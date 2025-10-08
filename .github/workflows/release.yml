@@ -33,9 +33,20 @@ jobs:
       - name: Build all packages
         run: bun run build
 
+      - name: Check for changesets
+        id: check-changesets
+        run: |
+          if [ -n "$(ls -A .changeset/*.md 2>/dev/null | grep -v 'README.md\|config.json')" ]; then
+            echo "has-changesets=true" >> $GITHUB_OUTPUT
+          else
+            echo "has-changesets=false" >> $GITHUB_OUTPUT
+            echo "No changesets found. Skipping release."
+          fi
+
       # Changesets will open/update PRs for versioning and changelogs,
       # and after merge, it will publish to npm.
       - name: Changesets
+        if: steps.check-changesets.outputs.has-changesets == 'true'
         uses: changesets/action@v1
         with:
           publish: bun run release
