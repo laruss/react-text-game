@@ -1,6 +1,7 @@
 {
     "name": "react-text-game",
     "devDependencies": {
+        "@changesets/cli": "^2.29.7",
         "@eslint/js": "^9.37.0",
         "@happy-dom/global-registrator": "^19.0.2",
         "@testing-library/dom": "^10.4.1",
@@ -32,7 +33,8 @@
         "docs": "turbo run dev --filter @react-text-game/docs",
         "docs:build": "turbo run build --filter @react-text-game/docs",
         "docs:api": "typedoc",
-        "docs:api:watch": "typedoc --watch"
+        "docs:api:watch": "typedoc --watch",
+        "changeset": "bunx changeset"
     },
     "workspaces": [
         "apps/*",
