@@ -46,10 +46,9 @@ function Button({
     VariantProps<typeof buttonVariants> & {
         asChild?: boolean;
     }) {
-    const Comp = asChild ? Slot : "button";
+    const Comp = (asChild ? Slot : "button") as React.ElementType;
 
     return (
-        // @ts-expect-error TS2322
         <Comp
             data-slot="button"
             className={cn(buttonVariants({ variant, size, className }))}
