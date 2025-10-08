@@ -1,0 +1,56 @@
+{
+    "name": "@react-text-game/ui",
+    "version": "0.1.1",
+    "description": "UI components library for react-text-game",
+    "private": false,
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "dev": "tsc --watch & tsc-alias --watch & bun run build:css --watch",
+        "build": "tsc && tsc-alias && bun run build:css",
+        "build:css": "mkdir -p dist/styles && bunx @tailwindcss/cli@latest -i src/styles/index.css -o dist/styles/index.css",
+        "prepack": "rm -rf dist && bun run build",
+        "test-pack": "npm pack --dry-run && bunx publint"
+    },
+    "author": "laruss",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "tailwind-merge": "^3.3.1"
+    },
+    "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0",
+        "react-dom": "^18.0.0 || ^19.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "^5",
+        "@react-text-game/core": "latest"
+    },
+    "devDependencies": {
+        "@types/node": "^24.6.2",
+        "@types/bun": "^1.2.23",
+        "@types/react": "^19.0.10",
+        "@types/react-dom": "^19.0.5",
+        "tsc-alias": "^1.8.16",
+        "@tailwindcss/postcss": "^4.0.0",
+        "postcss": "^8.4.49",
+        "@react-text-game/core": "workspace:*"
+    },
+    "imports": {
+        "#*": "./dist/*"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./styles": "./dist/styles/index.css"
+    }
+}

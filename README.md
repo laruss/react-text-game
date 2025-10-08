@@ -1,0 +1,206 @@
+# React Text Game
+
+A powerful, reactive text-based game engine for React applications. Build interactive narrative experiences with TypeScript, featuring state management, multiple passage types, and a comprehensive save system.
+
+[![@react-text-game/core](https://img.shields.io/npm/v/@react-text-game/core?label=core)](https://www.npmjs.com/package/@react-text-game/core)
+[![@react-text-game/ui](https://img.shields.io/npm/v/@react-text-game/ui?label=ui)](https://www.npmjs.com/package/@react-text-game/ui)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Features
+
+- **Reactive State Management** - Built on Valtio for automatic UI updates
+- **Multiple Passage Types** - Story passages, Interactive Maps, and custom Widget passages
+- **Comprehensive Save System** - IndexedDB persistence with encrypted export/import
+- **Themeable UI Components** - Tailwind CSS v4 with semantic color tokens
+- **Type-Safe** - Full TypeScript support with detailed JSDoc documentation
+- **React Integration** - Built-in hooks and React 19 support
+- **Modular Architecture** - Use core engine independently or with UI components
+
+## Packages
+
+This monorepo contains two publishable packages:
+
+### [@react-text-game/core](./packages/core)
+
+The core game engine providing:
+- Game orchestration and entity registry
+- Reactive state management (Valtio)
+- JSONPath-based storage system
+- Story and Interactive Map passages
+- Save/load system with auto-save
+- React hooks for game integration
+
+[Core Package Documentation](./packages/core/README.md)
+
+### [@react-text-game/ui](./packages/ui)
+
+UI components library featuring:
+- Pre-built game components (GameProvider, MainMenu, PassageController)
+- Story and Interactive Map renderers
+- Save/Load modals with slot management
+- Tailwind CSS v4 semantic theming
+- Dark mode support
+
+[UI Package Documentation](./packages/ui/README.md)
+
+## Quick Start
+
+### Installation
+
+```bash
+# Install both packages
+bun add @react-text-game/core @react-text-game/ui
+
+# Or use npm/yarn/pnpm
+npm install @react-text-game/core @react-text-game/ui
+```
+
+### Basic Example
+
+```tsx
+import { Game, BaseGameObject, newStory } from '@react-text-game/core';
+import { GameProvider, PassageController } from '@react-text-game/ui';
+import '@react-text-game/ui/styles';
+
+// Initialize the game
+await Game.init({
+  gameId: 'my-game',
+  gameTitle: 'My Adventure'
+});
+
+// Create a game entity
+class Player extends BaseGameObject<{ health: number; name: string }> {
+  constructor() {
+    super({
+      id: 'player',
+      variables: { health: 100, name: 'Hero' }
+    });
+  }
+}
+
+const player = new Player();
+
+// Create a story passage
+const intro = newStory('intro', () => [
+  {
+    type: 'header',
+    content: 'Welcome to the Game',
+    props: { level: 1 }
+  },
+  {
+    type: 'text',
+    content: `Hello, ${player.variables.name}!`
+  },
+  {
+    type: 'actions',
+    content: [
+      {
+        label: 'Start Adventure',
+        action: () => Game.jumpTo('chapter-1')
+      }
+    ]
+  }
+]);
+
+// React component
+function App() {
+  return (
+    <GameProvider game={Game}>
+      <PassageController />
+    </GameProvider>
+  );
+}
+
+// Start the game
+Game.jumpTo(intro);
+```
+
+## Documentation
+
+- **[Full Documentation](./apps/docs)** - Comprehensive guides and tutorials (Docusaurus site)
+- **[API Reference](./apps/docs/api)** - Auto-generated TypeDoc API documentation
+- **[Example Game](./apps/example-game)** - Complete game implementation example
+
+## Development
+
+This is a Turborepo monorepo using **Bun** as the package manager.
+
+### Prerequisites
+
+- [Bun](https://bun.sh) 1.2.23 or later
+- Node.js 18 or later
+
+### Setup
+
+```bash
+# Install dependencies
+bun install
+
+# Run all packages in watch mode
+bun run dev
+
+# Build all packages
+bun run build
+
+# Type checking
+bun run check-types
+
+# Linting
+bun run lint
+
+# Code formatting
+bun run format
+```
+
+### Turborepo Filtering
+
+Target specific packages or apps:
+
+```bash
+# Run dev for specific app
+bun run dev --filter=example-game
+
+# Build only the core package
+bun run build --filter=@react-text-game/core
+
+# Build both packages
+bun run build --filter='@react-text-game/*'
+```
+
+### Repository Structure
+
+```
+react-text-game/
+├── packages/
+│   ├── core/          # @react-text-game/core - Game engine
+│   └── ui/            # @react-text-game/ui - UI components
+├── apps/
+│   ├── docs/          # Docusaurus documentation site
+│   ├── example-game/  # Example game implementation
+│   ├── core-test-app/ # Core package testing
+│   └── ui-test-app/   # UI components testing
+└── turbo.json         # Turborepo configuration
+```
+
+**Note:** The `apps/` directory contains examples, tests, and documentation. The main deliverables are the packages in `packages/`.
+
+## Contributing
+
+Contributions are welcome! Please ensure:
+
+1. Code follows existing patterns and conventions
+2. TypeScript types are properly defined
+3. Tests pass (if applicable)
+4. Code is formatted with Prettier
+
+## License
+
+MIT (c) [laruss](https://github.com/laruss)
+
+## Links
+
+- **NPM Packages:**
+  - [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
+  - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
+- **Repository:** [GitHub](https://github.com/laruss/react-text-game) (update with actual repo URL)
+- **Issues:** Report bugs and request features on GitHub Issues

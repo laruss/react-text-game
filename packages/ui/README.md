@@ -1,0 +1,297 @@
+# @react-text-game/ui
+
+UI components library for react-text-game built with React 19, TypeScript, and Tailwind CSS v4.
+
+## Installation
+
+```bash
+bun install
+```
+
+## Development
+
+```bash
+# Build once
+bun run build
+
+# Watch mode
+bun run dev
+```
+
+## Theme Customization
+
+This package uses **Tailwind CSS v4** with semantic color tokens that can be easily customized to match your game's design system.
+
+### How It Works
+
+All components use semantic color names (like `primary`, `secondary`, `success`, etc.) instead of hardcoded colors. This means you can completely customize the look and feel by overriding these color variables in your application.
+
+### Available Semantic Colors
+
+#### Brand Colors
+- `primary-*` (50-950) - Main brand color
+- `secondary-*` (50-950) - Secondary brand color
+
+#### Semantic State Colors
+- `success-*` (50-950) - Success states
+- `warning-*` (50-950) - Warning states
+- `danger-*` (50-950) - Error/danger states
+- `info-*` (50-950) - Informational states
+
+#### Neutral/UI Colors
+- `muted-*` (50-950) - Muted/subtle UI elements
+- `background` - Main background color
+- `foreground` - Main text color
+- `card` / `card-foreground` - Card backgrounds and text
+- `popover` / `popover-foreground` - Popover backgrounds and text
+- `border` - Border color
+- `input` - Input border color
+- `ring` - Focus ring color
+- `accent` / `accent-foreground` - Accent backgrounds and text
+- `destructive` / `destructive-foreground` - Destructive action colors
+
+### Customizing the Theme
+
+You can override any theme color in your application's CSS file:
+
+#### Example 1: Custom Brand Colors
+
+```css
+@import "@react-text-game/ui/styles";
+
+@theme {
+  /* Override primary brand color to purple */
+  --color-primary-50: oklch(0.98 0.02 300);
+  --color-primary-100: oklch(0.95 0.05 300);
+  --color-primary-200: oklch(0.90 0.10 300);
+  --color-primary-300: oklch(0.82 0.15 300);
+  --color-primary-400: oklch(0.72 0.20 300);
+  --color-primary-500: oklch(0.62 0.24 300);
+  --color-primary-600: oklch(0.52 0.22 300);
+  --color-primary-700: oklch(0.44 0.18 300);
+  --color-primary-800: oklch(0.36 0.14 300);
+  --color-primary-900: oklch(0.28 0.10 300);
+  --color-primary-950: oklch(0.18 0.06 300);
+}
+```
+
+#### Example 2: Complete Custom Theme
+
+```css
+@import "@react-text-game/ui/styles";
+
+@theme {
+  /* Replace entire color palette */
+  --color-*: initial;
+
+  /* Custom brand colors */
+  --color-primary-500: oklch(0.65 0.25 265);
+  --color-secondary-500: oklch(0.70 0.20 180);
+
+  /* Custom UI colors */
+  --color-background: oklch(0.98 0.002 264);
+  --color-foreground: oklch(0.20 0.01 264);
+  --color-border: oklch(0.88 0.005 264);
+
+  /* Success/Error colors */
+  --color-success-500: oklch(0.65 0.18 150);
+  --color-danger-500: oklch(0.65 0.22 30);
+}
+```
+
+#### Example 3: Dark Mode Custom Colors
+
+```css
+@import "@react-text-game/ui/styles";
+
+/* Override dark mode colors */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: oklch(0.10 0.01 264);
+    --color-foreground: oklch(0.95 0.002 264);
+    --color-primary-500: oklch(0.70 0.25 265);
+  }
+}
+```
+
+### Using in Your Application
+
+1. **Import the styles** in your main CSS file:
+
+```css
+@import "@react-text-game/ui/styles";
+
+/* Your custom theme overrides here */
+@theme {
+  --color-primary-500: your-custom-color;
+}
+```
+
+2. **Import components** in your React code:
+
+```tsx
+import { Button, MainMenu, StoryComponent } from '@react-text-game/ui';
+```
+
+### Color Format: oklch()
+
+This package uses the `oklch()` color format from Tailwind CSS v4, which provides:
+- **Perceptually uniform** colors
+- **Better dark mode** transitions
+- **Predictable lightness** control
+
+Format: `oklch(lightness chroma hue)`
+- `lightness`: 0-1 (0 = black, 1 = white)
+- `chroma`: 0-0.4 (saturation intensity)
+- `hue`: 0-360 (color angle)
+
+Use [oklch.com](https://oklch.com) to pick and convert colors.
+
+### Component Customization
+
+Components also accept `className` props for additional styling:
+
+```tsx
+<Button
+  variant="solid"
+  color="primary"
+  className="custom-additional-styles"
+>
+  Click me
+</Button>
+```
+
+### Tips
+
+1. **Start small**: Override just `primary-500` and `secondary-500` to quickly brand your game
+2. **Use the scale**: The `-50` to `-950` scale provides consistent light/dark variants
+3. **Test dark mode**: Always test your custom colors in both light and dark modes
+4. **Maintain contrast**: Ensure sufficient contrast between foreground and background colors
+
+## ⚠️ Theme Variable Conflicts
+
+### Potential Issue
+
+This package uses **global CSS variables** (like `--color-primary-500`, `--color-background`, etc.) that may conflict with other design systems if you're mixing multiple component libraries.
+
+**Example conflict:**
+```css
+/* Both systems try to define the same variables */
+@import "@react-text-game/ui/styles";  /* Uses --color-primary-500 */
+@import "@shadcn/ui/styles";           /* Also uses --color-primary-500 */
+
+@theme {
+  --color-primary-500: oklch(...);     /* Which library does this affect? Both! */
+}
+```
+
+### Solutions
+
+#### Option 1: Use as Primary Design System (Recommended)
+
+This package is designed to be your **primary UI system** for game interfaces. If you're building a game, use `@react-text-game/ui` as your main component library and avoid mixing with other design systems.
+
+#### Option 2: Scope Your Game UI
+
+If you **must** mix with other design systems (e.g., using shadcn for admin panels and our UI for the game), wrap the game in a dedicated container:
+
+```tsx
+// App.tsx
+import '@react-text-game/ui/styles';
+
+function App() {
+  return (
+    <>
+      {/* Admin UI with shadcn */}
+      <AdminPanel />
+
+      {/* Game UI isolated in a scope */}
+      <div className="game-container">
+        <GameProvider>
+          {/* Our components here */}
+        </GameProvider>
+      </div>
+    </>
+  );
+}
+```
+
+Then create scoped overrides:
+```css
+/* app.css */
+@import "@react-text-game/ui/styles";
+
+/* Scoped theme for game only */
+.game-container {
+  /* Override game theme variables specifically */
+  --color-primary-500: oklch(0.65 0.25 300);
+  --color-background: oklch(0.05 0.01 280);
+}
+```
+
+#### Option 3: CSS Layers for Priority Control
+
+Use CSS `@layer` to control which system takes precedence:
+
+```css
+@import "@react-text-game/ui/styles" layer(game-ui);
+@import "@shadcn/ui/styles" layer(admin-ui);
+
+/* Define layer priority */
+@layer game-ui, admin-ui;
+
+/* game-ui variables will override admin-ui */
+```
+
+#### Option 4: Manual Variable Remapping (Advanced)
+
+If you need fine-grained control, manually remap variables:
+
+```css
+@import "@react-text-game/ui/styles";
+
+@theme {
+  /* Remap our variables to avoid conflicts */
+  --rtg-primary: var(--color-primary-500);
+  --rtg-background: var(--color-background);
+}
+```
+
+Then create wrapper components:
+```tsx
+// CustomButton.tsx
+import { Button as RTGButton } from '@react-text-game/ui';
+
+export const GameButton = (props) => (
+  <div style={{
+    '--color-primary-500': 'var(--rtg-primary)',
+    '--color-background': 'var(--rtg-background)'
+  }}>
+    <RTGButton {...props} />
+  </div>
+);
+```
+
+### Best Practices
+
+✅ **DO**: Use this as your primary design system for game UIs
+✅ **DO**: Override theme variables at the root for global customization
+✅ **DO**: Use scoped containers when mixing with other libraries
+❌ **DON'T**: Mix multiple design systems in the same view without scoping
+❌ **DON'T**: Import multiple `@theme` definitions at the same level without layers
+
+## Components
+
+- `Button` - Customizable button with multiple variants (solid, faded, bordered, light, flat, ghost, shadow)
+- `Spinner` - Loading spinner
+- `GameProvider` - Main game wrapper with dev tools
+- `MainMenu` - Game menu with save/load functionality
+- `StoryComponent` - Story passage renderer
+- `InteractiveMapComponent` - Interactive map renderer
+- `SaveLoadModal` - Save/Load game modal
+- `Tooltip` - Tooltip component
+- And more...
+
+## License
+
+MIT
