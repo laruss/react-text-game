@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.2.0",
+    "version": "0.1.2",
     "description": "",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -12,7 +12,8 @@
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
         "prepack": "rm -rf dist && bun run build",
-        "test-pack": "npm pack --dry-run && bunx publint"
+        "test-pack": "npm pack --dry-run && bunx publint",
+        "publish": "npm whoami && npm publish"
     },
     "author": "laruss",
     "publishConfig": {
