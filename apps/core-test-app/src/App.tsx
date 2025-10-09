@@ -13,10 +13,12 @@ import {
 import { useDeleteAllSaves } from "@react-text-game/core/saves";
 import { Activity, useMemo, useState } from "react";
 
+import { player } from "@/game/entities";
 import { environment } from "@/game/entities/environment";
 
 export const App = () => {
     const env = useGameEntity(environment);
+    const plr = useGameEntity(player);
     const restart = useRestartGame();
     const currentPassage = useCurrentPassage();
     const isStarted = useGameIsStarted();
@@ -153,6 +155,42 @@ export const App = () => {
                                 onClick={restart}
                             >
                                 restart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </Activity>
+            <Activity mode={isStarted ? "visible" : "hidden"}>
+                <div>
+                    <div>Player {plr.name} {plr.surname}</div>
+                    <div>Inventary</div>
+                    <div>
+                        <div>Money: {plr.inventory.money}</div>
+                        <div>
+                            <button
+                                onClick={() => { plr.inventory.money += 10 }}
+                            >
+                                + 10 $
+                            </button>
+                            <button
+                                onClick={() => plr.inventory.money -= 10}
+                            >
+                                - 10 $
+                            </button>
+                        </div>
+                        <div>
+                            Items: {plr.inventory.items.length}
+                        </div>
+                        <div>
+                            <button
+                                onClick={() => plr.inventory.items.push(`item-${Date.now()}`)}
+                            >
+                                Add item
+                            </button>
+                            <button
+                                onClick={() => plr.inventory.items.pop()}
+                            >
+                                Remove item
                             </button>
                         </div>
                     </div>

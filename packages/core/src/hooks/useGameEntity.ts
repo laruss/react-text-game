@@ -1,7 +1,7 @@
 import { useProxy } from "valtio/utils";
 
-import { BaseGameObject } from "#baseGameObject";
 import { Game } from "#game";
+import { BaseGameObject } from "#gameObjects";
 
 const getErrorMessage = (id: string) =>
     [

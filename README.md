@@ -13,6 +13,7 @@ A powerful, reactive text-based game engine for React applications. Build intera
 - **Comprehensive Save System** - IndexedDB persistence with encrypted export/import
 - **Themeable UI Components** - Tailwind CSS v4 with semantic color tokens
 - **Type-Safe** - Full TypeScript support with detailed JSDoc documentation
+- **Factory-Based Entities** - Plain-object factories with optional class-based escape hatches
 - **React Integration** - Built-in hooks and React 19 support
 - **Modular Architecture** - Use core engine independently or with UI components
 
@@ -23,6 +24,7 @@ This monorepo contains two publishable packages:
 ### [@react-text-game/core](./packages/core)
 
 The core game engine providing:
+
 - Game orchestration and entity registry
 - Reactive state management (Valtio)
 - JSONPath-based storage system
@@ -35,6 +37,7 @@ The core game engine providing:
 ### [@react-text-game/ui](./packages/ui)
 
 UI components library featuring:
+
 - Pre-built game components (GameProvider, MainMenu, PassageController)
 - Story and Interactive Map renderers
 - Save/Load modals with slot management
@@ -58,7 +61,7 @@ npm install @react-text-game/core @react-text-game/ui
 ### Basic Example
 
 ```tsx
-import { Game, BaseGameObject, newStory } from '@react-text-game/core';
+import { Game, createEntity, newStory } from '@react-text-game/core';
 import { GameProvider, PassageController } from '@react-text-game/ui';
 import '@react-text-game/ui/styles';
 
@@ -68,17 +71,15 @@ await Game.init({
   gameTitle: 'My Adventure'
 });
 
-// Create a game entity
-class Player extends BaseGameObject<{ health: number; name: string }> {
-  constructor() {
-    super({
-      id: 'player',
-      variables: { health: 100, name: 'Hero' }
-    });
-  }
-}
-
-const player = new Player();
+// Create a game entity (factory-first approach)
+const player = createEntity('player', {
+  name: 'Hero',
+  stats: {
+    health: 100,
+    mana: 50,
+  },
+  inventory: [] as string[],
+});
 
 // Create a story passage
 const intro = newStory('intro', () => [
@@ -89,7 +90,7 @@ const intro = newStory('intro', () => [
   },
   {
     type: 'text',
-    content: `Hello, ${player.variables.name}!`
+    content: `Hello, ${player.name}!`
   },
   {
     type: 'actions',
@@ -114,6 +115,8 @@ function App() {
 // Start the game
 Game.jumpTo(intro);
 ```
+
+> Prefer class-based entities? Extend `BaseGameObject` directly—the factory and class APIs work side by side.
 
 ## Documentation
 
@@ -169,7 +172,7 @@ bun run build --filter='@react-text-game/*'
 
 ### Repository Structure
 
-```
+```text
 react-text-game/
 ├── packages/
 │   ├── core/          # @react-text-game/core - Game engine

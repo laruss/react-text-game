@@ -2,11 +2,60 @@
 
 UI components library for react-text-game built with React 19, TypeScript, and Tailwind CSS v4.
 
+> Install this package inside your own React project. It depends on `@react-text-game/core` for game state and Tailwind CSS v4 for styling tokens.
+
 ## Installation
 
+### 1. Install and configure Tailwind CSS
+
+Follow the official Tailwind installation guide for your stack: [tailwindcss.com/docs/installation](https://tailwindcss.com/docs/installation).
+
+### 2. Add react-text-game packages
+
 ```bash
-bun install
+# Bun (repo default)
+bun add @react-text-game/core @react-text-game/ui
+
+# npm
+npm install @react-text-game/core @react-text-game/ui
+
+# yarn
+yarn add @react-text-game/core @react-text-game/ui
 ```
+
+### 3. Import the UI theme tokens
+
+Import the shared styles once in your global stylesheet (for example `src/index.css`, `src/main.css`, or whichever file you feed into your bundler):
+
+```css
+@import "@react-text-game/ui/styles";
+
+@theme {
+  --color-primary-500: oklch(0.65 0.25 265); /* optional override */
+}
+```
+
+### Minimal implementation
+
+Once Tailwind is wired up and packages are installed, the lightest viable setup only needs two pieces:
+
+1. Wrap your React tree with `GameProvider` and pass the core engine options.
+2. Render `PassageController` somewhere inside the provider.
+
+```tsx
+// src/App.tsx
+import { GameProvider, PassageController } from '@react-text-game/ui';
+
+export function App() {
+  return (
+    <GameProvider options={{ gameName: 'My Text Adventure', isDevMode: true }}>
+      <PassageController />
+    </GameProvider>
+  );
+}
+```
+
+With those two components in place, the UI handles menus, passage rendering, and save/load modals. You can immediately start defining entities and passages through `@react-text-game/core`.
 
 ## Development
 
@@ -29,16 +78,19 @@ All components use semantic color names (like `primary`, `secondary`, `success`,
 ### Available Semantic Colors
 
 #### Brand Colors
+
 - `primary-*` (50-950) - Main brand color
 - `secondary-*` (50-950) - Secondary brand color
 
 #### Semantic State Colors
+
 - `success-*` (50-950) - Success states
 - `warning-*` (50-950) - Warning states
 - `danger-*` (50-950) - Error/danger states
 - `info-*` (50-950) - Informational states
 
 #### Neutral/UI Colors
+
 - `muted-*` (50-950) - Muted/subtle UI elements
 - `background` - Main background color
 - `foreground` - Main text color
@@ -127,7 +179,7 @@ You can override any theme color in your application's CSS file:
 }
 ```
 
-2. **Import components** in your React code:
+1. **Import components** in your React code:
 
 ```tsx
 import { Button, MainMenu, StoryComponent } from '@react-text-game/ui';
@@ -173,6 +225,7 @@ function App() {
 ```
 
 **Available component overrides:**
+
 - `MainMenu` - Main game menu
 - `story.Heading` - Story passage heading
 - `story.Text` - Story text content
@@ -186,11 +239,13 @@ Any components not specified will use the default implementation.
 ### Color Format: oklch()
 
 This package uses the `oklch()` color format from Tailwind CSS v4, which provides:
+
 - **Perceptually uniform** colors
 - **Better dark mode** transitions
 - **Predictable lightness** control
 
 Format: `oklch(lightness chroma hue)`
+
 - `lightness`: 0-1 (0 = black, 1 = white)
 - `chroma`: 0-0.4 (saturation intensity)
 - `hue`: 0-360 (color angle)
@@ -225,6 +280,7 @@ Components also accept `className` props for additional styling:
 This package uses **global CSS variables** (like `--color-primary-500`, `--color-background`, etc.) that may conflict with other design systems if you're mixing multiple component libraries.
 
 **Example conflict:**
+
 ```css
 /* Both systems try to define the same variables */
 @import "@react-text-game/ui/styles";  /* Uses --color-primary-500 */
@@ -267,6 +323,7 @@ function App() {
 ```
 
 Then create scoped overrides:
+
 ```css
 /* app.css */
 @import "@react-text-game/ui/styles";
@@ -308,6 +365,7 @@ If you need fine-grained control, manually remap variables:
 ```
 
 Then create wrapper components:
+
 ```tsx
 // CustomButton.tsx
 import { Button as RTGButton } from '@react-text-game/ui';
@@ -333,6 +391,7 @@ export const GameButton = (props) => (
 ## Components
 
 ### Core Components
+
 - `Button` - Customizable button with multiple variants (solid, faded, bordered, light, flat, ghost, shadow)
 - `Spinner` - Loading spinner
 - `GameProvider` - Main game wrapper with dev tools
@@ -344,6 +403,7 @@ export const GameButton = (props) => (
 - `Tooltip` - Tooltip component
 
 ### Story Components (Overridable)
+
 - `Heading` - Story passage heading (formerly `Header`)
 - `Text` - Story text content
 - `Image` - Story images
@@ -352,6 +412,7 @@ export const GameButton = (props) => (
 - `Conversation` - Story conversation dialogs
 
 ### Hooks & Context
+
 - `useSaveLoadMenu` - Hook to control save/load modal (exported from main package)
 
 ## License

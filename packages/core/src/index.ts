@@ -1,5 +1,5 @@
-import { BaseGameObject } from "#baseGameObject";
 import { Game } from "#game";
+import { BaseGameObject, createEntity } from "#gameObjects";
 import type { NewOptions, Options } from "#options";
 import { InteractiveMap, newInteractiveMap } from "#passages/interactiveMap";
 import { Passage } from "#passages/passage";
@@ -12,6 +12,7 @@ export type * from "#types";
 
 export {
     BaseGameObject,
+    createEntity,
     Game,
     InteractiveMap,
     newInteractiveMap,
