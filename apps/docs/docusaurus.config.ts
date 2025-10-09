@@ -1,6 +1,5 @@
 import type { Options, ThemeConfig } from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
-import type { PluginOptions } from "docusaurus-plugin-typedoc";
 import { themes as prismThemes } from "prism-react-renderer";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -44,15 +43,10 @@ const config: Config = {
                 entryPoints: ["../../packages/core/src/index.ts"],
                 tsconfig: "../../packages/core/tsconfig.json",
                 out: "api/core",
-                sidebar: {
-                    // @ts-expect-error TS2353
-                    categoryLabel: "Core API",
-                    position: 0,
-                },
                 excludePrivate: true,
                 excludeProtected: false,
                 readme: "none",
-            } satisfies PluginOptions,
+            },
         ],
         [
             "docusaurus-plugin-typedoc",
@@ -61,15 +55,10 @@ const config: Config = {
                 entryPoints: ["../../packages/ui/src/index.ts"],
                 tsconfig: "../../packages/ui/tsconfig.json",
                 out: "api/ui",
-                sidebar: {
-                    // @ts-expect-error TS2353
-                    categoryLabel: "UI API",
-                    position: 1,
-                },
                 excludePrivate: true,
                 excludeProtected: false,
                 readme: "none",
-            } satisfies PluginOptions,
+            },
         ],
     ],
 
@@ -135,15 +124,15 @@ const config: Config = {
                     items: [
                         {
                             label: "Getting Started",
-                            to: "/docs/intro",
+                            to: "/",
                         },
                         {
                             label: "Core API",
-                            to: "/docs/api/core",
+                            to: "/api/core",
                         },
                         {
                             label: "UI API",
-                            to: "/docs/api/ui",
+                            to: "/api/ui",
                         },
                     ],
                 },

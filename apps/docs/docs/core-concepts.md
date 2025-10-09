@@ -447,6 +447,6 @@ const player = createEntity('player', {
 
 ## Next Steps
 
-- [**Core API Reference**](/docs/api/core) - Complete API documentation
-- [**UI API Reference**](/docs/api/ui) - UI components documentation
+- [**Core API Reference**](/api/core) - Complete API documentation
+- [**UI API Reference**](/api/ui) - UI components documentation
 - [**Example Game**](https://github.com/laruss/react-text-game/tree/main/apps/example-game) - See it in action
