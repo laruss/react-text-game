@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_react_text_game_docs=self.webpackChunk_react_text_game_docs||[]).push([[5742],{7093:e=>{e.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"default"}')}}]);
