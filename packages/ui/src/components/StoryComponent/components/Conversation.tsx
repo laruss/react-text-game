@@ -79,7 +79,7 @@ const ConversationLine = ({
     );
 };
 
-type ConversationProps = Readonly<{
+export type ConversationProps = Readonly<{
     component: ConversationComponent;
 }>;
 

@@ -4,7 +4,9 @@ import { ImageComponent } from "@react-text-game/core/passages";
 import { useEffect,useId } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const Image = ({ component }: { component: ImageComponent }) => {
+export type ImageProps = Readonly<{component: ImageComponent}>;
+
+export const Image = ({ component }: ImageProps) => {
     const modalId = useId();
     const shouldBeClickable =
         Boolean(component.props?.onClick) || !component.props?.disableModal;

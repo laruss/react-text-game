@@ -1,7 +1,7 @@
 import { Game, SYSTEM_PASSAGE_NAMES } from "@react-text-game/core";
 import { useLastLoadGame } from "@react-text-game/core/saves";
 
-import { useSaveLoadMenu } from "#hooks";
+import { useSaveLoadMenu } from "#context/SaveLoadMenuContext";
 
 import { Button } from "./common";
 

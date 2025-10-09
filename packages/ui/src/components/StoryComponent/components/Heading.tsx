@@ -1,7 +1,7 @@
 import { HeaderComponent, HeaderLevel } from "@react-text-game/core/passages";
 import { twMerge } from "tailwind-merge";
 
-type Props = Readonly<{
+export type HeadingProps = Readonly<{
     component: HeaderComponent;
 }>;
 
@@ -14,7 +14,7 @@ const headerMapper = {
     6: "text-base text-bold",
 } as const satisfies Record<HeaderLevel, string>;
 
-export const Header = ({ component: { props, content } }: Props) => (
+export const Heading = ({ component: { props, content } }: HeadingProps) => (
     <div className={twMerge(headerMapper[props?.level ?? 1], props?.className)}>
         {content}
     </div>

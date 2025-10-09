@@ -4,14 +4,7 @@ import { Game, Story } from "@react-text-game/core";
 import { useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
-import {
-    Actions,
-    Conversation,
-    Header,
-    Image,
-    Text,
-    Video,
-} from "./components";
+import { useComponents } from "#context/ComponentsContext/useComponents";
 
 type StoryComponentProps = {
     story: Story;
@@ -19,6 +12,7 @@ type StoryComponentProps = {
 
 export const StoryComponent = ({ story }: StoryComponentProps) => {
     const displayable = useMemo(() => story.display(), [story]);
+    const { story: { Heading, Conversation, Actions, Video, Image, Text } } = useComponents();
 
     return (
         <div
@@ -38,7 +32,7 @@ export const StoryComponent = ({ story }: StoryComponentProps) => {
                         switch (component.type) {
                             case "header":
                                 return (
-                                    <Header key={index} component={component} />
+                                    <Heading key={index} component={component} />
                                 );
 
                             case "text":

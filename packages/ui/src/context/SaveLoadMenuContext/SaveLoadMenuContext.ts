@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { SaveLoadMode } from "#components/GameProvider/SaveLoadMenuProvider";
+import { SaveLoadMode } from "#context/SaveLoadMenuContext";
 
 export interface SaveLoadMenuContextType {
     isOpen: boolean;

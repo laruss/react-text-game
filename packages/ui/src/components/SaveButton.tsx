@@ -1,8 +1,8 @@
 import { twMerge } from "tailwind-merge";
 
 import { Button, ButtonProps } from "#components/common";
-import { SaveLoadMode } from "#components/GameProvider/SaveLoadMenuProvider";
-import { useSaveLoadMenu } from "#hooks";
+import { SaveLoadMode } from "#context/SaveLoadMenuContext";
+import { useSaveLoadMenu } from "#context/SaveLoadMenuContext";
 
 type SaveButtonProps = Omit<ButtonProps, "children" | "onClick"> &
     Readonly<{

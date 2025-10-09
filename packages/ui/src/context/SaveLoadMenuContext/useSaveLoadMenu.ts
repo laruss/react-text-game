@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { SaveLoadMenuContext } from "#components/GameProvider/SaveLoadMenuContext";
+import { SaveLoadMenuContext } from "./SaveLoadMenuContext";
 
 export const useSaveLoadMenu = () => {
     const context = useContext(SaveLoadMenuContext);

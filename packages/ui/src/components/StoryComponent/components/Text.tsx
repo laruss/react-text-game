@@ -1,7 +1,7 @@
 import { TextComponent } from "@react-text-game/core/passages";
 import { twMerge } from "tailwind-merge";
 
-type TextProps = Readonly<{
+export type TextProps = Readonly<{
     component: TextComponent;
 }>;
 

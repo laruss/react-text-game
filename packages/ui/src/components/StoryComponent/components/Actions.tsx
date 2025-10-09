@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { Button } from "#components/common/Button";
 import { Tooltip } from "#components/common/Tooltip";
 
-type ActionsProps = Readonly<{
+export type ActionsProps = Readonly<{
     component: ActionsComponent;
 }>;
 

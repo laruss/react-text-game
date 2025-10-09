@@ -1,7 +1,7 @@
 import { useSaveSlots } from "@react-text-game/core/saves";
 import { useEffect, useState } from "react";
 
-import { SaveLoadMode } from "#components/GameProvider/SaveLoadMenuProvider";
+import { SaveLoadMode } from "#context/SaveLoadMenuContext";
 
 interface SaveLoadModalProps {
     isOpen: boolean;

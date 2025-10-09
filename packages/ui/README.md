@@ -133,6 +133,56 @@ You can override any theme color in your application's CSS file:
 import { Button, MainMenu, StoryComponent } from '@react-text-game/ui';
 ```
 
+### Custom Component Overrides
+
+You can override any built-in component with your own implementation using the `ComponentsProvider`:
+
+```tsx
+import { GameProvider, ComponentsProvider, type Components } from '@react-text-game/ui';
+
+// Create your custom components
+const CustomHeading = ({ text }: { text: string }) => (
+  <h1 className="text-4xl font-bold my-custom-class">{text}</h1>
+);
+
+const CustomMainMenu = () => (
+  <div className="my-custom-menu">
+    {/* Your custom menu implementation */}
+  </div>
+);
+
+// Define which components to override
+const customComponents: Components = {
+  MainMenu: CustomMainMenu,
+  story: {
+    Heading: CustomHeading,
+    // Text, Image, Video, Actions, Conversation can also be overridden
+  },
+};
+
+// Wrap your game with ComponentsProvider
+function App() {
+  return (
+    <GameProvider>
+      <ComponentsProvider components={customComponents}>
+        {/* Your game content */}
+      </ComponentsProvider>
+    </GameProvider>
+  );
+}
+```
+
+**Available component overrides:**
+- `MainMenu` - Main game menu
+- `story.Heading` - Story passage heading
+- `story.Text` - Story text content
+- `story.Image` - Story images
+- `story.Video` - Story videos
+- `story.Actions` - Story action buttons
+- `story.Conversation` - Story conversation dialogs
+
+Any components not specified will use the default implementation.
+
 ### Color Format: oklch()
 
 This package uses the `oklch()` color format from Tailwind CSS v4, which provides:
@@ -282,15 +332,27 @@ export const GameButton = (props) => (
 
 ## Components
 
+### Core Components
 - `Button` - Customizable button with multiple variants (solid, faded, bordered, light, flat, ghost, shadow)
 - `Spinner` - Loading spinner
 - `GameProvider` - Main game wrapper with dev tools
+- `ComponentsProvider` - Provider for custom component overrides (new in 0.2.0)
 - `MainMenu` - Game menu with save/load functionality
 - `StoryComponent` - Story passage renderer
 - `InteractiveMapComponent` - Interactive map renderer
 - `SaveLoadModal` - Save/Load game modal
 - `Tooltip` - Tooltip component
-- And more...
+
+### Story Components (Overridable)
+- `Heading` - Story passage heading (formerly `Header`)
+- `Text` - Story text content
+- `Image` - Story images
+- `Video` - Story videos
+- `Actions` - Story action buttons
+- `Conversation` - Story conversation dialogs
+
+### Hooks & Context
+- `useSaveLoadMenu` - Hook to control save/load modal (exported from main package)
 
 ## License
 

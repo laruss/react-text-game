@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
     Game,
@@ -6,20 +6,19 @@ import {
     newWidget,
     SYSTEM_PASSAGE_NAMES,
 } from "@react-text-game/core";
-import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 
 import { ErrorBoundary } from "#components/ErrorBoundary";
 import { MainMenu } from "#components/MainMenu";
 import { SaveLoadModal } from "#components/SaveLoadModal";
-import { useSaveLoadMenu } from "#hooks";
+import { Components, ComponentsProvider } from "#context/ComponentsContext";
+import {
+    SaveLoadMenuProvider,
+    useSaveLoadMenu,
+} from "#context/SaveLoadMenuContext";
 
 import { DevModeDrawer } from "../DevModeDrawer";
 import { AppIconMenu } from "./AppIconMenu";
-import { SaveLoadMenuProvider } from "./SaveLoadMenuProvider";
-
-type Components = Readonly<{
-    MainMenu?: (() => ReactNode) | undefined;
-}>;
 
 type GameProviderProps = PropsWithChildren<{
     options: NewOptions;
@@ -31,13 +30,20 @@ const SaveLoadModalWrapper = () => {
     return <SaveLoadModal isOpen={isOpen} onClose={close} mode={mode} />;
 };
 
-export const GameProvider = ({ children, options, components }: GameProviderProps) => {
+export const GameProvider = ({
+    children,
+    options,
+    components = {},
+}: GameProviderProps) => {
     const [internalOptions, setInternalOptions] = useState<NewOptions>(options);
     const [isInitialized, setIsInitialized] = useState(false);
 
     useEffect(() => {
         Game.init(options).then(() => {
-            newWidget(SYSTEM_PASSAGE_NAMES.START_MENU, components?.MainMenu?.() || <MainMenu />);
+            newWidget(
+                SYSTEM_PASSAGE_NAMES.START_MENU,
+                components?.MainMenu?.() || <MainMenu />
+            );
             Game.setCurrent(SYSTEM_PASSAGE_NAMES.START_MENU);
             setIsInitialized(true);
         });
@@ -54,20 +60,22 @@ export const GameProvider = ({ children, options, components }: GameProviderProp
     }
 
     return (
-        <SaveLoadMenuProvider>
-            <ErrorBoundary>
-                {children}
-                {options.isDevMode && (
-                    <>
-                        <AppIconMenu
-                            options={internalOptions}
-                            setOptions={setInternalOptions}
-                        />
-                        <DevModeDrawer options={internalOptions} />
-                    </>
-                )}
-                <SaveLoadModalWrapper />
-            </ErrorBoundary>
-        </SaveLoadMenuProvider>
+        <ErrorBoundary>
+            <ComponentsProvider components={components}>
+                <SaveLoadMenuProvider>
+                    {children}
+                    {options.isDevMode && (
+                        <>
+                            <AppIconMenu
+                                options={internalOptions}
+                                setOptions={setInternalOptions}
+                            />
+                            <DevModeDrawer options={internalOptions} />
+                        </>
+                    )}
+                    <SaveLoadModalWrapper />
+                </SaveLoadMenuProvider>
+            </ComponentsProvider>
+        </ErrorBoundary>
     );
 };
