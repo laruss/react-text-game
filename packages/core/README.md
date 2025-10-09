@@ -8,36 +8,51 @@ A powerful, reactive text-based game engine built for React applications. This p
 - **Multiple Passage Types** - Story, Interactive Map, and Widget passages
 - **Flexible Save System** - JSONPath-based storage with auto-save support
 - **Entity Registry** - Automatic registration and proxying of game objects
+- **Factory-Based Entities** - Plain-object factories for beginners with class-based escape hatches
 - **Type-Safe** - Full TypeScript support with comprehensive types
 - **React Hooks** - Built-in hooks for seamless React integration
 
 ## Installation
 
 ```bash
+# bun
 bun add @react-text-game/core
+
+# npm
+npm install @react-text-game/core
+
+# yarn
+yarn add @react-text-game/core
+
+# pnpm
+pnpm add @react-text-game/core
 ```
 
 ## Quick Start
 
 ```tsx
-import { Game, BaseGameObject, newStory } from '@react-text-game/core';
+import { Game, createEntity, newStory } from '@react-text-game/core';
 
 // IMPORTANT: Initialize the game first
 await Game.init({
   // your game options
 });
 
-// Create a game entity
-class Player extends BaseGameObject<{ health: number; name: string }> {
-  constructor() {
-    super({
-      id: 'player',
-      variables: { health: 100, name: 'Hero' }
-    });
-  }
-}
+// Create a game entity with the factory (recommended)
+const player = createEntity('player', {
+  name: 'Hero',
+  stats: {
+    health: 100,
+    mana: 50
+  },
+  inventory: [] as string[],
+});
 
-const player = new Player();
+// Direct property updates automatically stay reactive
+player.stats.health -= 10;
+
+// Persist manual changes when you need them stored
+player.save();
 
 // Create a story passage
 const introStory = newStory('intro', () => [
@@ -48,7 +63,7 @@ const introStory = newStory('intro', () => [
   },
   {
     type: 'text',
-    content: `Hello, ${player.variables.name}!`
+    content: `Hello, ${player.name}!`
   },
   {
     type: 'actions',
@@ -64,6 +79,8 @@ const introStory = newStory('intro', () => [
 // Navigate to passage
 Game.jumpTo(introStory);
 ```
+
+> Prefer writing classes? Jump to [Advanced Entities](#advanced-entities-basegameobject) for a drop-in replacement using inheritance.
 
 ## Core Concepts
 
@@ -102,27 +119,56 @@ Game.enableAutoSave();
 Game.loadFromSessionStorage();
 ```
 
-### BaseGameObject
+### Entities
 
-Base class for all game entities. Provides:
+#### Entity Factory (`createEntity`) — Recommended Starting Point
 
-- **Auto-registration** - Entities register with `Game` on construction
-- **Reactive Variables** - `_variables` object for state storage
-- **Persistence** - `save()` / `load()` methods sync with `Storage`
-- **JSONPath Integration** - Each entity has a unique storage path
+The simplest way to model game state is with the `createEntity` factory. You
+provide a unique id and a plain object describing the initial state; the engine
+wraps it in a `SimpleObject` that:
+
+- Registers itself with the game automatically
+- Exposes variables as direct properties (`player.health`, not `player.variables.health`)
+- Keeps nested objects/arrays reactive via deep proxies
+- Requires explicit `save()` calls so you stay in control of persistence cadence
 
 ```typescript
+import { createEntity } from '@react-text-game/core';
+
+const player = createEntity('player', {
+  name: 'Hero',
+  health: 100,
+  inventory: {
+    gold: 50,
+    items: [] as string[],
+  },
+});
+
+player.health -= 5; // direct property access
+player.inventory.items.push('sword');
+player.save(); // persist changes when you decide to
+```
+
+#### Advanced Entities (`BaseGameObject`)
+
+Prefer a class-based design, private fields, or inheritance? Extend
+`BaseGameObject` directly—the same registration and storage hooks remain
+available:
+
+```typescript
+import { BaseGameObject } from '@react-text-game/core';
+
 class Inventory extends BaseGameObject<{ items: string[] }> {
   constructor() {
     super({
       id: 'inventory',
-      variables: { items: [] }
+      variables: { items: [] },
     });
   }
 
   addItem(item: string) {
     this._variables.items.push(item);
-    this.save(); // Persist to storage
+    this.save();
   }
 }
 ```
@@ -578,8 +624,8 @@ function PlayerStats({ player }) {
 
   return (
     <div>
-      Health: {reactivePlayer.variables.health}
-      {/* Updates automatically when health changes */}
+      Health: {reactivePlayer.health}
+      {/* Direct property access stays reactive */}
     </div>
   );
 }

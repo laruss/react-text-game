@@ -1,62 +1,11 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 
-import { BaseGameObject } from "#baseGameObject";
 import { SYSTEM_PASSAGE_NAMES } from "#constants";
 import { Game } from "#game";
+import { BaseGameObject } from "#gameObjects";
 import { Passage } from "#passages/passage";
-import { Storage } from "#storage";
 import { GameSaveState } from "#types";
-
-// Create a mock storage that properly handles setState/getState
-class MockStorage {
-    private static state: GameSaveState = {};
-
-    static getValue<T>(jsonPath: string): Array<T> {
-        // Simple implementation that handles our test cases
-        const path = jsonPath.replace(/^\$\./, "").split(".");
-        let current = this.state;
-
-        for (const key of path) {
-            if (current && typeof current === "object" && key in current) {
-                current = current[key] as GameSaveState;
-            } else {
-                return [];
-            }
-        }
-
-        return [current] as Array<T>;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    static setValue<T>(jsonPath: string, value: T, _isSystem = false): void {
-        const path = jsonPath.replace(/^\$\./, "").split(".");
-        let current = this.state;
-
-        for (let i = 0; i < path.length - 1; i++) {
-            const key = path[i];
-            if (!(key! in current)) {
-                current[key!] = {};
-            }
-            current = current[key!] as GameSaveState;
-        }
-
-        current[path[path.length - 1]!] = value;
-    }
-
-    static getState(): GameSaveState {
-        // Return a deep clone to avoid reference issues
-        return JSON.parse(JSON.stringify(this.state));
-    }
-
-    static setState(state: GameSaveState): void {
-        // Deep clone the incoming state to avoid reference issues
-        this.state = JSON.parse(JSON.stringify(state));
-    }
-
-    static reset(): void {
-        this.state = {};
-    }
-}
+import { setupMockStorage, teardownMockStorage } from "#tests/helpers";
 
 // Test helper classes
 class TestEntity extends BaseGameObject<{ health: number; name: string }> {
@@ -101,44 +50,16 @@ function uniqueId(prefix: string): string {
     return `${prefix}-${testCounter++}`;
 }
 
-// Store original Storage methods
-const originalStorageMethods = {
-    getValue: Storage.getValue.bind(Storage),
-    setValue: Storage.setValue.bind(Storage),
-    getState: Storage.getState.bind(Storage),
-    setState: Storage.setState.bind(Storage),
-};
-
 describe("Game", () => {
     beforeEach(async () => {
-        // Replace Storage methods with MockStorage
-        Storage.getValue = MockStorage.getValue.bind(MockStorage);
-        Storage.setValue = MockStorage.setValue.bind(MockStorage);
-        Storage.getState = MockStorage.getState.bind(MockStorage);
-        Storage.setState = MockStorage.setState.bind(MockStorage);
-
-        // Reset mock storage
-        MockStorage.reset();
-
-        // Clear session storage
+        setupMockStorage();
         sessionStorage.clear();
-
-        // Re-initialize the game for each test
         await Game.init({ gameName: "Test Game", isDevMode: true });
     });
 
     afterEach(() => {
-        // Reset game state after each test to ensure clean state
         Game._resetForTesting();
-
-        // Reset mock storage
-        MockStorage.reset();
-
-        // Restore original Storage methods
-        Storage.getValue = originalStorageMethods.getValue;
-        Storage.setValue = originalStorageMethods.setValue;
-        Storage.getState = originalStorageMethods.getState;
-        Storage.setState = originalStorageMethods.setState;
+        teardownMockStorage();
     });
 
     describe("Initialization", () => {

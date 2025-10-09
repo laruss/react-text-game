@@ -1,7 +1,7 @@
 import { proxy, subscribe } from "valtio";
 
-import { BaseGameObject } from "#baseGameObject";
 import { STORAGE_SYSTEM_PATH, SYSTEM_PASSAGE_NAMES } from "#constants";
+import { BaseGameObject } from "#gameObjects";
 import { logger } from "#logger";
 import { _getOptions, NewOptions, newOptions, Options } from "#options";
 import { Passage } from "#passages/passage";
