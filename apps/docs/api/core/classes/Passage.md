@@ -1,6 +1,6 @@
 # Class: Passage
 
-Defined in: [passages/passage.ts:29](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/core/src/passages/passage.ts#L29)
+Defined in: [passages/passage.ts:29](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/core/src/passages/passage.ts#L29)
 
 Base class for all passage types in the text game engine.
 
@@ -41,7 +41,7 @@ class CustomPassage extends Passage {
 
 > **new Passage**(`id`, `type`): `Passage`
 
-Defined in: [passages/passage.ts:48](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/core/src/passages/passage.ts#L48)
+Defined in: [passages/passage.ts:48](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/core/src/passages/passage.ts#L48)
 
 Creates a new passage and automatically registers it with the Game.
 
@@ -69,7 +69,7 @@ The passage type (story, interactiveMap, or widget)
 
 > `readonly` **id**: `string`
 
-Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/core/src/passages/passage.ts#L34)
+Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -80,7 +80,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/core/src/passages/passage.ts#L40)
+Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -91,7 +91,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**\<`T`\>(`_props`): `void`
 
-Defined in: [passages/passage.ts:65](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/core/src/passages/passage.ts#L65)
+Defined in: [passages/passage.ts:65](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/core/src/passages/passage.ts#L65)
 
 Renders the passage content with optional props.
 

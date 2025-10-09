@@ -1,44 +1,45 @@
-# FIXME: uncomment and set it up
-#name: docs
-#
-#on:
-#  push:
-#    branches: [main]
-#  workflow_dispatch: {}
-#
-#permissions:
-#  contents: write
-#
-#jobs:
-#  build-deploy:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup Bun
-#        uses: oven-sh/setup-bun@v2
-#        with:
-#          bun-version: latest
-#
-#      # Docusaurus CLIs are Node-based; keep Node available
-#      - name: Setup Node
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 20
-#
-#      - name: Install dependencies
-#        run: bun install --frozen-lockfile
-#
-#      # Build packages first (Turbo will respect the graph)
-#      - name: Build packages
-#        run: bun run build
-#
-#      # Build docs (TypeDoc runs via docusaurus-plugin-typedoc)
-#      - name: Build docs site
-#        run: bun run docs:build
-#
-#      - name: Deploy to GitHub Pages
-#        uses: peaceiris/actions-gh-pages@v3
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_dir: apps/docs/build
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      # Docusaurus CLIs are Node-based; keep Node available
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Build packages first (Turbo will respect the graph)
+      - name: Build packages
+        run: bun run build
+
+      # Build docs (TypeDoc runs via docusaurus-plugin-typedoc)
+      - name: Build docs site
+        run: bun run docs:build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: apps/docs/build
+          publish_branch: docs
+          cname: false

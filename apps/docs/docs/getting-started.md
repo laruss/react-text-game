@@ -1,0 +1,235 @@
+---
+sidebar_position: 2
+---
+
+# Getting Started
+
+This guide will help you set up React Text Game in your project.
+
+## Installation
+
+React Text Game consists of two packages: the core engine (`@react-text-game/core`) and the UI components (`@react-text-game/ui`).
+
+### Core Package Only
+
+If you want to build your own UI, you can install just the core package:
+
+```bash
+# Bun
+bun add @react-text-game/core
+
+# npm
+npm install @react-text-game/core
+
+# yarn
+yarn add @react-text-game/core
+
+# pnpm
+pnpm add @react-text-game/core
+```
+
+### Core + UI Packages
+
+For a complete solution with ready-to-use React components:
+
+```bash
+# Bun
+bun add @react-text-game/core @react-text-game/ui
+
+# npm
+npm install @react-text-game/core @react-text-game/ui
+
+# yarn
+yarn add @react-text-game/core @react-text-game/ui
+
+# pnpm
+pnpm add @react-text-game/core @react-text-game/ui
+```
+
+## UI Package Setup
+
+If you're using the UI package, you need to configure Tailwind CSS:
+
+### 1. Install Tailwind CSS
+
+Follow the [official Tailwind installation guide](https://tailwindcss.com/docs/installation) for your stack.
+
+### 2. Import UI Styles
+
+Import the UI styles in your global CSS file (e.g., `src/index.css` or `src/main.css`):
+
+```css
+@import "@react-text-game/ui/styles";
+
+/* Optional: Override theme colors */
+@theme {
+  --color-primary-500: oklch(0.65 0.25 265);
+}
+```
+
+## Basic Setup
+
+### Using Core Package Only
+
+```tsx
+import { Game, createEntity, newStory } from '@react-text-game/core';
+
+// IMPORTANT: Initialize the game first
+await Game.init({
+  gameName: 'My Text Adventure',
+  isDevMode: true,
+});
+
+// Create game entities
+const player = createEntity('player', {
+  name: 'Hero',
+  health: 100,
+});
+
+// Create story passages
+const intro = newStory('intro', () => [
+  {
+    type: 'header',
+    content: 'Welcome!',
+    props: { level: 1 }
+  },
+  {
+    type: 'text',
+    content: 'Your adventure begins...'
+  },
+]);
+
+// Start the game
+Game.jumpTo(intro);
+```
+
+### Using Core + UI Packages
+
+The UI package provides a complete game interface with minimal setup:
+
+```tsx
+// src/App.tsx
+import { GameProvider, PassageController } from '@react-text-game/ui';
+
+export function App() {
+  return (
+    <GameProvider options={{ gameName: 'My Text Adventure', isDevMode: true }}>
+      <PassageController />
+    </GameProvider>
+  );
+}
+```
+
+Then define your game entities and passages:
+
+```tsx
+// src/game/entities.ts
+import { createEntity } from '@react-text-game/core';
+
+export const player = createEntity('player', {
+  name: 'Hero',
+  health: 100,
+  inventory: [] as string[],
+});
+```
+
+```tsx
+// src/game/passages.ts
+import { newStory, Game } from '@react-text-game/core';
+import { player } from './entities';
+
+export const intro = newStory('intro', () => [
+  {
+    type: 'header',
+    content: 'Welcome to the Game',
+    props: { level: 1 }
+  },
+  {
+    type: 'text',
+    content: `Hello, ${player.name}! Your health is ${player.health}.`
+  },
+  {
+    type: 'actions',
+    content: [
+      {
+        label: 'Start Adventure',
+        action: () => Game.jumpTo('chapter1'),
+        color: 'primary'
+      }
+    ]
+  }
+]);
+```
+
+## Project Structure
+
+Here's a recommended project structure:
+
+```
+src/
+├── game/
+│   ├── entities/          # Game entities (player, inventory, etc.)
+│   │   ├── player.ts
+│   │   ├── inventory.ts
+│   │   └── index.ts
+│   ├── passages/          # Game passages (story screens)
+│   │   ├── intro.ts
+│   │   ├── chapter1.ts
+│   │   └── index.ts
+│   └── index.ts           # Game initialization
+├── App.tsx                # Main app component
+└── main.tsx               # Entry point
+```
+
+## Next Steps
+
+Now that you have the basics set up, learn more about:
+
+- [**Core Concepts**](/docs/core-concepts) - Understand entities, passages, and state management
+- [**Core API**](/docs/api/core) - Complete API reference for the core package
+- [**UI API**](/docs/api/ui) - Complete API reference for the UI package
+
+## Examples
+
+Check out the example game in the repository:
+
+- [Example Game Source](https://github.com/laruss/react-text-game/tree/main/apps/example-game)
+
+## Troubleshooting
+
+### Game Not Initializing
+
+Make sure you call `Game.init()` before creating any entities or passages:
+
+```tsx
+// ❌ Wrong
+const player = createEntity('player', { name: 'Hero' });
+await Game.init();
+
+// ✅ Correct
+await Game.init();
+const player = createEntity('player', { name: 'Hero' });
+```
+
+### UI Components Not Styled
+
+Ensure you've imported the UI styles in your global CSS:
+
+```css
+@import "@react-text-game/ui/styles";
+```
+
+And that Tailwind CSS is properly configured for your project.
+
+### TypeScript Errors
+
+Make sure you have TypeScript 5.6+ installed:
+
+```bash
+bun add -d typescript@latest
+```
+
+## Need Help?
+
+- [Report an issue](https://github.com/laruss/react-text-game/issues)
+- [View the source code](https://github.com/laruss/react-text-game)

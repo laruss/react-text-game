@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type Placement =
+export type Placement =
     | "top"
     | "top-right"
     | "top-left"
@@ -10,7 +10,7 @@ type Placement =
     | "right"
     | "left";
 
-type TooltipProps = Readonly<{
+export type TooltipProps = Readonly<{
     children: ReactNode;
     disabled?: boolean | undefined;
     content: ReactNode;

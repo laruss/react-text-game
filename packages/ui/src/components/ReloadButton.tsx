@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 import { Button, ButtonProps } from "#components/common";
 
-type ReloadButtonProps = Omit<ButtonProps, "children" | "onClick"> &
+export type ReloadButtonProps = Omit<ButtonProps, "children" | "onClick"> &
     Readonly<{
         /**
          * If true, the button will display only the icon without any text.

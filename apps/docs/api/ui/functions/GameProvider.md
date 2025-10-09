@@ -2,13 +2,13 @@
 
 > **GameProvider**(`__namedParameters`): `null` \| `Element`
 
-Defined in: [packages/ui/src/components/GameProvider/GameProvider.tsx:34](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/ui/src/components/GameProvider/GameProvider.tsx#L34)
+Defined in: [packages/ui/src/components/GameProvider/GameProvider.tsx:33](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/ui/src/components/GameProvider/GameProvider.tsx#L33)
 
 ## Parameters
 
 ### \_\_namedParameters
 
-`GameProviderProps`
+[`GameProviderProps`](../type-aliases/GameProviderProps.md)
 
 ## Returns
 

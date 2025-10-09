@@ -20,7 +20,7 @@ import {
 import { DevModeDrawer } from "../DevModeDrawer";
 import { AppIconMenu } from "./AppIconMenu";
 
-type GameProviderProps = PropsWithChildren<{
+export type GameProviderProps = PropsWithChildren<{
     options: NewOptions;
     components?: Components;
 }>;

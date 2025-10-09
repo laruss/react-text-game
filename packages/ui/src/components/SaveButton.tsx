@@ -4,7 +4,7 @@ import { Button, ButtonProps } from "#components/common";
 import { SaveLoadMode } from "#context/SaveLoadMenuContext";
 import { useSaveLoadMenu } from "#context/SaveLoadMenuContext";
 
-type SaveButtonProps = Omit<ButtonProps, "children" | "onClick"> &
+export type SaveButtonProps = Omit<ButtonProps, "children" | "onClick"> &
     Readonly<{
         /**
          * If true, the button will display only the icon without any text.

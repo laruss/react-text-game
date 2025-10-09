@@ -1,47 +1,102 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
-# Tutorial Intro
+# Welcome to React Text Game
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**React Text Game** is a powerful, reactive text-based game engine built for React applications. Create interactive narrative experiences with support for story passages, interactive maps, and comprehensive state management.
 
-## Getting Started
+## Key Features
 
-Get started by **creating a new site**.
+- 🔄 **Reactive State Management** - Built on Valtio for automatic UI updates
+- 📖 **Multiple Passage Types** - Story, Interactive Map, and Widget passages
+- 💾 **Flexible Save System** - JSONPath-based storage with auto-save support
+- 🎮 **Entity Registry** - Automatic registration and proxying of game objects
+- 🏭 **Factory-Based Entities** - Plain-object factories for beginners with class-based escape hatches
+- 🔒 **Type-Safe** - Full TypeScript support with comprehensive types
+- ⚛️ **React Hooks** - Built-in hooks for seamless React integration
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Packages
 
-### What you'll need
+React Text Game consists of two main packages:
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+### [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
+The core game engine that handles state management, entity registration, passage navigation, and save/load functionality.
 
 ```bash
-cd my-website
-npm run start
+bun add @react-text-game/core
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+[View Core API Documentation →](/docs/api/core)
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+### [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Ready-to-use React components with Tailwind CSS v4 and a semantic theming system.
+
+```bash
+bun add @react-text-game/core @react-text-game/ui
+```
+
+[View UI API Documentation →](/docs/api/ui)
+
+## Quick Example
+
+```tsx
+import { Game, createEntity, newStory } from '@react-text-game/core';
+
+// Initialize the game
+await Game.init({
+  // your game options
+});
+
+// Create a game entity
+const player = createEntity('player', {
+  name: 'Hero',
+  health: 100,
+});
+
+// Create a story passage
+const intro = newStory('intro', () => [
+  {
+    type: 'header',
+    content: 'Welcome to the Game',
+    props: { level: 1 }
+  },
+  {
+    type: 'text',
+    content: `Hello, ${player.name}!`
+  },
+  {
+    type: 'actions',
+    content: [
+      {
+        label: 'Start Adventure',
+        action: () => Game.jumpTo('adventure')
+      }
+    ]
+  }
+]);
+
+// Navigate to passage
+Game.jumpTo(intro);
+```
+
+## Next Steps
+
+- [**Getting Started**](/docs/getting-started) - Installation and setup guide
+- [**Core Concepts**](/docs/core-concepts) - Learn the fundamental concepts
+- [**Core API**](/docs/api/core) - Complete API reference for the core package
+- [**UI API**](/docs/api/ui) - Complete API reference for the UI package
+
+## Resources
+
+- [GitHub Repository](https://github.com/laruss/react-text-game)
+- [Report Issues](https://github.com/laruss/react-text-game/issues)
+- [NPM - Core Package](https://www.npmjs.com/package/@react-text-game/core)
+- [NPM - UI Package](https://www.npmjs.com/package/@react-text-game/ui)
+
+## License
+
+MIT © [laruss](https://github.com/laruss)

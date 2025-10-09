@@ -2,4 +2,4 @@
 
 > **EmptyObject** = `Record`\<`string`, `never`\>
 
-Defined in: [types.ts:1](https://github.com/laruss/react-text-game/blob/3442aa0d22b82dc4760f453f7492731a6f583755/packages/core/src/types.ts#L1)
+Defined in: [types.ts:1](https://github.com/laruss/react-text-game/blob/3f24f1ae69cb46d4c796e3e7af2e5d08bb0359c7/packages/core/src/types.ts#L1)

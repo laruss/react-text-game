@@ -19,13 +19,14 @@
         "prettier": "^3.6.2",
         "turbo": "^2.5.8",
         "typedoc": "^0.28.13",
+        "typedoc-plugin-markdown": "^4.9.0",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.45.0",
       },
     },
     "apps/core-test-app": {
       "name": "core-test-app",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@react-text-game/core": "workspace:*",
         "react": "^19",
@@ -59,7 +60,7 @@
     },
     "apps/example-game": {
       "name": "example-game",
-      "version": "0.0.0",
+      "version": "0.0.1",
       "dependencies": {
         "@radix-ui/react-slot": "^1.2.3",
         "@react-text-game/core": "workspace:*",
@@ -94,7 +95,7 @@
     },
     "apps/ui-test-app": {
       "name": "ui-test-app",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@react-text-game/core": "workspace:*",
         "@react-text-game/ui": "workspace:*",
@@ -115,7 +116,7 @@
     },
     "packages/core": {
       "name": "@react-text-game/core",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "consola": "^3.4.2",
         "crypto-js": "^4.2.0",
@@ -138,7 +139,7 @@
     },
     "packages/ui": {
       "name": "@react-text-game/ui",
-      "version": "0.1.1",
+      "version": "0.2.1",
       "dependencies": {
         "tailwind-merge": "^3.3.1",
       },

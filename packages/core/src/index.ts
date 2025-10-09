@@ -10,6 +10,40 @@ export * from "./constants";
 export * from "./hooks";
 export type * from "#types";
 
+// Export SimpleObject explicitly for documentation
+export type { SimpleObject } from "#gameObjects/simpleObject";
+
+// Export passage types
+export type {
+    InteractiveMapType,
+    InteractiveMapOptions,
+    AnyHotspot,
+    MapLabelHotspot,
+    MapImageHotspot,
+    SideLabelHotspot,
+    SideImageHotspot,
+    MapMenu,
+    LabelHotspot,
+} from "#passages/interactiveMap";
+export type {
+    StoryContent,
+    StoryOptions,
+    Component,
+    TextComponent,
+    HeaderComponent,
+    ImageComponent,
+    VideoComponent,
+    ActionsComponent,
+    ConversationComponent,
+    AnotherStoryComponent,
+    ActionType,
+    ConversationAppearance,
+    ConversationBubble,
+    ConversationBubbleSide,
+    ConversationVariant,
+    HeaderLevel,
+} from "#passages/story";
+
 export {
     BaseGameObject,
     createEntity,
