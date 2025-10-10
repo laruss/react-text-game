@@ -1,11 +1,12 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": "github:laruss/react-text-game",
+    "homepage": "https://laruss.github.io/react-text-game/",
     "private": false,
     "type": "module",
     "scripts": {
