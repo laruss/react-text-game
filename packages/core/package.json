@@ -1,7 +1,7 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.2.1",
-    "description": "",
+    "version": "0.2.2",
+    "description": "A powerful React-based text game engine with reactive state management, passage-based navigation, and persistent save system for building interactive narrative experiences",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -13,8 +13,7 @@
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
         "prepack": "rm -rf dist && bun run build",
-        "test-pack": "npm pack --dry-run && bunx publint",
-        "publish": "npm whoami && npm publish"
+        "test-pack": "npm pack --dry-run && bunx publint"
     },
     "author": "laruss",
     "publishConfig": {

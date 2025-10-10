@@ -1,6 +1,32 @@
 ---
 sidebar_position: 1
 slug: /
+title: React Text Game - Reactive Text-Based Game Engine for React
+description: Build interactive narrative experiences, visual novels, and text adventures in React with a powerful, type-safe game engine featuring reactive state management, story passages, interactive maps, and flexible JSONPath-based save system.
+keywords:
+  - react
+  - reactjs
+  - typescript
+  - text game
+  - text adventure
+  - interactive fiction
+  - react text game
+  - react text adventure
+  - react interactive fiction
+  - narrative engine
+  - story engine
+  - game engine
+  - browser game
+  - visual novel
+  - twine alternative
+  - ink alternative
+  - choicescript
+  - passages
+  - save system
+  - jsonpath
+  - valtio
+  - tailwindcss
+image: /img/og-image.webp
 ---
 
 # Welcome to React Text Game

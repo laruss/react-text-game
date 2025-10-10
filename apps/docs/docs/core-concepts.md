@@ -1,5 +1,19 @@
 ---
 sidebar_position: 3
+title: Core Concepts - React Text Game Architecture and Patterns
+description: Master React Text Game architecture with entities, passages, state management, and navigation. Learn about the registry pattern, Valtio reactivity, JSONPath storage, save system, and best practices for building interactive narratives.
+keywords:
+  - react game architecture
+  - valtio state management
+  - game entity system
+  - story passages
+  - interactive map
+  - jsonpath storage
+  - game save system
+  - reactive game state
+  - text adventure development
+  - narrative game patterns
+image: /img/og-image.webp
 ---
 
 # Core Concepts

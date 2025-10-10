@@ -1,6 +1,6 @@
 # Interface: ActionsComponent
 
-Defined in: [passages/story/types.ts:523](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L523)
+Defined in: [passages/story/types.ts:523](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/story/types.ts#L523)
 
 Component for displaying a group of interactive action buttons.
 Used to present player choices, navigation options, or any interactive decisions.
@@ -39,7 +39,7 @@ Used to present player choices, navigation options, or any interactive decisions
 
 > **content**: [`ActionType`](../type-aliases/ActionType.md)[]
 
-Defined in: [passages/story/types.ts:533](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L533)
+Defined in: [passages/story/types.ts:533](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/story/types.ts#L533)
 
 Array of action buttons to display.
 Each action represents a choice or interactive option for the player.
@@ -50,7 +50,7 @@ Each action represents a choice or interactive option for the player.
 
 > `optional` **id**: `string`
 
-Defined in: [passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L24)
+Defined in: [passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/story/types.ts#L24)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -71,7 +71,7 @@ Can be used to reference or manipulate specific components programmatically.
 
 > `optional` **initialVariant**: `"hidden"` \| `"display"` \| `"disclosure"`
 
-Defined in: [passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L39)
+Defined in: [passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/story/types.ts#L39)
 
 Controls the initial visibility state of the component.
 
@@ -98,7 +98,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > `optional` **props**: `object`
 
-Defined in: [passages/story/types.ts:538](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L538)
+Defined in: [passages/story/types.ts:538](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/story/types.ts#L538)
 
 Optional configuration for layout and styling.
 
@@ -135,6 +135,6 @@ Layout direction for the action buttons.
 
 > **type**: `"actions"`
 
-Defined in: [passages/story/types.ts:527](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L527)
+Defined in: [passages/story/types.ts:527](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/story/types.ts#L527)
 
 Discriminator property identifying this as an actions component.

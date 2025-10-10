@@ -35,6 +35,39 @@ const config: Config = {
         locales: ["en"],
     },
 
+    headTags: [
+        {
+            tagName: "script",
+            attributes: {
+                type: "application/ld+json",
+            },
+            innerHTML: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                name: "React Text Game",
+                applicationCategory: "DeveloperApplication",
+                operatingSystem: "Web Browser",
+                description:
+                    "A powerful, reactive text-based game engine for React applications. Create interactive narrative experiences with support for story passages, interactive maps, and comprehensive state management.",
+                url: "https://laruss.github.io/react-text-game/",
+                author: {
+                    "@type": "Person",
+                    name: "laruss",
+                    url: "https://github.com/laruss",
+                },
+                offers: {
+                    "@type": "Offer",
+                    price: "0",
+                    priceCurrency: "USD",
+                },
+                programmingLanguage: ["TypeScript", "JavaScript"],
+                softwareVersion: "1.0.0",
+                keywords:
+                    "react, text game, interactive fiction, narrative engine, game engine, typescript, valtio",
+            }),
+        },
+    ],
+
     plugins: [
         [
             "docusaurus-plugin-typedoc",
@@ -76,13 +109,74 @@ const config: Config = {
                 theme: {
                     customCss: "./src/css/custom.css",
                 },
+                sitemap: {
+                    lastmod: "date",
+                    changefreq: null,
+                    priority: null,
+                    ignorePatterns: ["/tags/**"],
+                    filename: "sitemap.xml",
+                },
             } satisfies Options,
         ],
     ],
 
     themeConfig: {
         // Social card for link previews
-        image: "img/logo.svg",
+        image: "img/og-image.webp",
+        // Global metadata for SEO
+        metadata: [
+            {
+                name: "description",
+                content:
+                    "React Text Game is a powerful, reactive text-based game engine for creating interactive narrative experiences, visual novels, and text adventures in React. Features include story passages, interactive maps, JSONPath-based save system, and Valtio state management.",
+            },
+            {
+                name: "keywords",
+                content:
+                    "react, reactjs, typescript, text game, text adventure, interactive fiction, react text game, react text adventure, react interactive fiction, narrative engine, story engine, game engine, browser game, visual novel, twine alternative, ink alternative, choicescript, passages, save system, jsonpath, valtio, tailwindcss",
+            },
+            { name: "author", content: "laruss" },
+            { name: "twitter:card", content: "summary_large_image" },
+            {
+                name: "twitter:title",
+                content:
+                    "React Text Game - Reactive Text-Based Game Engine for React",
+            },
+            {
+                name: "twitter:description",
+                content:
+                    "Build interactive narrative experiences and text adventures in React with a powerful, type-safe game engine featuring reactive state management and flexible save system.",
+            },
+            {
+                name: "twitter:image",
+                content:
+                    "https://laruss.github.io/react-text-game/img/og-image.webp",
+            },
+            { property: "og:type", content: "website" },
+            {
+                property: "og:title",
+                content:
+                    "React Text Game - Reactive Text-Based Game Engine for React",
+            },
+            {
+                property: "og:description",
+                content:
+                    "Build interactive narrative experiences and text adventures in React with a powerful, type-safe game engine featuring reactive state management and flexible save system.",
+            },
+            {
+                property: "og:url",
+                content: "https://laruss.github.io/react-text-game/",
+            },
+            {
+                property: "og:image",
+                content:
+                    "https://laruss.github.io/react-text-game/img/og-image.webp",
+            },
+            { property: "og:image:width", content: "1200" },
+            { property: "og:image:height", content: "630" },
+            { property: "og:image:alt", content: "React Text Game Logo" },
+            { property: "og:site_name", content: "React Text Game" },
+        ],
         colorMode: {
             respectPrefersColorScheme: true,
         },
