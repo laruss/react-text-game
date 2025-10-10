@@ -384,6 +384,8 @@ Storage.setState(state);
 
 The engine includes a comprehensive save/load system built on IndexedDB (via Dexie) with encryption support for export/import:
 
+> **💾 Save Migrations**: For managing save compatibility across game versions, see the [Save Migration Guide](./MIGRATIONS.md).
+
 ```typescript
 import {
   useSaveSlots,

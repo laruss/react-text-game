@@ -221,6 +221,10 @@ const config: Config = {
                             to: "/",
                         },
                         {
+                            label: "Save Migrations",
+                            to: "/migrations",
+                        },
+                        {
                             label: "Core API",
                             to: "/api/core",
                         },

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: Getting Started - React Text Game Installation Guide
+title: Getting Started
 description: Learn how to install and set up React Text Game in your project. Step-by-step guide for installing the core game engine and UI components, configuring Tailwind CSS, and creating your first text-based game or interactive fiction.
 keywords:
   - react text game installation

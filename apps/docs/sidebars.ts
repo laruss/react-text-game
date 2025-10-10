@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
     'intro',
     'getting-started',
     'core-concepts',
+    'migrations',
   ],
 };
 

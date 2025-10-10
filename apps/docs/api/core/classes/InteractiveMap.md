@@ -1,6 +1,6 @@
 # Class: InteractiveMap
 
-Defined in: [passages/interactiveMap/interactiveMap.ts:49](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/interactiveMap/interactiveMap.ts#L49)
+Defined in: [passages/interactiveMap/interactiveMap.ts:49](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/interactiveMap/interactiveMap.ts#L49)
 
 Map-based interactive passage with clickable hotspots.
 
@@ -56,7 +56,7 @@ newInteractiveMap - Factory function for creating InteractiveMap instances
 
 > **new InteractiveMap**(`id`, `options`): `InteractiveMap`
 
-Defined in: [passages/interactiveMap/interactiveMap.ts:61](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/interactiveMap/interactiveMap.ts#L61)
+Defined in: [passages/interactiveMap/interactiveMap.ts:61](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/interactiveMap/interactiveMap.ts#L61)
 
 Creates a new InteractiveMap passage.
 
@@ -88,7 +88,7 @@ Configuration including image, hotspots, and styling
 
 > `readonly` **id**: `string`
 
-Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/passage.ts#L34)
+Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -103,7 +103,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/passage.ts#L40)
+Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -118,7 +118,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**\<`T`\>(`props`): [`InteractiveMapType`](../type-aliases/InteractiveMapType.md)
 
-Defined in: [passages/interactiveMap/interactiveMap.ts:95](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/passages/interactiveMap/interactiveMap.ts#L95)
+Defined in: [passages/interactiveMap/interactiveMap.ts:95](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/interactiveMap/interactiveMap.ts#L95)
 
 Renders the interactive map by resolving dynamic values and filtering hotspots.
 

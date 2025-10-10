@@ -6,6 +6,7 @@ import { logger } from "#logger";
 import { _getOptions, NewOptions, newOptions, Options } from "#options";
 import { Passage } from "#passages/passage";
 import { createOrUpdateSystemSave } from "#saves";
+import { validateMigrations } from "#saves/migrations";
 import { Storage } from "#storage";
 import { GameSaveState, JsonPath } from "#types";
 
@@ -506,6 +507,22 @@ export class Game {
             logger.warn(
                 "Game is running in dev mode, do not use in production!"
             );
+        }
+
+        // Validate migrations in dev mode
+        if (Game.options.isDevMode) {
+            const validation = validateMigrations(Game.options.gameVersion);
+            if (!validation.valid) {
+                logger.warn(
+                    "Migration validation failed. The following issues were found:"
+                );
+                validation.issues.forEach((issue) => logger.warn(`  - ${issue}`));
+                logger.warn(
+                    "These issues may cause problems when loading saves from older versions."
+                );
+            } else if (validation.issues.length === 0) {
+                logger.log("Migration validation passed");
+            }
         }
 
         Game.setCurrent(SYSTEM_PASSAGE_NAMES.START_MENU);

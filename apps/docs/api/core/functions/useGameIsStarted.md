@@ -2,7 +2,7 @@
 
 > **useGameIsStarted**(): `boolean`
 
-Defined in: [hooks/useGameIsStarted.ts:16](https://github.com/laruss/react-text-game/blob/76cea889a7a8b8f7da18a22748a455531ab7ac4b/packages/core/src/hooks/useGameIsStarted.ts#L16)
+Defined in: [hooks/useGameIsStarted.ts:16](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/hooks/useGameIsStarted.ts#L16)
 
 Determines whether the game has started.
 
