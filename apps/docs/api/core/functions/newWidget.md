@@ -2,7 +2,7 @@
 
 > **newWidget**(`id`, `content`): [`Widget`](../classes/Widget.md)
 
-Defined in: [passages/widget.ts:71](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/widget.ts#L71)
+Defined in: [passages/widget.ts:71](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/widget.ts#L71)
 
 Factory function for creating Widget passages.
 

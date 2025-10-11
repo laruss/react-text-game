@@ -12,6 +12,7 @@
     "scripts": {
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
+        "lint": "eslint .",
         "prepack": "rm -rf dist && bun run build",
         "test-pack": "npm pack --dry-run && bunx publint"
     },
