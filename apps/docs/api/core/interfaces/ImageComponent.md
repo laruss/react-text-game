@@ -1,6 +1,6 @@
 # Interface: ImageComponent
 
-Defined in: [passages/story/types.ts:174](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/story/types.ts#L174)
+Defined in: [passages/story/types.ts:174](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/story/types.ts#L174)
 
 Component for displaying images with built-in modal viewer support.
 By default, images can be clicked to open in a full-screen modal for better viewing.
@@ -38,7 +38,7 @@ By default, images can be clicked to open in a full-screen modal for better view
 
 > **content**: `string`
 
-Defined in: [passages/story/types.ts:191](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/story/types.ts#L191)
+Defined in: [passages/story/types.ts:191](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/story/types.ts#L191)
 
 URL or path to the image file.
 Can be absolute URL, relative path, or path to public assets.
@@ -57,7 +57,7 @@ content: 'scene.png'                      // Public folder asset
 
 > `optional` **id**: `string`
 
-Defined in: [passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/story/types.ts#L24)
+Defined in: [passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/story/types.ts#L24)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -78,7 +78,7 @@ Can be used to reference or manipulate specific components programmatically.
 
 > `optional` **initialVariant**: `"hidden"` \| `"display"` \| `"disclosure"`
 
-Defined in: [passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/story/types.ts#L39)
+Defined in: [passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/story/types.ts#L39)
 
 Controls the initial visibility state of the component.
 
@@ -105,7 +105,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > `optional` **props**: `object`
 
-Defined in: [passages/story/types.ts:196](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/story/types.ts#L196)
+Defined in: [passages/story/types.ts:196](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/story/types.ts#L196)
 
 Optional configuration for image behavior and styling.
 
@@ -184,6 +184,6 @@ props: {
 
 > **type**: `"image"`
 
-Defined in: [passages/story/types.ts:178](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/core/src/passages/story/types.ts#L178)
+Defined in: [passages/story/types.ts:178](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/story/types.ts#L178)
 
 Discriminator property identifying this as an image component.

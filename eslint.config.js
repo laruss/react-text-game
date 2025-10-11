@@ -7,10 +7,11 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default tseslint.config(
-    { ignores: ["dist", "node_modules", "coverage"] },
+    { ignores: ["**/dist/**", "**/node_modules/**", "**/coverage/**", "**/.next/**", "**/build/**"] },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
         files: ["**/*.{ts,tsx}"],
+        ignores: ["**/dist/**", "**/node_modules/**", "**/coverage/**", "**/.next/**", "**/build/**"],
         languageOptions: {
             ecmaVersion: 2020,
             globals: globals.browser,

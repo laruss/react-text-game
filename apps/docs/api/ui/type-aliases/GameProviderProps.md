@@ -2,4 +2,4 @@
 
 > **GameProviderProps** = `PropsWithChildren`\<\{ `components?`: [`Components`](Components.md); `options`: `NewOptions`; \}\>
 
-Defined in: [packages/ui/src/components/GameProvider/GameProvider.tsx:23](https://github.com/laruss/react-text-game/blob/4531810ed426df9948c54abd8dbf61d1745871f2/packages/ui/src/components/GameProvider/GameProvider.tsx#L23)
+Defined in: [packages/ui/src/components/GameProvider/GameProvider.tsx:23](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/ui/src/components/GameProvider/GameProvider.tsx#L23)

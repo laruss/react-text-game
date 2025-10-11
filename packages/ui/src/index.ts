@@ -1,7 +1,7 @@
 export * from './components';
-export { useSaveLoadMenu } from './context/SaveLoadMenuContext';
+export type { Components, StoryComponents } from './context/ComponentsContext';
 export type {
     SaveLoadMenuContextType,
     SaveLoadMode,
 } from './context/SaveLoadMenuContext';
-export type { Components, StoryComponents } from './context/ComponentsContext';
+export { useSaveLoadMenu } from './context/SaveLoadMenuContext';
