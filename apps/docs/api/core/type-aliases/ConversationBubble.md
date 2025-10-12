@@ -2,7 +2,7 @@
 
 > **ConversationBubble** = `object`
 
-Defined in: [passages/story/types.ts:650](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/story/types.ts#L650)
+Defined in: [passages/story/types.ts:650](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/passages/story/types.ts#L650)
 
 Represents a single message/bubble in a conversation sequence.
 Can include speaker information, avatar, and custom styling.
@@ -44,7 +44,7 @@ Can include speaker information, avatar, and custom styling.
 
 > `optional` **color**: `` `#${string}` ``
 
-Defined in: [passages/story/types.ts:693](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/story/types.ts#L693)
+Defined in: [passages/story/types.ts:693](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/passages/story/types.ts#L693)
 
 Optional custom background color for the message bubble.
 Must be a valid hex color code.
@@ -66,7 +66,7 @@ When not provided, the color is determined by the conversation variant and side.
 
 > **content**: `ReactNode`
 
-Defined in: [passages/story/types.ts:678](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/story/types.ts#L678)
+Defined in: [passages/story/types.ts:678](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/passages/story/types.ts#L678)
 
 The message content to display.
 Supports strings, JSX elements, and any valid React node.
@@ -77,7 +77,7 @@ Supports strings, JSX elements, and any valid React node.
 
 > `optional` **props**: `object`
 
-Defined in: [passages/story/types.ts:709](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/story/types.ts#L709)
+Defined in: [passages/story/types.ts:709](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/passages/story/types.ts#L709)
 
 Optional CSS class overrides for fine-grained styling control.
 
@@ -114,7 +114,7 @@ Controls text styling, padding, and background.
 
 > `optional` **side**: [`ConversationBubbleSide`](ConversationBubbleSide.md)
 
-Defined in: [passages/story/types.ts:704](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/story/types.ts#L704)
+Defined in: [passages/story/types.ts:704](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/passages/story/types.ts#L704)
 
 Which side of the conversation to display this message.
 
@@ -133,7 +133,7 @@ Which side of the conversation to display this message.
 
 > `optional` **who**: `object`
 
-Defined in: [passages/story/types.ts:654](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/story/types.ts#L654)
+Defined in: [passages/story/types.ts:654](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/passages/story/types.ts#L654)
 
 Optional speaker information for this message.
 

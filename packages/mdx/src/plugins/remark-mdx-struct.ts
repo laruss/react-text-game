@@ -1,6 +1,6 @@
 /// <reference types="remark-mdx" />
 
-import type { Heading, Paragraph, Root } from "mdast";
+import type { Heading, Image, Paragraph, Root } from "mdast";
 import type { MdxJsxFlowElement } from "mdast-util-mdx";
 import { toString } from "mdast-util-to-string";
 import type { Plugin } from "unified";
@@ -42,12 +42,12 @@ const remarkMdxStruct: Plugin<[], Root> = function () {
                         typeof attr.value === "object" &&
                         attr.value.type === "mdxJsxAttributeValueExpression"
                     ) {
-                        // Expression value (functions, objects, etc.) - store everything for evaluation
+                        // Expression value (functions, objects, etc.)
+                        // Store the estree data which will be used by recma plugin
                         props[attr.name] = {
                             type: "expression",
-                            // todo: here is non-serializable value, need to find a way to store it
-                            // value: attr.value.value,
-                            // data: attr.value.data,
+                            value: attr.value.value,
+                            data: attr.value.data,
                         };
                     }
                 }
@@ -90,11 +90,30 @@ const remarkMdxStruct: Plugin<[], Root> = function () {
                 });
             } else if (node.type === "paragraph") {
                 const paragraph = node as Paragraph;
-                out.push({
-                    component: "p",
-                    children: toString(paragraph),
-                    props: {},
-                });
+
+                // Check if paragraph contains a single image (markdown image syntax)
+                if (
+                    paragraph.children.length === 1 &&
+                    paragraph.children[0]?.type === "image"
+                ) {
+                    const image = paragraph.children[0] as Image;
+                    out.push({
+                        component: "img",
+                        children: "",
+                        props: {
+                            src: image.url,
+                            alt: image.alt ?? undefined,
+                            title: image.title ?? undefined,
+                        },
+                    });
+                } else {
+                    // Regular paragraph
+                    out.push({
+                        component: "p",
+                        children: toString(paragraph),
+                        props: {},
+                    });
+                }
             } else if (node.type === "mdxJsxFlowElement") {
                 const processed = processJsxElement(node as MdxJsxFlowElement);
                 if (processed) {

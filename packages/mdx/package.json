@@ -12,6 +12,7 @@
     "scripts": {
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
+        "test": "bun test",
         "lint": "eslint .",
         "prepack": "rm -rf dist && bun run build",
         "test-pack": "npm pack --dry-run && bunx publint"
@@ -58,7 +59,7 @@
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js"
         },
-        "./plgugin": {
+        "./plugin": {
             "types": "./dist/plugins/index.d.ts",
             "import": "./dist/plugins/index.js"
         }

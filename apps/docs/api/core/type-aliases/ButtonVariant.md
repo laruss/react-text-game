@@ -2,4 +2,4 @@
 
 > **ButtonVariant** = `"solid"` \| `"faded"` \| `"bordered"` \| `"light"` \| `"flat"` \| `"ghost"` \| `"shadow"`
 
-Defined in: [types.ts:23](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/types.ts#L23)
+Defined in: [types.ts:23](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/types.ts#L23)

@@ -8,3 +8,4 @@
 - [ ] add i18n support;
 - [ ] add to git ignore `apps/docs/api` folder and build it on CI;
 - [ ] add the possibility to add basic styling to text components;
+- [ ] fix icon in google search;
