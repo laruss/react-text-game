@@ -4,7 +4,7 @@ import { PassageController } from "@react-text-game/ui";
 import Test from '@/game/stories/mdx-test.mdx';
 
 export const App = () => {
-    console.log(Test);
+    console.log(JSON.stringify(Test, null, 2));
 
     return <PassageController />;
 };

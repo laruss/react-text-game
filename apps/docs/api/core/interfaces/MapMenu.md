@@ -1,6 +1,6 @@
 # Interface: MapMenu
 
-Defined in: [passages/interactiveMap/types.ts:514](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L514)
+Defined in: [passages/interactiveMap/types.ts:514](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L514)
 
 Contextual menu hotspot that displays multiple label buttons at a specific position.
 Useful for creating radial menus, action lists, or grouped choices on the map.
@@ -42,7 +42,7 @@ Useful for creating radial menus, action lists, or grouped choices on the map.
 
 > `optional` **direction**: `"horizontal"` \| `"vertical"`
 
-Defined in: [passages/interactiveMap/types.ts:585](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L585)
+Defined in: [passages/interactiveMap/types.ts:585](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L585)
 
 Layout direction for menu items.
 
@@ -61,7 +61,7 @@ Layout direction for menu items.
 
 > **items**: [`MaybeCallable`](../type-aliases/MaybeCallable.md)\<`undefined` \| [`LabelHotspot`](LabelHotspot.md)\>[]
 
-Defined in: [passages/interactiveMap/types.ts:544](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L544)
+Defined in: [passages/interactiveMap/types.ts:544](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L544)
 
 Array of menu items to display.
 Each item is a LabelHotspot or a function returning one.
@@ -93,7 +93,7 @@ items: [
 
 > **position**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:550](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L550)
+Defined in: [passages/interactiveMap/types.ts:550](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L550)
 
 Position of the menu on the map.
 Values are percentages (0-100) relative to the map dimensions.
@@ -132,7 +132,7 @@ y: () => player.cursorY  // Follow cursor
 
 > `optional` **props**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:590](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L590)
+Defined in: [passages/interactiveMap/types.ts:590](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L590)
 
 Optional styling configuration.
 
@@ -154,6 +154,6 @@ className: 'bg-card/90 backdrop-blur-sm rounded-lg shadow-xl p-2'
 
 > **type**: `"menu"`
 
-Defined in: [passages/interactiveMap/types.ts:518](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L518)
+Defined in: [passages/interactiveMap/types.ts:518](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L518)
 
 Discriminator property identifying this as a menu hotspot.

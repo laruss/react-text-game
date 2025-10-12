@@ -1,6 +1,6 @@
 # Interface: SideLabelHotspot
 
-Defined in: [passages/interactiveMap/types.ts:462](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L462)
+Defined in: [passages/interactiveMap/types.ts:462](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L462)
 
 Label hotspot positioned on the edge of the map.
 Appears outside the main map area, on one of the four sides.
@@ -26,7 +26,7 @@ Appears outside the main map area, on one of the four sides.
 
 > **action**: () => `void`
 
-Defined in: [passages/interactiveMap/types.ts:37](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L37)
+Defined in: [passages/interactiveMap/types.ts:37](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L37)
 
 Callback function executed when the hotspot is clicked.
 Called only when the hotspot is not disabled.
@@ -59,7 +59,7 @@ action: () => {
 
 > **content**: `string` \| () => `string`
 
-Defined in: [passages/interactiveMap/types.ts:140](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L140)
+Defined in: [passages/interactiveMap/types.ts:140](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L140)
 
 The text to display on the button.
 Can be static string or a function for dynamic content.
@@ -85,7 +85,7 @@ content: () => player.hasVisited ? 'Return to Town' : 'Discover Town'
 
 > `optional` **id**: `string`
 
-Defined in: [passages/interactiveMap/types.ts:18](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L18)
+Defined in: [passages/interactiveMap/types.ts:18](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L18)
 
 Optional unique identifier for this hotspot.
 Can be used for debugging, analytics, or programmatic hotspot manipulation.
@@ -107,7 +107,7 @@ id: 'shop-button'
 
 > `optional` **isDisabled**: `boolean` \| () => `boolean`
 
-Defined in: [passages/interactiveMap/types.ts:62](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L62)
+Defined in: [passages/interactiveMap/types.ts:62](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L62)
 
 Controls whether the hotspot is interactive.
 Can be a static boolean or a function for dynamic state.
@@ -147,7 +147,7 @@ When disabled:
 
 > **position**: `"top"` \| `"bottom"` \| `"left"` \| `"right"`
 
-Defined in: [passages/interactiveMap/types.ts:445](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L445)
+Defined in: [passages/interactiveMap/types.ts:445](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L445)
 
 Which edge of the map to place this hotspot.
 
@@ -171,7 +171,7 @@ Multiple hotspots on the same side are stacked in order.
 
 > `optional` **props**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:145](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L145)
+Defined in: [passages/interactiveMap/types.ts:145](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L145)
 
 Optional configuration for button styling and appearance.
 
@@ -232,7 +232,7 @@ Visual style variant for the button.
 
 > `optional` **tooltip**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:68](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L68)
+Defined in: [passages/interactiveMap/types.ts:68](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L68)
 
 Optional tooltip configuration.
 Displays additional information when hovering over the hotspot.
@@ -276,7 +276,7 @@ Position of the tooltip relative to the hotspot.
 
 > **type**: `"label"`
 
-Defined in: [passages/interactiveMap/types.ts:124](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L124)
+Defined in: [passages/interactiveMap/types.ts:124](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L124)
 
 Discriminator property identifying this as a label hotspot.
 

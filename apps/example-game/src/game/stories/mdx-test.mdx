@@ -1,8 +1,18 @@
 ---
 passageId: test
 ---
-import {MdxImage} from "@react-text-game/mdx";
+import {Action, Actions} from "@react-text-game/mdx";
 
 # This is a test MDX file
 
-<MdxImage src="images/test.png" />
+Hello, yes, this is a dog.
+
+<img src="images/test.png" />
+
+<video src="images/test.mp4" />
+
+![alt text](Isolated.png "Title")
+
+<Actions>
+    <Action onPerform={() => { console.log("hello!") }} >Action 1</Action>
+</Actions>

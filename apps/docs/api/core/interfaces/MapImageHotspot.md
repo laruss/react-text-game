@@ -1,6 +1,6 @@
 # Interface: MapImageHotspot
 
-Defined in: [passages/interactiveMap/types.ts:426](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L426)
+Defined in: [passages/interactiveMap/types.ts:426](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L426)
 
 Image hotspot positioned on the map image.
 Combines image-based interaction with percentage-based map positioning.
@@ -29,7 +29,7 @@ Combines image-based interaction with percentage-based map positioning.
 
 > **action**: () => `void`
 
-Defined in: [passages/interactiveMap/types.ts:37](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L37)
+Defined in: [passages/interactiveMap/types.ts:37](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L37)
 
 Callback function executed when the hotspot is clicked.
 Called only when the hotspot is not disabled.
@@ -62,7 +62,7 @@ action: () => {
 
 > **content**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:233](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L233)
+Defined in: [passages/interactiveMap/types.ts:233](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L233)
 
 Image URLs/paths for different hotspot states.
 At minimum, the `idle` state is required.
@@ -138,7 +138,7 @@ idle: () => `/icons/${currentTheme}/button.png`
 
 > `optional` **id**: `string`
 
-Defined in: [passages/interactiveMap/types.ts:18](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L18)
+Defined in: [passages/interactiveMap/types.ts:18](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L18)
 
 Optional unique identifier for this hotspot.
 Can be used for debugging, analytics, or programmatic hotspot manipulation.
@@ -160,7 +160,7 @@ id: 'shop-button'
 
 > `optional` **isDisabled**: `boolean` \| () => `boolean`
 
-Defined in: [passages/interactiveMap/types.ts:62](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L62)
+Defined in: [passages/interactiveMap/types.ts:62](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L62)
 
 Controls whether the hotspot is interactive.
 Can be a static boolean or a function for dynamic state.
@@ -200,7 +200,7 @@ When disabled:
 
 > **position**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:354](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L354)
+Defined in: [passages/interactiveMap/types.ts:354](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L354)
 
 Position coordinates on the map.
 Values are percentages (0-100) of the map's width and height.
@@ -257,7 +257,7 @@ y: () => player.level * 10  // Dynamic positioning
 
 > `optional` **props**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:290](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L290)
+Defined in: [passages/interactiveMap/types.ts:290](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L290)
 
 Optional configuration for sizing and styling.
 
@@ -333,7 +333,7 @@ For best results, use appropriately-sized source images.
 
 > `optional` **tooltip**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:68](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L68)
+Defined in: [passages/interactiveMap/types.ts:68](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L68)
 
 Optional tooltip configuration.
 Displays additional information when hovering over the hotspot.
@@ -377,7 +377,7 @@ Position of the tooltip relative to the hotspot.
 
 > **type**: `"image"`
 
-Defined in: [passages/interactiveMap/types.ts:227](https://github.com/laruss/react-text-game/blob/69d70d1469d5c42a37ce3eebe7e9ba2b0e018eba/packages/core/src/passages/interactiveMap/types.ts#L227)
+Defined in: [passages/interactiveMap/types.ts:227](https://github.com/laruss/react-text-game/blob/325ef0387ed3a81c3cff0516cf5aab684d6f654f/packages/core/src/passages/interactiveMap/types.ts#L227)
 
 Discriminator property identifying this as an image hotspot.
 
