@@ -25,7 +25,7 @@ jobs:
           node-version: 22
 
       - name: Install deps
-        run: bun install --frozen-lockfile
+        run: bun install --no-cache --frozen-lockfile
 
       - name: Build
         run: bun run build

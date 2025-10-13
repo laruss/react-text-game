@@ -47,5 +47,10 @@
     },
     "engines": {
         "node": ">=20.0"
+    },
+    "overrides": {
+        "typedoc": "0.28.14",
+        "typedoc-plugin-markdown>typedoc": "0.28.14",
+        "typedoc-docusaurus-theme>typedoc": "0.28.14"
     }
 }
