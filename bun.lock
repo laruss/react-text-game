@@ -138,6 +138,7 @@
         "@types/node": "^24.6.2",
         "@types/react": "^19.0.9",
         "@types/react-dom": "^19.0.3",
+        "eslint": "^9.37.0",
         "tsc-alias": "^1.8.16",
       },
       "peerDependencies": {
