@@ -2,7 +2,7 @@
 
 > **InteractiveMapOptions** = `object`
 
-Defined in: [passages/interactiveMap/types.ts:669](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L669)
+Defined in: [passages/interactiveMap/types.ts:669](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L669)
 
 Configuration options for creating an interactive map passage.
 Defines the map image, background, hotspots, and styling.
@@ -41,7 +41,7 @@ const mapOptions: InteractiveMapOptions = {
 
 > `optional` **bgImage**: `string` \| () => `string`
 
-Defined in: [passages/interactiveMap/types.ts:756](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L756)
+Defined in: [passages/interactiveMap/types.ts:756](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L756)
 
 Optional background image URL or path.
 Displayed behind the main map image with configurable opacity.
@@ -70,7 +70,7 @@ Use this for:
 
 > `optional` **caption**: `string`
 
-Defined in: [passages/interactiveMap/types.ts:680](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L680)
+Defined in: [passages/interactiveMap/types.ts:680](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L680)
 
 Optional caption or title for the map.
 Displayed above the map area (implementation depends on UI).
@@ -88,7 +88,7 @@ caption: 'Floor 1 - Dungeon'
 
 > `optional` **classNames**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:780](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L780)
+Defined in: [passages/interactiveMap/types.ts:780](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L780)
 
 CSS class name overrides for different map regions.
 
@@ -145,7 +145,7 @@ topHotspots: 'bg-muted/50 backdrop-blur-sm p-2'
 
 > **hotspots**: [`MaybeCallable`](MaybeCallable.md)\<[`AnyHotspot`](AnyHotspot.md) \| `undefined`\>[]
 
-Defined in: [passages/interactiveMap/types.ts:734](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L734)
+Defined in: [passages/interactiveMap/types.ts:734](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L734)
 
 Array of hotspots to display on the map.
 Can include static hotspots or functions that return hotspots dynamically.
@@ -187,7 +187,7 @@ hotspots: [
 
 > **image**: `string` \| () => `string`
 
-Defined in: [passages/interactiveMap/types.ts:698](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L698)
+Defined in: [passages/interactiveMap/types.ts:698](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L698)
 
 URL or path to the main map image.
 Can be static string or a function for dynamic map selection.
@@ -211,7 +211,7 @@ image: () => `/maps/world-level-${player.level}.jpg`
 
 > `optional` **props**: `object`
 
-Defined in: [passages/interactiveMap/types.ts:761](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/interactiveMap/types.ts#L761)
+Defined in: [passages/interactiveMap/types.ts:761](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/interactiveMap/types.ts#L761)
 
 Optional configuration for map behavior.
 

@@ -1,6 +1,6 @@
 # Class: Story
 
-Defined in: [passages/story/story.ts:44](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/story/story.ts#L44)
+Defined in: [passages/story/story.ts:44](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/story.ts#L44)
 
 Text-based narrative passage for displaying story content with rich components.
 
@@ -52,7 +52,7 @@ newStory - Factory function for creating Story instances
 
 > **new Story**(`id`, `content`, `options`): `Story`
 
-Defined in: [passages/story/story.ts:62](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/story/story.ts#L62)
+Defined in: [passages/story/story.ts:62](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/story.ts#L62)
 
 Creates a new Story passage.
 
@@ -90,7 +90,7 @@ Optional configuration for background, styling, etc.
 
 > `readonly` **id**: `string`
 
-Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/passage.ts#L34)
+Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -105,7 +105,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/passage.ts#L40)
+Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -120,7 +120,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**\<`T`\>(`props`): `object`
 
-Defined in: [passages/story/story.ts:88](https://github.com/laruss/react-text-game/blob/56d052e07c46af6beb5ea69677296eefae694e61/packages/core/src/passages/story/story.ts#L88)
+Defined in: [passages/story/story.ts:88](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/story.ts#L88)
 
 Renders the story by invoking the content function with props.
 

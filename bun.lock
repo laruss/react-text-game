@@ -208,6 +208,7 @@
   },
   "overrides": {
     "typedoc": "0.28.14",
+    "typedoc-plugin-markdown": "4.9.0",
   },
   "packages": {
     "@adobe/css-tools": ["@adobe/css-tools@4.4.4", "", {}, "sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg=="],
