@@ -19,7 +19,7 @@ A powerful, reactive text-based game engine for React applications. Build intera
 
 ## Packages
 
-This monorepo contains two publishable packages:
+This monorepo contains three publishable packages:
 
 ### [@react-text-game/core](./packages/core)
 
@@ -46,16 +46,33 @@ UI components library featuring:
 
 [UI Package Documentation](./packages/ui/README.md)
 
+### [@react-text-game/mdx](./packages/mdx)
+
+MDX integration package enabling:
+
+- Author-friendly Markdown syntax for game passages
+- Seamless React component integration in narratives
+- Type-safe custom components with full TypeScript support
+- Vite plugin for optimized build pipeline
+- Automatic metadata and story structure extraction
+- Runtime-evaluated dynamic variables
+
+[MDX Package Documentation](./packages/mdx/README.md)
+
 ## Quick Start
 
 ### Installation
 
 ```bash
-# Install both packages
+# Install core and UI packages
 bun add @react-text-game/core @react-text-game/ui
+
+# Optional: Add MDX support for Markdown-based passages
+bun add @react-text-game/mdx @mdx-js/mdx @mdx-js/react
 
 # Or use npm/yarn/pnpm
 npm install @react-text-game/core @react-text-game/ui
+npm install @react-text-game/mdx @mdx-js/mdx @mdx-js/react
 ```
 
 ### Basic Example
@@ -176,7 +193,8 @@ bun run build --filter='@react-text-game/*'
 react-text-game/
 ├── packages/
 │   ├── core/          # @react-text-game/core - Game engine
-│   └── ui/            # @react-text-game/ui - UI components
+│   ├── ui/            # @react-text-game/ui - UI components
+│   └── mdx/           # @react-text-game/mdx - MDX integration
 ├── apps/
 │   ├── docs/          # Docusaurus documentation site
 │   ├── example-game/  # Example game implementation
@@ -205,5 +223,6 @@ MIT (c) [laruss](https://github.com/laruss)
 - **NPM Packages:**
   - [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
   - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
+  - [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
 - **Repository:** [GitHub](https://github.com/laruss/react-text-game) (update with actual repo URL)
 - **Issues:** Report bugs and request features on GitHub Issues

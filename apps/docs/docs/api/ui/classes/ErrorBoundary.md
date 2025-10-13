@@ -1,6 +1,6 @@
 # Class: ErrorBoundary
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:17](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L17)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:17](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L17)
 
 ErrorBoundary catches all JavaScript errors in the application:
 - Rendering errors
@@ -18,7 +18,7 @@ ErrorBoundary catches all JavaScript errors in the application:
 
 > **new ErrorBoundary**(`props`): `ErrorBoundary`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:21](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L21)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:21](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L21)
 
 #### Parameters
 
@@ -145,7 +145,7 @@ Only kept in types for backwards compatibility. Will be removed in a future majo
 
 > **componentDidCatch**(`error`, `errorInfo`): `void`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:112](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L112)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:112](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L112)
 
 Catches exceptions generated in descendant components. Unhandled exceptions will cause
 the entire component tree to unmount.
@@ -174,7 +174,7 @@ the entire component tree to unmount.
 
 > **componentDidMount**(): `void`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:35](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L35)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:35](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L35)
 
 Called immediately after a component is mounted. Setting state here will trigger re-rendering.
 
@@ -303,7 +303,7 @@ this from being invoked.
 
 > **componentWillUnmount**(): `void`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:46](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L46)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:46](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L46)
 
 Called immediately before a component is destroyed. Perform any necessary cleanup in this method, such as
 cancelled network requests, or cleaning up any DOM elements created in `componentDidMount`.
@@ -369,7 +369,7 @@ this from being invoked.
 
 > **copyErrorToClipboard**(): `Promise`\<`void`\>
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:132](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L132)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:132](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L132)
 
 #### Returns
 
@@ -436,7 +436,7 @@ lifecycle events from running.
 
 > **handleGlobalError**(`event`): `void`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:54](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L54)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:54](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L54)
 
 #### Parameters
 
@@ -454,7 +454,7 @@ Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:54](http
 
 > **handlePromiseRejection**(`event`): `void`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:89](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L89)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:89](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L89)
 
 #### Parameters
 
@@ -472,7 +472,7 @@ Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:89](http
 
 > **render**(): `ReactNode`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:157](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L157)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:157](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L157)
 
 #### Returns
 
@@ -488,7 +488,7 @@ Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:157](htt
 
 > **reset**(): `void`
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:124](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L124)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:124](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L124)
 
 #### Returns
 
@@ -701,7 +701,7 @@ this from being invoked.
 
 > `static` **getDerivedStateFromError**(`error`): `Partial`\<[`ErrorBoundaryState`](../interfaces/ErrorBoundaryState.md)\>
 
-Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:31](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L31)
+Defined in: [packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx:31](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/ui/src/components/ErrorBoundary/ErrorBoundary.tsx#L31)
 
 #### Parameters
 

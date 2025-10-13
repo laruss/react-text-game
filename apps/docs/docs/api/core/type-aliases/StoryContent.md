@@ -2,7 +2,7 @@
 
 > **StoryContent** = \<`T`\>(`props`) => [`Component`](Component.md)[]
 
-Defined in: [passages/story/types.ts:909](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/types.ts#L909)
+Defined in: [passages/story/types.ts:909](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/core/src/passages/story/types.ts#L909)
 
 Function type for story content generation.
 Receives props and returns an array of components to display.

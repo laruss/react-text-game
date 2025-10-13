@@ -75,7 +75,7 @@ const config: Config = {
                 id: "core",
                 entryPoints: ["../../packages/core/src/index.ts"],
                 tsconfig: "../../packages/core/tsconfig.json",
-                out: "api/core",
+                out: "docs/api/core",
                 excludePrivate: true,
                 excludeProtected: false,
                 readme: "none",
@@ -87,7 +87,19 @@ const config: Config = {
                 id: "ui",
                 entryPoints: ["../../packages/ui/src/index.ts"],
                 tsconfig: "../../packages/ui/tsconfig.json",
-                out: "api/ui",
+                out: "docs/api/ui",
+                excludePrivate: true,
+                excludeProtected: false,
+                readme: "none",
+            },
+        ],
+        [
+            "docusaurus-plugin-typedoc",
+            {
+                id: "mdx",
+                entryPoints: ["../../packages/mdx/src/index.ts"],
+                tsconfig: "../../packages/mdx/tsconfig.json",
+                out: "docs/api/mdx",
                 excludePrivate: true,
                 excludeProtected: false,
                 readme: "none",
@@ -204,6 +216,11 @@ const config: Config = {
                     label: "UI API",
                 },
                 {
+                    to: "/api/mdx",
+                    position: "left",
+                    label: "MDX API",
+                },
+                {
                     href: "https://github.com/laruss/react-text-game",
                     label: "GitHub",
                     position: "right",
@@ -232,6 +249,10 @@ const config: Config = {
                             label: "UI API",
                             to: "/api/ui",
                         },
+                        {
+                            label: "MDX API",
+                            to: "/api/mdx",
+                        },
                     ],
                 },
                 {
@@ -244,6 +265,10 @@ const config: Config = {
                         {
                             label: "@react-text-game/ui",
                             href: "https://www.npmjs.com/package/@react-text-game/ui",
+                        },
+                        {
+                            label: "@react-text-game/mdx",
+                            href: "https://www.npmjs.com/package/@react-text-game/mdx",
                         },
                     ],
                 },

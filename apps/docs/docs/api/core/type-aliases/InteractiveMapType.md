@@ -2,7 +2,7 @@
 
 > **InteractiveMapType** = `Pick`\<[`InteractiveMapOptions`](InteractiveMapOptions.md), `"caption"` \| `"props"` \| `"classNames"`\> & `object`
 
-Defined in: [passages/interactiveMap/types.ts:850](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/interactiveMap/types.ts#L850)
+Defined in: [passages/interactiveMap/types.ts:850](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/core/src/passages/interactiveMap/types.ts#L850)
 
 Resolved/processed interactive map data returned by `InteractiveMap.display()`.
 All dynamic values (functions) have been resolved to their concrete values.
