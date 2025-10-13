@@ -151,6 +151,7 @@
         "estree-util-value-to-estree": "^3.4.0",
         "gray-matter": "^4.0.3",
         "remark-frontmatter": "^5.0.0",
+        "vfile": "^6.0.3",
         "yaml": "^2.8.1",
       },
       "devDependencies": {
