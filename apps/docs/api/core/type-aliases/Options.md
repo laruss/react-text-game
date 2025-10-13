@@ -2,7 +2,7 @@
 
 > **Options** = `object`
 
-Defined in: [options.ts:3](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L3)
+Defined in: [options.ts:3](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L3)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [options.ts:3](https://github.com/laruss/react-text-game/blob/ebc985
 
 > **author**: `string`
 
-Defined in: [options.ts:9](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L9)
+Defined in: [options.ts:9](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L9)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [options.ts:9](https://github.com/laruss/react-text-game/blob/ebc985
 
 > **description**: `string`
 
-Defined in: [options.ts:6](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L6)
+Defined in: [options.ts:6](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L6)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [options.ts:6](https://github.com/laruss/react-text-game/blob/ebc985
 
 > **gameId**: `string`
 
-Defined in: [options.ts:5](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L5)
+Defined in: [options.ts:5](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L5)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [options.ts:5](https://github.com/laruss/react-text-game/blob/ebc985
 
 > **gameName**: `string`
 
-Defined in: [options.ts:4](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L4)
+Defined in: [options.ts:4](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L4)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [options.ts:4](https://github.com/laruss/react-text-game/blob/ebc985
 
 > **gameVersion**: `string`
 
-Defined in: [options.ts:7](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L7)
+Defined in: [options.ts:7](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L7)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [options.ts:7](https://github.com/laruss/react-text-game/blob/ebc985
 
 > **isDevMode**: `boolean`
 
-Defined in: [options.ts:10](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L10)
+Defined in: [options.ts:10](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L10)
 
 ***
 
@@ -58,4 +58,4 @@ Defined in: [options.ts:10](https://github.com/laruss/react-text-game/blob/ebc98
 
 > **startPassage**: `string`
 
-Defined in: [options.ts:8](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/options.ts#L8)
+Defined in: [options.ts:8](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/options.ts#L8)

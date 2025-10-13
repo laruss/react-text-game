@@ -107,6 +107,44 @@ passageId: test-video
             expect(code).toContain('content: "/videos/intro.mp4"');
             expect(code).toContain('content: "clip.webm"');
         });
+
+        test("transforms <video> with all supported props", async () => {
+            const mdx = `---
+passageId: test-video-props
+---
+<video src="demo.mp4" className="video-player" controls={true} autoPlay={false} loop={true} muted={true} />
+`;
+
+            const result = await compile(mdx, reactTextGameStoryPlugin());
+            const code = result.value;
+
+            expect(code).toContain('type: "video"');
+            expect(code).toContain('content: "demo.mp4"');
+            expect(code).toContain('className: "video-player"');
+            expect(code).toContain('controls: true');
+            expect(code).toContain('autoPlay: false');
+            expect(code).toContain('loop: true');
+            expect(code).toContain('muted: true');
+        });
+
+        test("transforms <img> with all supported props", async () => {
+            const mdx = `---
+passageId: test-img-props
+---
+<img src="photo.jpg" alt="Photo" title="My Photo" className="rounded" disableModal={true} onClick={() => console.log('clicked')} />
+`;
+
+            const result = await compile(mdx, reactTextGameStoryPlugin());
+            const code = result.value;
+
+            expect(code).toContain('type: "image"');
+            expect(code).toContain('content: "photo.jpg"');
+            expect(code).toContain('alt: "Photo"');
+            expect(code).toContain('title: "My Photo"');
+            expect(code).toContain('className: "rounded"');
+            expect(code).toContain('disableModal: true');
+            expect(code).toContain("console.log('clicked')");
+        });
     });
 
     describe("MDX Components", () => {

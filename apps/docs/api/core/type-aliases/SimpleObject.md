@@ -2,7 +2,7 @@
 
 > **SimpleObject** = \<`VariablesType`\>(`props`) => `SimpleObject`\<`VariablesType`\>
 
-Defined in: [gameObjects/simpleObject.ts:96](https://github.com/laruss/react-text-game/blob/ebc985d74d2d38c34169b7426a7d28520cf19743/packages/core/src/gameObjects/simpleObject.ts#L96)
+Defined in: [gameObjects/simpleObject.ts:96](https://github.com/laruss/react-text-game/blob/7602514695c2b4f79da2fb62137ed33ba5572ba4/packages/core/src/gameObjects/simpleObject.ts#L96)
 
 SimpleObject provides direct property access to game entity variables.
 

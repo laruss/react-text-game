@@ -83,11 +83,46 @@ function itemToObjectExpression(item: MdxStructItem): ObjectExpression {
             createProperty("type", valueToEstree("image")),
             createProperty("content", valueToEstree(item.props.src))
         );
-        if (item.props.alt || item.props.title) {
-            const imgProps: Record<string, unknown> = {};
-            if (item.props.alt) imgProps.alt = item.props.alt;
-            if (item.props.title) imgProps.title = item.props.title;
-            properties.push(createProperty("props", valueToEstree(imgProps)));
+        // Handle optional image props: alt, title, className, disableModal, onClick
+        const imgProps: Record<string, unknown> = {};
+        const imgPropsWithExpressions: Property[] = [];
+
+        if (item.props.alt) imgProps.alt = item.props.alt;
+        if (item.props.title) imgProps.title = item.props.title;
+        if (typeof item.props.className === "string") {
+            imgProps.className = item.props.className;
+        }
+
+        // Handle disableModal - it might be an expression
+        const disableModal = item.props.disableModal;
+        if (typeof disableModal === "boolean") {
+            imgProps.disableModal = disableModal;
+        } else if (isExpression(disableModal) && disableModal.data?.estree) {
+            const expr = extractExpression(disableModal.data.estree);
+            imgPropsWithExpressions.push(createProperty("disableModal", expr));
+        }
+
+        // Handle onClick - it might be an expression
+        const onClick = item.props.onClick;
+        if (isExpression(onClick) && onClick.data?.estree) {
+            const funcExpr = extractExpression(onClick.data.estree);
+            imgPropsWithExpressions.push(createProperty("onClick", funcExpr));
+        }
+
+        if (Object.keys(imgProps).length > 0 || imgPropsWithExpressions.length > 0) {
+            if (imgPropsWithExpressions.length > 0) {
+                properties.push(createProperty("props", {
+                    type: "ObjectExpression",
+                    properties: [
+                        ...Object.entries(imgProps).map(([key, val]) =>
+                            createProperty(key, valueToEstree(val))
+                        ),
+                        ...imgPropsWithExpressions
+                    ]
+                }));
+            } else {
+                properties.push(createProperty("props", valueToEstree(imgProps)));
+            }
         }
     } else if (item.component === "video") {
         // Video component
@@ -95,6 +130,41 @@ function itemToObjectExpression(item: MdxStructItem): ObjectExpression {
             createProperty("type", valueToEstree("video")),
             createProperty("content", valueToEstree(item.props.src))
         );
+        // Handle optional video props: className, controls, autoPlay, loop, muted
+        const videoProps: Record<string, unknown> = {};
+        const videoPropsWithExpressions: Property[] = [];
+
+        if (typeof item.props.className === "string") {
+            videoProps.className = item.props.className;
+        }
+
+        // Handle boolean props that might be expressions
+        const booleanProps = ['controls', 'autoPlay', 'loop', 'muted'] as const;
+        for (const propName of booleanProps) {
+            const propValue = item.props[propName];
+            if (typeof propValue === "boolean") {
+                videoProps[propName] = propValue;
+            } else if (isExpression(propValue) && propValue.data?.estree) {
+                const expr = extractExpression(propValue.data.estree);
+                videoPropsWithExpressions.push(createProperty(propName, expr));
+            }
+        }
+
+        if (Object.keys(videoProps).length > 0 || videoPropsWithExpressions.length > 0) {
+            if (videoPropsWithExpressions.length > 0) {
+                properties.push(createProperty("props", {
+                    type: "ObjectExpression",
+                    properties: [
+                        ...Object.entries(videoProps).map(([key, val]) =>
+                            createProperty(key, valueToEstree(val))
+                        ),
+                        ...videoPropsWithExpressions
+                    ]
+                }));
+            } else {
+                properties.push(createProperty("props", valueToEstree(videoProps)));
+            }
+        }
     } else if (item.component === "Actions") {
         // Actions component - process children
         const actions: ObjectExpression[] = [];
