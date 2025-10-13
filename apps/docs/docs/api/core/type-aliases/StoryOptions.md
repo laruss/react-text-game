@@ -2,7 +2,7 @@
 
 > **StoryOptions** = `object`
 
-Defined in: [passages/story/types.ts:932](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/core/src/passages/story/types.ts#L932)
+Defined in: [passages/story/types.ts:932](https://github.com/laruss/react-text-game/blob/6b9098a8e439fedc8e81574fd40f3e2840d770e8/packages/core/src/passages/story/types.ts#L932)
 
 Configuration options for story appearance and behavior.
 Applied to the entire story passage.
@@ -29,7 +29,7 @@ newStory('forest-scene', () => [...], options);
 
 > `optional` **background**: `object`
 
-Defined in: [passages/story/types.ts:936](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/core/src/passages/story/types.ts#L936)
+Defined in: [passages/story/types.ts:936](https://github.com/laruss/react-text-game/blob/6b9098a8e439fedc8e81574fd40f3e2840d770e8/packages/core/src/passages/story/types.ts#L936)
 
 Background configuration for the story.
 
@@ -58,7 +58,7 @@ image: () => player.location === 'night'
 
 > `optional` **classNames**: `object`
 
-Defined in: [passages/story/types.ts:958](https://github.com/laruss/react-text-game/blob/4915125f9c22f1259a088eb59b920654db3f32d0/packages/core/src/passages/story/types.ts#L958)
+Defined in: [passages/story/types.ts:958](https://github.com/laruss/react-text-game/blob/6b9098a8e439fedc8e81574fd40f3e2840d770e8/packages/core/src/passages/story/types.ts#L958)
 
 CSS class name overrides for story layout.
 
