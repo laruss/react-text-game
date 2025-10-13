@@ -1,6 +1,6 @@
 # Interface: ConversationComponent
 
-Defined in: [passages/story/types.ts:791](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L791)
+Defined in: [passages/story/types.ts:791](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L791)
 
 Component for displaying dialogue, conversations, or sequential messages.
 Supports different visual styles and progressive message reveal.
@@ -57,7 +57,7 @@ Supports different visual styles and progressive message reveal.
 
 > `optional` **appearance**: [`ConversationAppearance`](../type-aliases/ConversationAppearance.md)
 
-Defined in: [passages/story/types.ts:815](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L815)
+Defined in: [passages/story/types.ts:815](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L815)
 
 Controls how messages are revealed to the player.
 
@@ -79,7 +79,7 @@ Controls how messages are revealed to the player.
 
 > **content**: [`ConversationBubble`](../type-aliases/ConversationBubble.md)[]
 
-Defined in: [passages/story/types.ts:801](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L801)
+Defined in: [passages/story/types.ts:801](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L801)
 
 Array of conversation bubbles/messages to display.
 Order determines the sequence in which messages appear.
@@ -90,7 +90,7 @@ Order determines the sequence in which messages appear.
 
 > `optional` **id**: `string`
 
-Defined in: [passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L24)
+Defined in: [passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L24)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -111,7 +111,7 @@ Can be used to reference or manipulate specific components programmatically.
 
 > `optional` **initialVariant**: `"hidden"` \| `"display"` \| `"disclosure"`
 
-Defined in: [passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L39)
+Defined in: [passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L39)
 
 Controls the initial visibility state of the component.
 
@@ -138,7 +138,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > `optional` **props**: `object`
 
-Defined in: [passages/story/types.ts:820](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L820)
+Defined in: [passages/story/types.ts:820](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L820)
 
 Optional configuration for visual style and layout.
 
@@ -182,6 +182,6 @@ Visual style preset for the conversation.
 
 > **type**: `"conversation"`
 
-Defined in: [passages/story/types.ts:795](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/passages/story/types.ts#L795)
+Defined in: [passages/story/types.ts:795](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/types.ts#L795)
 
 Discriminator property identifying this as a conversation component.

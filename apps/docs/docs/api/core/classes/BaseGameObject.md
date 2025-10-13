@@ -1,6 +1,6 @@
 # Class: BaseGameObject\<VariablesType\>
 
-Defined in: [gameObjects/baseGameObject.ts:34](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L34)
+Defined in: [gameObjects/baseGameObject.ts:34](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L34)
 
 Base class for all game entities in the text game engine.
 
@@ -41,7 +41,7 @@ The type definition for entity variables, must extend InitVarsType
 
 > **new BaseGameObject**\<`VariablesType`\>(`props`): `BaseGameObject`\<`VariablesType`\>
 
-Defined in: [gameObjects/baseGameObject.ts:56](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L56)
+Defined in: [gameObjects/baseGameObject.ts:56](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L56)
 
 Creates a new game object and automatically registers it with the Game registry.
 
@@ -73,7 +73,7 @@ Optional initial variables for this object
 
 > `protected` **\_variables**: `VariablesType`
 
-Defined in: [gameObjects/baseGameObject.ts:47](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L47)
+Defined in: [gameObjects/baseGameObject.ts:47](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L47)
 
 Internal storage for entity variables.
 Protected to allow derived classes to modify state directly.
@@ -84,7 +84,7 @@ Protected to allow derived classes to modify state directly.
 
 > `readonly` **id**: `string`
 
-Defined in: [gameObjects/baseGameObject.ts:41](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L41)
+Defined in: [gameObjects/baseGameObject.ts:41](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L41)
 
 Unique identifier for this game object.
 Used for registry lookup and storage path generation.
@@ -97,7 +97,7 @@ Used for registry lookup and storage path generation.
 
 > **get** **variables**(): `VariablesType`
 
-Defined in: [gameObjects/baseGameObject.ts:67](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L67)
+Defined in: [gameObjects/baseGameObject.ts:67](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L67)
 
 Read-only accessor for entity variables.
 
@@ -113,7 +113,7 @@ The current variables object for this entity
 
 > **load**(): `void`
 
-Defined in: [gameObjects/baseGameObject.ts:92](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L92)
+Defined in: [gameObjects/baseGameObject.ts:92](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L92)
 
 Loads this object's variables from the Storage system.
 
@@ -136,7 +136,7 @@ player.load(); // Restores player state from storage
 
 > **save**(): `void`
 
-Defined in: [gameObjects/baseGameObject.ts:114](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/core/src/gameObjects/baseGameObject.ts#L114)
+Defined in: [gameObjects/baseGameObject.ts:114](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/baseGameObject.ts#L114)
 
 Saves this object's current variables to the Storage system.
 

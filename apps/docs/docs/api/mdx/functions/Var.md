@@ -2,7 +2,7 @@
 
 > **Var**(`__namedParameters`): `Element`
 
-Defined in: [mdx/src/components/Var.tsx:28](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/mdx/src/components/Var.tsx#L28)
+Defined in: [mdx/src/components/Var.tsx:28](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/mdx/src/components/Var.tsx#L28)
 
 Component for embedding variables in MDX text content.
 Variables are evaluated at runtime when the story is rendered.

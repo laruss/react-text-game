@@ -1,6 +1,6 @@
 # Interface: ErrorBoundaryState
 
-Defined in: [src/components/ErrorBoundary/types.ts:3](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L3)
+Defined in: [src/components/ErrorBoundary/types.ts:3](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L3)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [src/components/ErrorBoundary/types.ts:3](https://github.com/laruss/
 
 > **copied**: `boolean`
 
-Defined in: [src/components/ErrorBoundary/types.ts:7](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L7)
+Defined in: [src/components/ErrorBoundary/types.ts:7](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L7)
 
 ***
 
@@ -16,7 +16,7 @@ Defined in: [src/components/ErrorBoundary/types.ts:7](https://github.com/laruss/
 
 > **error**: `Error` \| `null`
 
-Defined in: [src/components/ErrorBoundary/types.ts:5](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L5)
+Defined in: [src/components/ErrorBoundary/types.ts:5](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L5)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [src/components/ErrorBoundary/types.ts:5](https://github.com/laruss/
 
 > **errorInfo**: `ErrorInfo` \| `null`
 
-Defined in: [src/components/ErrorBoundary/types.ts:6](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L6)
+Defined in: [src/components/ErrorBoundary/types.ts:6](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L6)
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: [src/components/ErrorBoundary/types.ts:6](https://github.com/laruss/
 
 > **hasError**: `boolean`
 
-Defined in: [src/components/ErrorBoundary/types.ts:4](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L4)
+Defined in: [src/components/ErrorBoundary/types.ts:4](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L4)

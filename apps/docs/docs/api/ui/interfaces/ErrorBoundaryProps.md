@@ -1,6 +1,6 @@
 # Interface: ErrorBoundaryProps
 
-Defined in: [src/components/ErrorBoundary/types.ts:10](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L10)
+Defined in: [src/components/ErrorBoundary/types.ts:10](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L10)
 
 ## Extends
 
@@ -24,7 +24,7 @@ Defined in: node\_modules/@types/react/index.d.ts:1414
 
 > `optional` **fallback**: (`error`, `errorInfo`, `reset`) => `ReactNode`
 
-Defined in: [src/components/ErrorBoundary/types.ts:11](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L11)
+Defined in: [src/components/ErrorBoundary/types.ts:11](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L11)
 
 #### Parameters
 
@@ -50,7 +50,7 @@ Defined in: [src/components/ErrorBoundary/types.ts:11](https://github.com/laruss
 
 > `optional` **onError**: (`error`, `errorInfo`) => `void`
 
-Defined in: [src/components/ErrorBoundary/types.ts:16](https://github.com/laruss/react-text-game/blob/9170bd136d7f37dbbee8bf6f71732f065efa0401/packages/ui/src/components/ErrorBoundary/types.ts#L16)
+Defined in: [src/components/ErrorBoundary/types.ts:16](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/ErrorBoundary/types.ts#L16)
 
 #### Parameters
 
