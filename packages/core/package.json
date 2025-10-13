@@ -42,6 +42,8 @@
         "@types/bun": "^1.2.23",
         "@types/crypto-js": "^4.2.2",
         "@types/node": "^24.6.2",
+        "@types/react": "^19.0.9",
+        "@types/react-dom": "^19.0.3",
         "tsc-alias": "^1.8.16"
     },
     "imports": {
