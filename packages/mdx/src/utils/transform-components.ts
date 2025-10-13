@@ -12,7 +12,25 @@ import type {
     VideoComponent,
 } from "@react-text-game/core";
 
-import type { MdxStructItem, TransformResult } from "#types";
+import type { MdxStructItem, TemplateContent, TransformResult } from "#types";
+
+/**
+ * Helper to extract string content from children (handles TemplateContent).
+ * Note: TemplateContent is only used with auto-registration, so this is a fallback.
+ */
+function extractStringContent(children: string | MdxStructItem[] | TemplateContent): string {
+    if (typeof children === "string") {
+        return children;
+    }
+    if (typeof children === "object" && "type" in children && children.type === "template") {
+        // Template content - extract text parts only (variables won't work in manual mode)
+        return children.parts
+            .filter((part) => part.type === "text")
+            .map((part) => (part.type === "text" ? part.value : ""))
+            .join("");
+    }
+    return ""; // Array children
+}
 
 /**
  * Transforms an array of MDX structure items into Core component types.
@@ -92,11 +110,11 @@ function transformSingleComponent(item: MdxStructItem): Component | null {
  */
 function transformHeader(
     tag: `h${1 | 2 | 3 | 4 | 5 | 6}`,
-    children: string | MdxStructItem[],
+    children: string | MdxStructItem[] | TemplateContent,
     props: Record<string, unknown>
 ): HeaderComponent {
     const level = parseInt(tag[1] as string, 10) as HeaderLevel;
-    const content = typeof children === "string" ? children : "";
+    const content = extractStringContent(children);
     const className = typeof props.className === "string" ? props.className : undefined;
 
     return {
@@ -113,10 +131,10 @@ function transformHeader(
  * Transforms paragraph element to TextComponent.
  */
 function transformText(
-    children: string | MdxStructItem[],
+    children: string | MdxStructItem[] | TemplateContent,
     props: Record<string, unknown>
 ): TextComponent {
-    const content = typeof children === "string" ? children : "";
+    const content = extractStringContent(children);
     const className = typeof props.className === "string" ? props.className : undefined;
 
     return {
@@ -183,7 +201,7 @@ function transformVideo(props: Record<string, unknown>): VideoComponent {
  * Transforms Actions component to ActionsComponent.
  */
 function transformActions(
-    children: string | MdxStructItem[],
+    children: string | MdxStructItem[] | TemplateContent,
     props: Record<string, unknown>
 ): ActionsComponent {
     const actions: ActionType[] = [];
@@ -230,7 +248,7 @@ function transformAction(item: MdxStructItem): ActionType | null {
     const { props, children } = item;
 
     // Label is the text content of the Action component
-    const label = typeof children === "string" ? children : "";
+    const label = extractStringContent(children);
 
     // onPerform is the action callback
     const onPerform = props.onPerform as (() => void) | undefined;
@@ -341,7 +359,7 @@ function transformInclude(props: Record<string, unknown>): AnotherStoryComponent
  * Transforms Conversation component to ConversationComponent.
  */
 function transformConversation(
-    children: string | MdxStructItem[],
+    children: string | MdxStructItem[] | TemplateContent,
     props: Record<string, unknown>
 ): ConversationComponent {
     const bubbles: ConversationBubble[] = [];
@@ -390,7 +408,7 @@ function transformConversation(
 function transformSay(item: MdxStructItem): ConversationBubble | null {
     const { props, children } = item;
 
-    const content = typeof children === "string" ? children : "";
+    const content = extractStringContent(children);
 
     // Build the bubble object
     const bubble: ConversationBubble = { content };

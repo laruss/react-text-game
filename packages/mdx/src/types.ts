@@ -25,12 +25,23 @@ export interface MdxStoryMeta {
 }
 
 /**
+ * Template structure for content with variables
+ */
+export interface TemplateContent {
+    type: "template";
+    parts: Array<
+        | { type: "text"; value: string }
+        | { type: "var"; expression: { type: "expression"; data?: { estree?: unknown }; value?: string } }
+    >;
+}
+
+/**
  * Processed MDX structure returned by remark-mdx-struct plugin.
  */
 export interface MdxStructItem {
     component: string;
     props: Record<string, unknown>;
-    children: string | MdxStructItem[];
+    children: string | MdxStructItem[] | TemplateContent;
 }
 
 /**

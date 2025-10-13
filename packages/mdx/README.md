@@ -77,10 +77,11 @@ Create an MDX file for your story (e.g., `src/game/stories/intro.mdx`):
 passageId: intro
 ---
 import { Action, Actions } from "@react-text-game/mdx";
+import { player } from "../entities/player";
 
 # Welcome to the Adventure
 
-This is your first passage. You can use **Markdown** formatting and JSX components.
+Hello, {player.name}! This is your first passage.
 
 <Actions>
     <Action onPerform={() => alert("Started!")}>Start Adventure</Action>
@@ -110,10 +111,11 @@ Here's a more complex story demonstrating all available components:
 passageId: adventure-start
 ---
 import { Action, Actions, Conversation, Say, Include } from "@react-text-game/mdx";
+import { player } from "../entities/player";
 
 # The Grand Adventure
 
-You stand at the entrance of an ancient temple. Strange symbols glow on the walls.
+{player.name}, you stand at the entrance of an ancient temple. Strange symbols glow on the walls.
 
 ![Temple Entrance](./assets/temple.png "The Ancient Temple")
 
@@ -252,6 +254,85 @@ Embed another story passage within the current one. You can include any register
 - `storyId: string` - ID of the story passage to include (required). The story must be registered with the game engine.
 
 **Maps to:** `AnotherStoryComponent` from `@react-text-game/core`
+
+### Dynamic Variables
+
+Embed dynamic variables that are evaluated at runtime when the story is displayed. This allows you to show game state, player properties, or any JavaScript expression directly in your text content.
+
+**Two syntaxes are supported:**
+
+#### 1. **Bare Expressions** (Recommended - Concise)
+```mdx
+---
+passageId: player-status
+---
+import { player } from '../entities/player';
+import { Game } from '@react-text-game/core';
+
+# Hello, {player.name}!
+
+You have {player.gold} gold coins and {player.inventory.length} items.
+
+<Conversation>
+    <Say>What are you doing, {player.name}?</Say>
+</Conversation>
+
+<Actions>
+    <Action onPerform={() => console.log("test")}>
+        Talk to {player.name}
+    </Action>
+</Actions>
+```
+
+#### 2. **`<Var>` Wrapper** (Explicit Alternative)
+```mdx
+---
+passageId: player-status
+---
+import { Var } from "@react-text-game/mdx";
+import { player } from '../entities/player';
+
+# Hello, <Var>{player.name}</Var>!
+
+You have <Var>{player.gold}</Var> gold coins.
+```
+
+**Key Features:**
+- **Runtime Evaluation**: Variables are evaluated when the story renders, not at compile time
+- **IDE Support**: Full TypeScript autocomplete and type checking (because you import the variables)
+- **Import Tracking**: IDE enforces proper imports for referenced variables
+- **Dynamic Content**: Access game state, player properties, calculations, etc.
+- **Works Everywhere**: Paragraphs, headers, Say bubbles, Action labels, etc.
+
+**Expression Examples:**
+
+```mdx
+<!-- Simple property access -->
+{player.name}
+
+<!-- Nested properties -->
+{player.stats.strength}
+
+<!-- Calculations -->
+{player.gold * 2}
+
+<!-- Method calls -->
+{player.getTitle()}
+
+<!-- Conditional expressions -->
+{player.level >= 10 ? "Expert" : "Novice"}
+
+<!-- Array/object methods -->
+{player.inventory.map(item => item.name).join(", ")}
+```
+
+**Important Notes:**
+- Variables **must be imported** at the top of the MDX file
+- Expressions are evaluated in the story's render context
+- TypeScript will validate your variable paths
+- Can be used inline within paragraphs, headers, components, and other text content
+
+**Maps to:** Template literals in the compiled output, evaluated at runtime
 
 ## Limitations & Best Practices
 

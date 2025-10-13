@@ -1,7 +1,7 @@
 import { ProcessorOptions } from "@mdx-js/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 
-import recmaStoryRegister from "./recma-story-register.js";
+import recmaStoryRegister from "./recma-story-register/index.js";
 import remarkFrontmatterToData from "./remark-frontmatter-to-data.js";
 import remarkMdxStruct from "./remark-mdx-struct.js";
 
