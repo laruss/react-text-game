@@ -2,7 +2,7 @@
 
 > **MaybeOptionalCallable**\<`T`\> = `T` \| [`OptionalCallable`](OptionalCallable.md)\<`T`\>
 
-Defined in: [types.ts:21](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/types.ts#L21)
+Defined in: [types.ts:21](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/types.ts#L21)
 
 ## Type Parameters
 

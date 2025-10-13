@@ -4,8 +4,8 @@ import { SYSTEM_PASSAGE_NAMES } from "#constants";
 import { Game } from "#game";
 import { BaseGameObject } from "#gameObjects";
 import { Passage } from "#passages/passage";
-import { GameSaveState } from "#types";
 import { setupMockStorage, teardownMockStorage } from "#tests/helpers";
+import { GameSaveState } from "#types";
 
 // Test helper classes
 class TestEntity extends BaseGameObject<{ health: number; name: string }> {

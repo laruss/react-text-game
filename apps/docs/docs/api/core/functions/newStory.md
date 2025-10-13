@@ -2,7 +2,7 @@
 
 > **newStory**(`id`, `content`, `options?`): [`Story`](../classes/Story.md)
 
-Defined in: [passages/story/fabric.ts:4](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/story/fabric.ts#L4)
+Defined in: [passages/story/fabric.ts:4](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/story/fabric.ts#L4)
 
 ## Parameters
 

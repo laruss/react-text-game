@@ -13,6 +13,7 @@
         "dev": "tsc --watch & tsc-alias --watch & bun run build:css --watch",
         "build": "tsc && tsc-alias && bun run build:css",
         "build:css": "mkdir -p dist/styles && bunx @tailwindcss/cli@latest -i src/styles/index.css -o dist/styles/index.css",
+        "lint": "eslint .",
         "prepack": "rm -rf dist && bun run build",
         "test-pack": "npm pack --dry-run && bunx publint"
     },
@@ -40,6 +41,7 @@
         "@types/bun": "^1.2.23",
         "@types/react": "^19.0.10",
         "@types/react-dom": "^19.0.5",
+        "eslint": "^9.37.0",
         "tsc-alias": "^1.8.16",
         "@tailwindcss/postcss": "^4.0.0",
         "postcss": "^8.4.49",

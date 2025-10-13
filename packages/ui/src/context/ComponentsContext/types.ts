@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 import {
     ActionsProps,
-    Conversation, ConversationProps,
+    ConversationProps,
     HeadingProps,
     ImageProps,
     TextProps,

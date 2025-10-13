@@ -1,0 +1,26 @@
+---
+passageId: testMdx
+---
+import {Action, Actions, Conversation, Say, Include} from "@react-text-game/mdx";
+
+# This is a test MDX file
+
+Hello, yes, this is a dog.
+
+<img src="vite.svg"/>
+
+<video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+
+![alt text](Isolated.png "Title")
+
+<Actions>
+    <Action onPerform={() => { console.log("hello!") }} >Action 1</Action>
+</Actions>
+
+<Conversation>
+    <Say>Hello</Say>
+    <Say>World</Say>
+</Conversation>
+
+<Include storyId="include-mdx" />
+<Include storyId="mdxTestInclude" />

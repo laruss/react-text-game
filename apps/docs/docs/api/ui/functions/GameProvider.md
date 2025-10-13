@@ -1,8 +1,8 @@
 # Function: GameProvider()
 
-> **GameProvider**(`__namedParameters`): `null` \| `Element`
+> **GameProvider**(`__namedParameters`): `Element` \| `null`
 
-Defined in: [packages/ui/src/components/GameProvider/GameProvider.tsx:33](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/ui/src/components/GameProvider/GameProvider.tsx#L33)
+Defined in: [src/components/GameProvider/GameProvider.tsx:33](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/ui/src/components/GameProvider/GameProvider.tsx#L33)
 
 ## Parameters
 
@@ -12,4 +12,4 @@ Defined in: [packages/ui/src/components/GameProvider/GameProvider.tsx:33](https:
 
 ## Returns
 
-`null` \| `Element`
+`Element` \| `null`

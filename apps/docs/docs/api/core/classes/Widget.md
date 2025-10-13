@@ -1,6 +1,6 @@
 # Class: Widget
 
-Defined in: [passages/widget.ts:30](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/widget.ts#L30)
+Defined in: [passages/widget.ts:30](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/widget.ts#L30)
 
 Custom React component passage for fully customized UI.
 
@@ -39,7 +39,7 @@ newWidget - Factory function for creating Widget instances
 
 > **new Widget**(`id`, `content`): `Widget`
 
-Defined in: [passages/widget.ts:42](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/widget.ts#L42)
+Defined in: [passages/widget.ts:42](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/widget.ts#L42)
 
 Creates a new Widget passage.
 
@@ -71,7 +71,7 @@ React node (element, component, etc.) to display
 
 > `readonly` **id**: `string`
 
-Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/passage.ts#L34)
+Defined in: [passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -86,7 +86,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/passage.ts#L40)
+Defined in: [passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -101,7 +101,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**(): `ReactNode`
 
-Defined in: [passages/widget.ts:52](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/passages/widget.ts#L52)
+Defined in: [passages/widget.ts:52](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/passages/widget.ts#L52)
 
 Returns the React node for rendering.
 

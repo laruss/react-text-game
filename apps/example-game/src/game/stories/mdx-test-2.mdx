@@ -1,0 +1,27 @@
+---
+passageId: test-2
+---
+import {Actions, Action, Var, Conversation, Say} from "@react-text-game/mdx";
+import {Game} from "@react-text-game/core";
+import {player} from "@/game/entities";
+
+This is test 2.
+
+<p>
+    Player name is <Var>{player.name}</Var>
+</p>
+
+<Conversation>
+    <Say>Hello!</Say>
+    <Say>What are you doing here, {player.name}?</Say>
+    <Say side="right" who={{ name: player.name }}>Nothing, and you?</Say>
+</Conversation>
+
+<Conversation variant="messenger">
+    <Say>This is messenger example</Say>
+    <Say side="right" who={{ name: player.name }}>Nice to meet you!</Say>
+</Conversation>
+
+<Actions>
+    <Action onPerform={() => Game.jumpTo("testMdx")}>Test 2</Action>
+</Actions>

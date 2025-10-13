@@ -12,6 +12,7 @@
     "scripts": {
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
+        "lint": "eslint .",
         "prepack": "rm -rf dist && bun run build",
         "test-pack": "npm pack --dry-run && bunx publint"
     },
@@ -41,6 +42,9 @@
         "@types/bun": "^1.2.23",
         "@types/crypto-js": "^4.2.2",
         "@types/node": "^24.6.2",
+        "@types/react": "^19.0.9",
+        "@types/react-dom": "^19.0.3",
+        "eslint": "^9.37.0",
         "tsc-alias": "^1.8.16"
     },
     "imports": {

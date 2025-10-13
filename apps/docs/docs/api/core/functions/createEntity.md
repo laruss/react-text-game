@@ -2,7 +2,7 @@
 
 > **createEntity**\<`Vars`\>(`id`, `variables`): [`SimpleObject`](../type-aliases/SimpleObject.md)\<`Vars`\>
 
-Defined in: [gameObjects/fabric.ts:20](https://github.com/laruss/react-text-game/blob/5d1b7f722e0508dc7727e83f20112624d7c139f7/packages/core/src/gameObjects/fabric.ts#L20)
+Defined in: [gameObjects/fabric.ts:20](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/gameObjects/fabric.ts#L20)
 
 Convenience factory that wraps [SimpleObject](../type-aliases/SimpleObject.md) creation.
 
