@@ -1,18 +1,45 @@
 "use client";
 
 import { Game, Story } from "@react-text-game/core";
-import { useMemo } from "react";
+import { MouseEvent, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useComponents } from "#context/ComponentsContext/useComponents";
+import {
+    ConversationClickProvider,
+    useConversationClickContext,
+} from "#context/ConversationClickContext";
 
 type StoryComponentProps = {
     story: Story;
 };
 
-export const StoryComponent = ({ story }: StoryComponentProps) => {
+const StoryContent = ({ story }: StoryComponentProps) => {
     const displayable = useMemo(() => story.display(), [story]);
-    const { story: { Heading, Conversation, Actions, Video, Image, Text } } = useComponents();
+    const {
+        story: { Heading, Conversation, Actions, Video, Image, Text },
+    } = useComponents();
+    const context = useConversationClickContext();
+
+    const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+
+        // Check if the clicked element is non-clickable (not a button, link, or interactive element)
+        const isClickable =
+            target.tagName === "BUTTON" ||
+            target.tagName === "A" ||
+            target.closest("button") ||
+            target.closest("a") ||
+            target.closest('[role="button"]') ||
+            target.closest("input") ||
+            target.closest("select") ||
+            target.closest("textarea");
+
+        if (!isClickable) {
+            // Notify all byClick conversations to show next bubble
+            context.notifyClick();
+        }
+    };
 
     return (
         <div
@@ -20,6 +47,7 @@ export const StoryComponent = ({ story }: StoryComponentProps) => {
                 "w-full h-full flex flex-col content-center items-center",
                 displayable.options?.classNames?.base
             )}
+            onClick={handleClick}
         >
             <div className="px-4 w-full flex flex-col content-center items-center">
                 <div
@@ -36,9 +64,7 @@ export const StoryComponent = ({ story }: StoryComponentProps) => {
                                 );
 
                             case "text":
-                                return (
-                                    <Text key={index} component={component} />
-                                );
+                                return <Text key={index} component={component} />;
 
                             case "image":
                                 return (
@@ -85,5 +111,13 @@ export const StoryComponent = ({ story }: StoryComponentProps) => {
                 </div>
             </div>
         </div>
+    );
+};
+
+export const StoryComponent = ({ story }: StoryComponentProps) => {
+    return (
+        <ConversationClickProvider>
+            <StoryContent story={story} />
+        </ConversationClickProvider>
     );
 };

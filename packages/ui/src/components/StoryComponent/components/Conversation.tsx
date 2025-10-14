@@ -6,8 +6,10 @@ import {
     ConversationComponent,
     ConversationVariant,
 } from "@react-text-game/core/passages";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { twMerge } from "tailwind-merge";
+
+import { useConversationClickContext } from "#context/ConversationClickContext";
 
 const bubbleStyles = {
     chat: (side: ConversationBubbleSide) => ({
@@ -86,18 +88,29 @@ export type ConversationProps = Readonly<{
 export const Conversation = ({ component }: ConversationProps) => {
     const [lines, setLines] = useState<Array<ConversationBubble>>([]);
     const { appearance, content, props } = component;
+    const conversationId = useId();
+
+    // Try to get context, but don't fail if not available (for standalone usage in tests)
+    let context: ReturnType<typeof useConversationClickContext> | undefined;
+    try {
+        context = useConversationClickContext();
+    } catch {
+        // Context not available, component will work standalone
+        context = undefined;
+    }
 
     useEffect(() => {
         if (appearance === "byClick") {
-            // If the conversation is set to appear by click, we can initialize it with an empty array
-            setLines([]);
+            // Show first bubble immediately when using byClick
+            const firstBubble = content[0];
+            setLines(firstBubble ? [firstBubble] : []);
         } else {
-            // If it appears at once, we can set all lines immediately
+            // If it appears at once, set all lines immediately
             setLines(content);
         }
     }, [appearance, content]);
 
-    const onClick = () => {
+    const showNext = () => {
         if (appearance === "byClick") {
             // If the conversation is set to appear by click, append the next line
             setLines((prevLines) => {
@@ -108,7 +121,23 @@ export const Conversation = ({ component }: ConversationProps) => {
                 return prevLines; // No more lines to add
             });
         }
-        // If the appearance is "atOnce", we do not need to handle clicks
+    };
+
+    // Register with context for byClick conversations
+    useEffect(() => {
+        if (appearance === "byClick" && context) {
+            context.registerConversation(conversationId, showNext);
+            return () => {
+                context.unregisterConversation(conversationId);
+            };
+        }
+    }, [appearance, context, conversationId]);
+
+    const onClick = () => {
+        // For standalone usage (like tests), support direct clicks
+        if (appearance === "byClick" && !context) {
+            showNext();
+        }
     };
 
     return (
