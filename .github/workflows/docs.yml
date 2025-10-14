@@ -34,7 +34,7 @@ jobs:
 
       # Build docs site (will use pre-generated API docs)
       - name: Build docs site
-        run: bun run docs:build
+        run: bun run build --filter=@react-text-game/docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
