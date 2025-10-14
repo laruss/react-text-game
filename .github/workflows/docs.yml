@@ -28,11 +28,7 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      # Build packages first (Turbo will respect the graph)
-      - name: Build packages
-        run: bun run build
-
-      # Generate TypeDoc API documentation
+      # Generate TypeDoc API documentation (reads from source files)
       - name: Generate API docs
         run: bun run docs:api
 
