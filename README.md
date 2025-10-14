@@ -4,6 +4,7 @@ A powerful, reactive text-based game engine for React applications. Build intera
 
 [![@react-text-game/core](https://img.shields.io/npm/v/@react-text-game/core?label=core)](https://www.npmjs.com/package/@react-text-game/core)
 [![@react-text-game/ui](https://img.shields.io/npm/v/@react-text-game/ui?label=ui)](https://www.npmjs.com/package/@react-text-game/ui)
+[![@react-text-game/mdx](https://img.shields.io/npm/v/@react-text-game/mdx?label=mdx)](https://www.npmjs.com/package/@react-text-game/mdx)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Features

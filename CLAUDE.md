@@ -23,6 +23,15 @@ bun run lint
 
 # Code formatting
 bun run format
+
+# Documentation site (Docusaurus)
+bun run docs
+
+# Build documentation site
+bun run docs:build
+
+# Generate API documentation (TypeDoc)
+bun run docs:api
 ```
 
 ## Turborepo Filtering
@@ -32,9 +41,13 @@ Use `--filter` to target specific packages:
 ```bash
 # Run dev for a specific app
 bun run dev --filter=example-game
+bun run dev --filter=@react-text-game/docs
 
 # Build only the core package
 bun run build --filter=@react-text-game/core
+
+# Build all packages
+bun run build --filter='@react-text-game/*'
 ```
 
 ## Architecture
@@ -43,61 +56,176 @@ This is a **text-based game engine** built as a Turborepo monorepo with React in
 
 ### Workspaces
 
+**Packages (`packages/`):**
+
 - **`packages/core`** - The core game engine (`@react-text-game/core`)
   - Uses TypeScript, Valtio for state management
+  - Dependencies: `valtio`, `jsonpath-plus`, `dexie`, `crypto-js`, `consola`
   - Exports via `dist/index.js` after compilation
-  - Uses subpath imports (`#*` maps to `./src/*`)
+  - Uses subpath imports (`#*` maps to `./dist/*`)
+  - Has subpath exports: `.`, `./saves`, `./passages`
 
-- **`apps/example-game`** - Example game implementation using the core package
+- **`packages/ui`** - UI components library (`@react-text-game/ui`)
+  - React components with Tailwind CSS v4
+  - Semantic theming system with dark mode support
+  - Depends on `@react-text-game/core` (peer dependency)
+  - Exports: `.` (components), `./styles` (CSS)
+
+- **`packages/mdx`** - MDX integration package (`@react-text-game/mdx`)
+  - Markdown-based passage authoring
+  - Vite plugin for MDX compilation
+  - Peer dependencies: `@mdx-js/mdx`, `@mdx-js/react`, `@react-text-game/core`
+  - Exports: `.` (main), `./plugin` (Vite plugin)
+
+**Apps (`apps/`):**
+
+- **`apps/docs`** - Docusaurus documentation site
+  - Comprehensive guides and API reference
+  - TypeDoc integration for auto-generated API docs
+
+- **`apps/example-game`** - Example game implementation
   - Vite + React 19 + TypeScript
-  - Consumes `@react-text-game/core` via workspace protocol
+  - Demonstrates core and UI package usage
+
+- **`apps/core-test-app`** - Core package testing app
+  - Used for testing core functionality
+
+- **`apps/ui-test-app`** - UI components testing app
+  - Used for testing UI components
 
 ### Core Game Engine (`packages/core`)
 
-The engine uses a **registry pattern** with reactive state management (Valtio):
+The engine uses a **factory-first approach** with reactive state management (Valtio):
+
+#### Core Concepts
 
 1. **`Game`** (`src/game.ts`) - Central orchestrator
    - **MUST call `Game.init(options)` before using any other Game methods**
    - Manages two registries: `objectRegistry` (game entities) and `passagesRegistry` (game passages)
    - All registered objects are proxied with Valtio for reactivity
    - Handles navigation via `jumpTo()` and `setCurrent()`
-   - Save/load system via `Storage` class with auto-save support (session storage)
    - `Game.getState()` / `Game.setState()` for full game serialization
+   - Supports custom logging via `consola`
 
-2. **`BaseGameObject`** (`src/baseGameObject.ts`)
-   - Base class for all game entities
+2. **Factory Functions** - Preferred approach for creating entities
+   - `createEntity(id, props)` - Creates reactive game entities
+   - `createBaseGameObject(id, props)` - Alternative factory function
+   - Plain-object factories that return Valtio-proxied objects
+   - Automatically register with Game on creation
+   - Alternative to class-based approach
+
+3. **`BaseGameObject`** (`src/baseGameObject.ts`) - Class-based escape hatch
+   - Base class for all game entities (optional, use factories instead)
    - Auto-registers with `Game` on construction
    - Variables stored in `_variables` and persisted via JSONPath
-   - `save()` / `load()` methods sync with `Storage`
+   - `save()` / `load()` methods sync with storage system
 
-3. **`Passage`** (`src/passages/passage.ts`)
+4. **`Passage`** (`src/passages/passage.ts`)
    - Base class for game screens/scenes
    - Auto-registers with `Game` on construction
    - Subclasses must implement `display<T>(_props: T)` method
-   - Two built-in passage types: `Story` and `InteractiveMap`
+   - Built-in passage types: `Story`, `InteractiveMap`, and `Widget`
 
-4. **`Storage`** (`src/storage.ts`)
-   - JSONPath-based storage system using the `jsonpath` library
+5. **`Storage`** (`src/storage.ts`)
+   - JSONPath-based storage system using `jsonpath-plus` library
    - `getValue<T>(jsonPath)` / `setValue(jsonPath, value)` for querying/updating
    - Protected system paths (prefixed with `STORAGE_SYSTEM_PATH`)
    - `getState()` / `setState()` for full state serialization
 
-### Passage Types
+6. **Save System** (`src/saves/`)
+   - **IndexedDB persistence** via Dexie
+   - **Encrypted export/import** using crypto-js
+   - Save slots with metadata (name, timestamp, screenshot)
+   - Auto-save support with debouncing
+   - React hooks: `useSaves()`, `useAutoSave()`
 
-- **Story passages** (`src/passages/story/`) - Text-based narrative passages
-- **Interactive Map passages** (`src/passages/interactiveMap/`) - Map-based interactive passages
+#### Passage Types
 
-Both have corresponding factory functions and type definitions.
+The engine supports three built-in passage types:
 
-### State Management Flow
+1. **Story passages** (`src/passages/story/`)
+   - Text-based narrative passages
+   - Factory function: `newStory(id, displayFn)`
+   - Supports: headers, text, images, actions, conversations
+   - Dynamic content generation via display function
+
+2. **Interactive Map passages** (`src/passages/interactiveMap/`)
+   - Image-based interactive passages with clickable hotspots
+   - Factory function: `newInteractiveMap(id, displayFn)`
+   - Hotspots with customizable colors, positions, and actions
+   - Responsive positioning system
+
+3. **Widget passages** (`src/passages/widget.ts`)
+   - Custom React component passages
+   - For special UI screens (inventory, character sheet, etc.)
+   - Fully customizable via React components
+
+All passage types have corresponding factory functions and TypeScript type definitions.
+
+#### State Management Flow
 
 1. **Game initialization** - `Game.init(options)` must be called first
-2. Entities extend `BaseGameObject` and register on construction
-3. Passages extend `Passage` and register on construction
-4. All state changes go through Valtio proxies
+2. Entities created via factories (or classes) auto-register with Game
+3. Passages created via factories (or classes) auto-register with Game
+4. All state changes go through Valtio proxies for reactivity
 5. Storage uses JSONPath queries for flexible state access
-6. Auto-save (if enabled) debounces writes to session storage
-- NEVER fix aliases to their built names (from #<something> to ./<something>.js)
+6. Auto-save (if enabled) debounces writes to IndexedDB
+7. Import/export saves as encrypted files
+
+**IMPORTANT:** NEVER fix TypeScript path aliases to their built names (from `#<something>` to `./<something>.js`). The build process handles this via `tsc-alias`.
+
+## MDX Package (`packages/mdx`)
+
+The MDX package enables author-friendly Markdown syntax for game passages:
+
+### Features
+
+- **Markdown-based passages** - Write passages in `.mdx` files with frontmatter
+- **React components** - Seamlessly integrate React components in narratives
+- **Type-safe** - Full TypeScript support with custom component types
+- **Vite plugin** - Optimized build pipeline for MDX files
+- **Metadata extraction** - Automatic frontmatter parsing for passage metadata
+- **Dynamic variables** - Runtime-evaluated expressions in content
+
+### Usage
+
+```typescript
+// Configure Vite plugin
+import { vitePlugin } from '@react-text-game/mdx/plugin';
+
+export default defineConfig({
+  plugins: [
+    vitePlugin({
+      /* options */
+    })
+  ]
+});
+```
+
+### MDX Passage Structure
+
+```mdx
+---
+id: passage-id
+title: Passage Title
+tags: [tag1, tag2]
+---
+
+# Header
+
+Text content with **markdown** formatting.
+
+<CustomComponent prop="value" />
+
+[[Link to another passage->other-passage]]
+```
+
+### Key Components
+
+- **`src/plugins/`** - Remark/rehype plugins for MDX processing
+- **Frontmatter parsing** - Extracts metadata from passages
+- **Link transformation** - Converts `[[text->target]]` to passage navigation
+- **Variable evaluation** - Runtime evaluation of dynamic content
 
 ## UI Package (`packages/ui`)
 
@@ -287,3 +415,89 @@ When updating components, use these common replacements:
 | `bg-red-500` | `bg-danger-500` | Danger/delete actions |
 | `bg-yellow-500` | `bg-warning-500` | Warning actions |
 | `bg-purple-500` | `bg-secondary-500` | Secondary actions |
+
+## Development Practices
+
+### Build System
+
+- **TypeScript compilation** - `tsc` for type checking and compilation
+- **Path alias resolution** - `tsc-alias` resolves `#*` imports to `./dist/*`
+- **Tailwind CSS** - v4 with `@tailwindcss/cli` for CSS processing (UI package)
+- **Watch mode** - All packages support watch mode via `bun run dev`
+
+### Testing
+
+The project uses **Bun's built-in test runner** with:
+
+- **@testing-library/react** - React component testing
+- **@testing-library/jest-dom** - DOM matchers
+- **@happy-dom/global-registrator** - DOM environment for tests
+
+Run tests with:
+```bash
+bun test
+```
+
+Test apps are located in:
+- `apps/core-test-app` - Core functionality tests
+- `apps/ui-test-app` - UI component tests
+
+### Publishing
+
+The project uses **Changesets** for version management:
+
+```bash
+# Create a changeset
+bun run changeset
+
+# Apply changesets and update versions
+bunx changeset version
+
+# Publish to npm
+bunx changeset publish
+```
+
+All packages are published to npm with public access:
+- `@react-text-game/core`
+- `@react-text-game/ui`
+- `@react-text-game/mdx`
+
+### Documentation
+
+Documentation is built with **Docusaurus** and **TypeDoc**:
+
+- **Docusaurus site** - `apps/docs` (user guides, tutorials)
+- **API docs** - Auto-generated from TypeScript via TypeDoc
+- **API generation** - `bun run docs:api` generates API reference
+
+Documentation is deployed to GitHub Pages.
+
+### Code Style
+
+- **ESLint** - Linting with TypeScript ESLint
+- **Prettier** - Code formatting
+- **Simple Import Sort** - Automatic import sorting
+- **React Hooks Rules** - React-specific linting
+
+Run code quality checks:
+```bash
+bun run lint
+bun run format
+bun run check-types
+```
+
+### Key Conventions
+
+1. **Factory-first approach** - Use factory functions (e.g., `createEntity`, `newStory`) over classes
+2. **TypeScript paths** - Use `#*` imports within packages, resolved at build time
+3. **Semantic colors** - Always use semantic tokens in UI components
+4. **Workspace protocol** - Internal dependencies use `workspace:*`
+5. **Subpath exports** - Packages expose multiple entry points (e.g., `@react-text-game/core/saves`)
+
+## Important Notes
+
+- **Node.js version** - Requires Node.js 18 or later
+- **React version** - Supports React 18 and 19
+- **TypeScript version** - Requires TypeScript 5+
+- **Tailwind CSS version** - UI package requires Tailwind CSS v4
+- **Package manager** - Must use Bun 1.2.23 or later
