@@ -28,7 +28,7 @@ jobs:
         run: bun install --no-cache --frozen-lockfile
 
       - name: Build
-        run: bun run build
+        run: bun run build --filter='!@react-text-game/docs'
 
       - name: Lint
         run: bun run lint

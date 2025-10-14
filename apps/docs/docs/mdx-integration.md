@@ -299,10 +299,10 @@ Only specific HTML elements are processed:
 
 The plugin only processes specific props for each component. **Unsupported props are silently ignored.**
 
-See the [full API documentation](/api/mdx) for complete prop specifications.
+See the [full API documentation](/api/mdx/) for complete prop specifications.
 
 ## Next Steps
 
-- Explore the [MDX API documentation](/api/mdx)
+- Explore the [MDX API documentation](/api/mdx/)
 - Review the [Core Concepts](./core-concepts) for understanding game architecture
 - Check out example MDX stories in the repository

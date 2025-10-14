@@ -1,5 +1,0 @@
-# Type Alias: ActionType
-
-> **ActionType** = *typeof* [`Action`](../functions/Action.md)
-
-Defined in: [mdx/src/components/Actions/Action.tsx:24](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/mdx/src/components/Actions/Action.tsx#L24)

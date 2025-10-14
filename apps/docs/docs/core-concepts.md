@@ -245,7 +245,7 @@ const customUI = newWidget('custom-ui', (
 
 ## State Management
 
-React Text Game uses **Valtio** for reactive state and **JSONPath** for flexible storage queries.
+React Text Game uses **Valtio** for reactive state management and **jsonpath-plus** for flexible storage queries.
 
 ### Reactive Updates
 
@@ -260,23 +260,30 @@ player.health -= 10;
 
 ### Storage System
 
-The storage system uses JSONPath queries:
+The storage system uses JSONPath queries with session storage for auto-save:
 
 ```tsx
 import { Storage } from '@react-text-game/core';
 
-// Get values
+// Get values using JSONPath queries
 const health = Storage.getValue<number>('$.player.health');
 
 // Set values
 Storage.setValue('$.player.health', 75);
 
-// Full state serialization
+// Full state serialization for save/load
 const state = Storage.getState();
 Storage.setState(state);
+
+// Check if a path exists
+const hasInventory = Storage.hasPath('$.player.inventory');
 ```
 
-**Protected Paths:** System paths (prefixed with `$._system`) are protected and used internally.
+**Storage Features:**
+- Uses `jsonpath-plus` library for flexible querying
+- Session storage for auto-save (configurable)
+- Protected system paths (prefixed with `STORAGE_SYSTEM_PATH`)
+- Type-safe getValue with generic support
 
 ## Navigation
 
@@ -300,9 +307,9 @@ const current = Game.currentPassage;
 
 ## Save System
 
-React Text Game includes a comprehensive save/load system with IndexedDB and encryption support.
+React Text Game includes a comprehensive save/load system using **Dexie** (IndexedDB wrapper) with encryption support via **crypto-js**.
 
-### Using Hooks (UI Package)
+### Using Hooks
 
 ```tsx
 import { useSaveSlots } from '@react-text-game/core/saves';
@@ -314,10 +321,11 @@ function SavesList() {
     <div>
       {slots.map((slot, index) => (
         <div key={index}>
-          <p>Slot {index}: {slot.data ? 'Saved' : 'Empty'}</p>
+          <p>Slot {index + 1}: {slot.data ? 'Saved' : 'Empty'}</p>
+          {slot.data && <p>{slot.data.description}</p>}
           <button onClick={() => slot.save()}>Save</button>
-          <button onClick={() => slot.load()}>Load</button>
-          <button onClick={() => slot.delete()}>Delete</button>
+          <button onClick={() => slot.load()} disabled={!slot.data}>Load</button>
+          <button onClick={() => slot.delete()} disabled={!slot.data}>Delete</button>
         </div>
       ))}
     </div>
@@ -327,29 +335,39 @@ function SavesList() {
 
 ### Available Hooks
 
-- `useSaveSlots` - Get save slots with actions
-- `useSaveGame` - Save current state
-- `useLoadGame` - Load saved state
-- `useDeleteGame` - Delete save
-- `useLastLoadGame` - Load most recent save
+All save-related hooks are available from `@react-text-game/core/saves`:
+
+- `useSaveSlots` - Manage multiple save slots with save/load/delete actions
+- `useSaveGame` - Save current game state
+- `useLoadGame` - Load saved game state
+- `useDeleteGame` - Delete a specific save
+- `useDeleteAllSlots` - Delete all saves (except system save)
+- `useLastLoadGame` - Load the most recent save
 - `useExportSaves` - Export saves to encrypted file
-- `useImportSaves` - Import saves from file
-- `useRestartGame` - Restart from initial state
+- `useImportSaves` - Import saves from encrypted file
+- `useRestartGame` - Restart game from initial state
 
 ### Direct API
 
+The save system also provides direct database functions from `@react-text-game/core/saves`:
+
 ```tsx
-import { saveGame, loadGame, getAllSaves } from '@react-text-game/core/saves';
+import { saveGame, loadGame, getAllSaves, deleteSave } from '@react-text-game/core/saves';
 
-// Save manually
-await saveGame('my-save', gameData, 'Description', screenshotBase64);
+// Save manually with optional description and screenshot
+await saveGame('slot-1', gameData, 'Before boss fight', screenshotBase64);
 
-// Load by ID
+// Load by slot ID
 const save = await loadGame(1);
 
-// Get all saves
+// Get all saves (excluding system saves)
 const allSaves = await getAllSaves();
+
+// Delete a save
+await deleteSave(1);
 ```
+
+**Note:** Save IDs are auto-incremented. The system also maintains a special `SYSTEM_SAVE_NAME` for initial state restoration.
 
 ## React Hooks
 
@@ -461,6 +479,9 @@ const player = createEntity('player', {
 
 ## Next Steps
 
-- [**Core API Reference**](/api/core) - Complete API documentation
-- [**UI API Reference**](/api/ui) - UI components documentation
-- [**Example Game**](https://github.com/laruss/react-text-game/tree/main/apps/example-game) - See it in action
+- [**Core API Reference**](/api/core/) - Complete API documentation
+- [**UI API Reference**](/api/ui/) - UI components documentation
+- [**Example Projects**](https://github.com/laruss/react-text-game/tree/main/apps) - See it in action
+  - [Example Game](https://github.com/laruss/react-text-game/tree/main/apps/example-game) - Full game with Vite + React 19
+  - [Core Test App](https://github.com/laruss/react-text-game/tree/main/apps/core-test-app) - Core package examples
+  - [UI Test App](https://github.com/laruss/react-text-game/tree/main/apps/ui-test-app) - UI components showcase

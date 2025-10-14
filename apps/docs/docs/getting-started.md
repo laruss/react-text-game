@@ -197,14 +197,16 @@ src/
 Now that you have the basics set up, learn more about:
 
 - [**Core Concepts**](/core-concepts) - Understand entities, passages, and state management
-- [**Core API**](/api/core) - Complete API reference for the core package
-- [**UI API**](/api/ui) - Complete API reference for the UI package
+- [**Core API**](/api/core/) - Complete API reference for the core package
+- [**UI API**](/api/ui/) - Complete API reference for the UI package
 
-## Examples
+## Example Projects
 
-Check out the example game in the repository:
+Check out the example projects in the repository:
 
-- [Example Game Source](https://github.com/laruss/react-text-game/tree/main/apps/example-game)
+- [Example Game Source](https://github.com/laruss/react-text-game/tree/main/apps/example-game) - Full game implementation with Vite + React 19
+- [Core Test App](https://github.com/laruss/react-text-game/tree/main/apps/core-test-app) - Basic core package usage
+- [UI Test App](https://github.com/laruss/react-text-game/tree/main/apps/ui-test-app) - UI components showcase
 
 ## Troubleshooting
 
@@ -234,7 +236,7 @@ And that Tailwind CSS is properly configured for your project.
 
 ### TypeScript Errors
 
-Make sure you have TypeScript 5.6+ installed:
+Make sure you have TypeScript 5+ installed (5.9+ recommended):
 
 ```bash
 bun add -d typescript@latest
