@@ -41,3 +41,6 @@ yarn-error.log*
 *.pem
 
 .idea
+
+# auto-generated docs
+apps/docs/docs/api

@@ -1,5 +1,0 @@
-# Type Alias: PassageType
-
-> **PassageType** = `"story"` \| `"interactiveMap"` \| `"widget"`
-
-Defined in: [types.ts:16](https://github.com/laruss/react-text-game/blob/59d7b8f771aa0b3a193326c59fd60a3d4ca5383b/packages/core/src/types.ts#L16)

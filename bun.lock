@@ -19,6 +19,7 @@
         "globals": "^16.4.0",
         "prettier": "^3.6.2",
         "turbo": "^2.5.8",
+        "typedoc-docusaurus-theme": "^1.4.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.45.0",
       },
@@ -182,7 +183,7 @@
     },
     "packages/ui": {
       "name": "@react-text-game/ui",
-      "version": "0.2.3",
+      "version": "0.2.4",
       "dependencies": {
         "tailwind-merge": "^3.3.1",
       },

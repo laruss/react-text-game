@@ -68,44 +68,7 @@ const config: Config = {
         },
     ],
 
-    plugins: [
-        [
-            "docusaurus-plugin-typedoc",
-            {
-                id: "core",
-                entryPoints: ["../../packages/core/src/index.ts"],
-                tsconfig: "../../packages/core/tsconfig.json",
-                out: "docs/api/core",
-                excludePrivate: true,
-                excludeProtected: false,
-                readme: "none",
-            },
-        ],
-        [
-            "docusaurus-plugin-typedoc",
-            {
-                id: "ui",
-                entryPoints: ["../../packages/ui/src/index.ts"],
-                tsconfig: "../../packages/ui/tsconfig.json",
-                out: "docs/api/ui",
-                excludePrivate: true,
-                excludeProtected: false,
-                readme: "none",
-            },
-        ],
-        [
-            "docusaurus-plugin-typedoc",
-            {
-                id: "mdx",
-                entryPoints: ["../../packages/mdx/src/index.ts"],
-                tsconfig: "../../packages/mdx/tsconfig.json",
-                out: "docs/api/mdx",
-                excludePrivate: true,
-                excludeProtected: false,
-                readme: "none",
-            },
-        ],
-    ],
+    plugins: [],
 
     presets: [
         [
