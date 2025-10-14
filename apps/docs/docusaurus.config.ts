@@ -36,6 +36,57 @@ const config: Config = {
     },
 
     headTags: [
+        // PNG favicon for better Google Search compatibility
+        {
+            tagName: "link",
+            attributes: {
+                rel: "icon",
+                type: "image/png",
+                sizes: "48x48",
+                href: "/react-text-game/img/favicon-48x48.png",
+            },
+        },
+        {
+            tagName: "link",
+            attributes: {
+                rel: "icon",
+                type: "image/png",
+                sizes: "192x192",
+                href: "/react-text-game/img/favicon-192x192.png",
+            },
+        },
+        // Apple touch icon
+        {
+            tagName: "link",
+            attributes: {
+                rel: "apple-touch-icon",
+                sizes: "192x192",
+                href: "/react-text-game/img/favicon-192x192.png",
+            },
+        },
+        // WebSite structured data with search functionality
+        {
+            tagName: "script",
+            attributes: {
+                type: "application/ld+json",
+            },
+            innerHTML: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "React Text Game",
+                url: "https://laruss.github.io/react-text-game/",
+                potentialAction: {
+                    "@type": "SearchAction",
+                    target: {
+                        "@type": "EntryPoint",
+                        urlTemplate:
+                            "https://laruss.github.io/react-text-game/?q={search_term_string}",
+                    },
+                    "query-input": "required name=search_term_string",
+                },
+            }),
+        },
+        // SoftwareApplication structured data
         {
             tagName: "script",
             attributes: {
