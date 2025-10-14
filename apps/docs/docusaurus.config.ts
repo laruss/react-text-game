@@ -220,17 +220,17 @@ const config: Config = {
                     label: "Docs",
                 },
                 {
-                    to: "/api/core",
+                    to: "/api/core/",
                     position: "left",
                     label: "Core API",
                 },
                 {
-                    to: "/api/ui",
+                    to: "/api/ui/",
                     position: "left",
                     label: "UI API",
                 },
                 {
-                    to: "/api/mdx",
+                    to: "/api/mdx/",
                     position: "left",
                     label: "MDX API",
                 },
@@ -257,15 +257,15 @@ const config: Config = {
                         },
                         {
                             label: "Core API",
-                            to: "/api/core",
+                            to: "/api/core/",
                         },
                         {
                             label: "UI API",
-                            to: "/api/ui",
+                            to: "/api/ui/",
                         },
                         {
                             label: "MDX API",
-                            to: "/api/mdx",
+                            to: "/api/mdx/",
                         },
                     ],
                 },
