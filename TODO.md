@@ -10,3 +10,10 @@
 - [ ] fix icon in google search;
 - [ ] add proper errors handling from mdx package (e.g. passage is not registered in system, but being linked);
 - [ ] fix ui package: conversation on click doesn't work; init passage isn't shown (and add tests for it);
+
+### ROADMAP
+- [x] fix bugs in ui package;
+- [ ] big docs update and enhancements;
+- [ ] enchase ui package;
+- [ ] new utils package (dev mode);
+- [ ] ai integration;
