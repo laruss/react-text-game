@@ -56,7 +56,7 @@ The core game engine that handles state management, entity registration, passage
 bun add @react-text-game/core
 ```
 
-[View Core API Documentation →](/api/core)
+[View Core API Documentation →](/api/core/)
 
 ### [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
 
@@ -66,7 +66,7 @@ Ready-to-use React components with Tailwind CSS v4 and a semantic theming system
 bun add @react-text-game/core @react-text-game/ui
 ```
 
-[View UI API Documentation →](/api/ui)
+[View UI API Documentation →](/api/ui/)
 
 ### [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
 
@@ -143,8 +143,8 @@ Game.jumpTo(intro);
 
 - [**Getting Started**](/getting-started) - Installation and setup guide
 - [**Core Concepts**](/core-concepts) - Learn the fundamental concepts
-- [**Core API**](/api/core) - Complete API reference for the core package
-- [**UI API**](/api/ui) - Complete API reference for the UI package
+- [**Core API**](/api/core/) - Complete API reference for the core package
+- [**UI API**](/api/ui/) - Complete API reference for the UI package
 
 ## Resources
 

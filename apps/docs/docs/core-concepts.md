@@ -479,8 +479,8 @@ const player = createEntity('player', {
 
 ## Next Steps
 
-- [**Core API Reference**](/api/core) - Complete API documentation
-- [**UI API Reference**](/api/ui) - UI components documentation
+- [**Core API Reference**](/api/core/) - Complete API documentation
+- [**UI API Reference**](/api/ui/) - UI components documentation
 - [**Example Projects**](https://github.com/laruss/react-text-game/tree/main/apps) - See it in action
   - [Example Game](https://github.com/laruss/react-text-game/tree/main/apps/example-game) - Full game with Vite + React 19
   - [Core Test App](https://github.com/laruss/react-text-game/tree/main/apps/core-test-app) - Core package examples

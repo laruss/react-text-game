@@ -197,8 +197,8 @@ src/
 Now that you have the basics set up, learn more about:
 
 - [**Core Concepts**](/core-concepts) - Understand entities, passages, and state management
-- [**Core API**](/api/core) - Complete API reference for the core package
-- [**UI API**](/api/ui) - Complete API reference for the UI package
+- [**Core API**](/api/core/) - Complete API reference for the core package
+- [**UI API**](/api/ui/) - Complete API reference for the UI package
 
 ## Example Projects
 
