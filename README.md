@@ -250,5 +250,5 @@ MIT (c) [laruss](https://github.com/laruss)
   - [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
   - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
   - [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
-- **Repository:** [GitHub](https://github.com/laruss/react-text-game) (update with actual repo URL)
+- **Repository:** [GitHub](https://github.com/laruss/react-text-game)
 - **Issues:** Report bugs and request features on GitHub Issues
