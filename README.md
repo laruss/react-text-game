@@ -1,11 +1,26 @@
 # React Text Game
 
+![React Text Game](./apps/docs/static/img/og-image.webp)
+
 A powerful, reactive text-based game engine for React applications. Build interactive narrative experiences with TypeScript, featuring state management, multiple passage types, and a comprehensive save system.
 
 [![@react-text-game/core](https://img.shields.io/npm/v/@react-text-game/core?label=core)](https://www.npmjs.com/package/@react-text-game/core)
 [![@react-text-game/ui](https://img.shields.io/npm/v/@react-text-game/ui?label=ui)](https://www.npmjs.com/package/@react-text-game/ui)
 [![@react-text-game/mdx](https://img.shields.io/npm/v/@react-text-game/mdx?label=mdx)](https://www.npmjs.com/package/@react-text-game/mdx)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Why React Text Game?
+
+Building interactive narrative experiences shouldn't require reinventing the wheel. React Text Game provides a production-ready game engine that handles the complexity of state management, save systems, and UI components—so you can focus on crafting your story.
+
+- **Zero boilerplate** - Start building immediately with factory functions and pre-built components
+- **Production-ready** - Built-in save system with IndexedDB persistence and encrypted exports
+- **Author-friendly** - Write passages in Markdown (MDX) or programmatically with TypeScript
+- **Fully customizable** - Use our UI components or build your own with the core engine
+- **Type-safe** - Catch errors at compile time with comprehensive TypeScript support
+- **Modern React** - Built for React 18+ with hooks and reactive state management
+
+Whether you're building a visual novel, interactive fiction, or educational narrative experience, React Text Game provides the foundation to ship faster.
 
 ## Features
 
@@ -208,12 +223,22 @@ react-text-game/
 
 ## Contributing
 
-Contributions are welcome! Please ensure:
+Contributions are welcome! To contribute:
 
-1. Code follows existing patterns and conventions
-2. TypeScript types are properly defined
-3. Tests pass (if applicable)
-4. Code is formatted with Prettier
+1. **Fork the repository** and create a new branch for your feature or bugfix
+2. **Install dependencies** with `bun install`
+3. **Follow existing patterns** - Use factory functions, semantic colors in UI, and TypeScript types
+4. **Test your changes** in the test apps (`apps/core-test-app` or `apps/ui-test-app`)
+5. **Ensure code quality**:
+   - Run `bun run lint` to check for linting issues
+   - Run `bun run check-types` to verify TypeScript types
+   - Run `bun run format` to format code with Prettier
+6. **Create a changeset** if you're modifying a package:
+   - Run `bun run changeset` and follow the prompts
+   - This helps with version management and changelog generation
+7. **Submit a pull request** with a clear description of your changes
+
+Please ensure all checks pass before submitting your PR. If you're adding new features, consider updating the documentation in `apps/docs`.
 
 ## License
 

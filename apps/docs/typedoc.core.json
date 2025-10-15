@@ -1,10 +1,10 @@
 {
     "$schema": "https://typedoc.org/schema.json",
     "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
-    "entryPoints": ["./packages/mdx/src/index.ts"],
+    "entryPoints": ["../../packages/core/src/index.ts"],
     "entryPointStrategy": "expand",
-    "tsconfig": "./packages/mdx/tsconfig.json",
-    "out": "./apps/docs/docs/api/mdx",
+    "tsconfig": "../../packages/core/tsconfig.json",
+    "out": "./docs/api/core",
     "excludePrivate": true,
     "excludeProtected": false,
     "readme": "none"

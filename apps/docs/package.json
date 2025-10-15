@@ -6,7 +6,8 @@
         "docusaurus": "docusaurus",
         "dev": "docusaurus start",
         "start": "docusaurus start",
-        "build": "docusaurus build",
+        "build": "bun run docs:api && docusaurus build",
+        "docs:api": "typedoc --options typedoc.core.json && typedoc --options typedoc.ui.json && typedoc --options typedoc.mdx.json",
         "swizzle": "docusaurus swizzle",
         "deploy": "docusaurus deploy",
         "clear": "docusaurus clear",
@@ -30,6 +31,8 @@
         "@docusaurus/module-type-aliases": "3.9.1",
         "@docusaurus/tsconfig": "3.9.1",
         "@docusaurus/types": "3.9.1",
+        "typedoc": "^0.28.14",
+        "typedoc-plugin-markdown": "^4.9.0",
         "typescript": "~5.6.2"
     },
     "browserslist": {
