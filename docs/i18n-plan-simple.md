@@ -137,13 +137,15 @@ class Game {
 }
 ```
 
+**Note:** The `initI18n()` function uses dynamic imports to load UI package translations. This makes the UI package optional - if it's not installed (e.g., users building custom UIs), the core package will continue to work without UI translations.
+
 **Internal i18n initialization:**
 
 ```typescript
 // packages/core/src/i18n/init.ts
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { uiTranslations } from '@react-text-game/ui/i18n';
+import { getSetting } from '#saves/db';
 
 export interface I18nConfig {
   defaultLanguage?: string;
@@ -156,6 +158,20 @@ export interface I18nConfig {
   };
 }
 
+/**
+ * Safely load UI translations from @react-text-game/ui package.
+ * Returns empty object if UI package is not installed.
+ */
+async function loadUITranslations(): Promise<Record<string, Record<string, object>>> {
+  try {
+    const { uiTranslations } = await import('@react-text-game/ui/i18n');
+    return uiTranslations;
+  } catch (error) {
+    // UI package not installed - this is expected for users with custom UIs
+    return {};
+  }
+}
+
 export async function initI18n(config: I18nConfig) {
   const {
     defaultLanguage = 'en',
@@ -163,6 +179,9 @@ export async function initI18n(config: I18nConfig) {
     debug = false,
     resources,
   } = config;
+
+  // Try to load UI translations (will be empty if UI package not installed)
+  const uiTranslations = await loadUITranslations();
 
   // Merge user resources with UI translations
   const mergedResources: typeof resources = {};
@@ -821,6 +840,7 @@ export const CustomInventory = () => {
 - [ ] Add `i18next` and `react-i18next` dependencies
 - [ ] Create `packages/core/src/i18n/` directory
 - [ ] Implement `initI18n()` function with:
+  - [ ] Dynamic import helper (`loadUITranslations()`) to safely load UI package translations
   - [ ] Resource merging (user + UI translations)
   - [ ] Load saved language preference from database
   - [ ] Initialize i18next with saved or default language
@@ -882,7 +902,8 @@ export const CustomInventory = () => {
 ✅ **No CLI tooling needed** - uses standard i18next setup
 ✅ **Zero boilerplate** - no manual i18next configuration required
 ✅ **Single initialization point** - everything configured in `Game.init()`
-✅ **Automatic UI translations** - core package auto-merges UI translations
+✅ **Automatic UI translations** - core package auto-merges UI translations when UI package is installed
+✅ **UI package is optional** - dynamic imports gracefully handle missing UI package for custom UIs
 ✅ **Language persistence** - user's language choice automatically saved to database
 ✅ **Survives refresh** - language preference restored on page reload
 ✅ **Full control** - users manage their translation files
@@ -892,6 +913,7 @@ export const CustomInventory = () => {
 ✅ **Flexible** - users can use any i18next plugins or backends
 ✅ **Override-friendly** - easy to customize UI translations per language
 ✅ **Leverages existing infrastructure** - uses existing settings table, no new database schema needed
+✅ **Modern runtime compatibility** - dynamic imports work with all modern bundlers (Vite, Webpack 5+, esbuild, Rollup)
 
 ---
 
@@ -920,9 +942,10 @@ These will be addressed in **V2** with automatic code generation and CLI tooling
 ### Core Package Handles:
 
 1. **All i18next setup** - initialization, configuration, plugins
-2. **UI translations merging** - automatically includes UI package translations
-3. **Language management** - provides hooks and utilities for language switching
-4. **Type safety** - provides TypeScript types for i18n configuration
+2. **UI translations merging** - automatically includes UI package translations (if UI package is installed)
+3. **Optional UI package** - gracefully handles missing UI package via dynamic imports
+4. **Language management** - provides hooks and utilities for language switching
+5. **Type safety** - provides TypeScript types for i18n configuration
 
 ### UI Package Provides:
 

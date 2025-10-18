@@ -2,6 +2,7 @@ import { proxy, subscribe } from "valtio";
 
 import { STORAGE_SYSTEM_PATH, SYSTEM_PASSAGE_NAMES } from "#constants";
 import { BaseGameObject } from "#gameObjects";
+import { initI18n } from "#i18n";
 import { logger } from "#logger";
 import { _getOptions, NewOptions, newOptions, Options } from "#options";
 import { Passage } from "#passages/passage";
@@ -503,6 +504,9 @@ export class Game {
     static async init(opts: NewOptions): Promise<void> {
         newOptions(opts);
         Game.initialized = true;
+
+        await initI18n(opts.translations);
+
         if (Game.options.isDevMode) {
             logger.warn(
                 "Game is running in dev mode, do not use in production!"
