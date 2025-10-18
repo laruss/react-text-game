@@ -112,7 +112,7 @@ src/
 ```typescript
 // packages/core/src/i18n/index.ts
 export { initI18n } from './init';
-export { useGameTranslation } from './hooks';
+export { useGameTranslation, getGameTranslation } from './hooks';
 export { changeLanguage, getCurrentLanguage } from './utils';
 export type { I18nConfig } from './types';
 ```
@@ -219,13 +219,17 @@ export async function initI18n(config: I18nConfig) {
 }
 ```
 
-### 4.3. Translation hook for passages
+### 4.3. Translation utilities for passages
 
 ```typescript
 // packages/core/src/i18n/hooks.ts
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 import { setSetting } from '#saves/db';
 
+/**
+ * Hook for React components - provides translation function and language utilities
+ */
 export function useGameTranslation(namespace: string = 'passages') {
   const { t, i18n } = useTranslation(namespace);
 
@@ -241,6 +245,14 @@ export function useGameTranslation(namespace: string = 'passages') {
     currentLanguage: i18n.language,
     languages: i18n.languages,
   };
+}
+
+/**
+ * Non-hook helper for non-component contexts (like passage factory functions)
+ * Returns translation function for the specified namespace
+ */
+export function getGameTranslation(namespace: string = 'passages') {
+  return i18next.getFixedT(null, namespace);
 }
 ```
 
@@ -448,10 +460,11 @@ await Game.init({
 
 ```typescript
 import { newStory, Game } from '@react-text-game/core';
-import { useGameTranslation } from '@react-text-game/core/i18n';
+import { getGameTranslation } from '@react-text-game/core/i18n';
 
 export const start = newStory('start', () => {
-  const { t } = useGameTranslation('passages');
+  // Use getGameTranslation() instead of useGameTranslation() hook
+  const t = getGameTranslation('passages');
 
   return {
     header: t('start.header'),
@@ -592,11 +605,16 @@ export const CustomLanguageSwitcher = () => {
 };
 ```
 
-**Available from `useGameTranslation()`:**
+**Available from `useGameTranslation()` (for React components):**
 - `currentLanguage: string` - The currently active language code
 - `changeLanguage: (lang: string) => Promise<void>` - Function to switch languages
 - `languages: string[]` - Array of all available language codes
 - `t: (key: string) => string` - Translation function for current namespace
+
+**Available from `getGameTranslation(namespace)` (for non-component contexts):**
+- Returns the translation function `t` directly
+- Use this in passage factory functions, utility functions, or anywhere you can't use hooks
+- Example: `const t = getGameTranslation('passages')`
 
 ---
 
@@ -786,7 +804,8 @@ Then create a custom MDX component that reads from i18n based on `i18nKey` from 
 
 2. **API Reference**
    - `Game.init()` i18n options
-   - `useGameTranslation()` hook
+   - `useGameTranslation()` hook (for React components)
+   - `getGameTranslation()` function (for non-component contexts like passages)
    - `changeLanguage()` function
 
 3. **Translation File Structure**
@@ -849,6 +868,9 @@ export const CustomInventory = () => {
   - [ ] Language change function with database persistence
   - [ ] Current language getter
   - [ ] Available languages getter
+- [ ] Implement `getGameTranslation()` helper function:
+  - [ ] Returns translation function `t` for non-component contexts
+  - [ ] Uses `i18next.getFixedT()` for direct access without hooks
 - [ ] Add i18n initialization to `Game.init()`
 - [ ] Export i18n utilities from core package
 - [ ] Add TypeScript types for i18n config
