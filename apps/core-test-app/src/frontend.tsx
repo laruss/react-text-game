@@ -5,8 +5,25 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { App } from "./App";
+import passagesEn from "./locales/en/passages.json";
+import passagesRu from "./locales/ru/passages.json";
 
-await Game.init({ gameName: "core-test-app", isDevMode: true });
+await Game.init({
+    gameName: "core-test-app",
+    isDevMode: true,
+    translations: {
+        defaultLanguage: 'en',
+        fallbackLanguage: 'en',
+        resources: {
+            en: {
+                passages: passagesEn,
+            },
+            ru: {
+                passages: passagesRu,
+            },
+        }
+    },
+});
 
 const elem = document.getElementById("root")!;
 const app = (
