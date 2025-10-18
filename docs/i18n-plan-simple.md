@@ -17,16 +17,16 @@ This is a simplified, manual approach to i18n integration for experienced develo
 We'll integrate `react-i18next` into the core packages:
 
 **Dependencies to add:**
-```json
-// packages/core/package.json
+```json // packages/core/package.json
 {
   "dependencies": {
     "i18next": "^23.0.0",
     "react-i18next": "^14.0.0"
   }
 }
+```
 
-// packages/ui/package.json
+```json // packages/ui/package.json
 {
   "dependencies": {
     "i18next": "^23.0.0",
@@ -39,30 +39,46 @@ We'll integrate `react-i18next` into the core packages:
 
 ## 2. Game.init() Configuration
 
-Add i18n configuration to Game initialization:
+Add i18n configuration to Game initialization with user's translation resources:
 
 ```typescript
+import commonEn from './locales/en/common.json';
+import passagesEn from './locales/en/passages.json';
+import commonEs from './locales/es/common.json';
+import passagesEs from './locales/es/passages.json';
+
 await Game.init({
   gameName: "My Adventure",
   gameVersion: "1.0.0",
   i18n: {
     defaultLanguage: 'en',
-    supportedLanguages: ['en', 'es', 'fr'],
+    fallbackLanguage: 'en',
     debug: false, // Enable i18next debug mode
+    resources: {
+      en: {
+        common: commonEn,
+        passages: passagesEn,
+      },
+      es: {
+        common: commonEs,
+        passages: passagesEs,
+      }
+    }
   }
 });
 ```
 
 **Game.init() will:**
 1. Initialize i18next with provided configuration
-2. Load translation resources from user's project
+2. Automatically merge UI package translations with user translations
 3. Set up language switching functionality
+4. Handle all i18next boilerplate internally
 
 ---
 
 ## 3. User Project Structure
 
-Users manually create translation files:
+Users only create translation JSON files - no configuration code needed:
 
 ```
 src/
@@ -70,20 +86,20 @@ src/
 │   ├── start.ts
 │   ├── forest.ts
 │   └── inn.ts
-├── i18n/
-│   ├── index.ts           # i18n configuration
-│   ├── locales/
-│   │   ├── en/
-│   │   │   ├── common.json
-│   │   │   └── passages.json
-│   │   ├── es/
-│   │   │   ├── common.json
-│   │   │   └── passages.json
-│   │   └── fr/
-│   │       ├── common.json
-│   │       └── passages.json
+├── locales/
+│   ├── en/
+│   │   ├── common.json
+│   │   └── passages.json
+│   ├── es/
+│   │   ├── common.json
+│   │   └── passages.json
+│   └── fr/
+│       ├── common.json
+│       └── passages.json
 └── App.tsx
 ```
+
+**Note:** No `i18n/index.ts` file needed - `Game.init()` handles all configuration!
 
 ---
 
@@ -121,18 +137,88 @@ class Game {
 }
 ```
 
+**Internal i18n initialization:**
+
+```typescript
+// packages/core/src/i18n/init.ts
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import { uiTranslations } from '@react-text-game/ui/i18n';
+
+export interface I18nConfig {
+  defaultLanguage?: string;
+  fallbackLanguage?: string;
+  debug?: boolean;
+  resources: {
+    [language: string]: {
+      [namespace: string]: object;
+    };
+  };
+}
+
+export async function initI18n(config: I18nConfig) {
+  const {
+    defaultLanguage = 'en',
+    fallbackLanguage = 'en',
+    debug = false,
+    resources,
+  } = config;
+
+  // Merge user resources with UI translations
+  const mergedResources: typeof resources = {};
+
+  for (const [lang, namespaces] of Object.entries(resources)) {
+    mergedResources[lang] = {
+      ...namespaces,
+      // Auto-merge UI translations if available for this language
+      ...(uiTranslations[lang] || {}),
+    };
+  }
+
+  // Add UI translations for languages not provided by user
+  for (const [lang, translations] of Object.entries(uiTranslations)) {
+    if (!mergedResources[lang]) {
+      mergedResources[lang] = translations;
+    }
+  }
+
+  // Load saved language preference from database (if available)
+  const savedLanguage = await getSetting<string>('language', defaultLanguage);
+
+  await i18next
+    .use(initReactI18next)
+    .init({
+      lng: savedLanguage, // Use saved language or default
+      fallbackLng: fallbackLanguage,
+      defaultNS: 'common',
+      debug,
+      resources: mergedResources,
+      interpolation: {
+        escapeValue: false, // React already escapes
+      },
+    });
+}
+```
+
 ### 4.3. Translation hook for passages
 
 ```typescript
 // packages/core/src/i18n/hooks.ts
 import { useTranslation } from 'react-i18next';
+import { setSetting } from '#saves/db';
 
 export function useGameTranslation(namespace: string = 'passages') {
   const { t, i18n } = useTranslation(namespace);
 
+  const changeLanguage = async (lang: string) => {
+    await i18n.changeLanguage(lang);
+    // Persist language preference to database
+    await setSetting('language', lang);
+  };
+
   return {
     t,
-    changeLanguage: i18n.changeLanguage,
+    changeLanguage,
     currentLanguage: i18n.language,
     languages: i18n.languages,
   };
@@ -202,7 +288,7 @@ packages/ui/src/i18n/
 
 **Example: MainMenu.tsx**
 
-```typescript
+```tsx
 // Before
 export const MainMenu = () => {
   return (
@@ -214,7 +300,9 @@ export const MainMenu = () => {
     </div>
   );
 };
+```
 
+```tsx
 // After
 import { useTranslation } from 'react-i18next';
 
@@ -259,12 +347,11 @@ export * from './types';
 
 ### 6.1. Setup i18n in user's project
 
-**Create `src/i18n/index.ts`:**
+**No separate i18n configuration file needed!** Just import your translations and pass them to `Game.init()`:
 
 ```typescript
-import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import { uiTranslations } from '@react-text-game/ui/i18n';
+// App.tsx or main.tsx
+import { Game } from '@react-text-game/core';
 
 // Import user's translations
 import commonEn from './locales/en/common.json';
@@ -272,37 +359,35 @@ import passagesEn from './locales/en/passages.json';
 import commonEs from './locales/es/common.json';
 import passagesEs from './locales/es/passages.json';
 
-export const initI18n = async (defaultLanguage = 'en') => {
-  await i18next
-    .use(initReactI18next)
-    .init({
-      lng: defaultLanguage,
-      fallbackLng: 'en',
-      defaultNS: 'common',
-
-      resources: {
-        en: {
-          common: commonEn,
-          passages: passagesEn,
-          ...uiTranslations.en, // Include UI translations
-        },
-        es: {
-          common: commonEs,
-          passages: passagesEs,
-          // User can override UI translations here
-        },
+await Game.init({
+  gameName: "My Adventure",
+  gameVersion: "1.0.0",
+  i18n: {
+    defaultLanguage: 'en',
+    fallbackLanguage: 'en',
+    resources: {
+      en: {
+        common: commonEn,
+        passages: passagesEn,
       },
-
-      interpolation: {
-        escapeValue: false, // React already escapes
-      },
-    });
-};
+      es: {
+        common: commonEs,
+        passages: passagesEs,
+      }
+    }
+  }
+});
 ```
+
+**That's it!** The core package:
+- Automatically initializes i18next
+- Merges UI package translations
+- Handles all boilerplate
+- Makes translations available to all hooks
 
 ### 6.2. Create translation files
 
-**`src/i18n/locales/en/passages.json`:**
+**`src/locales/en/passages.json`:**
 ```json
 {
   "start": {
@@ -320,7 +405,7 @@ export const initI18n = async (defaultLanguage = 'en') => {
 }
 ```
 
-**`src/i18n/locales/es/passages.json`:**
+**`src/locales/es/passages.json`:**
 ```json
 {
   "start": {
@@ -372,18 +457,33 @@ export const start = newStory('start', () => {
 import { useEffect } from 'react';
 import { Game } from '@react-text-game/core';
 import { GameProvider } from '@react-text-game/ui';
-import { initI18n } from './i18n';
+
+// Import translations
+import commonEn from './locales/en/common.json';
+import passagesEn from './locales/en/passages.json';
+import commonEs from './locales/es/common.json';
+import passagesEs from './locales/es/passages.json';
 
 function App() {
   useEffect(() => {
     const init = async () => {
-      // Initialize i18n first
-      await initI18n('en');
-
-      // Then initialize game
       await Game.init({
         gameName: "My Adventure",
         gameVersion: "1.0.0",
+        i18n: {
+          defaultLanguage: 'en',
+          fallbackLanguage: 'en',
+          resources: {
+            en: {
+              common: commonEn,
+              passages: passagesEn,
+            },
+            es: {
+              common: commonEs,
+              passages: passagesEs,
+            }
+          }
+        }
       });
     };
 
@@ -402,68 +502,188 @@ function App() {
 
 ## 7. Language Switching
 
-### 7.1. Create language switcher component
+### 7.1. Built-in Language Switcher Component
 
-Users can create their own language switcher:
+The UI package provides a ready-to-use `<LanguageSwitcher />` component:
 
-```typescript
+```tsx
+import { LanguageSwitcher } from '@react-text-game/ui';
+
+function App() {
+  return (
+    <div>
+      <LanguageSwitcher />
+      {/* Your game content */}
+    </div>
+  );
+}
+```
+
+**Features:**
+- Automatically detects available languages from i18n configuration
+- Displays language names in their native language (e.g., "English", "Español", "Français")
+- Themed to match your game's design system
+- Supports customization via props
+
+**Props:**
+```tsx
+interface LanguageSwitcherProps {
+  variant?: 'dropdown' | 'buttons' | 'flags'; // UI style
+  labels?: Record<string, string>; // Custom language labels
+  className?: string; // Custom styling
+  showCurrentOnly?: boolean; // Show only current language when collapsed
+}
+```
+
+**Example with custom labels:**
+```tsx
+<LanguageSwitcher
+  variant="buttons"
+  labels={{
+    en: 'English',
+    es: 'Español',
+    fr: 'Français',
+  }}
+/>
+```
+
+### 7.2. Create custom language switcher
+
+Users can also create their own language switcher using the `useGameTranslation` hook:
+
+```tsx
 import { useGameTranslation } from '@react-text-game/core/i18n';
 
-export const LanguageSwitcher = () => {
+export const CustomLanguageSwitcher = () => {
   const { currentLanguage, changeLanguage, languages } = useGameTranslation();
 
   return (
-    <select
-      value={currentLanguage}
-      onChange={(e) => changeLanguage(e.target.value)}
-    >
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="fr">Français</option>
-    </select>
+    <div className="my-custom-switcher">
+      {languages.map((lang) => (
+        <button
+          key={lang}
+          onClick={() => changeLanguage(lang)}
+          className={currentLanguage === lang ? 'active' : ''}
+        >
+          {lang.toUpperCase()}
+        </button>
+      ))}
+    </div>
   );
 };
 ```
 
+**Available from `useGameTranslation()`:**
+- `currentLanguage: string` - The currently active language code
+- `changeLanguage: (lang: string) => Promise<void>` - Function to switch languages
+- `languages: string[]` - Array of all available language codes
+- `t: (key: string) => string` - Translation function for current namespace
+
 ---
 
-## 8. Override UI Translations
+## 8. Language Preference Persistence
 
-Users can override UI component translations:
+The core package automatically saves and restores the user's language preference using the existing save system.
 
+### 8.1. How it works
+
+**When user changes language:**
 ```typescript
-// src/i18n/index.ts
-import { uiTranslations } from '@react-text-game/ui/i18n';
+const { changeLanguage } = useGameTranslation();
 
-export const initI18n = async (defaultLanguage = 'en') => {
-  await i18next.init({
-    resources: {
-      en: {
-        ...uiTranslations.en,
-      },
-      es: {
-        // Override UI translations for Spanish
-        ui: {
-          mainMenu: {
-            title: "Menú Principal",
-            newGame: "Nuevo Juego",
-            continue: "Continuar",
-            loadGame: "Cargar Juego"
-          }
-        },
-        saves: {
-          title: {
-            save: "Guardar Partida",
-            load: "Cargar Partida",
-            saveLoad: "Guardar / Cargar"
-          },
-          // ... rest of overrides
-        }
-      }
-    }
-  });
+// This automatically saves to database
+await changeLanguage('es');
+```
+
+**Internal implementation:**
+```typescript
+// packages/core/src/i18n/hooks.ts
+const changeLanguage = async (lang: string) => {
+  await i18n.changeLanguage(lang);
+  // Automatically persist to database using settings table
+  await setSetting('language', lang);
 };
 ```
+
+**On game initialization:**
+```typescript
+// packages/core/src/i18n/init.ts
+// Load saved language preference from database
+const savedLanguage = await getSetting<string>('language', defaultLanguage);
+
+await i18next.init({
+  lng: savedLanguage, // Use saved language or default
+  // ... rest of config
+});
+```
+
+### 8.2. Benefits
+
+- **Automatic persistence** - Users don't need to do anything
+- **Survives page refresh** - Language choice is remembered
+- **Per-game storage** - Each game has its own language setting
+- **Uses existing infrastructure** - Leverages the settings table in IndexedDB
+
+### 8.3. Database schema
+
+The language preference is stored in the `settings` table:
+
+```typescript
+{
+  key: 'language',
+  value: 'es', // The language code
+  timestamp: Date,
+  version: '1.0.0'
+}
+```
+
+This is the same table used for other game settings, so no additional database setup is required.
+
+---
+
+## 9. Override UI Translations
+
+Users can override UI component translations by providing them in their resources:
+
+```typescript
+// App.tsx
+import commonEs from './locales/es/common.json';
+import passagesEs from './locales/es/passages.json';
+
+// Optional: custom UI translations
+import uiEs from './locales/es/ui.json';
+import savesEs from './locales/es/saves.json';
+
+await Game.init({
+  gameName: "My Adventure",
+  gameVersion: "1.0.0",
+  i18n: {
+    resources: {
+      es: {
+        common: commonEs,
+        passages: passagesEs,
+        // Override UI translations for Spanish
+        ui: uiEs,
+        saves: savesEs,
+      }
+    }
+  }
+});
+```
+
+**Example `src/locales/es/ui.json`:**
+```json
+{
+  "mainMenu": {
+    "title": "Menú Principal",
+    "newGame": "Nuevo Juego",
+    "continue": "Continuar",
+    "loadGame": "Cargar Juego"
+  }
+}
+```
+
+The core package automatically merges user translations with UI package defaults, giving priority to user translations.
 
 ---
 
@@ -600,11 +820,19 @@ export const CustomInventory = () => {
 ### Phase 1: Core Package
 - [ ] Add `i18next` and `react-i18next` dependencies
 - [ ] Create `packages/core/src/i18n/` directory
-- [ ] Implement `initI18n()` function
-- [ ] Implement `useGameTranslation()` hook
+- [ ] Implement `initI18n()` function with:
+  - [ ] Resource merging (user + UI translations)
+  - [ ] Load saved language preference from database
+  - [ ] Initialize i18next with saved or default language
+- [ ] Implement `useGameTranslation()` hook with:
+  - [ ] Translation function (`t`)
+  - [ ] Language change function with database persistence
+  - [ ] Current language getter
+  - [ ] Available languages getter
 - [ ] Add i18n initialization to `Game.init()`
 - [ ] Export i18n utilities from core package
 - [ ] Add TypeScript types for i18n config
+- [ ] Add language persistence using existing settings table
 
 ### Phase 2: UI Package
 - [ ] Add `i18next` and `react-i18next` dependencies
@@ -614,8 +842,17 @@ export const CustomInventory = () => {
   - [ ] `saves.json` (SaveLoadModal)
   - [ ] `devMode.json` (DevModeDrawer)
   - [ ] `errors.json` (ErrorBoundary)
+  - [ ] `languageSwitcher.json` (LanguageSwitcher component)
 - [ ] Update all UI components to use `useTranslation()`
+- [ ] Create `LanguageSwitcher` component:
+  - [ ] Implement dropdown variant
+  - [ ] Implement buttons variant
+  - [ ] Implement flags variant (optional)
+  - [ ] Add customization props (labels, className, variant)
+  - [ ] Auto-detect available languages from i18n config
+  - [ ] Use semantic theming colors
 - [ ] Export UI translations from `@react-text-game/ui/i18n`
+- [ ] Export `LanguageSwitcher` component from `@react-text-game/ui`
 - [ ] Test all UI components with translations
 
 ### Phase 3: Documentation
@@ -630,6 +867,10 @@ export const CustomInventory = () => {
 ### Phase 4: Testing
 - [ ] Create example game using i18n
 - [ ] Test language switching
+- [ ] Test language preference persistence:
+  - [ ] Change language and refresh page
+  - [ ] Verify language is remembered
+  - [ ] Test with multiple games (each should have separate setting)
 - [ ] Test UI translation overrides
 - [ ] Test passage translations
 - [ ] Verify TypeScript types work correctly
@@ -639,22 +880,54 @@ export const CustomInventory = () => {
 ## 12. Benefits of V1 (Simple Approach)
 
 ✅ **No CLI tooling needed** - uses standard i18next setup
-✅ **Familiar to experienced developers** - standard react-i18next patterns
+✅ **Zero boilerplate** - no manual i18next configuration required
+✅ **Single initialization point** - everything configured in `Game.init()`
+✅ **Automatic UI translations** - core package auto-merges UI translations
+✅ **Language persistence** - user's language choice automatically saved to database
+✅ **Survives refresh** - language preference restored on page reload
 ✅ **Full control** - users manage their translation files
 ✅ **Quick to implement** - mostly integration work, not code generation
 ✅ **Foundation for V2** - establishes i18n architecture for future automation
 ✅ **TypeScript support** - full type safety with i18next
 ✅ **Flexible** - users can use any i18next plugins or backends
+✅ **Override-friendly** - easy to customize UI translations per language
+✅ **Leverages existing infrastructure** - uses existing settings table, no new database schema needed
 
 ---
 
 ## 13. Limitations (Addressed in V2)
 
-⚠️ **Manual setup required** - users must create translation files themselves
+⚠️ **Manual translation file creation** - users must create JSON files themselves
 ⚠️ **Code duplication** - translation keys repeated in code and JSON
 ⚠️ **No auto-extraction** - strings must be manually copied to JSON
+⚠️ **Manual imports** - users must import each translation file
 ⚠️ **MDX not fully integrated** - requires workarounds or manual components
 ⚠️ **No watch mode** - users must manually keep translations in sync
 ⚠️ **No CLI helpers** - no scaffolding or validation tools
 
 These will be addressed in **V2** with automatic code generation and CLI tooling.
+
+---
+
+## 14. Summary: What Users Do vs What Packages Do
+
+### Users Only Need To:
+
+1. **Create translation JSON files** in `src/locales/{lang}/*.json`
+2. **Import their translations** in their app entry point
+3. **Pass translations to `Game.init()`** via the `i18n.resources` option
+
+### Core Package Handles:
+
+1. **All i18next setup** - initialization, configuration, plugins
+2. **UI translations merging** - automatically includes UI package translations
+3. **Language management** - provides hooks and utilities for language switching
+4. **Type safety** - provides TypeScript types for i18n configuration
+
+### UI Package Provides:
+
+1. **Pre-translated components** - all UI components use i18next
+2. **English translations** - default translations for all UI strings
+3. **Extensible namespaces** - users can override any UI translation
+
+This division of responsibilities makes i18n **simple for users** while keeping the **framework powerful and flexible**.
