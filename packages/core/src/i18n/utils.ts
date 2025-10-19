@@ -25,6 +25,12 @@ export async function loadUITranslations(): Promise<
     Record<string, Record<string, object>>
 > {
     try {
+        // UI package is a peer dependency and may not be installed.
+        // This dynamic import will fail gracefully at runtime if UI package is not available.
+        // Using @ts-ignore instead of @ts-expect-error because the error may or may not exist
+        // depending on whether the UI package is built/installed.
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const { uiTranslations } = await import("@react-text-game/ui/i18n");
         return uiTranslations;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
