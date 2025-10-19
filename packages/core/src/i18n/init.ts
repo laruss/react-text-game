@@ -85,13 +85,15 @@ export async function initI18n(config?: I18nConfig) {
     }
 
     // Merge user resources with UI translations
+    // User resources take precedence over UI translations
     const mergedResources: Resource = {};
 
     for (const [lang, namespaces] of Object.entries(resources || {})) {
         mergedResources[lang] = {
-            ...namespaces,
-            // Auto-merge UI translations if available for this language
+            // UI translations as defaults
             ...(uiTranslations[lang] || {}),
+            // User resources can override UI translations
+            ...namespaces,
         };
     }
 

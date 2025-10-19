@@ -24,7 +24,20 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <GameProvider options={{ gameName: "ui-test-app", startPassage: "testMap", isDevMode: true }}>
+                <GameProvider
+                    options={{
+                        gameName: "ui-test-app",
+                        isDevMode: true,
+                        translations: {
+                            defaultLanguage: 'en',
+                            fallbackLanguage: 'en',
+                            resources: {
+                                en: {
+                                    passages: {},
+                                },
+                            }
+                        },
+                }}>
                     {children}
                 </GameProvider>
             </body>

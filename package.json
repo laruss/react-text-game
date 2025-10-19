@@ -30,7 +30,7 @@
         "dev": "turbo run dev",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "check-types": "turbo run check-types",
+        "typecheck": "turbo run check-types",
         "docs": "turbo run dev --filter @react-text-game/docs",
         "docs:build": "turbo run build --filter @react-text-game/docs",
         "changeset": "bunx changeset"

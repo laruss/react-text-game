@@ -1,3 +1,5 @@
+"use client";
+
 import { useRestartGame } from "@react-text-game/core/saves";
 import { twMerge } from "tailwind-merge";
 
