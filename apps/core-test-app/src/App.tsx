@@ -1,9 +1,11 @@
 import {
     Game,
+    Story,
     useCurrentPassage,
     useGameEntity,
     useGameIsStarted,
 } from "@react-text-game/core";
+import { useGameTranslation } from "@react-text-game/core/i18n";
 import {
     useExportSaves,
     useImportSaves,
@@ -19,6 +21,7 @@ import { environment } from "@/game/entities/environment";
 export const App = () => {
     const env = useGameEntity(environment);
     const plr = useGameEntity(player);
+    const { changeLanguage, currentLanguage, languages } = useGameTranslation();
     const restart = useRestartGame();
     const currentPassage = useCurrentPassage();
     const isStarted = useGameIsStarted();
@@ -32,6 +35,19 @@ export const App = () => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <div>
+                Language:
+                <select
+                    value={currentLanguage}
+                    onChange={(e) => changeLanguage(e.target.value)}
+                >
+                    {languages.map((lang) => (
+                        <option key={lang} value={lang}>
+                            {lang}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <div>
                 <button onClick={() => {
                     setIsSavesOpen(state => !state);
@@ -113,6 +129,9 @@ export const App = () => {
                 <span>
                     {currentPassage?.id || "null"}
                 </span>
+                <div style={{ margin: 30 }} key={currentLanguage}>
+                    {currentPassage ? JSON.stringify((currentPassage as Story).display()): null}
+                </div>
             </div>
             <div style={{ display: "flex", gap: "8px" }}>
                 <span>
@@ -127,7 +146,15 @@ export const App = () => {
                             Game.jumpTo("testMap");
                         }}
                     >
-                        start
+                        start (map)
+                    </button>
+                    <button
+                        onClick={() => {
+                            Game.jumpTo("testStory");
+                        }}
+                        style={{ marginLeft: '10px' }}
+                    >
+                        start (story)
                     </button>
                 </Activity>
             </div>

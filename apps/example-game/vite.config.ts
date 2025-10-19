@@ -21,4 +21,11 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src"),
         },
     },
+    build: {
+        rollupOptions: {
+            // Mark UI package as external - it's a peer dependency that may not be installed
+            // The dynamic import in core will fail gracefully if UI is not available
+            external: (id) => id.startsWith("@react-text-game/ui/"),
+        },
+    },
 });

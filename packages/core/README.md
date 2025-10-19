@@ -11,6 +11,7 @@ A powerful, reactive text-based game engine built for React applications. This p
 - **Factory-Based Entities** - Plain-object factories for beginners with class-based escape hatches
 - **Type-Safe** - Full TypeScript support with comprehensive types
 - **React Hooks** - Built-in hooks for seamless React integration
+- **Internationalization** - i18next-powered translations with automatic language persistence
 
 ## Installation
 
@@ -35,7 +36,21 @@ import { Game, createEntity, newStory } from '@react-text-game/core';
 
 // IMPORTANT: Initialize the game first
 await Game.init({
-  // your game options
+  gameName: 'My Adventure',
+  translations: {
+    defaultLanguage: 'en',
+    fallbackLanguage: 'en',
+    resources: {
+      en: {
+        passages: { intro: 'Welcome to the Game' },
+        common: { save: 'Save', load: 'Load' }
+      },
+      ru: {
+        passages: { intro: 'Добро пожаловать в игру' }
+      }
+    }
+  },
+  // ...other options
 });
 
 // Create a game entity with the factory (recommended)
@@ -81,6 +96,88 @@ Game.jumpTo(introStory);
 ```
 
 > Prefer writing classes? Jump to [Advanced Entities](#advanced-entities-basegameobject) for a drop-in replacement using inheritance.
+
+## Internationalization
+
+The core engine ships with first-class i18n based on `i18next` and `react-i18next`. Language preferences are persisted to the save database and automatically restored on load.
+
+### Configuring translations
+
+Pass an `I18nConfig` via the `translations` field when you call `Game.init()`:
+
+```ts
+import type { I18nConfig } from '@react-text-game/core/i18n';
+
+const translations: I18nConfig = {
+  defaultLanguage: 'en',
+  fallbackLanguage: 'en',
+  debug: false,
+  resources: {
+    en: {
+      passages: { intro: 'Welcome to the game' },
+      common: { save: 'Save', load: 'Load' }
+    },
+    es: {
+      passages: { intro: '¡Bienvenido al juego!' }
+    }
+  },
+  modules: []
+};
+
+await Game.init({
+  gameName: 'My Adventure',
+  translations,
+  // ...other options
+});
+```
+
+- `resources` contains your language namespaces. Users normally keep them in `src/locales/{lang}/{namespace}.json` before importing into the app entry.
+- The engine reads any modules you supply (e.g. `i18next-browser-languagedetector`) and registers them after `initReactI18next`.
+- If you omit `translations`, the engine falls back to an English-only default config.
+
+A saved language preference is loaded from the settings store before i18next initializes, so players continue in the language they selected.
+
+### Using translations in React
+
+Use the `useGameTranslation` hook from `@react-text-game/core/i18n`:
+
+```tsx
+import { useGameTranslation } from '@react-text-game/core/i18n';
+
+export function LanguageSwitcher() {
+  const { t, languages, currentLanguage, changeLanguage } = useGameTranslation('common');
+
+  return (
+    <div>
+      <p>{t('currentLanguage', { language: currentLanguage })}</p>
+      <select value={currentLanguage} onChange={(event) => changeLanguage(event.target.value)}>
+        {languages.map((lang) => (
+          <option key={lang} value={lang}>
+            {lang}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+```
+
+The hook filters out the `cimode` debug language unless you enable `debug` and persists language changes via the save system.
+
+### Outside React components
+
+For game logic or utilities, grab a namespace-specific translator with `getGameTranslation`:
+
+```ts
+import { getGameTranslation } from '@react-text-game/core/i18n';
+
+const t = getGameTranslation('passages');
+const intro = t('forest.description');
+```
+
+### UI package integration
+
+If the optional `@react-text-game/ui` package is installed, the core engine automatically loads its bundled namespaces and merges them with your resources. Your translations override the UI defaults when both provide the same keys, and the engine happily runs without the UI package when you ship a custom interface.
 
 ## Core Concepts
 

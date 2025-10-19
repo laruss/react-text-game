@@ -14,7 +14,8 @@
         "serve": "docusaurus serve",
         "write-translations": "docusaurus write-translations",
         "write-heading-ids": "docusaurus write-heading-ids",
-        "typecheck": "tsc"
+        "typecheck": "tsc",
+        "check-types": "tsc --noEmit"
     },
     "dependencies": {
         "@docusaurus/core": "3.9.1",
