@@ -1,12 +1,12 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "description": "A powerful React-based text game engine with reactive state management, passage-based navigation, and persistent save system for building interactive narrative experiences",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": "github:laruss/react-text-game",
-    "homepage": "https://laruss.github.io/react-text-game/",
+    "homepage": "https://reacttextgame.dev/",
     "private": false,
     "type": "module",
     "scripts": {

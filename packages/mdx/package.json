@@ -1,12 +1,12 @@
 {
     "name": "@react-text-game/mdx",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "MDX support for React Text Game",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": "github:laruss/react-text-game",
-    "homepage": "https://laruss.github.io/react-text-game/",
+    "homepage": "https://reacttextgame.dev/",
     "private": false,
     "type": "module",
     "scripts": {

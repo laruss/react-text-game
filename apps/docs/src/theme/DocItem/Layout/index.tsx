@@ -17,7 +17,7 @@ export default function LayoutWrapper(props: Props) {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://laruss.github.io/react-text-game/',
+        item: 'https://reacttextgame.dev/',
       },
     ];
 
@@ -30,7 +30,7 @@ export default function LayoutWrapper(props: Props) {
     pathParts.forEach((part, index) => {
       const position = index + 2;
       const isLast = index === pathParts.length - 1;
-      const url = `https://laruss.github.io/react-text-game/${pathParts.slice(0, index + 1).join('/')}`;
+      const url = `https://reacttextgame.dev/${pathParts.slice(0, index + 1).join('/')}`;
 
       items.push({
         '@type': 'ListItem',
