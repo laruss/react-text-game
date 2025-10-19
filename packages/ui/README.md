@@ -4,6 +4,13 @@ UI components library for react-text-game built with React 19, TypeScript, and T
 
 > Install this package inside your own React project. It depends on `@react-text-game/core` for game state and Tailwind CSS v4 for styling tokens.
 
+## Features
+
+- Drop-in game shell: main menu, passage renderer, save/load modal, and dev helpers
+- Tailwind CSS v4 theme tokens for full visual customization
+- Language-aware UI copy powered by i18next with persistent language switching
+- React hooks and context utilities that integrate directly with `@react-text-game/core`
+
 ## Installation
 
 ### 1. Install and configure Tailwind CSS
@@ -56,6 +63,66 @@ export function App() {
 ```
 
 With those two components in place, the UI handles menus, passage rendering, and save/load modals. You can immediately start defining entities and passages through `@react-text-game/core`.
+
+## Internationalization
+
+The UI package ships with an `en` translation bundle for the `ui` namespace and exposes it through `@react-text-game/ui/i18n`. When you call `Game.init`, the core engine automatically merges these strings with your game resources and persists the active language for every player.
+
+### Default UI copy
+
+```ts
+import { uiTranslations } from '@react-text-game/ui/i18n';
+
+console.log(uiTranslations.en.ui.mainMenu.title); // "Main Menu"
+```
+
+Components such as `MainMenu`, `SaveLoadModal`, and `ErrorBoundary` already call `useTranslation('ui')`, so English works out of the box. You only need to add resources when you want to localize beyond the default language or override labels.
+
+### Adding more languages
+
+Create your own `ui` namespace JSON file per language and pass it alongside your story translations:
+
+```ts
+import uiEs from './locales/es/ui.json';
+import passagesEs from './locales/es/passages.json';
+
+await Game.init({
+  gameName: 'My Text Adventure',
+  translations: {
+    defaultLanguage: 'en',
+    fallbackLanguage: 'en',
+    resources: {
+      es: {
+        ui: uiEs,
+        passages: passagesEs,
+      },
+    },
+  },
+});
+```
+
+- Any namespace you provide (including `ui`) overrides the defaults for that language.
+- If you omit a translation key, i18next falls back to the language defined in `fallbackLanguage`.
+- Because the core engine persists language preference in its settings store, players keep their choice on reload.
+
+### Language toggle component
+
+Use the built-in `LanguageToggle` to expose language switching in your UI. It relies on `useGameTranslation`, so language changes propagate everywhere.
+
+```tsx
+import { LanguageToggle } from '@react-text-game/ui';
+
+function Header() {
+  return (
+    <header className="flex justify-end">
+      <LanguageToggle
+        languageNames={{ en: 'English', es: 'Español' }}
+        showCode
+      />
+    </header>
+  );
+}
+```
 
 ## Development
 

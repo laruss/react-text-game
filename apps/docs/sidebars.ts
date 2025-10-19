@@ -19,6 +19,7 @@ const sidebars: SidebarsConfig = {
     'getting-started',
     'core-concepts',
     'mdx-integration',
+    'i18n',
     'migrations',
   ],
 };

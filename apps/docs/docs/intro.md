@@ -143,6 +143,7 @@ Game.jumpTo(intro);
 
 - [**Getting Started**](/getting-started) - Installation and setup guide
 - [**Core Concepts**](/core-concepts) - Learn the fundamental concepts
+- [**Internationalization**](/i18n) - Configure translations, language switching, and i18next plugins
 - [**Core API**](/api/core/) - Complete API reference for the core package
 - [**UI API**](/api/ui/) - Complete API reference for the UI package
 

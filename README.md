@@ -28,6 +28,7 @@ Whether you're building a visual novel, interactive fiction, or educational narr
 - **Multiple Passage Types** - Story passages, Interactive Maps, and custom Widget passages
 - **Comprehensive Save System** - IndexedDB persistence with encrypted export/import
 - **Themeable UI Components** - Tailwind CSS v4 with semantic color tokens
+- **Internationalization** - i18next-powered translations with persistent language switching
 - **Type-Safe** - Full TypeScript support with detailed JSDoc documentation
 - **Factory-Based Entities** - Plain-object factories with optional class-based escape hatches
 - **React Integration** - Built-in hooks and React 19 support
@@ -101,7 +102,18 @@ import '@react-text-game/ui/styles';
 // Initialize the game
 await Game.init({
   gameId: 'my-game',
-  gameTitle: 'My Adventure'
+  gameName: 'My Adventure',
+  translations: {
+    defaultLanguage: 'en',
+    fallbackLanguage: 'en',
+    resources: {
+      en: {
+        passages: {
+          intro: 'Welcome to the Game'
+        }
+      }
+    }
+  }
 });
 
 // Create a game entity (factory-first approach)
@@ -150,6 +162,30 @@ Game.jumpTo(intro);
 ```
 
 > Prefer class-based entities? Extend `BaseGameObject` directly—the factory and class APIs work side by side.
+
+## Internationalization
+
+React Text Game ships with i18next baked into the core engine and the UI package. The `translations` option you pass to `Game.init` accepts the same structure as i18next resources, and the engine automatically persists the player’s language choice in the save database.
+
+- Core exports `useGameTranslation` and `getGameTranslation` so you can localize passages, UI, and game logic.
+- The optional UI package exposes a `LanguageToggle` component and contributes default English strings under the `ui` namespace; your resources override them per language.
+- Supported language codes are derived from your resources, and missing keys fall back to the language you declare in `fallbackLanguage`.
+
+```tsx
+import { useGameTranslation } from '@react-text-game/core/i18n';
+import { LanguageToggle } from '@react-text-game/ui';
+
+function StatusBar() {
+  const { t, currentLanguage } = useGameTranslation('common');
+
+  return (
+    <header className="flex items-center gap-4">
+      <span>{t('status.currentLanguage', { language: currentLanguage })}</span>
+      <LanguageToggle />
+    </header>
+  );
+}
+```
 
 ## Documentation
 
