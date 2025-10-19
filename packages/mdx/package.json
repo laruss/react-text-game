@@ -13,6 +13,7 @@
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
         "test": "bun test",
+        "check-types": "tsc --noEmit",
         "lint": "eslint .",
         "prepack": "rm -rf dist && bun run build",
         "test-pack": "npm pack --dry-run && bunx publint"
