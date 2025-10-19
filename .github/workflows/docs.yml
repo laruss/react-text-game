@@ -47,4 +47,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: apps/docs/build
           publish_branch: docs
-          cname: false
+          cname: reacttextgame.dev
