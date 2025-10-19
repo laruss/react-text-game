@@ -18,7 +18,7 @@ const config: Config = {
     url: "https://laruss.github.io",
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: "/react-text-game/",
+    baseUrl: "/",
 
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
@@ -43,7 +43,7 @@ const config: Config = {
                 rel: "icon",
                 type: "image/png",
                 sizes: "48x48",
-                href: "/react-text-game/img/favicon-48x48.png",
+                href: "/img/favicon-48x48.png",
             },
         },
         {
@@ -52,7 +52,7 @@ const config: Config = {
                 rel: "icon",
                 type: "image/png",
                 sizes: "192x192",
-                href: "/react-text-game/img/favicon-192x192.png",
+                href: "/img/favicon-192x192.png",
             },
         },
         // Apple touch icon
@@ -61,7 +61,7 @@ const config: Config = {
             attributes: {
                 rel: "apple-touch-icon",
                 sizes: "192x192",
-                href: "/react-text-game/img/favicon-192x192.png",
+                href: "/img/favicon-192x192.png",
             },
         },
         // WebSite structured data with search functionality
@@ -74,13 +74,13 @@ const config: Config = {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 name: "React Text Game",
-                url: "https://laruss.github.io/react-text-game/",
+                url: "https://reacttextgame.dev/",
                 potentialAction: {
                     "@type": "SearchAction",
                     target: {
                         "@type": "EntryPoint",
                         urlTemplate:
-                            "https://laruss.github.io/react-text-game/?q={search_term_string}",
+                            "https://reacttextgame.dev/?q={search_term_string}",
                     },
                     "query-input": "required name=search_term_string",
                 },
@@ -100,7 +100,7 @@ const config: Config = {
                 operatingSystem: "Web Browser",
                 description:
                     "A powerful, reactive text-based game engine for React applications. Create interactive narrative experiences with support for story passages, interactive maps, and comprehensive state management.",
-                url: "https://laruss.github.io/react-text-game/",
+                url: "https://reacttextgame.dev/",
                 author: {
                     "@type": "Person",
                     name: "laruss",
@@ -129,7 +129,7 @@ const config: Config = {
                     sidebarPath: "./sidebars.ts",
                     routeBasePath: "/",
                     editUrl:
-                        "https://github.com/laruss/react-text-game/tree/main/apps/docs/",
+                        "https://github.com/laruss/tree/main/apps/docs/",
                 },
                 blog: false,
                 theme: {
@@ -176,7 +176,7 @@ const config: Config = {
             {
                 name: "twitter:image",
                 content:
-                    "https://laruss.github.io/react-text-game/img/og-image.webp",
+                    "https://reacttextgame.dev/img/og-image.webp",
             },
             { property: "og:type", content: "website" },
             {
@@ -191,12 +191,12 @@ const config: Config = {
             },
             {
                 property: "og:url",
-                content: "https://laruss.github.io/react-text-game/",
+                content: "https://reacttextgame.dev/",
             },
             {
                 property: "og:image",
                 content:
-                    "https://laruss.github.io/react-text-game/img/og-image.webp",
+                    "https://reacttextgame.dev/img/og-image.webp",
             },
             { property: "og:image:width", content: "1200" },
             { property: "og:image:height", content: "630" },
@@ -235,7 +235,7 @@ const config: Config = {
                     label: "MDX API",
                 },
                 {
-                    href: "https://github.com/laruss/react-text-game",
+                    href: "https://github.com/laruss",
                     label: "GitHub",
                     position: "right",
                 },
@@ -291,11 +291,11 @@ const config: Config = {
                     items: [
                         {
                             label: "GitHub",
-                            href: "https://github.com/laruss/react-text-game",
+                            href: "https://github.com/laruss",
                         },
                         {
                             label: "Issues",
-                            href: "https://github.com/laruss/react-text-game/issues",
+                            href: "https://github.com/laruss/issues",
                         },
                     ],
                 },
