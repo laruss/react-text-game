@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://laruss.github.io/react-text-game/sitemap.xml
+Sitemap: https://reacttextgame.dev/sitemap.xml
