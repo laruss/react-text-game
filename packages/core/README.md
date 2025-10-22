@@ -7,6 +7,7 @@ A powerful, reactive text-based game engine built for React applications. This p
 - **Reactive State Management** - Built on Valtio for automatic UI updates
 - **Multiple Passage Types** - Story, Interactive Map, and Widget passages
 - **Flexible Save System** - JSONPath-based storage with auto-save support
+- **Audio System** - Comprehensive audio support with reactive state, persistence, and global controls
 - **Entity Registry** - Automatic registration and proxying of game objects
 - **Factory-Based Entities** - Plain-object factories for beginners with class-based escape hatches
 - **Type-Safe** - Full TypeScript support with comprehensive types
@@ -96,6 +97,394 @@ Game.jumpTo(introStory);
 ```
 
 > Prefer writing classes? Jump to [Advanced Entities](#advanced-entities-basegameobject) for a drop-in replacement using inheritance.
+
+## Audio System
+
+The core engine includes a comprehensive audio system with reactive state management, automatic persistence, and global controls. Built on top of the Web Audio API with Valtio for reactive state, it provides an easy-to-use interface for managing background music, sound effects, and voice-over audio.
+
+### Features
+
+- **Reactive State** - Valtio-powered reactive state for seamless React integration
+- **Automatic Persistence** - Audio state (volume, position, playing status) saved automatically
+- **Global Controls** - Master volume, mute all, pause/resume all tracks
+- **Fade Effects** - Built-in fade in/out for smooth transitions
+- **Multiple Tracks** - Independent control of multiple audio files simultaneously
+- **Browser-friendly** - Handles autoplay policies and user interaction requirements
+- **Type-Safe** - Full TypeScript support with comprehensive types
+
+### Quick Start
+
+```typescript
+import { createAudio, AudioManager } from '@react-text-game/core/audio';
+
+// Create an audio track
+const bgMusic = createAudio('/audio/background.mp3', {
+  id: 'bg-music',
+  volume: 0.7,
+  loop: true,
+});
+
+// Play the track
+await bgMusic.play();
+
+// Control individual tracks
+bgMusic.setVolume(0.5);
+bgMusic.pause();
+bgMusic.resume();
+bgMusic.stop();
+
+// Global controls
+AudioManager.setMasterVolume(0.8);
+AudioManager.muteAll();
+AudioManager.pauseAll();
+```
+
+### Creating Audio Tracks
+
+Use the `createAudio` factory function to create audio tracks:
+
+```typescript
+import { createAudio } from '@react-text-game/core/audio';
+
+// Basic audio track
+const sfx = createAudio('/audio/click.mp3');
+
+// With options
+const music = createAudio('/audio/theme.mp3', {
+  id: 'theme-music',        // Required for persistence
+  volume: 0.6,              // 0.0 to 1.0 (default: 1.0)
+  loop: true,               // Auto-loop (default: false)
+  playbackRate: 1.0,        // Playback speed (default: 1.0)
+  muted: false,             // Start muted (default: false)
+  autoPlay: false,          // Auto-play on creation (default: false)
+  preload: 'metadata',      // 'none', 'metadata', or 'auto' (default: 'metadata')
+});
+```
+
+### Audio Track Controls
+
+Each audio track provides comprehensive playback controls:
+
+```typescript
+// Playback control
+await audio.play();           // Start playback (returns Promise)
+audio.pause();                // Pause playback
+audio.resume();               // Resume from pause
+audio.stop();                 // Stop and reset to beginning
+
+// Volume and settings
+audio.setVolume(0.5);         // Set volume (0.0 to 1.0)
+audio.setLoop(true);          // Enable/disable looping
+audio.setPlaybackRate(1.5);   // Set playback speed
+audio.setMuted(true);         // Mute/unmute
+
+// Seeking
+audio.seek(30);               // Seek to 30 seconds
+
+// Fade effects
+await audio.fadeIn(2000);     // Fade in over 2 seconds
+await audio.fadeOut(1500);    // Fade out over 1.5 seconds
+
+// State and persistence
+const state = audio.getState(); // Get reactive state
+audio.save();                 // Save state to storage
+audio.load();                 // Load state from storage
+
+// Cleanup
+audio.dispose();              // Remove and clean up
+```
+
+### Reactive State
+
+Audio tracks use Valtio for reactive state management, making them perfect for React integration:
+
+```typescript
+const audio = createAudio('/audio/music.mp3', { id: 'music' });
+
+// Get reactive state
+const state = audio.getState();
+
+// Access state properties
+console.log(state.isPlaying);    // boolean
+console.log(state.isPaused);     // boolean
+console.log(state.isStopped);    // boolean
+console.log(state.currentTime);  // number (seconds)
+console.log(state.duration);     // number (seconds)
+console.log(state.volume);       // number (0.0 to 1.0)
+console.log(state.loop);         // boolean
+console.log(state.playbackRate); // number
+console.log(state.muted);        // boolean
+```
+
+### Global Audio Manager
+
+The `AudioManager` provides global controls for all registered audio tracks:
+
+```typescript
+import { AudioManager } from '@react-text-game/core/audio';
+
+// Master volume control
+AudioManager.setMasterVolume(0.5);           // Set master volume (0.0 to 1.0)
+const volume = AudioManager.getMasterVolume(); // Get master volume
+
+// Global playback control
+AudioManager.pauseAll();   // Pause all playing tracks
+AudioManager.resumeAll();  // Resume all paused tracks
+AudioManager.stopAll();    // Stop all tracks
+
+// Global mute control
+AudioManager.muteAll();    // Mute all tracks
+AudioManager.unmuteAll();  // Unmute all tracks
+
+// Track management
+const tracks = AudioManager.getAllTracks();           // Get all registered tracks
+const music = AudioManager.getTrackById('bg-music'); // Get specific track by ID
+
+// Cleanup
+AudioManager.disposeAll(); // Dispose all tracks
+```
+
+**Master Volume Behavior:**
+- Master volume is a multiplier applied to all track volumes
+- Does not modify individual track volume settings
+- Example: Track at 0.8 volume with 0.5 master = 0.4 effective volume
+- Useful for game-wide volume sliders in settings
+
+### React Integration
+
+The audio system includes React hooks for seamless component integration:
+
+#### useAudio Hook
+
+Monitor individual audio track state with automatic re-renders:
+
+```tsx
+import { createAudio } from '@react-text-game/core/audio';
+import { useAudio } from '@react-text-game/core';
+
+const bgMusic = createAudio('/audio/background.mp3', {
+  id: 'bg-music',
+  loop: true,
+});
+
+function MusicPlayer() {
+  const audioState = useAudio(bgMusic);
+
+  return (
+    <div>
+      <p>Status: {audioState.isPlaying ? 'Playing' : 'Stopped'}</p>
+      <p>Time: {audioState.currentTime.toFixed(1)}s / {audioState.duration.toFixed(1)}s</p>
+      <p>Volume: {(audioState.volume * 100).toFixed(0)}%</p>
+
+      <button onClick={() => bgMusic.play()}>Play</button>
+      <button onClick={() => bgMusic.pause()}>Pause</button>
+      <button onClick={() => bgMusic.stop()}>Stop</button>
+
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value={audioState.volume}
+        onChange={(e) => bgMusic.setVolume(parseFloat(e.target.value))}
+      />
+    </div>
+  );
+}
+```
+
+#### useAudioManager Hook
+
+Access global audio controls in React components:
+
+```tsx
+import { useAudioManager } from '@react-text-game/core';
+
+function AudioSettings() {
+  const audioManager = useAudioManager();
+
+  return (
+    <div>
+      <h2>Audio Settings</h2>
+
+      <label>
+        Master Volume: {(audioManager.masterVolume * 100).toFixed(0)}%
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={audioManager.masterVolume}
+          onChange={(e) => audioManager.setMasterVolume(parseFloat(e.target.value))}
+        />
+      </label>
+
+      <div>
+        <button onClick={audioManager.muteAll}>Mute All</button>
+        <button onClick={audioManager.unmuteAll}>Unmute All</button>
+        <button onClick={audioManager.pauseAll}>Pause All</button>
+        <button onClick={audioManager.resumeAll}>Resume All</button>
+      </div>
+
+      <p>Muted: {audioManager.isMuted ? 'Yes' : 'No'}</p>
+      <p>Active Tracks: {audioManager.getAllTracks().length}</p>
+    </div>
+  );
+}
+```
+
+### Automatic Persistence
+
+Audio tracks with an `id` automatically persist their state:
+
+```typescript
+// Create audio with ID for persistence
+const music = createAudio('/audio/theme.mp3', {
+  id: 'theme-music',
+  volume: 0.7,
+  loop: true,
+});
+
+// State is automatically saved when it changes
+await music.play();
+music.setVolume(0.5);
+// State saved automatically
+
+// On game restart/reload
+const music = createAudio('/audio/theme.mp3', {
+  id: 'theme-music', // Same ID
+});
+music.load(); // Restores volume, position, playing state
+```
+
+**What Gets Persisted:**
+- Volume level
+- Loop setting
+- Playback rate
+- Muted status
+- Current playback position
+- Playing/paused state
+
+**Note:** Audio without an ID will not persist across page reloads.
+
+### Common Patterns
+
+#### Background Music with Crossfade
+
+```typescript
+const oldMusic = AudioManager.getTrackById('current-music');
+const newMusic = createAudio('/audio/new-theme.mp3', {
+  id: 'current-music',
+  loop: true,
+});
+
+// Crossfade between tracks
+if (oldMusic) {
+  await Promise.all([
+    oldMusic.fadeOut(1000),
+    newMusic.fadeIn(1000)
+  ]);
+  oldMusic.dispose();
+}
+```
+
+#### Sound Effects Pool
+
+```typescript
+// Create sound effect without ID (no persistence needed)
+function playSoundEffect(src: string) {
+  const sfx = createAudio(src, {
+    volume: 0.8,
+  });
+
+  sfx.play();
+
+  // Auto-cleanup when finished
+  sfx.audioElement.addEventListener('ended', () => {
+    sfx.dispose();
+  });
+}
+
+playSoundEffect('/audio/click.mp3');
+```
+
+#### Pause Audio During Dialogue
+
+```typescript
+function showDialogue() {
+  // Pause background music
+  AudioManager.pauseAll();
+
+  // Show dialogue...
+
+  // Resume when done
+  AudioManager.resumeAll();
+}
+```
+
+### Browser Autoplay Policies
+
+Modern browsers restrict audio autoplay without user interaction. The audio system handles this gracefully:
+
+```typescript
+const music = createAudio('/audio/theme.mp3', {
+  autoPlay: true, // May be blocked by browser
+});
+
+// Autoplay failures are logged but don't throw errors
+// Manually play after user interaction:
+document.addEventListener('click', async () => {
+  await music.play(); // Will work after user interaction
+}, { once: true });
+```
+
+### TypeScript Types
+
+```typescript
+import type {
+  AudioOptions,
+  AudioState,
+  AudioSaveState,
+} from '@react-text-game/core/audio';
+
+// All types include comprehensive JSDoc documentation
+```
+
+### API Reference
+
+**createAudio(src, options?)**
+- `src: string` - Audio file URL
+- `options?: AudioOptions` - Configuration options
+- Returns: `AudioTrack`
+
+**AudioTrack Methods:**
+- `play(): Promise<void>` - Start playback
+- `pause(): void` - Pause playback
+- `resume(): void` - Resume from pause
+- `stop(): void` - Stop and reset
+- `setVolume(volume: number): void` - Set volume (0.0-1.0)
+- `setLoop(loop: boolean): void` - Enable/disable looping
+- `setPlaybackRate(rate: number): void` - Set playback speed
+- `setMuted(muted: boolean): void` - Mute/unmute
+- `seek(time: number): void` - Seek to time in seconds
+- `fadeIn(duration?: number): Promise<void>` - Fade in effect
+- `fadeOut(duration?: number): Promise<void>` - Fade out effect
+- `getState(): AudioState` - Get reactive state
+- `save(): void` - Save state to storage
+- `load(): void` - Load state from storage
+- `dispose(): void` - Clean up and remove
+
+**AudioManager Methods:**
+- `setMasterVolume(volume: number): void` - Set master volume
+- `getMasterVolume(): number` - Get master volume
+- `muteAll(): void` - Mute all tracks
+- `unmuteAll(): void` - Unmute all tracks
+- `pauseAll(): void` - Pause all playing tracks
+- `resumeAll(): void` - Resume all paused tracks
+- `stopAll(): void` - Stop all tracks
+- `getAllTracks(): AudioTrack[]` - Get all tracks
+- `getTrackById(id: string): AudioTrack | undefined` - Get track by ID
+- `disposeAll(): void` - Dispose all tracks
 
 ## Internationalization
 

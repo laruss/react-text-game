@@ -27,6 +27,7 @@ Whether you're building a visual novel, interactive fiction, or educational narr
 - **Reactive State Management** - Built on Valtio for automatic UI updates
 - **Multiple Passage Types** - Story passages, Interactive Maps, and custom Widget passages
 - **Comprehensive Save System** - IndexedDB persistence with encrypted export/import
+- **Audio System** - Full-featured audio management with reactive state, persistence, and global controls
 - **Themeable UI Components** - Tailwind CSS v4 with semantic color tokens
 - **Internationalization** - i18next-powered translations with persistent language switching
 - **Type-Safe** - Full TypeScript support with detailed JSDoc documentation
@@ -46,6 +47,7 @@ The core game engine providing:
 - Reactive state management (Valtio)
 - JSONPath-based storage system
 - Story and Interactive Map passages
+- Audio system with reactive state and persistence
 - Save/load system with auto-save
 - React hooks for game integration
 
