@@ -9,6 +9,9 @@
     "homepage": "https://reacttextgame.dev/",
     "private": false,
     "type": "module",
+    "bin": {
+        "rtg-observer": "./dist/game-observer/cli.js"
+    },
     "scripts": {
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
@@ -28,6 +31,10 @@
         "dist"
     ],
     "dependencies": {
+        "@typescript-eslint/typescript-estree": "^8.46.2",
+        "gray-matter": "^4.0.3",
+        "glob": "^11.0.3",
+        "commander": "^14.0.1"
     },
     "peerDependencies": {
         "typescript": "^5",

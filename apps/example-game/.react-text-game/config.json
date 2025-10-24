@@ -1,0 +1,10 @@
+{
+  "passageDirectories": [
+    "src"
+  ],
+  "excludePatterns": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/node_modules/**"
+  ]
+}

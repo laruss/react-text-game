@@ -1,0 +1,39 @@
+{
+  "passages": {
+    "testStory": {
+      "id": "testStory",
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "anotherStory": {
+      "id": "anotherStory",
+      "position": {
+        "x": 0,
+        "y": 50
+      }
+    },
+    "mdxTestInclude": {
+      "id": "mdxTestInclude",
+      "position": {
+        "x": 50,
+        "y": 50
+      }
+    },
+    "testMap": {
+      "id": "testMap",
+      "position": {
+        "x": 100,
+        "y": 50
+      }
+    },
+    "testMap2": {
+      "id": "testMap2",
+      "position": {
+        "x": 150,
+        "y": 50
+      }
+    }
+  }
+}
