@@ -25,6 +25,19 @@ const DEFAULT_CONFIG: UtilsConfig = {
 
 /**
  * Default passages metadata (empty)
+ *
+ * Example passage structure:
+ * {
+ *   "passages": {
+ *     "example-passage": {
+ *       "id": "example-passage",
+ *       "source": "code",  // 'code' for user-created, 'tool' for tool-created
+ *       "position": { "x": 0, "y": 0 },
+ *       "tags": ["example"],
+ *       "description": "An example passage"
+ *     }
+ *   }
+ * }
  */
 const DEFAULT_PASSAGES_METADATA: PassagesMetadata = {
 	passages: {},

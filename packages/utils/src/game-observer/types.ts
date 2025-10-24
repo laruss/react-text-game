@@ -14,6 +14,8 @@ export interface UtilsConfig {
 export interface PassageExtendedMetadata {
   /** Reference to passage ID */
   id: string;
+  /** Source of passage creation: 'code' = user-created in source files (read-only in UI), 'tool' = created by utils tools (editable in UI) */
+  source: 'code' | 'tool';
   /** User-defined categories/tags */
   tags?: string[];
   /** Passage description */

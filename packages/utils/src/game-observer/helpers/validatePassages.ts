@@ -73,6 +73,23 @@ function validatePassageMetadata(key: string, value: unknown): void {
 		);
 	}
 
+	// Check if source exists and is valid
+	if (!("source" in metadata)) {
+		throw new Error(`Invalid passage metadata for '${key}': missing 'source' property`);
+	}
+
+	if (typeof metadata.source !== "string") {
+		throw new Error(
+			`Invalid passage metadata for '${key}': 'source' must be a string`,
+		);
+	}
+
+	if (metadata.source !== "code" && metadata.source !== "tool") {
+		throw new Error(
+			`Invalid passage metadata for '${key}': 'source' must be either 'code' or 'tool', got '${metadata.source}'`,
+		);
+	}
+
 	// Validate optional tags property
 	if ("tags" in metadata && metadata.tags !== undefined) {
 		if (!Array.isArray(metadata.tags)) {

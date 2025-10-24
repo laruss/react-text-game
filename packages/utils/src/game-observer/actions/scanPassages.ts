@@ -22,6 +22,7 @@ export interface PassageSourceData {
 	title?: string;
 	filePath: string;
 	lineNumber: number;
+	source: "code"; // All scanned passages are marked as 'code' (user-created)
 }
 
 /**
@@ -242,6 +243,7 @@ async function parseFileForPassages(
 								type: passageType,
 								filePath,
 								lineNumber,
+								source: "code", // Mark as user-created
 							});
 						}
 					}
@@ -412,6 +414,7 @@ export async function scanPassages(
 
 				newMetadata.passages[id] = {
 					id,
+					source: "code", // Mark scanned passages as user-created
 					position: lastPosition,
 				};
 				added++;

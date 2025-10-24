@@ -41,7 +41,9 @@ Create a comprehensive system for discovering, analyzing, and visualizing game p
   - `id` (required)
   - `type` (story, interactiveMap, widget)
   - `title` (optional, from MDX frontmatter or options)
+  - `source` (always 'code' for scanned passages)
 - Store extended metadata separately in `.react-text-game/metadata/` folder:
+  - `source` ('code' for user-created, 'tool' for utility-created)
   - `tags` (user-defined categories)
   - `description` (passage description)
   - `position` (visual editor position)
@@ -56,11 +58,13 @@ interface PassageSourceData {
   title?: string;
   filePath: string;
   lineNumber: number;
+  source: 'code' | 'tool'; // Determines if passage is editable in UI
 }
 
 // Extended metadata stored separately
 interface PassageExtendedMetadata {
   id: string; // Reference to passage
+  source: 'code' | 'tool'; // 'code' = user-created (read-only in UI), 'tool' = tool-created (editable in UI)
   tags?: string[];
   description?: string;
   position?: { x: number; y: number }; // For visual editor
@@ -69,6 +73,7 @@ interface PassageExtendedMetadata {
 
 // Combined view for UI
 interface PassageMetadata extends PassageSourceData {
+  source: 'code' | 'tool'; // Determines editability in UI tools
   tags?: string[];
   description?: string;
   position?: { x: number; y: number };
@@ -88,6 +93,7 @@ class PassageScanner {
 
   // Default: scans src/ if no config provided
   // With config: scans only specified directories
+  // All scanned passages from code are marked as source: 'code'
 }
 
 // Metadata Manager
@@ -137,6 +143,7 @@ class MetadataManager {
   "passages": {
     "intro": {
       "id": "intro",
+      "source": "code",
       "tags": ["prologue", "tutorial"],
       "description": "Opening scene introducing the player to the world",
       "position": { "x": 100, "y": 100 },
@@ -147,6 +154,7 @@ class MetadataManager {
     },
     "village": {
       "id": "village",
+      "source": "tool",
       "tags": ["location", "hub"],
       "description": "Central village where quests begin",
       "position": { "x": 300, "y": 100 }
@@ -293,6 +301,9 @@ flowchart TD
 - Click to open passage source file
 - Real-time graph updates during development
 - Export graph layout positions
+- Read-only mode for code-sourced passages (source: 'code')
+- Full editing capabilities for tool-created passages (source: 'tool')
+- Visual indicators to distinguish editable vs read-only passages
 
 **Technical Approach:**
 - Use React Flow for node-based UI
@@ -309,8 +320,14 @@ const PassageNode: React.FC<NodeProps<PassageMetadata>> = ({ data }) => {
   // Visual representation showing:
   // - id, type, title (from source)
   // - tags, description (from metadata)
+  // - Read-only indicator if source === 'code'
 
   const handleMetadataUpdate = async (updates: Partial<PassageExtendedMetadata>) => {
+    // Only allow updates if source === 'tool'
+    if (data.source === 'code') {
+      // Show read-only warning or disable editing UI
+      return;
+    }
     await metadataManager.updatePassageMetadata(data.id, updates);
   };
 };
@@ -574,6 +591,7 @@ const intro = new StoryBuilder()
 - Generate passage files with boilerplate
 - Support for both TypeScript and MDX formats
 - Automatically register passages in entry point
+- Mark CLI-generated passages with source: 'tool' for UI editability
 
 **Technical Approach:**
 ```bash
@@ -644,6 +662,7 @@ Your story continues...
 - Component palette for drag-and-drop
 - Live preview
 - Export to TypeScript or MDX
+- Created passages marked with source: 'tool' for full editability
 
 **Technical Approach:**
 - Use ContentEditable or Lexical editor
@@ -831,6 +850,9 @@ class ReactTextGameMCPServer {
   async updatePassage(id: string, updates: Partial<PassageConfig>): Promise<void>;
   async deletePassage(id: string): Promise<void>;
   async analyzePassageFlow(startId: string): Promise<PassageGraph>;
+
+  // Note: createPassage marks new passages with source: 'tool'
+  // updatePassage/deletePassage only work on passages with source: 'tool'
 }
 ```
 
