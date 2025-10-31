@@ -1,0 +1,46 @@
+{
+    "name": "@react-text-game/mcp",
+    "version": "0.1.0",
+    "description": "MCP package for React Text Game",
+    "repository": "github:laruss/react-text-game",
+    "homepage": "https://reacttextgame.dev/",
+    "private": false,
+    "type": "module",
+    "bin": {
+        "react-text-game": "./dist/index.js"
+    },
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "author": "laruss",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "scripts": {
+        "dev": "tsx watch & tsc-alias -p tsconfig.json --resolve-full-paths --watch",
+        "build": "tsc && tsc-alias -p tsconfig.json --resolve-full-paths && chmod 755 dist/index.js",
+        "start": "node dist/index.js"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.20.2",
+        "zod": "^4.1.12"
+    },
+    "peerDependencies": {
+        "@react-text-game/core": "latest"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.17",
+        "typescript": "^5"
+    },
+    "imports": {
+        "#*": "./dist/*"
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    }
+}

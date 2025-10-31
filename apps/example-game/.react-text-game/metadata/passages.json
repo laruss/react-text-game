@@ -2,38 +2,68 @@
   "passages": {
     "testStory": {
       "id": "testStory",
+      "source": "code",
       "position": {
-        "x": 0,
-        "y": 0
+        "x": 14.85973452240853,
+        "y": 14.15072003870812
       }
     },
     "anotherStory": {
       "id": "anotherStory",
+      "source": "code",
       "position": {
-        "x": 0,
-        "y": 50
+        "x": -191.10290745773875,
+        "y": 82.22110768171616
       }
     },
     "mdxTestInclude": {
       "id": "mdxTestInclude",
+      "source": "code",
       "position": {
-        "x": 50,
-        "y": 50
+        "x": 15.067905332657375,
+        "y": 140.5999302456561
       }
     },
     "testMap": {
       "id": "testMap",
+      "source": "code",
       "position": {
-        "x": 100,
-        "y": 50
+        "x": 250,
+        "y": -55
       }
     },
     "testMap2": {
       "id": "testMap2",
+      "source": "code",
       "position": {
-        "x": 150,
-        "y": 50
+        "x": 354.2801126709581,
+        "y": 84.51700321290446
+      }
+    },
+    "start-passage": {
+      "id": "start-passage",
+      "source": "tool",
+      "position": {
+        "x": 452.96340543754474,
+        "y": -81.23322397949448
       }
     }
+  },
+  "connections": [
+    {
+      "from": "testMap",
+      "to": "testStory"
+    },
+    {
+      "from": "testMap",
+      "to": "testMap2"
+    },
+    {
+      "from": "testMap2",
+      "to": "testMap"
+    }
+  ],
+  "settings": {
+    "startPassage": "start-passage"
   }
 }

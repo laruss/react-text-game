@@ -1,55 +1,51 @@
 {
-    "name": "@react-text-game/utils",
+    "name": "@react-text-game/observer",
     "version": "0.1.0",
-    "description": "Utilities for React Text Game",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "description": "Observer for React Text Game",
     "repository": "github:laruss/react-text-game",
     "homepage": "https://reacttextgame.dev/",
     "private": false,
     "type": "module",
     "bin": {
-        "rtg-observer": "./dist/game-observer/cli.js"
-    },
-    "scripts": {
-        "dev": "tsc --watch & tsc-alias --watch",
-        "build": "tsc && tsc-alias",
-        "test": "bun test",
-        "check-types": "tsc --noEmit",
-        "lint": "eslint .",
-        "prepack": "rm -rf dist && bun run build",
-        "test-pack": "npm pack --dry-run && bunx publint"
-    },
-    "author": "laruss",
-    "publishConfig": {
-        "access": "public",
-        "registry": "https://registry.npmjs.org/"
+        "rtg-observer": "./dist/cli/index.js"
     },
     "license": "MIT",
     "files": [
         "dist"
     ],
+    "author": "laruss",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "scripts": {
+        "dev": "tsx watch & tsc-alias -p tsconfig.json --resolve-full-paths --watch",
+        "build": "tsc && tsc-alias -p tsconfig.json --resolve-full-paths",
+        "start": "node dist/index.js"
+    },
     "dependencies": {
+        "@hono/node-server": "^1.19.5",
+        "hono": "^4.10.3",
         "@typescript-eslint/typescript-estree": "^8.46.2",
         "gray-matter": "^4.0.3",
         "glob": "^11.0.3",
-        "commander": "^14.0.1"
+        "commander": "^14.0.1",
+        "argparse": "^2.0.1"
     },
     "peerDependencies": {
         "typescript": "^5",
-        "react": "^18.0.0 || ^19.0.0",
-        "react-dom": "^18.0.0 || ^19.0.0",
         "@react-text-game/core": "latest"
     },
     "devDependencies": {
+        "@types/node": "^20.11.17",
+        "tsx": "^4.7.1",
+        "typescript": "^5.8.3",
         "@react-text-game/core": "workspace:*",
         "@types/bun": "latest",
         "@types/estree": "^1.0.8",
-        "@types/react": "^19.2.2",
-        "@types/react-dom": "^19.2.2",
         "eslint": "^9.37.0",
-        "tsc-alias": "^1.8.16"
+        "tsc-alias": "^1.8.16",
+        "@types/argparse": "^2.0.17"
     },
     "imports": {
         "#*": "./dist/*"

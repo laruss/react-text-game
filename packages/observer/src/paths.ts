@@ -12,7 +12,7 @@ import {
 	METADATA_DIR,
 	PASSAGES_FILE,
 	REACT_TEXT_GAME_DIR,
-} from "#game-observer/consts";
+} from "#consts";
 
 /**
  * Interface for all Game Observer paths

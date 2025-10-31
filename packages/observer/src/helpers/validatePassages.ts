@@ -1,7 +1,9 @@
 import type {
+	PassageConnection,
 	PassageExtendedMetadata,
 	PassagesMetadata,
-} from "#game-observer/types";
+	PassageSettings,
+} from "#types";
 
 /**
  * This one validates the data from passages.json passed to it.
@@ -36,6 +38,22 @@ export const validatePassages = (data: unknown): void => {
 	// Validate each passage metadata entry
 	for (const [key, value] of Object.entries(passagesData.passages)) {
 		validatePassageMetadata(key, value);
+	}
+
+	// Validate optional connections property
+	if ("connections" in passagesData && passagesData.connections !== undefined) {
+		if (!Array.isArray(passagesData.connections)) {
+			throw new Error("Invalid passages data: 'connections' must be an array");
+		}
+
+		for (let i = 0; i < passagesData.connections.length; i++) {
+			validateConnection(i, passagesData.connections[i]);
+		}
+	}
+
+	// Validate optional settings property
+	if ("settings" in passagesData && passagesData.settings !== undefined) {
+		validateSettings(passagesData.settings);
 	}
 };
 
@@ -150,5 +168,69 @@ function validatePassageMetadata(key: string, value: unknown): void {
 				`Invalid passage metadata for '${key}': 'customMetadata' must be an object`,
 			);
 		}
+	}
+}
+
+/**
+ * Validates a single connection entry
+ *
+ * @param index - The index in the connections array
+ * @param value - The connection to validate
+ * @throws Error if the connection is not valid
+ */
+function validateConnection(index: number, value: unknown): void {
+	// Check if value is an object
+	if (typeof value !== "object" || value === null) {
+		throw new Error(
+			`Invalid connection at index ${index}: must be an object`,
+		);
+	}
+
+	const connection = value as Partial<PassageConnection>;
+
+	// Check if from exists and is a string
+	if (!("from" in connection)) {
+		throw new Error(`Invalid connection at index ${index}: missing 'from' property`);
+	}
+
+	if (typeof connection.from !== "string") {
+		throw new Error(
+			`Invalid connection at index ${index}: 'from' must be a string`,
+		);
+	}
+
+	// Check if to exists and is a string
+	if (!("to" in connection)) {
+		throw new Error(`Invalid connection at index ${index}: missing 'to' property`);
+	}
+
+	if (typeof connection.to !== "string") {
+		throw new Error(
+			`Invalid connection at index ${index}: 'to' must be a string`,
+		);
+	}
+}
+
+/**
+ * Validates the settings object
+ *
+ * @param value - The settings to validate
+ * @throws Error if the settings are not valid
+ */
+function validateSettings(value: unknown): void {
+	// Check if value is an object
+	if (typeof value !== "object" || value === null) {
+		throw new Error("Invalid settings: must be an object");
+	}
+
+	const settings = value as Partial<PassageSettings>;
+
+	// Check if startPassage exists and is a string
+	if (!("startPassage" in settings)) {
+		throw new Error("Invalid settings: missing 'startPassage' property");
+	}
+
+	if (typeof settings.startPassage !== "string") {
+		throw new Error("Invalid settings: 'startPassage' must be a string");
 	}
 }
