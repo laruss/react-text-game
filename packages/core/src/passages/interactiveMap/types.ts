@@ -699,11 +699,23 @@ export type InteractiveMapOptions = {
 
     /**
      * Array of hotspots to display on the map.
-     * Can include static hotspots or functions that return hotspots dynamically.
+     * Can be a static array, or a function that returns an array.
+     * Individual hotspots within the array can also be static or functions.
      * Functions returning `undefined` are filtered out (useful for conditional hotspots).
+     *
+     * @remarks
+     * **When to use a function for the entire array:**
+     * - When the entire set of hotspots changes based on game state
+     * - When you need access to display props to generate the array
+     * - For completely different hotspot sets in different game modes
+     *
+     * **When to use functions for individual hotspots:**
+     * - For conditional visibility of specific hotspots
+     * - When most hotspots remain constant but a few are dynamic
      *
      * @example
      * ```typescript
+     * // Static array with mixed static and dynamic hotspots
      * hotspots: [
      *   // Static hotspot - always visible
      *   {
@@ -729,9 +741,23 @@ export type InteractiveMapOptions = {
      *     action: () => openMenu()
      *   }
      * ]
+     *
+     * // Dynamic array - entire hotspot set changes based on game state
+     * hotspots: () => {
+     *   if (player.isInCombat) {
+     *     return [
+     *       { type: 'label', content: 'Attack', position: 'bottom', action: () => attack() },
+     *       { type: 'label', content: 'Defend', position: 'bottom', action: () => defend() }
+     *     ];
+     *   }
+     *   return [
+     *     { type: 'label', content: 'Explore', position: { x: 50, y: 50 }, action: () => explore() },
+     *     { type: 'label', content: 'Rest', position: 'bottom', action: () => rest() }
+     *   ];
+     * }
      * ```
      */
-    hotspots: Array<MaybeCallable<AnyHotspot | undefined>>;
+    hotspots: MaybeCallable<Array<MaybeCallable<AnyHotspot | undefined>>>;
 
     /**
      * Optional background image URL or path.

@@ -829,6 +829,276 @@ describe("InteractiveMap", () => {
         });
     });
 
+    describe("Dynamic Hotspots Array", () => {
+        test("hotspots as function returning static array", () => {
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                hotspots: () => [
+                    {
+                        type: "label",
+                        content: "From Function",
+                        position: { x: 50, y: 50 },
+                        action: () => {},
+                    } as MapLabelHotspot,
+                ],
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const result = map.display();
+
+            expect(result.hotspots).toHaveLength(1);
+            expect((result.hotspots[0] as MapLabelHotspot).content).toBe(
+                "From Function"
+            );
+        });
+
+        test("hotspots function receives props", () => {
+            let receivedProps: unknown | null = null;
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                // @ts-expect-error TS2322
+                hotspots: (props: unknown) => {
+                    receivedProps = props;
+                    return [
+                        {
+                            type: "label",
+                            content: "Test",
+                            position: { x: 50, y: 50 },
+                            action: () => {},
+                        } as MapLabelHotspot,
+                    ];
+                },
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const testProps = { level: 10, hasKey: true };
+            map.display(testProps);
+
+            expect(receivedProps).toEqual(testProps);
+        });
+
+        test("conditional array generation based on props", () => {
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                // @ts-expect-error TS2322
+                hotspots: (props: { isInCombat: boolean }) => {
+                    if (props.isInCombat) {
+                        return [
+                            {
+                                type: "label",
+                                content: "Attack",
+                                position: "bottom",
+                                action: () => {},
+                            } as SideLabelHotspot,
+                            {
+                                type: "label",
+                                content: "Defend",
+                                position: "bottom",
+                                action: () => {},
+                            } as SideLabelHotspot,
+                        ];
+                    }
+                    return [
+                        {
+                            type: "label",
+                            content: "Explore",
+                            position: { x: 50, y: 50 },
+                            action: () => {},
+                        } as MapLabelHotspot,
+                        {
+                            type: "label",
+                            content: "Rest",
+                            position: "bottom",
+                            action: () => {},
+                        } as SideLabelHotspot,
+                    ];
+                },
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const combatResult = map.display({ isInCombat: true });
+            expect(combatResult.hotspots).toHaveLength(2);
+            expect((combatResult.hotspots[0] as SideLabelHotspot).content).toBe(
+                "Attack"
+            );
+            expect((combatResult.hotspots[1] as SideLabelHotspot).content).toBe(
+                "Defend"
+            );
+
+            const exploreResult = map.display({ isInCombat: false });
+            expect(exploreResult.hotspots).toHaveLength(2);
+            expect((exploreResult.hotspots[0] as MapLabelHotspot).content).toBe(
+                "Explore"
+            );
+            expect((exploreResult.hotspots[1] as SideLabelHotspot).content).toBe(
+                "Rest"
+            );
+        });
+
+        test("empty array from function", () => {
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                hotspots: () => [],
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const result = map.display();
+
+            expect(result.hotspots).toHaveLength(0);
+        });
+
+        test("function returning array with conditional hotspots", () => {
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                // @ts-expect-error TS2322
+                hotspots: (props: { showSecret: boolean; showShop: boolean }) => [
+                    {
+                        type: "label",
+                        content: "Home",
+                        position: { x: 50, y: 50 },
+                        action: () => {},
+                    } as MapLabelHotspot,
+                    () =>
+                        props.showSecret
+                            ? ({
+                                  type: "label",
+                                  content: "Secret",
+                                  position: { x: 80, y: 30 },
+                                  action: () => {},
+                              } as MapLabelHotspot)
+                            : undefined,
+                    () =>
+                        props.showShop
+                            ? ({
+                                  type: "label",
+                                  content: "Shop",
+                                  position: { x: 20, y: 70 },
+                                  action: () => {},
+                              } as MapLabelHotspot)
+                            : undefined,
+                ],
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const allResult = map.display({
+                showSecret: true,
+                showShop: true,
+            });
+            expect(allResult.hotspots).toHaveLength(3);
+
+            const secretOnlyResult = map.display({
+                showSecret: true,
+                showShop: false,
+            });
+            expect(secretOnlyResult.hotspots).toHaveLength(2);
+            expect((secretOnlyResult.hotspots[1] as MapLabelHotspot).content).toBe(
+                "Secret"
+            );
+
+            const noneResult = map.display({
+                showSecret: false,
+                showShop: false,
+            });
+            expect(noneResult.hotspots).toHaveLength(1);
+            expect((noneResult.hotspots[0] as MapLabelHotspot).content).toBe(
+                "Home"
+            );
+        });
+
+        test("different arrays for different game states", () => {
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                // @ts-expect-error TS2322
+                hotspots: (props: { gamePhase: "early" | "mid" | "late" }) => {
+                    switch (props.gamePhase) {
+                        case "early":
+                            return [
+                                {
+                                    type: "label",
+                                    content: "Tutorial",
+                                    position: "top",
+                                    action: () => {},
+                                } as SideLabelHotspot,
+                            ];
+                        case "mid":
+                            return [
+                                {
+                                    type: "label",
+                                    content: "Village",
+                                    position: { x: 30, y: 40 },
+                                    action: () => {},
+                                } as MapLabelHotspot,
+                                {
+                                    type: "label",
+                                    content: "Forest",
+                                    position: { x: 70, y: 60 },
+                                    action: () => {},
+                                } as MapLabelHotspot,
+                            ];
+                        case "late":
+                            return [
+                                {
+                                    type: "label",
+                                    content: "Castle",
+                                    position: { x: 50, y: 30 },
+                                    action: () => {},
+                                } as MapLabelHotspot,
+                                {
+                                    type: "label",
+                                    content: "Dungeon",
+                                    position: { x: 50, y: 70 },
+                                    action: () => {},
+                                } as MapLabelHotspot,
+                                {
+                                    type: "label",
+                                    content: "Final Boss",
+                                    position: { x: 80, y: 80 },
+                                    action: () => {},
+                                } as MapLabelHotspot,
+                            ];
+                    }
+                },
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const earlyResult = map.display({ gamePhase: "early" });
+            expect(earlyResult.hotspots).toHaveLength(1);
+            expect((earlyResult.hotspots[0] as SideLabelHotspot).content).toBe(
+                "Tutorial"
+            );
+
+            const midResult = map.display({ gamePhase: "mid" });
+            expect(midResult.hotspots).toHaveLength(2);
+
+            const lateResult = map.display({ gamePhase: "late" });
+            expect(lateResult.hotspots).toHaveLength(3);
+        });
+
+        test("calling display multiple times with different props", () => {
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                // @ts-expect-error TS2322
+                hotspots: (props: { count: number }) =>
+                    Array.from({ length: props.count }, (_, i) => ({
+                        type: "label",
+                        content: `Hotspot ${i + 1}`,
+                        position: { x: (i + 1) * 20, y: 50 },
+                        action: () => {},
+                    })) as Array<MapLabelHotspot>,
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const result1 = map.display({ count: 2 });
+            expect(result1.hotspots).toHaveLength(2);
+
+            const result2 = map.display({ count: 5 });
+            expect(result2.hotspots).toHaveLength(5);
+
+            const result3 = map.display({ count: 0 });
+            expect(result3.hotspots).toHaveLength(0);
+        });
+    });
+
     describe("Mixed Hotspots", () => {
         test("displays map with multiple hotspot types", () => {
             const options: InteractiveMapOptions = {

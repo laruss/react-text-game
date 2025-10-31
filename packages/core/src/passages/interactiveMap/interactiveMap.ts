@@ -67,9 +67,10 @@ export class InteractiveMap extends Passage {
      * Renders the interactive map by resolving dynamic values and filtering hotspots.
      *
      * Processes all hotspots by:
-     * 1. Calling hotspot functions with props (if they are functions)
-     * 2. Filtering out undefined hotspots (useful for conditional hotspots)
-     * 3. Resolving image URLs (if they are functions)
+     * 1. Resolving the hotspots array (if it's a function)
+     * 2. Calling individual hotspot functions with props (if they are functions)
+     * 3. Filtering out undefined hotspots (useful for conditional hotspots)
+     * 4. Resolving image URLs (if they are functions)
      *
      * @template T - Type of props to pass when resolving dynamic content
      * @param props - Properties used when evaluating dynamic hotspots/images
@@ -77,7 +78,8 @@ export class InteractiveMap extends Passage {
      *
      * @example
      * ```typescript
-     * const map = newInteractiveMap('map', {
+     * // With static hotspots array
+     * const map1 = newInteractiveMap('map', {
      *   image: () => `/maps/${currentSeason}.jpg`,
      *   hotspots: [
      *     () => isNight ? undefined : {
@@ -88,14 +90,25 @@ export class InteractiveMap extends Passage {
      *     }
      *   ]
      * });
+     * const result1 = map1.display({ currentSeason: 'winter', isNight: false });
      *
-     * const { image, hotspots } = map.display({ currentSeason: 'winter', isNight: false });
+     * // With dynamic hotspots array function
+     * const map2 = newInteractiveMap('map', {
+     *   image: '/map.jpg',
+     *   hotspots: (props) => props.isInCombat ? [
+     *     { type: 'label', content: 'Attack', position: 'bottom', action: () => attack() }
+     *   ] : [
+     *     { type: 'label', content: 'Explore', position: { x: 50, y: 50 }, action: () => explore() }
+     *   ]
+     * });
+     * const result2 = map2.display({ isInCombat: true });
      * ```
      */
     display<T extends InitVarsType = EmptyObject>(
         props: T = {} as T
     ): InteractiveMapType {
-        const hotspots = this.options.hotspots
+        const hotspotsArray = callIfFunction(this.options.hotspots, props);
+        const hotspots = hotspotsArray
             .map((callback) => callIfFunction(callback, props))
             .filter((hotspot) => hotspot !== undefined);
 
