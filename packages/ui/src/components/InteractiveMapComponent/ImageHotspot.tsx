@@ -8,12 +8,17 @@ import { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { callIfFunction } from "./helpers";
+import { ImagePositionInfo } from "./types";
 
 type ImageHotspotProps = {
     hotspot: MapImageHotspot | ImageHotspotType;
+    imagePositionInfo?: ImagePositionInfo;
 };
 
-export const ImageHotspot = ({ hotspot }: ImageHotspotProps) => {
+export const ImageHotspot = ({
+    hotspot,
+    imagePositionInfo,
+}: ImageHotspotProps) => {
     const [isHovering, setIsHovering] = useState(false);
     const [isActive, setIsActive] = useState(false);
     const classNames = hotspot.props?.classNames || {};
@@ -30,13 +35,24 @@ export const ImageHotspot = ({ hotspot }: ImageHotspotProps) => {
         [hotspot.content]
     );
 
+    // Calculate the combined scale factor from both the map scaling and custom zoom
+    const combinedScale = useMemo(() => {
+        const scaleFactor = imagePositionInfo?.scaleFactor ?? 1;
+        const customZoom = hotspot.props?.zoom || "100%";
+        const zoomValue = parseFloat(customZoom) / 100;
+        return scaleFactor * zoomValue;
+    }, [imagePositionInfo?.scaleFactor, hotspot.props?.zoom]);
+
     return (
         <button
             className={twMerge(
                 "cursor-pointer disabled:cursor-not-allowed relative",
                 classNames.container
             )}
-            style={{ zoom: hotspot.props?.zoom || "100%" }}
+            style={{
+                transform: `scale(${combinedScale})`,
+                transformOrigin: "center center",
+            }}
             disabled={isDisabled}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}

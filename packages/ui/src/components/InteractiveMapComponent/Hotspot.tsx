@@ -55,7 +55,10 @@ export const Hotspot = ({ hotspot, imagePositionInfo }: HotspotProps) => {
             >
                 <div>
                     {hotspot.type === "image" ? (
-                        <ImageHotspot hotspot={hotspot} />
+                        <ImageHotspot
+                            hotspot={hotspot}
+                            {...(imagePositionInfo && { imagePositionInfo })}
+                        />
                     ) : hotspot.type === "label" ? (
                         <LabelHotspot hotspot={hotspot} />
                     ) : (
