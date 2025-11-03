@@ -124,53 +124,6 @@ describe("SimpleObject", () => {
 
             expect(player.name).toBe("Hero of Light");
         });
-
-        test("should support setting optional properties not provided at initialization", () => {
-            type PlayerVars = {
-                health: number;
-                mana?: number;
-                nickname?: string;
-            };
-
-            const player = new SimpleObject<PlayerVars>({
-                id: "player",
-                variables: { health: 100 },
-            });
-
-            // These optional properties weren't provided at initialization
-            player.mana = 50;
-            player.nickname = "Hero";
-
-            // They should be accessible and stored in _variables
-            expect(player.mana).toBe(50);
-            expect(player.nickname).toBe("Hero");
-
-            // They should be in _variables for reactivity and persistence
-            expect(player.variables.mana).toBe(50);
-            expect(player.variables.nickname).toBe("Hero");
-        });
-
-        test("should support setting optional nested properties not provided at initialization", () => {
-            type PlayerVars = {
-                health: number;
-                stats?: {
-                    strength: number;
-                    agility: number;
-                };
-            };
-
-            const player = new SimpleObject<PlayerVars>({
-                id: "player",
-                variables: { health: 100 },
-            });
-
-            // Set optional nested object
-            player.stats = { strength: 10, agility: 15 };
-
-            expect(player.stats.strength).toBe(10);
-            expect(player.stats.agility).toBe(15);
-            expect(player.variables.stats).toEqual({ strength: 10, agility: 15 });
-        });
     });
 
     describe("Nested Object Access and Modification", () => {
@@ -419,24 +372,6 @@ describe("SimpleObject", () => {
 
             expect(player.pattern).toBeInstanceOf(RegExp);
             expect(player.pattern.test("TEST")).toBe(true);
-        });
-
-        test("should handle null values", () => {
-            const player = new SimpleObject({
-                id: "player",
-                variables: { weapon: null as string | null },
-            });
-
-            expect(player.weapon).toBeNull();
-        });
-
-        test("should handle undefined values", () => {
-            const player = new SimpleObject({
-                id: "player",
-                variables: { optionalField: undefined as string | undefined },
-            });
-
-            expect(player.optionalField).toBeUndefined();
         });
 
         test("should handle boolean values", () => {

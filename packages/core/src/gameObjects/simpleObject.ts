@@ -4,19 +4,6 @@ import { InitVarsType } from "#types";
 
 import { BaseGameObject } from "./baseGameObject";
 
-const CLASS_PROPERTIES = [
-    "id",
-    "_variables",
-    "variables",
-    "save",
-    "load",
-    "path",
-    "proxyCache",
-    "isProxyableObject",
-    "createDeepProxy",
-] as const;
-type ClassProperties = typeof CLASS_PROPERTIES[number];
-
 /**
  * Internal implementation that augments {@link BaseGameObject} with
  * property accessors for each variable field.
@@ -25,69 +12,39 @@ type ClassProperties = typeof CLASS_PROPERTIES[number];
  * but documenting this class clarifies how deep proxying and manual save hooks
  * are wired under the hood.
  */
-class SimpleObjectImpl<
-    VariablesType extends InitVarsType,
-> extends BaseGameObject<VariablesType> {
+class SimpleObjectImpl<VariablesType extends InitVarsType> extends BaseGameObject<VariablesType> {
     private proxyCache = new WeakMap<object, object>();
 
     constructor(props: { id: string; variables?: VariablesType }) {
         super(props);
 
-        // Return a Proxy that intercepts all property access
-        // This allows setting properties that weren't defined at initialization
-        // (e.g., optional properties in TypeScript types)
-        return new Proxy(this, {
-            get: (target, prop, receiver) => {
-                // Handle symbols by delegating to the target
-                if (typeof prop === "symbol") {
-                    return Reflect.get(target, prop, receiver);
-                }
-
-                // Allow access to class properties and methods
-                if (CLASS_PROPERTIES.includes(prop as ClassProperties)) {
-                    return Reflect.get(target, prop, receiver);
-                }
-
-                // Get value from _variables
-                const value = target._variables[prop as keyof VariablesType];
-
-                // If it's an object (but not Date or other special types), wrap it in a deep proxy
-                if (target.isProxyableObject(value)) {
-                    return target.createDeepProxy(value);
-                }
-
-                return value;
-            },
-            set: (target, prop, value, receiver) => {
-                // Handle symbols by delegating to the target
-                if (typeof prop === "symbol") {
-                    return Reflect.set(target, prop, value, receiver);
-                }
-
-                // Allow setting class properties
-                if (
-                    prop === "id" ||
-                    prop === "_variables" ||
-                    prop === "proxyCache"
-                ) {
-                    return Reflect.set(target, prop, value, receiver);
-                }
-
-                // If replacing an object, clear its proxy cache
-                const oldValue = target._variables[prop as keyof VariablesType];
-                if (
-                    target.isProxyableObject(oldValue) &&
-                    target.proxyCache.has(oldValue)
-                ) {
-                    target.proxyCache.delete(oldValue);
-                }
-
-                // Set value in _variables
-                target._variables[prop as keyof VariablesType] = value;
-
-                return true;
-            },
-        });
+        // for each of variables register getter and setter, so we can do like this:
+        // const player = new SimpleObject({ id: 'player', variables: { health: 100 } });
+        // player.health = 50;
+        // console.log(player.health); // 50
+        // Also supports nested objects:
+        // const player = new SimpleObject({ id: 'player', variables: { health: { mental: 20, physical: 30 } } });
+        // player.health.mental += 20;
+        if (props.variables) {
+            for (const key of Object.keys(props.variables)) {
+                Object.defineProperty(this, key, {
+                    get: () => {
+                        const value = this._variables[key as keyof VariablesType];
+                        // If it's an object (but not Date or other special types), wrap it in a deep proxy
+                        if (this.isProxyableObject(value)) {
+                            return this.createDeepProxy(value);
+                        }
+                        return value;
+                    },
+                    set: (value) => {
+                        this._variables[key as keyof VariablesType] = value;
+                        // Note: does not auto-save. Call save() manually to persist changes.
+                    },
+                    enumerable: true,
+                    configurable: true,
+                });
+            }
+        }
     }
 
     /**
@@ -143,12 +100,17 @@ export type SimpleObject<VariablesType extends InitVarsType> =
  * SimpleObject provides direct property access to game entity variables.
  *
  * Instead of accessing `entity._variables.health`, you can use `entity.health` directly.
- * Supports nested objects with deep reactivity.
+ * Supports nested objects with deep reactivity using Valtio proxies.
  *
- * @template VariablesType - The type of variables stored in this object
+ * **IMPORTANT:** All properties in `variables` must be required (non-optional).
+ * Optional properties are not supported because the Proxy-based implementation
+ * cannot distinguish between undefined optional values and missing properties.
+ *
+ * @template VariablesType - The type of variables stored in this object (must not contain optional properties)
  *
  * @example
  * ```typescript
+ * // ✅ Correct - All properties are required
  * const player = new SimpleObject({
  *   id: 'player',
  *   variables: { health: 100, mana: 50 }
@@ -156,11 +118,28 @@ export type SimpleObject<VariablesType extends InitVarsType> =
  *
  * player.health = 75; // Direct access
  * player.health += 25; // Operators work
+ *
+ * // ✅ Correct - Use explicit undefined for optional-like behavior
+ * const player = new SimpleObject({
+ *   id: 'player',
+ *   variables: {
+ *     health: 100,
+ *     special: undefined as string | undefined // Explicit type
+ *   }
+ * });
+ *
+ * // ❌ Wrong - Optional properties cause TypeScript errors
+ * const player = new SimpleObject({
+ *   id: 'player',
+ *   variables: {
+ *     health: 100,
+ *     mana?: 50  // This will not compile
+ *   }
+ * });
  * ```
  */
 export const SimpleObject = SimpleObjectImpl as new <
     VariablesType extends InitVarsType,
->(props: {
-    id: string;
-    variables?: VariablesType;
-}) => SimpleObject<VariablesType>;
+>(
+    props: { id: string; variables?: VariablesType }
+) => SimpleObject<VariablesType>;
