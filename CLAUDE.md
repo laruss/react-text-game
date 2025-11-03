@@ -16,7 +16,7 @@ bun run dev
 bun run build
 
 # Type checking
-bun run check-types
+bun run typecheck
 
 # Linting
 bun run lint
