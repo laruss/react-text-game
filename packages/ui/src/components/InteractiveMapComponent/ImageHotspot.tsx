@@ -1,7 +1,9 @@
 "use client";
 
+import { MaybeCallable } from "@react-text-game/core";
 import {
     ImageHotspot as ImageHotspotType,
+    ImageHotspotContentObject,
     MapImageHotspot,
 } from "@react-text-game/core/passages";
 import { useMemo, useState } from "react";
@@ -25,15 +27,22 @@ export const ImageHotspot = ({
 
     const isDisabled = callIfFunction(hotspot.isDisabled);
 
-    const content = useMemo(
-        () => ({
-            idle: callIfFunction(hotspot.content.idle),
-            hover: callIfFunction(hotspot.content.hover),
-            active: callIfFunction(hotspot.content.active),
-            disabled: callIfFunction(hotspot.content.disabled),
-        }),
-        [hotspot.content]
-    );
+    const content = useMemo(() => {
+        const isObject = typeof hotspot.content === "object";
+        if (!isObject) {
+            const stringContent = hotspot.content as MaybeCallable<string>;
+            return {
+                idle: callIfFunction(stringContent), hover: undefined, active: undefined, disabled: undefined };
+        }
+        const content = hotspot.content as ImageHotspotContentObject;
+
+        return {
+            idle: callIfFunction(content.idle),
+            hover: callIfFunction(content.hover),
+            active: callIfFunction(content.active),
+            disabled: callIfFunction(content.disabled),
+        };
+    }, [hotspot.content]);
 
     // Calculate the combined scale factor from both the map scaling and custom zoom
     const combinedScale = useMemo(() => {
