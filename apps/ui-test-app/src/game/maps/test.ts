@@ -34,7 +34,7 @@ export const testInteractiveMap = newInteractiveMap("testMap", {
             props: { zoom: "20%" },
             tooltip: {
                 content: "This is an image hotspot",
-                position: "bottom",
+                position: "left",
             },
         }),
     ],

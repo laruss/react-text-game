@@ -1,4 +1,5 @@
-import { ActionsComponent } from "@react-text-game/core/passages";
+import { ActionsComponent, ActionType } from "@react-text-game/core/passages";
+import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "#components/common/Button";
@@ -7,6 +8,33 @@ import { Tooltip } from "#components/common/Tooltip";
 export type ActionsProps = Readonly<{
     component: ActionsComponent;
 }>;
+
+const Action = ({ action }: { action: ActionType }) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    return (
+        <>
+            <div ref={ref}>
+                <Button
+                    color={action.color}
+                    variant={action.variant}
+                    className={action.className}
+                    disabled={action.isDisabled}
+                    onClick={action.action}
+                >
+                    {action.label}
+                </Button>
+            </div>
+            <Tooltip
+                targetRef={ref}
+                content={action.tooltip?.content}
+                placement={action.tooltip?.position}
+                disabled={!action.tooltip?.content}
+                className={action.tooltip?.className}
+            />
+        </>
+    );
+};
 
 export const Actions = ({ component }: ActionsProps) => (
     <div
@@ -17,25 +45,7 @@ export const Actions = ({ component }: ActionsProps) => (
         )}
     >
         {component.content.map((action, index) => (
-            <Tooltip
-                key={index}
-                disabled={!action.tooltip?.content}
-                content={action.tooltip?.content}
-                className={action.tooltip?.className}
-                placement={action.tooltip?.position}
-            >
-                <div>
-                    <Button
-                        color={action.color}
-                        variant={action.variant}
-                        className={action.className}
-                        disabled={action.isDisabled}
-                        onClick={action.action}
-                    >
-                        {action.label}
-                    </Button>
-                </div>
-            </Tooltip>
+            <Action action={action} key={index} />
         ))}
     </div>
 );

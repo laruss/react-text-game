@@ -6,8 +6,10 @@ import {
     ImageHotspotContentObject,
     MapImageHotspot,
 } from "@react-text-game/core/passages";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
+
+import { Placement, Tooltip } from "#components";
 
 import { callIfFunction } from "./helpers";
 import { ImagePositionInfo } from "./types";
@@ -15,12 +17,17 @@ import { ImagePositionInfo } from "./types";
 type ImageHotspotProps = {
     hotspot: MapImageHotspot | ImageHotspotType;
     imagePositionInfo?: ImagePositionInfo;
+    tooltipContent?: string | undefined;
+    tooltipPlacement?: Placement | undefined;
 };
 
 export const ImageHotspot = ({
     hotspot,
     imagePositionInfo,
+    tooltipContent,
+    tooltipPlacement = "top",
 }: ImageHotspotProps) => {
+    const ref = useRef<HTMLButtonElement>(null);
     const [isHovering, setIsHovering] = useState(false);
     const [isActive, setIsActive] = useState(false);
     const classNames = hotspot.props?.classNames || {};
@@ -53,49 +60,58 @@ export const ImageHotspot = ({
     }, [imagePositionInfo?.scaleFactor, hotspot.props?.zoom]);
 
     return (
-        <button
-            className={twMerge(
-                "cursor-pointer disabled:cursor-not-allowed relative",
-                classNames.container
-            )}
-            style={{
-                transform: `scale(${combinedScale})`,
-                transformOrigin: "center center",
-            }}
-            disabled={isDisabled}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-            onClick={() => {
-                setIsActive(true);
-                hotspot.action();
-                setTimeout(() => setIsActive(false), 100);
-            }}
-        >
-            {isActive && content.active ? (
-                <img
-                    className={classNames.active}
-                    src={content.active}
-                    alt="hotspot active"
-                />
-            ) : isHovering && content.hover ? (
-                <img
-                    className={classNames.hover}
-                    src={content.hover}
-                    alt="hotspot hover"
-                />
-            ) : isDisabled && content.disabled ? (
-                <img
-                    className={classNames.disabled}
-                    src={content.disabled}
-                    alt="hotspot disabled"
-                />
-            ) : (
-                <img
-                    className={classNames.idle}
-                    src={content.idle}
-                    alt={hotspot.id || "hotspot"}
-                />
-            )}
-        </button>
+        <>
+            <button
+                ref={ref}
+                className={twMerge(
+                    "cursor-pointer disabled:cursor-not-allowed relative",
+                    classNames.container
+                )}
+                style={{
+                    transform: `scale(${combinedScale})`,
+                    transformOrigin: "center center",
+                }}
+                disabled={isDisabled}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                onClick={() => {
+                    setIsActive(true);
+                    hotspot.action();
+                    setTimeout(() => setIsActive(false), 100);
+                }}
+            >
+                {isActive && content.active ? (
+                    <img
+                        className={classNames.active}
+                        src={content.active}
+                        alt="hotspot active"
+                    />
+                ) : isHovering && content.hover ? (
+                    <img
+                        className={classNames.hover}
+                        src={content.hover}
+                        alt="hotspot hover"
+                    />
+                ) : isDisabled && content.disabled ? (
+                    <img
+                        className={classNames.disabled}
+                        src={content.disabled}
+                        alt="hotspot disabled"
+                    />
+                ) : (
+                    <img
+                        className={classNames.idle}
+                        src={content.idle}
+                        alt={hotspot.id || "hotspot"}
+                    />
+                )}
+            </button>
+            <Tooltip
+                content={tooltipContent}
+                placement={tooltipPlacement}
+                targetRef={ref}
+                disabled={!tooltipContent}
+            />
+        </>
     );
 };
