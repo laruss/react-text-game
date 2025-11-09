@@ -81,7 +81,7 @@ interface BaseHotspot {
          *   : 'You need a key to unlock this door'
          * ```
          */
-        content: string | (() => string);
+        content: MaybeCallable<string>;
 
         /**
          * Position of the tooltip relative to the hotspot.
@@ -137,7 +137,7 @@ export interface LabelHotspot extends BaseHotspot {
      * content: () => player.hasVisited ? 'Return to Town' : 'Discover Town'
      * ```
      */
-    content: string | (() => string);
+    content: MaybeCallable<string>;
 
     /**
      * Optional configuration for button styling and appearance.
@@ -179,13 +179,84 @@ export interface LabelHotspot extends BaseHotspot {
     };
 }
 
+export type ImageHotspotContentObject = {
+    /**
+     * Image displayed in the default/resting state.
+     * Always shown when no other state is active.
+     *
+     * @example
+     * ```typescript
+     * idle: '/icons/button-default.png'
+     * idle: () => `/icons/${currentTheme}/button.png`
+     * ```
+     */
+    idle: MaybeCallable<string>;
+
+    /**
+     * Optional image displayed when the hotspot is hovered.
+     * If not provided, the idle image is shown on hover.
+     *
+     * @example
+     * ```typescript
+     * hover: '/icons/button-hover.png'
+     * hover: () => `/icons/button-${hoverColor}.png`
+     * ```
+     */
+    hover?: MaybeCallable<string>;
+
+    /**
+     * Optional image displayed briefly when the hotspot is clicked.
+     * Creates visual feedback for the click action.
+     * If not provided, the hover or idle image is shown on click.
+     *
+     * @example
+     * ```typescript
+     * active: '/icons/button-pressed.png'
+     * active: '/icons/button-flash.png'
+     * ```
+     *
+     * @remarks
+     * The active state is shown for ~100ms when clicked, then returns to idle/hover.
+     */
+    active?: MaybeCallable<string>;
+
+    /**
+     * Optional image displayed when the hotspot is disabled.
+     * If not provided, the idle image is shown with reduced opacity when disabled.
+     *
+     * @example
+     * ```typescript
+     * disabled: '/icons/button-grayed.png'
+     * disabled: '/icons/button-locked.png'
+     * ```
+     */
+    disabled?: MaybeCallable<string>;
+};
+
 /**
- * Image-based hotspot with state-dependent visuals.
- * Displays different images for idle, hover, active, and disabled states.
+ * Image-based hotspot with optional state-dependent visuals.
+ * Content can be a simple string/function for basic usage, or an object with
+ * different images for idle, hover, active, and disabled states.
  *
  * @example
  * ```typescript
- * // Basic image hotspot with hover effect
+ * // Simple image hotspot (string)
+ * {
+ *   type: 'image',
+ *   content: '/icons/chest.png',
+ *   position: { x: 60, y: 70 },
+ *   action: () => openChest()
+ * }
+ *
+ * // Dynamic image hotspot (function)
+ * {
+ *   type: 'image',
+ *   content: () => `/icons/chest-${player.level}.png`,
+ *   position: { x: 60, y: 70 },
+ *   action: () => openChest()
+ * }
+ *
+ * // Image hotspot with hover effect (object)
  * {
  *   type: 'image',
  *   content: {
@@ -193,6 +264,7 @@ export interface LabelHotspot extends BaseHotspot {
  *     hover: '/icons/chest-glow.png',
  *     active: '/icons/chest-open.png'
  *   },
+ *   position: { x: 60, y: 70 },
  *   action: () => openChest()
  * }
  *
@@ -204,6 +276,7 @@ export interface LabelHotspot extends BaseHotspot {
  *     hover: '/icons/door-highlight.png',
  *     disabled: '/icons/door-locked.png'
  *   },
+ *   position: { x: 50, y: 50 },
  *   isDisabled: () => !player.hasKey,
  *   action: () => Game.jumpTo('next-room'),
  *   tooltip: {
@@ -214,7 +287,8 @@ export interface LabelHotspot extends BaseHotspot {
  * // Scaled image hotspot
  * {
  *   type: 'image',
- *   content: { idle: '/icons/small-item.png' },
+ *   content: '/icons/small-item.png',
+ *   position: { x: 75, y: 80 },
  *   props: { zoom: '150%' },
  *   action: () => pickupItem()
  * }
@@ -227,62 +301,31 @@ export interface ImageHotspot extends BaseHotspot {
     type: "image";
 
     /**
-     * Image URLs/paths for different hotspot states.
-     * At minimum, the `idle` state is required.
+     * Image URL/path or object with URLs for different hotspot states.
+     *
+     * Can be one of three options:
+     * 1. **String** - Single static image URL (simplest)
+     * 2. **Function** - Returns dynamic image URL based on game state
+     * 3. **Object** - Different images for idle, hover, active, and disabled states
+     *
+     * @example
+     * ```typescript
+     * // Option 1: Simple string
+     * content: '/icons/button.png'
+     *
+     * // Option 2: Dynamic function
+     * content: () => `/icons/button-${theme}.png`
+     *
+     * // Option 3: State-dependent object
+     * content: {
+     *   idle: '/icons/button.png',
+     *   hover: '/icons/button-hover.png',
+     *   active: '/icons/button-pressed.png',
+     *   disabled: '/icons/button-disabled.png'
+     * }
+     * ```
      */
-    content: {
-        /**
-         * Image displayed in the default/resting state.
-         * Always shown when no other state is active.
-         *
-         * @example
-         * ```typescript
-         * idle: '/icons/button-default.png'
-         * idle: () => `/icons/${currentTheme}/button.png`
-         * ```
-         */
-        idle: string | (() => string);
-
-        /**
-         * Optional image displayed when the hotspot is hovered.
-         * If not provided, the idle image is shown on hover.
-         *
-         * @example
-         * ```typescript
-         * hover: '/icons/button-hover.png'
-         * hover: () => `/icons/button-${hoverColor}.png`
-         * ```
-         */
-        hover?: string | (() => string);
-
-        /**
-         * Optional image displayed briefly when the hotspot is clicked.
-         * Creates visual feedback for the click action.
-         * If not provided, the hover or idle image is shown on click.
-         *
-         * @example
-         * ```typescript
-         * active: '/icons/button-pressed.png'
-         * active: '/icons/button-flash.png'
-         * ```
-         *
-         * @remarks
-         * The active state is shown for ~100ms when clicked, then returns to idle/hover.
-         */
-        active?: string | (() => string);
-
-        /**
-         * Optional image displayed when the hotspot is disabled.
-         * If not provided, the idle image is shown with reduced opacity when disabled.
-         *
-         * @example
-         * ```typescript
-         * disabled: '/icons/button-grayed.png'
-         * disabled: '/icons/button-locked.png'
-         * ```
-         */
-        disabled?: string | (() => string);
-    };
+    content: MaybeCallable<string> | ImageHotspotContentObject;
 
     /**
      * Optional configuration for sizing and styling.
@@ -695,7 +738,7 @@ export type InteractiveMapOptions = {
      * image: () => `/maps/world-level-${player.level}.jpg`
      * ```
      */
-    image: string | (() => string);
+    image: MaybeCallable<string>;
 
     /**
      * Array of hotspots to display on the map.
@@ -779,7 +822,7 @@ export type InteractiveMapOptions = {
      * - Atmospheric effects (clouds, fog, etc.)
      * - Contextual backgrounds that change with game state
      */
-    bgImage?: string | (() => string);
+    bgImage?: MaybeCallable<string>;
 
     /**
      * Optional configuration for map behavior.

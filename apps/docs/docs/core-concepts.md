@@ -221,7 +221,14 @@ const worldMap = newInteractiveMap('world-map', {
       action: () => Game.jumpTo('village'),
       props: { color: 'primary' }
     },
-    // Image hotspot with states
+    // Simple image hotspot (just a string)
+    {
+      type: 'image',
+      content: '/icons/treasure.png',
+      position: { x: 50, y: 60 },
+      action: () => collectTreasure(),
+    },
+    // Image hotspot with hover effect (object with states)
     {
       type: 'image',
       content: {
@@ -230,6 +237,13 @@ const worldMap = newInteractiveMap('world-map', {
       },
       position: { x: 60, y: 70 },
       action: () => openChest(),
+    },
+    // Dynamic image hotspot (function)
+    {
+      type: 'image',
+      content: () => `/icons/portal-${player.level}.png`,
+      position: { x: 75, y: 80 },
+      action: () => enterPortal(),
     },
     // Conditional hotspot
     () => player.hasDiscovered('forest') ? {

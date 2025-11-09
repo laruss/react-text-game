@@ -3,7 +3,8 @@ import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { Game } from "#game";
 import { newInteractiveMap } from "#passages/interactiveMap/fabric";
 import { InteractiveMap } from "#passages/interactiveMap/interactiveMap";
-import type {
+import {
+    ImageHotspotContentObject,
     InteractiveMapOptions,
     MapImageHotspot,
     MapLabelHotspot,
@@ -368,9 +369,11 @@ describe("InteractiveMap", () => {
 
             const result = map.display();
 
+            const imageHotspot = result.hotspots[0] as MapImageHotspot;
+
             expect(result.hotspots).toHaveLength(1);
-            expect(result.hotspots[0]?.type).toBe("image");
-            expect((result.hotspots[0] as MapImageHotspot).content.idle).toBe(
+            expect(imageHotspot.type).toBe("image");
+            expect((imageHotspot.content as ImageHotspotContentObject).idle).toBe(
                 "/icon.png"
             );
         });
@@ -395,11 +398,12 @@ describe("InteractiveMap", () => {
 
             const result = map.display();
             const resultHotspot = result.hotspots[0] as MapImageHotspot;
+            const content = resultHotspot.content as ImageHotspotContentObject;
 
-            expect(resultHotspot.content.idle).toBe("/idle.png");
-            expect(resultHotspot.content.hover).toBe("/hover.png");
-            expect(resultHotspot.content.active).toBe("/active.png");
-            expect(resultHotspot.content.disabled).toBe("/disabled.png");
+            expect(content.idle).toBe("/idle.png");
+            expect(content.hover).toBe("/hover.png");
+            expect(content.active).toBe("/active.png");
+            expect(content.disabled).toBe("/disabled.png");
         });
 
         test("image hotspot with dynamic images", () => {
@@ -420,9 +424,10 @@ describe("InteractiveMap", () => {
 
             const result = map.display();
             const resultHotspot = result.hotspots[0] as MapImageHotspot;
+            const content = resultHotspot.content as ImageHotspotContentObject;
 
-            expect(typeof resultHotspot.content.idle).toBe("function");
-            expect(typeof resultHotspot.content.hover).toBe("function");
+            expect(typeof content.idle).toBe("function");
+            expect(typeof content.hover).toBe("function");
         });
 
         test("image hotspot with zoom and classNames", () => {
@@ -461,6 +466,49 @@ describe("InteractiveMap", () => {
             expect(resultHotspot.props?.classNames?.disabled).toBe(
                 "disabled-class"
             );
+        });
+
+        test("image hotspot with static string content", () => {
+            const hotspot: MapImageHotspot = {
+                type: "image",
+                content: "/simple-icon.png",
+                position: { x: 40, y: 60 },
+                action: () => {},
+            };
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                hotspots: [hotspot],
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const result = map.display();
+            const resultHotspot = result.hotspots[0] as MapImageHotspot;
+
+            expect(resultHotspot.type).toBe("image");
+            expect(resultHotspot.content).toBe("/simple-icon.png");
+        });
+
+        test("image hotspot with function returning string", () => {
+            const hotspot: MapImageHotspot = {
+                type: "image",
+                content: () => "/dynamic-icon.png",
+                position: { x: 40, y: 60 },
+                action: () => {},
+            };
+            const options: InteractiveMapOptions = {
+                image: "/map.jpg",
+                hotspots: [hotspot],
+            };
+            const map = newInteractiveMap(uniqueId("map"), options);
+
+            const result = map.display();
+            const resultHotspot = result.hotspots[0] as MapImageHotspot;
+
+            expect(resultHotspot.type).toBe("image");
+            expect(typeof resultHotspot.content).toBe("function");
+            if (typeof resultHotspot.content === "function") {
+                expect(resultHotspot.content()).toBe("/dynamic-icon.png");
+            }
         });
     });
 
@@ -545,12 +593,14 @@ describe("InteractiveMap", () => {
             const map = newInteractiveMap(uniqueId("map"), options);
 
             const result = map.display();
+            const imageHotspot = result.hotspots[0] as SideImageHotspot;
+            const content = imageHotspot.content as ImageHotspotContentObject;
 
             expect(result.hotspots).toHaveLength(1);
-            expect((result.hotspots[0] as SideImageHotspot).position).toBe(
+            expect(imageHotspot.position).toBe(
                 "bottom"
             );
-            expect((result.hotspots[0] as SideImageHotspot).content.idle).toBe(
+            expect(content.idle).toBe(
                 "/compass.png"
             );
         });
@@ -575,11 +625,12 @@ describe("InteractiveMap", () => {
 
             const result = map.display();
             const resultHotspot = result.hotspots[0] as SideImageHotspot;
+            const content = resultHotspot.content as ImageHotspotContentObject;
 
-            expect(resultHotspot.content.idle).toBe("/idle.png");
-            expect(resultHotspot.content.hover).toBe("/hover.png");
-            expect(resultHotspot.content.active).toBe("/active.png");
-            expect(resultHotspot.content.disabled).toBe("/disabled.png");
+            expect(content.idle).toBe("/idle.png");
+            expect(content.hover).toBe("/hover.png");
+            expect(content.active).toBe("/active.png");
+            expect(content.disabled).toBe("/disabled.png");
         });
     });
 
