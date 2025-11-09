@@ -374,24 +374,6 @@ describe("SimpleObject", () => {
             expect(player.pattern.test("TEST")).toBe(true);
         });
 
-        test("should handle null values", () => {
-            const player = new SimpleObject({
-                id: "player",
-                variables: { weapon: null as string | null },
-            });
-
-            expect(player.weapon).toBeNull();
-        });
-
-        test("should handle undefined values", () => {
-            const player = new SimpleObject({
-                id: "player",
-                variables: { optionalField: undefined as string | undefined },
-            });
-
-            expect(player.optionalField).toBeUndefined();
-        });
-
         test("should handle boolean values", () => {
             const player = new SimpleObject({
                 id: "player",

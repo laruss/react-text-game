@@ -5,8 +5,6 @@ import {
     SideLabelHotspot,
 } from "@react-text-game/core/passages";
 
-import { Tooltip } from "#components/common";
-
 import { callIfFunction } from "./helpers";
 import { ImageHotspot } from "./ImageHotspot";
 import { LabelHotspot } from "./LabelHotspot";
@@ -19,20 +17,22 @@ export const SideHotspot = ({ hotspot }: Props) => {
     const tooltipContent = callIfFunction(hotspot.tooltip?.content);
 
     return (
-        <Tooltip
-            content={tooltipContent}
-            placement={hotspot.tooltip?.position || "top"}
-            disabled={!tooltipContent}
-        >
-            <div>
-                {hotspot.type === "image" ? (
-                    <ImageHotspot hotspot={hotspot} />
-                ) : hotspot.type === "label" ? (
-                    <LabelHotspot hotspot={hotspot} />
-                ) : (
-                    <div>Unknown Hotspot Type</div>
-                )}
-            </div>
-        </Tooltip>
+        <div>
+            {hotspot.type === "image" ? (
+                <ImageHotspot
+                    hotspot={hotspot}
+                    tooltipContent={tooltipContent}
+                    tooltipPlacement={hotspot.tooltip?.position}
+                />
+            ) : hotspot.type === "label" ? (
+                <LabelHotspot
+                    hotspot={hotspot}
+                    tooltipContent={tooltipContent}
+                    tooltipPlacement={hotspot.tooltip?.position}
+                />
+            ) : (
+                <div>Unknown Hotspot Type</div>
+            )}
+        </div>
     );
 };

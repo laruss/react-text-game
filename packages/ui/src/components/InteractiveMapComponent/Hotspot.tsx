@@ -6,8 +6,6 @@ import {
 } from "@react-text-game/core/passages";
 import { useEffect, useRef } from "react";
 
-import { Tooltip } from "#components/common/Tooltip";
-
 import { callIfFunction } from "./helpers";
 import { ImageHotspot } from "./ImageHotspot";
 import { LabelHotspot } from "./LabelHotspot";
@@ -48,21 +46,22 @@ export const Hotspot = ({ hotspot, imagePositionInfo }: HotspotProps) => {
 
     return (
         <div ref={hotspotRef} className="absolute z-10">
-            <Tooltip
-                content={tooltipContent}
-                placement={hotspot.tooltip?.position || "top"}
-                disabled={!tooltipContent}
-            >
-                <div>
-                    {hotspot.type === "image" ? (
-                        <ImageHotspot hotspot={hotspot} />
-                    ) : hotspot.type === "label" ? (
-                        <LabelHotspot hotspot={hotspot} />
-                    ) : (
-                        <div>Unknown Hotspot Type</div>
-                    )}
-                </div>
-            </Tooltip>
+            {hotspot.type === "image" ? (
+                <ImageHotspot
+                    hotspot={hotspot}
+                    tooltipContent={tooltipContent}
+                    tooltipPlacement={hotspot.tooltip?.position}
+                    {...(imagePositionInfo && { imagePositionInfo })}
+                />
+            ) : hotspot.type === "label" ? (
+                <LabelHotspot
+                    hotspot={hotspot}
+                    tooltipContent={tooltipContent}
+                    tooltipPlacement={hotspot.tooltip?.position}
+                />
+            ) : (
+                <div>Unknown Hotspot Type</div>
+            )}
         </div>
     );
 };

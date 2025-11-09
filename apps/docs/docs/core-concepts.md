@@ -105,6 +105,22 @@ player.save();
 - Deep reactivity for nested objects/arrays
 - Explicit `save()` calls for controlled persistence
 
+**IMPORTANT:** All properties in the variables object must be required (non-optional). Optional properties are not supported because the Proxy-based implementation cannot distinguish between undefined optional values and missing properties. If you need optional-like behavior, use explicit `undefined` with a union type:
+
+```tsx
+// ❌ Wrong - Optional properties will cause TypeScript errors
+const player = createEntity('player', {
+  health: 100,
+  mana?: 50  // Error: optional keys are not allowed
+});
+
+// ✅ Correct - Use explicit undefined for optional-like behavior
+const player = createEntity('player', {
+  health: 100,
+  mana: undefined as number | undefined
+});
+```
+
 ### Advanced Entities (Class-Based)
 
 For more complex scenarios, extend `BaseGameObject`:
@@ -205,7 +221,14 @@ const worldMap = newInteractiveMap('world-map', {
       action: () => Game.jumpTo('village'),
       props: { color: 'primary' }
     },
-    // Image hotspot with states
+    // Simple image hotspot (just a string)
+    {
+      type: 'image',
+      content: '/icons/treasure.png',
+      position: { x: 50, y: 60 },
+      action: () => collectTreasure(),
+    },
+    // Image hotspot with hover effect (object with states)
     {
       type: 'image',
       content: {
@@ -214,6 +237,13 @@ const worldMap = newInteractiveMap('world-map', {
       },
       position: { x: 60, y: 70 },
       action: () => openChest(),
+    },
+    // Dynamic image hotspot (function)
+    {
+      type: 'image',
+      content: () => `/icons/portal-${player.level}.png`,
+      position: { x: 75, y: 80 },
+      action: () => enterPortal(),
     },
     // Conditional hotspot
     () => player.hasDiscovered('forest') ? {
@@ -771,10 +801,34 @@ if (player.health <= 0) { /* ... */ }
 ### 5. Use TypeScript
 
 ```tsx
-// ✅ Type-safe entities
+// ✅ Type-safe entities with explicit types
 const player = createEntity('player', {
   name: 'Hero',
   inventory: [] as string[],  // Explicit array type
+});
+```
+
+### 6. Avoid Optional Properties in Entities
+
+```tsx
+// ❌ Wrong - Optional properties are not supported
+const player = createEntity('player', {
+  health: 100,
+  mana?: 50  // TypeScript will prevent this
+});
+
+// ✅ Correct - Use explicit undefined for optional-like behavior
+const player = createEntity('player', {
+  health: 100,
+  mana: undefined as number | undefined,
+  questItem: undefined as string | undefined
+});
+
+// ✅ Also correct - All required properties
+const player = createEntity('player', {
+  health: 100,
+  mana: 50,  // Always provide a value
+  questItem: ''  // Use empty string instead of optional
 });
 ```
 

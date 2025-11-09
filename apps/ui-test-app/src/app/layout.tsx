@@ -28,6 +28,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                     options={{
                         gameName: "ui-test-app",
                         isDevMode: true,
+                        startPassage: "testMap",
                         translations: {
                             defaultLanguage: 'en',
                             fallbackLanguage: 'en',

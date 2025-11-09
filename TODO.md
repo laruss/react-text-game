@@ -1,6 +1,7 @@
 ### TODO
 
 - [ ] set up script for automatic version update;
+- [ ] redo tooltip implementation in interactiveMap component in core;
 - [ ] add theme trigger to ui package;
 - [ ] add utility to determine whether a developer needs to create a save migration or not.
 - [x] add i18n support;

@@ -4,9 +4,8 @@ import { MapMenu } from "@react-text-game/core/passages";
 import { useEffect, useMemo, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { Button, Tooltip } from "#components/common";
-
 import { callIfFunction } from "./helpers";
+import { HotspotMenuItem } from "./HotspotMenuItem";
 import { ImagePositionInfo } from "./types";
 
 type Props = Readonly<{
@@ -53,36 +52,14 @@ export const HotspotMenu = ({ menu, imagePositionInfo }: Props) => {
         <div
             ref={menuRef}
             className={twMerge(
-                "absolute z-10 flex gap-2 p-2 bg-popover/95 border border-border rounded-lg shadow-md",
+                "absolute z-10 flex gap-2 p-2 bg-popover/95 border ",
+                "border-border rounded-lg shadow-md",
                 menu.direction === "horizontal" ? "flex-row" : "flex-col"
             )}
         >
-            {items.map((item, index) => {
-                const tooltipContent = callIfFunction(item.tooltip?.content);
-                const isDisabled = callIfFunction(item.isDisabled) || false;
-                const content = callIfFunction(item.content);
-
-                return (
-                    <Tooltip
-                        key={index}
-                        content={tooltipContent}
-                        placement={item.tooltip?.position || "top"}
-                        disabled={!tooltipContent}
-                    >
-                        <div>
-                            <Button
-                                className={item?.props?.classNames?.button}
-                                variant={item?.props?.variant}
-                                color={item?.props?.color}
-                                disabled={isDisabled}
-                                onClick={item.action}
-                            >
-                                {content}
-                            </Button>
-                        </div>
-                    </Tooltip>
-                );
-            })}
+            {items.map((item, index) => (
+                <HotspotMenuItem item={item} key={index} />
+            ))}
         </div>
     );
 };
