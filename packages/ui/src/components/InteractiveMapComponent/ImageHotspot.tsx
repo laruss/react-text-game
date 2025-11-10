@@ -82,25 +82,25 @@ export const ImageHotspot = ({
             >
                 {isActive && content.active ? (
                     <img
-                        className={classNames.active}
+                        className={twMerge("max-w-none", classNames.active)}
                         src={content.active}
                         alt="hotspot active"
                     />
                 ) : isHovering && content.hover ? (
                     <img
-                        className={classNames.hover}
+                        className={twMerge("max-w-none", classNames.hover)}
                         src={content.hover}
                         alt="hotspot hover"
                     />
                 ) : isDisabled && content.disabled ? (
                     <img
-                        className={classNames.disabled}
+                        className={twMerge("max-w-none", classNames.disabled)}
                         src={content.disabled}
                         alt="hotspot disabled"
                     />
                 ) : (
                     <img
-                        className={classNames.idle}
+                        className={twMerge("max-w-none", classNames.idle)}
                         src={content.idle}
                         alt={hotspot.id || "hotspot"}
                     />
