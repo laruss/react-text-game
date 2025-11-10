@@ -1,3 +1,5 @@
+"use client";
+
 import { ActionsComponent, ActionType } from "@react-text-game/core/passages";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
