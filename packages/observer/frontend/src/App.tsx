@@ -13,6 +13,7 @@ import {
 import { usePassagesStore } from "@/app/usePassagesStore";
 import { PassageNode } from "@/components/PassageNode";
 import type { PassageExtendedMetadata } from "@/types";
+import { HotspotFinder } from "@/components/hotspot-finder/HotspotFinder.tsx";
 
 export const App = () => {
     const { data, loading, error, getPassages, updatePassagePosition } = usePassagesStore();
@@ -114,6 +115,7 @@ export const App = () => {
                 <Controls />
                 <MiniMap />
             </ReactFlow>
+            <HotspotFinder />
         </div>
     );
 };
