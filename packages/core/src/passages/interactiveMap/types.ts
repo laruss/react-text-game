@@ -1,6 +1,35 @@
 import { ButtonColor, ButtonVariant, MaybeCallable } from "#types";
 
 /**
+ * Position coordinates for hotspots on the map.
+ * Values are percentages (0-100) relative to the map's dimensions.
+ * Can be a static object or a function that returns an object for dynamic positioning.
+ *
+ * @example
+ * ```typescript
+ * // Static positioning
+ * position: { x: 50, y: 50 }  // Center of map
+ * position: { x: 25, y: 75 }  // Lower left quadrant
+ *
+ * // Dynamic positioning
+ * position: () => ({
+ *   x: player.isAtNight ? 30 : 70,
+ *   y: player.level * 10
+ * })
+ * ```
+ *
+ * @remarks
+ * - x: 0 = left edge, 50 = horizontal center, 100 = right edge
+ * - y: 0 = top edge, 50 = vertical center, 100 = bottom edge
+ */
+export type HotspotPosition = MaybeCallable<{
+    /** Horizontal position on the map, as a percentage (0-100) */
+    x: number;
+    /** Vertical position on the map, as a percentage (0-100) */
+    y: number;
+}>;
+
+/**
  * Base interface shared by all hotspot types.
  * Provides common properties for interaction, identification, and state management.
  */
@@ -393,44 +422,11 @@ interface BaseMapHotspot {
     /**
      * Position coordinates on the map.
      * Values are percentages (0-100) of the map's width and height.
+     * Can be static or dynamic (function-based) for reactive positioning.
+     *
+     * @see {@link HotspotPosition} for examples and coordinate system details
      */
-    position: {
-        /**
-         * Horizontal position as a percentage (0-100) from the left edge.
-         * Can be static number or a function for dynamic positioning.
-         *
-         * @example
-         * ```typescript
-         * x: 50      // Center horizontally
-         * x: 25      // 25% from the left
-         * x: () => player.isAtNight ? 30 : 70  // Dynamic based on state
-         * ```
-         *
-         * @remarks
-         * - 0 = left edge of the map
-         * - 50 = horizontal center
-         * - 100 = right edge of the map
-         */
-        x: number | (() => number);
-
-        /**
-         * Vertical position as a percentage (0-100) from the top edge.
-         * Can be static number or a function for dynamic positioning.
-         *
-         * @example
-         * ```typescript
-         * y: 50      // Center vertically
-         * y: 75      // 75% from the top
-         * y: () => player.level * 10  // Dynamic positioning
-         * ```
-         *
-         * @remarks
-         * - 0 = top edge of the map
-         * - 50 = vertical center
-         * - 100 = bottom edge of the map
-         */
-        y: number | (() => number);
-    };
+    position: HotspotPosition;
 }
 
 /**
@@ -589,32 +585,11 @@ export interface MapMenu {
     /**
      * Position of the menu on the map.
      * Values are percentages (0-100) relative to the map dimensions.
+     * Can be static or dynamic (function-based) for reactive positioning.
+     *
+     * @see {@link HotspotPosition} for examples and coordinate system details
      */
-    position: {
-        /**
-         * Horizontal position as a percentage (0-100) from the left edge.
-         * Can be static number or a function for dynamic positioning.
-         *
-         * @example
-         * ```typescript
-         * x: 50  // Center horizontally
-         * x: () => player.cursorX  // Follow cursor
-         * ```
-         */
-        x: MaybeCallable<number>;
-
-        /**
-         * Vertical position as a percentage (0-100) from the top edge.
-         * Can be static number or a function for dynamic positioning.
-         *
-         * @example
-         * ```typescript
-         * y: 50  // Center vertically
-         * y: () => player.cursorY  // Follow cursor
-         * ```
-         */
-        y: MaybeCallable<number>;
-    };
+    position: HotspotPosition;
 
     /**
      * Layout direction for menu items.
