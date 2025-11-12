@@ -26,17 +26,13 @@ export const HotspotMenu = ({ menu, imagePositionInfo }: Props) => {
     // Position the menu based on percentage coordinates and image position info
     useEffect(() => {
         if (menuRef.current && imagePositionInfo && items.length) {
-            const { x, y } = menu.position;
+            const { x, y } = callIfFunction(menu.position);
             const { offsetLeft, offsetTop, scaledWidth, scaledHeight } =
                 imagePositionInfo;
 
             // Calculate position based on percentage of the scaled image
-            const xPos =
-                offsetLeft +
-                ((typeof x === "number" ? x : x()) / 100) * scaledWidth;
-            const yPos =
-                offsetTop +
-                ((typeof y === "number" ? y : y()) / 100) * scaledHeight;
+            const xPos = offsetLeft + (x / 100) * scaledWidth;
+            const yPos = offsetTop + (y / 100) * scaledHeight;
 
             menuRef.current.style.left = `${xPos}px`;
             menuRef.current.style.top = `${yPos}px`;

@@ -23,18 +23,14 @@ export const Hotspot = ({ hotspot, imagePositionInfo }: HotspotProps) => {
     // Position the hotspot based on percentage coordinates and image position info
     useEffect(() => {
         if (hotspotRef.current && imagePositionInfo) {
-            const { x, y } = hotspot.position;
+            const { x, y } = callIfFunction(hotspot.position);
             const { offsetLeft, offsetTop, scaledWidth, scaledHeight } =
                 imagePositionInfo;
 
             // Calculate position based on percentage of the scaled image
             // x and y are percentages (0-100), so we convert to 0-1 by dividing by 100
-            const xPos =
-                offsetLeft +
-                ((typeof x === "number" ? x : x()) / 100) * scaledWidth;
-            const yPos =
-                offsetTop +
-                ((typeof y === "number" ? y : y()) / 100) * scaledHeight;
+            const xPos = offsetLeft + (x / 100) * scaledWidth;
+            const yPos = offsetTop + (y / 100) * scaledHeight;
 
             hotspotRef.current.style.left = `${xPos}px`;
             hotspotRef.current.style.top = `${yPos}px`;

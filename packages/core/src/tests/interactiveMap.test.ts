@@ -213,7 +213,9 @@ describe("InteractiveMap", () => {
 
             expect(result.hotspots).toHaveLength(1);
             expect(result.hotspots[0]?.type).toBe("label");
-            expect((result.hotspots[0] as MapLabelHotspot).content).toBe("Village");
+            expect((result.hotspots[0] as MapLabelHotspot).content).toBe(
+                "Village"
+            );
             expect((result.hotspots[0] as MapLabelHotspot).position).toEqual({
                 x: 30,
                 y: 40,
@@ -247,7 +249,7 @@ describe("InteractiveMap", () => {
             const hotspot: MapLabelHotspot = {
                 type: "label",
                 content: "Test",
-                position: { x: () => 25, y: () => 75 },
+                position: () => ({ x: 25, y: 75 }),
                 action: () => {},
             };
             const options: InteractiveMapOptions = {
@@ -259,11 +261,11 @@ describe("InteractiveMap", () => {
             const result = map.display();
 
             const pos = (result.hotspots[0] as MapLabelHotspot).position;
-            expect(typeof pos.x).toBe("function");
-            expect(typeof pos.y).toBe("function");
-            if (typeof pos.x === "function" && typeof pos.y === "function") {
-                expect(pos.x()).toBe(25);
-                expect(pos.y()).toBe(75);
+            expect(typeof pos).toBe("function");
+            if (typeof pos === "function") {
+                const res = pos();
+                expect(res.x).toBe(25);
+                expect(res.y).toBe(75);
             }
         });
 
@@ -296,11 +298,15 @@ describe("InteractiveMap", () => {
 
             expect(resultHotspot.id).toBe("village-hotspot");
             expect(resultHotspot.isDisabled).toBe(false);
-            expect(resultHotspot.tooltip?.content).toBe("Click to visit village");
+            expect(resultHotspot.tooltip?.content).toBe(
+                "Click to visit village"
+            );
             expect(resultHotspot.tooltip?.position).toBe("top");
             expect(resultHotspot.props?.variant).toBe("bordered");
             expect(resultHotspot.props?.color).toBe("primary");
-            expect(resultHotspot.props?.classNames?.button).toBe("custom-button");
+            expect(resultHotspot.props?.classNames?.button).toBe(
+                "custom-button"
+            );
         });
 
         test("label hotspot with dynamic disabled state", () => {
@@ -373,9 +379,9 @@ describe("InteractiveMap", () => {
 
             expect(result.hotspots).toHaveLength(1);
             expect(imageHotspot.type).toBe("image");
-            expect((imageHotspot.content as ImageHotspotContentObject).idle).toBe(
-                "/icon.png"
-            );
+            expect(
+                (imageHotspot.content as ImageHotspotContentObject).idle
+            ).toBe("/icon.png");
         });
 
         test("image hotspot with all image states", () => {
@@ -462,7 +468,9 @@ describe("InteractiveMap", () => {
             );
             expect(resultHotspot.props?.classNames?.idle).toBe("idle-class");
             expect(resultHotspot.props?.classNames?.hover).toBe("hover-class");
-            expect(resultHotspot.props?.classNames?.active).toBe("active-class");
+            expect(resultHotspot.props?.classNames?.active).toBe(
+                "active-class"
+            );
             expect(resultHotspot.props?.classNames?.disabled).toBe(
                 "disabled-class"
             );
@@ -529,7 +537,9 @@ describe("InteractiveMap", () => {
             const result = map.display();
 
             expect(result.hotspots).toHaveLength(1);
-            expect((result.hotspots[0] as SideLabelHotspot).position).toBe("top");
+            expect((result.hotspots[0] as SideLabelHotspot).position).toBe(
+                "top"
+            );
         });
 
         test("side label hotspots on all sides", () => {
@@ -567,11 +577,15 @@ describe("InteractiveMap", () => {
             const result = map.display();
 
             expect(result.hotspots).toHaveLength(4);
-            expect((result.hotspots[0] as SideLabelHotspot).position).toBe("top");
+            expect((result.hotspots[0] as SideLabelHotspot).position).toBe(
+                "top"
+            );
             expect((result.hotspots[1] as SideLabelHotspot).position).toBe(
                 "bottom"
             );
-            expect((result.hotspots[2] as SideLabelHotspot).position).toBe("left");
+            expect((result.hotspots[2] as SideLabelHotspot).position).toBe(
+                "left"
+            );
             expect((result.hotspots[3] as SideLabelHotspot).position).toBe(
                 "right"
             );
@@ -597,12 +611,8 @@ describe("InteractiveMap", () => {
             const content = imageHotspot.content as ImageHotspotContentObject;
 
             expect(result.hotspots).toHaveLength(1);
-            expect(imageHotspot.position).toBe(
-                "bottom"
-            );
-            expect(content.idle).toBe(
-                "/compass.png"
-            );
+            expect(imageHotspot.position).toBe("bottom");
+            expect(content.idle).toBe("/compass.png");
         });
 
         test("side image hotspots with all image states", () => {
@@ -695,7 +705,7 @@ describe("InteractiveMap", () => {
         test("menu with dynamic position", () => {
             const menu: MapMenu = {
                 type: "menu",
-                position: { x: () => 25, y: () => 75 },
+                position: () => ({ x: 25, y: 75 }),
                 items: [
                     {
                         type: "label",
@@ -713,14 +723,11 @@ describe("InteractiveMap", () => {
             const result = map.display();
             const resultMenu = result.hotspots[0] as MapMenu;
 
-            expect(typeof resultMenu.position.x).toBe("function");
-            expect(typeof resultMenu.position.y).toBe("function");
-            if (
-                typeof resultMenu.position.x === "function" &&
-                typeof resultMenu.position.y === "function"
-            ) {
-                expect(resultMenu.position.x()).toBe(25);
-                expect(resultMenu.position.y()).toBe(75);
+            expect(typeof resultMenu.position).toBe("function");
+            if (typeof resultMenu.position === "function") {
+                const res = resultMenu.position();
+                expect(res.x).toBe(25);
+                expect(res.y).toBe(75);
             }
         });
 
@@ -981,9 +988,9 @@ describe("InteractiveMap", () => {
             expect((exploreResult.hotspots[0] as MapLabelHotspot).content).toBe(
                 "Explore"
             );
-            expect((exploreResult.hotspots[1] as SideLabelHotspot).content).toBe(
-                "Rest"
-            );
+            expect(
+                (exploreResult.hotspots[1] as SideLabelHotspot).content
+            ).toBe("Rest");
         });
 
         test("empty array from function", () => {
@@ -1002,7 +1009,10 @@ describe("InteractiveMap", () => {
             const options: InteractiveMapOptions = {
                 image: "/map.jpg",
                 // @ts-expect-error TS2322
-                hotspots: (props: { showSecret: boolean; showShop: boolean }) => [
+                hotspots: (props: {
+                    showSecret: boolean;
+                    showShop: boolean;
+                }) => [
                     {
                         type: "label",
                         content: "Home",
@@ -1042,9 +1052,9 @@ describe("InteractiveMap", () => {
                 showShop: false,
             });
             expect(secretOnlyResult.hotspots).toHaveLength(2);
-            expect((secretOnlyResult.hotspots[1] as MapLabelHotspot).content).toBe(
-                "Secret"
-            );
+            expect(
+                (secretOnlyResult.hotspots[1] as MapLabelHotspot).content
+            ).toBe("Secret");
 
             const noneResult = map.display({
                 showSecret: false,
@@ -1375,8 +1385,20 @@ describe("InteractiveMap", () => {
 
         test("hotspot with all button color variants", () => {
             const colors: Array<
-                "default" | "primary" | "secondary" | "success" | "warning" | "danger"
-            > = ["default", "primary", "secondary", "success", "warning", "danger"];
+                | "default"
+                | "primary"
+                | "secondary"
+                | "success"
+                | "warning"
+                | "danger"
+            > = [
+                "default",
+                "primary",
+                "secondary",
+                "success",
+                "warning",
+                "danger",
+            ];
 
             const options: InteractiveMapOptions = {
                 image: "/map.jpg",
@@ -1409,7 +1431,15 @@ describe("InteractiveMap", () => {
                 | "faded"
                 | "shadow"
                 | "ghost"
-            > = ["solid", "bordered", "light", "flat", "faded", "shadow", "ghost"];
+            > = [
+                "solid",
+                "bordered",
+                "light",
+                "flat",
+                "faded",
+                "shadow",
+                "ghost",
+            ];
 
             const options: InteractiveMapOptions = {
                 image: "/map.jpg",
@@ -1452,9 +1482,9 @@ describe("InteractiveMap", () => {
 
             expect(result.hotspots).toHaveLength(4);
             zooms.forEach((zoom, i) => {
-                expect((result.hotspots[i] as MapImageHotspot).props?.zoom).toBe(
-                    zoom
-                );
+                expect(
+                    (result.hotspots[i] as MapImageHotspot).props?.zoom
+                ).toBe(zoom);
             });
         });
 
