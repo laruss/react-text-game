@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Game, NewOptions, useCurrentPassage } from "@react-text-game/core";
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ type DevModeDrawerProps = Readonly<{
 export const DevModeDrawer = ({ options }: DevModeDrawerProps) => {
     const { isDevMode } = options;
     const [isOpen, setIsOpen] = useState(false);
-    const passage = useCurrentPassage();
+    const [passage] = useCurrentPassage();
     const [saveStateOnReload, setSaveStateOnReload] = useLocalStorage(
         "saveStateOnReload",
         true
@@ -54,7 +54,9 @@ export const DevModeDrawer = ({ options }: DevModeDrawerProps) => {
 
                 {isOpen && (
                     <div className="p-4 border-t border-border">
-                        <h3 className="text-lg font-semibold mb-3 text-card-foreground">Dev Mode</h3>
+                        <h3 className="text-lg font-semibold mb-3 text-card-foreground">
+                            Dev Mode
+                        </h3>
                         <div className="space-y-2">
                             <div className="flex items-center flex-wrap gap-4">
                                 <div className="flex items-center gap-2">
@@ -68,12 +70,18 @@ export const DevModeDrawer = ({ options }: DevModeDrawerProps) => {
                                             )
                                         }
                                     />
-                                    <label htmlFor="save-state-on-reload" className="text-card-foreground">
+                                    <label
+                                        htmlFor="save-state-on-reload"
+                                        className="text-card-foreground"
+                                    >
                                         Save state on reload
                                     </label>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <label htmlFor="current-passage-id" className="text-card-foreground">
+                                    <label
+                                        htmlFor="current-passage-id"
+                                        className="text-card-foreground"
+                                    >
                                         Current passage ID
                                     </label>
                                     <input

@@ -87,9 +87,9 @@ describe("Storage", () => {
 
         test("sets boolean values", () => {
             Storage.setValue("$.settings.musicEnabled", true);
-            expect(Storage.getValue<boolean>("$.settings.musicEnabled")).toEqual(
-                [true]
-            );
+            expect(
+                Storage.getValue<boolean>("$.settings.musicEnabled")
+            ).toEqual([true]);
         });
 
         test("sets array values", () => {
@@ -369,9 +369,7 @@ describe("Storage", () => {
 
         test("handles unicode characters", () => {
             Storage.setValue("$.name", "H�ro �� <�");
-            expect(Storage.getValue<string>("$.name")).toEqual([
-                "H�ro �� <�",
-            ]);
+            expect(Storage.getValue<string>("$.name")).toEqual(["H�ro �� <�"]);
         });
 
         test("overwrites existing different type", () => {

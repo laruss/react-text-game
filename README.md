@@ -97,66 +97,66 @@ npm install @react-text-game/mdx @mdx-js/mdx @mdx-js/react
 ### Basic Example
 
 ```tsx
-import { Game, createEntity, newStory } from '@react-text-game/core';
-import { GameProvider, PassageController } from '@react-text-game/ui';
-import '@react-text-game/ui/styles';
+import { Game, createEntity, newStory } from "@react-text-game/core";
+import { GameProvider, PassageController } from "@react-text-game/ui";
+import "@react-text-game/ui/styles";
 
 // Initialize the game
 await Game.init({
-  gameId: 'my-game',
-  gameName: 'My Adventure',
-  translations: {
-    defaultLanguage: 'en',
-    fallbackLanguage: 'en',
-    resources: {
-      en: {
-        passages: {
-          intro: 'Welcome to the Game'
-        }
-      }
-    }
-  }
+    gameId: "my-game",
+    gameName: "My Adventure",
+    translations: {
+        defaultLanguage: "en",
+        fallbackLanguage: "en",
+        resources: {
+            en: {
+                passages: {
+                    intro: "Welcome to the Game",
+                },
+            },
+        },
+    },
 });
 
 // Create a game entity (factory-first approach)
-const player = createEntity('player', {
-  name: 'Hero',
-  stats: {
-    health: 100,
-    mana: 50,
-  },
-  inventory: [] as string[],
+const player = createEntity("player", {
+    name: "Hero",
+    stats: {
+        health: 100,
+        mana: 50,
+    },
+    inventory: [] as string[],
 });
 
 // Create a story passage
-const intro = newStory('intro', () => [
-  {
-    type: 'header',
-    content: 'Welcome to the Game',
-    props: { level: 1 }
-  },
-  {
-    type: 'text',
-    content: `Hello, ${player.name}!`
-  },
-  {
-    type: 'actions',
-    content: [
-      {
-        label: 'Start Adventure',
-        action: () => Game.jumpTo('chapter-1')
-      }
-    ]
-  }
+const intro = newStory("intro", () => [
+    {
+        type: "header",
+        content: "Welcome to the Game",
+        props: { level: 1 },
+    },
+    {
+        type: "text",
+        content: `Hello, ${player.name}!`,
+    },
+    {
+        type: "actions",
+        content: [
+            {
+                label: "Start Adventure",
+                action: () => Game.jumpTo("chapter-1"),
+            },
+        ],
+    },
 ]);
 
 // React component
 function App() {
-  return (
-    <GameProvider game={Game}>
-      <PassageController />
-    </GameProvider>
-  );
+    return (
+        <GameProvider game={Game}>
+            <PassageController />
+        </GameProvider>
+    );
 }
 
 // Start the game
@@ -174,18 +174,20 @@ React Text Game ships with i18next baked into the core engine and the UI package
 - Supported language codes are derived from your resources, and missing keys fall back to the language you declare in `fallbackLanguage`.
 
 ```tsx
-import { useGameTranslation } from '@react-text-game/core/i18n';
-import { LanguageToggle } from '@react-text-game/ui';
+import { useGameTranslation } from "@react-text-game/core/i18n";
+import { LanguageToggle } from "@react-text-game/ui";
 
 function StatusBar() {
-  const { t, currentLanguage } = useGameTranslation('common');
+    const { t, currentLanguage } = useGameTranslation("common");
 
-  return (
-    <header className="flex items-center gap-4">
-      <span>{t('status.currentLanguage', { language: currentLanguage })}</span>
-      <LanguageToggle />
-    </header>
-  );
+    return (
+        <header className="flex items-center gap-4">
+            <span>
+                {t("status.currentLanguage", { language: currentLanguage })}
+            </span>
+            <LanguageToggle />
+        </header>
+    );
 }
 ```
 
@@ -268,12 +270,12 @@ Contributions are welcome! To contribute:
 3. **Follow existing patterns** - Use factory functions, semantic colors in UI, and TypeScript types
 4. **Test your changes** in the test apps (`apps/core-test-app` or `apps/ui-test-app`)
 5. **Ensure code quality**:
-   - Run `bun run lint` to check for linting issues
-   - Run `bun run check-types` to verify TypeScript types
-   - Run `bun run format` to format code with Prettier
+    - Run `bun run lint` to check for linting issues
+    - Run `bun run check-types` to verify TypeScript types
+    - Run `bun run format` to format code with Prettier
 6. **Create a changeset** if you're modifying a package:
-   - Run `bun run changeset` and follow the prompts
-   - This helps with version management and changelog generation
+    - Run `bun run changeset` and follow the prompts
+    - This helps with version management and changelog generation
 7. **Submit a pull request** with a clear description of your changes
 
 Please ensure all checks pass before submitting your PR. If you're adding new features, consider updating the documentation in `apps/docs`.
@@ -285,8 +287,8 @@ MIT (c) [laruss](https://github.com/laruss)
 ## Links
 
 - **NPM Packages:**
-  - [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
-  - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
-  - [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
+    - [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
+    - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
+    - [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
 - **Repository:** [GitHub](https://github.com/laruss/react-text-game)
 - **Issues:** Report bugs and request features on GitHub Issues

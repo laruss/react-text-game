@@ -71,7 +71,7 @@ export async function loadUITranslations(): Promise<
  * const passageText = t('forest.description');
  * ```
  */
-export const getGameTranslation = (namespace: string = 'passages') => {
+export const getGameTranslation = (namespace: string = "passages") => {
     // Use i18next.language to get the current language dynamically
     return i18next.getFixedT(i18next.language, namespace);
 };

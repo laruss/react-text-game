@@ -21,7 +21,10 @@ export const useRestartGame = () => {
         const systemSave = await getSystemSave();
 
         if (!systemSave) {
-            return { success: false, error: "System save not found. Cannot restart game." }
+            return {
+                success: false,
+                error: "System save not found. Cannot restart game.",
+            };
         }
 
         Game.clearAutoSave();

@@ -209,6 +209,68 @@ describe("Game", () => {
             expect(Game.selfState.currentPassageId).toBe(passageId);
         });
 
+        test("generates renderId on jumpTo", () => {
+            const passageId = uniqueId("intro");
+            new TestPassage(passageId);
+
+            Game.jumpTo(passageId);
+
+            expect(Game.selfState.renderId).not.toBeNull();
+            expect(typeof Game.selfState.renderId).toBe("string");
+        });
+
+        test("renderId changes on each jumpTo call", () => {
+            const passageId = uniqueId("intro");
+            new TestPassage(passageId);
+
+            Game.jumpTo(passageId);
+            const firstRenderId = Game.selfState.renderId;
+
+            Game.jumpTo(passageId);
+            const secondRenderId = Game.selfState.renderId;
+
+            expect(firstRenderId).not.toBeNull();
+            expect(secondRenderId).not.toBeNull();
+            expect(firstRenderId).not.toBe(secondRenderId);
+        });
+
+        test("renderId is unique across multiple jumps", () => {
+            const id1 = uniqueId("p1");
+            const id2 = uniqueId("p2");
+            new TestPassage(id1);
+            new TestPassage(id2);
+
+            const renderIds = new Set<string>();
+
+            for (let i = 0; i < 10; i++) {
+                Game.jumpTo(i % 2 === 0 ? id1 : id2);
+                const renderId = Game.selfState.renderId;
+                expect(renderId).not.toBeNull();
+                if (renderId) {
+                    renderIds.add(renderId);
+                }
+            }
+
+            // All render IDs should be unique
+            expect(renderIds.size).toBe(10);
+        });
+
+        test("jumping to same passage multiple times generates different renderIds", () => {
+            const passageId = uniqueId("intro");
+            new TestPassage(passageId);
+
+            const renderIds: Array<string | null> = [];
+            for (let i = 0; i < 5; i++) {
+                Game.jumpTo(passageId);
+                renderIds.push(Game.selfState.renderId);
+            }
+
+            // All render IDs should exist and be unique
+            expect(renderIds.every((id) => id !== null)).toBe(true);
+            const uniqueIds = new Set(renderIds);
+            expect(uniqueIds.size).toBe(5);
+        });
+
         test("jumps to passage by object", () => {
             const passageId = uniqueId("intro");
             const passage = new TestPassage(passageId);

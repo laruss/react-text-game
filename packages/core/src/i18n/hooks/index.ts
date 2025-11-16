@@ -9,4 +9,4 @@
  *
  * @see {@link useGameTranslation} for the main i18n hook
  */
-export * from './useGameTranslation';
+export * from "./useGameTranslation";

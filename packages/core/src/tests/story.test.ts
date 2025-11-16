@@ -698,7 +698,9 @@ describe("Story", () => {
 
             const result = story.display();
 
-            expect((result.components[0] as TextComponent).content).toBe("Bold text");
+            expect((result.components[0] as TextComponent).content).toBe(
+                "Bold text"
+            );
         });
 
         test("actions with all color variants", () => {
@@ -828,15 +830,15 @@ describe("Story", () => {
             const result = story.display();
             const conversation = result.components[0] as ConversationComponent;
 
-            expect(
-                conversation.content[0]?.props?.classNames?.base
-            ).toBe("custom-base");
-            expect(
-                conversation.content[0]?.props?.classNames?.content
-            ).toBe("custom-content");
-            expect(
-                conversation.content[0]?.props?.classNames?.avatar
-            ).toBe("custom-avatar");
+            expect(conversation.content[0]?.props?.classNames?.base).toBe(
+                "custom-base"
+            );
+            expect(conversation.content[0]?.props?.classNames?.content).toBe(
+                "custom-content"
+            );
+            expect(conversation.content[0]?.props?.classNames?.avatar).toBe(
+                "custom-avatar"
+            );
         });
 
         test("multiple nested anotherStory components", () => {

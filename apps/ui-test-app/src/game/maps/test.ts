@@ -1,15 +1,22 @@
-import { Game, newInteractiveMap } from "@react-text-game/core";
+import { createEntity, Game, newInteractiveMap } from "@react-text-game/core";
+
+export const testInteractiveMapEntity = createEntity("testMapEntity", {
+    isSecretHotspotDisplayed: false,
+});
 
 export const testInteractiveMap = newInteractiveMap("testMap", {
     image: "city.png",
     bgImage: "img.png",
     hotspots: [
-        () => ({
-            action: () => Game.jumpTo("testStory"),
-            type: "label",
-            content: "Hotspot",
-            position: { x: 50, y: 50 },
-        }),
+        () =>
+            testInteractiveMapEntity.isSecretHotspotDisplayed
+                ? {
+                      action: () => Game.jumpTo("testStory"),
+                      type: "label",
+                      content: "Hotspot",
+                      position: { x: 50, y: 50 },
+                  }
+                : undefined,
         {
             action: () => Game.jumpTo("testMap2"),
             type: "label",
@@ -21,7 +28,11 @@ export const testInteractiveMap = newInteractiveMap("testMap", {
             },
         },
         () => ({
-            action: () => console.log("Image Hotspot clicked"),
+            action: () => {
+                testInteractiveMapEntity.isSecretHotspotDisplayed = true;
+                console.log("Image Hotspot clicked");
+                Game.jumpTo("testMap");
+            },
             type: "image",
             content: {
                 idle: "imageHotspot/idle.png",

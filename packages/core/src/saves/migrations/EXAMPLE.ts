@@ -25,7 +25,9 @@ import { registerMigration, SaveMigration } from "./index";
  * - IDE autocomplete for the specific fields
  * - Compile-time validation of the migration logic
  */
-const migration_1_0_to_1_1: SaveMigration<{ player?: { inventory: string[] } }> = {
+const migration_1_0_to_1_1: SaveMigration<{
+    player?: { inventory: string[] };
+}> = {
     from: "1.0.0",
     to: "1.1.0",
     description: "Added player inventory system",

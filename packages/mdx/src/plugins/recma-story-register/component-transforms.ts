@@ -1,10 +1,19 @@
-import type { ArrayExpression, Expression, ObjectExpression, Property } from "estree";
+import type {
+    ArrayExpression,
+    Expression,
+    ObjectExpression,
+    Property,
+} from "estree";
 import { valueToEstree } from "estree-util-value-to-estree";
 
 import type { MdxStructItem } from "#types";
 
 import { contentToExpression } from "./content.js";
-import { createProperty, createPropsProperty, extractExpression } from "./estree-helpers.js";
+import {
+    createProperty,
+    createPropsProperty,
+    extractExpression,
+} from "./estree-helpers.js";
 import { isExpression } from "./guards.js";
 import type { TemplateContent } from "./types.js";
 
@@ -41,7 +50,9 @@ function itemToObjectExpression(item: MdxStructItem): ObjectExpression {
 }
 
 function buildHeadingProperties(item: MdxStructItem): Property[] {
-    const content = contentToExpression(item.children as string | TemplateContent);
+    const content = contentToExpression(
+        item.children as string | TemplateContent
+    );
     return [
         createProperty("type", valueToEstree("header")),
         createProperty("content", content),
@@ -53,7 +64,9 @@ function buildHeadingProperties(item: MdxStructItem): Property[] {
 }
 
 function buildTextProperties(item: MdxStructItem): Property[] {
-    const content = contentToExpression(item.children as string | TemplateContent);
+    const content = contentToExpression(
+        item.children as string | TemplateContent
+    );
     return [
         createProperty("type", valueToEstree("text")),
         createProperty("content", content),
@@ -147,7 +160,9 @@ function buildActionsProperties(item: MdxStructItem): Property[] {
             const actionProps: Property[] = [
                 createProperty(
                     "label",
-                    contentToExpression(child.children as string | TemplateContent)
+                    contentToExpression(
+                        child.children as string | TemplateContent
+                    )
                 ),
             ];
 
@@ -193,7 +208,9 @@ function buildConversationProperties(item: MdxStructItem): Property[] {
             const bubbleProperties: Property[] = [
                 createProperty(
                     "content",
-                    contentToExpression(child.children as string | TemplateContent)
+                    contentToExpression(
+                        child.children as string | TemplateContent
+                    )
                 ),
             ];
 
@@ -202,26 +219,36 @@ function buildConversationProperties(item: MdxStructItem): Property[] {
             if (who) {
                 if (isExpression(who) && who.data?.estree) {
                     bubbleProperties.push(
-                        createProperty("who", extractExpression(who.data.estree))
+                        createProperty(
+                            "who",
+                            extractExpression(who.data.estree)
+                        )
                     );
                 } else if (typeof who === "object") {
-                    bubbleProperties.push(createProperty("who", valueToEstree(who)));
+                    bubbleProperties.push(
+                        createProperty("who", valueToEstree(who))
+                    );
                 }
             }
 
             if (typeof color === "string" && color.startsWith("#")) {
-                bubbleProperties.push(createProperty("color", valueToEstree(color)));
+                bubbleProperties.push(
+                    createProperty("color", valueToEstree(color))
+                );
             }
 
             if (
                 typeof side === "string" &&
                 (side === "left" || side === "right")
             ) {
-                bubbleProperties.push(createProperty("side", valueToEstree(side)));
+                bubbleProperties.push(
+                    createProperty("side", valueToEstree(side))
+                );
             }
 
             const baseProps: Record<string, unknown> = {};
-            const expressionProps: Array<{ key: string; value: Expression }> = [];
+            const expressionProps: Array<{ key: string; value: Expression }> =
+                [];
 
             if (classNames) {
                 if (isExpression(classNames) && classNames.data?.estree) {
@@ -234,7 +261,10 @@ function buildConversationProperties(item: MdxStructItem): Property[] {
                 }
             }
 
-            const propsProperty = createPropsProperty(baseProps, expressionProps);
+            const propsProperty = createPropsProperty(
+                baseProps,
+                expressionProps
+            );
             if (propsProperty) {
                 bubbleProperties.push(propsProperty);
             }
@@ -254,7 +284,10 @@ function buildConversationProperties(item: MdxStructItem): Property[] {
         }),
     ];
 
-    if (item.props.appearance === "byClick" || item.props.appearance === "atOnce") {
+    if (
+        item.props.appearance === "byClick" ||
+        item.props.appearance === "atOnce"
+    ) {
         properties.push(
             createProperty("appearance", valueToEstree(item.props.appearance))
         );

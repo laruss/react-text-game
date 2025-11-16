@@ -34,20 +34,20 @@ The migration system allows you to make changes to your game's save structure wh
 When you make a breaking change to your save structure, register a migration:
 
 ```typescript
-import { registerMigration } from '@react-text-game/core/saves';
+import { registerMigration } from "@react-text-game/core/saves";
 
 // After updating your game version to 1.1.0
 registerMigration({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Added player inventory system",
-  migrate: (save) => ({
-    ...save,
-    player: {
-      ...save.player,
-      inventory: [] // Add default value for new field
-    }
-  })
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Added player inventory system",
+    migrate: (save) => ({
+        ...save,
+        player: {
+            ...save.player,
+            inventory: [], // Add default value for new field
+        },
+    }),
 });
 ```
 
@@ -68,6 +68,7 @@ When a player loads a save from an older version, the system:
 5. **Loads** the migrated data
 
 Example migration chain:
+
 ```
 Save v1.0.0 → Migration(1.0.0→1.1.0) → Migration(1.1.0→1.2.0) → Migration(1.2.0→2.0.0) → Current v2.0.0
 ```
@@ -75,6 +76,7 @@ Save v1.0.0 → Migration(1.0.0→1.1.0) → Migration(1.1.0→1.2.0) → Migrat
 ### Validation
 
 In **dev mode**, the system validates your migration chain on startup:
+
 - Checks for orphaned versions
 - Ensures all base versions can reach the current version
 - Warns about dead ends
@@ -88,29 +90,29 @@ Register migrations **after** `Game.init()` in your game's entry point:
 ```typescript
 // src/index.tsx or src/App.tsx
 
-import { Game, registerMigration } from '@react-text-game/core';
+import { Game, registerMigration } from "@react-text-game/core";
 
 async function initGame() {
-  await Game.init({
-    gameName: "My Adventure Game",
-    gameVersion: "2.0.0", // Your current version
-    isDevMode: import.meta.env.DEV
-  });
+    await Game.init({
+        gameName: "My Adventure Game",
+        gameVersion: "2.0.0", // Your current version
+        isDevMode: import.meta.env.DEV,
+    });
 
-  // Register all your migrations
-  registerMigration({
-    from: "1.0.0",
-    to: "1.1.0",
-    description: "Added inventory",
-    migrate: addInventorySystem
-  });
+    // Register all your migrations
+    registerMigration({
+        from: "1.0.0",
+        to: "1.1.0",
+        description: "Added inventory",
+        migrate: addInventorySystem,
+    });
 
-  registerMigration({
-    from: "1.1.0",
-    to: "2.0.0",
-    description: "Renamed 'hp' to 'health'",
-    migrate: renameHpToHealth
-  });
+    registerMigration({
+        from: "1.1.0",
+        to: "2.0.0",
+        description: "Renamed 'hp' to 'health'",
+        migrate: renameHpToHealth,
+    });
 }
 ```
 
@@ -121,14 +123,14 @@ Migrations should be **pure functions** that don't mutate the input:
 ```typescript
 // ✅ GOOD: Returns new object
 const migrate = (save) => ({
-  ...save,
-  newField: "default value"
+    ...save,
+    newField: "default value",
 });
 
 // ❌ BAD: Mutates input
 const migrate = (save) => {
-  save.newField = "default value";
-  return save;
+    save.newField = "default value";
+    return save;
 };
 ```
 
@@ -145,38 +147,40 @@ The migration system supports TypeScript generics for improved type safety. You 
 ```typescript
 // Define the shape of data this migration works with
 interface PlayerInventoryData {
-  player?: {
-    inventory: string[];
-  };
+    player?: {
+        inventory: string[];
+    };
 }
 
 // Use the generic type parameter
 registerMigration<PlayerInventoryData>({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Added player inventory",
-  migrate: (save) => {
-    const player = save.player || {};
-    return {
-      ...save,
-      player: {
-        ...player,
-        inventory: [], // TypeScript knows this should be string[]
-      }
-    };
-  }
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Added player inventory",
+    migrate: (save) => {
+        const player = save.player || {};
+        return {
+            ...save,
+            player: {
+                ...player,
+                inventory: [], // TypeScript knows this should be string[]
+            },
+        };
+    },
 });
 ```
 
 #### When to Use Generics
 
 **✅ Use generics when:**
+
 - Working with complex nested data structures
 - The migration logic is non-trivial
 - You want IDE autocomplete for specific fields
 - Type safety would help prevent bugs
 
 **⚠️ Optional for:**
+
 - Simple migrations (adding a top-level field)
 - One-line transformations
 - Migrations where types are obvious
@@ -184,29 +188,29 @@ registerMigration<PlayerInventoryData>({
 ```typescript
 // Simple migration - generics optional
 registerMigration({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Add settings",
-  migrate: (save) => ({ ...save, settings: {} })
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Add settings",
+    migrate: (save) => ({ ...save, settings: {} }),
 });
 
 // Complex migration - generics recommended
 interface OldInventoryFormat {
-  inventory?: string[];
+    inventory?: string[];
 }
 
 registerMigration<OldInventoryFormat>({
-  from: "1.0.0",
-  to: "2.0.0",
-  description: "Convert inventory to objects",
-  migrate: (save) => {
-    const items = (save.inventory || []).map((name, i) => ({
-      id: `item_${i}`,
-      name,
-      quantity: 1
-    }));
-    return { ...save, inventory: items };
-  }
+    from: "1.0.0",
+    to: "2.0.0",
+    description: "Convert inventory to objects",
+    migrate: (save) => {
+        const items = (save.inventory || []).map((name, i) => ({
+            id: `item_${i}`,
+            name,
+            quantity: 1,
+        }));
+        return { ...save, inventory: items };
+    },
 });
 ```
 
@@ -214,15 +218,16 @@ registerMigration<OldInventoryFormat>({
 
 Follow [semver](https://semver.org/) to communicate the impact of changes:
 
-| Version Change | Migration? | Example |
-|----------------|------------|---------|
-| **Patch** (`1.0.0` → `1.0.1`) | ❌ No | Bug fixes, no save structure changes |
-| **Minor** (`1.0.0` → `1.1.0`) | ⚠️ Optional | New optional fields with defaults |
+| Version Change                | Migration?  | Example                                  |
+| ----------------------------- | ----------- | ---------------------------------------- |
+| **Patch** (`1.0.0` → `1.0.1`) | ❌ No       | Bug fixes, no save structure changes     |
+| **Minor** (`1.0.0` → `1.1.0`) | ⚠️ Optional | New optional fields with defaults        |
 | **Major** (`1.0.0` → `2.0.0`) | ✅ Required | Breaking changes, removed/renamed fields |
 
 ### When to Register a Migration
 
 Register a migration when you:
+
 - ✅ Add a new required field
 - ✅ Rename or remove a field
 - ✅ Change the structure of existing data
@@ -236,58 +241,58 @@ Register a migration when you:
 
 ```typescript
 // ✅ GOOD
-description: "Renamed 'hp' field to 'health' in player object"
+description: "Renamed 'hp' field to 'health' in player object";
 
 // ❌ BAD
-description: "Updated player"
+description: "Updated player";
 ```
 
 ### 2. Provide Sensible Defaults
 
 ```typescript
 migrate: (save) => ({
-  ...save,
-  player: {
-    ...save.player,
-    inventory: [], // Empty array for new players
-    gold: 0,       // Start with 0 gold
-    level: 1       // Default level
-  }
-})
+    ...save,
+    player: {
+        ...save.player,
+        inventory: [], // Empty array for new players
+        gold: 0, // Start with 0 gold
+        level: 1, // Default level
+    },
+});
 ```
 
 ### 3. Handle Optional Fields
 
 ```typescript
 migrate: (save) => {
-  const player = save.player as any;
-  return {
-    ...save,
-    player: {
-      ...player,
-      // Use existing value if present, otherwise default
-      health: player.hp ?? player.health ?? 100
-    }
-  };
+    const player = save.player as any;
+    return {
+        ...save,
+        player: {
+            ...player,
+            // Use existing value if present, otherwise default
+            health: player.hp ?? player.health ?? 100,
+        },
+    };
 };
 ```
 
 ### 4. Test Your Migrations
 
 ```typescript
-import { runMigrations } from '@react-text-game/core/saves';
+import { runMigrations } from "@react-text-game/core/saves";
 
-describe('Save Migrations', () => {
-  it('should migrate from 1.0.0 to 1.1.0', () => {
-    const oldSave = {
-      player: { name: "Hero" }
-    };
+describe("Save Migrations", () => {
+    it("should migrate from 1.0.0 to 1.1.0", () => {
+        const oldSave = {
+            player: { name: "Hero" },
+        };
 
-    const result = runMigrations(oldSave, "1.0.0", "1.1.0");
+        const result = runMigrations(oldSave, "1.0.0", "1.1.0");
 
-    expect(result.success).toBe(true);
-    expect(result.data.player.inventory).toEqual([]);
-  });
+        expect(result.success).toBe(true);
+        expect(result.data.player.inventory).toEqual([]);
+    });
 });
 ```
 
@@ -298,18 +303,20 @@ One migration = one logical change:
 ```typescript
 // ✅ GOOD: One clear change
 registerMigration({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Added inventory",
-  migrate: (save) => ({ ...save, inventory: [] })
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Added inventory",
+    migrate: (save) => ({ ...save, inventory: [] }),
 });
 
 // ❌ BAD: Multiple unrelated changes
 registerMigration({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Added inventory, renamed hp, changed level system",
-  migrate: (save) => { /* complex changes */ }
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Added inventory, renamed hp, changed level system",
+    migrate: (save) => {
+        /* complex changes */
+    },
 });
 ```
 
@@ -320,9 +327,11 @@ registerMigration({
 Registers a migration function.
 
 **Type Parameters:**
+
 - `T` - Optional generic type specifying the shape of the save data this migration operates on. Extends `MigrationGameSaveState` (which is `Partial<GameSaveState> & Record<string, unknown>`). Defaults to `GameSaveState`.
 
 **Parameters:**
+
 - `migration.from` - Source version (e.g., `"1.0.0"`)
 - `migration.to` - Target version (e.g., `"1.1.0"`)
 - `migration.description` - Human-readable description
@@ -331,22 +340,25 @@ Registers a migration function.
 **Throws:** Error if migration already registered for the same from→to path.
 
 **Example:**
+
 ```typescript
 // With generic type for type safety
-interface MyData { player?: { inventory: string[] } }
+interface MyData {
+    player?: { inventory: string[] };
+}
 registerMigration<MyData>({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Add inventory",
-  migrate: (save) => ({ ...save, player: { ...save.player, inventory: [] } })
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Add inventory",
+    migrate: (save) => ({ ...save, player: { ...save.player, inventory: [] } }),
 });
 
 // Without generic type (uses default GameSaveState)
 registerMigration({
-  from: "1.1.0",
-  to: "1.2.0",
-  description: "Add quests",
-  migrate: (save) => ({ ...save, quests: [] })
+    from: "1.1.0",
+    to: "1.2.0",
+    description: "Add quests",
+    migrate: (save) => ({ ...save, quests: [] }),
 });
 ```
 
@@ -361,19 +373,23 @@ Finds the shortest migration path between two versions.
 Runs a migration chain.
 
 **Type Parameters:**
+
 - `T` - Optional generic type for the expected result data structure. Defaults to `GameSaveState`.
 
 **Parameters:**
+
 - `data` - The save data to migrate
 - `from` - Source version (e.g., `"1.0.0"`)
 - `to` - Target version (e.g., `"2.0.0"`)
 - `options?` - Optional migration options
 
 **Options:**
+
 - `strict?: boolean` - Throw error if no path found (default: `false`)
 - `verbose?: boolean` - Log migration steps (default: dev mode setting)
 
 **Returns:** `MigrationResult<T>` with the following structure:
+
 ```typescript
 {
   success: boolean;
@@ -388,22 +404,23 @@ Runs a migration chain.
 ```
 
 **Examples:**
+
 ```typescript
 // Basic usage without type parameter
 const result = runMigrations(oldSave, "1.0.0", "2.0.0");
 if (result.success) {
-  console.log("Migration successful:", result.data);
+    console.log("Migration successful:", result.data);
 }
 
 // Type-safe usage with expected result structure
 type NewSaveFormat = {
-  player: { stats: { health: number; mana: number } }
+    player: { stats: { health: number; mana: number } };
 } & Record<string, unknown>;
 
 const result = runMigrations<NewSaveFormat>(oldSave, "1.0.0", "2.0.0");
 if (result.success && result.data) {
-  // TypeScript knows the structure of result.data
-  console.log("Health:", result.data.player.stats.health);
+    // TypeScript knows the structure of result.data
+    console.log("Health:", result.data.player.stats.health);
 }
 ```
 
@@ -412,6 +429,7 @@ if (result.success && result.data) {
 Validates the migration chain.
 
 **Returns:**
+
 ```typescript
 {
   valid: boolean;
@@ -426,16 +444,16 @@ Validates the migration chain.
 ```typescript
 // Game v1.1.0: Added inventory system
 registerMigration({
-  from: "1.0.0",
-  to: "1.1.0",
-  description: "Added player inventory",
-  migrate: (save) => ({
-    ...save,
-    player: {
-      ...save.player,
-      inventory: []
-    }
-  })
+    from: "1.0.0",
+    to: "1.1.0",
+    description: "Added player inventory",
+    migrate: (save) => ({
+        ...save,
+        player: {
+            ...save.player,
+            inventory: [],
+        },
+    }),
 });
 ```
 
@@ -444,19 +462,19 @@ registerMigration({
 ```typescript
 // Game v1.2.0: Renamed 'hp' to 'health'
 registerMigration({
-  from: "1.1.0",
-  to: "1.2.0",
-  description: "Renamed 'hp' to 'health'",
-  migrate: (save) => {
-    const { hp, ...playerRest } = save.player as any;
-    return {
-      ...save,
-      player: {
-        ...playerRest,
-        health: hp ?? 100 // Use existing hp or default to 100
-      }
-    };
-  }
+    from: "1.1.0",
+    to: "1.2.0",
+    description: "Renamed 'hp' to 'health'",
+    migrate: (save) => {
+        const { hp, ...playerRest } = save.player as any;
+        return {
+            ...save,
+            player: {
+                ...playerRest,
+                health: hp ?? 100, // Use existing hp or default to 100
+            },
+        };
+    },
 });
 ```
 
@@ -465,23 +483,23 @@ registerMigration({
 ```typescript
 // Game v2.0.0: Split player stats into separate object
 registerMigration({
-  from: "1.2.0",
-  to: "2.0.0",
-  description: "Restructured player stats",
-  migrate: (save) => {
-    const player = save.player as any;
-    return {
-      ...save,
-      player: {
-        name: player.name,
-        stats: {
-          health: player.health,
-          mana: player.mana,
-          strength: player.strength
-        }
-      }
-    };
-  }
+    from: "1.2.0",
+    to: "2.0.0",
+    description: "Restructured player stats",
+    migrate: (save) => {
+        const player = save.player as any;
+        return {
+            ...save,
+            player: {
+                name: player.name,
+                stats: {
+                    health: player.health,
+                    mana: player.mana,
+                    strength: player.strength,
+                },
+            },
+        };
+    },
 });
 ```
 
@@ -490,24 +508,24 @@ registerMigration({
 ```typescript
 // Registering multiple migrations for a complex update path
 const migrations = [
-  {
-    from: "1.0.0",
-    to: "1.1.0",
-    description: "Added inventory",
-    migrate: addInventory
-  },
-  {
-    from: "1.1.0",
-    to: "1.2.0",
-    description: "Added quest system",
-    migrate: addQuests
-  },
-  {
-    from: "1.2.0",
-    to: "2.0.0",
-    description: "Complete game redesign",
-    migrate: redesignGame
-  }
+    {
+        from: "1.0.0",
+        to: "1.1.0",
+        description: "Added inventory",
+        migrate: addInventory,
+    },
+    {
+        from: "1.1.0",
+        to: "1.2.0",
+        description: "Added quest system",
+        migrate: addQuests,
+    },
+    {
+        from: "1.2.0",
+        to: "2.0.0",
+        description: "Complete game redesign",
+        migrate: redesignGame,
+    },
 ];
 
 migrations.forEach(registerMigration);
@@ -529,10 +547,10 @@ migrations.forEach(registerMigration);
 // You need to add 1.1.0→1.2.0 to complete the chain
 
 registerMigration({
-  from: "1.1.0",
-  to: "1.2.0",
-  description: "Bridge version",
-  migrate: (save) => save // No changes needed
+    from: "1.1.0",
+    to: "1.2.0",
+    description: "Bridge version",
+    migrate: (save) => save, // No changes needed
 });
 ```
 
@@ -547,6 +565,7 @@ registerMigration({
 **Problem:** A migration throws an error or returns invalid data.
 
 **Debug:**
+
 1. Check console for error details
 2. Test the migration function in isolation
 3. Verify the input data structure matches expectations
@@ -554,24 +573,25 @@ registerMigration({
 ```typescript
 // Add defensive checks
 migrate: (save) => {
-  if (!save.player) {
-    console.error("Migration failed: save.player is undefined");
-    return save; // Return unchanged if something is wrong
-  }
-
-  return {
-    ...save,
-    player: {
-      ...save.player,
-      inventory: []
+    if (!save.player) {
+        console.error("Migration failed: save.player is undefined");
+        return save; // Return unchanged if something is wrong
     }
-  };
-}
+
+    return {
+        ...save,
+        player: {
+            ...save.player,
+            inventory: [],
+        },
+    };
+};
 ```
 
 ### Dev Mode Warnings
 
 In dev mode, you may see warnings about:
+
 - **Orphaned versions**: Versions with no path to current version
 - **Dead ends**: Versions that can't reach the current version
 - **Missing migrations**: Gaps in the migration chain
@@ -583,5 +603,6 @@ These are helpful for catching migration issues before they affect players.
 ## Support
 
 For issues or questions:
+
 - Check the [main documentation](./README.md)
 - Report bugs at [GitHub Issues](https://github.com/laruss/react-text-game/issues)

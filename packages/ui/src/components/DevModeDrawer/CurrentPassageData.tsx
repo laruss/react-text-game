@@ -6,11 +6,16 @@ import { RefreshButton } from "./RefreshButton";
 
 export const CurrentPassageData = ({ isOpen }: { isOpen: boolean }) => {
     const [currentPassageData, setCurrentPassageData] = useState("");
-    const [showPassageDataRefreshed, setShowPassageDataRefreshed] = useState(false);
+    const [showPassageDataRefreshed, setShowPassageDataRefreshed] =
+        useState(false);
 
     const onReloadPassageData = () => {
         const psg = Game.currentPassage;
-        const data = JSON.stringify({ passage: psg, data: psg?.display() }, null, 2);
+        const data = JSON.stringify(
+            { passage: psg, data: psg?.display() },
+            null,
+            2
+        );
         setCurrentPassageData(data);
         setShowPassageDataRefreshed(true);
         setTimeout(() => setShowPassageDataRefreshed(false), 500);

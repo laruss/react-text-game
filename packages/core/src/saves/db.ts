@@ -182,7 +182,7 @@ export async function setSetting(
  * @return {Promise<void>} A promise that resolves when the game save data has been successfully deleted.
  */
 export async function deleteAllGameSaves(): Promise<void> {
-    const systemSave= await getSystemSave();
+    const systemSave = await getSystemSave();
 
     await db.saves.clear();
 

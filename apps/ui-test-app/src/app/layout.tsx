@@ -30,15 +30,16 @@ export default function RootLayout({ children }: PropsWithChildren) {
                         isDevMode: true,
                         startPassage: "testMap",
                         translations: {
-                            defaultLanguage: 'en',
-                            fallbackLanguage: 'en',
+                            defaultLanguage: "en",
+                            fallbackLanguage: "en",
                             resources: {
                                 en: {
                                     passages: {},
                                 },
-                            }
+                            },
                         },
-                }}>
+                    }}
+                >
                     {children}
                 </GameProvider>
             </body>

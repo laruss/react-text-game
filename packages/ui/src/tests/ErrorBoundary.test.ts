@@ -431,7 +431,7 @@ describe("ErrorBoundary", () => {
         });
 
         const calls = writeTextMock.mock.calls as unknown as Array<[string]>;
-        const copiedText = calls[0]?.[0] || '';
+        const copiedText = calls[0]?.[0] || "";
         expect(copiedText.includes("Error: Clipboard copy test")).toBe(true);
         expect(copiedText.includes("Stack Trace:")).toBe(true);
         expect(copiedText.includes("Component Stack:")).toBe(true);

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import "@/game/registry";
 
@@ -13,10 +13,10 @@ export default function Home() {
     const isGameStarted = useGameIsStarted();
 
     return (
-        <div className='w-screen h-screen flex flex-col'>
+        <div className="w-screen h-screen flex flex-col">
             {isGameStarted && (
                 <>
-                    <header className='fixed top-0 left-0 w-full h-16 bg-background flex items-center z-100'>
+                    <header className="fixed top-0 left-0 w-full h-16 bg-background flex items-center z-100">
                         <SaveButton variant="ghost" isIconOnly />
                         <ReloadButton variant="ghost" isIconOnly />
                     </header>

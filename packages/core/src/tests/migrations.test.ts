@@ -478,9 +478,9 @@ describe("Migration System", () => {
 
             const result = validateMigrations("1.1.0");
             expect(result.valid).toBe(false);
-            expect(result.issues.some((issue) => issue.includes("Dead end"))).toBe(
-                true
-            );
+            expect(
+                result.issues.some((issue) => issue.includes("Dead end"))
+            ).toBe(true);
         });
 
         test("accepts multiple base versions if all reach latest", () => {
@@ -601,7 +601,10 @@ describe("Migration System", () => {
                 to: "1.1.0",
                 description: "Migrate conditional data",
                 migrate: (data) => {
-                    const player = (data.player || {}) as Record<string, unknown>;
+                    const player = (data.player || {}) as Record<
+                        string,
+                        unknown
+                    >;
                     return {
                         ...data,
                         player: {
@@ -619,7 +622,9 @@ describe("Migration System", () => {
             const result1 = runMigrations(save1, "1.0.0", "1.1.0");
             expect(result1.success).toBe(true);
             if (result1.data) {
-                expect((result1.data.player as Record<string, unknown>).health).toBe(75);
+                expect(
+                    (result1.data.player as Record<string, unknown>).health
+                ).toBe(75);
             }
 
             // Test with health field already
@@ -627,7 +632,9 @@ describe("Migration System", () => {
             const result2 = runMigrations(save2, "1.0.0", "1.1.0");
             expect(result2.success).toBe(true);
             if (result2.data) {
-                expect((result2.data.player as Record<string, unknown>).health).toBe(80);
+                expect(
+                    (result2.data.player as Record<string, unknown>).health
+                ).toBe(80);
             }
 
             // Test with neither field
@@ -635,7 +642,9 @@ describe("Migration System", () => {
             const result3 = runMigrations(save3, "1.0.0", "1.1.0");
             expect(result3.success).toBe(true);
             if (result3.data) {
-                expect((result3.data.player as Record<string, unknown>).health).toBe(100);
+                expect(
+                    (result3.data.player as Record<string, unknown>).health
+                ).toBe(100);
             }
         });
     });
@@ -673,7 +682,9 @@ describe("Migration System", () => {
 
             expect(result.success).toBe(true);
             if (result.data) {
-                expect((result.data as PlayerInventory).player?.inventory).toEqual([]);
+                expect(
+                    (result.data as PlayerInventory).player?.inventory
+                ).toEqual([]);
             }
         });
 
@@ -693,7 +704,10 @@ describe("Migration System", () => {
                 to: "2.0.0",
                 description: "Restructure player stats with types",
                 migrate: (data) => {
-                    const player = (data.player || {}) as Record<string, unknown>;
+                    const player = (data.player || {}) as Record<
+                        string,
+                        unknown
+                    >;
                     return {
                         ...data,
                         player: {

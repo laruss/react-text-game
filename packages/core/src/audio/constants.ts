@@ -7,7 +7,8 @@ import { JsonPath } from "#types";
  * All audio tracks with IDs will be stored under this path.
  * Individual tracks are stored at: $._system.audio.{id}
  */
-export const AUDIO_STORAGE_PATH = `${STORAGE_SYSTEM_PATH}.audio` as const satisfies JsonPath;
+export const AUDIO_STORAGE_PATH =
+    `${STORAGE_SYSTEM_PATH}.audio` as const satisfies JsonPath;
 
 /**
  * Default audio configuration values.

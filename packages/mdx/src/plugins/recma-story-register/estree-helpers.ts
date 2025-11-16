@@ -41,7 +41,9 @@ export function createPropsProperty(
             ...Object.entries(baseProps).map(([key, val]) =>
                 createProperty(key, valueToEstree(val))
             ),
-            ...expressionEntries.map(({ key, value }) => createProperty(key, value)),
+            ...expressionEntries.map(({ key, value }) =>
+                createProperty(key, value)
+            ),
         ],
     });
 }

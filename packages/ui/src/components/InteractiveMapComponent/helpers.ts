@@ -44,11 +44,13 @@ export const handleMapClick = (
             const xPercent = ((event.clientX - rect.left) / rect.width) * 100;
             const yPercent = ((event.clientY - rect.top) / rect.height) * 100;
             console.log("Click position is copied to clipboard");
-            navigator.clipboard.writeText(
-                `{ x: ${xPercent.toFixed(2)}, y: ${yPercent.toFixed(2)} }`
-            ).catch((e) => {
-                console.error("Failed to copy to clipboard:", e);
-            })
+            navigator.clipboard
+                .writeText(
+                    `{ x: ${xPercent.toFixed(2)}, y: ${yPercent.toFixed(2)} }`
+                )
+                .catch((e) => {
+                    console.error("Failed to copy to clipboard:", e);
+                });
         } else {
             console.error("Image reference is null or invalid.");
         }

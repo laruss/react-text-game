@@ -60,11 +60,16 @@ const StoryContent = ({ story }: StoryComponentProps) => {
                         switch (component.type) {
                             case "header":
                                 return (
-                                    <Heading key={index} component={component} />
+                                    <Heading
+                                        key={index}
+                                        component={component}
+                                    />
                                 );
 
                             case "text":
-                                return <Text key={index} component={component} />;
+                                return (
+                                    <Text key={index} component={component} />
+                                );
 
                             case "image":
                                 return (

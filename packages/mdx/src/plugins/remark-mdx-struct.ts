@@ -12,7 +12,14 @@ type Props = Record<string, unknown>;
  */
 type TemplatePart =
     | { type: "text"; value: string }
-    | { type: "var"; expression: { type: "expression"; data?: { estree?: unknown }; value?: string } };
+    | {
+          type: "var";
+          expression: {
+              type: "expression";
+              data?: { estree?: unknown };
+              value?: string;
+          };
+      };
 
 /**
  * Template structure for content with variables
@@ -45,10 +52,11 @@ declare module "vfile" {
  * Processes children array to extract text and Var elements into a template structure.
  * Returns either a plain string (if no Var elements) or a TemplateContent structure.
  */
-function processChildrenWithVars(children: PhrasingContent[]): string | TemplateContent {
+function processChildrenWithVars(
+    children: PhrasingContent[]
+): string | TemplateContent {
     const parts: TemplatePart[] = [];
     let hasVars = false;
-
 
     // Walk through children to find text, Var elements, and bare expressions
     for (const child of children) {
@@ -74,8 +82,13 @@ function processChildrenWithVars(children: PhrasingContent[]): string | Template
                 // Extract the expression from Var's children
                 // Var should have a single mdxTextExpression child (inline expression)
                 const expressionChild = jsxElement.children[0];
-                if (expressionChild && expressionChild.type === "mdxTextExpression") {
-                    const data = expressionChild.data as { estree?: unknown } | undefined;
+                if (
+                    expressionChild &&
+                    expressionChild.type === "mdxTextExpression"
+                ) {
+                    const data = expressionChild.data as
+                        | { estree?: unknown }
+                        | undefined;
                     parts.push({
                         type: "var",
                         expression: {
@@ -97,7 +110,7 @@ function processChildrenWithVars(children: PhrasingContent[]): string | Template
 
     // If no Var elements found, return plain string by joining parts
     if (!hasVars) {
-        return parts.map(p => p.type === "text" ? p.value : "").join("");
+        return parts.map((p) => (p.type === "text" ? p.value : "")).join("");
     }
 
     // Return template structure
@@ -111,7 +124,9 @@ function processChildrenWithVars(children: PhrasingContent[]): string | Template
  * Processes a node's children to extract text and Var elements into a template structure.
  * Returns either a plain string (if no Var elements) or a TemplateContent structure.
  */
-function processTextWithVars(node: Paragraph | Heading): string | TemplateContent {
+function processTextWithVars(
+    node: Paragraph | Heading
+): string | TemplateContent {
     return processChildrenWithVars(node.children);
 }
 
@@ -180,7 +195,9 @@ const remarkMdxStruct: Plugin<[], Root> = function () {
                 } else {
                     // Process as inline phrasing content (text, inline JSX like <Var>)
                     // Force cast to PhrasingContent[] since we know these are inline nodes
-                    children = processChildrenWithVars(element.children as unknown as PhrasingContent[]);
+                    children = processChildrenWithVars(
+                        element.children as unknown as PhrasingContent[]
+                    );
                 }
             } else {
                 // No children

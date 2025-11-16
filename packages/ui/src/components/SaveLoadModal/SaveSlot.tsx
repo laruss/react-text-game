@@ -31,13 +31,18 @@ export const SaveSlot = ({
 }: SaveSlotProps) => {
     const { t } = useTranslation("ui");
 
-    const hasActions = mode === "save" || (mode === "load" && slot.data) || mode === "saveLoad";
+    const hasActions =
+        mode === "save" ||
+        (mode === "load" && slot.data) ||
+        mode === "saveLoad";
 
     return (
         <div
             className={twMerge(
                 "bg-card rounded-lg border border-border transition-all overflow-hidden",
-                hasActions ? "hover:border-muted-400 hover:shadow-lg" : "cursor-default"
+                hasActions
+                    ? "hover:border-muted-400 hover:shadow-lg"
+                    : "cursor-default"
             )}
         >
             {/* Card Header */}
@@ -48,7 +53,9 @@ export const SaveSlot = ({
                     })}
                 </h3>
                 <p className="text-xs text-muted-foreground mt-1">
-                    {slot.data ? new Date(slot.data.timestamp).toLocaleString() : 'no data'}
+                    {slot.data
+                        ? new Date(slot.data.timestamp).toLocaleString()
+                        : "no data"}
                 </p>
             </div>
 

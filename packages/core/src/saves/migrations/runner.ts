@@ -38,8 +38,7 @@ export function runMigrations(
     const { strict = false, verbose } = options;
 
     // Determine verbosity (default to dev mode setting)
-    const shouldLog =
-        verbose !== undefined ? verbose : _getOptions().isDevMode;
+    const shouldLog = verbose !== undefined ? verbose : _getOptions().isDevMode;
 
     // If versions match, no migration needed
     if (fromVersion === toVersion) {
@@ -96,9 +95,7 @@ export function runMigrations(
             `Found migration path with ${migrationPath.length} step(s):`
         );
         migrationPath.forEach((m, i) => {
-            logger.log(
-                `  ${i + 1}. ${m.from} → ${m.to}: ${m.description}`
-            );
+            logger.log(`  ${i + 1}. ${m.from} → ${m.to}: ${m.description}`);
         });
     }
 
@@ -154,8 +151,7 @@ export function runMigrations(
             migrationsApplied: appliedMigrations,
         };
     } catch (error) {
-        const errorMsg =
-            error instanceof Error ? error.message : String(error);
+        const errorMsg = error instanceof Error ? error.message : String(error);
 
         logger.error(
             `Migration failed at step ${appliedMigrations.length + 1}: ${errorMsg}`

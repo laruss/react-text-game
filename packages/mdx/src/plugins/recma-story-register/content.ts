@@ -42,7 +42,9 @@ function templateToExpression(template: TemplateContent): TemplateLiteral {
     };
 }
 
-export function contentToExpression(content: string | TemplateContent): Expression {
+export function contentToExpression(
+    content: string | TemplateContent
+): Expression {
     if (isTemplate(content)) {
         return templateToExpression(content);
     }

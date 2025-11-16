@@ -38,7 +38,7 @@ newStory("anotherStory", () => [
     {
         type: "conversation",
         props: {
-            variant: "messenger"
+            variant: "messenger",
         },
         content: [
             { content: "Hello, this is a conversation line." },

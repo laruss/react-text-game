@@ -158,7 +158,9 @@ import { player } from "@/entities";
         const code = String(result);
 
         // Should start with template literal, not plain string
-        expect(code).toContain("`${player.name} is a warrior of level ${player.level}`");
+        expect(code).toContain(
+            "`${player.name} is a warrior of level ${player.level}`"
+        );
     });
 
     test("should handle complex nested expressions", async () => {
@@ -206,7 +208,9 @@ Hello {player.name}, you have <Var>{player.gold}</Var> gold coins.
         expect(code).toContain("`");
         expect(code).toContain("${player.name}");
         expect(code).toContain("${player.gold}");
-        expect(code).toContain("Hello ${player.name}, you have ${player.gold} gold coins");
+        expect(code).toContain(
+            "Hello ${player.name}, you have ${player.gold} gold coins"
+        );
     });
 
     test("should handle variables in multiple component types simultaneously", async () => {
@@ -246,9 +250,13 @@ You meet {npc.name}.
 
         // Check Say components
         expect(code).toContain("${npc.greeting}, ${player.name}!");
-        expect(code).toContain("Hello ${npc.name}, I have ${player.questItems.length} quest items");
+        expect(code).toContain(
+            "Hello ${npc.name}, I have ${player.questItems.length} quest items"
+        );
 
         // Check Action label
-        expect(code).toContain("Trade with ${npc.name} (${npc.reputation} reputation)");
+        expect(code).toContain(
+            "Trade with ${npc.name} (${npc.reputation} reputation)"
+        );
     });
 });

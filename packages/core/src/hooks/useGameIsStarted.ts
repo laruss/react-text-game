@@ -16,5 +16,7 @@ import { Game } from "#game";
 export const useGameIsStarted = (): boolean => {
     const reactiveGameState = useProxy(Game.selfState);
 
-    return reactiveGameState.currentPassageId !== SYSTEM_PASSAGE_NAMES.START_MENU;
+    return (
+        reactiveGameState.currentPassageId !== SYSTEM_PASSAGE_NAMES.START_MENU
+    );
 };

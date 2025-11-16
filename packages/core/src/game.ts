@@ -51,8 +51,16 @@ type GameInternalSaveState = {
  * ```
  */
 export class Game {
+    /**
+     * Internal reactive state managed by Valtio.
+     * Contains:
+     * - currentPassageId: The ID of the currently active passage
+     * - renderId: A unique identifier that changes on each jumpTo() call,
+     *   used to force React component remounts when revisiting the same passage
+     */
     private static state = proxy({
         currentPassageId: null as string | null,
+        renderId: null as string | null,
     });
 
     private static initialized = false;
@@ -177,12 +185,33 @@ export class Game {
     /**
      * Navigates the game to a specified passage.
      *
+     * On each call, generates a new unique renderId to enable React components
+     * to force remounts when revisiting the same passage. This is useful for
+     * resetting component state, restarting animations, or clearing forms.
+     *
      * @param {Passage|string} passage - The passage object or identifier of the passage to jump to.
      * @return {void} Does not return any value.
      * @throws {Error} Throws an error if the specified passage is not found or if Game.init() has not been called
+     *
+     * @example
+     * ```typescript
+     * // Jump to a passage by ID
+     * Game.jumpTo('intro');
+     *
+     * // Jump to a passage object
+     * const chapter1 = newStory('chapter1', () => [...]);
+     * Game.jumpTo(chapter1);
+     *
+     * // Jumping to the same passage multiple times will generate different renderIds
+     * Game.jumpTo('combat'); // renderId: "1234567890-0.123"
+     * Game.jumpTo('combat'); // renderId: "1234567891-0.456" (different!)
+     * ```
      */
     static jumpTo(passage: Passage | string): void {
         Game.ensureInitialized();
+
+        // generating new renderId to force rerendering
+        Game.state.renderId = `${Date.now()}-${Math.random()}`;
 
         const passageId = typeof passage === "string" ? passage : passage.id;
 
@@ -520,7 +549,9 @@ export class Game {
                 logger.warn(
                     "Migration validation failed. The following issues were found:"
                 );
-                validation.issues.forEach((issue) => logger.warn(`  - ${issue}`));
+                validation.issues.forEach((issue) =>
+                    logger.warn(`  - ${issue}`)
+                );
                 logger.warn(
                     "These issues may cause problems when loading saves from older versions."
                 );

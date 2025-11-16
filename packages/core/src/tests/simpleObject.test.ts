@@ -288,14 +288,19 @@ describe("SimpleObject", () => {
 
             // Storage should still have old value
             const savedData = MockStorage.getValue("$.player");
-            expect((savedData[0] as { health: { mental: number } }).health.mental).toBe(20);
+            expect(
+                (savedData[0] as { health: { mental: number } }).health.mental
+            ).toBe(20);
 
             // Now save
             player.save();
 
             // Storage should have new value
             const savedDataAfter = MockStorage.getValue("$.player");
-            expect((savedDataAfter[0] as { health: { mental: number } }).health.mental).toBe(50);
+            expect(
+                (savedDataAfter[0] as { health: { mental: number } }).health
+                    .mental
+            ).toBe(50);
         });
 
         test("should load variables from storage", () => {

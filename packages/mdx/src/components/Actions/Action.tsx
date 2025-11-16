@@ -15,10 +15,6 @@ export type ActionProps = Readonly<{
  * and is transformed at compile time into core game components. Using it in React components
  * will not work as expected.
  */
-export const Action = (props: ActionProps) => (
-    <>
-        { props }
-    </>
-);
+export const Action = (props: ActionProps) => <>{props}</>;
 
 export type ActionType = typeof Action;

@@ -39,7 +39,11 @@ export const ImageHotspot = ({
         if (!isObject) {
             const stringContent = hotspot.content as MaybeCallable<string>;
             return {
-                idle: callIfFunction(stringContent), hover: undefined, active: undefined, disabled: undefined };
+                idle: callIfFunction(stringContent),
+                hover: undefined,
+                active: undefined,
+                disabled: undefined,
+            };
         }
         const content = hotspot.content as ImageHotspotContentObject;
 
@@ -64,7 +68,7 @@ export const ImageHotspot = ({
             <button
                 ref={ref}
                 className={twMerge(
-                    "cursor-pointer disabled:cursor-not-allowed relative",
+                    "pointer-events-auto cursor-pointer disabled:cursor-not-allowed relative",
                     classNames.container
                 )}
                 style={{

@@ -62,7 +62,7 @@
  * @see {@link getGameTranslation} - Get translations outside React
  * @see {@link I18nConfig} - Configuration type
  */
-export * from './hooks';
-export * from './init';
-export * from './types';
-export { getGameTranslation } from './utils';
+export * from "./hooks";
+export * from "./init";
+export * from "./types";
+export { getGameTranslation } from "./utils";
