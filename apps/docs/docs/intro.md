@@ -4,28 +4,28 @@ slug: /
 title: React Text Game
 description: Build interactive narrative experiences, visual novels, and text adventures in React with a powerful, type-safe game engine featuring reactive state management, story passages, interactive maps, and flexible JSONPath-based save system.
 keywords:
-  - react
-  - reactjs
-  - typescript
-  - text game
-  - text adventure
-  - interactive fiction
-  - react text game
-  - react text adventure
-  - react interactive fiction
-  - narrative engine
-  - story engine
-  - game engine
-  - browser game
-  - visual novel
-  - twine alternative
-  - ink alternative
-  - choicescript
-  - passages
-  - save system
-  - jsonpath
-  - valtio
-  - tailwindcss
+    - react
+    - reactjs
+    - typescript
+    - text game
+    - text adventure
+    - interactive fiction
+    - react text game
+    - react text adventure
+    - react interactive fiction
+    - narrative engine
+    - story engine
+    - game engine
+    - browser game
+    - visual novel
+    - twine alternative
+    - ink alternative
+    - choicescript
+    - passages
+    - save system
+    - jsonpath
+    - valtio
+    - tailwindcss
 image: /img/og-image.webp
 ---
 
@@ -82,6 +82,7 @@ bun add @react-text-game/mdx @react-text-game/core @mdx-js/mdx @mdx-js/react
 ---
 passageId: intro
 ---
+
 import { Action, Actions } from "@react-text-game/mdx";
 import { player } from "../entities/player";
 
@@ -90,49 +91,47 @@ import { player } from "../entities/player";
 Your adventure begins in a dark forest...
 
 <Actions>
-    <Action onPerform={() => Game.jumpTo("forest")}>
-        Enter the forest
-    </Action>
+    <Action onPerform={() => Game.jumpTo("forest")}>Enter the forest</Action>
 </Actions>
 ```
 
 ## Quick Example
 
 ```tsx
-import { Game, createEntity, newStory } from '@react-text-game/core';
+import { Game, createEntity, newStory } from "@react-text-game/core";
 
 // Initialize the game first (required!)
 await Game.init({
-  gameName: 'My Text Adventure',
-  isDevMode: true,
+    gameName: "My Text Adventure",
+    isDevMode: true,
 });
 
 // Create a game entity
-const player = createEntity('player', {
-  name: 'Hero',
-  health: 100,
+const player = createEntity("player", {
+    name: "Hero",
+    health: 100,
 });
 
 // Create a story passage
-const intro = newStory('intro', () => [
-  {
-    type: 'header',
-    content: 'Welcome to the Game',
-    props: { level: 1 }
-  },
-  {
-    type: 'text',
-    content: `Hello, ${player.name}!`
-  },
-  {
-    type: 'actions',
-    content: [
-      {
-        label: 'Start Adventure',
-        action: () => Game.jumpTo('adventure')
-      }
-    ]
-  }
+const intro = newStory("intro", () => [
+    {
+        type: "header",
+        content: "Welcome to the Game",
+        props: { level: 1 },
+    },
+    {
+        type: "text",
+        content: `Hello, ${player.name}!`,
+    },
+    {
+        type: "actions",
+        content: [
+            {
+                label: "Start Adventure",
+                action: () => Game.jumpTo("adventure"),
+            },
+        ],
+    },
 ]);
 
 // Navigate to passage

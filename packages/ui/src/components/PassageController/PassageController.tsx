@@ -11,7 +11,7 @@ import { InteractiveMapComponent } from "#components/InteractiveMapComponent";
 import { StoryComponent } from "#components/StoryComponent";
 
 export const PassageController = () => {
-    const currentPassage = useCurrentPassage();
+    const [currentPassage, rerenderId] = useCurrentPassage();
 
     const renderComponent = () => {
         switch (currentPassage?.type) {
@@ -40,7 +40,7 @@ export const PassageController = () => {
 
     return (
         <div
-            key={currentPassage.type}
+            key={`${currentPassage.type}-${rerenderId}`}
             className="w-full h-full animate-in fade-in duration-300"
         >
             {renderComponent()}

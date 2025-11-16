@@ -12,7 +12,9 @@ import { BaseGameObject } from "./baseGameObject";
  * but documenting this class clarifies how deep proxying and manual save hooks
  * are wired under the hood.
  */
-class SimpleObjectImpl<VariablesType extends InitVarsType> extends BaseGameObject<VariablesType> {
+class SimpleObjectImpl<
+    VariablesType extends InitVarsType,
+> extends BaseGameObject<VariablesType> {
     private proxyCache = new WeakMap<object, object>();
 
     constructor(props: { id: string; variables?: VariablesType }) {
@@ -29,7 +31,8 @@ class SimpleObjectImpl<VariablesType extends InitVarsType> extends BaseGameObjec
             for (const key of Object.keys(props.variables)) {
                 Object.defineProperty(this, key, {
                     get: () => {
-                        const value = this._variables[key as keyof VariablesType];
+                        const value =
+                            this._variables[key as keyof VariablesType];
                         // If it's an object (but not Date or other special types), wrap it in a deep proxy
                         if (this.isProxyableObject(value)) {
                             return this.createDeepProxy(value);
@@ -140,6 +143,7 @@ export type SimpleObject<VariablesType extends InitVarsType> =
  */
 export const SimpleObject = SimpleObjectImpl as new <
     VariablesType extends InitVarsType,
->(
-    props: { id: string; variables?: VariablesType }
-) => SimpleObject<VariablesType>;
+>(props: {
+    id: string;
+    variables?: VariablesType;
+}) => SimpleObject<VariablesType>;

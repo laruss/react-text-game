@@ -12,13 +12,13 @@ This document outlines the proposed internationalization (i18n) system for the r
 
 ```typescript
 await Game.init({
-  gameName: "My Adventure",
-  gameVersion: "1.0.0",
-  translations: {
-    defaultLanguage: 'es', // default language for new games, defaults to 'en'
-    supportedLanguages: ['en', 'es', 'fr'], // languages supported by game, defaults to ['en']
-    translationsPath: './src/i18n', // where generated files go, defaults to src/i18n
-  }
+    gameName: "My Adventure",
+    gameVersion: "1.0.0",
+    translations: {
+        defaultLanguage: "es", // default language for new games, defaults to 'en'
+        supportedLanguages: ["en", "es", "fr"], // languages supported by game, defaults to ['en']
+        translationsPath: "./src/i18n", // where generated files go, defaults to src/i18n
+    },
 });
 ```
 
@@ -36,10 +36,12 @@ bun run rtg-i18n generate
 ### A. For Game Passages (User Content)
 
 The script should scan:
+
 - **TypeScript files** - Extract strings from `newStory()`, `newInteractiveMap()` display functions
 - **MDX files** - Extract all text content, headers, and frontmatter
 
 **Generated structure:**
+
 ```
 src/translations/
 ├── passages/
@@ -58,26 +60,28 @@ src/translations/
 ```
 
 **Example `start.json` for Spanish (default language - auto-filled):**
+
 ```json
 {
-  "header": "El Comienzo",
-  "text": "Te despiertas en un bosque oscuro...",
-  "actions": {
-    "explore": "Explorar el bosque",
-    "rest": "Descansar"
-  }
+    "header": "El Comienzo",
+    "text": "Te despiertas en un bosque oscuro...",
+    "actions": {
+        "explore": "Explorar el bosque",
+        "rest": "Descansar"
+    }
 }
 ```
 
 **Example `start.json` for English (non-default - template):**
+
 ```json
 {
-  "header": "",  // User fills this
-  "text": "",    // User fills this
-  "actions": {
-    "explore": "",
-    "rest": ""
-  }
+    "header": "", // User fills this
+    "text": "", // User fills this
+    "actions": {
+        "explore": "",
+        "rest": ""
+    }
 }
 ```
 
@@ -86,6 +90,7 @@ src/translations/
 The `@react-text-game/ui` package will ship with English translations pre-integrated.
 
 **UI package structure (pre-built):**
+
 ```
 packages/ui/src/i18n/
 ├── locales/
@@ -99,6 +104,7 @@ packages/ui/src/i18n/
 **User's project structure:**
 
 When the user runs the CLI script, it will:
+
 1. Copy UI translation files from `@react-text-game/ui` package to their project
 2. Generate translation JSON files for their selected languages
 3. **Generate shadow TypeScript files with `t()` functions** in the `translations/` folder
@@ -150,48 +156,57 @@ src/
 ### Development Workflow
 
 1. **User writes clean code:**
+
 ```typescript
 // src/passages/start.ts
-import { newStory } from '@react-text-game/core';
+import { newStory } from "@react-text-game/core";
 
-export const start = newStory('start', () => {
-  return {
-    header: 'El Comienzo',
-    text: 'Te despiertas en un bosque oscuro...',
-    actions: [
-      { text: 'Explorar el bosque', onClick: () => Game.jumpTo('forest') }
-    ]
-  };
+export const start = newStory("start", () => {
+    return {
+        header: "El Comienzo",
+        text: "Te despiertas en un bosque oscuro...",
+        actions: [
+            {
+                text: "Explorar el bosque",
+                onClick: () => Game.jumpTo("forest"),
+            },
+        ],
+    };
 });
 ```
 
 2. **CLI generates shadow file:**
+
 ```typescript
 // translations/passages/start.ts (GENERATED - DO NOT EDIT)
-import { newStory } from '@react-text-game/core';
-import { usePassageTranslation } from '@react-text-game/core/i18n';
+import { newStory } from "@react-text-game/core";
+import { usePassageTranslation } from "@react-text-game/core/i18n";
 
-export const start = newStory('start', () => {
-  const { t } = usePassageTranslation('start');
-  return {
-    header: t('header'),
-    text: t('text'),
-    actions: [
-      { text: t('actions.explore'), onClick: () => Game.jumpTo('forest') }
-    ]
-  };
+export const start = newStory("start", () => {
+    const { t } = usePassageTranslation("start");
+    return {
+        header: t("header"),
+        text: t("text"),
+        actions: [
+            {
+                text: t("actions.explore"),
+                onClick: () => Game.jumpTo("forest"),
+            },
+        ],
+    };
 });
 ```
 
 3. **CLI generates JSON:**
+
 ```json
 // translations/locales/es/passages/start.json
 {
-  "header": "El Comienzo",
-  "text": "Te despiertas en un bosque oscuro...",
-  "actions": {
-    "explore": "Explorar el bosque"
-  }
+    "header": "El Comienzo",
+    "text": "Te despiertas en un bosque oscuro...",
+    "actions": {
+        "explore": "Explorar el bosque"
+    }
 }
 ```
 
@@ -212,50 +227,55 @@ bun run rtg-i18n watch
 The CLI will generate shadow files in `translations/passages/` that mirror the structure of `src/passages/`. Users always import from `translations/`.
 
 **User's original code:**
+
 ```typescript
 // src/passages/start.ts - User writes clean code here
-export const start = newStory('start', () => {
-  return {
-    header: 'El Comienzo',
-    text: 'Te despiertas...'
-  };
+export const start = newStory("start", () => {
+    return {
+        header: "El Comienzo",
+        text: "Te despiertas...",
+    };
 });
 ```
 
 **CLI generates two versions in translations folder:**
 
 1. **Development version** (no i18n, just re-exports):
+
 ```typescript
 // translations/passages/start.ts (when i18n disabled or in dev mode)
-export * from '../../src/passages/start';
+export * from "../../src/passages/start";
 ```
 
 2. **Production version** (with i18n):
+
 ```typescript
 // translations/passages/start.ts (when i18n enabled)
-import { newStory } from '@react-text-game/core';
-import { usePassageTranslation } from '@react-text-game/core/i18n';
+import { newStory } from "@react-text-game/core";
+import { usePassageTranslation } from "@react-text-game/core/i18n";
 
-export const start = newStory('start', () => {
-  const { t } = usePassageTranslation('start');
-  return {
-    header: t('header'),
-    text: t('text')
-  };
+export const start = newStory("start", () => {
+    const { t } = usePassageTranslation("start");
+    return {
+        header: t("header"),
+        text: t("text"),
+    };
 });
 ```
 
 **User always imports from translations:**
+
 ```typescript
 // User's App.tsx
-import { start } from './translations/passages/start';
-import { forest } from './translations/passages/forest';
+import { start } from "./translations/passages/start";
+import { forest } from "./translations/passages/forest";
 
 // No build configuration needed!
 // CLI decides what to generate in translations/ folder
 ```
 
 **Benefits:**
+
 - ✅ Zero build configuration required
 - ✅ Works with any bundler (Vite, Webpack, etc.)
 - ✅ User doesn't need to understand aliases or path mapping
@@ -264,6 +284,7 @@ import { forest } from './translations/passages/forest';
 - ✅ Can switch between dev/prod by regenerating files
 
 **CLI commands control behavior:**
+
 ```bash
 # Development mode - generates re-export files (no i18n overhead)
 bun run rtg-i18n generate --mode dev
@@ -284,29 +305,32 @@ bun run rtg-i18n watch --mode prod
 **Decision: Auto-detect all strings from specific locations**
 
 We'll automatically extract ALL string literals from passage display functions. This is safer than it sounds because we know exactly where to look:
+
 - Inside `newStory()` display function return objects
 - Inside `newInteractiveMap()` display function return objects
 - Inside MDX file content (excluding frontmatter)
 
 ```typescript
 // CLI scans and extracts ALL string literals automatically
-newStory('start', () => {
-  return {
-    header: 'El Comienzo',  // ✅ Auto-extracted
-    text: 'Te despiertas...',  // ✅ Auto-extracted
-    actions: [
-      { text: 'Explorar', onClick: () => Game.jumpTo('forest') }  // ✅ Auto-extracted
-    ]
-  };
+newStory("start", () => {
+    return {
+        header: "El Comienzo", // ✅ Auto-extracted
+        text: "Te despiertas...", // ✅ Auto-extracted
+        actions: [
+            { text: "Explorar", onClick: () => Game.jumpTo("forest") }, // ✅ Auto-extracted
+        ],
+    };
 });
 ```
 
 **Pros:**
+
 - Zero code changes needed
 - Clean user code without i18n boilerplate
 - Clear structure means less risk of extracting wrong strings
 
 **Cons:**
+
 - Need to handle edge cases (variables, expressions)
 
 ---
@@ -316,13 +340,13 @@ newStory('start', () => {
 When passages use variables or expressions instead of string literals:
 
 ```typescript
-const playerName = Storage.getValue('player.name');
+const playerName = Storage.getValue("player.name");
 
-newStory('greeting', () => {
-  return {
-    text: `Hello, ${playerName}!`,  // ❌ Template literal with variable
-    header: playerName.toUpperCase(),  // ❌ Expression, not a literal
-  };
+newStory("greeting", () => {
+    return {
+        text: `Hello, ${playerName}!`, // ❌ Template literal with variable
+        header: playerName.toUpperCase(), // ❌ Expression, not a literal
+    };
 });
 ```
 
@@ -333,20 +357,22 @@ newStory('greeting', () => {
 - User manually handles dynamic content
 
 **Generated JSON:**
+
 ```json
 {
-  // No 'text' or 'header' - skipped because not pure strings
+    // No 'text' or 'header' - skipped because not pure strings
 }
 ```
 
 **User must refactor to:**
+
 ```typescript
-newStory('greeting', ({ t }) => {
-  const playerName = Storage.getValue('player.name');
-  return {
-    text: t('text', { name: playerName }),  // Use interpolation
-    header: playerName.toUpperCase(),
-  };
+newStory("greeting", ({ t }) => {
+    const playerName = Storage.getValue("player.name");
+    return {
+        text: t("text", { name: playerName }), // Use interpolation
+        header: playerName.toUpperCase(),
+    };
 });
 ```
 
@@ -357,20 +383,22 @@ newStory('greeting', ({ t }) => {
 - Generate placeholders for variables
 
 **Generated JSON:**
+
 ```json
 {
-  "text": "Hello, {{name}}!",  // Placeholder for playerName
+    "text": "Hello, {{name}}!" // Placeholder for playerName
 }
 ```
 
 **Runtime automatically replaces:**
+
 ```typescript
 // Framework detects variables and injects them
-newStory('greeting', () => {
-  const playerName = Storage.getValue('player.name');
-  return {
-    text: `Hello, ${playerName}!`,  // Works automatically with i18n
-  };
+newStory("greeting", () => {
+    const playerName = Storage.getValue("player.name");
+    return {
+        text: `Hello, ${playerName}!`, // Works automatically with i18n
+    };
 });
 ```
 
@@ -413,12 +441,13 @@ What should be extracted?
 - Extract link text: `here`
 
 **Generated JSON:**
+
 ```json
 {
-  "heading": "Your Inventory",
-  "text": "You have {playerGold} gold coins.",  // Preserve placeholder
-  "link_shop": "here",
-  "text_2": "to visit the shop"
+    "heading": "Your Inventory",
+    "text": "You have {playerGold} gold coins.", // Preserve placeholder
+    "link_shop": "here",
+    "text_2": "to visit the shop"
 }
 ```
 
@@ -440,6 +469,7 @@ What should be extracted?
 **Recommendation:** **Option A + Option C** (smart detection with markdown-only extraction). Components and expressions are naturally skipped.
 
 **Special handling for expressions:**
+
 - `{playerGold}` → Keep as placeholder `{playerGold}` in translation
 - MDX expression syntax is preserved in JSON for runtime replacement
 
@@ -455,7 +485,7 @@ id: start
 i18n: start.passage
 ---
 
-# {{t 'header'}}  <!-- References i18n/passages/{lang}/start.json -->
+# {{t 'header'}} <!-- References i18n/passages/{lang}/start.json -->
 
 {{t 'text'}}
 
@@ -499,30 +529,31 @@ How should passages access translations at runtime?
 
 ```typescript
 // Framework automatically provides t() function in display context
-newStory('start', ({ t }) => {  // t() injected by framework
-  return {
-    header: t('header'),
-    text: t('text'),
-  };
+newStory("start", ({ t }) => {
+    // t() injected by framework
+    return {
+        header: t("header"),
+        text: t("text"),
+    };
 });
 ```
 
 #### Option B - Import from core
 
 ```typescript
-import { useGameTranslation } from '@react-text-game/core/i18n';
+import { useGameTranslation } from "@react-text-game/core/i18n";
 
-newStory('start', () => {
-  const { t } = useGameTranslation('start');  // namespace: 'start'
-  return { header: t('header') };
+newStory("start", () => {
+    const { t } = useGameTranslation("start"); // namespace: 'start'
+    return { header: t("header") };
 });
 ```
 
 #### Option C - Direct JSON imports
 
 ```typescript
-import startEn from './i18n/passages/en/start.json';
-import startEs from './i18n/passages/es/start.json';
+import startEn from "./i18n/passages/en/start.json";
+import startEs from "./i18n/passages/es/start.json";
 
 // Framework handles switching based on Game.options.i18n.currentLanguage
 ```
@@ -593,28 +624,28 @@ packages/i18n/
 
 ```javascript
 export default {
-  defaultLanguage: 'es',
-  supportedLanguages: ['en', 'es', 'fr'],
+    defaultLanguage: "es",
+    supportedLanguages: ["en", "es", "fr"],
 
-  // Where to scan
-  scan: {
-    passages: ['./src/passages/**/*.{ts,tsx,mdx}'],
-    ui: ['./src/components/**/*.{ts,tsx}'],
-  },
+    // Where to scan
+    scan: {
+        passages: ["./src/passages/**/*.{ts,tsx,mdx}"],
+        ui: ["./src/components/**/*.{ts,tsx}"],
+    },
 
-  // Where to output
-  output: {
-    passages: './src/i18n/passages',
-    ui: './src/i18n/ui',
-  },
+    // Where to output
+    output: {
+        passages: "./src/i18n/passages",
+        ui: "./src/i18n/ui",
+    },
 
-  // Extraction strategy
-  extractionMode: 'explicit', // 'explicit' | 'auto' | 'comments'
+    // Extraction strategy
+    extractionMode: "explicit", // 'explicit' | 'auto' | 'comments'
 
-  // MDX handling
-  mdx: {
-    strategy: 'json-only', // 'json-only' | 'separate-files' | 'frontmatter'
-  },
+    // MDX handling
+    mdx: {
+        strategy: "json-only", // 'json-only' | 'separate-files' | 'frontmatter'
+    },
 };
 ```
 

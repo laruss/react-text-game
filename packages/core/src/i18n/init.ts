@@ -113,7 +113,7 @@ export async function initI18n(config?: I18nConfig) {
     const supportedLanguages = Object.keys(mergedResources);
 
     let i18nInstance = i18next.use(initReactI18next);
-    modules.forEach(module => {
+    modules.forEach((module) => {
         i18nInstance = i18nInstance.use(module);
     });
 
@@ -130,6 +130,6 @@ export async function initI18n(config?: I18nConfig) {
     });
 
     logger.log(
-        `i18n initialized with language: ${i18next.language}, fallback: ${fallbackLanguage}, supported languages: ${supportedLanguages.join(', ')}`
+        `i18n initialized with language: ${i18next.language}, fallback: ${fallbackLanguage}, supported languages: ${supportedLanguages.join(", ")}`
     );
 }

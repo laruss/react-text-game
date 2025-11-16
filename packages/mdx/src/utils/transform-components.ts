@@ -18,11 +18,17 @@ import type { MdxStructItem, TemplateContent, TransformResult } from "#types";
  * Helper to extract string content from children (handles TemplateContent).
  * Note: TemplateContent is only used with auto-registration, so this is a fallback.
  */
-function extractStringContent(children: string | MdxStructItem[] | TemplateContent): string {
+function extractStringContent(
+    children: string | MdxStructItem[] | TemplateContent
+): string {
     if (typeof children === "string") {
         return children;
     }
-    if (typeof children === "object" && "type" in children && children.type === "template") {
+    if (
+        typeof children === "object" &&
+        "type" in children &&
+        children.type === "template"
+    ) {
         // Template content - extract text parts only (variables won't work in manual mode)
         return children.parts
             .filter((part) => part.type === "text")
@@ -69,7 +75,11 @@ function transformSingleComponent(item: MdxStructItem): Component | null {
 
     // Handle heading elements (h1-h6)
     if (/^h[1-6]$/.test(component)) {
-        return transformHeader(component as `h${1 | 2 | 3 | 4 | 5 | 6}`, children, props);
+        return transformHeader(
+            component as `h${1 | 2 | 3 | 4 | 5 | 6}`,
+            children,
+            props
+        );
     }
 
     // Handle paragraph elements
@@ -115,7 +125,8 @@ function transformHeader(
 ): HeaderComponent {
     const level = parseInt(tag[1] as string, 10) as HeaderLevel;
     const content = extractStringContent(children);
-    const className = typeof props.className === "string" ? props.className : undefined;
+    const className =
+        typeof props.className === "string" ? props.className : undefined;
 
     return {
         type: "header",
@@ -135,7 +146,8 @@ function transformText(
     props: Record<string, unknown>
 ): TextComponent {
     const content = extractStringContent(children);
-    const className = typeof props.className === "string" ? props.className : undefined;
+    const className =
+        typeof props.className === "string" ? props.className : undefined;
 
     return {
         type: "text",
@@ -150,9 +162,12 @@ function transformText(
 function transformImage(props: Record<string, unknown>): ImageComponent {
     const src = typeof props.src === "string" ? props.src : "";
     const alt = typeof props.alt === "string" ? props.alt : undefined;
-    const className = typeof props.className === "string" ? props.className : undefined;
+    const className =
+        typeof props.className === "string" ? props.className : undefined;
     const disableModal =
-        typeof props.disableModal === "boolean" ? props.disableModal : undefined;
+        typeof props.disableModal === "boolean"
+            ? props.disableModal
+            : undefined;
 
     return {
         type: "image",
@@ -174,16 +189,23 @@ function transformImage(props: Record<string, unknown>): ImageComponent {
  */
 function transformVideo(props: Record<string, unknown>): VideoComponent {
     const src = typeof props.src === "string" ? props.src : "";
-    const className = typeof props.className === "string" ? props.className : undefined;
-    const controls = typeof props.controls === "boolean" ? props.controls : undefined;
-    const autoPlay = typeof props.autoPlay === "boolean" ? props.autoPlay : undefined;
+    const className =
+        typeof props.className === "string" ? props.className : undefined;
+    const controls =
+        typeof props.controls === "boolean" ? props.controls : undefined;
+    const autoPlay =
+        typeof props.autoPlay === "boolean" ? props.autoPlay : undefined;
     const loop = typeof props.loop === "boolean" ? props.loop : undefined;
     const muted = typeof props.muted === "boolean" ? props.muted : undefined;
 
     return {
         type: "video",
         content: src,
-        ...(className || controls !== undefined || autoPlay !== undefined || loop !== undefined || muted !== undefined
+        ...(className ||
+        controls !== undefined ||
+        autoPlay !== undefined ||
+        loop !== undefined ||
+        muted !== undefined
             ? {
                   props: {
                       ...(className && { className }),
@@ -222,7 +244,8 @@ function transformActions(
         (props.direction === "horizontal" || props.direction === "vertical")
             ? props.direction
             : undefined;
-    const className = typeof props.className === "string" ? props.className : undefined;
+    const className =
+        typeof props.className === "string" ? props.className : undefined;
 
     return {
         type: "actions",
@@ -300,14 +323,17 @@ function transformAction(item: MdxStructItem): ActionType | null {
         action.isDisabled = props.isDisabled;
     }
 
-    const className = typeof props.className === "string" ? props.className : null;
+    const className =
+        typeof props.className === "string" ? props.className : null;
     if (className) {
         action.className = className;
     }
 
     // Handle tooltip
     if (props.tooltip && typeof props.tooltip === "object") {
-        const tooltip = transformTooltip(props.tooltip as Record<string, unknown>);
+        const tooltip = transformTooltip(
+            props.tooltip as Record<string, unknown>
+        );
         if (tooltip) {
             action.tooltip = tooltip;
         }
@@ -322,7 +348,8 @@ function transformAction(item: MdxStructItem): ActionType | null {
 function transformTooltip(
     tooltip: Record<string, unknown>
 ): ActionType["tooltip"] | undefined {
-    const content = typeof tooltip.content === "string" ? tooltip.content : undefined;
+    const content =
+        typeof tooltip.content === "string" ? tooltip.content : undefined;
     if (!content) return undefined;
 
     const position =
@@ -346,7 +373,9 @@ function transformTooltip(
 /**
  * Transforms Include component to AnotherStoryComponent.
  */
-function transformInclude(props: Record<string, unknown>): AnotherStoryComponent {
+function transformInclude(
+    props: Record<string, unknown>
+): AnotherStoryComponent {
     const storyId = typeof props.storyId === "string" ? props.storyId : "";
 
     return {
@@ -385,7 +414,8 @@ function transformConversation(
         (props.variant === "chat" || props.variant === "messenger")
             ? props.variant
             : undefined;
-    const className = typeof props.className === "string" ? props.className : undefined;
+    const className =
+        typeof props.className === "string" ? props.className : undefined;
 
     return {
         type: "conversation",
@@ -466,8 +496,12 @@ function transformWho(
  */
 function transformBubbleClassNames(
     classNames: Record<string, unknown>
-): NonNullable<NonNullable<ConversationBubble["props"]>["classNames"]> | undefined {
-    const result: NonNullable<NonNullable<ConversationBubble["props"]>["classNames"]> = {};
+):
+    | NonNullable<NonNullable<ConversationBubble["props"]>["classNames"]>
+    | undefined {
+    const result: NonNullable<
+        NonNullable<ConversationBubble["props"]>["classNames"]
+    > = {};
     let hasAny = false;
 
     if (typeof classNames.base === "string") {

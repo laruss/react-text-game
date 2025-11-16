@@ -44,7 +44,8 @@ export const GameProvider = ({
                 SYSTEM_PASSAGE_NAMES.START_MENU,
                 components?.MainMenu?.() || <MainMenu />
             );
-            const initialPassage = options.startPassage || SYSTEM_PASSAGE_NAMES.START_MENU;
+            const initialPassage =
+                options.startPassage || SYSTEM_PASSAGE_NAMES.START_MENU;
             Game.setCurrent(initialPassage);
             setIsInitialized(true);
         });

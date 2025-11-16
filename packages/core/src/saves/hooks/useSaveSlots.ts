@@ -1,7 +1,13 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useMemo } from "react";
 
-import { GameSave, getAllSaves, useDeleteGame, useLoadGame, useSaveGame } from "#saves";
+import {
+    GameSave,
+    getAllSaves,
+    useDeleteGame,
+    useLoadGame,
+    useSaveGame,
+} from "#saves";
 
 /**
  * React hook that provides an array of save slots with live updates from IndexedDB.
@@ -37,14 +43,12 @@ export const useSaveSlots = ({ count } = { count: 1 }) => {
 
     return useMemo(
         () =>
-            Array.from({ length: count }).map(
-                (_, index) => ({
-                    data: data?.find((slot) => slot.name === `${index}`) || null,
-                    save: async () => saveGameHandler(index),
-                    load: async () => loadGameHandler(index),
-                    delete: async () => deleteGameHandler(index),
-                })
-            ),
+            Array.from({ length: count }).map((_, index) => ({
+                data: data?.find((slot) => slot.name === `${index}`) || null,
+                save: async () => saveGameHandler(index),
+                load: async () => loadGameHandler(index),
+                delete: async () => deleteGameHandler(index),
+            })),
         [data, count, deleteGameHandler, loadGameHandler, saveGameHandler]
     );
 };

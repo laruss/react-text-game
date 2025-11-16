@@ -8,14 +8,12 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
         color?: ButtonColor | undefined;
     }>;
 
-const variantColorStyles: Record<
-    ButtonVariant,
-    Record<ButtonColor, string>
-> = {
+const variantColorStyles: Record<ButtonVariant, Record<ButtonColor, string>> = {
     solid: {
         default: "bg-muted-500 text-primary-foreground hover:bg-muted-600",
         primary: "bg-primary-500 text-primary-foreground hover:bg-primary-600",
-        secondary: "bg-secondary-500 text-secondary-foreground hover:bg-secondary-600",
+        secondary:
+            "bg-secondary-500 text-secondary-foreground hover:bg-secondary-600",
         success: "bg-success-500 text-success-foreground hover:bg-success-600",
         warning: "bg-warning-500 text-warning-foreground hover:bg-warning-600",
         danger: "bg-danger-500 text-danger-foreground hover:bg-danger-600",
@@ -30,11 +28,14 @@ const variantColorStyles: Record<
     },
     bordered: {
         default: "border-2 border-muted-500 text-muted-700 hover:bg-muted-50",
-        primary: "border-2 border-primary-500 text-primary-600 hover:bg-primary-50",
+        primary:
+            "border-2 border-primary-500 text-primary-600 hover:bg-primary-50",
         secondary:
             "border-2 border-secondary-500 text-secondary-600 hover:bg-secondary-50",
-        success: "border-2 border-success-500 text-success-600 hover:bg-success-50",
-        warning: "border-2 border-warning-500 text-warning-600 hover:bg-warning-50",
+        success:
+            "border-2 border-success-500 text-success-600 hover:bg-success-50",
+        warning:
+            "border-2 border-warning-500 text-warning-600 hover:bg-warning-50",
         danger: "border-2 border-danger-500 text-danger-600 hover:bg-danger-50",
     },
     light: {
@@ -72,8 +73,7 @@ const variantColorStyles: Record<
             "bg-success-500 text-success-foreground shadow-lg shadow-success-500/50 hover:bg-success-600",
         warning:
             "bg-warning-500 text-warning-foreground shadow-lg shadow-warning-500/50 hover:bg-warning-600",
-        danger:
-            "bg-danger-500 text-danger-foreground shadow-lg shadow-danger-500/50 hover:bg-danger-600",
+        danger: "bg-danger-500 text-danger-foreground shadow-lg shadow-danger-500/50 hover:bg-danger-600",
     },
 };
 

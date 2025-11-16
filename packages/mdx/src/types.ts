@@ -31,7 +31,14 @@ export interface TemplateContent {
     type: "template";
     parts: Array<
         | { type: "text"; value: string }
-        | { type: "var"; expression: { type: "expression"; data?: { estree?: unknown }; value?: string } }
+        | {
+              type: "var";
+              expression: {
+                  type: "expression";
+                  data?: { estree?: unknown };
+                  value?: string;
+              };
+          }
     >;
 }
 

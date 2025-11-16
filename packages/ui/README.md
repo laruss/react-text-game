@@ -38,7 +38,7 @@ Import the shared styles once in your global stylesheet (for example `src/index.
 @import "@react-text-game/ui/styles";
 
 @theme {
-  --color-primary-500: oklch(0.65 0.25 265); /* optional override */
+    --color-primary-500: oklch(0.65 0.25 265); /* optional override */
 }
 ```
 
@@ -51,14 +51,16 @@ Once Tailwind is wired up and packages are installed, the lightest viable setup 
 
 ```tsx
 // src/App.tsx
-import { GameProvider, PassageController } from '@react-text-game/ui';
+import { GameProvider, PassageController } from "@react-text-game/ui";
 
 export function App() {
-  return (
-    <GameProvider options={{ gameName: 'My Text Adventure', isDevMode: true }}>
-      <PassageController />
-    </GameProvider>
-  );
+    return (
+        <GameProvider
+            options={{ gameName: "My Text Adventure", isDevMode: true }}
+        >
+            <PassageController />
+        </GameProvider>
+    );
 }
 ```
 
@@ -71,7 +73,7 @@ The UI package ships with an `en` translation bundle for the `ui` namespace and 
 ### Default UI copy
 
 ```ts
-import { uiTranslations } from '@react-text-game/ui/i18n';
+import { uiTranslations } from "@react-text-game/ui/i18n";
 
 console.log(uiTranslations.en.ui.mainMenu.title); // "Main Menu"
 ```
@@ -83,21 +85,21 @@ Components such as `MainMenu`, `SaveLoadModal`, and `ErrorBoundary` already call
 Create your own `ui` namespace JSON file per language and pass it alongside your story translations:
 
 ```ts
-import uiEs from './locales/es/ui.json';
-import passagesEs from './locales/es/passages.json';
+import uiEs from "./locales/es/ui.json";
+import passagesEs from "./locales/es/passages.json";
 
 await Game.init({
-  gameName: 'My Text Adventure',
-  translations: {
-    defaultLanguage: 'en',
-    fallbackLanguage: 'en',
-    resources: {
-      es: {
-        ui: uiEs,
-        passages: passagesEs,
-      },
+    gameName: "My Text Adventure",
+    translations: {
+        defaultLanguage: "en",
+        fallbackLanguage: "en",
+        resources: {
+            es: {
+                ui: uiEs,
+                passages: passagesEs,
+            },
+        },
     },
-  },
 });
 ```
 
@@ -110,17 +112,17 @@ await Game.init({
 Use the built-in `LanguageToggle` to expose language switching in your UI. It relies on `useGameTranslation`, so language changes propagate everywhere.
 
 ```tsx
-import { LanguageToggle } from '@react-text-game/ui';
+import { LanguageToggle } from "@react-text-game/ui";
 
 function Header() {
-  return (
-    <header className="flex justify-end">
-      <LanguageToggle
-        languageNames={{ en: 'English', es: 'Español' }}
-        showCode
-      />
-    </header>
-  );
+    return (
+        <header className="flex justify-end">
+            <LanguageToggle
+                languageNames={{ en: "English", es: "Español" }}
+                showCode
+            />
+        </header>
+    );
 }
 ```
 
@@ -179,18 +181,18 @@ You can override any theme color in your application's CSS file:
 @import "@react-text-game/ui/styles";
 
 @theme {
-  /* Override primary brand color to purple */
-  --color-primary-50: oklch(0.98 0.02 300);
-  --color-primary-100: oklch(0.95 0.05 300);
-  --color-primary-200: oklch(0.90 0.10 300);
-  --color-primary-300: oklch(0.82 0.15 300);
-  --color-primary-400: oklch(0.72 0.20 300);
-  --color-primary-500: oklch(0.62 0.24 300);
-  --color-primary-600: oklch(0.52 0.22 300);
-  --color-primary-700: oklch(0.44 0.18 300);
-  --color-primary-800: oklch(0.36 0.14 300);
-  --color-primary-900: oklch(0.28 0.10 300);
-  --color-primary-950: oklch(0.18 0.06 300);
+    /* Override primary brand color to purple */
+    --color-primary-50: oklch(0.98 0.02 300);
+    --color-primary-100: oklch(0.95 0.05 300);
+    --color-primary-200: oklch(0.9 0.1 300);
+    --color-primary-300: oklch(0.82 0.15 300);
+    --color-primary-400: oklch(0.72 0.2 300);
+    --color-primary-500: oklch(0.62 0.24 300);
+    --color-primary-600: oklch(0.52 0.22 300);
+    --color-primary-700: oklch(0.44 0.18 300);
+    --color-primary-800: oklch(0.36 0.14 300);
+    --color-primary-900: oklch(0.28 0.1 300);
+    --color-primary-950: oklch(0.18 0.06 300);
 }
 ```
 
@@ -200,21 +202,21 @@ You can override any theme color in your application's CSS file:
 @import "@react-text-game/ui/styles";
 
 @theme {
-  /* Replace entire color palette */
-  --color-*: initial;
+    /* Replace entire color palette */
+    --color-*: initial;
 
-  /* Custom brand colors */
-  --color-primary-500: oklch(0.65 0.25 265);
-  --color-secondary-500: oklch(0.70 0.20 180);
+    /* Custom brand colors */
+    --color-primary-500: oklch(0.65 0.25 265);
+    --color-secondary-500: oklch(0.7 0.2 180);
 
-  /* Custom UI colors */
-  --color-background: oklch(0.98 0.002 264);
-  --color-foreground: oklch(0.20 0.01 264);
-  --color-border: oklch(0.88 0.005 264);
+    /* Custom UI colors */
+    --color-background: oklch(0.98 0.002 264);
+    --color-foreground: oklch(0.2 0.01 264);
+    --color-border: oklch(0.88 0.005 264);
 
-  /* Success/Error colors */
-  --color-success-500: oklch(0.65 0.18 150);
-  --color-danger-500: oklch(0.65 0.22 30);
+    /* Success/Error colors */
+    --color-success-500: oklch(0.65 0.18 150);
+    --color-danger-500: oklch(0.65 0.22 30);
 }
 ```
 
@@ -225,11 +227,11 @@ You can override any theme color in your application's CSS file:
 
 /* Override dark mode colors */
 @media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: oklch(0.10 0.01 264);
-    --color-foreground: oklch(0.95 0.002 264);
-    --color-primary-500: oklch(0.70 0.25 265);
-  }
+    @theme {
+        --color-background: oklch(0.1 0.01 264);
+        --color-foreground: oklch(0.95 0.002 264);
+        --color-primary-500: oklch(0.7 0.25 265);
+    }
 }
 ```
 
@@ -242,14 +244,14 @@ You can override any theme color in your application's CSS file:
 
 /* Your custom theme overrides here */
 @theme {
-  --color-primary-500: your-custom-color;
+    --color-primary-500: your-custom-color;
 }
 ```
 
 1. **Import components** in your React code:
 
 ```tsx
-import { Button, MainMenu, StoryComponent } from '@react-text-game/ui';
+import { Button, MainMenu, StoryComponent } from "@react-text-game/ui";
 ```
 
 ### Custom Component Overrides
@@ -257,37 +259,41 @@ import { Button, MainMenu, StoryComponent } from '@react-text-game/ui';
 You can override any built-in component with your own implementation using the `ComponentsProvider`:
 
 ```tsx
-import { GameProvider, ComponentsProvider, type Components } from '@react-text-game/ui';
+import {
+    GameProvider,
+    ComponentsProvider,
+    type Components,
+} from "@react-text-game/ui";
 
 // Create your custom components
 const CustomHeading = ({ text }: { text: string }) => (
-  <h1 className="text-4xl font-bold my-custom-class">{text}</h1>
+    <h1 className="text-4xl font-bold my-custom-class">{text}</h1>
 );
 
 const CustomMainMenu = () => (
-  <div className="my-custom-menu">
-    {/* Your custom menu implementation */}
-  </div>
+    <div className="my-custom-menu">
+        {/* Your custom menu implementation */}
+    </div>
 );
 
 // Define which components to override
 const customComponents: Components = {
-  MainMenu: CustomMainMenu,
-  story: {
-    Heading: CustomHeading,
-    // Text, Image, Video, Actions, Conversation can also be overridden
-  },
+    MainMenu: CustomMainMenu,
+    story: {
+        Heading: CustomHeading,
+        // Text, Image, Video, Actions, Conversation can also be overridden
+    },
 };
 
 // Wrap your game with ComponentsProvider
 function App() {
-  return (
-    <GameProvider>
-      <ComponentsProvider components={customComponents}>
-        {/* Your game content */}
-      </ComponentsProvider>
-    </GameProvider>
-  );
+    return (
+        <GameProvider>
+            <ComponentsProvider components={customComponents}>
+                {/* Your game content */}
+            </ComponentsProvider>
+        </GameProvider>
+    );
 }
 ```
 
@@ -324,12 +330,8 @@ Use [oklch.com](https://oklch.com) to pick and convert colors.
 Components also accept `className` props for additional styling:
 
 ```tsx
-<Button
-  variant="solid"
-  color="primary"
-  className="custom-additional-styles"
->
-  Click me
+<Button variant="solid" color="primary" className="custom-additional-styles">
+    Click me
 </Button>
 ```
 
@@ -350,11 +352,11 @@ This package uses **global CSS variables** (like `--color-primary-500`, `--color
 
 ```css
 /* Both systems try to define the same variables */
-@import "@react-text-game/ui/styles";  /* Uses --color-primary-500 */
-@import "@shadcn/ui/styles";           /* Also uses --color-primary-500 */
+@import "@react-text-game/ui/styles"; /* Uses --color-primary-500 */
+@import "@shadcn/ui/styles"; /* Also uses --color-primary-500 */
 
 @theme {
-  --color-primary-500: oklch(...);     /* Which library does this affect? Both! */
+    --color-primary-500: oklch(...); /* Which library does this affect? Both! */
 }
 ```
 
@@ -370,22 +372,20 @@ If you **must** mix with other design systems (e.g., using shadcn for admin pane
 
 ```tsx
 // App.tsx
-import '@react-text-game/ui/styles';
+import "@react-text-game/ui/styles";
 
 function App() {
-  return (
-    <>
-      {/* Admin UI with shadcn */}
-      <AdminPanel />
+    return (
+        <>
+            {/* Admin UI with shadcn */}
+            <AdminPanel />
 
-      {/* Game UI isolated in a scope */}
-      <div className="game-container">
-        <GameProvider>
-          {/* Our components here */}
-        </GameProvider>
-      </div>
-    </>
-  );
+            {/* Game UI isolated in a scope */}
+            <div className="game-container">
+                <GameProvider>{/* Our components here */}</GameProvider>
+            </div>
+        </>
+    );
 }
 ```
 
@@ -397,9 +397,9 @@ Then create scoped overrides:
 
 /* Scoped theme for game only */
 .game-container {
-  /* Override game theme variables specifically */
-  --color-primary-500: oklch(0.65 0.25 300);
-  --color-background: oklch(0.05 0.01 280);
+    /* Override game theme variables specifically */
+    --color-primary-500: oklch(0.65 0.25 300);
+    --color-background: oklch(0.05 0.01 280);
 }
 ```
 
@@ -425,9 +425,9 @@ If you need fine-grained control, manually remap variables:
 @import "@react-text-game/ui/styles";
 
 @theme {
-  /* Remap our variables to avoid conflicts */
-  --rtg-primary: var(--color-primary-500);
-  --rtg-background: var(--color-background);
+    /* Remap our variables to avoid conflicts */
+    --rtg-primary: var(--color-primary-500);
+    --rtg-background: var(--color-background);
 }
 ```
 
@@ -435,15 +435,17 @@ Then create wrapper components:
 
 ```tsx
 // CustomButton.tsx
-import { Button as RTGButton } from '@react-text-game/ui';
+import { Button as RTGButton } from "@react-text-game/ui";
 
 export const GameButton = (props) => (
-  <div style={{
-    '--color-primary-500': 'var(--rtg-primary)',
-    '--color-background': 'var(--rtg-background)'
-  }}>
-    <RTGButton {...props} />
-  </div>
+    <div
+        style={{
+            "--color-primary-500": "var(--rtg-primary)",
+            "--color-background": "var(--rtg-background)",
+        }}
+    >
+        <RTGButton {...props} />
+    </div>
 );
 ```
 

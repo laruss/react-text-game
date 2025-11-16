@@ -8,9 +8,9 @@ import {
 } from "./ConversationClickContext";
 
 export const ConversationClickProvider = ({ children }: PropsWithChildren) => {
-    const conversationsRef = useRef<
-        Map<string, ConversationClickCallback>
-    >(new Map());
+    const conversationsRef = useRef<Map<string, ConversationClickCallback>>(
+        new Map()
+    );
 
     const registerConversation = useCallback(
         (id: string, callback: ConversationClickCallback) => {

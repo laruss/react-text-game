@@ -109,9 +109,7 @@ describe("Conversation", () => {
             expect(screen.getByText("Right message")).toBeTruthy();
 
             // Check that different styles are applied based on side
-            const leftBubble = screen
-                .getByText("Left message")
-                .closest("div");
+            const leftBubble = screen.getByText("Left message").closest("div");
             const rightBubble = screen
                 .getByText("Right message")
                 .closest("div");
@@ -267,8 +265,7 @@ describe("Conversation", () => {
             });
 
             // Count bubbles
-            const bubblesBefore =
-                container.querySelectorAll("div").length;
+            const bubblesBefore = container.querySelectorAll("div").length;
 
             // Click again
             screen.getByText("First").click();

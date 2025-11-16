@@ -12,7 +12,7 @@ export type Replace<T, K extends keyof T, TReplace> = Identity<
 >;
 
 export type OptionalKeys<T> = {
-    [K in keyof T]-?: object extends Pick<T, K> ? K : never
+    [K in keyof T]-?: object extends Pick<T, K> ? K : never;
 }[keyof T];
 
 /**
@@ -22,16 +22,15 @@ export type OptionalKeys<T> = {
  *
  * @template T - The object type to be validated for optional keys.
  */
-export type AssertNoOptionals<T> =
-    [OptionalKeys<T>] extends [never]
-        ? unknown
-        : {
-            /**
-             * ❌ Optional keys are not allowed.
-             * Remove or make required these keys:
-             */
-            "Error: no optional keys": OptionalKeys<T>;
-        };
+export type AssertNoOptionals<T> = [OptionalKeys<T>] extends [never]
+    ? unknown
+    : {
+          /**
+           * ❌ Optional keys are not allowed.
+           * Remove or make required these keys:
+           */
+          "Error: no optional keys": OptionalKeys<T>;
+      };
 
 export type GameSaveState = Record<string, unknown>;
 

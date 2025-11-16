@@ -128,8 +128,7 @@ const config: Config = {
                 docs: {
                     sidebarPath: "./sidebars.ts",
                     routeBasePath: "/",
-                    editUrl:
-                        "https://github.com/laruss/tree/main/apps/docs/",
+                    editUrl: "https://github.com/laruss/tree/main/apps/docs/",
                 },
                 blog: false,
                 theme: {
@@ -175,8 +174,7 @@ const config: Config = {
             },
             {
                 name: "twitter:image",
-                content:
-                    "https://reacttextgame.dev/img/og-image.webp",
+                content: "https://reacttextgame.dev/img/og-image.webp",
             },
             { property: "og:type", content: "website" },
             {
@@ -195,8 +193,7 @@ const config: Config = {
             },
             {
                 property: "og:image",
-                content:
-                    "https://reacttextgame.dev/img/og-image.webp",
+                content: "https://reacttextgame.dev/img/og-image.webp",
             },
             { property: "og:image:width", content: "1200" },
             { property: "og:image:height", content: "630" },

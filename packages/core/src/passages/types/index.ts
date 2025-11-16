@@ -1,2 +1,2 @@
-export type * from '../interactiveMap/types';
-export type * from '../story/types';
+export type * from "../interactiveMap/types";
+export type * from "../story/types";

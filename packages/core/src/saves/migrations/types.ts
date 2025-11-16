@@ -1,6 +1,7 @@
 import { GameSaveState } from "#types";
 
-export type MigrationGameSaveState = Partial<GameSaveState> & Record<string, unknown>;
+export type MigrationGameSaveState = Partial<GameSaveState> &
+    Record<string, unknown>;
 
 /**
  * A function that migrates game save data from one version to another.
@@ -43,7 +44,8 @@ export type MigrationGameSaveState = Partial<GameSaveState> & Record<string, unk
  * };
  * ```
  */
-export type SaveMigrationFn<T extends MigrationGameSaveState = GameSaveState> = (data: T) => T;
+export type SaveMigrationFn<T extends MigrationGameSaveState = GameSaveState> =
+    (data: T) => T;
 
 /**
  * Defines a migration from one game version to another.
@@ -88,7 +90,9 @@ export type SaveMigrationFn<T extends MigrationGameSaveState = GameSaveState> = 
  * };
  * ```
  */
-export interface SaveMigration<T extends MigrationGameSaveState = GameSaveState> {
+export interface SaveMigration<
+    T extends MigrationGameSaveState = GameSaveState,
+> {
     /**
      * The source version this migration starts from.
      * Should be a valid semver string (e.g., "1.0.0", "1.2.3")

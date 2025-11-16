@@ -121,10 +121,10 @@ passageId: test-video-props
             expect(code).toContain('type: "video"');
             expect(code).toContain('content: "demo.mp4"');
             expect(code).toContain('className: "video-player"');
-            expect(code).toContain('controls: true');
-            expect(code).toContain('autoPlay: false');
-            expect(code).toContain('loop: true');
-            expect(code).toContain('muted: true');
+            expect(code).toContain("controls: true");
+            expect(code).toContain("autoPlay: false");
+            expect(code).toContain("loop: true");
+            expect(code).toContain("muted: true");
         });
 
         test("transforms <img> with all supported props", async () => {
@@ -142,7 +142,7 @@ passageId: test-img-props
             expect(code).toContain('alt: "Photo"');
             expect(code).toContain('title: "My Photo"');
             expect(code).toContain('className: "rounded"');
-            expect(code).toContain('disableModal: true');
+            expect(code).toContain("disableModal: true");
             expect(code).toContain("console.log('clicked')");
         });
     });

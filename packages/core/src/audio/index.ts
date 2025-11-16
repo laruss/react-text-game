@@ -30,8 +30,4 @@
 export { AudioManager, AudioTrack } from "./audioTrack";
 export { AUDIO_STORAGE_PATH, DEFAULT_AUDIO_OPTIONS } from "./constants";
 export { createAudio } from "./fabric";
-export type {
-    AudioOptions,
-    AudioSaveState,
-    AudioState,
-} from "./types";
+export type { AudioOptions, AudioSaveState, AudioState } from "./types";

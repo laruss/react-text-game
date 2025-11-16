@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useGameTranslation } from "@react-text-game/core/i18n";
 import { useState } from "react";
@@ -56,7 +56,8 @@ export const LanguageToggle = ({
     languageNames,
     showCode = false,
 }: LanguageToggleProps) => {
-    const { currentLanguage, languages, changeLanguage } = useGameTranslation(namespace);
+    const { currentLanguage, languages, changeLanguage } =
+        useGameTranslation(namespace);
     const [isOpen, setIsOpen] = useState(false);
 
     // Default language names - uppercase language codes
@@ -137,31 +138,34 @@ export const LanguageToggle = ({
                     aria-orientation="vertical"
                 >
                     <div className="bg-popover border border-border rounded-lg shadow-lg overflow-hidden animate-[fadeIn_150ms_ease-in]">
-                    {languages.map((lang) => {
-                        const isActive = lang === currentLanguage;
-                        return (
-                            <button
-                                key={lang}
-                                onClick={() => handleLanguageChange(lang)}
-                                className={twMerge(
-                                    "w-full text-left px-4 py-2.5 transition-colors duration-150 whitespace-nowrap",
-                                    isActive
-                                        ? "bg-primary-100 text-primary-700 font-medium cursor-default"
-                                        : "text-popover-foreground hover:bg-muted hover:text-accent-foreground cursor-pointer"
-                                )}
-                                role="menuitem"
-                                aria-current={isActive ? "true" : undefined}
-                            >
-                                {getLanguageName(lang)}
-                                {showCode && ` (${lang})`}
-                                {isActive && (
-                                    <span className="ml-2" aria-label="Current language">
-                                        ✓
-                                    </span>
-                                )}
-                            </button>
-                        );
-                    })}
+                        {languages.map((lang) => {
+                            const isActive = lang === currentLanguage;
+                            return (
+                                <button
+                                    key={lang}
+                                    onClick={() => handleLanguageChange(lang)}
+                                    className={twMerge(
+                                        "w-full text-left px-4 py-2.5 transition-colors duration-150 whitespace-nowrap",
+                                        isActive
+                                            ? "bg-primary-100 text-primary-700 font-medium cursor-default"
+                                            : "text-popover-foreground hover:bg-muted hover:text-accent-foreground cursor-pointer"
+                                    )}
+                                    role="menuitem"
+                                    aria-current={isActive ? "true" : undefined}
+                                >
+                                    {getLanguageName(lang)}
+                                    {showCode && ` (${lang})`}
+                                    {isActive && (
+                                        <span
+                                            className="ml-2"
+                                            aria-label="Current language"
+                                        >
+                                            ✓
+                                        </span>
+                                    )}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             )}

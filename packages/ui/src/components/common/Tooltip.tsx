@@ -14,7 +14,9 @@ export type Placement =
     | "left";
 
 export type TooltipProps = Readonly<{
-    targetRef: RefObject<HTMLElement | HTMLDivElement | HTMLButtonElement | null>;
+    targetRef: RefObject<
+        HTMLElement | HTMLDivElement | HTMLButtonElement | null
+    >;
     disabled?: boolean | undefined;
     content: ReactNode;
     className?: string | undefined;

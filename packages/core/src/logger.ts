@@ -1,5 +1,5 @@
 import { consola } from "consola/browser";
-import { colors } from 'consola/utils';
+import { colors } from "consola/utils";
 
 import { _getOptions } from "#options";
 

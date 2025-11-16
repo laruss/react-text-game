@@ -26,10 +26,13 @@ import { mdxStructToEstree } from "./component-transforms.js";
 const recmaStoryRegister: Plugin<[], Program> = function () {
     return (program, file) => {
         const meta = (file.data?.meta ?? {}) as MdxStoryMeta;
-        const mdxStruct = (file.data?.mdxStruct ?? []) as MdxExport["components"];
+        const mdxStruct = (file.data?.mdxStruct ??
+            []) as MdxExport["components"];
 
         if (!meta.passageId || typeof meta.passageId !== "string") {
-            file.message("MDX story requires 'passageId' in frontmatter for auto-registration");
+            file.message(
+                "MDX story requires 'passageId' in frontmatter for auto-registration"
+            );
             return;
         }
 
@@ -77,7 +80,9 @@ const recmaStoryRegister: Plugin<[], Program> = function () {
                                     body: componentsArrayExpr,
                                     expression: true,
                                 },
-                                ...(meta.options ? [valueToEstree(meta.options)] : []),
+                                ...(meta.options
+                                    ? [valueToEstree(meta.options)]
+                                    : []),
                             ],
                             optional: false,
                         },

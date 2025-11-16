@@ -12,8 +12,8 @@ await Game.init({
     gameName: "core-test-app",
     isDevMode: true,
     translations: {
-        defaultLanguage: 'en',
-        fallbackLanguage: 'en',
+        defaultLanguage: "en",
+        fallbackLanguage: "en",
         resources: {
             en: {
                 passages: passagesEn,
@@ -21,7 +21,7 @@ await Game.init({
             ru: {
                 passages: passagesRu,
             },
-        }
+        },
     },
 });
 

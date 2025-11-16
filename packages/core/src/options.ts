@@ -13,7 +13,8 @@ export type Options = {
     translations: I18nConfig;
 };
 
-export type NewOptions = Pick<Options, "gameName"> & Partial<Omit<Options, "gameName">>;
+export type NewOptions = Pick<Options, "gameName"> &
+    Partial<Omit<Options, "gameName">>;
 
 const options: Options = {
     gameName: "",

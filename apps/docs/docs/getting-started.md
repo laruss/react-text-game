@@ -3,13 +3,13 @@ sidebar_position: 2
 title: Getting Started
 description: Learn how to install and set up React Text Game in your project. Step-by-step guide for installing the core game engine and UI components, configuring Tailwind CSS, and creating your first text-based game or interactive fiction.
 keywords:
-  - react text game installation
-  - text game setup
-  - interactive fiction tutorial
-  - react game engine setup
-  - valtio state management
-  - tailwindcss game ui
-  - typescript game development
+    - react text game installation
+    - text game setup
+    - interactive fiction tutorial
+    - react game engine setup
+    - valtio state management
+    - tailwindcss game ui
+    - typescript game development
 image: /img/og-image.webp
 ---
 
@@ -74,7 +74,7 @@ Import the UI styles in your global CSS file (e.g., `src/index.css` or `src/main
 
 /* Optional: Override theme colors */
 @theme {
-  --color-primary-500: oklch(0.65 0.25 265);
+    --color-primary-500: oklch(0.65 0.25 265);
 }
 ```
 
@@ -83,31 +83,31 @@ Import the UI styles in your global CSS file (e.g., `src/index.css` or `src/main
 ### Using Core Package Only
 
 ```tsx
-import { Game, createEntity, newStory } from '@react-text-game/core';
+import { Game, createEntity, newStory } from "@react-text-game/core";
 
 // IMPORTANT: Initialize the game first
 await Game.init({
-  gameName: 'My Text Adventure',
-  isDevMode: true,
+    gameName: "My Text Adventure",
+    isDevMode: true,
 });
 
 // Create game entities
-const player = createEntity('player', {
-  name: 'Hero',
-  health: 100,
+const player = createEntity("player", {
+    name: "Hero",
+    health: 100,
 });
 
 // Create story passages
-const intro = newStory('intro', () => [
-  {
-    type: 'header',
-    content: 'Welcome!',
-    props: { level: 1 }
-  },
-  {
-    type: 'text',
-    content: 'Your adventure begins...'
-  },
+const intro = newStory("intro", () => [
+    {
+        type: "header",
+        content: "Welcome!",
+        props: { level: 1 },
+    },
+    {
+        type: "text",
+        content: "Your adventure begins...",
+    },
 ]);
 
 // Start the game
@@ -120,14 +120,16 @@ The UI package provides a complete game interface with minimal setup:
 
 ```tsx
 // src/App.tsx
-import { GameProvider, PassageController } from '@react-text-game/ui';
+import { GameProvider, PassageController } from "@react-text-game/ui";
 
 export function App() {
-  return (
-    <GameProvider options={{ gameName: 'My Text Adventure', isDevMode: true }}>
-      <PassageController />
-    </GameProvider>
-  );
+    return (
+        <GameProvider
+            options={{ gameName: "My Text Adventure", isDevMode: true }}
+        >
+            <PassageController />
+        </GameProvider>
+    );
 }
 ```
 
@@ -135,40 +137,40 @@ Then define your game entities and passages:
 
 ```tsx
 // src/game/entities.ts
-import { createEntity } from '@react-text-game/core';
+import { createEntity } from "@react-text-game/core";
 
-export const player = createEntity('player', {
-  name: 'Hero',
-  health: 100,
-  inventory: [] as string[],
+export const player = createEntity("player", {
+    name: "Hero",
+    health: 100,
+    inventory: [] as string[],
 });
 ```
 
 ```tsx
 // src/game/passages.ts
-import { newStory, Game } from '@react-text-game/core';
-import { player } from './entities';
+import { newStory, Game } from "@react-text-game/core";
+import { player } from "./entities";
 
-export const intro = newStory('intro', () => [
-  {
-    type: 'header',
-    content: 'Welcome to the Game',
-    props: { level: 1 }
-  },
-  {
-    type: 'text',
-    content: `Hello, ${player.name}! Your health is ${player.health}.`
-  },
-  {
-    type: 'actions',
-    content: [
-      {
-        label: 'Start Adventure',
-        action: () => Game.jumpTo('chapter1'),
-        color: 'primary'
-      }
-    ]
-  }
+export const intro = newStory("intro", () => [
+    {
+        type: "header",
+        content: "Welcome to the Game",
+        props: { level: 1 },
+    },
+    {
+        type: "text",
+        content: `Hello, ${player.name}! Your health is ${player.health}.`,
+    },
+    {
+        type: "actions",
+        content: [
+            {
+                label: "Start Adventure",
+                action: () => Game.jumpTo("chapter1"),
+                color: "primary",
+            },
+        ],
+    },
 ]);
 ```
 
@@ -216,12 +218,12 @@ Make sure you call `Game.init()` before creating any entities or passages:
 
 ```tsx
 // ❌ Wrong
-const player = createEntity('player', { name: 'Hero' });
+const player = createEntity("player", { name: "Hero" });
 await Game.init();
 
 // ✅ Correct
 await Game.init();
-const player = createEntity('player', { name: 'Hero' });
+const player = createEntity("player", { name: "Hero" });
 ```
 
 ### UI Components Not Styled

@@ -5,6 +5,7 @@ import {
     MapLabelHotspot,
 } from "@react-text-game/core/passages";
 import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Button, Placement, Tooltip } from "#components/common";
 
@@ -31,7 +32,10 @@ export const LabelHotspot = ({
                 <Button
                     onClick={() => hotspot.action()}
                     disabled={isDisabled}
-                    className={hotspot.props?.classNames?.button}
+                    className={twMerge(
+                        "pointer-events-auto",
+                        hotspot.props?.classNames?.button
+                    )}
                     variant={hotspot.props?.variant}
                     color={hotspot.props?.color}
                 >

@@ -85,7 +85,9 @@ class MockAudioElement {
 
 // Mock requestAnimationFrame for fade tests
 (
-    global as unknown as { requestAnimationFrame: (cb: FrameRequestCallback) => number }
+    global as unknown as {
+        requestAnimationFrame: (cb: FrameRequestCallback) => number;
+    }
 ).requestAnimationFrame = (callback: FrameRequestCallback) => {
     return setTimeout(() => callback(Date.now()), 0) as unknown as number;
 };
@@ -279,8 +281,9 @@ describe("Audio System", () => {
         test("seeks to specific time", () => {
             const audio = createAudio("test.mp3");
             // Simulate loaded metadata
-            const audioEl = (audio as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
             audioEl._triggerLoadedMetadata();
 
             audio.seek(30);
@@ -290,8 +293,9 @@ describe("Audio System", () => {
         test("clamps seek time to valid range", () => {
             const audio = createAudio("test.mp3");
             // Simulate loaded metadata (duration = 180s)
-            const audioEl = (audio as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
             audioEl._triggerLoadedMetadata();
 
             audio.seek(-10);
@@ -341,7 +345,11 @@ describe("Audio System", () => {
             audio1.dispose();
 
             // Restore the saved state
-            Storage.setValue("$._system.audio.test-audio", savedState[0]!, true);
+            Storage.setValue(
+                "$._system.audio.test-audio",
+                savedState[0]!,
+                true
+            );
 
             // Create new audio with same ID and different settings
             const audio2 = createAudio("test.mp3", {
@@ -407,8 +415,9 @@ describe("Audio System", () => {
             const audio = createAudio("test.mp3", { id: "test", volume: 0.8 });
 
             // Access the audio element to verify effective volume
-            const audioEl = (audio as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
 
             // Initial state: track volume 0.8, master volume 1.0
             expect(audio.getState().volume).toBe(0.8);
@@ -432,16 +441,28 @@ describe("Audio System", () => {
         });
 
         test("master volume applies to all tracks independently", () => {
-            const audio1 = createAudio("test1.mp3", { id: "test1", volume: 0.6 });
-            const audio2 = createAudio("test2.mp3", { id: "test2", volume: 0.9 });
-            const audio3 = createAudio("test3.mp3", { id: "test3", volume: 0.3 });
+            const audio1 = createAudio("test1.mp3", {
+                id: "test1",
+                volume: 0.6,
+            });
+            const audio2 = createAudio("test2.mp3", {
+                id: "test2",
+                volume: 0.9,
+            });
+            const audio3 = createAudio("test3.mp3", {
+                id: "test3",
+                volume: 0.3,
+            });
 
-            const audioEl1 = (audio1 as unknown as { audioElement: MockAudioElement })
-                .audioElement;
-            const audioEl2 = (audio2 as unknown as { audioElement: MockAudioElement })
-                .audioElement;
-            const audioEl3 = (audio3 as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl1 = (
+                audio1 as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
+            const audioEl2 = (
+                audio2 as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
+            const audioEl3 = (
+                audio3 as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
 
             // Set master volume to 0.5
             AudioManager.setMasterVolume(0.5);
@@ -459,8 +480,9 @@ describe("Audio System", () => {
 
         test("changing track volume updates effective volume with current master volume", () => {
             const audio = createAudio("test.mp3", { id: "test", volume: 0.5 });
-            const audioEl = (audio as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
 
             // Set master volume to 0.5
             AudioManager.setMasterVolume(0.5);
@@ -481,10 +503,12 @@ describe("Audio System", () => {
             const audio1 = createAudio("test1.mp3", { volume: 0.7 });
             const audio2 = createAudio("test2.mp3", { volume: 0.5 });
 
-            const audioEl1 = (audio1 as unknown as { audioElement: MockAudioElement })
-                .audioElement;
-            const audioEl2 = (audio2 as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl1 = (
+                audio1 as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
+            const audioEl2 = (
+                audio2 as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
 
             // Set master volume to 0 (silence all)
             AudioManager.setMasterVolume(0);
@@ -510,8 +534,9 @@ describe("Audio System", () => {
             AudioManager.setMasterVolume(0.5);
 
             const audio = createAudio("test.mp3", { volume: 0.8 });
-            const audioEl = (audio as unknown as { audioElement: MockAudioElement })
-                .audioElement;
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
 
             // New track should have master volume applied
             expect(audio.getState().volume).toBe(0.8);
@@ -674,7 +699,9 @@ describe("Audio System", () => {
             audio1.save();
 
             // Save the state before disposing
-            const savedState = Storage.getValue("$._system.audio.persistent-audio");
+            const savedState = Storage.getValue(
+                "$._system.audio.persistent-audio"
+            );
             audio1.dispose();
 
             // Restore the saved state (in case dispose cleared it)

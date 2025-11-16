@@ -42,9 +42,7 @@ export const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
                 </svg>
             </button>
             {showCopied && (
-                <span className="ml-2 text-xs text-success-600">
-                    copied
-                </span>
+                <span className="ml-2 text-xs text-success-600">copied</span>
             )}
         </>
     );

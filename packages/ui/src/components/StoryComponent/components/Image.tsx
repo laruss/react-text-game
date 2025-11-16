@@ -1,10 +1,10 @@
 "use client";
 
 import { ImageComponent } from "@react-text-game/core/passages";
-import { useEffect,useId } from "react";
+import { useEffect, useId } from "react";
 import { twMerge } from "tailwind-merge";
 
-export type ImageProps = Readonly<{component: ImageComponent}>;
+export type ImageProps = Readonly<{ component: ImageComponent }>;
 
 export const Image = ({ component }: ImageProps) => {
     const modalId = useId();
@@ -21,7 +21,9 @@ export const Image = ({ component }: ImageProps) => {
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
-                const checkbox = document.getElementById(modalId) as HTMLInputElement;
+                const checkbox = document.getElementById(
+                    modalId
+                ) as HTMLInputElement;
                 if (checkbox?.checked) {
                     checkbox.checked = false;
                 }

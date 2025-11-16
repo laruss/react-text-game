@@ -47,13 +47,13 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [
-    {
-      enforce: "pre",
-      ...mdx({ ...reactTextGameStoryPlugin() }),
-    },
-    react(),
-  ],
+    plugins: [
+        {
+            enforce: "pre",
+            ...mdx({ ...reactTextGameStoryPlugin() }),
+        },
+        react(),
+    ],
 });
 ```
 
@@ -62,8 +62,8 @@ export default defineConfig({
 Follow the [MDX installation guide](https://mdxjs.com/docs/getting-started/) for your bundler, then pass `reactTextGameStoryPlugin()` as an option to the MDX compiler:
 
 ```javascript
-import { compile } from '@mdx-js/mdx';
-import { reactTextGameStoryPlugin } from '@react-text-game/mdx/plugin';
+import { compile } from "@mdx-js/mdx";
+import { reactTextGameStoryPlugin } from "@react-text-game/mdx/plugin";
 
 await compile(mdxSource, { ...reactTextGameStoryPlugin() });
 ```
@@ -76,6 +76,7 @@ Create an MDX file for your story (e.g., `src/game/stories/intro.mdx`):
 ---
 passageId: intro
 ---
+
 import { Action, Actions } from "@react-text-game/mdx";
 import { player } from "../entities/player";
 
@@ -96,7 +97,7 @@ import "./intro.mdx";
 import "./chapter1.mdx";
 
 // src/game/registry.ts
-export * from './stories';
+export * from "./stories";
 
 // src/main.tsx
 import "./game/registry";
@@ -110,7 +111,14 @@ Here's a more complex story demonstrating all available components:
 ---
 passageId: adventure-start
 ---
-import { Action, Actions, Conversation, Say, Include } from "@react-text-game/mdx";
+
+import {
+    Action,
+    Actions,
+    Conversation,
+    Say,
+    Include,
+} from "@react-text-game/mdx";
 import { player } from "../entities/player";
 
 # The Grand Adventure
@@ -134,9 +142,7 @@ import { player } from "../entities/player";
     <Action onPerform={() => console.log("Entering temple")}>
         Enter the temple
     </Action>
-    <Action onPerform={() => console.log("Walking away")}>
-        Walk away
-    </Action>
+    <Action onPerform={() => console.log("Walking away")}>Walk away</Action>
 </Actions>
 
 <Include storyId="temple-lore" />
@@ -152,7 +158,9 @@ Standard Markdown text and headers are automatically converted to the appropriat
 
 ```mdx
 # Header Level 1
+
 ## Header Level 2
+
 ### Header Level 3
 
 Regular paragraph text becomes a text component.
@@ -194,6 +202,7 @@ Container for interactive action buttons. Each `<Action>` represents a clickable
 ```
 
 **Props for `<Action>`:**
+
 - `onPerform: () => void` - Callback executed when clicked (required)
 - `children: string` - Button label text (required)
 - `color?: ButtonColor` - Color scheme: `"default"`, `"primary"`, `"secondary"`, `"success"`, `"warning"`, `"danger"`
@@ -203,6 +212,7 @@ Container for interactive action buttons. Each `<Action>` represents a clickable
 - `className?: string` - Custom CSS classes
 
 **Props for `<Actions>`:**
+
 - `direction?: "horizontal" | "vertical"` - Layout direction (default: `"horizontal"`)
 - `className?: string` - Custom CSS classes
 
@@ -225,6 +235,7 @@ Display dialogue or conversation sequences with multiple messages.
 ```
 
 **Props for `<Say>`:**
+
 - `children: ReactNode` - Message content (required)
 - `who?: { name?: string; avatar?: string }` - Speaker information
 - `side?: "left" | "right"` - Message alignment (default: `"left"`)
@@ -232,6 +243,7 @@ Display dialogue or conversation sequences with multiple messages.
 - `classNames?: object` - CSS class overrides for `base`, `content`, and `avatar`
 
 **Props for `<Conversation>`:**
+
 - `appearance?: "atOnce" | "byClick"` - Message reveal mode (default: `"atOnce"`)
 - `variant?: "chat" | "messenger"` - Visual style (default: `"chat"`)
 - `className?: string` - Custom CSS classes
@@ -244,13 +256,16 @@ Embed another story passage within the current one. You can include any register
 
 ```mdx
 <!-- Include an MDX story -->
+
 <Include storyId="common-intro" />
 
 <!-- Include a TypeScript-defined story -->
+
 <Include storyId="combat-system" />
 ```
 
 **Props:**
+
 - `storyId: string` - ID of the story passage to include (required). The story must be registered with the game engine.
 
 **Maps to:** `AnotherStoryComponent` from `@react-text-game/core`
@@ -262,12 +277,14 @@ Embed dynamic variables that are evaluated at runtime when the story is displaye
 **Two syntaxes are supported:**
 
 #### 1. **Bare Expressions** (Recommended - Concise)
+
 ```mdx
 ---
 passageId: player-status
 ---
-import { player } from '../entities/player';
-import { Game } from '@react-text-game/core';
+
+import { player } from "../entities/player";
+import { Game } from "@react-text-game/core";
 
 # Hello, {player.name}!
 
@@ -278,19 +295,19 @@ You have {player.gold} gold coins and {player.inventory.length} items.
 </Conversation>
 
 <Actions>
-    <Action onPerform={() => console.log("test")}>
-        Talk to {player.name}
-    </Action>
+    <Action onPerform={() => console.log("test")}>Talk to {player.name}</Action>
 </Actions>
 ```
 
 #### 2. **`<Var>` Wrapper** (Explicit Alternative)
+
 ```mdx
 ---
 passageId: player-status
 ---
+
 import { Var } from "@react-text-game/mdx";
-import { player } from '../entities/player';
+import { player } from "../entities/player";
 
 # Hello, <Var>{player.name}</Var>!
 
@@ -298,6 +315,7 @@ You have <Var>{player.gold}</Var> gold coins.
 ```
 
 **Key Features:**
+
 - **Runtime Evaluation**: Variables are evaluated when the story renders, not at compile time
 - **IDE Support**: Full TypeScript autocomplete and type checking (because you import the variables)
 - **Import Tracking**: IDE enforces proper imports for referenced variables
@@ -308,25 +326,32 @@ You have <Var>{player.gold}</Var> gold coins.
 
 ```mdx
 <!-- Simple property access -->
+
 {player.name}
 
 <!-- Nested properties -->
+
 {player.stats.strength}
 
 <!-- Calculations -->
-{player.gold * 2}
+
+{player.gold \* 2}
 
 <!-- Method calls -->
+
 {player.getTitle()}
 
 <!-- Conditional expressions -->
+
 {player.level >= 10 ? "Expert" : "Novice"}
 
 <!-- Array/object methods -->
+
 {player.inventory.map(item => item.name).join(", ")}
 ```
 
 **Important Notes:**
+
 - Variables **must be imported** at the top of the MDX file
 - Expressions are evaluated in the story's render context
 - TypeScript will validate your variable paths
@@ -341,24 +366,31 @@ You have <Var>{player.gold}</Var> gold coins.
 **Only use components provided by `@react-text-game/mdx` or standard HTML/Markdown elements.** Custom React components are not supported and will be ignored during compilation.
 
 **Supported:**
+
 ```mdx
 <!-- Package components -->
+
 <Action onPerform={() => {}}>Click</Action>
 <Say>Hello</Say>
 <Include storyId="intro" />
 
 <!-- Standard HTML -->
+
 <video src="video.mp4" />
 <img src="image.png" />
 
 <!-- Markdown syntax -->
+
 # Header
+
 ![Image](image.png)
 ```
 
 **Not supported:**
+
 ```mdx
 <!-- Custom components will be ignored -->
+
 <CustomButton onClick={() => {}}>Click</CustomButton>
 <MyComponent />
 ```
@@ -366,20 +398,24 @@ You have <Var>{player.gold}</Var> gold coins.
 ### Unsupported HTML Elements
 
 Only specific HTML elements are processed by the plugin:
+
 - `<img>` - Converted to `ImageComponent`
 - `<video>` - Converted to `VideoComponent`
 
 **All other HTML elements (like `<div>`, `<span>`, `<button>`, etc.) are ignored** and will not appear in the final story. Use standard Markdown syntax for text formatting instead.
 
 **Example:**
+
 ```mdx
 <!-- ❌ This will be ignored -->
+
 <div className="container">
-  <span>Text</span>
+    <span>Text</span>
 </div>
 
 <!-- ✅ Use Markdown instead -->
-Regular text with **bold** and *italic* formatting.
+
+Regular text with **bold** and _italic_ formatting.
 ```
 
 ### Unsupported Props
@@ -387,30 +423,40 @@ Regular text with **bold** and *italic* formatting.
 The plugin only processes specific props for each component. **Unsupported props are silently ignored.**
 
 **For `<Say>` component:**
+
 - ✅ Supported: `who`, `side`, `color`, `classNames`
 - ❌ Ignored: Any other props (e.g., `className`, `style`, `id`)
 
 **For `<Conversation>` component:**
+
 - ✅ Supported: `appearance`, `variant`, `className`
 - ❌ Ignored: Any other props
 
 **For `<Action>` component:**
+
 - ✅ Supported: `onPerform`, `color`, `variant`, `isDisabled`, `tooltip`, `className`
 - ❌ Ignored: Any other props
 
 **For `<Actions>` component:**
+
 - ✅ Supported: `direction`, `className`
 - ❌ Ignored: Any other props
 
 **For HTML elements:**
+
 - `<img>`: Supported props are `src`, `alt`, `title`, `className`, `disableModal`, `onClick`
 - `<video>`: Supported props are `src`, `className`, `controls`, `autoPlay`, `loop`, `muted`
 
 **Example:**
+
 ```mdx
 <!-- ❌ 'style' and 'id' will be ignored -->
-<Say style={{ color: 'red' }} id="greeting">Hello</Say>
+
+<Say style={{ color: "red" }} id="greeting">
+    Hello
+</Say>
 
 <!-- ✅ Use supported props instead -->
+
 <Say color="#ff0000">Hello</Say>
 ```

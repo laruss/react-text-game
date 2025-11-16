@@ -240,11 +240,7 @@ describe("Tooltip", () => {
                     createElement(
                         "div",
                         null,
-                        createElement(
-                            "button",
-                            { ref: targetRef },
-                            "Hover me"
-                        ),
+                        createElement("button", { ref: targetRef }, "Hover me"),
                         createElement(Tooltip, {
                             targetRef,
                             content: "Tooltip content",

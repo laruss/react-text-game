@@ -47,5 +47,5 @@ import { SimpleObject } from "./simpleObject";
  */
 export const createEntity = <Vars extends InitVarsType>(
     id: string,
-    variables: Vars & AssertNoOptionals<Vars>,
+    variables: Vars & AssertNoOptionals<Vars>
 ) => new SimpleObject({ id, variables });

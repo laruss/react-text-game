@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { NewOptions } from "@react-text-game/core";
 import { useState } from "react";

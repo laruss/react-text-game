@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/ui",
-    "version": "0.3.6",
+    "version": "0.3.7",
     "description": "Themeable React UI component library for text-based games with Tailwind CSS v4, featuring story passages, interactive maps, and customizable game interfaces",
     "private": false,
     "type": "module",

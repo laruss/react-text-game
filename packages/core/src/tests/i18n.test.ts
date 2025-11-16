@@ -135,7 +135,9 @@ describe("i18n", () => {
 
             // fallbackLng can be a string or array, normalize for comparison
             const fallbackLng = i18next.options.fallbackLng;
-            const expectedLang = Array.isArray(fallbackLng) ? fallbackLng[0] : fallbackLng;
+            const expectedLang = Array.isArray(fallbackLng)
+                ? fallbackLng[0]
+                : fallbackLng;
             expect(expectedLang).toBe("en");
         });
 
@@ -633,7 +635,7 @@ describe("i18n", () => {
                 resources: {
                     en: {
                         passages: {
-                            special: 'Test "quotes" and \'apostrophes\'',
+                            special: "Test \"quotes\" and 'apostrophes'",
                             unicode: "Test `} E1-('",
                             newlines: "Line 1\nLine 2",
                         },
@@ -643,7 +645,7 @@ describe("i18n", () => {
 
             const t = getGameTranslation("passages");
 
-            expect(t("special")).toBe('Test "quotes" and \'apostrophes\'');
+            expect(t("special")).toBe("Test \"quotes\" and 'apostrophes'");
             expect(t("unicode")).toBe("Test `} E1-('");
             expect(t("newlines")).toBe("Line 1\nLine 2");
         });

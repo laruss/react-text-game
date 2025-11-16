@@ -1,4 +1,9 @@
-import { Game, NewOptions, Passage, SYSTEM_PASSAGE_NAMES } from "@react-text-game/core";
+import {
+    Game,
+    NewOptions,
+    Passage,
+    SYSTEM_PASSAGE_NAMES,
+} from "@react-text-game/core";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import { createElement } from "react";
@@ -71,7 +76,11 @@ describe("GameProvider", () => {
                 createElement(
                     GameProvider,
                     { options: { gameName: "test" } },
-                    createElement("div", { "data-testid": "child" }, "Test content")
+                    createElement(
+                        "div",
+                        { "data-testid": "child" },
+                        "Test content"
+                    )
                 )
             );
 
@@ -95,7 +104,12 @@ describe("GameProvider", () => {
             render(
                 createElement(
                     GameProvider,
-                    { options: { gameName: "test", startPassage: testPassageId } },
+                    {
+                        options: {
+                            gameName: "test",
+                            startPassage: testPassageId,
+                        },
+                    },
                     createElement("div", null, "Test content")
                 )
             );
@@ -118,7 +132,9 @@ describe("GameProvider", () => {
             );
 
             await waitFor(() => {
-                expect(Game.currentPassage?.id).toBe(SYSTEM_PASSAGE_NAMES.START_MENU);
+                expect(Game.currentPassage?.id).toBe(
+                    SYSTEM_PASSAGE_NAMES.START_MENU
+                );
             });
         });
     });
@@ -126,7 +142,11 @@ describe("GameProvider", () => {
     describe("Custom Components", () => {
         test("uses custom MainMenu component when provided", async () => {
             const CustomMainMenu = () =>
-                createElement("div", { "data-testid": "custom-menu" }, "Custom Menu");
+                createElement(
+                    "div",
+                    { "data-testid": "custom-menu" },
+                    "Custom Menu"
+                );
 
             const components = {
                 MainMenu: () => createElement(CustomMainMenu),
@@ -283,7 +303,9 @@ describe("GameProvider", () => {
             );
 
             await waitFor(() => {
-                expect(Game.currentPassage?.id).toBe(SYSTEM_PASSAGE_NAMES.START_MENU);
+                expect(Game.currentPassage?.id).toBe(
+                    SYSTEM_PASSAGE_NAMES.START_MENU
+                );
             });
         });
 
@@ -304,7 +326,9 @@ describe("GameProvider", () => {
             );
 
             await waitFor(() => {
-                expect(Game.currentPassage?.id).toBe(SYSTEM_PASSAGE_NAMES.START_MENU);
+                expect(Game.currentPassage?.id).toBe(
+                    SYSTEM_PASSAGE_NAMES.START_MENU
+                );
             });
         });
     });

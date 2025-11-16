@@ -23,7 +23,7 @@ export const App = () => {
     const plr = useGameEntity(player);
     const { changeLanguage, currentLanguage, languages } = useGameTranslation();
     const restart = useRestartGame();
-    const currentPassage = useCurrentPassage();
+    const [currentPassage] = useCurrentPassage();
     const isStarted = useGameIsStarted();
     const [isSavesOpen, setIsSavesOpen] = useState(false);
     const slots = useSaveSlots({ count: 5 });
@@ -49,23 +49,39 @@ export const App = () => {
                 </select>
             </div>
             <div>
-                <button onClick={() => {
-                    setIsSavesOpen(state => !state);
-                }}>
+                <button
+                    onClick={() => {
+                        setIsSavesOpen((state) => !state);
+                    }}
+                >
                     Saves
                 </button>
                 <Activity mode={isSavesOpen ? "visible" : "hidden"}>
-                    <div style={{ marginBottom: '10px' }}>
+                    <div style={{ marginBottom: "10px" }}>
                         <div>Saves</div>
-                        <div style={{ display: 'flex', marginTop: '10px', gap: 40 }}>
+                        <div
+                            style={{
+                                display: "flex",
+                                marginTop: "10px",
+                                gap: 40,
+                            }}
+                        >
                             {slots.map((slot, index) => (
-                                <div key={index} style={{ marginBottom: '5px' }}>
+                                <div
+                                    key={index}
+                                    style={{ marginBottom: "5px" }}
+                                >
                                     <span>Slot {index + 1}: </span>
                                     {slot.data ? (
                                         <>
-                                            <span>{new Date(slot.data?.timestamp || Date.now()).toLocaleString()}</span>
+                                            <span>
+                                                {new Date(
+                                                    slot.data?.timestamp ||
+                                                        Date.now()
+                                                ).toLocaleString()}
+                                            </span>
                                             <button
-                                                style={{ marginLeft: '10px' }}
+                                                style={{ marginLeft: "10px" }}
                                                 onClick={async () => {
                                                     await slot.load();
                                                     setIsSavesOpen(false);
@@ -74,7 +90,7 @@ export const App = () => {
                                                 Load
                                             </button>
                                             <button
-                                                style={{ marginLeft: '5px' }}
+                                                style={{ marginLeft: "5px" }}
                                                 onClick={async () => {
                                                     await slot.delete();
                                                 }}
@@ -83,9 +99,7 @@ export const App = () => {
                                             </button>
                                         </>
                                     ) : (
-                                        <span>
-                                            No data
-                                        </span>
+                                        <span>No data</span>
                                     )}
                                     {isStarted && (
                                         <button
@@ -99,22 +113,16 @@ export const App = () => {
                                 </div>
                             ))}
                             <div style={{ marginLeft: 10 }}>
-                                <button
-                                    onClick={deleteAllCallback}
-                                >
+                                <button onClick={deleteAllCallback}>
                                     Delete all saves
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <button
-                                onClick={exportCallback}
-                            >
+                            <button onClick={exportCallback}>
                                 Export saves
                             </button>
-                            <button
-                                onClick={importCallback}
-                            >
+                            <button onClick={importCallback}>
                                 Import saves
                             </button>
                         </div>
@@ -123,23 +131,17 @@ export const App = () => {
             </div>
             <div>{JSON.stringify(state, null, 2)}</div>
             <div>
-                <span>
-                    Current passage:
-                </span>
-                <span>
-                    {currentPassage?.id || "null"}
-                </span>
+                <span>Current passage:</span>
+                <span>{currentPassage?.id || "null"}</span>
                 <div style={{ margin: 30 }} key={currentLanguage}>
-                    {currentPassage ? JSON.stringify((currentPassage as Story).display()): null}
+                    {currentPassage
+                        ? JSON.stringify((currentPassage as Story).display())
+                        : null}
                 </div>
             </div>
             <div style={{ display: "flex", gap: "8px" }}>
-                <span>
-                    Game is started:
-                </span>
-                <span>
-                    {String(isStarted)}
-                </span>
+                <span>Game is started:</span>
+                <span>{String(isStarted)}</span>
                 <Activity mode={isStarted ? "hidden" : "visible"}>
                     <button
                         onClick={() => {
@@ -152,7 +154,7 @@ export const App = () => {
                         onClick={() => {
                             Game.jumpTo("testStory");
                         }}
-                        style={{ marginLeft: '10px' }}
+                        style={{ marginLeft: "10px" }}
                     >
                         start (story)
                     </button>
@@ -162,61 +164,53 @@ export const App = () => {
                 <div>
                     <div>{env.temperature}*</div>
                     <div>
+                        <div>Change temperature</div>
                         <div>
-                            Change temperature
-                        </div>
-                        <div>
-                            <button
-                                onClick={() => env.changeTemperature(10)}
-                            >
+                            <button onClick={() => env.changeTemperature(10)}>
                                 + 10 *
                             </button>
-                            <button
-                                onClick={() => env.changeTemperature(-10)}
-                            >
+                            <button onClick={() => env.changeTemperature(-10)}>
                                 - 10 *
                             </button>
                         </div>
                         <div>
-                            <button
-                                onClick={restart}
-                            >
-                                restart
-                            </button>
+                            <button onClick={restart}>restart</button>
                         </div>
                     </div>
                 </div>
             </Activity>
             <Activity mode={isStarted ? "visible" : "hidden"}>
                 <div>
-                    <div>Player {plr.name} {plr.surname}</div>
+                    <div>
+                        Player {plr.name} {plr.surname}
+                    </div>
                     <div>Inventary</div>
                     <div>
                         <div>Money: {plr.inventory.money}</div>
                         <div>
                             <button
-                                onClick={() => { plr.inventory.money += 10 }}
+                                onClick={() => {
+                                    plr.inventory.money += 10;
+                                }}
                             >
                                 + 10 $
                             </button>
-                            <button
-                                onClick={() => plr.inventory.money -= 10}
-                            >
+                            <button onClick={() => (plr.inventory.money -= 10)}>
                                 - 10 $
                             </button>
                         </div>
-                        <div>
-                            Items: {plr.inventory.items.length}
-                        </div>
+                        <div>Items: {plr.inventory.items.length}</div>
                         <div>
                             <button
-                                onClick={() => plr.inventory.items.push(`item-${Date.now()}`)}
+                                onClick={() =>
+                                    plr.inventory.items.push(
+                                        `item-${Date.now()}`
+                                    )
+                                }
                             >
                                 Add item
                             </button>
-                            <button
-                                onClick={() => plr.inventory.items.pop()}
-                            >
+                            <button onClick={() => plr.inventory.items.pop()}>
                                 Remove item
                             </button>
                         </div>

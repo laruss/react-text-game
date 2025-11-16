@@ -25,11 +25,7 @@ export const JumpToPassage = () => {
                     id="jump-to-passage-id"
                     type="text"
                     value={passageToJumpTo}
-                    onChange={(e) =>
-                        setPassageToJumpTo(
-                            e.target.value
-                        )
-                    }
+                    onChange={(e) => setPassageToJumpTo(e.target.value)}
                     placeholder="Enter passage ID"
                     className="bg-muted/20 border border-input rounded px-2 text-sm text-foreground"
                 />
