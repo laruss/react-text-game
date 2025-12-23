@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.5.7",
+    "version": "0.5.8",
     "description": "A powerful React-based text game engine with reactive state management, passage-based navigation, and persistent save system for building interactive narrative experiences",
     "main": "dist/index.js",
     "module": "dist/index.js",
