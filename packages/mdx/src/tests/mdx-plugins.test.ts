@@ -145,6 +145,46 @@ passageId: test-img-props
             expect(code).toContain("disableModal: true");
             expect(code).toContain("console.log('clicked')");
         });
+
+        test("transforms <img> with variable src prop", async () => {
+            const mdx = `---
+passageId: test-img-variable-src
+---
+export const imageUrl = "/assets/hero.png";
+
+<img src={imageUrl} alt="Dynamic Image" />
+`;
+
+            const result = await compile(mdx, reactTextGameStoryPlugin());
+            const code = result.value;
+
+            expect(code).toContain('type: "image"');
+            // Should use the variable expression, not the wrapper object
+            expect(code).toContain("content: imageUrl");
+            // Should NOT contain the expression wrapper object
+            expect(code).not.toContain('type: "expression"');
+            expect(code).toContain('"alt": "Dynamic Image"');
+        });
+
+        test("transforms <video> with variable src prop", async () => {
+            const mdx = `---
+passageId: test-video-variable-src
+---
+export const videoPath = "/videos/intro.mp4";
+
+<video src={videoPath} controls={true} />
+`;
+
+            const result = await compile(mdx, reactTextGameStoryPlugin());
+            const code = result.value;
+
+            expect(code).toContain('type: "video"');
+            // Should use the variable expression, not the wrapper object
+            expect(code).toContain("content: videoPath");
+            // Should NOT contain the expression wrapper object
+            expect(code).not.toContain('type: "expression"');
+            expect(code).toContain("controls: true");
+        });
     });
 
     describe("MDX Components", () => {

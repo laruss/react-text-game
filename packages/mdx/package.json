@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/mdx",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "MDX support for React Text Game",
     "main": "dist/index.js",
     "module": "dist/index.js",

@@ -74,9 +74,16 @@ function buildTextProperties(item: MdxStructItem): Property[] {
 }
 
 function buildImageProperties(item: MdxStructItem): Property[] {
+    // Handle src as either string literal or expression
+    const srcProp = item.props.src;
+    const contentExpression =
+        isExpression(srcProp) && srcProp.data?.estree
+            ? extractExpression(srcProp.data.estree)
+            : valueToEstree(srcProp);
+
     const properties: Property[] = [
         createProperty("type", valueToEstree("image")),
-        createProperty("content", valueToEstree(item.props.src)),
+        createProperty("content", contentExpression),
     ];
 
     const baseProps: Record<string, unknown> = {};
@@ -115,9 +122,16 @@ function buildImageProperties(item: MdxStructItem): Property[] {
 }
 
 function buildVideoProperties(item: MdxStructItem): Property[] {
+    // Handle src as either string literal or expression
+    const srcProp = item.props.src;
+    const contentExpression =
+        isExpression(srcProp) && srcProp.data?.estree
+            ? extractExpression(srcProp.data.estree)
+            : valueToEstree(srcProp);
+
     const properties: Property[] = [
         createProperty("type", valueToEstree("video")),
-        createProperty("content", valueToEstree(item.props.src)),
+        createProperty("content", contentExpression),
     ];
 
     const baseProps: Record<string, unknown> = {};
