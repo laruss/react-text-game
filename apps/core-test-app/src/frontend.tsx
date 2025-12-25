@@ -11,6 +11,11 @@ import passagesRu from "./locales/ru/passages.json";
 await Game.init({
     gameName: "core-test-app",
     isDevMode: true,
+    initialState: {
+        player: {
+            name: "Player",
+        },
+    },
     translations: {
         defaultLanguage: "en",
         fallbackLanguage: "en",
@@ -24,6 +29,7 @@ await Game.init({
         },
     },
 });
+console.log({ state: Game.getState() });
 
 const elem = document.getElementById("root")!;
 const app = (

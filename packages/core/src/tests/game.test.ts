@@ -93,6 +93,229 @@ describe("Game", () => {
         });
     });
 
+    describe("Initial State", () => {
+        test("applies full entity state override", async () => {
+            // Reset and create a fresh game with entities
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 25, name: "OverriddenName" },
+                },
+            });
+
+            expect(player.getHealth()).toBe(25);
+            expect(player.getName()).toBe("OverriddenName");
+        });
+
+        test("applies partial entity state (merge)", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 50 },
+                },
+            });
+
+            expect(player.getHealth()).toBe(50);
+            expect(player.getName()).toBe("DefaultName");
+        });
+
+        test("replaces arrays instead of merging", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            class InventoryEntity extends BaseGameObject<{
+                items: Array<string>;
+            }> {
+                constructor(id: string) {
+                    super({
+                        id,
+                        variables: { items: ["sword", "shield", "potion"] },
+                    });
+                }
+
+                getItems() {
+                    return this._variables.items;
+                }
+            }
+
+            const inventoryId = uniqueId("inventory");
+            const inventory = new InventoryEntity(inventoryId);
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [inventoryId]: { items: ["newItem"] },
+                },
+            });
+
+            expect(inventory.getItems()).toEqual(["newItem"]);
+        });
+
+        test("ignores unknown entities", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 50 },
+                    nonExistentEntity: { foo: "bar" },
+                },
+            });
+
+            expect(player.getHealth()).toBe(50);
+            const state = Game.getState();
+            expect(state).not.toHaveProperty("nonExistentEntity");
+        });
+
+        test("ignores system paths", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 50 },
+                    _system: { game: { currentPassageId: "hack" } },
+                },
+            });
+
+            expect(player.getHealth()).toBe(50);
+            expect(Game.selfState.currentPassageId).toBe(
+                SYSTEM_PASSAGE_NAMES.START_MENU
+            );
+        });
+
+        test("handles empty initialState", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {},
+            });
+
+            expect(player.getHealth()).toBe(100);
+            expect(player.getName()).toBe("DefaultName");
+        });
+
+        test("handles nested object merging in initialState", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            class ComplexEntity extends BaseGameObject<{
+                stats: {
+                    health: number;
+                    mana: number;
+                };
+                name: string;
+            }> {
+                constructor(id: string) {
+                    super({
+                        id,
+                        variables: {
+                            stats: { health: 100, mana: 50 },
+                            name: "Hero",
+                        },
+                    });
+                }
+
+                getStats() {
+                    return this._variables.stats;
+                }
+
+                getName() {
+                    return this._variables.name;
+                }
+            }
+
+            const playerId = uniqueId("player");
+            const player = new ComplexEntity(playerId);
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: {
+                        stats: { health: 75 },
+                    },
+                },
+            });
+
+            expect(player.getStats()).toEqual({ health: 75, mana: 50 });
+            expect(player.getName()).toBe("Hero");
+        });
+
+        test("handles multiple entities in initialState", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const enemyId = uniqueId("enemy");
+
+            const player = new TestEntity(playerId, 100, "Hero");
+            const enemy = new TestEntity(enemyId, 50, "Goblin");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 75, name: "TestHero" },
+                    [enemyId]: { health: 25, name: "TestGoblin" },
+                },
+            });
+
+            expect(player.getHealth()).toBe(75);
+            expect(player.getName()).toBe("TestHero");
+            expect(enemy.getHealth()).toBe(25);
+            expect(enemy.getName()).toBe("TestGoblin");
+        });
+
+        test("initialState is not required", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            // Init without initialState option
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+            });
+
+            expect(player.getHealth()).toBe(100);
+            expect(player.getName()).toBe("DefaultName");
+        });
+    });
+
     describe("Entity Registration", () => {
         test("registers a single entity", () => {
             const entity = new TestEntity(uniqueId("player"));

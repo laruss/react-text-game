@@ -2,6 +2,7 @@ import { proxy, subscribe } from "valtio";
 
 import { STORAGE_SYSTEM_PATH, SYSTEM_PASSAGE_NAMES } from "#constants";
 import { BaseGameObject } from "#gameObjects";
+import { deepMerge } from "#helpers";
 import { initI18n } from "#i18n";
 import { logger } from "#logger";
 import { _getOptions, NewOptions, newOptions, Options } from "#options";
@@ -535,6 +536,61 @@ export class Game {
         Game.initialized = true;
 
         await initI18n(opts.translations);
+
+        // Apply initialState if provided
+        if (opts.initialState && Object.keys(opts.initialState).length > 0) {
+            // Save all entities to capture their default state
+            Game.save();
+            for (const [, object] of objectRegistry) {
+                object.save();
+            }
+
+            // Get current state with all entity defaults
+            const currentState = Storage.getState();
+
+            // Filter initialState to only include registered entity IDs
+            // Skip system paths (_system) and unknown entities
+            const registeredEntityIds = new Set(
+                Array.from(objectRegistry.keys())
+            );
+
+            const filteredInitialState: Record<string, unknown> = {};
+            for (const key in opts.initialState) {
+                // Skip system paths
+                if (key.startsWith("_system") || key.startsWith("$")) {
+                    logger.warn(
+                        `Skipping system path in initialState: ${key}`
+                    );
+                    continue;
+                }
+
+                // Skip unknown entities
+                if (!registeredEntityIds.has(key)) {
+                    logger.warn(
+                        `Skipping unknown entity in initialState: ${key}`
+                    );
+                    continue;
+                }
+
+                filteredInitialState[key] = opts.initialState[key];
+            }
+
+            // Deep merge filtered initialState into current state
+            const mergedState = deepMerge(currentState, filteredInitialState);
+
+            // Apply merged state
+            Storage.setState(mergedState);
+
+            // Reload all entities to apply the new values
+            Game.load();
+            for (const [, object] of objectRegistry) {
+                object.load();
+            }
+
+            logger.log(
+                `Applied initialState: ${JSON.stringify(filteredInitialState)}`
+            );
+        }
 
         if (Game.options.isDevMode) {
             logger.warn(
