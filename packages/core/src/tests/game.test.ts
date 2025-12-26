@@ -412,6 +412,147 @@ describe("Game", () => {
             expect(player.getHealth()).toBe(100);
             expect(player.getName()).toBe("DefaultName");
         });
+
+        test("queues initialState for entities registered after Game.init()", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            // Initialize game with initialState for entity that doesn't exist yet
+            const playerId = uniqueId("player");
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 75, name: "QueuedHero" },
+                },
+            });
+
+            // Now register the entity AFTER init
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            // The queued initialState should have been applied
+            expect(player.getHealth()).toBe(75);
+            expect(player.getName()).toBe("QueuedHero");
+        });
+
+        test("applies initialState immediately for registered entities and queues for unregistered", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            // Register one entity before init
+            const player1Id = uniqueId("player1");
+            const player1 = new TestEntity(player1Id, 100, "Hero1");
+
+            // Init with state for both registered and unregistered entities
+            const player2Id = uniqueId("player2");
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [player1Id]: { health: 50, name: "UpdatedHero1" },
+                    [player2Id]: { health: 25, name: "QueuedHero2" },
+                },
+            });
+
+            // First player should have state applied immediately
+            expect(player1.getHealth()).toBe(50);
+            expect(player1.getName()).toBe("UpdatedHero1");
+
+            // Register second player after init
+            const player2 = new TestEntity(player2Id, 100, "DefaultName");
+
+            // Second player should have queued state applied
+            expect(player2.getHealth()).toBe(25);
+            expect(player2.getName()).toBe("QueuedHero2");
+        });
+
+        test("handles multiple late-registering entities", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const player1Id = uniqueId("player1");
+            const player2Id = uniqueId("player2");
+            const player3Id = uniqueId("player3");
+
+            // Init with state for entities that don't exist yet
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [player1Id]: { health: 10, name: "Late1" },
+                    [player2Id]: { health: 20, name: "Late2" },
+                    [player3Id]: { health: 30, name: "Late3" },
+                },
+            });
+
+            // Register entities in different order
+            const player2 = new TestEntity(player2Id, 100, "Default2");
+            const player1 = new TestEntity(player1Id, 100, "Default1");
+            const player3 = new TestEntity(player3Id, 100, "Default3");
+
+            // All should have their queued state applied
+            expect(player1.getHealth()).toBe(10);
+            expect(player1.getName()).toBe("Late1");
+            expect(player2.getHealth()).toBe(20);
+            expect(player2.getName()).toBe("Late2");
+            expect(player3.getHealth()).toBe(30);
+            expect(player3.getName()).toBe("Late3");
+        });
+
+        test("partial initialState applies to late-registered entities", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+
+            // Init with partial state
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 42 }, // Only override health
+                },
+            });
+
+            // Register entity after init
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            // Health should be overridden, name should remain default
+            expect(player.getHealth()).toBe(42);
+            expect(player.getName()).toBe("DefaultName");
+        });
+
+        test("clears pending queue on _resetForTesting", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+
+            // Init with queued state
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 50 },
+                },
+            });
+
+            // Reset before entity registers
+            Game._resetForTesting();
+            setupMockStorage();
+
+            // Re-init without initialState
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+            });
+
+            // Register entity - should use default values, not queued values
+            const player = new TestEntity(playerId, 100, "DefaultName");
+
+            expect(player.getHealth()).toBe(100);
+            expect(player.getName()).toBe("DefaultName");
+        });
     });
 
     describe("Entity Registration", () => {

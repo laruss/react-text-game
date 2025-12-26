@@ -70,6 +70,7 @@ export class Game {
     private static unsubscribeFunctions: Array<() => void> = [];
     private static readonly AUTO_SAVE_KEY = "gameAutoSave";
     private static readonly SAVE_DEBOUNCE_MS = 500;
+    private static pendingInitialState: Record<string, unknown> = {};
 
     /**
      * Ensures the game has been initialized before allowing method calls.
@@ -101,6 +102,39 @@ export class Game {
             objectRegistry.set(object.id, proxiedObject);
 
             logger.log(`Registered entity: ${object.id}`);
+
+            // Check if there's pending initialState for this entity
+            if (Game.pendingInitialState[object.id]) {
+                const pendingState = Game.pendingInitialState[object.id];
+
+                logger.log(
+                    `Applying pending initialState for late-registered entity: ${object.id}`
+                );
+
+                // Save entity to establish baseline
+                object.save();
+
+                // Get current storage state
+                const currentState = Storage.getState();
+
+                // Merge pending initialState for this entity
+                const mergedState = deepMerge(currentState, {
+                    [object.id]: pendingState,
+                });
+
+                // Apply merged state
+                Storage.setState(mergedState);
+
+                // Reload entity to apply the new values
+                object.load();
+
+                // Remove from pending queue
+                delete Game.pendingInitialState[object.id];
+
+                logger.log(
+                    `Successfully applied pending initialState: ${JSON.stringify(pendingState)}`
+                );
+            }
         });
     }
 
@@ -562,25 +596,30 @@ export class Game {
             );
 
             const filteredInitialState: Record<string, unknown> = {};
+            const queuedInitialState: Record<string, unknown> = {};
+
             for (const key in opts.initialState) {
                 // Skip system paths
                 if (key.startsWith("_system") || key.startsWith("$")) {
-                    logger.warn(
-                        `Skipping system path in initialState: ${key}`
-                    );
+                    logger.warn(`Skipping system path in initialState: ${key}`);
                     continue;
                 }
 
-                // Skip unknown entities
-                if (!registeredEntityIds.has(key)) {
-                    logger.warn(
-                        `Skipping unknown entity in initialState: ${key}`
+                // Check if entity is registered
+                if (registeredEntityIds.has(key)) {
+                    // Apply immediately for registered entities
+                    filteredInitialState[key] = opts.initialState[key];
+                } else {
+                    // Queue for entities that will register later
+                    queuedInitialState[key] = opts.initialState[key];
+                    logger.log(
+                        `Queuing initialState for not-yet-registered entity: ${key}`
                     );
-                    continue;
                 }
-
-                filteredInitialState[key] = opts.initialState[key];
             }
+
+            // Store queued state for later application
+            Game.pendingInitialState = { ...queuedInitialState };
 
             // Deep merge filtered initialState into current state
             const mergedState = deepMerge(currentState, filteredInitialState);
@@ -595,8 +634,14 @@ export class Game {
             }
 
             logger.log(
-                `Applied initialState: ${JSON.stringify(filteredInitialState)}`
+                `Applied initialState immediately: ${JSON.stringify(filteredInitialState)}`
             );
+
+            if (Object.keys(queuedInitialState).length > 0) {
+                logger.log(
+                    `Queued initialState for late-registering entities: ${JSON.stringify(queuedInitialState)}`
+                );
+            }
         }
 
         if (Game.options.isDevMode) {
@@ -684,6 +729,9 @@ export class Game {
 
         // Reset initialization state
         Game.initialized = false;
+
+        // Clear pending initialState queue
+        Game.pendingInitialState = {};
 
         // Reset state
         Game.state.currentPassageId = null;
