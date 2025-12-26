@@ -69,6 +69,10 @@ describe("Game", () => {
         });
 
         test("sets custom options on init", async () => {
+            // Reset to allow fresh initialization with custom options
+            Game._resetForTesting();
+            setupMockStorage();
+
             await Game.init({
                 gameName: "Custom Game",
                 gameId: "custom-id",
@@ -90,6 +94,100 @@ describe("Game", () => {
             expect(Game.selfState.currentPassageId).toBe(
                 SYSTEM_PASSAGE_NAMES.START_MENU
             );
+        });
+
+        test("ignores subsequent Game.init() calls after first initialization", async () => {
+            // Game is already initialized in beforeEach
+            const originalGameName = Game.options.gameName;
+            const originalGameVersion = Game.options.gameVersion;
+
+            // Try to initialize again with different options
+            // Use a version that's definitely different from the current one
+            const newVersion =
+                originalGameVersion === "2.0.0" ? "3.0.0" : "2.0.0";
+
+            await Game.init({
+                gameName: "Different Game",
+                gameVersion: newVersion,
+                isDevMode: true,
+            });
+
+            // Options should remain unchanged from beforeEach
+            expect(Game.options.gameName).toBe(originalGameName);
+            expect(Game.options.gameVersion).toBe(originalGameVersion);
+            expect(Game.options.gameVersion).not.toBe(newVersion);
+        });
+
+        test("handles multiple rapid init() calls gracefully", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const player = new TestEntity(playerId, 100, "Hero");
+
+            // Simulate rapid initialization attempts
+            const initPromises = [
+                Game.init({
+                    gameName: "Game 1",
+                    isDevMode: true,
+                    initialState: { [playerId]: { health: 25 } },
+                }),
+                Game.init({
+                    gameName: "Game 2",
+                    isDevMode: true,
+                    initialState: { [playerId]: { health: 50 } },
+                }),
+                Game.init({
+                    gameName: "Game 3",
+                    isDevMode: true,
+                    initialState: { [playerId]: { health: 75 } },
+                }),
+            ];
+
+            await Promise.all(initPromises);
+
+            // First initialization should win
+            expect(Game.options.gameName).toBe("Game 1");
+
+            // Player health should be from first init
+            expect(player.getHealth()).toBe(25);
+        });
+
+        test("multiple init() attempts do not corrupt state", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const playerId = uniqueId("player");
+            const enemyId = uniqueId("enemy");
+
+            const player = new TestEntity(playerId, 100, "Hero");
+            const enemy = new TestEntity(enemyId, 50, "Goblin");
+
+            // First init with specific state
+            await Game.init({
+                gameName: "First Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 75, name: "FirstHero" },
+                    [enemyId]: { health: 30, name: "FirstGoblin" },
+                },
+            });
+
+            // Try to init again - should be ignored
+            await Game.init({
+                gameName: "Second Game",
+                isDevMode: true,
+                initialState: {
+                    [playerId]: { health: 10, name: "SecondHero" },
+                    [enemyId]: { health: 5, name: "SecondGoblin" },
+                },
+            });
+
+            // State from first init should be preserved
+            expect(player.getHealth()).toBe(75);
+            expect(player.getName()).toBe("FirstHero");
+            expect(enemy.getHealth()).toBe(30);
+            expect(enemy.getName()).toBe("FirstGoblin");
         });
     });
 

@@ -532,6 +532,13 @@ export class Game {
      * ```
      */
     static async init(opts: NewOptions): Promise<void> {
+        if (Game.initialized) {
+            logger.warn(
+                "Game.init() called multiple times. Ignoring subsequent calls."
+            );
+            return;
+        }
+
         newOptions(opts);
         Game.initialized = true;
 

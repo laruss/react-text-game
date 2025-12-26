@@ -38,6 +38,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
                                 },
                             },
                         },
+                        initialState: {
+                            environment: {
+                                temperature: 25,
+                            },
+                            testMapEntity: {
+                                isSecretHotspotDisplayed: true,
+                            },
+                        },
                     }}
                 >
                     {children}

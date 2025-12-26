@@ -362,4 +362,250 @@ describe("GameProvider", () => {
             });
         });
     });
+
+    describe("Initialization Guard", () => {
+        test("prevents multiple simultaneous Game.init() calls", async () => {
+            // Track how many times Game.init is called
+            let initCallCount = 0;
+            const originalInit = Game.init.bind(Game);
+            Game.init = mock(async (opts: NewOptions) => {
+                initCallCount++;
+                return originalInit(opts);
+            });
+
+            render(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test" } },
+                    createElement("div", null, "Test content")
+                )
+            );
+
+            // Wait for initialization
+            await waitFor(
+                () => {
+                    expect(screen.getByText("Test content")).toBeTruthy();
+                },
+                { timeout: 1000 }
+            );
+
+            // Game.init should be called exactly once
+            expect(initCallCount).toBe(1);
+
+            // Restore original
+            Game.init = originalInit;
+        });
+
+        test("handles rapid re-renders without calling Game.init multiple times", async () => {
+            let initCallCount = 0;
+            const originalInit = Game.init.bind(Game);
+            Game.init = mock(async (opts: NewOptions) => {
+                initCallCount++;
+                // Simulate slow initialization
+                await new Promise((resolve) => setTimeout(resolve, 100));
+                return originalInit(opts);
+            });
+
+            const { rerender } = render(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test1" } },
+                    createElement("div", null, "Test content 1")
+                )
+            );
+
+            // Trigger rapid re-renders during initialization
+            rerender(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test1" } },
+                    createElement("div", null, "Test content 2")
+                )
+            );
+
+            rerender(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test1" } },
+                    createElement("div", null, "Test content 3")
+                )
+            );
+
+            await waitFor(
+                () => {
+                    expect(
+                        screen.getByText("Test content 3") ||
+                            screen.getByText("Test content 2") ||
+                            screen.getByText("Test content 1")
+                    ).toBeTruthy();
+                },
+                { timeout: 1000 }
+            );
+
+            // Should still only initialize once due to guard
+            expect(initCallCount).toBe(1);
+
+            // Restore original
+            Game.init = originalInit;
+        });
+
+        test("initializes successfully even with initialState", async () => {
+            const options: NewOptions = {
+                gameName: "test",
+                isDevMode: true,
+                initialState: {
+                    player: { health: 50 },
+                },
+            };
+
+            render(
+                createElement(
+                    GameProvider,
+                    { options },
+                    createElement("div", null, "Test content")
+                )
+            );
+
+            await waitFor(
+                () => {
+                    expect(screen.getByText("Test content")).toBeTruthy();
+                },
+                { timeout: 1000 }
+            );
+
+            // Game should be initialized
+            expect(Game.options.gameName).toBe("test");
+        });
+
+        test("handles initialization errors gracefully", async () => {
+            // Mock Game.init to throw an error
+            const originalInit = Game.init.bind(Game);
+            const consoleErrorSpy = mock(() => {});
+            const originalConsoleError = console.error;
+            console.error = consoleErrorSpy;
+
+            Game.init = mock(async () => {
+                throw new Error("Initialization failed");
+            });
+
+            render(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test" } },
+                    createElement("div", null, "Test content")
+                )
+            );
+
+            // Wait a bit for error handling
+            await new Promise((resolve) => setTimeout(resolve, 100));
+
+            // Error should be logged to console
+            expect(consoleErrorSpy).toHaveBeenCalled();
+
+            // Restore original
+            Game.init = originalInit;
+            console.error = originalConsoleError;
+        });
+
+        test("does not render children until initialization completes", () => {
+            const { container } = render(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test" } },
+                    createElement(
+                        "div",
+                        { "data-testid": "child" },
+                        "Test content"
+                    )
+                )
+            );
+
+            // Immediately after render, children should not be visible
+            expect(container.querySelector('[data-testid="child"]')).toBeNull();
+        });
+
+        test("renders children after initialization completes", async () => {
+            render(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test" } },
+                    createElement(
+                        "div",
+                        { "data-testid": "child" },
+                        "Test content"
+                    )
+                )
+            );
+
+            // After initialization, children should be rendered
+            await waitFor(() => {
+                expect(screen.getByTestId("child")).toBeTruthy();
+                expect(screen.getByText("Test content")).toBeTruthy();
+            });
+        });
+
+        test("prevents race conditions with large initialState", async () => {
+            // Create a large initialState to increase initialization time
+            const largeInitialState: Record<string, unknown> = {};
+            for (let i = 0; i < 20; i++) {
+                largeInitialState[`entity${i}`] = {
+                    value1: Math.random(),
+                    value2: Math.random(),
+                    value3: Math.random(),
+                };
+            }
+
+            let initCallCount = 0;
+            const originalInit = Game.init.bind(Game);
+            Game.init = mock(async (opts: NewOptions) => {
+                initCallCount++;
+                return originalInit(opts);
+            });
+
+            const { rerender } = render(
+                createElement(
+                    GameProvider,
+                    {
+                        options: {
+                            gameName: "test",
+                            isDevMode: true,
+                            initialState: largeInitialState,
+                        },
+                    },
+                    createElement("div", null, "Test content 1")
+                )
+            );
+
+            // Trigger re-render immediately
+            rerender(
+                createElement(
+                    GameProvider,
+                    {
+                        options: {
+                            gameName: "test",
+                            isDevMode: true,
+                            initialState: largeInitialState,
+                        },
+                    },
+                    createElement("div", null, "Test content 2")
+                )
+            );
+
+            await waitFor(
+                () => {
+                    expect(
+                        screen.getByText("Test content 2") ||
+                            screen.getByText("Test content 1")
+                    ).toBeTruthy();
+                },
+                { timeout: 2000 }
+            );
+
+            // Should only initialize once despite large state
+            expect(initCallCount).toBe(1);
+
+            // Restore original
+            Game.init = originalInit;
+        });
+    });
 });

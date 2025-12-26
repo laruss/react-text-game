@@ -6,7 +6,7 @@ import {
     newWidget,
     SYSTEM_PASSAGE_NAMES,
 } from "@react-text-game/core";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 
 import { ErrorBoundary } from "#components/ErrorBoundary";
 import { MainMenu } from "#components/MainMenu";
@@ -37,18 +37,32 @@ export const GameProvider = ({
 }: GameProviderProps) => {
     const [internalOptions, setInternalOptions] = useState<NewOptions>(options);
     const [isInitialized, setIsInitialized] = useState(false);
+    const initializingRef = useRef(false);
 
     useEffect(() => {
-        Game.init(options).then(() => {
-            newWidget(
-                SYSTEM_PASSAGE_NAMES.START_MENU,
-                components?.MainMenu?.() || <MainMenu />
-            );
-            const initialPassage =
-                options.startPassage || SYSTEM_PASSAGE_NAMES.START_MENU;
-            Game.setCurrent(initialPassage);
-            setIsInitialized(true);
-        });
+        // Prevent multiple simultaneous initializations
+        if (initializingRef.current) {
+            return;
+        }
+
+        initializingRef.current = true;
+        Game.init(options)
+            .then(() => {
+                newWidget(
+                    SYSTEM_PASSAGE_NAMES.START_MENU,
+                    components?.MainMenu?.() || <MainMenu />
+                );
+                const initialPassage =
+                    options.startPassage || SYSTEM_PASSAGE_NAMES.START_MENU;
+                Game.setCurrent(initialPassage);
+                setIsInitialized(true);
+            })
+            .catch((error) => {
+                console.error("Failed to initialize game:", error);
+            })
+            .finally(() => {
+                initializingRef.current = false;
+            });
     }, [options]);
 
     useEffect(() => {
