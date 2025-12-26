@@ -9,7 +9,7 @@ export const GameData = ({ isOpen }: { isOpen: boolean }) => {
     const [showRefreshed, setShowRefreshed] = useState(false);
 
     const onReloadGameState = () => {
-        const state = JSON.stringify(Game._getAllProxiedObjects(), null, 2);
+        const state = JSON.stringify(Game.getState(), null, 2);
         setGameState(state);
         setShowRefreshed(true);
         setTimeout(() => setShowRefreshed(false), 500);
