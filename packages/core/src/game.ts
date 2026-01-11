@@ -71,6 +71,7 @@ export class Game {
     private static readonly AUTO_SAVE_KEY = "gameAutoSave";
     private static readonly SAVE_DEBOUNCE_MS = 500;
     private static pendingInitialState: Record<string, unknown> = {};
+    private static pendingStartPassage: string | null = null;
 
     /**
      * Ensures the game has been initialized before allowing method calls.
@@ -165,6 +166,13 @@ export class Game {
             passagesRegistry.set(passage.id, passage);
 
             logger.log(`Registered passage: ${passage.id}`);
+
+            // Check if this passage is the pending startPassage
+            if (Game.pendingStartPassage === passage.id) {
+                Game.setCurrent(passage.id);
+                Game.pendingStartPassage = null;
+                logger.log(`Applied pending startPassage: ${passage.id}`);
+            }
         });
     }
 
@@ -576,6 +584,9 @@ export class Game {
         newOptions(opts);
         Game.initialized = true;
 
+        // Store whether user explicitly provided startPassage
+        const userProvidedStartPassage = opts.startPassage !== undefined;
+
         await initI18n(opts.translations);
 
         // Apply initialState if provided
@@ -668,7 +679,24 @@ export class Game {
             }
         }
 
-        Game.setCurrent(SYSTEM_PASSAGE_NAMES.START_MENU);
+        // Check if user explicitly provided startPassage option
+        if (userProvidedStartPassage) {
+            // If passage is already registered, set it immediately
+            if (passagesRegistry.has(Game.options.startPassage)) {
+                Game.setCurrent(Game.options.startPassage);
+                logger.log(`Set startPassage: ${Game.options.startPassage}`);
+            } else {
+                // Passage not registered yet, queue it for later
+                Game.pendingStartPassage = Game.options.startPassage;
+                logger.log(
+                    `Queuing startPassage for late registration: ${Game.options.startPassage}`
+                );
+                // Keep currentPassageId as null to wait for registration
+            }
+        } else {
+            // No startPassage specified, use default START_MENU
+            Game.setCurrent(SYSTEM_PASSAGE_NAMES.START_MENU);
+        }
 
         const initialState = Game.getState(true);
         await createOrUpdateSystemSave(initialState);
@@ -732,6 +760,9 @@ export class Game {
 
         // Clear pending initialState queue
         Game.pendingInitialState = {};
+
+        // Clear pending startPassage queue
+        Game.pendingStartPassage = null;
 
         // Reset state
         Game.state.currentPassageId = null;

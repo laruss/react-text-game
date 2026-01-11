@@ -52,9 +52,24 @@ export const GameProvider = ({
                     SYSTEM_PASSAGE_NAMES.START_MENU,
                     components?.MainMenu?.() || <MainMenu />
                 );
-                const initialPassage =
-                    options.startPassage || SYSTEM_PASSAGE_NAMES.START_MENU;
-                Game.setCurrent(initialPassage);
+
+                // Only set if not already set by Game.init() or registerPassage
+                if (!Game.currentPassage) {
+                    const initialPassage =
+                        options.startPassage || SYSTEM_PASSAGE_NAMES.START_MENU;
+
+                    // Check if passage exists, warn if not
+                    const passage = Game.getPassageById(initialPassage);
+                    if (!passage && options.startPassage) {
+                        console.warn(
+                            `[react-text-game] startPassage "${options.startPassage}" not found, falling back to START_MENU`
+                        );
+                        Game.setCurrent(SYSTEM_PASSAGE_NAMES.START_MENU);
+                    } else {
+                        Game.setCurrent(initialPassage);
+                    }
+                }
+
                 setIsInitialized(true);
             })
             .catch((error) => {

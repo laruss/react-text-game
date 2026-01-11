@@ -90,7 +90,7 @@ describe("Game", () => {
             expect(Game.options.isDevMode).toBe(true);
         });
 
-        test("sets start menu as current passage on init", () => {
+        test("sets start menu as current passage on init when no startPassage specified", () => {
             expect(Game.selfState.currentPassageId).toBe(
                 SYSTEM_PASSAGE_NAMES.START_MENU
             );
@@ -552,6 +552,150 @@ describe("Game", () => {
 
             expect(player.getHealth()).toBe(100);
             expect(player.getName()).toBe("DefaultName");
+        });
+    });
+
+    describe("Start Passage", () => {
+        test("sets registered passage as current when startPassage is provided", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const passageId = uniqueId("intro");
+            // Register passage BEFORE init
+            new TestPassage(passageId);
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: passageId,
+            });
+
+            expect(Game.selfState.currentPassageId).toBe(passageId);
+        });
+
+        test("queues startPassage when passage not yet registered", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const passageId = uniqueId("late-passage");
+
+            // Init with startPassage that doesn't exist yet
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: passageId,
+            });
+
+            // currentPassageId should be null (waiting)
+            expect(Game.selfState.currentPassageId).toBeNull();
+
+            // Now register the passage
+            new TestPassage(passageId);
+
+            // currentPassageId should now be set
+            expect(Game.selfState.currentPassageId).toBe(passageId);
+        });
+
+        test("queues startPassage and applies when passage registers later", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const targetPassageId = uniqueId("target");
+            const otherPassageId = uniqueId("other");
+
+            // Init with startPassage for non-existent passage
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: targetPassageId,
+            });
+
+            // Should be queued (currentPassageId is null)
+            expect(Game.selfState.currentPassageId).toBeNull();
+
+            // Register some other passages first
+            new TestPassage(otherPassageId);
+            expect(Game.selfState.currentPassageId).toBeNull();
+
+            // Register the target passage
+            new TestPassage(targetPassageId);
+
+            // Now currentPassageId should be set to target
+            expect(Game.selfState.currentPassageId).toBe(targetPassageId);
+        });
+
+        test("uses START_MENU when no startPassage option provided", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+            });
+
+            expect(Game.selfState.currentPassageId).toBe(
+                SYSTEM_PASSAGE_NAMES.START_MENU
+            );
+        });
+
+        test("clears pending queue on _resetForTesting", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const passageId = uniqueId("queued");
+
+            // Init with queued startPassage
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: passageId,
+            });
+
+            // Reset before passage registers
+            Game._resetForTesting();
+            setupMockStorage();
+
+            // Re-init without startPassage
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+            });
+
+            // Register passage - should NOT set as current (queue was cleared)
+            new TestPassage(passageId);
+
+            // Should still be START_MENU
+            expect(Game.selfState.currentPassageId).toBe(
+                SYSTEM_PASSAGE_NAMES.START_MENU
+            );
+        });
+
+        test("handles multiple passage registrations correctly", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const startPassageId = uniqueId("start");
+            const passage1Id = uniqueId("p1");
+            const passage2Id = uniqueId("p2");
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: startPassageId,
+            });
+
+            // Register non-start passages first
+            new TestPassage(passage1Id);
+            new TestPassage(passage2Id);
+
+            // Should still be null
+            expect(Game.selfState.currentPassageId).toBeNull();
+
+            // Register the start passage
+            new TestPassage(startPassageId);
+
+            // Should now be set to start passage
+            expect(Game.selfState.currentPassageId).toBe(startPassageId);
         });
     });
 
