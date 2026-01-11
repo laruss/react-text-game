@@ -41,7 +41,7 @@ export const InteractiveMapComponent = ({
         <div className="w-full h-full flex flex-col">
             <div
                 key={displayableKey}
-                className="flex-grow relative overflow-hidden animate-[fadeIn_0.3s_ease-in-out]"
+                className="flex-grow relative overflow-hidden animate-[fadeIn_0.3s_ease-in-out] min-h-full"
             >
                 {/* Background image container */}
                 {displayable.bgImage && (
