@@ -44,6 +44,7 @@ export type {
     TextComponent,
     VideoComponent,
 } from "#passages/story";
+export type { WidgetContent } from "#passages/widget";
 
 export {
     BaseGameObject,

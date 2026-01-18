@@ -112,6 +112,69 @@ describe("PassageController", () => {
             });
         });
 
+        test("renders widget content from function", async () => {
+            const widgetId = "test-widget-function";
+            newWidget(widgetId, () =>
+                createElement(
+                    "div",
+                    { "data-testid": "widget-function-content" },
+                    "Widget Function Test"
+                )
+            );
+
+            Game.jumpTo(widgetId);
+
+            renderWithProviders();
+
+            await waitFor(() => {
+                expect(
+                    screen.getByTestId("widget-function-content")
+                ).toBeTruthy();
+                expect(screen.getByText("Widget Function Test")).toBeTruthy();
+            });
+        });
+
+        test("widget function is called on each display", async () => {
+            const widgetId = "test-widget-call-count";
+            let callCount = 0;
+
+            newWidget(widgetId, () => {
+                callCount++;
+                return createElement(
+                    "div",
+                    { "data-testid": `call-count-${callCount}` },
+                    `Call count: ${callCount}`
+                );
+            });
+
+            Game.jumpTo(widgetId);
+
+            const { rerender } = renderWithProviders();
+
+            await waitFor(() => {
+                expect(screen.getByTestId("call-count-1")).toBeTruthy();
+                expect(callCount).toBeGreaterThanOrEqual(1);
+            });
+
+            const initialCallCount = callCount;
+
+            // Jump to the same passage again - should trigger remount and new function call
+            Game.jumpTo(widgetId);
+
+            rerender(
+                createElement(
+                    ComponentsProvider,
+                    { components: {} },
+                    createElement(PassageController)
+                )
+            );
+
+            await waitFor(() => {
+                // The function should have been called again
+                expect(callCount).toBeGreaterThan(initialCallCount);
+            });
+        });
+
         test("handles unknown passage types gracefully", async () => {
             const unknownId = `unknown-type-${Date.now()}`;
             // TestPassage constructor automatically registers the passage
