@@ -205,6 +205,26 @@ const chapter1 = newStory("chapter1", () => [
 - `conversation` - Dialogue with chat/messenger variants
 - `anotherStory` - Embed other story passages
 
+#### HTML Content in Text Components
+
+For simple HTML content without needing JSX/TSX files, use the `isHTML` prop:
+
+```typescript
+// In a .ts file (no JSX needed)
+newStory("example", () => [
+    {
+        type: "text",
+        content: "<strong>Bold</strong> and <em>italic</em> text",
+        props: { isHTML: true },
+    },
+]);
+```
+
+:::note
+`isHTML` only works when `content` is a string. For complex interactive content
+with event handlers or React state, use `.tsx` files with React components.
+:::
+
 ### Interactive Map Passages
 
 Map-based interactive passages with hotspots:

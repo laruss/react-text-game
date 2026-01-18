@@ -77,6 +77,31 @@ export interface TextComponent extends BaseComponent {
          * ```
          */
         className?: string;
+
+        /**
+         * When `true`, renders the content as raw HTML using `dangerouslySetInnerHTML`.
+         * This allows using HTML markup in `.ts` files without needing JSX/TSX.
+         *
+         * @defaultValue false
+         *
+         * @remarks
+         * - Only works when `content` is a string. If `content` is a ReactNode,
+         *   this prop is ignored and the content is rendered normally.
+         * - The browser handles HTML parsing natively and is forgiving with malformed HTML.
+         * - **Security:** Since game authors control their own content, XSS is not
+         *   a concern. Do not use with untrusted user input.
+         *
+         * @example
+         * ```typescript
+         * // In a .ts file (no JSX needed)
+         * {
+         *   type: 'text',
+         *   content: '<strong>Bold</strong> and <em>italic</em> text',
+         *   props: { isHTML: true }
+         * }
+         * ```
+         */
+        isHTML?: boolean;
     };
 }
 
@@ -861,12 +886,18 @@ export type Component =
     | AnotherStoryComponent;
 
 /**
+ * Array of story components.
+ * Used to define the structure of a story passage.
+ */
+export type StoryComponents = Array<Component>;
+
+/**
  * Function type for story content generation.
  * Receives props and returns an array of components to display.
  *
  * @template T - Type of props passed to the story (extends InitVarsType)
  * @param props - Properties used for conditional rendering or dynamic content
- * @returns Array of components that make up the story
+ * @returns Array of story components to render
  *
  * @example
  * ```typescript
@@ -903,7 +934,7 @@ export type Component =
  */
 export type StoryContent = <T extends InitVarsType = EmptyObject>(
     props: T
-) => Array<Component>;
+) => StoryComponents;
 
 /**
  * Configuration options for story appearance and behavior.
