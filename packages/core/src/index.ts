@@ -38,6 +38,7 @@ export type {
     HeaderComponent,
     HeaderLevel,
     ImageComponent,
+    StoryComponents,
     StoryContent,
     StoryOptions,
     TextComponent,
