@@ -47,11 +47,13 @@ const ConversationLine = ({
 
     return (
         <div
+            id="conversation-line-container"
             className={twMerge(classNames.base, line.props?.classNames?.base)}
             style={{ backgroundColor: line.color }}
             onClick={onClick}
         >
             <div
+                id="conversation-line-avatar"
                 className={twMerge(
                     classNames.avatar,
                     line.props?.classNames?.avatar
@@ -59,17 +61,22 @@ const ConversationLine = ({
             >
                 {line.who?.avatar ? (
                     <img
+                        id="conversation-line-avatar-img"
                         src={line.who.avatar}
                         alt={line.who.name || "Avatar"}
                         className="w-full h-full object-cover"
                     />
                 ) : (
-                    <div className="w-full h-full bg-muted-300 text-muted-700 flex items-center justify-center cursor-default">
+                    <div
+                        id="conversation-line-avatar-fallback"
+                        className="w-full h-full bg-muted-300 text-muted-700 flex items-center justify-center cursor-default"
+                    >
                         {line.who?.name?.[0] || "?"}
                     </div>
                 )}
             </div>
             <div
+                id="conversation-line-content"
                 className={twMerge(
                     classNames.content,
                     line.props?.classNames?.content
@@ -141,7 +148,7 @@ export const Conversation = ({ component }: ConversationProps) => {
     };
 
     return (
-        <div className={props?.className}>
+        <div id="conversation-content" className={props?.className}>
             {lines.map((line, index) => (
                 <ConversationLine
                     key={index}

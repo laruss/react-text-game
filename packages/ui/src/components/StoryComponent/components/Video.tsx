@@ -7,6 +7,7 @@ export type VideoProps = Readonly<{
 
 export const Video = ({ component: { props, content } }: VideoProps) => (
     <video
+        id="video-content"
         className={twMerge("max-w-200 max-h-200 mx-auto", props?.className)}
         controls={props?.controls ?? false}
         autoPlay={props?.autoPlay ?? true}

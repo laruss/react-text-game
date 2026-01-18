@@ -40,6 +40,7 @@ const Action = ({ action }: { action: ActionType }) => {
 
 export const Actions = ({ component }: ActionsProps) => (
     <div
+        id="actions-content"
         className={twMerge(
             "flex flex-wrap gap-2 justify-center items-center",
             component.props?.direction === "vertical" ? "flex-col" : "flex-row",

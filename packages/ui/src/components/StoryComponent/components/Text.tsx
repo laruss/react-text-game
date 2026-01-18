@@ -15,6 +15,7 @@ export const Text = ({ component: { props, content } }: TextProps) => {
     if (props?.isHTML && typeof content === "string") {
         return (
             <div
+                id="text-content"
                 className={className}
                 dangerouslySetInnerHTML={{ __html: content }}
             />
@@ -22,5 +23,9 @@ export const Text = ({ component: { props, content } }: TextProps) => {
     }
 
     // Default: render as ReactNode
-    return <div className={className}>{content}</div>;
+    return (
+        <div id="text-content" className={className}>
+            {content}
+        </div>
+    );
 };

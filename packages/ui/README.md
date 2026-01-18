@@ -335,6 +335,74 @@ Components also accept `className` props for additional styling:
 </Button>
 ```
 
+### Global Styling via Element IDs
+
+All story components include stable `id` attributes that allow you to target them with global CSS selectors. This is useful when you need to style components without creating custom overrides.
+
+#### Available Element IDs
+
+**Story Layout:**
+
+- `#story-content` - Main story wrapper
+- `#story-content-container` - Inner content container
+
+**Text Components:**
+
+- `#heading-content` - Heading/title element
+- `#text-content` - Text paragraph element
+
+**Media Components:**
+
+- `#image-content` - Image element (without modal)
+- `#image-content-modal` - Image that triggers modal
+- `#image-content-modal-overlay` - Modal backdrop
+- `#image-content-modal-content` - Modal content wrapper
+- `#image-content-modal-image` - Full-size image in modal
+- `#image-content-modal-close-button` - Modal close button
+- `#video-content` - Video element
+
+**Interactive Components:**
+
+- `#actions-content` - Actions button container
+- `#conversation-content` - Conversation wrapper
+- `#conversation-line-container` - Individual conversation line
+- `#conversation-line-avatar` - Avatar container
+- `#conversation-line-avatar-img` - Avatar image
+- `#conversation-line-avatar-fallback` - Avatar placeholder
+- `#conversation-line-content` - Conversation text content
+
+#### Example: Custom Global Styles
+
+```css
+@import "@react-text-game/ui/styles";
+
+/* Custom story layout */
+#story-content {
+    background: linear-gradient(to bottom, var(--color-background), var(--color-muted-100));
+}
+
+/* Custom heading style */
+#heading-content {
+    font-family: 'Cinzel', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom conversation bubbles */
+#conversation-line-container {
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom action buttons container */
+#actions-content {
+    padding: 1rem;
+    background: var(--color-card);
+    border-radius: 0.5rem;
+}
+```
+
+> **Note:** These IDs are designed for global overrides. For component-specific styling, prefer `className` props or custom component overrides via `ComponentsProvider`.
+
 ### Tips
 
 1. **Start small**: Override just `primary-500` and `secondary-500` to quickly brand your game

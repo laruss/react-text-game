@@ -37,6 +37,7 @@ export const Image = ({ component }: ImageProps) => {
     if (disableModal) {
         return (
             <img
+                id="image-content"
                 src={component.content}
                 alt={component.props?.alt ?? "image"}
                 className={twMerge(
@@ -60,6 +61,7 @@ export const Image = ({ component }: ImageProps) => {
 
             <label htmlFor={modalId} onClick={handleClick}>
                 <img
+                    id="image-content-modal"
                     src={component.content}
                     alt={component.props?.alt ?? "image"}
                     className={twMerge(
@@ -70,10 +72,17 @@ export const Image = ({ component }: ImageProps) => {
             </label>
 
             {/* Modal Overlay */}
-            <div className="peer-checked/modal:opacity-100 peer-checked/modal:pointer-events-auto opacity-0 pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-overlay/80 transition-opacity duration-300 overflow-auto">
+            <div
+                id="image-content-modal-overlay"
+                className="peer-checked/modal:opacity-100 peer-checked/modal:pointer-events-auto opacity-0 pointer-events-none fixed inset-0 z-[9999] flex items-center justify-center bg-overlay/80 transition-opacity duration-300 overflow-auto"
+            >
                 {/* Modal Content */}
-                <div className="relative w-full max-w-7xl min-h-0 p-4 m-auto flex items-center justify-center">
+                <div
+                    id="image-content-modal-content"
+                    className="relative w-full max-w-7xl min-h-0 p-4 m-auto flex items-center justify-center"
+                >
                     <img
+                        id="image-content-modal-image"
                         src={component.content}
                         alt={component.props?.alt ?? "image"}
                         className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
@@ -81,6 +90,7 @@ export const Image = ({ component }: ImageProps) => {
 
                     {/* Close Button */}
                     <label
+                        id="image-content-modal-close-button"
                         htmlFor={modalId}
                         className="absolute top-2 right-2 w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full cursor-pointer transition-colors"
                         aria-label="Close modal"

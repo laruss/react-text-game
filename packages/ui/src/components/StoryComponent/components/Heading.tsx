@@ -15,7 +15,10 @@ const headerMapper = {
 } as const satisfies Record<HeaderLevel, string>;
 
 export const Heading = ({ component: { props, content } }: HeadingProps) => (
-    <div className={twMerge(headerMapper[props?.level ?? 1], props?.className)}>
+    <div
+        id="heading-content"
+        className={twMerge(headerMapper[props?.level ?? 1], props?.className)}
+    >
         {content}
     </div>
 );

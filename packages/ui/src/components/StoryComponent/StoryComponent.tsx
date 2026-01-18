@@ -43,6 +43,7 @@ const StoryContent = ({ story }: StoryComponentProps) => {
 
     return (
         <div
+            id="story-content"
             className={twMerge(
                 "w-full h-full flex flex-col content-center items-center",
                 displayable.options?.classNames?.base
@@ -51,6 +52,7 @@ const StoryContent = ({ story }: StoryComponentProps) => {
         >
             <div className="px-4 w-full flex flex-col content-center items-center">
                 <div
+                    id="story-content-container"
                     className={twMerge(
                         "w-full overflow-x-hidden max-w-[1200px] flex flex-col gap-4 my-4",
                         displayable.options?.classNames?.container
