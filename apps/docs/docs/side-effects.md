@@ -326,5 +326,5 @@ By following this pattern, your game will behave correctly when:
 
 ## Related Topics
 
-- [Core Concepts](/docs/core-concepts) - Entity and passage fundamentals
-- [Migrations](/docs/migrations) - Handle save compatibility across versions
+- [Core Concepts](/core-concepts) - Entity and passage fundamentals
+- [Migrations](/migrations) - Handle save compatibility across versions
