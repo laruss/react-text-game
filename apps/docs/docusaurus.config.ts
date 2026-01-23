@@ -14,6 +14,13 @@ const config: Config = {
         v4: true, // Improve compatibility with the upcoming Docusaurus v4
     },
 
+    // Markdown configuration
+    // Use "detect" to treat .md files as CommonMark and .mdx files as MDX
+    // This fixes issues with TypeDoc-generated API docs containing curly braces
+    markdown: {
+        format: "detect",
+    },
+
     // Set the production url of your site here
     url: "https://reacttextgame.dev",
     // Set the /<baseUrl>/ pathname under which your site is served
