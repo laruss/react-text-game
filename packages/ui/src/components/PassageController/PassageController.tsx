@@ -40,6 +40,7 @@ export const PassageController = () => {
 
     return (
         <div
+            id="passage-content"
             key={`${currentPassage.type}-${rerenderId}`}
             className="w-full h-full animate-in fade-in duration-300"
         >

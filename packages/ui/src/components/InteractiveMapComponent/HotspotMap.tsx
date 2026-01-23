@@ -45,6 +45,7 @@ export const HotspotMap = ({ imageUrl, children }: HotspotMapProps) => {
 
     return (
         <div
+            id="hotspot-map"
             ref={containerRef}
             className="relative w-full h-full overflow-hidden"
         >
@@ -53,7 +54,10 @@ export const HotspotMap = ({ imageUrl, children }: HotspotMapProps) => {
                     <Spinner />
                 </div>
             )}
-            <div className="relative w-full h-full overflow-hidden">
+            <div
+                className="relative w-full h-full overflow-hidden"
+                id="hotspot-map-content"
+            >
                 <img
                     ref={imageRef}
                     src={imageUrl}

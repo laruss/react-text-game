@@ -38,7 +38,10 @@ export const InteractiveMapComponent = ({
     }, [displayable.image, displayable.bgImage, displayable.hotspots.length]);
 
     return (
-        <div className="w-full h-full flex flex-col">
+        <div
+            className="w-full h-full flex flex-col"
+            id="interactive-map-content"
+        >
             <div
                 key={displayableKey}
                 className="flex-grow relative overflow-hidden animate-[fadeIn_0.3s_ease-in-out] min-h-full"
@@ -46,6 +49,7 @@ export const InteractiveMapComponent = ({
                 {/* Background image container */}
                 {displayable.bgImage && (
                     <div
+                        id="background-image-container"
                         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
                         style={{
                             backgroundImage: `url(${displayable.bgImage})`,
@@ -56,12 +60,14 @@ export const InteractiveMapComponent = ({
 
                 {/* Hotspot map container */}
                 <div
+                    id="hotspot-map-container"
                     className={twMerge(
                         "h-full w-full flex flex-col",
                         displayable.classNames?.container
                     )}
                 >
                     <div
+                        id="top-hotspots-container"
                         className={twMerge(
                             "w-full z-20 overflow-y-hidden overflow-x-auto scrollbar-hide max-h-100",
                             displayable.classNames?.topHotspots
@@ -73,6 +79,7 @@ export const InteractiveMapComponent = ({
                     </div>
                     <div className="h-full w-full flex">
                         <div
+                            id="left-hotspots-container"
                             className={twMerge(
                                 "h-full z-20 overflow-x-hidden overflow-y-auto scrollbar-hide max-w-100",
                                 displayable.classNames?.leftHotspots
@@ -83,6 +90,7 @@ export const InteractiveMapComponent = ({
                             ))}
                         </div>
                         <div
+                            id="map-container"
                             ref={mapContainerRef}
                             className="w-full h-full flex justify-center items-center relative z-10"
                         >
@@ -99,6 +107,7 @@ export const InteractiveMapComponent = ({
                             </HotspotMap>
                         </div>
                         <div
+                            id="right-hotspots-container"
                             className={twMerge(
                                 "h-full z-20 overflow-x-hidden overflow-y-auto scrollbar-hide max-w-100",
                                 displayable.classNames?.rightHotspots
@@ -110,6 +119,7 @@ export const InteractiveMapComponent = ({
                         </div>
                     </div>
                     <div
+                        id="bottom-hotspots-container"
                         className={twMerge(
                             "w-full z-20 overflow-y-hidden overflow-x-auto scrollbar-hide max-h-100",
                             displayable.classNames?.bottomHotspots

@@ -41,7 +41,7 @@ export const Hotspot = ({ hotspot, imagePositionInfo }: HotspotProps) => {
     }, [hotspot.position, imagePositionInfo]);
 
     return (
-        <div ref={hotspotRef} className="absolute z-10 pointer-events-none">
+        <div ref={hotspotRef} className="absolute z-10 pointer-events-none" id="hotspot-container">
             {hotspot.type === "image" ? (
                 <ImageHotspot
                     hotspot={hotspot}

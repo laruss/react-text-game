@@ -66,6 +66,7 @@ export const ImageHotspot = ({
     return (
         <>
             <button
+                id="image-hotspot-button"
                 ref={ref}
                 className={twMerge(
                     "pointer-events-auto cursor-pointer disabled:cursor-not-allowed relative",

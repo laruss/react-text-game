@@ -30,6 +30,7 @@ export const LabelHotspot = ({
         <>
             <div ref={ref}>
                 <Button
+                    id="label-hotspot-button"
                     onClick={() => hotspot.action()}
                     disabled={isDisabled}
                     className={twMerge(

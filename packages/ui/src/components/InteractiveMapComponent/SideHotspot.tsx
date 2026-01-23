@@ -17,7 +17,7 @@ export const SideHotspot = ({ hotspot }: Props) => {
     const tooltipContent = callIfFunction(hotspot.tooltip?.content);
 
     return (
-        <div>
+        <div id="side-hotspot-container">
             {hotspot.type === "image" ? (
                 <ImageHotspot
                     hotspot={hotspot}
