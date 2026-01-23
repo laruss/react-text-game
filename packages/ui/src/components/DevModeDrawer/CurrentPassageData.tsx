@@ -11,8 +11,9 @@ export const CurrentPassageData = ({ isOpen }: { isOpen: boolean }) => {
 
     const onReloadPassageData = () => {
         const psg = Game.currentPassage;
+        const cachedData = psg?.getLastDisplayResult();
         const data = JSON.stringify(
-            { passage: psg, data: psg?.display() },
+            { passage: psg, data: cachedData },
             null,
             2
         );

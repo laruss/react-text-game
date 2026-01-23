@@ -116,11 +116,13 @@ export class InteractiveMap extends Passage {
 
         const bgImage = callIfFunction(this.options.bgImage)!;
 
-        return {
+        const result: InteractiveMapType = {
             ...this.options,
             image,
             bgImage,
             hotspots,
         };
+        this._lastDisplayResult = result;
+        return result;
     }
 }

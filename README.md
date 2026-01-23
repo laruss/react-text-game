@@ -194,6 +194,7 @@ function StatusBar() {
 ## Documentation
 
 - **[Full Documentation](./apps/docs)** - Comprehensive guides and tutorials (Docusaurus site)
+- **[Handling Side Effects](./apps/docs/docs/side-effects.md)** - Best practices for state modifications in passages
 - **[API Reference](./apps/docs/api)** - Auto-generated TypeDoc API documentation
 - **[Example Game](./apps/example-game)** - Complete game implementation example
 
@@ -257,13 +258,13 @@ bun run lint --filter='@react-text-game/*'
 
 #### Common Development Workflows
 
-| Workflow | Command |
-|----------|---------|
-| Work on core engine | `bun run dev --filter=@react-text-game/core --filter=core-test-app` |
-| Work on UI components | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app` |
-| Work on MDX package | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/mdx --filter=example-game` |
-| Full stack development | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game` |
-| Documentation site | `bun run docs` or `bun run dev --filter=@react-text-game/docs` |
+| Workflow               | Command                                                                                          |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| Work on core engine    | `bun run dev --filter=@react-text-game/core --filter=core-test-app`                              |
+| Work on UI components  | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app`   |
+| Work on MDX package    | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/mdx --filter=example-game` |
+| Full stack development | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game`  |
+| Documentation site     | `bun run docs` or `bun run dev --filter=@react-text-game/docs`                                   |
 
 ### Repository Structure
 
@@ -382,17 +383,17 @@ Follow the prompts to describe your changes. This generates version bumps and ch
 
 ### Quick Reference
 
-| Task | Command |
-|------|---------|
-| Install dependencies | `bun install` |
-| Start dev (all) | `bun run dev` |
+| Task                 | Command                          |
+| -------------------- | -------------------------------- |
+| Install dependencies | `bun install`                    |
+| Start dev (all)      | `bun run dev`                    |
 | Start dev (specific) | `bun run dev --filter=<package>` |
-| Build all | `bun run build` |
-| Run tests | `bun test` |
-| Type check | `bun run typecheck` |
-| Lint | `bun run lint` |
-| Format | `bun run format` |
-| Create changeset | `bun run changeset` |
+| Build all            | `bun run build`                  |
+| Run tests            | `bun test`                       |
+| Type check           | `bun run typecheck`              |
+| Lint                 | `bun run lint`                   |
+| Format               | `bun run format`                 |
+| Create changeset     | `bun run changeset`              |
 
 ## License
 

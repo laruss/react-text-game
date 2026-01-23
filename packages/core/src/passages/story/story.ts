@@ -88,9 +88,11 @@ export class Story extends Passage {
     display<T extends InitVarsType = EmptyObject>(
         props: T = {} as T
     ): { options?: StoryOptions; components: Array<Component> } {
-        return {
+        const result = {
             options: this.options,
             components: this.content(props),
         };
+        this._lastDisplayResult = result;
+        return result;
     }
 }

@@ -18,6 +18,7 @@ const sidebars: SidebarsConfig = {
         "intro",
         "getting-started",
         "core-concepts",
+        "side-effects",
         "mdx-integration",
         "i18n",
         "migrations",

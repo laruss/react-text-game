@@ -40,6 +40,13 @@ export class Passage {
     readonly type: PassageType;
 
     /**
+     * Cached result from the last display() call.
+     * Used to access display data without re-executing content functions.
+     * @internal
+     */
+    protected _lastDisplayResult: unknown = null;
+
+    /**
      * Creates a new passage and automatically registers it with the Game.
      *
      * @param id - Unique identifier for this passage
@@ -66,5 +73,37 @@ export class Passage {
         throw new Error(
             `Display method not implemented for passage: ${this.id}`
         );
+    }
+
+    /**
+     * Returns the cached result from the last display() call.
+     * Use this method to access passage data without re-executing content functions,
+     * which prevents unwanted side effects.
+     *
+     * @template T - Expected return type
+     * @returns The cached display result, or null if display() has never been called
+     *
+     * @example
+     * ```typescript
+     * const story = newStory('test', () => [{ type: 'text', content: 'Hello' }]);
+     *
+     * // First call to display() - executes content function
+     * const result = story.display();
+     *
+     * // Get cached result - does NOT execute content function again
+     * const cached = story.getLastDisplayResult();
+     * ```
+     */
+    getLastDisplayResult<T = unknown>(): T | null {
+        return this._lastDisplayResult as T | null;
+    }
+
+    /**
+     * Checks if a cached display result exists.
+     *
+     * @returns true if display() has been called at least once, false otherwise
+     */
+    hasDisplayCache(): boolean {
+        return this._lastDisplayResult !== null;
     }
 }

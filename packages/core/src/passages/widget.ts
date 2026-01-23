@@ -74,10 +74,13 @@ export class Widget extends Passage {
      *
      * @returns The React content to be rendered
      */
-    display() {
-        return typeof this.content === "function"
-            ? this.content()
-            : this.content;
+    display(): ReactNode {
+        const result =
+            typeof this.content === "function"
+                ? this.content()
+                : this.content;
+        this._lastDisplayResult = result;
+        return result;
     }
 }
 
