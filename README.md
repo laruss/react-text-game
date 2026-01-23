@@ -230,18 +230,40 @@ bun run format
 
 ### Turborepo Filtering
 
-Target specific packages or apps:
+Target specific packages or apps using the `--filter` flag:
 
 ```bash
-# Run dev for specific app
+# Run dev for a specific app
 bun run dev --filter=example-game
+
+# Run dev for a specific package
+bun run dev --filter=@react-text-game/core
+
+# Run multiple packages/apps together (common development workflow)
+bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game
 
 # Build only the core package
 bun run build --filter=@react-text-game/core
 
-# Build both packages
+# Build all publishable packages
 bun run build --filter='@react-text-game/*'
+
+# Run typecheck for UI package only
+bun run typecheck --filter=@react-text-game/ui
+
+# Run lint for all packages
+bun run lint --filter='@react-text-game/*'
 ```
+
+#### Common Development Workflows
+
+| Workflow | Command |
+|----------|---------|
+| Work on core engine | `bun run dev --filter=@react-text-game/core --filter=core-test-app` |
+| Work on UI components | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app` |
+| Work on MDX package | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/mdx --filter=example-game` |
+| Full stack development | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game` |
+| Documentation site | `bun run docs` or `bun run dev --filter=@react-text-game/docs` |
 
 ### Repository Structure
 
@@ -261,24 +283,116 @@ react-text-game/
 
 **Note:** The `apps/` directory contains examples, tests, and documentation. The main deliverables are the packages in `packages/`.
 
-## Contributing
+## Collaboration
 
-Contributions are welcome! To contribute:
+Contributions are welcome! This section covers how to work effectively with the codebase.
 
-1. **Fork the repository** and create a new branch for your feature or bugfix
+### Getting Started
+
+1. **Fork the repository** and clone it locally
 2. **Install dependencies** with `bun install`
-3. **Follow existing patterns** - Use factory functions, semantic colors in UI, and TypeScript types
-4. **Test your changes** in the test apps (`apps/core-test-app` or `apps/ui-test-app`)
-5. **Ensure code quality**:
-    - Run `bun run lint` to check for linting issues
-    - Run `bun run check-types` to verify TypeScript types
-    - Run `bun run format` to format code with Prettier
-6. **Create a changeset** if you're modifying a package:
-    - Run `bun run changeset` and follow the prompts
-    - This helps with version management and changelog generation
-7. **Submit a pull request** with a clear description of your changes
+3. **Choose your development workflow** based on what you're working on (see table above)
 
-Please ensure all checks pass before submitting your PR. If you're adding new features, consider updating the documentation in `apps/docs`.
+### Project Architecture
+
+Understanding the dependency graph helps you run only what's needed:
+
+```
+@react-text-game/core (no internal deps)
+       ↑
+@react-text-game/ui (depends on core)
+       ↑
+@react-text-game/mdx (depends on core)
+```
+
+- **Working on core?** Run core + a test app to see changes
+- **Working on UI?** Run core + UI + a test app (UI depends on core)
+- **Working on MDX?** Run core + MDX + example-game
+
+### Development Workflow
+
+#### 1. Start Development Server
+
+Pick the right filter combination for your task:
+
+```bash
+# Core engine development
+bun run dev --filter=@react-text-game/core --filter=core-test-app
+
+# UI components development
+bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app
+
+# Full example game development
+bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game
+
+# Documentation writing
+bun run docs
+```
+
+#### 2. Follow Existing Patterns
+
+- **Core package**: Use factory functions (`createEntity`, `newStory`, `newInteractiveMap`)
+- **UI package**: Use semantic color tokens (never hardcode colors like `bg-blue-500`)
+- **All packages**: Write TypeScript with proper types
+
+#### 3. Test Your Changes
+
+```bash
+# Run tests
+bun test
+
+# Type checking
+bun run typecheck
+
+# Or check specific package
+bun run typecheck --filter=@react-text-game/core
+```
+
+#### 4. Code Quality
+
+Before submitting, ensure all checks pass:
+
+```bash
+# Linting
+bun run lint
+
+# Type checking
+bun run typecheck
+
+# Format code
+bun run format
+```
+
+#### 5. Create a Changeset
+
+If you're modifying a publishable package (`core`, `ui`, or `mdx`):
+
+```bash
+bun run changeset
+```
+
+Follow the prompts to describe your changes. This generates version bumps and changelog entries.
+
+### Contribution Guidelines
+
+1. **Keep changes focused** - One feature or fix per PR
+2. **Update documentation** - If adding features, update `apps/docs`
+3. **Add tests** - For new functionality, add tests in the test apps
+4. **Follow semantic versioning** - Use changesets to indicate breaking changes
+
+### Quick Reference
+
+| Task | Command |
+|------|---------|
+| Install dependencies | `bun install` |
+| Start dev (all) | `bun run dev` |
+| Start dev (specific) | `bun run dev --filter=<package>` |
+| Build all | `bun run build` |
+| Run tests | `bun test` |
+| Type check | `bun run typecheck` |
+| Lint | `bun run lint` |
+| Format | `bun run format` |
+| Create changeset | `bun run changeset` |
 
 ## License
 

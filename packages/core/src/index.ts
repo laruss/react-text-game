@@ -46,6 +46,9 @@ export type {
 } from "#passages/story";
 export type { WidgetContent } from "#passages/widget";
 
+// Export dev tools types
+export type { ReactTextGameDebug } from "./global";
+
 export {
     BaseGameObject,
     createEntity,

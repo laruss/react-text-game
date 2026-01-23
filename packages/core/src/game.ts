@@ -1,6 +1,7 @@
 import { proxy, subscribe } from "valtio";
 
 import { STORAGE_SYSTEM_PATH, SYSTEM_PASSAGE_NAMES } from "#constants";
+import { cleanupDevTools, exposeDevTools } from "#devTools";
 import { BaseGameObject } from "#gameObjects";
 import { deepMerge } from "#helpers";
 import { initI18n } from "#i18n";
@@ -659,6 +660,7 @@ export class Game {
             logger.warn(
                 "Game is running in dev mode, do not use in production!"
             );
+            exposeDevTools();
         }
 
         // Validate migrations in dev mode
@@ -766,5 +768,8 @@ export class Game {
 
         // Reset state
         Game.state.currentPassageId = null;
+
+        // Clean up dev tools from window
+        cleanupDevTools();
     }
 }
