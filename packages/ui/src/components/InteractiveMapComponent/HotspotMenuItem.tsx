@@ -2,6 +2,7 @@
 
 import { LabelHotspot } from "@react-text-game/core";
 import { useRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Button, Tooltip } from "#components";
 import { callIfFunction } from "#components/InteractiveMapComponent/helpers";
@@ -20,7 +21,10 @@ export const HotspotMenuItem = ({ item }: HotspotMenuItemProps) => {
         <>
             <div ref={ref}>
                 <Button
-                    className={item.props?.classNames?.button}
+                    className={twMerge(
+                        "w-full",
+                        item.props?.classNames?.button
+                    )}
                     variant={item.props?.variant}
                     color={item.props?.color}
                     disabled={isDisabled}

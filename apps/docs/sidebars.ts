@@ -22,6 +22,11 @@ const sidebars: SidebarsConfig = {
         "mdx-integration",
         "i18n",
         "migrations",
+        {
+            type: "html",
+            value: '<a href="/demo/" target="_blank" rel="noopener noreferrer" class="menu__link">Live Demo</a>',
+            defaultStyle: true,
+        },
     ],
 };
 

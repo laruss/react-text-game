@@ -49,7 +49,7 @@ export const HotspotMenu = ({ menu, imagePositionInfo }: Props) => {
             ref={menuRef}
             className={twMerge(
                 "absolute z-10 flex gap-2 p-2 bg-popover/95 border ",
-                "border-border rounded-lg shadow-md",
+                "border-border rounded-lg shadow-md justify-center items-center",
                 menu.direction === "horizontal" ? "flex-row" : "flex-col"
             )}
         >

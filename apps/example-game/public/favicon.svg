@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="dragonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#ff6b6b"/>
+    </linearGradient>
+    <linearGradient id="fireGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="50%" style="stop-color:#ffa502"/>
+      <stop offset="100%" style="stop-color:#ffdd59"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <circle cx="32" cy="32" r="30" fill="url(#bgGrad)" stroke="#e94560" stroke-width="2"/>
+  
+  <!-- Dragon head silhouette -->
+  <path d="M20 42 
+           L22 35 
+           L18 32 
+           L22 30 
+           L20 25 
+           L26 28 
+           L28 22 
+           L32 26 
+           L36 20 
+           L38 26 
+           L44 22 
+           L42 30 
+           L48 32 
+           L42 35 
+           L44 42 
+           L38 38 
+           L32 44 
+           L26 38 
+           Z" 
+        fill="url(#dragonGrad)"/>
+  
+  <!-- Dragon eye -->
+  <ellipse cx="32" cy="32" rx="3" ry="4" fill="#ffdd59"/>
+  <ellipse cx="32" cy="32" rx="1.5" ry="3" fill="#1a1a2e"/>
+  
+  <!-- Fire/flame accent at bottom -->
+  <path d="M26 46 
+           Q28 42 30 46 
+           Q32 40 34 46 
+           Q36 42 38 46 
+           L38 50 
+           L26 50 
+           Z" 
+        fill="url(#fireGrad)" opacity="0.9"/>
+</svg>

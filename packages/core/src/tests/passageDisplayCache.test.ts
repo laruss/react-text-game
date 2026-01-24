@@ -285,41 +285,13 @@ describe("Passage Display Cache - No Double Side Effects", () => {
 
     describe("Widget Cache", () => {
         test("getLastDisplayResult returns null before first display", () => {
-            const widget = newWidget(uniqueId("widget"), () => "Content");
+            const widget = newWidget(uniqueId("widget"), "Static Content");
 
             expect(widget.getLastDisplayResult()).toBeNull();
             expect(widget.hasDisplayCache()).toBe(false);
         });
 
-        test("getLastDisplayResult returns cached result after display", () => {
-            const widget = newWidget(
-                uniqueId("widget"),
-                () => "Widget Content"
-            );
-
-            const displayResult = widget.display();
-            const cachedResult = widget.getLastDisplayResult();
-
-            expect(cachedResult).toBe(displayResult);
-            expect(widget.hasDisplayCache()).toBe(true);
-        });
-
-        test("getLastDisplayResult does NOT trigger content function (no side effects)", () => {
-            let callCount = 0;
-            const widget = newWidget(uniqueId("widget"), () => {
-                callCount++;
-                return `Content ${callCount}`;
-            });
-
-            widget.display();
-            expect(callCount).toBe(1);
-
-            widget.getLastDisplayResult();
-            widget.getLastDisplayResult();
-            expect(callCount).toBe(1); // No additional calls
-        });
-
-        test("static content widget caches correctly", () => {
+        test("getLastDisplayResult returns cached result after display for static content", () => {
             const staticContent = "Static Widget Content";
             const widget = newWidget(uniqueId("widget"), staticContent);
 
@@ -328,20 +300,21 @@ describe("Passage Display Cache - No Double Side Effects", () => {
 
             expect(cachedResult).toBe(staticContent);
             expect(cachedResult).toBe(displayResult);
+            expect(widget.hasDisplayCache()).toBe(true);
         });
 
-        test("cache updates when display is called again", () => {
-            let callCount = 0;
-            const widget = newWidget(uniqueId("widget"), () => {
-                callCount++;
-                return `Content ${callCount}`;
-            });
+        test("function content is treated as React component (createElement)", () => {
+            // With the new behavior, functions are always treated as React components
+            // and wrapped in createElement, not called directly.
+            // This ensures hooks work correctly in minified production builds.
+            const widget = newWidget(uniqueId("widget"), () => "Content");
 
-            widget.display();
-            expect(widget.getLastDisplayResult<string>()).toBe("Content 1");
+            const displayResult = widget.display();
 
-            widget.display();
-            expect(widget.getLastDisplayResult<string>()).toBe("Content 2");
+            // The result is a React element, not the string "Content"
+            expect(displayResult).toBeDefined();
+            expect(typeof displayResult).toBe("object");
+            expect(widget.hasDisplayCache()).toBe(true);
         });
     });
 

@@ -1,50 +1,58 @@
 name: Deploy Documentation
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: {}
+    push:
+        branches: [main]
+    workflow_dispatch: {}
 
 permissions:
-  contents: write
+    contents: write
 
 jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
+    build-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  lfs: true
 
-      - name: Checkout LFS objects
-        run: git lfs pull
+            - name: Checkout LFS objects
+              run: git lfs pull
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: latest
 
-      # Docusaurus CLIs are Node-based; keep Node available
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+            # Docusaurus CLIs are Node-based; keep Node available
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
 
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
+            - name: Install dependencies
+              run: bun install --frozen-lockfile
 
-      # Build all packages first (needed for API docs generation)
-      - name: Build all packages
-        run: bun run build
+            # Build all packages except docs (needed for API docs generation and example-game)
+            - name: Build packages
+              run: bun run build --filter='!@react-text-game/docs'
 
-      # Build docs site (includes API generation)
-      - name: Build docs site
-        run: bun run build --filter=@react-text-game/docs
+            # Rebuild example-game with correct base path for docs
+            - name: Build example-game for docs
+              run: DOCS_BUILD=true bun run build --filter=example-game
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: apps/docs/build
-          publish_branch: docs
-          cname: reacttextgame.dev
+            # Copy example-game to docs static folder before docs build
+            - name: Copy example-game to docs static
+              run: cp -r apps/example-game/dist apps/docs/static/demo
+
+            # Build docs site (includes API generation)
+            - name: Build docs site
+              run: bun run build --filter=@react-text-game/docs
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: apps/docs/build
+                  publish_branch: docs
+                  cname: reacttextgame.dev

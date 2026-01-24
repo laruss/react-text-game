@@ -1,8 +1,8 @@
 import { Game, newInteractiveMap } from "@react-text-game/core";
 
 export const testInteractiveMap = newInteractiveMap("testMap", {
-    image: "city.png",
-    bgImage: "img.png",
+    image: "./assets/test/city.webp",
+    bgImage: "./assets/test/img.webp",
     hotspots: [
         () => ({
             action: () => Game.jumpTo("testStory"),
@@ -24,10 +24,10 @@ export const testInteractiveMap = newInteractiveMap("testMap", {
             action: () => console.log("Image Hotspot clicked"),
             type: "image",
             content: {
-                idle: "imageHotspot/idle.png",
-                hover: "imageHotspot/hover.png",
-                active: "imageHotspot/active.png",
-                disabled: "imageHotspot/disabled.png",
+                idle: "imageHotspot/idle.webp",
+                hover: "imageHotspot/hover.webp",
+                active: "imageHotspot/active.webp",
+                disabled: "imageHotspot/disabled.webp",
             },
             // isDisabled: true,
             position: { x: 70, y: 70 },
@@ -41,8 +41,8 @@ export const testInteractiveMap = newInteractiveMap("testMap", {
 });
 
 export const testInteractiveMap2 = newInteractiveMap("testMap2", {
-    image: "kitchen.png",
-    bgImage: "img.png",
+    image: "./assets/test/kitchen.webp",
+    bgImage: "./assets/test/img.webp",
     hotspots: [
         () => ({
             action: () => Game.jumpTo("testMap"),

@@ -25,7 +25,7 @@ const bubbleStyles = {
         base: `flex items-end gap-2 my-4 ${side === "left" ? "justify-start" : "justify-end"}`,
         content: `max-w-[70%] px-4 py-3 shadow-sm ${
             side === "left"
-                ? "bg-card text-card-foreground rounded-t-2xl rounded-br-2xl rounded-bl-lg border border-border"
+                ? "bg-card text-card-foreground rounded-t-2xl rounded-br-2xl rounded-bl-lg border"
                 : "bg-primary-500 text-primary-foreground rounded-t-2xl rounded-bl-2xl rounded-br-lg"
         }`,
         avatar: `w-10 h-10 rounded-full overflow-hidden mb-1 ${side === "left" ? "order-first" : "order-last"}`,
@@ -49,7 +49,6 @@ const ConversationLine = ({
         <div
             id="conversation-line-container"
             className={twMerge(classNames.base, line.props?.classNames?.base)}
-            style={{ backgroundColor: line.color }}
             onClick={onClick}
         >
             <div
@@ -81,6 +80,7 @@ const ConversationLine = ({
                     classNames.content,
                     line.props?.classNames?.content
                 )}
+                style={{ backgroundColor: line.color }}
             >
                 {line.content}
             </div>

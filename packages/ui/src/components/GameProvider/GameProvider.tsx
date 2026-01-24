@@ -50,7 +50,7 @@ export const GameProvider = ({
             .then(() => {
                 newWidget(
                     SYSTEM_PASSAGE_NAMES.START_MENU,
-                    components?.MainMenu?.() || <MainMenu />
+                    components?.MainMenu || MainMenu
                 );
 
                 // Only set if not already set by Game.init() or registerPassage

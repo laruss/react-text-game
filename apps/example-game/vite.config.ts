@@ -15,17 +15,11 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
-    base: "./",
+    // Use /demo/ base path when building for docs deployment
+    base: process.env.DOCS_BUILD ? "/demo/" : "./",
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
-        },
-    },
-    build: {
-        rollupOptions: {
-            // Mark UI package as external - it's a peer dependency that may not be installed
-            // The dynamic import in core will fail gracefully if UI is not available
-            external: (id) => id.startsWith("@react-text-game/ui/"),
         },
     },
 });

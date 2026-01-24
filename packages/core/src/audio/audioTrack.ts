@@ -40,11 +40,16 @@ export class AudioTrack {
     private readonly state: AudioState;
     private readonly jsonPath: JsonPath;
     private readonly unsubscribe?: () => void;
+    /** The original volume from options, used as target for fadeIn when current volume is corrupted */
+    private readonly originalVolume: number;
+    /** Animation frame ID for the current fade, used to cancel ongoing fades */
+    private fadeAnimationId: number | null = null;
 
     constructor(src: string, options: AudioOptions = {}) {
         this.id = options.id || `audio-${Date.now()}-${Math.random()}`;
         this.src = src;
         this.jsonPath = `${AUDIO_STORAGE_PATH}.${this.id}` as JsonPath;
+        this.originalVolume = options.volume ?? DEFAULT_AUDIO_OPTIONS.volume;
 
         // Create reactive state with Valtio
         this.state = proxy<AudioState>({
@@ -309,6 +314,8 @@ export class AudioTrack {
      * Fades in the audio over a specified duration.
      *
      * Starts at volume 0 and gradually increases to the target volume.
+     * Uses the original configured volume as the target, falling back to
+     * current state volume if it's non-zero.
      *
      * @param duration - Fade duration in milliseconds
      * @returns Promise that resolves when fade completes
@@ -319,7 +326,14 @@ export class AudioTrack {
      * ```
      */
     async fadeIn(duration: number = 1000): Promise<void> {
-        const targetVolume = this.state.volume;
+        // Cancel any ongoing fade first
+        this.cancelFade();
+
+        // Use original volume as target, or current state.volume if non-zero
+        // This prevents issues when fadeIn is called while a previous fade left volume at 0
+        const targetVolume =
+            this.state.volume > 0 ? this.state.volume : this.originalVolume;
+
         this.state.volume = 0;
         this.audioElement.volume = 0;
 
@@ -340,8 +354,26 @@ export class AudioTrack {
      * ```
      */
     async fadeOut(duration: number = 1000): Promise<void> {
+        // Cancel any ongoing fade first
+        this.cancelFade();
+
         await this.fadeTo(0, duration);
         this.stop();
+    }
+
+    /**
+     * Cancels any ongoing fade animation.
+     *
+     * @example
+     * ```typescript
+     * audio.cancelFade();
+     * ```
+     */
+    cancelFade(): void {
+        if (this.fadeAnimationId !== null) {
+            cancelAnimationFrame(this.fadeAnimationId);
+            this.fadeAnimationId = null;
+        }
     }
 
     /**
@@ -370,13 +402,14 @@ export class AudioTrack {
                 this.state.volume = currentVolume;
 
                 if (progress < 1) {
-                    requestAnimationFrame(fade);
+                    this.fadeAnimationId = requestAnimationFrame(fade);
                 } else {
+                    this.fadeAnimationId = null;
                     resolve();
                 }
             };
 
-            requestAnimationFrame(fade);
+            this.fadeAnimationId = requestAnimationFrame(fade);
         });
     }
 
@@ -475,6 +508,7 @@ export class AudioTrack {
      * ```
      */
     dispose(): void {
+        this.cancelFade();
         this.stop();
         this.unsubscribe?.();
         AudioManager._unregisterTrack(this);

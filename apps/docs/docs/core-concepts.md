@@ -297,6 +297,7 @@ Custom React components as passages:
 ```tsx
 import { newWidget } from "@react-text-game/core";
 
+// With ReactNode (static content)
 const customUI = newWidget(
     "custom-ui",
     <div>
@@ -304,7 +305,50 @@ const customUI = newWidget(
         <MyCustomComponent />
     </div>
 );
+
+// With React component (supports hooks)
+const MyMenu = () => {
+    const [selected, setSelected] = useState(null);
+    return <MenuUI selected={selected} onSelect={setSelected} />;
+};
+const menuWidget = newWidget("menu", MyMenu);
 ```
+
+:::warning Important: Function Content Handling
+When passing a function to `newWidget`, it is **always treated as a React component** and rendered via `createElement`. This ensures hooks work correctly even in minified production builds where function names are mangled.
+
+If you need dynamic content without hooks (e.g., a simple render function), pre-evaluate it:
+
+```tsx
+// For dynamic content without hooks, pre-evaluate the function:
+const timestampWidget = newWidget("time", (() => <div>{Date.now()}</div>)());
+```
+
+:::
+
+:::caution Save System and Widget Passages
+The save system caches passage display results for performance. However, **Widget passages with function content (React components) cannot be reliably cached** because they return React elements rather than serializable data.
+
+**Best practices:**
+
+- Avoid saving game state while on a Widget passage
+- Navigate to a Story or InteractiveMap passage before allowing saves
+- If your Widget is a menu or settings screen, consider disabling the save button while it's displayed
+
+```tsx
+// Example: Disable save while on settings widget
+const SettingsWidget = () => {
+    const isOnSettings = Game.currentPassage?.id === "settings";
+    return (
+        <div>
+            <SaveButton disabled={isOnSettings} />
+            {/* ... */}
+        </div>
+    );
+};
+```
+
+:::
 
 ## State Management
 

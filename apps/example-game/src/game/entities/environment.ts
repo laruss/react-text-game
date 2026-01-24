@@ -1,59 +1,89 @@
-import { BaseGameObject } from "@react-text-game/core";
+import { createEntity } from "@react-text-game/core";
 
-type EnvironmentVariables = {
-    dateTimestamp: number;
-    temperature: number;
-};
+/**
+ * Environment entity - tracks world state
+ * Demonstrates: createEntity for non-player state, location discovery, time/weather
+ */
+export const environment = createEntity("environment", {
+    // Time of day affects some descriptions and events
+    timeOfDay: "morning" as "morning" | "afternoon" | "evening" | "night",
 
-class Environment extends BaseGameObject<EnvironmentVariables> {
-    get date(): Date {
-        return new Date(this.variables.dateTimestamp);
-    }
+    // Weather affects atmosphere
+    weather: "clear" as "clear" | "cloudy" | "rainy" | "stormy",
 
-    set date(newDate: Date) {
-        this.variables.dateTimestamp = newDate.getTime();
-    }
-
-    get temperature(): number {
-        return this.variables.temperature;
-    }
-
-    set temperature(newTemp: number) {
-        this.variables.temperature = newTemp;
-    }
-
-    spendTime({
-        days = 0,
-        hours = 0,
-        minutes = 0,
-    }: {
-        days?: number;
-        hours?: number;
-        minutes?: number;
-    }) {
-        console.log(
-            `Spending time: ${days} days, ${hours} hours, ${minutes} minutes`
-        );
-        // Now we can mutate the timestamp directly - valtio will track this change
-        const currentDate = new Date(this.variables.dateTimestamp);
-        currentDate.setDate(currentDate.getDate() + days);
-        currentDate.setHours(currentDate.getHours() + hours);
-        currentDate.setMinutes(currentDate.getMinutes() + minutes);
-
-        // Assign the new timestamp - this is a primitive mutation that valtio tracks
-        this.variables.dateTimestamp = currentDate.getTime();
-    }
-
-    changeTemperature(delta: number) {
-        console.log(`Changing temperature by ${delta} degrees`);
-        this.variables.temperature += delta;
-    }
-}
-
-export const environment = new Environment({
-    id: "environment",
-    variables: {
-        dateTimestamp: new Date().getTime(),
-        temperature: 22,
+    // Discovered locations - unlocks hotspots on world map
+    discoveredLocations: {
+        village: true, // Start with village discovered
+        forest: true, // Forest is also accessible from start
+        castle: false, // Unlocked after starting main quest
+        dragonLair: false, // Unlocked after getting royal blessing
     },
+
+    // Location visit counts for dynamic content
+    visitCounts: {
+        village: 0,
+        tavern: 0,
+        blacksmith: 0,
+        forest: 0,
+        castle: 0,
+        dragonLair: 0,
+    },
+
+    // World events that have occurred
+    worldEvents: {
+        dragonAttackAnnounced: false,
+        villageInPanic: false,
+        castleOnAlert: false,
+        dragonDefeated: false,
+        peacefulEnding: false,
+    },
+
+    // Current chapter for story progression
+    currentChapter: 1,
 });
+
+// Helper functions for environment
+export const environmentActions = {
+    discoverLocation: (
+        location: keyof typeof environment.discoveredLocations
+    ) => {
+        environment.discoveredLocations[location] = true;
+    },
+
+    isLocationDiscovered: (
+        location: keyof typeof environment.discoveredLocations
+    ) => {
+        return environment.discoveredLocations[location];
+    },
+
+    incrementVisitCount: (location: keyof typeof environment.visitCounts) => {
+        environment.visitCounts[location]++;
+    },
+
+    getVisitCount: (location: keyof typeof environment.visitCounts) => {
+        return environment.visitCounts[location];
+    },
+
+    advanceTime: () => {
+        const times: Array<"morning" | "afternoon" | "evening" | "night"> = [
+            "morning",
+            "afternoon",
+            "evening",
+            "night",
+        ];
+        const currentIndex = times.indexOf(environment.timeOfDay);
+        environment.timeOfDay = times[(currentIndex + 1) % times.length];
+    },
+
+    setWeather: (weather: typeof environment.weather) => {
+        environment.weather = weather;
+    },
+
+    triggerWorldEvent: (event: keyof typeof environment.worldEvents) => {
+        environment.worldEvents[event] = true;
+    },
+
+    advanceChapter: () => {
+        environment.currentChapter++;
+    },
+};
