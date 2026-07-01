@@ -1,0 +1,37 @@
+# Function: Var()
+
+> **Var**(`__namedParameters`): `Element`
+
+Defined in: [mdx/src/components/Var.tsx:28](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/mdx/src/components/Var.tsx#L28)
+
+Component for embedding variables in MDX text content.
+Variables are evaluated at runtime when the story is rendered.
+
+## Parameters
+
+### \_\_namedParameters
+
+[`VarProps`](../type-aliases/VarProps.md)
+
+## Returns
+
+`Element`
+
+## Example
+
+```mdx
+import { player } from '../entities/player';
+
+# Hello, <Var>{player.name}</Var>!
+
+You have <Var>{player.gold}</Var> gold coins.
+```
+
+## Remarks
+
+**WARNING: This is a compile-time-only component for MDX files.**
+Do NOT use this component in regular React/TSX code. It only works in `.mdx` files
+and is transformed at compile time into template literals. Using it in React components
+will not work as expected.
+
+This component is only used for type checking and IDE support in MDX files.

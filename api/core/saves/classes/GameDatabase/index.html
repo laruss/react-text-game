@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-api/core/saves/classes/GameDatabase" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.9.1">
+<title data-rh="true">Class: GameDatabase | React Text Game</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="keywords" content="react, reactjs, typescript, text game, text adventure, interactive fiction, react text game, react text adventure, react interactive fiction, narrative engine, story engine, game engine, browser game, visual novel, twine alternative, ink alternative, choicescript, passages, save system, jsonpath, valtio, tailwindcss"><meta data-rh="true" name="author" content="laruss"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" name="twitter:title" content="React Text Game - Reactive Text-Based Game Engine for React"><meta data-rh="true" name="twitter:description" content="Build interactive narrative experiences and text adventures in React with a powerful, type-safe game engine featuring reactive state management and flexible save system."><meta data-rh="true" name="twitter:image" content="https://reacttextgame.dev/img/og-image.webp"><meta data-rh="true" property="og:type" content="website"><meta data-rh="true" property="og:url" content="https://reacttextgame.dev/"><meta data-rh="true" property="og:image" content="https://reacttextgame.dev/img/og-image.webp"><meta data-rh="true" property="og:image:width" content="1200"><meta data-rh="true" property="og:image:height" content="630"><meta data-rh="true" property="og:image:alt" content="React Text Game Logo"><meta data-rh="true" property="og:site_name" content="React Text Game"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Class: GameDatabase | React Text Game"><meta data-rh="true" name="description" content="Defined in17"><meta data-rh="true" property="og:description" content="Defined in17"><link data-rh="true" rel="icon" href="/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://reacttextgame.dev/api/core/saves/classes/GameDatabase"><link data-rh="true" rel="alternate" href="https://reacttextgame.dev/api/core/saves/classes/GameDatabase" hreflang="en"><link data-rh="true" rel="alternate" href="https://reacttextgame.dev/api/core/saves/classes/GameDatabase" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reacttextgame.dev/"},{"@type":"ListItem","position":2,"name":"api","item":"https://reacttextgame.dev/api"},{"@type":"ListItem","position":3,"name":"core","item":"https://reacttextgame.dev/api/core"},{"@type":"ListItem","position":4,"name":"saves","item":"https://reacttextgame.dev/api/core/saves"},{"@type":"ListItem","position":5,"name":"classes","item":"https://reacttextgame.dev/api/core/saves/classes"},{"@type":"ListItem","position":6,"name":"Class: GameDatabase","item":"https://reacttextgame.dev/api/core/saves/classes/GameDatabase"}]}</script><link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/img/favicon-192x192.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/img/favicon-192x192.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"React Text Game","url":"https://reacttextgame.dev/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://reacttextgame.dev/?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"React Text Game","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","description":"A powerful, reactive text-based game engine for React applications. Create interactive narrative experiences with support for story passages, interactive maps, and comprehensive state management.","url":"https://reacttextgame.dev/","author":{"@type":"Person","name":"laruss","url":"https://github.com/laruss"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"programmingLanguage":["TypeScript","JavaScript"],"softwareVersion":"1.0.0","keywords":"react, text game, interactive fiction, narrative engine, game engine, typescript, valtio"}</script><link rel="stylesheet" href="/assets/css/styles.405c160f.css">
+<script src="/assets/js/runtime~main.a714b850.js" defer="defer"></script>
+<script src="/assets/js/main.351b5d2d.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/img/logo.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_G6ar" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="React Text Game Logo" class="themedComponent_DHUr themedComponent--light_DIHH"><img src="/img/logo.svg" alt="React Text Game Logo" class="themedComponent_DHUr themedComponent--dark_Bv2M"></div><b class="navbar__title text--truncate">React Text Game</b></a><a class="navbar__item navbar__link" href="/">Docs</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Core API</a><ul class="dropdown__menu"><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/api/core/">Overview</a></li><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/api/core/saves/">Saves &amp; Migrations</a></li><li><a class="dropdown__link" href="/api/core/audio/">Audio</a></li><li><a class="dropdown__link" href="/api/core/i18n/">i18n</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">UI API</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/api/ui/">Overview</a></li><li><a class="dropdown__link" href="/api/ui/i18n/">i18n</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">MDX API</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/api/mdx/">Overview</a></li><li><a class="dropdown__link" href="/api/mdx/plugin/">Build Plugin</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/laruss/react-text-game" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_awgD"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_OLSw colorModeToggle_Hg9V"><button class="clean-btn toggleButton_wYmb toggleButtonDisabled_vaDU" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_KEbZ lightToggleIcon_Sxwe"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_KEbZ darkToggleIcon_Yem1"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_KEbZ systemToggleIcon_txm5"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_bmvg"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_UyTV"><div class="docsWrapper_XLvK"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_z1FD" type="button"></button><div class="docRoot_HciC"><main class="docMainContainer_namt docMainContainerEnhanced_sRjM"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_YAwJ"><div class="docItemContainer_Rv5Z"><article><div class="tocCollapsible_O_Qc theme-doc-toc-mobile tocMobile_tjDr"><button type="button" class="clean-btn tocCollapsibleButton_htYj">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Class: GameDatabase</h1></header>
+<p>Defined in: <a href="https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/saves/db.ts#L17" target="_blank" rel="noopener noreferrer">packages/core/src/saves/db.ts:17</a></p>
+<p>Dexie database class for managing game saves and settings.
+Uses IndexedDB for browser-based persistent storage.</p>
+<h2 class="anchor anchorWithStickyNavbar_fF9Z" id="extends">Extends<a href="#extends" class="hash-link" aria-label="Direct link to Extends" title="Direct link to Extends" translate="no">​</a></h2>
+<ul>
+<li><code>Dexie</code></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_fF9Z" id="constructors">Constructors<a href="#constructors" class="hash-link" aria-label="Direct link to Constructors" title="Direct link to Constructors" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="constructor">Constructor<a href="#constructor" class="hash-link" aria-label="Direct link to Constructor" title="Direct link to Constructor" translate="no">​</a></h3>
+<blockquote>
+<p><strong>new GameDatabase</strong>(<code>gameId</code>): <code>GameDatabase</code></p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/saves/db.ts#L27" target="_blank" rel="noopener noreferrer">packages/core/src/saves/db.ts:27</a></p>
+<p>Creates a new GameDatabase instance</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters">Parameters<a href="#parameters" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="gameid">gameId<a href="#gameid" class="hash-link" aria-label="Direct link to gameId" title="Direct link to gameId" translate="no">​</a></h5>
+<p><code>string</code></p>
+<p>Unique identifier for the game, used as database name prefix</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns">Returns<a href="#returns" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>GameDatabase</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="overrides">Overrides<a href="#overrides" class="hash-link" aria-label="Direct link to Overrides" title="Direct link to Overrides" translate="no">​</a></h4>
+<p><code>Dexie.constructor</code></p>
+<h2 class="anchor anchorWithStickyNavbar_fF9Z" id="properties">Properties<a href="#properties" class="hash-link" aria-label="Direct link to Properties" title="Direct link to Properties" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="_alltables">_allTables<a href="#_alltables" class="hash-link" aria-label="Direct link to _allTables" title="Direct link to _allTables" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>_allTables</strong>: <code>object</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:845</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="index-signature">Index Signature<a href="#index-signature" class="hash-link" aria-label="Direct link to Index Signature" title="Direct link to Index Signature" translate="no">​</a></h4>
+<p>[<code>name</code>: <code>string</code>]: <code>Table</code>&lt;<code>any</code>, <code>IndexableType</code>, <code>any</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from">Inherited from<a href="#inherited-from" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie._allTables</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="_createtransaction">_createTransaction()<a href="#_createtransaction" class="hash-link" aria-label="Direct link to _createTransaction()" title="Direct link to _createTransaction()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>_createTransaction</strong>: (<code>this</code>, <code>mode</code>, <code>storeNames</code>, <code>dbschema</code>, <code>parentTransaction?</code>) =&gt; <code>Transaction</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:850</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-1">Parameters<a href="#parameters-1" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="this">this<a href="#this" class="hash-link" aria-label="Direct link to this" title="Direct link to this" translate="no">​</a></h5>
+<p><code>Dexie</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="mode">mode<a href="#mode" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h5>
+<p><code>IDBTransactionMode</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="storenames">storeNames<a href="#storenames" class="hash-link" aria-label="Direct link to storeNames" title="Direct link to storeNames" translate="no">​</a></h5>
+<p><code>ArrayLike</code>&lt;<code>string</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="dbschema">dbschema<a href="#dbschema" class="hash-link" aria-label="Direct link to dbschema" title="Direct link to dbschema" translate="no">​</a></h5>
+<p><code>DbSchema</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parenttransaction">parentTransaction?<a href="#parenttransaction" class="hash-link" aria-label="Direct link to parentTransaction?" title="Direct link to parentTransaction?" translate="no">​</a></h5>
+<p><code>Transaction</code> | <code>null</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-1">Returns<a href="#returns-1" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Transaction</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-1">Inherited from<a href="#inherited-from-1" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie._createTransaction</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="_dbschema">_dbSchema<a href="#_dbschema" class="hash-link" aria-label="Direct link to _dbSchema" title="Direct link to _dbSchema" translate="no">​</a></h3>
+<blockquote>
+<p><strong>_dbSchema</strong>: <code>DbSchema</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:852</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-2">Inherited from<a href="#inherited-from-2" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie._dbSchema</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="_novip">_novip<a href="#_novip" class="hash-link" aria-label="Direct link to _novip" title="Direct link to _novip" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>_novip</strong>: <code>Dexie</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:851</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-3">Inherited from<a href="#inherited-from-3" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie._novip</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="_options">_options<a href="#_options" class="hash-link" aria-label="Direct link to _options" title="Direct link to _options" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>_options</strong>: <code>DexieOptions</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:848</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-4">Inherited from<a href="#inherited-from-4" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie._options</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="collection">Collection<a href="#collection" class="hash-link" aria-label="Direct link to Collection" title="Direct link to Collection" translate="no">​</a></h3>
+<blockquote>
+<p><strong>Collection</strong>: <code>object</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:898</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="prototype">prototype<a href="#prototype" class="hash-link" aria-label="Direct link to prototype" title="Direct link to prototype" translate="no">​</a></h4>
+<blockquote>
+<p><strong>prototype</strong>: <code>Collection</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-5">Inherited from<a href="#inherited-from-5" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.Collection</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="core">core<a href="#core" class="hash-link" aria-label="Direct link to core" title="Direct link to core" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>core</strong>: <code>DBCore</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:849</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-6">Inherited from<a href="#inherited-from-6" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.core</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="name">name<a href="#name" class="hash-link" aria-label="Direct link to name" title="Direct link to name" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>name</strong>: <code>string</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:841</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-7">Inherited from<a href="#inherited-from-7" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.name</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="on">on<a href="#on" class="hash-link" aria-label="Direct link to on" title="Direct link to on" translate="no">​</a></h3>
+<blockquote>
+<p><strong>on</strong>: <code>DbEvents</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:854</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-8">Inherited from<a href="#inherited-from-8" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.on</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="once">once<a href="#once" class="hash-link" aria-label="Direct link to once" title="Direct link to once" translate="no">​</a></h3>
+<blockquote>
+<p><strong>once</strong>: <code>DbEventFns</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:855</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-9">Inherited from<a href="#inherited-from-9" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.once</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="saves">saves<a href="#saves" class="hash-link" aria-label="Direct link to saves" title="Direct link to saves" translate="no">​</a></h3>
+<blockquote>
+<p><strong>saves</strong>: <code>EntityTable</code>&lt;<a href="/api/core/saves/interfaces/GameSave"><code>GameSave</code></a>, <code>&quot;id&quot;</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/saves/db.ts#L19" target="_blank" rel="noopener noreferrer">packages/core/src/saves/db.ts:19</a></p>
+<p>Table for storing game saves</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="settings">settings<a href="#settings" class="hash-link" aria-label="Direct link to settings" title="Direct link to settings" translate="no">​</a></h3>
+<blockquote>
+<p><strong>settings</strong>: <code>EntityTable</code>&lt;<a href="/api/core/saves/interfaces/GameSettings"><code>GameSettings</code></a>, <code>&quot;id&quot;</code>&gt;</p>
+</blockquote>
+<p>Defined in: <a href="https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/saves/db.ts#L21" target="_blank" rel="noopener noreferrer">packages/core/src/saves/db.ts:21</a></p>
+<p>Table for storing game settings</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="table">Table<a href="#table" class="hash-link" aria-label="Direct link to Table" title="Direct link to Table" translate="no">​</a></h3>
+<blockquote>
+<p><strong>Table</strong>: <code>object</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:886</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="prototype-1">prototype<a href="#prototype-1" class="hash-link" aria-label="Direct link to prototype" title="Direct link to prototype" translate="no">​</a></h4>
+<blockquote>
+<p><strong>prototype</strong>: <code>Table</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-10">Inherited from<a href="#inherited-from-10" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.Table</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="tables">tables<a href="#tables" class="hash-link" aria-label="Direct link to tables" title="Direct link to tables" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>tables</strong>: <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;[]</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:842</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-11">Inherited from<a href="#inherited-from-11" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.tables</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="transaction">Transaction<a href="#transaction" class="hash-link" aria-label="Direct link to Transaction" title="Direct link to Transaction" translate="no">​</a></h3>
+<blockquote>
+<p><strong>Transaction</strong>: <code>object</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:895</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="prototype-2">prototype<a href="#prototype-2" class="hash-link" aria-label="Direct link to prototype" title="Direct link to prototype" translate="no">​</a></h4>
+<blockquote>
+<p><strong>prototype</strong>: <code>Transaction</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-12">Inherited from<a href="#inherited-from-12" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.Transaction</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="verno">verno<a href="#verno" class="hash-link" aria-label="Direct link to verno" title="Direct link to verno" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>verno</strong>: <code>number</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:843</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-13">Inherited from<a href="#inherited-from-13" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.verno</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="version">Version<a href="#version" class="hash-link" aria-label="Direct link to Version" title="Direct link to Version" translate="no">​</a></h3>
+<blockquote>
+<p><strong>Version</strong>: <code>Function</code> &amp; <code>object</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:892</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-declaration">Type Declaration<a href="#type-declaration" class="hash-link" aria-label="Direct link to Type Declaration" title="Direct link to Type Declaration" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="prototype-3">prototype<a href="#prototype-3" class="hash-link" aria-label="Direct link to prototype" title="Direct link to prototype" translate="no">​</a></h5>
+<blockquote>
+<p><strong>prototype</strong>: <code>ExtendableVersion</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-14">Inherited from<a href="#inherited-from-14" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.Version</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="vip">vip<a href="#vip" class="hash-link" aria-label="Direct link to vip" title="Direct link to vip" translate="no">​</a></h3>
+<blockquote>
+<p><code>readonly</code> <strong>vip</strong>: <code>Dexie</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:844</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-15">Inherited from<a href="#inherited-from-15" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.vip</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="whereclause">WhereClause<a href="#whereclause" class="hash-link" aria-label="Direct link to WhereClause" title="Direct link to WhereClause" translate="no">​</a></h3>
+<blockquote>
+<p><strong>WhereClause</strong>: <code>object</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:889</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="prototype-4">prototype<a href="#prototype-4" class="hash-link" aria-label="Direct link to prototype" title="Direct link to prototype" translate="no">​</a></h4>
+<blockquote>
+<p><strong>prototype</strong>: <code>WhereClause</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-16">Inherited from<a href="#inherited-from-16" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.WhereClause</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="aborterror">AbortError<a href="#aborterror" class="hash-link" aria-label="Direct link to AbortError" title="Direct link to AbortError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>AbortError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-17">Inherited from<a href="#inherited-from-17" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.AbortError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="addons">addons<a href="#addons" class="hash-link" aria-label="Direct link to addons" title="Direct link to addons" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>addons</strong>: (<code>db</code>) =&gt; <code>void</code>[]</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1128</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-2">Parameters<a href="#parameters-2" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="db">db<a href="#db" class="hash-link" aria-label="Direct link to db" title="Direct link to db" translate="no">​</a></h5>
+<p><code>Dexie</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-2">Returns<a href="#returns-2" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>void</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-18">Inherited from<a href="#inherited-from-18" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.addons</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="bulkerror">BulkError<a href="#bulkerror" class="hash-link" aria-label="Direct link to BulkError" title="Direct link to BulkError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>BulkError</strong>: <code>BulkErrorConstructor</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1036</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-19">Inherited from<a href="#inherited-from-19" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.BulkError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="cache">cache<a href="#cache" class="hash-link" aria-label="Direct link to cache" title="Direct link to cache" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>cache</strong>: <code>GlobalQueryCache</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1153</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-20">Inherited from<a href="#inherited-from-20" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.cache</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="constrainterror">ConstraintError<a href="#constrainterror" class="hash-link" aria-label="Direct link to ConstraintError" title="Direct link to ConstraintError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>ConstraintError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-21">Inherited from<a href="#inherited-from-21" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.ConstraintError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="currenttransaction">currentTransaction<a href="#currenttransaction" class="hash-link" aria-label="Direct link to currentTransaction" title="Direct link to currentTransaction" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>currentTransaction</strong>: <code>Transaction</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1131</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-22">Inherited from<a href="#inherited-from-22" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.currentTransaction</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="databaseclosederror">DatabaseClosedError<a href="#databaseclosederror" class="hash-link" aria-label="Direct link to DatabaseClosedError" title="Direct link to DatabaseClosedError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>DatabaseClosedError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-23">Inherited from<a href="#inherited-from-23" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.DatabaseClosedError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="datacloneerror">DataCloneError<a href="#datacloneerror" class="hash-link" aria-label="Direct link to DataCloneError" title="Direct link to DataCloneError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>DataCloneError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-24">Inherited from<a href="#inherited-from-24" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.DataCloneError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="dataerror">DataError<a href="#dataerror" class="hash-link" aria-label="Direct link to DataError" title="Direct link to DataError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>DataError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-25">Inherited from<a href="#inherited-from-25" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.DataError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="debug">debug<a href="#debug" class="hash-link" aria-label="Direct link to debug" title="Direct link to debug" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>debug</strong>: <code>boolean</code> | <code>&quot;dexie&quot;</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1154</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-26">Inherited from<a href="#inherited-from-26" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.debug</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="default">default<a href="#default" class="hash-link" aria-label="Direct link to default" title="Direct link to default" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>default</strong>: <code>Dexie</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1152</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-27">Inherited from<a href="#inherited-from-27" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.default</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="dependencies">dependencies<a href="#dependencies" class="hash-link" aria-label="Direct link to dependencies" title="Direct link to dependencies" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>dependencies</strong>: <code>DexieDOMDependencies</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1151</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-28">Inherited from<a href="#inherited-from-28" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.dependencies</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="dexieerror">DexieError<a href="#dexieerror" class="hash-link" aria-label="Direct link to DexieError" title="Direct link to DexieError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>DexieError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1034</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-29">Inherited from<a href="#inherited-from-29" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.DexieError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="disablebfcache">disableBfCache?<a href="#disablebfcache" class="hash-link" aria-label="Direct link to disableBfCache?" title="Direct link to disableBfCache?" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <code>optional</code> <strong>disableBfCache</strong>: <code>boolean</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1137</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-30">Inherited from<a href="#inherited-from-30" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.disableBfCache</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="errnames">errnames<a href="#errnames" class="hash-link" aria-label="Direct link to errnames" title="Direct link to errnames" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>errnames</strong>: <code>DexieErrors</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1160</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-31">Inherited from<a href="#inherited-from-31" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.errnames</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="events">Events()<a href="#events" class="hash-link" aria-label="Direct link to Events()" title="Direct link to Events()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>Events</strong>: (<code>ctx?</code>) =&gt; <code>DexieEventSet</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1158</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-3">Parameters<a href="#parameters-3" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="ctx">ctx?<a href="#ctx" class="hash-link" aria-label="Direct link to ctx?" title="Direct link to ctx?" translate="no">​</a></h5>
+<p><code>any</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-3">Returns<a href="#returns-3" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>DexieEventSet</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-32">Inherited from<a href="#inherited-from-32" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.Events</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="foreignawaiterror">ForeignAwaitError<a href="#foreignawaiterror" class="hash-link" aria-label="Direct link to ForeignAwaitError" title="Direct link to ForeignAwaitError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>ForeignAwaitError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-33">Inherited from<a href="#inherited-from-33" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.ForeignAwaitError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="internalerror">InternalError<a href="#internalerror" class="hash-link" aria-label="Direct link to InternalError" title="Direct link to InternalError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>InternalError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-34">Inherited from<a href="#inherited-from-34" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.InternalError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="invalidaccesserror">InvalidAccessError<a href="#invalidaccesserror" class="hash-link" aria-label="Direct link to InvalidAccessError" title="Direct link to InvalidAccessError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>InvalidAccessError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-35">Inherited from<a href="#inherited-from-35" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.InvalidAccessError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="invalidargumenterror">InvalidArgumentError<a href="#invalidargumenterror" class="hash-link" aria-label="Direct link to InvalidArgumentError" title="Direct link to InvalidArgumentError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>InvalidArgumentError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-36">Inherited from<a href="#inherited-from-36" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.InvalidArgumentError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="invalidstateerror">InvalidStateError<a href="#invalidstateerror" class="hash-link" aria-label="Direct link to InvalidStateError" title="Direct link to InvalidStateError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>InvalidStateError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-37">Inherited from<a href="#inherited-from-37" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.InvalidStateError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="invalidtableerror">InvalidTableError<a href="#invalidtableerror" class="hash-link" aria-label="Direct link to InvalidTableError" title="Direct link to InvalidTableError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>InvalidTableError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-38">Inherited from<a href="#inherited-from-38" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.InvalidTableError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="maxkey">maxKey<a href="#maxkey" class="hash-link" aria-label="Direct link to maxKey" title="Direct link to maxKey" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>maxKey</strong>: <code>string</code> | <code>void</code>[][]</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1147</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-39">Inherited from<a href="#inherited-from-39" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.maxKey</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="minkey">minKey<a href="#minkey" class="hash-link" aria-label="Direct link to minKey" title="Direct link to minKey" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>minKey</strong>: <code>number</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1148</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-40">Inherited from<a href="#inherited-from-40" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.minKey</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="missingapierror">MissingAPIError<a href="#missingapierror" class="hash-link" aria-label="Direct link to MissingAPIError" title="Direct link to MissingAPIError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>MissingAPIError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-41">Inherited from<a href="#inherited-from-41" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.MissingAPIError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="modifyerror">ModifyError<a href="#modifyerror" class="hash-link" aria-label="Direct link to ModifyError" title="Direct link to ModifyError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>ModifyError</strong>: <code>ModifyErrorConstructor</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1035</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-42">Inherited from<a href="#inherited-from-42" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.ModifyError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="nosuchdatabaseerror">NoSuchDatabaseError<a href="#nosuchdatabaseerror" class="hash-link" aria-label="Direct link to NoSuchDatabaseError" title="Direct link to NoSuchDatabaseError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>NoSuchDatabaseError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-43">Inherited from<a href="#inherited-from-43" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.NoSuchDatabaseError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="notfounderror">NotFoundError<a href="#notfounderror" class="hash-link" aria-label="Direct link to NotFoundError" title="Direct link to NotFoundError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>NotFoundError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-44">Inherited from<a href="#inherited-from-44" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.NotFoundError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="on-1">on<a href="#on-1" class="hash-link" aria-label="Direct link to on" title="Direct link to on" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>on</strong>: <code>GlobalDexieEvents</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1159</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-45">Inherited from<a href="#inherited-from-45" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.on</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="openfailederror">OpenFailedError<a href="#openfailederror" class="hash-link" aria-label="Direct link to OpenFailedError" title="Direct link to OpenFailedError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>OpenFailedError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-46">Inherited from<a href="#inherited-from-46" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.OpenFailedError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="prematurecommiterror">PrematureCommitError<a href="#prematurecommiterror" class="hash-link" aria-label="Direct link to PrematureCommitError" title="Direct link to PrematureCommitError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>PrematureCommitError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-47">Inherited from<a href="#inherited-from-47" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.PrematureCommitError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="promise">Promise<a href="#promise" class="hash-link" aria-label="Direct link to Promise" title="Direct link to Promise" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>Promise</strong>: <code>PromiseExtendedConstructor</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1155</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-48">Inherited from<a href="#inherited-from-48" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.Promise</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="quotaexceedederror">QuotaExceededError<a href="#quotaexceedederror" class="hash-link" aria-label="Direct link to QuotaExceededError" title="Direct link to QuotaExceededError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>QuotaExceededError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-49">Inherited from<a href="#inherited-from-49" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.QuotaExceededError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="readonlyerror">ReadOnlyError<a href="#readonlyerror" class="hash-link" aria-label="Direct link to ReadOnlyError" title="Direct link to ReadOnlyError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>ReadOnlyError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-50">Inherited from<a href="#inherited-from-50" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.ReadOnlyError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="schemaerror">SchemaError<a href="#schemaerror" class="hash-link" aria-label="Direct link to SchemaError" title="Direct link to SchemaError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>SchemaError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-51">Inherited from<a href="#inherited-from-51" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.SchemaError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="semver">semVer<a href="#semver" class="hash-link" aria-label="Direct link to semVer" title="Direct link to semVer" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>semVer</strong>: <code>string</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1130</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-52">Inherited from<a href="#inherited-from-52" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.semVer</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="subtransactionerror">SubTransactionError<a href="#subtransactionerror" class="hash-link" aria-label="Direct link to SubTransactionError" title="Direct link to SubTransactionError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>SubTransactionError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-53">Inherited from<a href="#inherited-from-53" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.SubTransactionError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="timeouterror">TimeoutError<a href="#timeouterror" class="hash-link" aria-label="Direct link to TimeoutError" title="Direct link to TimeoutError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>TimeoutError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-54">Inherited from<a href="#inherited-from-54" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.TimeoutError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="transactioninactiveerror">TransactionInactiveError<a href="#transactioninactiveerror" class="hash-link" aria-label="Direct link to TransactionInactiveError" title="Direct link to TransactionInactiveError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>TransactionInactiveError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-55">Inherited from<a href="#inherited-from-55" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.TransactionInactiveError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="unknownerror">UnknownError<a href="#unknownerror" class="hash-link" aria-label="Direct link to UnknownError" title="Direct link to UnknownError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>UnknownError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-56">Inherited from<a href="#inherited-from-56" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.UnknownError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="unsupportederror">UnsupportedError<a href="#unsupportederror" class="hash-link" aria-label="Direct link to UnsupportedError" title="Direct link to UnsupportedError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>UnsupportedError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-57">Inherited from<a href="#inherited-from-57" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.UnsupportedError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="upgradeerror">UpgradeError<a href="#upgradeerror" class="hash-link" aria-label="Direct link to UpgradeError" title="Direct link to UpgradeError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>UpgradeError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-58">Inherited from<a href="#inherited-from-58" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.UpgradeError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="version-1">version<a href="#version-1" class="hash-link" aria-label="Direct link to version" title="Direct link to version" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>version</strong>: <code>number</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1129</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-59">Inherited from<a href="#inherited-from-59" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.version</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="versionchangeerror">VersionChangeError<a href="#versionchangeerror" class="hash-link" aria-label="Direct link to VersionChangeError" title="Direct link to VersionChangeError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>VersionChangeError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-60">Inherited from<a href="#inherited-from-60" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.VersionChangeError</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="versionerror">VersionError<a href="#versionerror" class="hash-link" aria-label="Direct link to VersionError" title="Direct link to VersionError" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>VersionError</strong>: <code>DexieErrorConstructor</code></p>
+</blockquote>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-61">Inherited from<a href="#inherited-from-61" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.VersionError</code></p>
+<h2 class="anchor anchorWithStickyNavbar_fF9Z" id="methods">Methods<a href="#methods" class="hash-link" aria-label="Direct link to Methods" title="Direct link to Methods" translate="no">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="backenddb">backendDB()<a href="#backenddb" class="hash-link" aria-label="Direct link to backendDB()" title="Direct link to backendDB()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>backendDB</strong>(): <code>IDBDatabase</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:874</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-4">Returns<a href="#returns-4" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>IDBDatabase</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-62">Inherited from<a href="#inherited-from-62" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.backendDB</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="close">close()<a href="#close" class="hash-link" aria-label="Direct link to close()" title="Direct link to close()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>close</strong>(<code>closeOptions?</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:864</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-4">Parameters<a href="#parameters-4" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="closeoptions">closeOptions?<a href="#closeoptions" class="hash-link" aria-label="Direct link to closeOptions?" title="Direct link to closeOptions?" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="disableautoopen">disableAutoOpen<a href="#disableautoopen" class="hash-link" aria-label="Direct link to disableAutoOpen" title="Direct link to disableAutoOpen" translate="no">​</a></h6>
+<p><code>boolean</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-5">Returns<a href="#returns-5" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>void</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-63">Inherited from<a href="#inherited-from-63" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.close</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="delete">delete()<a href="#delete" class="hash-link" aria-label="Direct link to delete()" title="Direct link to delete()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>delete</strong>(<code>closeOptions?</code>): <code>PromiseExtended</code>&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:867</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-5">Parameters<a href="#parameters-5" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="closeoptions-1">closeOptions?<a href="#closeoptions-1" class="hash-link" aria-label="Direct link to closeOptions?" title="Direct link to closeOptions?" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="disableautoopen-1">disableAutoOpen<a href="#disableautoopen-1" class="hash-link" aria-label="Direct link to disableAutoOpen" title="Direct link to disableAutoOpen" translate="no">​</a></h6>
+<p><code>boolean</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-6">Returns<a href="#returns-6" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>PromiseExtended</code>&lt;<code>void</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-64">Inherited from<a href="#inherited-from-64" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.delete</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="dynamicallyopened">dynamicallyOpened()<a href="#dynamicallyopened" class="hash-link" aria-label="Direct link to dynamicallyOpened()" title="Direct link to dynamicallyOpened()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>dynamicallyOpened</strong>(): <code>boolean</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:873</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-7">Returns<a href="#returns-7" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>boolean</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-65">Inherited from<a href="#inherited-from-65" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.dynamicallyOpened</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="hasbeenclosed">hasBeenClosed()<a href="#hasbeenclosed" class="hash-link" aria-label="Direct link to hasBeenClosed()" title="Direct link to hasBeenClosed()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>hasBeenClosed</strong>(): <code>boolean</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:871</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-8">Returns<a href="#returns-8" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>boolean</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-66">Inherited from<a href="#inherited-from-66" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.hasBeenClosed</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="hasfailed">hasFailed()<a href="#hasfailed" class="hash-link" aria-label="Direct link to hasFailed()" title="Direct link to hasFailed()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>hasFailed</strong>(): <code>boolean</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:872</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-9">Returns<a href="#returns-9" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>boolean</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-67">Inherited from<a href="#inherited-from-67" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.hasFailed</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="isopen">isOpen()<a href="#isopen" class="hash-link" aria-label="Direct link to isOpen()" title="Direct link to isOpen()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>isOpen</strong>(): <code>boolean</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:870</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-10">Returns<a href="#returns-10" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>boolean</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-68">Inherited from<a href="#inherited-from-68" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.isOpen</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="open">open()<a href="#open" class="hash-link" aria-label="Direct link to open()" title="Direct link to open()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>open</strong>(): <code>PromiseExtended</code>&lt;<code>Dexie</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:856</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-11">Returns<a href="#returns-11" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>PromiseExtended</code>&lt;<code>Dexie</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-69">Inherited from<a href="#inherited-from-69" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.open</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="table-1">table()<a href="#table-1" class="hash-link" aria-label="Direct link to table()" title="Direct link to table()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>table</strong>&lt;<code>T</code>, <code>TKey</code>, <code>TInsertType</code>&gt;(<code>tableName</code>): <code>Table</code>&lt;<code>T</code>, <code>TKey</code>, <code>TInsertType</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:857</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters">Type Parameters<a href="#type-parameters" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="t">T<a href="#t" class="hash-link" aria-label="Direct link to T" title="Direct link to T" translate="no">​</a></h5>
+<p><code>T</code> = <code>any</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="tkey">TKey<a href="#tkey" class="hash-link" aria-label="Direct link to TKey" title="Direct link to TKey" translate="no">​</a></h5>
+<p><code>TKey</code> = <code>IndexableType</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="tinserttype">TInsertType<a href="#tinserttype" class="hash-link" aria-label="Direct link to TInsertType" title="Direct link to TInsertType" translate="no">​</a></h5>
+<p><code>TInsertType</code> = <code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-6">Parameters<a href="#parameters-6" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="tablename">tableName<a href="#tablename" class="hash-link" aria-label="Direct link to tableName" title="Direct link to tableName" translate="no">​</a></h5>
+<p><code>string</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-12">Returns<a href="#returns-12" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Table</code>&lt;<code>T</code>, <code>TKey</code>, <code>TInsertType</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-70">Inherited from<a href="#inherited-from-70" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.table</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="transaction-1">transaction()<a href="#transaction-1" class="hash-link" aria-label="Direct link to transaction()" title="Direct link to transaction()" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature">Call Signature<a href="#call-signature" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>transaction</strong>&lt;<code>U</code>&gt;(<code>mode</code>, <code>tables</code>, <code>scope</code>): <code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:858</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-1">Type Parameters<a href="#type-parameters-1" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="u">U<a href="#u" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h6>
+<p><code>U</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-7">Parameters<a href="#parameters-7" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="mode-1">mode<a href="#mode-1" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h6>
+<p><code>TransactionMode</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="tables-1">tables<a href="#tables-1" class="hash-link" aria-label="Direct link to tables" title="Direct link to tables" translate="no">​</a></h6>
+<p>readonly (<code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;)[]</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="scope">scope<a href="#scope" class="hash-link" aria-label="Direct link to scope" title="Direct link to scope" translate="no">​</a></h6>
+<p>(<code>trans</code>) =&gt; <code>U</code> | <code>PromiseLike</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-13">Returns<a href="#returns-13" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-71">Inherited from<a href="#inherited-from-71" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.transaction</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-1">Call Signature<a href="#call-signature-1" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>transaction</strong>&lt;<code>U</code>&gt;(<code>mode</code>, <code>table</code>, <code>scope</code>): <code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:859</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-2">Type Parameters<a href="#type-parameters-2" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="u-1">U<a href="#u-1" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h6>
+<p><code>U</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-8">Parameters<a href="#parameters-8" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="mode-2">mode<a href="#mode-2" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h6>
+<p><code>TransactionMode</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table-2">table<a href="#table-2" class="hash-link" aria-label="Direct link to table" title="Direct link to table" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="scope-1">scope<a href="#scope-1" class="hash-link" aria-label="Direct link to scope" title="Direct link to scope" translate="no">​</a></h6>
+<p>(<code>trans</code>) =&gt; <code>U</code> | <code>PromiseLike</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-14">Returns<a href="#returns-14" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-72">Inherited from<a href="#inherited-from-72" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.transaction</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-2">Call Signature<a href="#call-signature-2" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>transaction</strong>&lt;<code>U</code>&gt;(<code>mode</code>, <code>table</code>, <code>table2</code>, <code>scope</code>): <code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:860</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-3">Type Parameters<a href="#type-parameters-3" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="u-2">U<a href="#u-2" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h6>
+<p><code>U</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-9">Parameters<a href="#parameters-9" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="mode-3">mode<a href="#mode-3" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h6>
+<p><code>TransactionMode</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table-3">table<a href="#table-3" class="hash-link" aria-label="Direct link to table" title="Direct link to table" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table2">table2<a href="#table2" class="hash-link" aria-label="Direct link to table2" title="Direct link to table2" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="scope-2">scope<a href="#scope-2" class="hash-link" aria-label="Direct link to scope" title="Direct link to scope" translate="no">​</a></h6>
+<p>(<code>trans</code>) =&gt; <code>U</code> | <code>PromiseLike</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-15">Returns<a href="#returns-15" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-73">Inherited from<a href="#inherited-from-73" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.transaction</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-3">Call Signature<a href="#call-signature-3" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>transaction</strong>&lt;<code>U</code>&gt;(<code>mode</code>, <code>table</code>, <code>table2</code>, <code>table3</code>, <code>scope</code>): <code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:861</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-4">Type Parameters<a href="#type-parameters-4" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="u-3">U<a href="#u-3" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h6>
+<p><code>U</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-10">Parameters<a href="#parameters-10" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="mode-4">mode<a href="#mode-4" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h6>
+<p><code>TransactionMode</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table-4">table<a href="#table-4" class="hash-link" aria-label="Direct link to table" title="Direct link to table" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table2-1">table2<a href="#table2-1" class="hash-link" aria-label="Direct link to table2" title="Direct link to table2" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table3">table3<a href="#table3" class="hash-link" aria-label="Direct link to table3" title="Direct link to table3" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="scope-3">scope<a href="#scope-3" class="hash-link" aria-label="Direct link to scope" title="Direct link to scope" translate="no">​</a></h6>
+<p>(<code>trans</code>) =&gt; <code>U</code> | <code>PromiseLike</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-16">Returns<a href="#returns-16" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-74">Inherited from<a href="#inherited-from-74" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.transaction</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-4">Call Signature<a href="#call-signature-4" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>transaction</strong>&lt;<code>U</code>&gt;(<code>mode</code>, <code>table</code>, <code>table2</code>, <code>table3</code>, <code>table4</code>, <code>scope</code>): <code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:862</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-5">Type Parameters<a href="#type-parameters-5" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="u-4">U<a href="#u-4" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h6>
+<p><code>U</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-11">Parameters<a href="#parameters-11" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="mode-5">mode<a href="#mode-5" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h6>
+<p><code>TransactionMode</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table-5">table<a href="#table-5" class="hash-link" aria-label="Direct link to table" title="Direct link to table" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table2-2">table2<a href="#table2-2" class="hash-link" aria-label="Direct link to table2" title="Direct link to table2" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table3-1">table3<a href="#table3-1" class="hash-link" aria-label="Direct link to table3" title="Direct link to table3" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table4">table4<a href="#table4" class="hash-link" aria-label="Direct link to table4" title="Direct link to table4" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="scope-4">scope<a href="#scope-4" class="hash-link" aria-label="Direct link to scope" title="Direct link to scope" translate="no">​</a></h6>
+<p>(<code>trans</code>) =&gt; <code>U</code> | <code>PromiseLike</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-17">Returns<a href="#returns-17" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-75">Inherited from<a href="#inherited-from-75" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.transaction</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-5">Call Signature<a href="#call-signature-5" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>transaction</strong>&lt;<code>U</code>&gt;(<code>mode</code>, <code>table</code>, <code>table2</code>, <code>table3</code>, <code>table4</code>, <code>table5</code>, <code>scope</code>): <code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:863</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-6">Type Parameters<a href="#type-parameters-6" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="u-5">U<a href="#u-5" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h6>
+<p><code>U</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-12">Parameters<a href="#parameters-12" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="mode-6">mode<a href="#mode-6" class="hash-link" aria-label="Direct link to mode" title="Direct link to mode" translate="no">​</a></h6>
+<p><code>TransactionMode</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table-6">table<a href="#table-6" class="hash-link" aria-label="Direct link to table" title="Direct link to table" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table2-3">table2<a href="#table2-3" class="hash-link" aria-label="Direct link to table2" title="Direct link to table2" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table3-2">table3<a href="#table3-2" class="hash-link" aria-label="Direct link to table3" title="Direct link to table3" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table4-1">table4<a href="#table4-1" class="hash-link" aria-label="Direct link to table4" title="Direct link to table4" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="table5">table5<a href="#table5" class="hash-link" aria-label="Direct link to table5" title="Direct link to table5" translate="no">​</a></h6>
+<p><code>string</code> | <code>Table</code>&lt;<code>any</code>, <code>any</code>, <code>any</code>&gt;</p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="scope-5">scope<a href="#scope-5" class="hash-link" aria-label="Direct link to scope" title="Direct link to scope" translate="no">​</a></h6>
+<p>(<code>trans</code>) =&gt; <code>U</code> | <code>PromiseLike</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-18">Returns<a href="#returns-18" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>PromiseExtended</code>&lt;<code>U</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-76">Inherited from<a href="#inherited-from-76" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.transaction</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="unuse">unuse()<a href="#unuse" class="hash-link" aria-label="Direct link to unuse()" title="Direct link to unuse()" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-6">Call Signature<a href="#call-signature-6" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>unuse</strong>(<code>__namedParameters</code>): <code>this</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:877</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-13">Parameters<a href="#parameters-13" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="__namedparameters">__namedParameters<a href="#__namedparameters" class="hash-link" aria-label="Direct link to __namedParameters" title="Direct link to __namedParameters" translate="no">​</a></h6>
+<p><code>Middleware</code>&lt;{ <code>stack</code>: <code>&quot;dbcore&quot;</code>; }&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-19">Returns<a href="#returns-19" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>this</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-77">Inherited from<a href="#inherited-from-77" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.unuse</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-7">Call Signature<a href="#call-signature-7" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><strong>unuse</strong>(<code>__namedParameters</code>): <code>this</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:880</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-14">Parameters<a href="#parameters-14" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="__namedparameters-1">__namedParameters<a href="#__namedparameters-1" class="hash-link" aria-label="Direct link to __namedParameters" title="Direct link to __namedParameters" translate="no">​</a></h6>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="name-1">name<a href="#name-1" class="hash-link" aria-label="Direct link to name" title="Direct link to name" translate="no">​</a></h6>
+<p><code>string</code></p>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="stack">stack<a href="#stack" class="hash-link" aria-label="Direct link to stack" title="Direct link to stack" translate="no">​</a></h6>
+<p><code>&quot;dbcore&quot;</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-20">Returns<a href="#returns-20" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>this</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-78">Inherited from<a href="#inherited-from-78" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.unuse</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="use">use()<a href="#use" class="hash-link" aria-label="Direct link to use()" title="Direct link to use()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>use</strong>(<code>middleware</code>): <code>this</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:875</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-15">Parameters<a href="#parameters-15" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="middleware">middleware<a href="#middleware" class="hash-link" aria-label="Direct link to middleware" title="Direct link to middleware" translate="no">​</a></h5>
+<p><code>Middleware</code>&lt;<code>DBCore</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-21">Returns<a href="#returns-21" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>this</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-79">Inherited from<a href="#inherited-from-79" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.use</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="version-2">version()<a href="#version-2" class="hash-link" aria-label="Direct link to version()" title="Direct link to version()" translate="no">​</a></h3>
+<blockquote>
+<p><strong>version</strong>(<code>versionNumber</code>): <code>Version</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:853</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-16">Parameters<a href="#parameters-16" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="versionnumber">versionNumber<a href="#versionnumber" class="hash-link" aria-label="Direct link to versionNumber" title="Direct link to versionNumber" translate="no">​</a></h5>
+<p><code>number</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-22">Returns<a href="#returns-22" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Version</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-80">Inherited from<a href="#inherited-from-80" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.version</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="asap">asap()<a href="#asap" class="hash-link" aria-label="Direct link to asap()" title="Direct link to asap()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>asap</strong>(<code>fn</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1146</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-17">Parameters<a href="#parameters-17" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="fn">fn<a href="#fn" class="hash-link" aria-label="Direct link to fn" title="Direct link to fn" translate="no">​</a></h5>
+<p><code>Function</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-23">Returns<a href="#returns-23" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>void</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-81">Inherited from<a href="#inherited-from-81" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.asap</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="deepclone">deepClone()<a href="#deepclone" class="hash-link" aria-label="Direct link to deepClone()" title="Direct link to deepClone()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>deepClone</strong>&lt;<code>T</code>&gt;(<code>obj</code>): <code>T</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1145</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-7">Type Parameters<a href="#type-parameters-7" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="t-1">T<a href="#t-1" class="hash-link" aria-label="Direct link to T" title="Direct link to T" translate="no">​</a></h5>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-18">Parameters<a href="#parameters-18" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="obj">obj<a href="#obj" class="hash-link" aria-label="Direct link to obj" title="Direct link to obj" translate="no">​</a></h5>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-24">Returns<a href="#returns-24" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-82">Inherited from<a href="#inherited-from-82" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.deepClone</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="delbykeypath">delByKeyPath()<a href="#delbykeypath" class="hash-link" aria-label="Direct link to delByKeyPath()" title="Direct link to delByKeyPath()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>delByKeyPath</strong>(<code>obj</code>, <code>keyPath</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1143</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-19">Parameters<a href="#parameters-19" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="obj-1">obj<a href="#obj-1" class="hash-link" aria-label="Direct link to obj" title="Direct link to obj" translate="no">​</a></h5>
+<p><code>Object</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="keypath">keyPath<a href="#keypath" class="hash-link" aria-label="Direct link to keyPath" title="Direct link to keyPath" translate="no">​</a></h5>
+<p><code>string</code> | <code>string</code>[]</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-25">Returns<a href="#returns-25" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>void</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-83">Inherited from<a href="#inherited-from-83" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.delByKeyPath</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="delete-1">delete()<a href="#delete-1" class="hash-link" aria-label="Direct link to delete()" title="Direct link to delete()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>delete</strong>(<code>dbName</code>): <code>Promise</code>&lt;<code>void</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1150</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-20">Parameters<a href="#parameters-20" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="dbname">dbName<a href="#dbname" class="hash-link" aria-label="Direct link to dbName" title="Direct link to dbName" translate="no">​</a></h5>
+<p><code>string</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-26">Returns<a href="#returns-26" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Promise</code>&lt;<code>void</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-84">Inherited from<a href="#inherited-from-84" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.delete</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="exists">exists()<a href="#exists" class="hash-link" aria-label="Direct link to exists()" title="Direct link to exists()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>exists</strong>(<code>dbName</code>): <code>Promise</code>&lt;<code>boolean</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1149</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-21">Parameters<a href="#parameters-21" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="dbname-1">dbName<a href="#dbname-1" class="hash-link" aria-label="Direct link to dbName" title="Direct link to dbName" translate="no">​</a></h5>
+<p><code>string</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-27">Returns<a href="#returns-27" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Promise</code>&lt;<code>boolean</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-85">Inherited from<a href="#inherited-from-85" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.exists</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="extendobservabilityset">extendObservabilitySet()<a href="#extendobservabilityset" class="hash-link" aria-label="Direct link to extendObservabilitySet()" title="Direct link to extendObservabilitySet()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>extendObservabilitySet</strong>(<code>target</code>, <code>newSet</code>): <code>ObservabilitySet</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1139</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-22">Parameters<a href="#parameters-22" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="target">target<a href="#target" class="hash-link" aria-label="Direct link to target" title="Direct link to target" translate="no">​</a></h5>
+<p><code>ObservabilitySet</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="newset">newSet<a href="#newset" class="hash-link" aria-label="Direct link to newSet" title="Direct link to newSet" translate="no">​</a></h5>
+<p><code>ObservabilitySet</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-28">Returns<a href="#returns-28" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>ObservabilitySet</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-86">Inherited from<a href="#inherited-from-86" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.extendObservabilitySet</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="getbykeypath">getByKeyPath()<a href="#getbykeypath" class="hash-link" aria-label="Direct link to getByKeyPath()" title="Direct link to getByKeyPath()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>getByKeyPath</strong>(<code>obj</code>, <code>keyPath</code>): <code>any</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1141</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-23">Parameters<a href="#parameters-23" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="obj-2">obj<a href="#obj-2" class="hash-link" aria-label="Direct link to obj" title="Direct link to obj" translate="no">​</a></h5>
+<p><code>Object</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="keypath-1">keyPath<a href="#keypath-1" class="hash-link" aria-label="Direct link to keyPath" title="Direct link to keyPath" translate="no">​</a></h5>
+<p><code>string</code> | <code>string</code>[]</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-29">Returns<a href="#returns-29" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>any</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-87">Inherited from<a href="#inherited-from-87" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.getByKeyPath</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="getdatabasenames">getDatabaseNames()<a href="#getdatabasenames" class="hash-link" aria-label="Direct link to getDatabaseNames()" title="Direct link to getDatabaseNames()" translate="no">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-8">Call Signature<a href="#call-signature-8" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><code>static</code> <strong>getDatabaseNames</strong>(): <code>Promise</code>&lt;<code>string</code>[]&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1133</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-30">Returns<a href="#returns-30" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>Promise</code>&lt;<code>string</code>[]&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-88">Inherited from<a href="#inherited-from-88" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.getDatabaseNames</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="call-signature-9">Call Signature<a href="#call-signature-9" class="hash-link" aria-label="Direct link to Call Signature" title="Direct link to Call Signature" translate="no">​</a></h4>
+<blockquote>
+<p><code>static</code> <strong>getDatabaseNames</strong>&lt;<code>R</code>&gt;(<code>thenShortcut</code>): <code>Promise</code>&lt;<code>R</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1134</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-8">Type Parameters<a href="#type-parameters-8" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="r">R<a href="#r" class="hash-link" aria-label="Direct link to R" title="Direct link to R" translate="no">​</a></h6>
+<p><code>R</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-24">Parameters<a href="#parameters-24" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h5>
+<h6 class="anchor anchorWithStickyNavbar_fF9Z" id="thenshortcut">thenShortcut<a href="#thenshortcut" class="hash-link" aria-label="Direct link to thenShortcut" title="Direct link to thenShortcut" translate="no">​</a></h6>
+<p><code>ThenShortcut</code>&lt;<code>string</code>[], <code>R</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-31">Returns<a href="#returns-31" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h5>
+<p><code>Promise</code>&lt;<code>R</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-89">Inherited from<a href="#inherited-from-89" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h5>
+<p><code>Dexie.getDatabaseNames</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="ignoretransaction">ignoreTransaction()<a href="#ignoretransaction" class="hash-link" aria-label="Direct link to ignoreTransaction()" title="Direct link to ignoreTransaction()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>ignoreTransaction</strong>&lt;<code>U</code>&gt;(<code>fn</code>): <code>U</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1136</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-9">Type Parameters<a href="#type-parameters-9" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="u-6">U<a href="#u-6" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h5>
+<p><code>U</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-25">Parameters<a href="#parameters-25" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="fn-1">fn<a href="#fn-1" class="hash-link" aria-label="Direct link to fn" title="Direct link to fn" translate="no">​</a></h5>
+<p>() =&gt; <code>U</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-32">Returns<a href="#returns-32" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>U</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-90">Inherited from<a href="#inherited-from-90" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.ignoreTransaction</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="livequery">liveQuery()<a href="#livequery" class="hash-link" aria-label="Direct link to liveQuery()" title="Direct link to liveQuery()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>liveQuery</strong>&lt;<code>T</code>&gt;(<code>fn</code>): <code>Observable</code>&lt;<code>T</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1138</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-10">Type Parameters<a href="#type-parameters-10" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="t-2">T<a href="#t-2" class="hash-link" aria-label="Direct link to T" title="Direct link to T" translate="no">​</a></h5>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-26">Parameters<a href="#parameters-26" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="fn-2">fn<a href="#fn-2" class="hash-link" aria-label="Direct link to fn" title="Direct link to fn" translate="no">​</a></h5>
+<p>() =&gt; <code>T</code> | <code>Promise</code>&lt;<code>T</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-33">Returns<a href="#returns-33" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Observable</code>&lt;<code>T</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-91">Inherited from<a href="#inherited-from-91" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.liveQuery</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="override">override()<a href="#override" class="hash-link" aria-label="Direct link to override()" title="Direct link to override()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>override</strong>&lt;<code>F</code>&gt;(<code>origFunc</code>, <code>overridedFactory</code>): <code>F</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1140</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-11">Type Parameters<a href="#type-parameters-11" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="f">F<a href="#f" class="hash-link" aria-label="Direct link to F" title="Direct link to F" translate="no">​</a></h5>
+<p><code>F</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-27">Parameters<a href="#parameters-27" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="origfunc">origFunc<a href="#origfunc" class="hash-link" aria-label="Direct link to origFunc" title="Direct link to origFunc" translate="no">​</a></h5>
+<p><code>F</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="overridedfactory">overridedFactory<a href="#overridedfactory" class="hash-link" aria-label="Direct link to overridedFactory" title="Direct link to overridedFactory" translate="no">​</a></h5>
+<p>(<code>fn</code>) =&gt; <code>any</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-34">Returns<a href="#returns-34" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>F</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-92">Inherited from<a href="#inherited-from-92" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.override</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="setbykeypath">setByKeyPath()<a href="#setbykeypath" class="hash-link" aria-label="Direct link to setByKeyPath()" title="Direct link to setByKeyPath()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>setByKeyPath</strong>(<code>obj</code>, <code>keyPath</code>, <code>value</code>): <code>void</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1142</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-28">Parameters<a href="#parameters-28" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="obj-3">obj<a href="#obj-3" class="hash-link" aria-label="Direct link to obj" title="Direct link to obj" translate="no">​</a></h5>
+<p><code>Object</code></p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="keypath-2">keyPath<a href="#keypath-2" class="hash-link" aria-label="Direct link to keyPath" title="Direct link to keyPath" translate="no">​</a></h5>
+<p><code>string</code> | <code>string</code>[]</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="value">value<a href="#value" class="hash-link" aria-label="Direct link to value" title="Direct link to value" translate="no">​</a></h5>
+<p><code>any</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-35">Returns<a href="#returns-35" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>void</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-93">Inherited from<a href="#inherited-from-93" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.setByKeyPath</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="shallowclone">shallowClone()<a href="#shallowclone" class="hash-link" aria-label="Direct link to shallowClone()" title="Direct link to shallowClone()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>shallowClone</strong>&lt;<code>T</code>&gt;(<code>obj</code>): <code>T</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1144</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-12">Type Parameters<a href="#type-parameters-12" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="t-3">T<a href="#t-3" class="hash-link" aria-label="Direct link to T" title="Direct link to T" translate="no">​</a></h5>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-29">Parameters<a href="#parameters-29" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="obj-4">obj<a href="#obj-4" class="hash-link" aria-label="Direct link to obj" title="Direct link to obj" translate="no">​</a></h5>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-36">Returns<a href="#returns-36" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-94">Inherited from<a href="#inherited-from-94" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.shallowClone</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="vip-1">vip()<a href="#vip-1" class="hash-link" aria-label="Direct link to vip()" title="Direct link to vip()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>vip</strong>&lt;<code>U</code>&gt;(<code>scopeFunction</code>): <code>U</code></p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1135</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-13">Type Parameters<a href="#type-parameters-13" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="u-7">U<a href="#u-7" class="hash-link" aria-label="Direct link to U" title="Direct link to U" translate="no">​</a></h5>
+<p><code>U</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-30">Parameters<a href="#parameters-30" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="scopefunction">scopeFunction<a href="#scopefunction" class="hash-link" aria-label="Direct link to scopeFunction" title="Direct link to scopeFunction" translate="no">​</a></h5>
+<p>() =&gt; <code>U</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-37">Returns<a href="#returns-37" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>U</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-95">Inherited from<a href="#inherited-from-95" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.vip</code></p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_fF9Z" id="waitfor">waitFor()<a href="#waitfor" class="hash-link" aria-label="Direct link to waitFor()" title="Direct link to waitFor()" translate="no">​</a></h3>
+<blockquote>
+<p><code>static</code> <strong>waitFor</strong>&lt;<code>T</code>&gt;(<code>promise</code>, <code>timeoutMilliseconds?</code>): <code>Promise</code>&lt;<code>T</code>&gt;</p>
+</blockquote>
+<p>Defined in: node_modules/dexie/dist/dexie.d.ts:1132</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="type-parameters-14">Type Parameters<a href="#type-parameters-14" class="hash-link" aria-label="Direct link to Type Parameters" title="Direct link to Type Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="t-4">T<a href="#t-4" class="hash-link" aria-label="Direct link to T" title="Direct link to T" translate="no">​</a></h5>
+<p><code>T</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="parameters-31">Parameters<a href="#parameters-31" class="hash-link" aria-label="Direct link to Parameters" title="Direct link to Parameters" translate="no">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="promise-1">promise<a href="#promise-1" class="hash-link" aria-label="Direct link to promise" title="Direct link to promise" translate="no">​</a></h5>
+<p><code>T</code> | <code>PromiseLike</code>&lt;<code>T</code>&gt;</p>
+<h5 class="anchor anchorWithStickyNavbar_fF9Z" id="timeoutmilliseconds">timeoutMilliseconds?<a href="#timeoutmilliseconds" class="hash-link" aria-label="Direct link to timeoutMilliseconds?" title="Direct link to timeoutMilliseconds?" translate="no">​</a></h5>
+<p><code>number</code></p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="returns-38">Returns<a href="#returns-38" class="hash-link" aria-label="Direct link to Returns" title="Direct link to Returns" translate="no">​</a></h4>
+<p><code>Promise</code>&lt;<code>T</code>&gt;</p>
+<h4 class="anchor anchorWithStickyNavbar_fF9Z" id="inherited-from-96">Inherited from<a href="#inherited-from-96" class="hash-link" aria-label="Direct link to Inherited from" title="Direct link to Inherited from" translate="no">​</a></h4>
+<p><code>Dexie.waitFor</code></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/laruss/react-text-game/tree/main/apps/docs/docs/api/core/saves/classes/GameDatabase.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_UohW" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_g62E"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"></nav></div></div><div class="col col--3"><div class="tableOfContents_TN1Q thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#extends" class="table-of-contents__link toc-highlight">Extends</a></li><li><a href="#constructors" class="table-of-contents__link toc-highlight">Constructors</a><ul><li><a href="#constructor" class="table-of-contents__link toc-highlight">Constructor</a></li></ul></li><li><a href="#properties" class="table-of-contents__link toc-highlight">Properties</a><ul><li><a href="#_alltables" class="table-of-contents__link toc-highlight">_allTables</a></li><li><a href="#_createtransaction" class="table-of-contents__link toc-highlight">_createTransaction()</a></li><li><a href="#_dbschema" class="table-of-contents__link toc-highlight">_dbSchema</a></li><li><a href="#_novip" class="table-of-contents__link toc-highlight">_novip</a></li><li><a href="#_options" class="table-of-contents__link toc-highlight">_options</a></li><li><a href="#collection" class="table-of-contents__link toc-highlight">Collection</a></li><li><a href="#core" class="table-of-contents__link toc-highlight">core</a></li><li><a href="#name" class="table-of-contents__link toc-highlight">name</a></li><li><a href="#on" class="table-of-contents__link toc-highlight">on</a></li><li><a href="#once" class="table-of-contents__link toc-highlight">once</a></li><li><a href="#saves" class="table-of-contents__link toc-highlight">saves</a></li><li><a href="#settings" class="table-of-contents__link toc-highlight">settings</a></li><li><a href="#table" class="table-of-contents__link toc-highlight">Table</a></li><li><a href="#tables" class="table-of-contents__link toc-highlight">tables</a></li><li><a href="#transaction" class="table-of-contents__link toc-highlight">Transaction</a></li><li><a href="#verno" class="table-of-contents__link toc-highlight">verno</a></li><li><a href="#version" class="table-of-contents__link toc-highlight">Version</a></li><li><a href="#vip" class="table-of-contents__link toc-highlight">vip</a></li><li><a href="#whereclause" class="table-of-contents__link toc-highlight">WhereClause</a></li><li><a href="#aborterror" class="table-of-contents__link toc-highlight">AbortError</a></li><li><a href="#addons" class="table-of-contents__link toc-highlight">addons</a></li><li><a href="#bulkerror" class="table-of-contents__link toc-highlight">BulkError</a></li><li><a href="#cache" class="table-of-contents__link toc-highlight">cache</a></li><li><a href="#constrainterror" class="table-of-contents__link toc-highlight">ConstraintError</a></li><li><a href="#currenttransaction" class="table-of-contents__link toc-highlight">currentTransaction</a></li><li><a href="#databaseclosederror" class="table-of-contents__link toc-highlight">DatabaseClosedError</a></li><li><a href="#datacloneerror" class="table-of-contents__link toc-highlight">DataCloneError</a></li><li><a href="#dataerror" class="table-of-contents__link toc-highlight">DataError</a></li><li><a href="#debug" class="table-of-contents__link toc-highlight">debug</a></li><li><a href="#default" class="table-of-contents__link toc-highlight">default</a></li><li><a href="#dependencies" class="table-of-contents__link toc-highlight">dependencies</a></li><li><a href="#dexieerror" class="table-of-contents__link toc-highlight">DexieError</a></li><li><a href="#disablebfcache" class="table-of-contents__link toc-highlight">disableBfCache?</a></li><li><a href="#errnames" class="table-of-contents__link toc-highlight">errnames</a></li><li><a href="#events" class="table-of-contents__link toc-highlight">Events()</a></li><li><a href="#foreignawaiterror" class="table-of-contents__link toc-highlight">ForeignAwaitError</a></li><li><a href="#internalerror" class="table-of-contents__link toc-highlight">InternalError</a></li><li><a href="#invalidaccesserror" class="table-of-contents__link toc-highlight">InvalidAccessError</a></li><li><a href="#invalidargumenterror" class="table-of-contents__link toc-highlight">InvalidArgumentError</a></li><li><a href="#invalidstateerror" class="table-of-contents__link toc-highlight">InvalidStateError</a></li><li><a href="#invalidtableerror" class="table-of-contents__link toc-highlight">InvalidTableError</a></li><li><a href="#maxkey" class="table-of-contents__link toc-highlight">maxKey</a></li><li><a href="#minkey" class="table-of-contents__link toc-highlight">minKey</a></li><li><a href="#missingapierror" class="table-of-contents__link toc-highlight">MissingAPIError</a></li><li><a href="#modifyerror" class="table-of-contents__link toc-highlight">ModifyError</a></li><li><a href="#nosuchdatabaseerror" class="table-of-contents__link toc-highlight">NoSuchDatabaseError</a></li><li><a href="#notfounderror" class="table-of-contents__link toc-highlight">NotFoundError</a></li><li><a href="#on-1" class="table-of-contents__link toc-highlight">on</a></li><li><a href="#openfailederror" class="table-of-contents__link toc-highlight">OpenFailedError</a></li><li><a href="#prematurecommiterror" class="table-of-contents__link toc-highlight">PrematureCommitError</a></li><li><a href="#promise" class="table-of-contents__link toc-highlight">Promise</a></li><li><a href="#quotaexceedederror" class="table-of-contents__link toc-highlight">QuotaExceededError</a></li><li><a href="#readonlyerror" class="table-of-contents__link toc-highlight">ReadOnlyError</a></li><li><a href="#schemaerror" class="table-of-contents__link toc-highlight">SchemaError</a></li><li><a href="#semver" class="table-of-contents__link toc-highlight">semVer</a></li><li><a href="#subtransactionerror" class="table-of-contents__link toc-highlight">SubTransactionError</a></li><li><a href="#timeouterror" class="table-of-contents__link toc-highlight">TimeoutError</a></li><li><a href="#transactioninactiveerror" class="table-of-contents__link toc-highlight">TransactionInactiveError</a></li><li><a href="#unknownerror" class="table-of-contents__link toc-highlight">UnknownError</a></li><li><a href="#unsupportederror" class="table-of-contents__link toc-highlight">UnsupportedError</a></li><li><a href="#upgradeerror" class="table-of-contents__link toc-highlight">UpgradeError</a></li><li><a href="#version-1" class="table-of-contents__link toc-highlight">version</a></li><li><a href="#versionchangeerror" class="table-of-contents__link toc-highlight">VersionChangeError</a></li><li><a href="#versionerror" class="table-of-contents__link toc-highlight">VersionError</a></li></ul></li><li><a href="#methods" class="table-of-contents__link toc-highlight">Methods</a><ul><li><a href="#backenddb" class="table-of-contents__link toc-highlight">backendDB()</a></li><li><a href="#close" class="table-of-contents__link toc-highlight">close()</a></li><li><a href="#delete" class="table-of-contents__link toc-highlight">delete()</a></li><li><a href="#dynamicallyopened" class="table-of-contents__link toc-highlight">dynamicallyOpened()</a></li><li><a href="#hasbeenclosed" class="table-of-contents__link toc-highlight">hasBeenClosed()</a></li><li><a href="#hasfailed" class="table-of-contents__link toc-highlight">hasFailed()</a></li><li><a href="#isopen" class="table-of-contents__link toc-highlight">isOpen()</a></li><li><a href="#open" class="table-of-contents__link toc-highlight">open()</a></li><li><a href="#table-1" class="table-of-contents__link toc-highlight">table()</a></li><li><a href="#transaction-1" class="table-of-contents__link toc-highlight">transaction()</a></li><li><a href="#unuse" class="table-of-contents__link toc-highlight">unuse()</a></li><li><a href="#use" class="table-of-contents__link toc-highlight">use()</a></li><li><a href="#version-2" class="table-of-contents__link toc-highlight">version()</a></li><li><a href="#asap" class="table-of-contents__link toc-highlight">asap()</a></li><li><a href="#deepclone" class="table-of-contents__link toc-highlight">deepClone()</a></li><li><a href="#delbykeypath" class="table-of-contents__link toc-highlight">delByKeyPath()</a></li><li><a href="#delete-1" class="table-of-contents__link toc-highlight">delete()</a></li><li><a href="#exists" class="table-of-contents__link toc-highlight">exists()</a></li><li><a href="#extendobservabilityset" class="table-of-contents__link toc-highlight">extendObservabilitySet()</a></li><li><a href="#getbykeypath" class="table-of-contents__link toc-highlight">getByKeyPath()</a></li><li><a href="#getdatabasenames" class="table-of-contents__link toc-highlight">getDatabaseNames()</a></li><li><a href="#ignoretransaction" class="table-of-contents__link toc-highlight">ignoreTransaction()</a></li><li><a href="#livequery" class="table-of-contents__link toc-highlight">liveQuery()</a></li><li><a href="#override" class="table-of-contents__link toc-highlight">override()</a></li><li><a href="#setbykeypath" class="table-of-contents__link toc-highlight">setByKeyPath()</a></li><li><a href="#shallowclone" class="table-of-contents__link toc-highlight">shallowClone()</a></li><li><a href="#vip-1" class="table-of-contents__link toc-highlight">vip()</a></li><li><a href="#waitfor" class="table-of-contents__link toc-highlight">waitFor()</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Documentation</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/">Getting Started</a></li><li class="footer__item"><a class="footer__link-item" href="/migrations">Save Migrations</a></li><li class="footer__item"><a class="footer__link-item" href="/api/core/">Core API</a></li><li class="footer__item"><a class="footer__link-item" href="/api/core/saves/">Saves &amp; Migrations API</a></li><li class="footer__item"><a class="footer__link-item" href="/api/core/audio/">Audio API</a></li><li class="footer__item"><a class="footer__link-item" href="/api/ui/">UI API</a></li><li class="footer__item"><a class="footer__link-item" href="/api/mdx/">MDX API</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Packages</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.npmjs.com/package/@react-text-game/core" target="_blank" rel="noopener noreferrer" class="footer__link-item">@react-text-game/core<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_awgD"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.npmjs.com/package/@react-text-game/ui" target="_blank" rel="noopener noreferrer" class="footer__link-item">@react-text-game/ui<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_awgD"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.npmjs.com/package/@react-text-game/mdx" target="_blank" rel="noopener noreferrer" class="footer__link-item">@react-text-game/mdx<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_awgD"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/laruss/react-text-game" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_awgD"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/laruss/react-text-game/issues" target="_blank" rel="noopener noreferrer" class="footer__link-item">Issues<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_awgD"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 laruss. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
