@@ -1,0 +1,12 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+    "name": "i18n",
+    "entryPoints": ["../../packages/core/src/i18n/index.ts"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "../../packages/core/tsconfig.json",
+    "out": "./docs/api/core/i18n",
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "readme": "none"
+}

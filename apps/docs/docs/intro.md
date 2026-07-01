@@ -83,6 +83,7 @@ bun add @react-text-game/mdx @react-text-game/core @mdx-js/mdx @mdx-js/react
 passageId: intro
 ---
 
+import { Game } from "@react-text-game/core";
 import { Action, Actions } from "@react-text-game/mdx";
 import { player } from "../entities/player";
 

@@ -1,0 +1,12 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+    "name": "Build Plugin",
+    "entryPoints": ["../../packages/mdx/src/plugins/index.ts"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "../../packages/mdx/tsconfig.json",
+    "out": "./docs/api/mdx/plugin",
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "readme": "none"
+}

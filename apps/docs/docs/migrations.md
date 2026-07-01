@@ -96,7 +96,8 @@ Register migrations **after** `Game.init()` in your game's entry point:
 ```typescript
 // src/index.tsx or src/App.tsx
 
-import { Game, registerMigration } from "@react-text-game/core";
+import { Game } from "@react-text-game/core";
+import { registerMigration } from "@react-text-game/core/saves";
 
 async function initGame() {
     await Game.init({
@@ -151,6 +152,8 @@ The migration system supports TypeScript generics for improved type safety. You 
 #### Using Generic Types
 
 ```typescript
+import type { SaveMigration } from "@react-text-game/core/saves";
+
 // Define the shape of data this migration works with
 interface PlayerInventoryData {
     player?: {
@@ -158,8 +161,9 @@ interface PlayerInventoryData {
     };
 }
 
-// Use the generic type parameter
-registerMigration<PlayerInventoryData>({
+// The generic lives on the SaveMigration<T> type, not on registerMigration.
+// Type the migration object, and `save` inside `migrate` is PlayerInventoryData.
+const addPlayerInventory: SaveMigration<PlayerInventoryData> = {
     from: "1.0.0",
     to: "1.1.0",
     description: "Added player inventory",
@@ -173,7 +177,9 @@ registerMigration<PlayerInventoryData>({
             },
         };
     },
-});
+};
+
+registerMigration(addPlayerInventory);
 ```
 
 #### When to Use Generics
@@ -205,7 +211,7 @@ interface OldInventoryFormat {
     inventory?: string[];
 }
 
-registerMigration<OldInventoryFormat>({
+const convertInventory: SaveMigration<OldInventoryFormat> = {
     from: "1.0.0",
     to: "2.0.0",
     description: "Convert inventory to objects",
@@ -217,7 +223,9 @@ registerMigration<OldInventoryFormat>({
         }));
         return { ...save, inventory: items };
     },
-});
+};
+
+registerMigration(convertInventory);
 ```
 
 ## Semantic Versioning Strategy
@@ -328,11 +336,11 @@ registerMigration({
 
 ## API Reference
 
-### `registerMigration<T>(migration: SaveMigration<T>)`
+### `registerMigration(migration: SaveMigration<T>)`
 
-Registers a migration function.
+Registers a migration. The function itself is **not** generic — the generic parameter lives on the `SaveMigration<T>` type. Type the migration object (annotate it with `SaveMigration<T>`) and pass it in.
 
-**Type Parameters:**
+**Type Parameter (on `SaveMigration<T>`):**
 
 - `T` - Optional generic type specifying the shape of the save data this migration operates on. Extends `MigrationGameSaveState` (which is `Partial<GameSaveState> & Record<string, unknown>`). Defaults to `GameSaveState`.
 
@@ -348,18 +356,21 @@ Registers a migration function.
 **Example:**
 
 ```typescript
-// With generic type for type safety
+import type { SaveMigration } from "@react-text-game/core/saves";
+
+// With a typed migration object for type safety
 interface MyData {
     player?: { inventory: string[] };
 }
-registerMigration<MyData>({
+const addInventory: SaveMigration<MyData> = {
     from: "1.0.0",
     to: "1.1.0",
     description: "Add inventory",
     migrate: (save) => ({ ...save, player: { ...save.player, inventory: [] } }),
-});
+};
+registerMigration(addInventory);
 
-// Without generic type (uses default GameSaveState)
+// Without a type (uses default GameSaveState)
 registerMigration({
     from: "1.1.0",
     to: "1.2.0",
@@ -374,13 +385,9 @@ Finds the shortest migration path between two versions.
 
 **Returns:** Array of migrations to apply, or `null` if no path exists.
 
-### `runMigrations<T>(data, from, to, options?): MigrationResult<T>`
+### `runMigrations(data, from, to, options?): MigrationResult`
 
-Runs a migration chain.
-
-**Type Parameters:**
-
-- `T` - Optional generic type for the expected result data structure. Defaults to `GameSaveState`.
+Runs a migration chain. The function is **not** generic and always returns `MigrationResult`, whose `data` is typed `GameSaveState`. To read a known result shape, cast `result.data`.
 
 **Parameters:**
 
@@ -394,12 +401,12 @@ Runs a migration chain.
 - `strict?: boolean` - Throw error if no path found (default: `false`)
 - `verbose?: boolean` - Log migration steps (default: dev mode setting)
 
-**Returns:** `MigrationResult<T>` with the following structure:
+**Returns:** `MigrationResult` with the following structure:
 
 ```typescript
 {
   success: boolean;
-  data?: T;                    // Migrated data (if successful), defaults to GameSaveState
+  data?: GameSaveState;        // Migrated data (if successful)
   error?: string;              // Error message (if failed)
   migrationsApplied: Array<{   // List of applied migrations
     from: string;
@@ -412,21 +419,22 @@ Runs a migration chain.
 **Examples:**
 
 ```typescript
-// Basic usage without type parameter
+// Basic usage
 const result = runMigrations(oldSave, "1.0.0", "2.0.0");
 if (result.success) {
     console.log("Migration successful:", result.data);
 }
 
-// Type-safe usage with expected result structure
+// Reading a known result shape: runMigrations always returns MigrationResult
+// (data typed GameSaveState), so cast result.data when drilling in.
 type NewSaveFormat = {
     player: { stats: { health: number; mana: number } };
 } & Record<string, unknown>;
 
-const result = runMigrations<NewSaveFormat>(oldSave, "1.0.0", "2.0.0");
-if (result.success && result.data) {
-    // TypeScript knows the structure of result.data
-    console.log("Health:", result.data.player.stats.health);
+const migrated = runMigrations(oldSave, "1.0.0", "2.0.0");
+if (migrated.success && migrated.data) {
+    const data = migrated.data as NewSaveFormat;
+    console.log("Health:", data.player.stats.health);
 }
 ```
 

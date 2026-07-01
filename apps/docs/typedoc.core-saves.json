@@ -1,0 +1,12 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+    "name": "Saves & Migrations",
+    "entryPoints": ["../../packages/core/src/saves/index.ts"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "../../packages/core/tsconfig.json",
+    "out": "./docs/api/core/saves",
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "readme": "none"
+}

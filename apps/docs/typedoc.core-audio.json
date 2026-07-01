@@ -1,0 +1,12 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+    "name": "Audio",
+    "entryPoints": ["../../packages/core/src/audio/index.ts"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "../../packages/core/tsconfig.json",
+    "out": "./docs/api/core/audio",
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "readme": "none"
+}

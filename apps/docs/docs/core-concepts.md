@@ -365,33 +365,51 @@ const player = createEntity("player", { health: 100 });
 player.health -= 10;
 ```
 
-### Storage System
+### Reading and Writing State
 
-The storage system uses JSONPath queries with session storage for auto-save:
+For everyday game logic you read and write state directly through your **entities**, which
+are reactive Valtio proxies (see [Entities](#entities)). Assigning to an entity property both
+updates the value and triggers re-renders:
 
 ```tsx
-import { Storage } from "@react-text-game/core";
+const player = createEntity("player", { health: 100 });
 
-// Get values using JSONPath queries
-const health = Storage.getValue<number>("$.player.health");
+// Read
+const currentHealth = player.health;
 
-// Set values
-Storage.setValue("$.player.health", 75);
+// Write (reactive — the UI updates automatically)
+player.health = 75;
 
-// Full state serialization for save/load
-const state = Storage.getState();
-Storage.setState(state);
-
-// Check if a path exists
-const hasInventory = Storage.hasPath("$.player.inventory");
+// Persist the change to the storage layer for save/load
+player.save();
 ```
 
-**Storage Features:**
+### Full State Serialization
 
-- Uses `jsonpath-plus` library for flexible querying
-- Session storage for auto-save (configurable)
-- Protected system paths (prefixed with `STORAGE_SYSTEM_PATH`)
-- Type-safe getValue with generic support
+To snapshot or restore the **entire** game — all registered entities plus the current
+passage — use `Game.getState()` and `Game.setState()`. This is what the save system uses
+under the hood:
+
+```tsx
+import { Game } from "@react-text-game/core";
+
+// Serialize the whole game into a plain, JSON-safe object
+const state = Game.getState();
+
+// Restore a previously serialized state
+Game.setState(state);
+```
+
+`Game.getState()` first flushes the current passage and every registered entity into the
+store, then returns the serialized snapshot. `Game.setState()` reverses this: it restores the
+store, the current passage, and every registered entity, so the UI reflects the loaded state
+immediately.
+
+**Under the hood:** state lives in a central store queried with the
+[`jsonpath-plus`](https://github.com/JSONPath-Plus/JSONPath) library and auto-saved to
+session storage (configurable), with internal system paths protected. You normally don't
+touch that layer directly — reactive entities and `Game.getState()`/`Game.setState()` are the
+public API.
 
 ## Navigation
 
@@ -412,6 +430,16 @@ Game.setCurrent("chapter1");
 // Get current passage
 const current = Game.currentPassage;
 ```
+
+### Other Game methods
+
+The `Game` object exposes a few more helpers you may reach for:
+
+- `Game.getPassageById(id)` — look up a registered passage by id (`Passage | null`)
+- `Game.getAllPassages()` — all registered passages (`Passage[]`)
+- `Game.enableAutoSave()` / `Game.disableAutoSave()` — toggle debounced auto-save to session storage
+- `Game.updateOptions(options)` — update game options after `init`
+- `Game.options` — read the resolved game options
 
 ## Save System
 
@@ -455,7 +483,7 @@ All save-related hooks are available from `@react-text-game/core/saves`:
 - `useSaveGame` - Save current game state
 - `useLoadGame` - Load saved game state
 - `useDeleteGame` - Delete a specific save
-- `useDeleteAllSlots` - Delete all saves (except system save)
+- `useDeleteAllSaves` - Delete all saves (except system save)
 - `useLastLoadGame` - Load the most recent save
 - `useExportSaves` - Export saves to encrypted file
 - `useImportSaves` - Import saves from encrypted file
@@ -473,20 +501,22 @@ import {
     deleteSave,
 } from "@react-text-game/core/saves";
 
-// Save manually with optional description and screenshot
-await saveGame("slot-1", gameData, "Before boss fight", screenshotBase64);
+// Save to slot 1 with optional description and screenshot.
+// The first argument is the save "slot" name (string or number);
+// loadGame/deleteSave look a save up by this same value.
+await saveGame(1, gameData, "Before boss fight", screenshotBase64);
 
-// Load by slot ID
+// Load the save in slot 1
 const save = await loadGame(1);
 
 // Get all saves (excluding system saves)
 const allSaves = await getAllSaves();
 
-// Delete a save
+// Delete the save in slot 1
 await deleteSave(1);
 ```
 
-**Note:** Save IDs are auto-incremented. The system also maintains a special `SYSTEM_SAVE_NAME` for initial state restoration.
+**Note:** `saveGame` returns an auto-incremented database id, but `loadGame` and `deleteSave` look saves up by the **slot name** you passed to `saveGame` (compared as a string) — so pass the same value to save and load. The system also maintains a special `SYSTEM_SAVE_NAME` for initial state restoration.
 
 ## Audio System
 
@@ -805,11 +835,13 @@ Monitor the current passage with reactive updates:
 import { useCurrentPassage } from "@react-text-game/core";
 
 function GameScreen() {
-    const passage = useCurrentPassage();
+    // Returns a tuple: [passage, renderId]. renderId changes on every
+    // navigation and can be used as a React key to force a remount.
+    const [passage, renderId] = useCurrentPassage();
 
     if (!passage) return <div>Loading...</div>;
 
-    return <div>{/* Render passage */}</div>;
+    return <div key={renderId}>{/* Render passage */}</div>;
 }
 ```
 

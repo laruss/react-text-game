@@ -1,8 +1,43 @@
 import type { Options, ThemeConfig } from "@docusaurus/preset-classic";
-import type { Config } from "@docusaurus/types";
+import type { Config, LoadContext, Plugin } from "@docusaurus/types";
+import fs from "node:fs";
+import path from "node:path";
 import { themes as prismThemes } from "prism-react-renderer";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+
+// Emit the raw markdown source alongside the built HTML so that appending
+// `.md` to a doc URL (e.g. /mdx-integration.md) serves the plain markdown.
+// Docusaurus only outputs HTML by default; this mirrors docs/**/*.{md,mdx}
+// into the build output as .md files at the matching route path.
+function rawMarkdownPlugin(context: LoadContext): Plugin {
+    return {
+        name: "raw-markdown",
+        async postBuild({ outDir }) {
+            const docsDir = path.join(context.siteDir, "docs");
+
+            const walk = (dir: string) => {
+                for (const entry of fs.readdirSync(dir, {
+                    withFileTypes: true,
+                })) {
+                    const src = path.join(dir, entry.name);
+                    if (entry.isDirectory()) {
+                        walk(src);
+                    } else if (/\.mdx?$/.test(entry.name)) {
+                        const rel = path
+                            .relative(docsDir, src)
+                            .replace(/\.mdx?$/, ".md");
+                        const dest = path.join(outDir, rel);
+                        fs.mkdirSync(path.dirname(dest), { recursive: true });
+                        fs.copyFileSync(src, dest);
+                    }
+                }
+            };
+
+            walk(docsDir);
+        },
+    };
+}
 
 const config: Config = {
     title: "React Text Game",
@@ -126,7 +161,7 @@ const config: Config = {
         },
     ],
 
-    plugins: [],
+    plugins: [rawMarkdownPlugin],
 
     presets: [
         [
@@ -135,7 +170,7 @@ const config: Config = {
                 docs: {
                     sidebarPath: "./sidebars.ts",
                     routeBasePath: "/",
-                    editUrl: "https://github.com/laruss/tree/main/apps/docs/",
+                    editUrl: "https://github.com/laruss/react-text-game/tree/main/apps/docs/",
                 },
                 blog: false,
                 theme: {
@@ -224,22 +259,36 @@ const config: Config = {
                     label: "Docs",
                 },
                 {
-                    to: "/api/core/",
-                    position: "left",
+                    type: "dropdown",
                     label: "Core API",
+                    position: "left",
+                    items: [
+                        { to: "/api/core/", label: "Overview" },
+                        { to: "/api/core/saves/", label: "Saves & Migrations" },
+                        { to: "/api/core/audio/", label: "Audio" },
+                        { to: "/api/core/i18n/", label: "i18n" },
+                    ],
                 },
                 {
-                    to: "/api/ui/",
-                    position: "left",
+                    type: "dropdown",
                     label: "UI API",
-                },
-                {
-                    to: "/api/mdx/",
                     position: "left",
-                    label: "MDX API",
+                    items: [
+                        { to: "/api/ui/", label: "Overview" },
+                        { to: "/api/ui/i18n/", label: "i18n" },
+                    ],
                 },
                 {
-                    href: "https://github.com/laruss",
+                    type: "dropdown",
+                    label: "MDX API",
+                    position: "left",
+                    items: [
+                        { to: "/api/mdx/", label: "Overview" },
+                        { to: "/api/mdx/plugin/", label: "Build Plugin" },
+                    ],
+                },
+                {
+                    href: "https://github.com/laruss/react-text-game",
                     label: "GitHub",
                     position: "right",
                 },
@@ -262,6 +311,14 @@ const config: Config = {
                         {
                             label: "Core API",
                             to: "/api/core/",
+                        },
+                        {
+                            label: "Saves & Migrations API",
+                            to: "/api/core/saves/",
+                        },
+                        {
+                            label: "Audio API",
+                            to: "/api/core/audio/",
                         },
                         {
                             label: "UI API",
@@ -295,11 +352,11 @@ const config: Config = {
                     items: [
                         {
                             label: "GitHub",
-                            href: "https://github.com/laruss",
+                            href: "https://github.com/laruss/react-text-game",
                         },
                         {
                             label: "Issues",
-                            href: "https://github.com/laruss/issues",
+                            href: "https://github.com/laruss/react-text-game/issues",
                         },
                     ],
                 },

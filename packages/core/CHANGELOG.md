@@ -5,6 +5,14 @@ All notable changes to `@react-text-game/core` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.18] - 2026-07-01
+
+### Changed
+
+- Updated `dexie` from `^4.2.0` to `^4.4.4`
+- Updated `dexie-react-hooks` from `^4.2.0` to `^4.4.0`
+- Updated `valtio` from `^2.1.8` to `^2.3.2`
+
 ## [0.5.17] - 2026-01-24
 
 ### Added

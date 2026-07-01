@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.5.17",
+    "version": "0.5.18",
     "description": "A powerful React-based text game engine with reactive state management, passage-based navigation, and persistent save system for building interactive narrative experiences",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -29,12 +29,12 @@
     "dependencies": {
         "consola": "^3.4.2",
         "crypto-js": "^4.2.0",
-        "dexie": "^4.2.0",
-        "dexie-react-hooks": "^4.2.0",
+        "dexie": "^4.4.4",
+        "dexie-react-hooks": "^4.4.0",
         "i18next": "^25.6.0",
         "jsonpath-plus": "^10.3.0",
         "react-i18next": "^16.1.0",
-        "valtio": "^2.1.8"
+        "valtio": "^2.3.2"
     },
     "peerDependencies": {
         "react": "^18.0.0 || ^19.0.0",

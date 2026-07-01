@@ -214,17 +214,27 @@ Check out the example projects in the repository:
 
 ### Game Not Initializing
 
-Make sure you call `Game.init()` before creating any entities or passages:
+Entities and passages **register themselves when they are created**, so you can safely
+define them at module scope (they register on import) and call `Game.init()` afterwards.
+This is exactly what the UI package does — `GameProvider` runs `Game.init()` in an effect
+after your modules have loaded. You do **not** need to create entities and passages after
+`Game.init()`.
+
+What matters is that `Game.init()` is called **once** and has resolved before you rely on
+game state or navigation (e.g. `Game.jumpTo`, reading persisted state):
 
 ```tsx
-// ❌ Wrong
+// Entities and passages can be defined at module scope — they self-register.
 const player = createEntity("player", { name: "Hero" });
-await Game.init();
+const intro = newStory("intro", () => [/* ... */]);
 
-// ✅ Correct
-await Game.init();
-const player = createEntity("player", { name: "Hero" });
+// Initialize once, then navigate.
+await Game.init({ gameName: "My Game" });
+Game.jumpTo(intro);
 ```
+
+If you use the UI package, `GameProvider` calls `Game.init()` for you — just render your
+app inside it.
 
 ### UI Components Not Styled
 
