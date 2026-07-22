@@ -2,7 +2,7 @@
 
 > **useLoadGame**(): (`id`) => `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
 
-Defined in: [packages/core/src/saves/hooks/useLoadGame.ts:25](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/saves/hooks/useLoadGame.ts#L25)
+Defined in: [packages/core/src/saves/hooks/useLoadGame.ts:25](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/saves/hooks/useLoadGame.ts#L25)
 
 React hook that provides a function to load a saved game by its ID.
 Restores the game state from the specified save.

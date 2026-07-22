@@ -2,7 +2,7 @@
 
 > **registerMigration**(`migration`): `void`
 
-Defined in: [packages/core/src/saves/migrations/registry.ts:38](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/saves/migrations/registry.ts#L38)
+Defined in: [packages/core/src/saves/migrations/registry.ts:38](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/saves/migrations/registry.ts#L38)
 
 Registers a migration function for moving from one version to another.
 

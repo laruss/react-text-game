@@ -1,6 +1,6 @@
 # Interface: AnotherStoryComponent
 
-Defined in: [packages/core/src/passages/story/types.ts:612](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/passages/story/types.ts#L612)
+Defined in: [packages/core/src/passages/story/types.ts:612](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/types.ts#L612)
 
 Component for embedding another story passage within the current story.
 Enables composition and reuse of story content.
@@ -39,7 +39,7 @@ Use this to:
 
 > `optional` **id**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/passages/story/types.ts#L24)
+Defined in: [packages/core/src/passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/types.ts#L24)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -60,7 +60,7 @@ Can be used to reference or manipulate specific components programmatically.
 
 > `optional` **initialVariant**: `"display"` \| `"hidden"` \| `"disclosure"`
 
-Defined in: [packages/core/src/passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/passages/story/types.ts#L39)
+Defined in: [packages/core/src/passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/types.ts#L39)
 
 Controls the initial visibility state of the component.
 
@@ -87,7 +87,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > **storyId**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:632](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/passages/story/types.ts#L632)
+Defined in: [packages/core/src/passages/story/types.ts:632](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/types.ts#L632)
 
 The unique identifier of the story passage to embed.
 Must reference a story that has been registered with `newStory()`.
@@ -110,6 +110,6 @@ Ensure the story is registered before it's referenced.
 
 > **type**: `"anotherStory"`
 
-Defined in: [packages/core/src/passages/story/types.ts:616](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/passages/story/types.ts#L616)
+Defined in: [packages/core/src/passages/story/types.ts:616](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/types.ts#L616)
 
 Discriminator property identifying this as an embedded story component.

@@ -2,7 +2,7 @@
 
 > **StoryComponent**(`__namedParameters`): `Element`
 
-Defined in: [components/StoryComponent/StoryComponent.tsx:127](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/StoryComponent/StoryComponent.tsx#L127)
+Defined in: [components/StoryComponent/StoryComponent.tsx:127](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/StoryComponent/StoryComponent.tsx#L127)
 
 ## Parameters
 

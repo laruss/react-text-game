@@ -1,6 +1,6 @@
 # Interface: ImagePositionInfo
 
-Defined in: [components/InteractiveMapComponent/types.ts:3](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/types.ts#L3)
+Defined in: [components/InteractiveMapComponent/types.ts:3](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/InteractiveMapComponent/types.ts#L3)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [components/InteractiveMapComponent/types.ts:3](https://github.com/l
 
 > **offsetLeft**: `number`
 
-Defined in: [components/InteractiveMapComponent/types.ts:5](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/types.ts#L5)
+Defined in: [components/InteractiveMapComponent/types.ts:5](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/InteractiveMapComponent/types.ts#L5)
 
 ***
 
@@ -16,7 +16,7 @@ Defined in: [components/InteractiveMapComponent/types.ts:5](https://github.com/l
 
 > **offsetTop**: `number`
 
-Defined in: [components/InteractiveMapComponent/types.ts:6](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/types.ts#L6)
+Defined in: [components/InteractiveMapComponent/types.ts:6](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/InteractiveMapComponent/types.ts#L6)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [components/InteractiveMapComponent/types.ts:6](https://github.com/l
 
 > **scaledHeight**: `number`
 
-Defined in: [components/InteractiveMapComponent/types.ts:8](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/types.ts#L8)
+Defined in: [components/InteractiveMapComponent/types.ts:8](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/InteractiveMapComponent/types.ts#L8)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [components/InteractiveMapComponent/types.ts:8](https://github.com/l
 
 > **scaledWidth**: `number`
 
-Defined in: [components/InteractiveMapComponent/types.ts:7](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/types.ts#L7)
+Defined in: [components/InteractiveMapComponent/types.ts:7](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/InteractiveMapComponent/types.ts#L7)
 
 ***
 
@@ -40,4 +40,4 @@ Defined in: [components/InteractiveMapComponent/types.ts:7](https://github.com/l
 
 > **scaleFactor**: `number`
 
-Defined in: [components/InteractiveMapComponent/types.ts:4](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/types.ts#L4)
+Defined in: [components/InteractiveMapComponent/types.ts:4](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/ui/src/components/InteractiveMapComponent/types.ts#L4)
