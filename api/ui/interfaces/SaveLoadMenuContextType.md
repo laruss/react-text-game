@@ -1,6 +1,6 @@
 # Interface: SaveLoadMenuContextType
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:7](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L7)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:7](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L7)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:7](https://githu
 
 > **close**: () => `void`
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:13](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L13)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:13](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L13)
 
 #### Returns
 
@@ -20,7 +20,7 @@ Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:13](https://gith
 
 > **isOpen**: `boolean`
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:8](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L8)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:8](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L8)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:8](https://githu
 
 > **mode**: [`SaveLoadMode`](../type-aliases/SaveLoadMode.md)
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:9](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L9)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:9](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L9)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:9](https://githu
 
 > **openLoadMenu**: () => `void`
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:11](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L11)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:11](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L11)
 
 #### Returns
 
@@ -48,7 +48,7 @@ Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:11](https://gith
 
 > **openSaveLoadMenu**: () => `void`
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:12](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L12)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:12](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L12)
 
 #### Returns
 
@@ -60,7 +60,7 @@ Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:12](https://gith
 
 > **openSaveMenu**: () => `void`
 
-Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:10](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L10)
+Defined in: [context/SaveLoadMenuContext/SaveLoadMenuContext.ts:10](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/context/SaveLoadMenuContext/SaveLoadMenuContext.ts#L10)
 
 #### Returns
 

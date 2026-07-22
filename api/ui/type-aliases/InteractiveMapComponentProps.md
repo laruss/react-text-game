@@ -2,7 +2,7 @@
 
 > **InteractiveMapComponentProps** = `object`
 
-Defined in: [components/InteractiveMapComponent/InteractiveMapComponent.tsx:14](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/components/InteractiveMapComponent/InteractiveMapComponent.tsx#L14)
+Defined in: [components/InteractiveMapComponent/InteractiveMapComponent.tsx:14](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/InteractiveMapComponent.tsx#L14)
 
 ## Properties
 
@@ -10,4 +10,4 @@ Defined in: [components/InteractiveMapComponent/InteractiveMapComponent.tsx:14](
 
 > **interactiveMap**: `InteractiveMap`
 
-Defined in: [components/InteractiveMapComponent/InteractiveMapComponent.tsx:15](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/components/InteractiveMapComponent/InteractiveMapComponent.tsx#L15)
+Defined in: [components/InteractiveMapComponent/InteractiveMapComponent.tsx:15](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/ui/src/components/InteractiveMapComponent/InteractiveMapComponent.tsx#L15)

@@ -2,7 +2,7 @@
 
 > **useGameTranslation**(`namespace?`): `object`
 
-Defined in: [hooks/useGameTranslation.ts:79](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/i18n/hooks/useGameTranslation.ts#L79)
+Defined in: [hooks/useGameTranslation.ts:79](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/i18n/hooks/useGameTranslation.ts#L79)
 
 React hook for accessing translation functionality within game components.
 

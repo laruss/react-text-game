@@ -1,6 +1,6 @@
 # Interface: AudioState
 
-Defined in: [types.ts:76](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L76)
+Defined in: [types.ts:76](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L76)
 
 Reactive state of an audio track.
 
@@ -21,7 +21,7 @@ console.log(state.currentTime); // 45.2
 
 > **currentTime**: `number`
 
-Defined in: [types.ts:87](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L87)
+Defined in: [types.ts:87](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L87)
 
 Current playback position in seconds
 
@@ -31,7 +31,7 @@ Current playback position in seconds
 
 > **duration**: `number`
 
-Defined in: [types.ts:90](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L90)
+Defined in: [types.ts:90](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L90)
 
 Total duration in seconds
 
@@ -41,7 +41,7 @@ Total duration in seconds
 
 > **isPaused**: `boolean`
 
-Defined in: [types.ts:81](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L81)
+Defined in: [types.ts:81](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L81)
 
 Whether audio is paused
 
@@ -51,7 +51,7 @@ Whether audio is paused
 
 > **isPlaying**: `boolean`
 
-Defined in: [types.ts:78](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L78)
+Defined in: [types.ts:78](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L78)
 
 Whether audio is currently playing
 
@@ -61,7 +61,7 @@ Whether audio is currently playing
 
 > **isStopped**: `boolean`
 
-Defined in: [types.ts:84](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L84)
+Defined in: [types.ts:84](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L84)
 
 Whether audio is stopped
 
@@ -71,7 +71,7 @@ Whether audio is stopped
 
 > **loop**: `boolean`
 
-Defined in: [types.ts:96](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L96)
+Defined in: [types.ts:96](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L96)
 
 Whether audio is looping
 
@@ -81,7 +81,7 @@ Whether audio is looping
 
 > **muted**: `boolean`
 
-Defined in: [types.ts:102](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L102)
+Defined in: [types.ts:102](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L102)
 
 Whether audio is muted
 
@@ -91,7 +91,7 @@ Whether audio is muted
 
 > **playbackRate**: `number`
 
-Defined in: [types.ts:99](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L99)
+Defined in: [types.ts:99](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L99)
 
 Current playback rate multiplier
 
@@ -101,6 +101,6 @@ Current playback rate multiplier
 
 > **volume**: `number`
 
-Defined in: [types.ts:93](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L93)
+Defined in: [types.ts:93](https://github.com/laruss/react-text-game/blob/302fa8835a5795482d8fc01ee44cbc4b943bb88f/packages/core/src/audio/types.ts#L93)
 
 Current volume (0.0 to 1.0)
