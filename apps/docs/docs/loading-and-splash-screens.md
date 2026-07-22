@@ -127,7 +127,7 @@ const components = { LoadingScreen: MyLoadingScreen };
 
 ## Configure splash screens
 
-In production, the built-in React Text Game splash is enabled by default. It lasts three seconds including fade-in and fade-out, and a click skips it immediately.
+In production, the built-in React Text Game splash is enabled by default. It lasts 1.5 seconds including fade-in and fade-out, and a click skips it immediately.
 
 ```tsx
 const splashScreens = [

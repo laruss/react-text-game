@@ -207,7 +207,7 @@
 }
 
 .rtg-splash-screen {
-    animation: rtgSplashScreen 3s ease-in-out both;
+    animation: rtgSplashScreen 1.5s ease-in-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -10,7 +10,7 @@ import {
 } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const DEFAULT_SPLASH_SCREEN_DURATION = 3_000;
+export const DEFAULT_SPLASH_SCREEN_DURATION = 1_500;
 
 export type SplashScreenConfig = Readonly<{
     className?: string;

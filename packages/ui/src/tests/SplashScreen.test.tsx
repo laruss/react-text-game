@@ -108,7 +108,7 @@ describe("splash screens", () => {
         await waitFor(() => expect(onComplete).toHaveBeenCalledTimes(1));
     });
 
-    test("uses the three-second default and supports custom styling", () => {
+    test("uses the 1.5-second default and supports custom styling", () => {
         render(
             createElement(SplashScreenSequence, {
                 onComplete: () => {},
@@ -123,6 +123,7 @@ describe("splash screens", () => {
         );
 
         const splash = screen.getByText("Studio");
+        expect(DEFAULT_SPLASH_SCREEN_DURATION).toBe(1_500);
         expect(splash.className).toContain("studio-splash");
         expect(splash.style.animationDuration).toBe(
             `${DEFAULT_SPLASH_SCREEN_DURATION}ms`

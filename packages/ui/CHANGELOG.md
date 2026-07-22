@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Configurable loading screen with the RTG logo, accessible progress, background images, rotating text, class/style hooks, and a complete `LoadingScreen` component slot
-- Ordered splash screens with three-second defaults, fade-in/out, immediate pointer and keyboard skipping, non-interruptible entries, dev-mode control, and a replaceable RTG brand screen
+- Ordered splash screens with 1.5-second defaults, fade-in/out, immediate pointer and keyboard skipping, non-interruptible entries, dev-mode control, and a replaceable RTG brand screen
 - `GameProvider` preloading lifecycle and `onPreloadComplete` results
 - Non-interactive `mapImage` rendering for decorative map artwork
 - Story, passage, bootstrap, and main-menu component slots for application-owned UI
