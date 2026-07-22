@@ -1,7 +1,7 @@
 import { JSONPath } from "jsonpath-plus";
 
 import { STORAGE_SYSTEM_PATH } from "#constants";
-import { GameSaveState, JsonPath } from "#types";
+import type { GameSaveState, JsonPath } from "#types";
 
 const storage = {};
 
@@ -29,6 +29,7 @@ const storage = {};
  * Storage.setState(state);
  * ```
  */
+// biome-ignore lint/complexity/noStaticOnlyClass: Storage intentionally preserves its public static facade.
 export class Storage {
     /**
      * Retrieves values from storage using a JSONPath query.
@@ -114,7 +115,7 @@ export class Storage {
             }
         } else {
             // Path doesn't exist, create it
-            this.createPath(storage, jsonPath, value);
+            Storage.createPath(storage, jsonPath, value);
         }
     }
 
@@ -188,7 +189,7 @@ export class Storage {
         // toPathArray converts '$.a.b[0]' to ['$', 'a', 'b', '0']
         const pathComponents = JSONPath.toPathArray(jsonPath);
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // biome-ignore lint/suspicious/noExplicitAny: JSONPath traversal requires dynamic object and array indexing.
         let current = obj as any;
 
         // Iterate through path components, skipping the root ($)
@@ -207,7 +208,7 @@ export class Storage {
 
             if (isNumeric) {
                 // Array index like [0] or [1]
-                const index = parseInt(component);
+                const index = Number.parseInt(component, 10);
 
                 if (isLast) {
                     // Ensure current is an array

@@ -1,13 +1,13 @@
+import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import {
     Game,
     newInteractiveMap,
     newStory,
     newWidget,
     Passage,
-    PassageType,
+    type PassageType,
 } from "@react-text-game/core";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { createElement } from "react";
 
 import { PassageController } from "#components/PassageController";

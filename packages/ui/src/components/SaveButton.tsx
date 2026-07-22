@@ -2,9 +2,11 @@
 
 import { twMerge } from "tailwind-merge";
 
-import { Button, ButtonProps } from "#components/common";
-import { SaveLoadMode } from "#context/SaveLoadMenuContext";
-import { useSaveLoadMenu } from "#context/SaveLoadMenuContext";
+import { Button, type ButtonProps } from "#components/common";
+import {
+    type SaveLoadMode,
+    useSaveLoadMenu,
+} from "#context/SaveLoadMenuContext";
 
 export type SaveButtonProps = Omit<ButtonProps, "children" | "onClick"> &
     Readonly<{
@@ -26,6 +28,7 @@ export type SaveButtonProps = Omit<ButtonProps, "children" | "onClick"> &
 
 const Icon = ({ className }: { className?: string }) => (
     <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 48 48"

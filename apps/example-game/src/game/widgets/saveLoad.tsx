@@ -1,13 +1,22 @@
-import { Game, newWidget } from "@react-text-game/core";
+import { Game } from "@react-text-game/core";
 import { useSaveSlots } from "@react-text-game/core/saves";
 import { Button } from "@react-text-game/ui";
+
+const SAVE_SLOT_IDS = [
+    "save-slot-1",
+    "save-slot-2",
+    "save-slot-3",
+    "save-slot-4",
+    "save-slot-5",
+    "save-slot-6",
+] as const;
 
 /**
  * Save/Load Widget Component
  * Demonstrates: Save system integration with useSaveSlots hook
  */
-const SaveLoadComponent = () => {
-    const slots = useSaveSlots({ count: 6 });
+export const SaveLoadComponent = () => {
+    const slots = useSaveSlots({ count: SAVE_SLOT_IDS.length });
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 p-8">
@@ -28,70 +37,74 @@ const SaveLoadComponent = () => {
 
                 {/* Save Slots Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {slots.map((slot, index) => (
-                        <div
-                            key={index}
-                            className="bg-card/80 rounded-lg p-4 border border-border"
-                        >
-                            <div className="flex items-center justify-between mb-3">
-                                <h3 className="font-semibold text-foreground">
-                                    Slot {index + 1}
-                                </h3>
-                                {slot.data && (
-                                    <span className="text-xs text-muted-foreground">
-                                        {new Date(
-                                            slot.data.timestamp
-                                        ).toLocaleString()}
-                                    </span>
-                                )}
-                            </div>
+                    {SAVE_SLOT_IDS.map((slotId, index) => {
+                        const slot = slots[index];
 
-                            {slot.data ? (
-                                <div className="mb-3">
-                                    <p className="text-sm text-muted-foreground">
-                                        {slot.data.name || "Unnamed Save"}
-                                    </p>
-                                    {slot.data.description && (
-                                        <p className="text-xs text-muted-foreground mt-1">
-                                            {slot.data.description}
-                                        </p>
+                        return (
+                            <div
+                                key={slotId}
+                                className="bg-card/80 rounded-lg p-4 border border-border"
+                            >
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="font-semibold text-foreground">
+                                        Slot {index + 1}
+                                    </h3>
+                                    {slot.data && (
+                                        <span className="text-xs text-muted-foreground">
+                                            {new Date(
+                                                slot.data.timestamp
+                                            ).toLocaleString()}
+                                        </span>
                                     )}
                                 </div>
-                            ) : (
-                                <p className="text-sm text-muted-foreground mb-3 italic">
-                                    Empty slot
-                                </p>
-                            )}
 
-                            <div className="flex gap-2">
-                                <Button
-                                    color="success"
-                                    variant="solid"
-                                    className="flex-1"
-                                    onClick={() => slot.save()}
-                                >
-                                    Save
-                                </Button>
-                                <Button
-                                    color="primary"
-                                    variant="bordered"
-                                    className="flex-1"
-                                    onClick={() => slot.load()}
-                                    disabled={!slot.data}
-                                >
-                                    Load
-                                </Button>
-                                <Button
-                                    color="danger"
-                                    variant="ghost"
-                                    onClick={() => slot.delete()}
-                                    disabled={!slot.data}
-                                >
-                                    Delete
-                                </Button>
+                                {slot.data ? (
+                                    <div className="mb-3">
+                                        <p className="text-sm text-muted-foreground">
+                                            {slot.data.name || "Unnamed Save"}
+                                        </p>
+                                        {slot.data.description && (
+                                            <p className="text-xs text-muted-foreground mt-1">
+                                                {slot.data.description}
+                                            </p>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <p className="text-sm text-muted-foreground mb-3 italic">
+                                        Empty slot
+                                    </p>
+                                )}
+
+                                <div className="flex gap-2">
+                                    <Button
+                                        color="success"
+                                        variant="solid"
+                                        className="flex-1"
+                                        onClick={() => slot.save()}
+                                    >
+                                        Save
+                                    </Button>
+                                    <Button
+                                        color="primary"
+                                        variant="bordered"
+                                        className="flex-1"
+                                        onClick={() => slot.load()}
+                                        disabled={!slot.data}
+                                    >
+                                        Load
+                                    </Button>
+                                    <Button
+                                        color="danger"
+                                        variant="ghost"
+                                        onClick={() => slot.delete()}
+                                        disabled={!slot.data}
+                                    >
+                                        Delete
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* Info text */}
@@ -102,11 +115,3 @@ const SaveLoadComponent = () => {
         </div>
     );
 };
-
-/**
- * Save/Load Widget Passage
- */
-export const saveLoadWidget = newWidget(
-    "saveLoadWidget",
-    <SaveLoadComponent />
-);

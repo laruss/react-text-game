@@ -1,5 +1,5 @@
 import { Game } from "@react-text-game/core";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { CopyButton } from "./CopyButton";
 import { RefreshButton } from "./RefreshButton";
@@ -8,18 +8,18 @@ export const GameData = ({ isOpen }: { isOpen: boolean }) => {
     const [gameState, setGameState] = useState("");
     const [showRefreshed, setShowRefreshed] = useState(false);
 
-    const onReloadGameState = () => {
+    const onReloadGameState = useCallback(() => {
         const state = JSON.stringify(Game.getState(), null, 2);
         setGameState(state);
         setShowRefreshed(true);
         setTimeout(() => setShowRefreshed(false), 500);
-    };
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
             onReloadGameState();
         }
-    }, [isOpen]);
+    }, [isOpen, onReloadGameState]);
 
     return (
         <div className="w-full">

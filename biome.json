@@ -1,0 +1,99 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "files": {
+        "ignoreUnknown": true,
+        "includes": [
+            "**",
+            "!!**/.docusaurus",
+            "!!**/.next",
+            "!!**/build",
+            "!!**/coverage",
+            "!!**/dist",
+            "!**/api-docs",
+            "!apps/docs/docs/api"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf",
+        "lineWidth": 80
+    },
+    "linter": {
+        "enabled": true,
+        "domains": {
+            "react": "recommended",
+            "test": "recommended"
+        },
+        "rules": {
+            "preset": "recommended",
+            "style": {
+                "useComponentExportOnlyModules": {
+                    "level": "warn",
+                    "options": {
+                        "allowConstantExport": true
+                    }
+                }
+            }
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "arrowParentheses": "always",
+            "quoteProperties": "asNeeded",
+            "quoteStyle": "double",
+            "semicolons": "always",
+            "trailingCommas": "es5"
+        }
+    },
+    "json": {
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4
+        }
+    },
+    "css": {
+        "parser": {
+            "tailwindDirectives": true
+        },
+        "formatter": {
+            "enabled": true
+        }
+    },
+    "overrides": [
+        {
+            "includes": ["apps/ui-test-app/**"],
+            "linter": {
+                "domains": {
+                    "next": "recommended"
+                },
+                "rules": {
+                    "style": {
+                        "useComponentExportOnlyModules": {
+                            "level": "warn",
+                            "options": {
+                                "allowConstantExport": true,
+                                "allowExportNames": ["metadata"]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

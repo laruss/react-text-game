@@ -1,6 +1,6 @@
 import { proxy } from "valtio";
 
-import { InitVarsType } from "#types";
+import type { InitVarsType } from "#types";
 
 import { BaseGameObject } from "./baseGameObject";
 
@@ -71,8 +71,9 @@ class SimpleObjectImpl<
      */
     private createDeepProxy(obj: object): object {
         // Return cached proxy if it exists to avoid creating multiple proxies for the same object
-        if (this.proxyCache.has(obj)) {
-            return this.proxyCache.get(obj)!;
+        const cachedProxy = this.proxyCache.get(obj);
+        if (cachedProxy) {
+            return cachedProxy;
         }
 
         const proxy_ = proxy(obj);

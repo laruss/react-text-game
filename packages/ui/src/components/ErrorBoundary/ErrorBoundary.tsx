@@ -1,11 +1,11 @@
 "use client";
 
 import { Game } from "@react-text-game/core";
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, type ErrorInfo, type ReactNode } from "react";
 
 import { Button } from "#components/common";
 
-import { ErrorBoundaryProps, ErrorBoundaryState } from "./types";
+import type { ErrorBoundaryProps, ErrorBoundaryState } from "./types";
 
 /**
  * ErrorBoundary catches all JavaScript errors in the application:
@@ -169,6 +169,7 @@ export class ErrorBoundary extends Component<
                     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-background bg-opacity-50 p-8">
                         <div className="max-w-2xl w-full bg-card border-2 border-danger-500 rounded-lg p-6 shadow-lg relative max-h-screen">
                             <button
+                                type="button"
                                 onClick={this.reset}
                                 className="cursor-pointer absolute top-4 right-4 text-danger-600 hover:text-danger-800 font-bold text-2xl leading-none transition-colors"
                                 aria-label="Close error"
@@ -188,6 +189,7 @@ export class ErrorBoundary extends Component<
                                         <span>Error Details</span>
                                         <span>
                                             <svg
+                                                aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
@@ -209,6 +211,7 @@ export class ErrorBoundary extends Component<
                                             </span>
                                         )}
                                         <button
+                                            type="button"
                                             onClick={(e) => {
                                                 e.preventDefault();
                                                 void this.copyErrorToClipboard();
@@ -218,6 +221,7 @@ export class ErrorBoundary extends Component<
                                             aria-label="Copy error to clipboard"
                                         >
                                             <svg
+                                                aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="20"
                                                 height="20"

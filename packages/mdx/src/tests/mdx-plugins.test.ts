@@ -1,5 +1,5 @@
-import { compile } from "@mdx-js/mdx";
 import { describe, expect, test } from "bun:test";
+import { compile } from "@mdx-js/mdx";
 
 import { reactTextGameStoryPlugin } from "#plugins/index";
 

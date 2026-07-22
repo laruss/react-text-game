@@ -1,6 +1,6 @@
-import { ConversationComponent } from "@react-text-game/core";
+import type { ConversationComponent } from "@react-text-game/core";
 
-import { SayComponent } from "./Say";
+import type { SayComponent } from "./Say";
 
 type ConversationProps = Readonly<{
     children: SayComponent | SayComponent[];

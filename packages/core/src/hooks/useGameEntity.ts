@@ -1,7 +1,7 @@
 import { useProxy } from "valtio/utils";
 
 import { Game } from "#game";
-import { BaseGameObject } from "#gameObjects";
+import type { BaseGameObject } from "#gameObjects";
 
 const getErrorMessage = (id: string) =>
     [
@@ -59,6 +59,7 @@ export function useGameEntity<T extends BaseGameObject>(gameObject: T): T {
     const proxiedObject = Game._getProxiedObject(gameObject);
 
     try {
+        // biome-ignore lint/correctness/useHookAtTopLevel: useProxy is always called exactly once; the catch only translates Valtio's TypeError.
         return useProxy(proxiedObject);
     } catch (error) {
         // if error is a TypeError, it means the object is not registered

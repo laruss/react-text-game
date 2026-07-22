@@ -1,6 +1,6 @@
 "use client";
 
-import {
+import type {
     SideImageHotspot,
     SideLabelHotspot,
 } from "@react-text-game/core/passages";

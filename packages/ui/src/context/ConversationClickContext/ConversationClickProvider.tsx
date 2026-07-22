@@ -1,9 +1,9 @@
 "use client";
 
-import { PropsWithChildren, useCallback, useRef } from "react";
+import { type PropsWithChildren, useCallback, useRef } from "react";
 
 import {
-    ConversationClickCallback,
+    type ConversationClickCallback,
     ConversationClickContext,
 } from "./ConversationClickContext";
 

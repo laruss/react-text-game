@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, SyntheticEvent, useState } from "react";
+import { type ReactNode, type SyntheticEvent, useState } from "react";
 
 import { Spinner } from "#components/common/Spinner";
 
@@ -58,6 +58,7 @@ export const HotspotMap = ({ imageUrl, children }: HotspotMapProps) => {
                 className="relative w-full h-full overflow-hidden"
                 id="hotspot-map-content"
             >
+                {/* biome-ignore lint/a11y/useKeyWithClickEvents: Development coordinate copying requires pointer coordinates and has no keyboard equivalent. */}
                 <img
                     ref={imageRef}
                     src={imageUrl}

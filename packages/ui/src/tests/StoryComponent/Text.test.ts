@@ -1,6 +1,6 @@
-import { TextComponent } from "@react-text-game/core/passages";
-import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "bun:test";
+import type { TextComponent } from "@react-text-game/core/passages";
+import { cleanup, render, screen } from "@testing-library/react";
 import { createElement } from "react";
 
 import { Text } from "#components/StoryComponent/components/Text";
@@ -145,9 +145,7 @@ describe("Text", () => {
             expect(strong).toBeNull();
 
             // The raw HTML string should be visible as text
-            expect(
-                screen.getByText("<strong>Not bold</strong>")
-            ).toBeTruthy();
+            expect(screen.getByText("<strong>Not bold</strong>")).toBeTruthy();
         });
 
         test("renders HTML as escaped text when isHTML is not provided", () => {

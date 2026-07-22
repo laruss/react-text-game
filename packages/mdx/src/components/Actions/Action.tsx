@@ -1,4 +1,4 @@
-import { ActionType as CoreAction } from "@react-text-game/core";
+import type { ActionType as CoreAction } from "@react-text-game/core";
 
 export type ActionProps = Readonly<{
     children: string;

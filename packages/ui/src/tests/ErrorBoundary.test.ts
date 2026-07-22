@@ -1,6 +1,6 @@
+import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import { Game } from "@react-text-game/core";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import { createElement } from "react";
 
 import { ErrorBoundary } from "#components/ErrorBoundary";
@@ -50,6 +50,34 @@ describe("ErrorBoundary", () => {
         );
 
         expect(screen.getByText("Test content")).toBeTruthy();
+    });
+
+    test("derives and records errors thrown while rendering children", () => {
+        const error = new Error("Render failure");
+        const errorInfo = {
+            componentStack: "\n    at ThrowingComponent",
+        } as Parameters<ErrorBoundary["componentDidCatch"]>[1];
+        const onError = mock(() => {});
+        const boundary = new ErrorBoundary({ onError });
+        const setState = mock(() => {});
+        boundary.setState = setState as typeof boundary.setState;
+
+        expect(ErrorBoundary.getDerivedStateFromError(error)).toEqual({
+            hasError: true,
+            error,
+        });
+        boundary.componentDidCatch(error, errorInfo);
+
+        expect(setState).toHaveBeenCalledWith({
+            error,
+            errorInfo,
+        });
+        expect(onError).toHaveBeenCalledWith(error, errorInfo);
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+            "ErrorBoundary caught an error:",
+            error,
+            errorInfo
+        );
     });
 
     test("catches global errors from window.addEventListener", async () => {

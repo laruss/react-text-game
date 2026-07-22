@@ -1,6 +1,7 @@
+// biome-ignore-all lint/a11y/useButtonType: Fixture buttons are never placed in forms and only act as tooltip targets.
+import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { createElement, createRef } from "react";
 
 import { type Placement, Tooltip } from "#components/common/Tooltip";

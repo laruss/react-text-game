@@ -1,10 +1,10 @@
 "use client";
 
 import {
-    InteractiveMap,
-    Story,
+    type InteractiveMap,
+    type Story,
     useCurrentPassage,
-    Widget,
+    type Widget,
 } from "@react-text-game/core";
 
 import { InteractiveMapComponent } from "#components/InteractiveMapComponent";

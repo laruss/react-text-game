@@ -1,4 +1,4 @@
-import i18next, { Resource } from "i18next";
+import i18next, { type Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import { logger } from "#logger";

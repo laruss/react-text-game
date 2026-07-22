@@ -1,5 +1,5 @@
 import { STORAGE_SYSTEM_PATH } from "#constants";
-import { JsonPath } from "#types";
+import type { JsonPath } from "#types";
 
 /**
  * Base JSONPath for audio storage within the system path.

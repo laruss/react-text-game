@@ -23,78 +23,75 @@ import { mdxStructToEstree } from "./component-transforms.js";
  *
  * @type {Plugin<[], Program>}
  */
-const recmaStoryRegister: Plugin<[], Program> = function () {
-    return (program, file) => {
-        const meta = (file.data?.meta ?? {}) as MdxStoryMeta;
-        const mdxStruct = (file.data?.mdxStruct ??
-            []) as MdxExport["components"];
+const recmaStoryRegister: Plugin<[], Program> = () => (program, file) => {
+    const meta = (file.data?.meta ?? {}) as MdxStoryMeta;
+    const mdxStruct = (file.data?.mdxStruct ?? []) as MdxExport["components"];
 
-        if (!meta.passageId || typeof meta.passageId !== "string") {
-            file.message(
-                "MDX story requires 'passageId' in frontmatter for auto-registration"
-            );
-            return;
-        }
-
-        const componentsArrayExpr = mdxStructToEstree(mdxStruct);
-
-        const existingImports = program.body.filter(
-            (node) =>
-                node.type === "ImportDeclaration" &&
-                node.source.value !== "@react-text-game/mdx" &&
-                node.source.value !== "react/jsx-runtime"
+    if (!meta.passageId || typeof meta.passageId !== "string") {
+        file.message(
+            "MDX story requires 'passageId' in frontmatter for auto-registration"
         );
+        return;
+    }
 
-        program.body = [
-            ...existingImports,
-            {
-                type: "ImportDeclaration",
-                specifiers: [
-                    {
-                        type: "ImportSpecifier",
-                        imported: { type: "Identifier", name: "newStory" },
-                        local: { type: "Identifier", name: "newStory" },
-                    },
-                ],
-                source: {
-                    type: "Literal",
-                    value: "@react-text-game/core",
+    const componentsArrayExpr = mdxStructToEstree(mdxStruct);
+
+    const existingImports = program.body.filter(
+        (node) =>
+            node.type === "ImportDeclaration" &&
+            node.source.value !== "@react-text-game/mdx" &&
+            node.source.value !== "react/jsx-runtime"
+    );
+
+    program.body = [
+        ...existingImports,
+        {
+            type: "ImportDeclaration",
+            specifiers: [
+                {
+                    type: "ImportSpecifier",
+                    imported: { type: "Identifier", name: "newStory" },
+                    local: { type: "Identifier", name: "newStory" },
                 },
-                attributes: [],
+            ],
+            source: {
+                type: "Literal",
+                value: "@react-text-game/core",
             },
-            {
-                type: "VariableDeclaration",
-                kind: "const",
-                declarations: [
-                    {
-                        type: "VariableDeclarator",
-                        id: { type: "Identifier", name: "story" },
-                        init: {
-                            type: "CallExpression",
-                            callee: { type: "Identifier", name: "newStory" },
-                            arguments: [
-                                { type: "Literal", value: meta.passageId },
-                                {
-                                    type: "ArrowFunctionExpression",
-                                    params: [],
-                                    body: componentsArrayExpr,
-                                    expression: true,
-                                },
-                                ...(meta.options
-                                    ? [valueToEstree(meta.options)]
-                                    : []),
-                            ],
-                            optional: false,
-                        },
+            attributes: [],
+        },
+        {
+            type: "VariableDeclaration",
+            kind: "const",
+            declarations: [
+                {
+                    type: "VariableDeclarator",
+                    id: { type: "Identifier", name: "story" },
+                    init: {
+                        type: "CallExpression",
+                        callee: { type: "Identifier", name: "newStory" },
+                        arguments: [
+                            { type: "Literal", value: meta.passageId },
+                            {
+                                type: "ArrowFunctionExpression",
+                                params: [],
+                                body: componentsArrayExpr,
+                                expression: true,
+                            },
+                            ...(meta.options
+                                ? [valueToEstree(meta.options)]
+                                : []),
+                        ],
+                        optional: false,
                     },
-                ],
-            },
-            {
-                type: "ExportDefaultDeclaration",
-                declaration: { type: "Identifier", name: "story" },
-            },
-        ];
-    };
+                },
+            ],
+        },
+        {
+            type: "ExportDefaultDeclaration",
+            declaration: { type: "Identifier", name: "story" },
+        },
+    ];
 };
 
 export default recmaStoryRegister;

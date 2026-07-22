@@ -84,7 +84,7 @@ describe("Migration System", () => {
 
             const path = findMigrationPath("1.0.0", "1.1.0");
             expect(path).toHaveLength(1);
-            expect(path![0]).toBe(migration);
+            expect(path?.[0]).toBe(migration);
         });
 
         test("finds multi-step migration path", () => {
@@ -113,9 +113,9 @@ describe("Migration System", () => {
 
             const path = findMigrationPath("1.0.0", "2.0.0");
             expect(path).toHaveLength(3);
-            expect(path![0]).toBe(m1);
-            expect(path![1]).toBe(m2);
-            expect(path![2]).toBe(m3);
+            expect(path?.[0]).toBe(m1);
+            expect(path?.[1]).toBe(m2);
+            expect(path?.[2]).toBe(m3);
         });
 
         test("returns null when no path exists", () => {
@@ -158,7 +158,7 @@ describe("Migration System", () => {
             const path = findMigrationPath("1.0.0", "2.0.0");
             // Should find the shortest path (direct)
             expect(path).toHaveLength(1);
-            expect(path![0]).toBe(direct);
+            expect(path?.[0]).toBe(direct);
         });
     });
 
@@ -331,7 +331,7 @@ describe("Migration System", () => {
                 from: "1.0.0",
                 to: "1.1.0",
                 description: "Invalid migration",
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // biome-ignore lint/suspicious/noExplicitAny: intentionally violates the migration contract.
                 migrate: () => null as any,
             });
 

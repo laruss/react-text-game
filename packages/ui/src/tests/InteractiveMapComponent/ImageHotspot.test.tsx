@@ -1,11 +1,12 @@
-import { MapImageHotspot } from "@react-text-game/core/passages";
+// biome-ignore-all lint/style/noNonNullAssertion: Each queried button is asserted before its style is inspected.
+import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
+import type { MapImageHotspot } from "@react-text-game/core/passages";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import { createElement } from "react";
 
 import { ImageHotspot } from "#components/InteractiveMapComponent/ImageHotspot";
-import { ImagePositionInfo } from "#components/InteractiveMapComponent/types";
+import type { ImagePositionInfo } from "#components/InteractiveMapComponent/types";
 
 describe("ImageHotspot", () => {
     beforeEach(() => {
@@ -230,6 +231,22 @@ describe("ImageHotspot", () => {
     });
 
     describe("Dynamic Content (Functions)", () => {
+        test("supports a callable string as the complete image content", () => {
+            const hotspot = {
+                id: "callable-content",
+                type: "image",
+                position: { x: 50, y: 50 },
+                content: () => "/images/callable.png",
+                action: mock(() => {}),
+            } as unknown as MapImageHotspot;
+
+            render(createElement(ImageHotspot, { hotspot }));
+
+            expect(
+                screen.getByAltText("callable-content").getAttribute("src")
+            ).toBe("/images/callable.png");
+        });
+
         test("handles content as functions", () => {
             const mockAction = mock(() => {});
             const hotspot: MapImageHotspot = {

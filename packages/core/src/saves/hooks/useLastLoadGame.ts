@@ -2,7 +2,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { useCallback } from "react";
 
 import { Game } from "#game";
-import { db, GameSave, loadGame } from "#saves";
+import { db, type GameSave, loadGame } from "#saves";
 
 const getLastSave = async (): Promise<GameSave | null> => {
     const save = await db.saves
@@ -47,7 +47,7 @@ export const useLastLoadGame = () => {
         if (!lastSave?.id) return;
 
         const saveId = Number(lastSave.name);
-        if (isNaN(saveId)) {
+        if (Number.isNaN(saveId)) {
             throw new Error("Invalid save ID");
         }
 
@@ -66,7 +66,7 @@ export const useLastLoadGame = () => {
                     "Unknown error occurred while loading the game, please, check console for more info",
             };
         }
-    }, [lastSave?.id]);
+    }, [lastSave?.id, lastSave?.name]);
 
     return {
         hasLastSave: !!lastSave,

@@ -1,11 +1,11 @@
+import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import {
     Game,
-    NewOptions,
+    type NewOptions,
     Passage,
     SYSTEM_PASSAGE_NAMES,
 } from "@react-text-game/core";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 import { createElement } from "react";
 
 import { GameProvider } from "#components/GameProvider";
@@ -136,6 +136,66 @@ describe("GameProvider", () => {
                     SYSTEM_PASSAGE_NAMES.START_MENU
                 );
             });
+        });
+
+        test("selects START_MENU when an initialized game has no current passage", async () => {
+            await Game.init({ gameName: "pre-initialized" });
+            Game.selfState.currentPassageId = null;
+            const originalSetCurrent = Game.setCurrent.bind(Game);
+            const setCurrent = mock(originalSetCurrent);
+            Game.setCurrent = setCurrent;
+
+            render(
+                createElement(
+                    GameProvider,
+                    { options: { gameName: "test" } },
+                    createElement("div", null, "Default passage ready")
+                )
+            );
+
+            await waitFor(() => {
+                expect(screen.getByText("Default passage ready")).toBeTruthy();
+                expect(setCurrent).toHaveBeenCalledWith(
+                    SYSTEM_PASSAGE_NAMES.START_MENU
+                );
+            });
+            Game.setCurrent = originalSetCurrent;
+        });
+
+        test("warns and falls back when startPassage is not registered", async () => {
+            await Game.init({ gameName: "pre-initialized" });
+            Game.selfState.currentPassageId = null;
+            const originalSetCurrent = Game.setCurrent.bind(Game);
+            const setCurrent = mock(originalSetCurrent);
+            const originalWarn = console.warn;
+            const warn = mock(() => {});
+            Game.setCurrent = setCurrent;
+            console.warn = warn;
+
+            render(
+                createElement(
+                    GameProvider,
+                    {
+                        options: {
+                            gameName: "test",
+                            startPassage: "missing-start",
+                        },
+                    },
+                    createElement("div", null, "Fallback ready")
+                )
+            );
+
+            await waitFor(() => {
+                expect(screen.getByText("Fallback ready")).toBeTruthy();
+                expect(warn).toHaveBeenCalledWith(
+                    '[react-text-game] startPassage "missing-start" not found, falling back to START_MENU'
+                );
+                expect(setCurrent).toHaveBeenCalledWith(
+                    SYSTEM_PASSAGE_NAMES.START_MENU
+                );
+            });
+            Game.setCurrent = originalSetCurrent;
+            console.warn = originalWarn;
         });
     });
 

@@ -12,11 +12,12 @@
     "scripts": {
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
-        "test": "bun test",
+        "test": "bun test --cwd ../.. packages/mdx/src/tests",
+        "test:coverage": "bun test --cwd ../.. --coverage --coverage-dir packages/mdx/coverage packages/mdx/src/tests && bun ../../scripts/check-coverage.ts packages/mdx",
         "check-types": "tsc --noEmit",
-        "lint": "eslint .",
+        "lint": "biome check --error-on-warnings .",
         "prepack": "rm -rf dist && bun run build",
-        "test-pack": "npm pack --dry-run && bunx publint"
+        "test-pack": "bun pm pack --dry-run && bunx --bun publint"
     },
     "author": "laruss",
     "publishConfig": {
@@ -44,12 +45,11 @@
     },
     "devDependencies": {
         "@react-text-game/core": "workspace:*",
-        "@types/bun": "latest",
+        "@types/bun": "1.3.9",
         "@types/estree": "^1.0.8",
         "@types/mdast": "^4.0.4",
         "@types/react": "^19.2.2",
         "@types/react-dom": "^19.2.2",
-        "eslint": "^9.37.0",
         "mdast-util-mdx": "^3.0.0",
         "mdast-util-to-string": "^4.0.0",
         "remark-mdx": "^3.1.0",

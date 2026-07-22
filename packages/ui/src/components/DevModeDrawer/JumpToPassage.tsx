@@ -1,5 +1,5 @@
 import { Game } from "@react-text-game/core";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 
 export const JumpToPassage = () => {
     const [passageToJumpTo, setPassageToJumpTo] = useState<string>("");

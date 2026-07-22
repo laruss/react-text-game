@@ -2,16 +2,21 @@ import { proxy, subscribe } from "valtio";
 
 import { STORAGE_SYSTEM_PATH, SYSTEM_PASSAGE_NAMES } from "#constants";
 import { cleanupDevTools, exposeDevTools } from "#devTools";
-import { BaseGameObject } from "#gameObjects";
+import type { BaseGameObject } from "#gameObjects";
 import { deepMerge } from "#helpers";
 import { initI18n } from "#i18n";
 import { logger } from "#logger";
-import { _getOptions, NewOptions, newOptions, Options } from "#options";
-import { Passage } from "#passages/passage";
+import {
+    _getOptions,
+    type NewOptions,
+    newOptions,
+    type Options,
+} from "#options";
+import type { Passage } from "#passages/passage";
 import { createOrUpdateSystemSave } from "#saves";
 import { validateMigrations } from "#saves/migrations";
 import { Storage } from "#storage";
-import { GameSaveState, JsonPath } from "#types";
+import type { GameSaveState, JsonPath } from "#types";
 
 const objectRegistry = new Map<string, BaseGameObject>();
 const passagesRegistry = new Map<string, Passage>();
@@ -52,6 +57,7 @@ type GameInternalSaveState = {
  * Game.loadFromSessionStorage();
  * ```
  */
+// biome-ignore lint/complexity/noStaticOnlyClass: Game is a long-standing public namespace API with static lifecycle methods.
 export class Game {
     /**
      * Internal reactive state managed by Valtio.
@@ -347,13 +353,14 @@ export class Game {
      */
     private static load(): void {
         const savedState = Storage.getValue<GameInternalSaveState>(jsonPath);
-        if (!savedState.length) {
+        const state = savedState[0];
+        if (!state) {
             throw new Error("No saved state found.");
         }
-        const { currentPassageId } = savedState[0]!;
+        const { currentPassageId } = state;
         Game.state.currentPassageId = currentPassageId || null;
 
-        logger.log(`Game state loaded: ${JSON.stringify(savedState[0])}`);
+        logger.log(`Game state loaded: ${JSON.stringify(state)}`);
     }
 
     /**
@@ -494,7 +501,9 @@ export class Game {
         }
 
         // Unsubscribe all listeners
-        Game.unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
+        Game.unsubscribeFunctions.forEach((unsubscribe) => {
+            unsubscribe();
+        });
         Game.unsubscribeFunctions = [];
 
         Game.autoSaveEnabled = false;
@@ -670,9 +679,9 @@ export class Game {
                 logger.warn(
                     "Migration validation failed. The following issues were found:"
                 );
-                validation.issues.forEach((issue) =>
-                    logger.warn(`  - ${issue}`)
-                );
+                validation.issues.forEach((issue) => {
+                    logger.warn(`  - ${issue}`);
+                });
                 logger.warn(
                     "These issues may cause problems when loading saves from older versions."
                 );

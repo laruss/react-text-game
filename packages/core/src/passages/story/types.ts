@@ -1,6 +1,11 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
-import { ButtonColor, ButtonVariant, EmptyObject, InitVarsType } from "#types";
+import type {
+    ButtonColor,
+    ButtonVariant,
+    EmptyObject,
+    InitVarsType,
+} from "#types";
 
 /**
  * Base interface shared by all story components.

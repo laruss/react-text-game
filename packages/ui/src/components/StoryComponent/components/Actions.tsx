@@ -1,6 +1,9 @@
 "use client";
 
-import { ActionsComponent, ActionType } from "@react-text-game/core/passages";
+import type {
+    ActionsComponent,
+    ActionType,
+} from "@react-text-game/core/passages";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -48,6 +51,7 @@ export const Actions = ({ component }: ActionsProps) => (
         )}
     >
         {component.content.map((action, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: Actions are ordered and have no stable identifier in the public model.
             <Action action={action} key={index} />
         ))}
     </div>

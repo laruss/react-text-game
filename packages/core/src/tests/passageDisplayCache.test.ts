@@ -91,15 +91,11 @@ describe("Passage Display Cache - No Double Side Effects", () => {
 
             story.display();
             const cache1 = story.getLastDisplayResult<StoryDisplayResult>();
-            expect((cache1?.components[0] as TextComponent).content).toBe(
-                "Call 1"
-            );
+            expect(cache1?.components[0]).toMatchObject({ content: "Call 1" });
 
             story.display();
             const cache2 = story.getLastDisplayResult<StoryDisplayResult>();
-            expect((cache2?.components[0] as TextComponent).content).toBe(
-                "Call 2"
-            );
+            expect(cache2?.components[0]).toMatchObject({ content: "Call 2" });
         });
 
         test("simulates DevModeDrawer scenario - no side effects when reading passage data", () => {

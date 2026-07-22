@@ -372,9 +372,9 @@ describe("Widget Passage", () => {
         });
 
         test("anonymous function works correctly", () => {
-            const widget = newWidget(uniqueId("widget"), function () {
-                return createElement("div", null, "Anonymous");
-            });
+            const widget = newWidget(uniqueId("widget"), () =>
+                createElement("div", null, "Anonymous")
+            );
 
             const result = widget.display() as React.ReactElement;
 

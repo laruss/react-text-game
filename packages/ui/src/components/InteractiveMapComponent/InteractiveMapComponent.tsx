@@ -1,6 +1,7 @@
+// biome-ignore-all lint/suspicious/noArrayIndexKey: Hotspots are ordered display data and do not have required stable identifiers.
 "use client";
 
-import { InteractiveMap } from "@react-text-game/core";
+import type { InteractiveMap } from "@react-text-game/core";
 import { useMemo, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 

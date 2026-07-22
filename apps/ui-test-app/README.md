@@ -2,16 +2,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Install and run the development server from the repository root with Bun 1.3.9:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install --frozen-lockfile
+bun run dev --filter=ui-test-app
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

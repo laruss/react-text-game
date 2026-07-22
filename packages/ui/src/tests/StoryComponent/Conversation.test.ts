@@ -1,6 +1,12 @@
-import { ConversationComponent } from "@react-text-game/core/passages";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import type { ConversationComponent } from "@react-text-game/core/passages";
+import {
+    cleanup,
+    fireEvent,
+    render,
+    screen,
+    waitFor,
+} from "@testing-library/react";
 import { createElement } from "react";
 
 import { Conversation } from "#components/StoryComponent/components/Conversation";
@@ -211,6 +217,32 @@ describe("Conversation", () => {
             // Second bubble should now be visible
             await waitFor(() => {
                 expect(screen.getByText("Second message")).toBeTruthy();
+            });
+        });
+
+        test("shows the next bubble with keyboard activation", async () => {
+            const component: ConversationComponent = {
+                type: "conversation",
+                appearance: "byClick",
+                content: [
+                    { content: "Keyboard first", side: "left" },
+                    { content: "Keyboard second", side: "left" },
+                ],
+            };
+
+            const { container } = render(
+                createElement(Conversation, { component })
+            );
+            const line = container.querySelector(
+                "#conversation-line-container"
+            ) as HTMLElement;
+
+            fireEvent.keyDown(line, { key: "ArrowDown" });
+            expect(screen.queryByText("Keyboard second")).toBeNull();
+            fireEvent.keyDown(line, { key: "Enter" });
+
+            await waitFor(() => {
+                expect(screen.getByText("Keyboard second")).toBeTruthy();
             });
         });
 

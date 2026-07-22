@@ -1,5 +1,5 @@
 import { Game } from "@react-text-game/core";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { CopyButton } from "./CopyButton";
 import { RefreshButton } from "./RefreshButton";
@@ -9,7 +9,7 @@ export const CurrentPassageData = ({ isOpen }: { isOpen: boolean }) => {
     const [showPassageDataRefreshed, setShowPassageDataRefreshed] =
         useState(false);
 
-    const onReloadPassageData = () => {
+    const onReloadPassageData = useCallback(() => {
         const psg = Game.currentPassage;
         const cachedData = psg?.getLastDisplayResult();
         const data = JSON.stringify(
@@ -20,13 +20,13 @@ export const CurrentPassageData = ({ isOpen }: { isOpen: boolean }) => {
         setCurrentPassageData(data);
         setShowPassageDataRefreshed(true);
         setTimeout(() => setShowPassageDataRefreshed(false), 500);
-    };
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
             onReloadPassageData();
         }
-    }, [isOpen]);
+    }, [isOpen, onReloadPassageData]);
 
     return (
         <div className="w-full">

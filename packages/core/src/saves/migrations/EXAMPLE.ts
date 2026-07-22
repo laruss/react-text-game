@@ -5,7 +5,7 @@
  * It shows a complete migration history from version 1.0.0 to 3.0.0.
  */
 
-import { registerMigration, SaveMigration } from "./index";
+import { registerMigration, type SaveMigration } from "./index";
 
 // ============================================================================
 // MIGRATION HISTORY

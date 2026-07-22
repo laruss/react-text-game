@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, RefObject, useEffect, useState } from "react";
+import { type ReactNode, type RefObject, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 export type Placement =
@@ -137,10 +137,11 @@ export const Tooltip = ({
     }, [targetRef, disabled]);
 
     useEffect(() => {
-        if (!isVisible || !tooltipElement || !targetRef.current) return;
+        const target = targetRef.current;
+        if (!isVisible || !tooltipElement || !target) return;
 
         const updatePosition = () => {
-            const targetRect = targetRef.current!.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
             const tooltipRect = tooltipElement.getBoundingClientRect();
 
             const { top, left, arrowTop, arrowLeft } = calculatePosition(

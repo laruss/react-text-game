@@ -1,7 +1,7 @@
 import { useProxy } from "valtio/utils";
 
 import { Game } from "#game";
-import { Passage } from "#passages/passage";
+import type { Passage } from "#passages/passage";
 
 /**
  * Retrieves the current passage and render identifier from the game state.

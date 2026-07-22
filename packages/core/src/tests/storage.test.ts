@@ -246,6 +246,27 @@ describe("Storage", () => {
                 "value",
             ]);
         });
+
+        test("creates missing nested arrays and assigns their indexes", () => {
+            Storage.setValue("$.matrix[0][0]", "cell");
+
+            expect(Storage.getState()).toEqual({ matrix: [["cell"]] });
+        });
+
+        test("rejects array indexes when their parent is not an array", () => {
+            expect(() => Storage.setValue("$[0]" as never, "cell")).toThrow(
+                "Cannot set array index on non-array"
+            );
+            expect(() =>
+                Storage.setValue("$[0].name" as never, "cell")
+            ).toThrow("Cannot access array index on non-array");
+        });
+
+        test("rejects an empty JSONPath component", () => {
+            expect(() => Storage.setValue('$[""]' as never, "cell")).toThrow(
+                "Invalid path component at index 1"
+            );
+        });
     });
 
     describe("Integration tests", () => {

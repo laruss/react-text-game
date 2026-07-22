@@ -1,12 +1,11 @@
 "use client";
 
-import { MapMenu } from "@react-text-game/core/passages";
+import type { MapMenu } from "@react-text-game/core/passages";
 import { useEffect, useMemo, useRef } from "react";
 import { twMerge } from "tailwind-merge";
-
-import { callIfFunction } from "./helpers";
 import { HotspotMenuItem } from "./HotspotMenuItem";
-import { ImagePositionInfo } from "./types";
+import { callIfFunction } from "./helpers";
+import type { ImagePositionInfo } from "./types";
 
 type Props = Readonly<{
     menu: MapMenu;
@@ -54,6 +53,7 @@ export const HotspotMenu = ({ menu, imagePositionInfo }: Props) => {
             )}
         >
             {items.map((item, index) => (
+                // biome-ignore lint/suspicious/noArrayIndexKey: Menu items are ordered and have no required stable identifier.
                 <HotspotMenuItem item={item} key={index} />
             ))}
         </div>

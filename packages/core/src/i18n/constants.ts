@@ -1,4 +1,4 @@
-import { I18nConfig } from "./types";
+import type { I18nConfig } from "./types";
 
 /**
  * Default configuration for the i18n system.

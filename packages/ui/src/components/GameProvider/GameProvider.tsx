@@ -2,16 +2,19 @@
 
 import {
     Game,
-    NewOptions,
+    type NewOptions,
     newWidget,
     SYSTEM_PASSAGE_NAMES,
 } from "@react-text-game/core";
-import { PropsWithChildren, useEffect, useRef, useState } from "react";
+import { type PropsWithChildren, useEffect, useRef, useState } from "react";
 
 import { ErrorBoundary } from "#components/ErrorBoundary";
 import { MainMenu } from "#components/MainMenu";
 import { SaveLoadModal } from "#components/SaveLoadModal";
-import { Components, ComponentsProvider } from "#context/ComponentsContext";
+import {
+    type Components,
+    ComponentsProvider,
+} from "#context/ComponentsContext";
 import {
     SaveLoadMenuProvider,
     useSaveLoadMenu,
@@ -78,7 +81,7 @@ export const GameProvider = ({
             .finally(() => {
                 initializingRef.current = false;
             });
-    }, [options]);
+    }, [options, components?.MainMenu]);
 
     useEffect(() => {
         if (internalOptions && isInitialized && internalOptions !== options) {

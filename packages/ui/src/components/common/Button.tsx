@@ -1,5 +1,5 @@
-import { ButtonColor, ButtonVariant } from "@react-text-game/core";
-import { ButtonHTMLAttributes } from "react";
+import type { ButtonColor, ButtonVariant } from "@react-text-game/core";
+import type { ButtonHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &

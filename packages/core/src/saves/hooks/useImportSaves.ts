@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { deleteAllGameSaves, GameSave, saveGame } from "#saves";
+import { deleteAllGameSaves, type GameSave, saveGame } from "#saves";
 import { SAFE_FILE_EXTENSION } from "#saves/constants";
 import { decodeSf } from "#saves/helpers";
 

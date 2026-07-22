@@ -1,4 +1,7 @@
-import { HeaderComponent, HeaderLevel } from "@react-text-game/core/passages";
+import type {
+    HeaderComponent,
+    HeaderLevel,
+} from "@react-text-game/core/passages";
 import { twMerge } from "tailwind-merge";
 
 export type HeadingProps = Readonly<{

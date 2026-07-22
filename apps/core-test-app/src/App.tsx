@@ -1,19 +1,19 @@
 import {
     Game,
-    Story,
+    type Story,
     useCurrentPassage,
     useGameEntity,
     useGameIsStarted,
 } from "@react-text-game/core";
 import { useGameTranslation } from "@react-text-game/core/i18n";
 import {
+    useDeleteAllSaves,
     useExportSaves,
     useImportSaves,
     useRestartGame,
     useSaveSlots,
 } from "@react-text-game/core/saves";
-import { useDeleteAllSaves } from "@react-text-game/core/saves";
-import { Activity, useMemo, useState } from "react";
+import { Activity, useState } from "react";
 
 import { player } from "@/game/entities";
 import { environment } from "@/game/entities/environment";
@@ -31,7 +31,7 @@ export const App = () => {
     const exportCallback = useExportSaves();
     const deleteAllCallback = useDeleteAllSaves();
 
-    const state = useMemo(() => Game.getState(), [env]);
+    const state = Game.getState();
 
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -50,6 +50,7 @@ export const App = () => {
             </div>
             <div>
                 <button
+                    type="button"
                     onClick={() => {
                         setIsSavesOpen((state) => !state);
                     }}
@@ -68,6 +69,7 @@ export const App = () => {
                         >
                             {slots.map((slot, index) => (
                                 <div
+                                    // biome-ignore lint/suspicious/noArrayIndexKey: save slots have fixed positional identity.
                                     key={index}
                                     style={{ marginBottom: "5px" }}
                                 >
@@ -81,6 +83,7 @@ export const App = () => {
                                                 ).toLocaleString()}
                                             </span>
                                             <button
+                                                type="button"
                                                 style={{ marginLeft: "10px" }}
                                                 onClick={async () => {
                                                     await slot.load();
@@ -90,6 +93,7 @@ export const App = () => {
                                                 Load
                                             </button>
                                             <button
+                                                type="button"
                                                 style={{ marginLeft: "5px" }}
                                                 onClick={async () => {
                                                     await slot.delete();
@@ -103,6 +107,7 @@ export const App = () => {
                                     )}
                                     {isStarted && (
                                         <button
+                                            type="button"
                                             onClick={async () => {
                                                 await slot.save();
                                             }}
@@ -113,16 +118,19 @@ export const App = () => {
                                 </div>
                             ))}
                             <div style={{ marginLeft: 10 }}>
-                                <button onClick={deleteAllCallback}>
+                                <button
+                                    type="button"
+                                    onClick={deleteAllCallback}
+                                >
                                     Delete all saves
                                 </button>
                             </div>
                         </div>
                         <div>
-                            <button onClick={exportCallback}>
+                            <button type="button" onClick={exportCallback}>
                                 Export saves
                             </button>
-                            <button onClick={importCallback}>
+                            <button type="button" onClick={importCallback}>
                                 Import saves
                             </button>
                         </div>
@@ -144,6 +152,7 @@ export const App = () => {
                 <span>{String(isStarted)}</span>
                 <Activity mode={isStarted ? "hidden" : "visible"}>
                     <button
+                        type="button"
                         onClick={() => {
                             Game.jumpTo("testMap");
                         }}
@@ -151,6 +160,7 @@ export const App = () => {
                         start (map)
                     </button>
                     <button
+                        type="button"
                         onClick={() => {
                             Game.jumpTo("testStory");
                         }}
@@ -166,15 +176,23 @@ export const App = () => {
                     <div>
                         <div>Change temperature</div>
                         <div>
-                            <button onClick={() => env.changeTemperature(10)}>
+                            <button
+                                type="button"
+                                onClick={() => env.changeTemperature(10)}
+                            >
                                 + 10 *
                             </button>
-                            <button onClick={() => env.changeTemperature(-10)}>
+                            <button
+                                type="button"
+                                onClick={() => env.changeTemperature(-10)}
+                            >
                                 - 10 *
                             </button>
                         </div>
                         <div>
-                            <button onClick={restart}>restart</button>
+                            <button type="button" onClick={restart}>
+                                restart
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -189,19 +207,24 @@ export const App = () => {
                         <div>Money: {plr.inventory.money}</div>
                         <div>
                             <button
+                                type="button"
                                 onClick={() => {
                                     plr.inventory.money += 10;
                                 }}
                             >
                                 + 10 $
                             </button>
-                            <button onClick={() => (plr.inventory.money -= 10)}>
+                            <button
+                                type="button"
+                                onClick={() => (plr.inventory.money -= 10)}
+                            >
                                 - 10 $
                             </button>
                         </div>
                         <div>Items: {plr.inventory.items.length}</div>
                         <div>
                             <button
+                                type="button"
                                 onClick={() =>
                                     plr.inventory.items.push(
                                         `item-${Date.now()}`
@@ -210,7 +233,10 @@ export const App = () => {
                             >
                                 Add item
                             </button>
-                            <button onClick={() => plr.inventory.items.pop()}>
+                            <button
+                                type="button"
+                                onClick={() => plr.inventory.items.pop()}
+                            >
                                 Remove item
                             </button>
                         </div>

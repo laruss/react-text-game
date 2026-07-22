@@ -1,8 +1,8 @@
-import Dexie, { EntityTable } from "dexie";
+import Dexie, { type EntityTable } from "dexie";
 
 import { _getOptions } from "#options";
 
-import { GameSave, GameSettings } from "./types";
+import type { GameSave, GameSettings } from "./types";
 
 /**
  * Special save name used for the system initial state.
@@ -51,11 +51,14 @@ const dbCache = new Map<string, GameDatabase>();
  * @returns GameDatabase instance
  */
 export function getGameDatabase(gameId: string): GameDatabase {
-    if (!dbCache.has(gameId)) {
-        const db = new GameDatabase(gameId);
-        dbCache.set(gameId, db);
+    const cachedDatabase = dbCache.get(gameId);
+    if (cachedDatabase) {
+        return cachedDatabase;
     }
-    return dbCache.get(gameId)!;
+
+    const database = new GameDatabase(gameId);
+    dbCache.set(gameId, database);
+    return database;
 }
 
 /**
@@ -86,19 +89,42 @@ export async function saveGame(
     description?: string,
     screenshot?: string
 ): Promise<number> {
-    // Create new save with the given name
-    const id = await db.saves.add({
-        name: `${name}`,
-        gameData,
-        timestamp: new Date(),
-        version: _getOptions().gameVersion,
-        description: String(description),
-        screenshot: String(screenshot),
-    });
-    if (id === undefined) {
-        throw new Error("Failed to save game");
+    const normalizedName = `${name}`;
+    if (normalizedName === SYSTEM_SAVE_NAME) {
+        throw new Error(`Save name "${SYSTEM_SAVE_NAME}" is reserved`);
     }
-    return id;
+
+    return db.transaction("rw", db.saves, async () => {
+        const save = {
+            name: normalizedName,
+            gameData,
+            timestamp: new Date(),
+            version: _getOptions().gameVersion,
+            description: String(description),
+            screenshot: String(screenshot),
+        };
+        const [existingSave, ...duplicates] = await db.saves
+            .where({ name: save.name })
+            .toArray();
+
+        if (existingSave?.id !== undefined) {
+            await db.saves.update(existingSave.id, save);
+            await Promise.all(
+                duplicates.map((duplicate) =>
+                    duplicate.id === undefined
+                        ? Promise.resolve()
+                        : db.saves.delete(duplicate.id)
+                )
+            );
+            return existingSave.id;
+        }
+
+        const id = await db.saves.add(save);
+        if (id === undefined) {
+            throw new Error("Failed to save game");
+        }
+        return id;
+    });
 }
 
 /**
@@ -152,12 +178,16 @@ export async function setSetting(
     // Try to update existing setting first
     const existing = await db.settings.where("key").equals(key).first();
     if (existing) {
-        await db.settings.update(existing.id!, {
+        const existingId = existing.id;
+        if (existingId === undefined) {
+            throw new Error(`Existing setting "${key}" is missing an ID`);
+        }
+        await db.settings.update(existingId, {
             value,
             timestamp: new Date(),
             version: _getOptions().gameVersion,
         });
-        return existing.id!;
+        return existingId;
     } else {
         // Create new setting
         const id = await db.settings.add({

@@ -1,13 +1,13 @@
 "use client";
 
-import {
+import type {
     LabelHotspot as LabelHotspotType,
     MapLabelHotspot,
 } from "@react-text-game/core/passages";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { Button, Placement, Tooltip } from "#components/common";
+import { Button, type Placement, Tooltip } from "#components/common";
 
 import { callIfFunction } from "./helpers";
 

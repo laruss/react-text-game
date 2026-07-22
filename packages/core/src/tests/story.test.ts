@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 
 import { Game } from "#game";
+import { _loadUITranslationsFrom } from "#i18n/utils";
 import { newStory } from "#passages/story/fabric";
 import { Story } from "#passages/story/story";
 import type {
@@ -16,6 +17,14 @@ import type {
     VideoComponent,
 } from "#passages/story/types";
 import { Storage } from "#storage";
+
+test("optional UI translations fail gracefully", async () => {
+    expect(
+        await _loadUITranslationsFrom(async () => {
+            throw new Error("optional UI package unavailable");
+        })
+    ).toEqual({});
+});
 
 // Counter for unique IDs
 let testCounter = 0;

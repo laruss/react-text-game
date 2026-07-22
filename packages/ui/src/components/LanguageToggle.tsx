@@ -62,7 +62,7 @@ export const LanguageToggle = ({
 
     // Default language names - uppercase language codes
     const getLanguageName = (lang: string): string => {
-        if (languageNames && languageNames[lang]) {
+        if (languageNames?.[lang]) {
             return languageNames[lang];
         }
         return lang.toUpperCase();
@@ -79,6 +79,7 @@ export const LanguageToggle = ({
     }
 
     return (
+        // biome-ignore lint/a11y/noStaticElementInteractions: The wrapper keeps a hover-open menu active while its button provides keyboard interaction.
         <div
             className={twMerge("relative inline-block", className)}
             onMouseEnter={() => setIsOpen(true)}
@@ -86,10 +87,12 @@ export const LanguageToggle = ({
         >
             {/* Trigger Button */}
             <button
+                type="button"
                 className="flex items-center gap-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 text-primary-foreground rounded-lg shadow-md transition-colors duration-200 cursor-pointer active:scale-95"
                 aria-label="Select language"
                 aria-expanded={isOpen}
                 aria-haspopup="true"
+                onClick={() => setIsOpen((open) => !open)}
             >
                 {/* Globe Icon */}
                 <svg
@@ -142,6 +145,7 @@ export const LanguageToggle = ({
                             const isActive = lang === currentLanguage;
                             return (
                                 <button
+                                    type="button"
                                     key={lang}
                                     onClick={() => handleLanguageChange(lang)}
                                     className={twMerge(
@@ -156,12 +160,7 @@ export const LanguageToggle = ({
                                     {getLanguageName(lang)}
                                     {showCode && ` (${lang})`}
                                     {isActive && (
-                                        <span
-                                            className="ml-2"
-                                            aria-label="Current language"
-                                        >
-                                            ✓
-                                        </span>
+                                        <span className="ml-2">✓</span>
                                     )}
                                 </button>
                             );

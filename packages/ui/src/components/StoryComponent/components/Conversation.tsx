@@ -1,15 +1,23 @@
+// biome-ignore-all lint/suspicious/noArrayIndexKey: Conversation bubbles are ordered and have no stable identifier in the public model.
 "use client";
 
-import {
+import type {
     ConversationBubble,
     ConversationBubbleSide,
     ConversationComponent,
     ConversationVariant,
 } from "@react-text-game/core/passages";
-import { useEffect, useId, useState } from "react";
+import {
+    type KeyboardEvent as ReactKeyboardEvent,
+    useCallback,
+    useContext,
+    useEffect,
+    useId,
+    useState,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
-import { useConversationClickContext } from "#context/ConversationClickContext";
+import { ConversationClickContext } from "#context/ConversationClickContext";
 
 const bubbleStyles = {
     chat: (side: ConversationBubbleSide) => ({
@@ -35,7 +43,7 @@ const bubbleStyles = {
 type ConversationLineProps = Readonly<{
     line: ConversationBubble;
     variant?: ConversationVariant | undefined;
-    onClick?: () => void;
+    onClick?: (() => void) | undefined;
 }>;
 
 const ConversationLine = ({
@@ -44,47 +52,62 @@ const ConversationLine = ({
     variant = "chat",
 }: ConversationLineProps) => {
     const classNames = bubbleStyles[variant](line.side || "left");
+    const handleKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+        if (onClick && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            onClick();
+        }
+    };
 
     return (
-        <div
-            id="conversation-line-container"
-            className={twMerge(classNames.base, line.props?.classNames?.base)}
-            onClick={onClick}
-        >
+        <>
+            {/* biome-ignore lint/a11y/noStaticElementInteractions: The container is interactive only when the optional button role and keyboard handler are present. */}
             <div
-                id="conversation-line-avatar"
+                id="conversation-line-container"
                 className={twMerge(
-                    classNames.avatar,
-                    line.props?.classNames?.avatar
+                    classNames.base,
+                    line.props?.classNames?.base
                 )}
+                onClick={onClick}
+                onKeyDown={onClick ? handleKeyDown : undefined}
+                role={onClick ? "button" : undefined}
+                tabIndex={onClick ? 0 : undefined}
             >
-                {line.who?.avatar ? (
-                    <img
-                        id="conversation-line-avatar-img"
-                        src={line.who.avatar}
-                        alt={line.who.name || "Avatar"}
-                        className="w-full h-full object-cover"
-                    />
-                ) : (
-                    <div
-                        id="conversation-line-avatar-fallback"
-                        className="w-full h-full bg-muted-300 text-muted-700 flex items-center justify-center cursor-default"
-                    >
-                        {line.who?.name?.[0] || "?"}
-                    </div>
-                )}
+                <div
+                    id="conversation-line-avatar"
+                    className={twMerge(
+                        classNames.avatar,
+                        line.props?.classNames?.avatar
+                    )}
+                >
+                    {line.who?.avatar ? (
+                        <img
+                            id="conversation-line-avatar-img"
+                            src={line.who.avatar}
+                            alt={line.who.name || "Avatar"}
+                            className="w-full h-full object-cover"
+                        />
+                    ) : (
+                        <div
+                            id="conversation-line-avatar-fallback"
+                            className="w-full h-full bg-muted-300 text-muted-700 flex items-center justify-center cursor-default"
+                        >
+                            {line.who?.name?.[0] || "?"}
+                        </div>
+                    )}
+                </div>
+                <div
+                    id="conversation-line-content"
+                    className={twMerge(
+                        classNames.content,
+                        line.props?.classNames?.content
+                    )}
+                    style={{ backgroundColor: line.color }}
+                >
+                    {line.content}
+                </div>
             </div>
-            <div
-                id="conversation-line-content"
-                className={twMerge(
-                    classNames.content,
-                    line.props?.classNames?.content
-                )}
-                style={{ backgroundColor: line.color }}
-            >
-                {line.content}
-            </div>
-        </div>
+        </>
     );
 };
 
@@ -97,14 +120,7 @@ export const Conversation = ({ component }: ConversationProps) => {
     const { appearance, content, props } = component;
     const conversationId = useId();
 
-    // Try to get context, but don't fail if not available (for standalone usage in tests)
-    let context: ReturnType<typeof useConversationClickContext> | undefined;
-    try {
-        context = useConversationClickContext();
-    } catch {
-        // Context not available, component will work standalone
-        context = undefined;
-    }
+    const context = useContext(ConversationClickContext);
 
     useEffect(() => {
         if (appearance === "byClick") {
@@ -117,7 +133,7 @@ export const Conversation = ({ component }: ConversationProps) => {
         }
     }, [appearance, content]);
 
-    const showNext = () => {
+    const showNext = useCallback(() => {
         if (appearance === "byClick") {
             // If the conversation is set to appear by click, append the next line
             setLines((prevLines) => {
@@ -128,7 +144,7 @@ export const Conversation = ({ component }: ConversationProps) => {
                 return prevLines; // No more lines to add
             });
         }
-    };
+    }, [appearance, content]);
 
     // Register with context for byClick conversations
     useEffect(() => {
@@ -138,11 +154,14 @@ export const Conversation = ({ component }: ConversationProps) => {
                 context.unregisterConversation(conversationId);
             };
         }
-    }, [appearance, context, conversationId]);
+    }, [appearance, context, conversationId, showNext]);
 
     const onClick = () => {
-        // For standalone usage (like tests), support direct clicks
-        if (appearance === "byClick" && !context) {
+        if (appearance !== "byClick") return;
+
+        if (context) {
+            context.notifyClick();
+        } else {
             showNext();
         }
     };
@@ -152,7 +171,7 @@ export const Conversation = ({ component }: ConversationProps) => {
             {lines.map((line, index) => (
                 <ConversationLine
                     key={index}
-                    onClick={onClick}
+                    onClick={appearance === "byClick" ? onClick : undefined}
                     line={line}
                     variant={props?.variant}
                 />

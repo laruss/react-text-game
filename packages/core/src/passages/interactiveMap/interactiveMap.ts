@@ -1,8 +1,8 @@
 import { callIfFunction } from "#helpers";
 import { Passage } from "#passages/passage";
-import { EmptyObject, InitVarsType } from "#types";
+import type { EmptyObject, InitVarsType } from "#types";
 
-import { InteractiveMapOptions, InteractiveMapType } from "./types";
+import type { InteractiveMapOptions, InteractiveMapType } from "./types";
 
 /**
  * Map-based interactive passage with clickable hotspots.
@@ -114,12 +114,20 @@ export class InteractiveMap extends Passage {
 
         const image = callIfFunction(this.options.image);
 
-        const bgImage = callIfFunction(this.options.bgImage)!;
+        const bgImage = callIfFunction(this.options.bgImage);
 
         const result: InteractiveMapType = {
-            ...this.options,
+            ...(this.options.caption === undefined
+                ? {}
+                : { caption: this.options.caption }),
+            ...(this.options.props === undefined
+                ? {}
+                : { props: this.options.props }),
+            ...(this.options.classNames === undefined
+                ? {}
+                : { classNames: this.options.classNames }),
             image,
-            bgImage,
+            ...(bgImage === undefined ? {} : { bgImage }),
             hotspots,
         };
         this._lastDisplayResult = result;

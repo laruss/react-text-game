@@ -1,4 +1,4 @@
-import { GameSaveState } from "#types";
+import type { GameSaveState } from "#types";
 
 export type MigrationGameSaveState = Partial<GameSaveState> &
     Record<string, unknown>;

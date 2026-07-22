@@ -12,10 +12,12 @@
     "scripts": {
         "dev": "tsc --watch & tsc-alias --watch",
         "build": "tsc && tsc-alias",
+        "test": "bun test --cwd ../.. packages/core/src/tests",
+        "test:coverage": "bun test --cwd ../.. --coverage --coverage-dir packages/core/coverage packages/core/src/tests && bun ../../scripts/check-coverage.ts packages/core",
         "check-types": "tsc --noEmit",
-        "lint": "eslint .",
+        "lint": "biome check --error-on-warnings .",
         "prepack": "rm -rf dist && bun run build",
-        "test-pack": "npm pack --dry-run && bunx publint"
+        "test-pack": "bun pm pack --dry-run && bunx --bun publint"
     },
     "author": "laruss",
     "publishConfig": {
@@ -42,12 +44,11 @@
         "typescript": "^5"
     },
     "devDependencies": {
-        "@types/bun": "^1.2.23",
+        "@types/bun": "1.3.9",
         "@types/crypto-js": "^4.2.2",
         "@types/node": "^24.6.2",
         "@types/react": "^19.0.9",
         "@types/react-dom": "^19.0.3",
-        "eslint": "^9.37.0",
         "tsc-alias": "^1.8.16"
     },
     "imports": {

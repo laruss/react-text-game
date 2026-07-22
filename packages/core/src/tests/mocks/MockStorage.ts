@@ -1,15 +1,16 @@
-import { GameSaveState } from "#types";
+import type { GameSaveState } from "#types";
 
 /**
  * Mock storage implementation for testing.
  * Provides an in-memory storage that mimics the Storage class API.
  */
+// biome-ignore lint/complexity/noStaticOnlyClass: Mirrors the public static Storage API used by tests.
 export class MockStorage {
     private static state: GameSaveState = {};
 
     static getValue<T>(jsonPath: string): Array<T> {
         const path = jsonPath.replace(/^\$\./, "").split(".");
-        let current = this.state;
+        let current = MockStorage.state;
 
         for (const key of path) {
             if (current && typeof current === "object" && key in current) {
@@ -22,31 +23,37 @@ export class MockStorage {
         return [current] as Array<T>;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static setValue<T>(jsonPath: string, value: T, _isSystem = false): void {
         const path = jsonPath.replace(/^\$\./, "").split(".");
-        let current = this.state;
+        let current = MockStorage.state;
 
         for (let i = 0; i < path.length - 1; i++) {
             const key = path[i];
-            if (!(key! in current)) {
-                current[key!] = {};
+            if (key === undefined) {
+                throw new Error(`Invalid storage path: ${jsonPath}`);
             }
-            current = current[key!] as GameSaveState;
+            if (!(key in current)) {
+                current[key] = {};
+            }
+            current = current[key] as GameSaveState;
         }
 
-        current[path[path.length - 1]!] = value;
+        const finalKey = path.at(-1);
+        if (finalKey === undefined) {
+            throw new Error(`Invalid storage path: ${jsonPath}`);
+        }
+        current[finalKey] = value;
     }
 
     static getState(): GameSaveState {
-        return JSON.parse(JSON.stringify(this.state));
+        return JSON.parse(JSON.stringify(MockStorage.state));
     }
 
     static setState(state: GameSaveState): void {
-        this.state = JSON.parse(JSON.stringify(state));
+        MockStorage.state = JSON.parse(JSON.stringify(state));
     }
 
     static reset(): void {
-        this.state = {};
+        MockStorage.state = {};
     }
 }

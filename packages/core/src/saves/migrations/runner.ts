@@ -1,9 +1,9 @@
 import { logger } from "#logger";
 import { _getOptions } from "#options";
-import { GameSaveState } from "#types";
+import type { GameSaveState } from "#types";
 
 import { findMigrationPath } from "./registry";
-import { MigrationOptions, MigrationResult } from "./types";
+import type { MigrationOptions, MigrationResult } from "./types";
 
 /**
  * Runs the migration chain to migrate save data from one version to another.

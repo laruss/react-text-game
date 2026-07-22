@@ -43,7 +43,9 @@ class MockAudioElement {
     dispatchEvent(event: Event): boolean {
         const listeners = this.listeners.get(event.type);
         if (listeners) {
-            listeners.forEach((listener) => listener(event));
+            listeners.forEach((listener) => {
+                listener(event);
+            });
         }
         return true;
     }
@@ -77,6 +79,16 @@ class MockAudioElement {
     _triggerEnded(): void {
         this.dispatchEvent(new Event("ended"));
     }
+
+    _triggerVolumeChange(muted: boolean): void {
+        this.muted = muted;
+        this.dispatchEvent(new Event("volumechange"));
+    }
+
+    _triggerRateChange(rate: number): void {
+        this.playbackRate = rate;
+        this.dispatchEvent(new Event("ratechange"));
+    }
 }
 
 // Replace global Audio with mock
@@ -96,13 +108,17 @@ describe("Audio System", () => {
     beforeEach(() => {
         // Clear storage before each test
         Storage.setState({});
-        // Clear audio manager tracks
+        // Restore all shared AudioManager state before each test
         AudioManager.disposeAll();
+        AudioManager.setMasterVolume(1);
+        AudioManager.unmuteAll();
     });
 
     afterEach(() => {
         // Clean up after tests
         AudioManager.disposeAll();
+        AudioManager.setMasterVolume(1);
+        AudioManager.unmuteAll();
         Storage.setState({});
     });
 
@@ -222,6 +238,54 @@ describe("Audio System", () => {
             expect(resumedState.isPlaying).toBe(true);
             expect(resumedState.isPaused).toBe(false);
         });
+
+        test("synchronizes metadata, time, end, mute and rate events", async () => {
+            const audio = createAudio("events.mp3");
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
+
+            audioEl._triggerLoadedMetadata();
+            audioEl._triggerTimeUpdate(73);
+            audioEl._triggerVolumeChange(true);
+            audioEl._triggerRateChange(1.75);
+            await audio.play();
+            audioEl._triggerEnded();
+
+            expect(audio.getState()).toMatchObject({
+                duration: 180,
+                currentTime: 0,
+                muted: true,
+                playbackRate: 1.75,
+                isPlaying: false,
+                isPaused: false,
+                isStopped: true,
+            });
+        });
+
+        test("keeps failed automatic playback attempts contained", async () => {
+            const originalPlay = MockAudioElement.prototype.play;
+            MockAudioElement.prototype.play = async () => {
+                throw new Error("playback blocked");
+            };
+
+            try {
+                const automatic = createAudio("automatic.mp3", {
+                    id: "automatic",
+                    autoPlay: true,
+                });
+                await Promise.resolve();
+                expect(AudioManager.getTrackById("automatic")).toBe(automatic);
+                expect(automatic.getState().isStopped).toBe(true);
+
+                automatic.getState().isPaused = true;
+                automatic.resume();
+                await Promise.resolve();
+                expect(automatic.getState().isPaused).toBe(true);
+            } finally {
+                MockAudioElement.prototype.play = originalPlay;
+            }
+        });
     });
 
     describe("AudioTrack controls", () => {
@@ -339,17 +403,18 @@ describe("Audio System", () => {
             audio1.save();
 
             // Clear the saved state that gets overwritten by constructor
-            const savedState = Storage.getValue("$._system.audio.test-audio");
+            const savedState = Storage.getValue(
+                "$._system.audio.test-audio"
+            )[0];
+            if (!savedState) {
+                throw new Error("Expected the audio state to be saved");
+            }
 
             // Dispose audio1 to clean up
             audio1.dispose();
 
             // Restore the saved state
-            Storage.setValue(
-                "$._system.audio.test-audio",
-                savedState[0]!,
-                true
-            );
+            Storage.setValue("$._system.audio.test-audio", savedState, true);
 
             // Create new audio with same ID and different settings
             const audio2 = createAudio("test.mp3", {
@@ -372,6 +437,41 @@ describe("Audio System", () => {
 
             // Should not throw
             expect(() => audio.load()).not.toThrow();
+        });
+
+        test("restores state even when automatic resume is blocked", async () => {
+            Storage.setValue(
+                "$._system.audio.resume-blocked",
+                {
+                    id: "resume-blocked",
+                    src: "resume.mp3",
+                    volume: 0.4,
+                    loop: false,
+                    playbackRate: 1.2,
+                    muted: false,
+                    currentTime: 12,
+                    isPlaying: true,
+                    isPaused: false,
+                },
+                true
+            );
+            const audio = createAudio("resume.mp3", { id: "resume-blocked" });
+            const audioEl = (
+                audio as unknown as { audioElement: MockAudioElement }
+            ).audioElement;
+            audioEl.play = async () => {
+                throw new Error("resume blocked");
+            };
+
+            audio.load();
+            await Promise.resolve();
+
+            expect(audio.getState()).toMatchObject({
+                volume: 0.4,
+                playbackRate: 1.2,
+                currentTime: 0,
+            });
+            expect(audioEl.currentTime).toBe(12);
         });
     });
 
@@ -701,13 +801,16 @@ describe("Audio System", () => {
             // Save the state before disposing
             const savedState = Storage.getValue(
                 "$._system.audio.persistent-audio"
-            );
+            )[0];
+            if (!savedState) {
+                throw new Error("Expected the persistent audio state");
+            }
             audio1.dispose();
 
             // Restore the saved state (in case dispose cleared it)
             Storage.setValue(
                 "$._system.audio.persistent-audio",
-                savedState[0]!,
+                savedState,
                 true
             );
 

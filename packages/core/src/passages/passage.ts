@@ -1,5 +1,5 @@
 import { Game } from "#game";
-import { EmptyObject, InitVarsType, PassageType } from "#types";
+import type { EmptyObject, InitVarsType, PassageType } from "#types";
 
 /**
  * Base class for all passage types in the text game engine.
@@ -68,7 +68,6 @@ export class Passage {
      * @returns The rendered passage content (type depends on passage implementation)
      * @throws Error if not implemented by subclass
      */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     display<T extends InitVarsType = EmptyObject>(_props: T = {} as T) {
         throw new Error(
             `Display method not implemented for passage: ${this.id}`

@@ -1,7 +1,8 @@
+// biome-ignore-all lint/suspicious/noArrayIndexKey: Story components are ordered display data and do not have stable identifiers.
 "use client";
 
-import { Game, Story } from "@react-text-game/core";
-import { MouseEvent, useMemo } from "react";
+import { Game, type Story } from "@react-text-game/core";
+import { type MouseEvent, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useComponents } from "#context/ComponentsContext/useComponents";
@@ -42,6 +43,8 @@ const StoryContent = ({ story }: StoryComponentProps) => {
     };
 
     return (
+        // biome-ignore lint/a11y/noStaticElementInteractions: Story-level click delegation advances conversations while preserving nested interactive controls.
+        // biome-ignore lint/a11y/useKeyWithClickEvents: Keyboard interaction remains on the nested controls; delegated background clicks have no focus target.
         <div
             id="story-content"
             className={twMerge(

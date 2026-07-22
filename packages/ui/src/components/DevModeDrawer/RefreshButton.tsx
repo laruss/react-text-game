@@ -1,10 +1,13 @@
 export const RefreshButton = ({ onClick }: { onClick: () => void }) => {
     return (
         <button
+            type="button"
             className="ml-1 text-sm cursor-pointer text-card-foreground"
             onClick={onClick}
+            aria-label="Refresh data"
         >
             <svg
+                aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"

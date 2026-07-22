@@ -40,10 +40,16 @@ export const MainMenu = () => {
                     backgroundImage:
                         "url('./assets/backgrounds/main-menu.webp')",
                 }}
-                onClick={handleStart}
             >
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/70" />
+
+                <button
+                    type="button"
+                    className="absolute inset-0 z-20 cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-400 focus-visible:ring-inset"
+                    onClick={handleStart}
+                    aria-label="Start the game"
+                />
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col items-center gap-8 p-8 max-w-2xl text-center">

@@ -1,25 +1,24 @@
 "use client";
 
-import { useSaveSlots } from "@react-text-game/core/saves";
+import type { useSaveSlots } from "@react-text-game/core/saves";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "#components/common/Button";
-import { SaveLoadMode } from "#context/SaveLoadMenuContext";
+import type { SaveLoadMode } from "#context/SaveLoadMenuContext";
 
 type SaveSlotType = ReturnType<typeof useSaveSlots>[number];
+export type SaveSlotAction =
+    | SaveSlotType["save"]
+    | SaveSlotType["load"]
+    | SaveSlotType["delete"];
 
 interface SaveSlotProps {
     slot: SaveSlotType;
     index: number;
     mode: SaveLoadMode;
     loading: number | null;
-    onAction: (
-        slotIndex: number,
-        action: () => Promise<
-            void | { success: boolean; message: string } | undefined
-        >
-    ) => void;
+    onAction: (slotIndex: number, action: SaveSlotAction) => void;
 }
 
 export const SaveSlot = ({
@@ -110,6 +109,7 @@ export const SaveSlot = ({
                                 aria-label="Delete save"
                             >
                                 <svg
+                                    aria-hidden="true"
                                     className="w-5 h-5"
                                     fill="none"
                                     stroke="currentColor"

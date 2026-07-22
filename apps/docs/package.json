@@ -7,7 +7,7 @@
         "dev": "docusaurus start",
         "start": "docusaurus start",
         "build": "bun run docs:api && docusaurus build",
-        "docs:api": "typedoc --options typedoc.core.json && typedoc --options typedoc.core-saves.json && typedoc --options typedoc.core-audio.json && typedoc --options typedoc.core-i18n.json && typedoc --options typedoc.ui.json && typedoc --options typedoc.ui-i18n.json && typedoc --options typedoc.mdx.json && typedoc --options typedoc.mdx-plugin.json",
+        "docs:api": "bun --cwd=../.. run docs:api",
         "swizzle": "docusaurus swizzle",
         "deploy": "docusaurus deploy",
         "clear": "docusaurus clear",
@@ -15,7 +15,8 @@
         "write-translations": "docusaurus write-translations",
         "write-heading-ids": "docusaurus write-heading-ids",
         "typecheck": "tsc",
-        "check-types": "tsc --noEmit"
+        "check-types": "tsc --noEmit",
+        "lint": "biome check --error-on-warnings ."
     },
     "dependencies": {
         "@docusaurus/core": "3.9.1",
@@ -32,8 +33,6 @@
         "@docusaurus/module-type-aliases": "3.9.1",
         "@docusaurus/tsconfig": "3.9.1",
         "@docusaurus/types": "3.9.1",
-        "typedoc": "^0.28.14",
-        "typedoc-plugin-markdown": "^4.9.0",
         "typescript": "~5.6.2"
     },
     "browserslist": {

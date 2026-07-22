@@ -1,5 +1,4 @@
-import { Game, newWidget } from "@react-text-game/core";
-import { useGameEntity } from "@react-text-game/core";
+import { Game, useGameEntity } from "@react-text-game/core";
 import { Button } from "@react-text-game/ui";
 
 import { player, playerActions } from "../entities";
@@ -83,7 +82,7 @@ const itemDefinitions: Record<
 /**
  * Inventory Component
  */
-const InventoryComponent = () => {
+export const InventoryComponent = () => {
     // Use reactive player state
     const reactivePlayer = useGameEntity(player);
 
@@ -217,7 +216,7 @@ const InventoryComponent = () => {
                         </p>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {reactivePlayer.inventory.map((itemId) => {
+                            {reactivePlayer.inventory.map((itemId: string) => {
                                 const item = itemDefinitions[itemId];
                                 if (!item) return null;
 
@@ -304,9 +303,3 @@ const InventoryComponent = () => {
         </div>
     );
 };
-
-/**
- * Inventory Widget Passage
- * Demonstrates: Widget passage with custom React component
- */
-export const inventoryWidget = newWidget("inventory", <InventoryComponent />);

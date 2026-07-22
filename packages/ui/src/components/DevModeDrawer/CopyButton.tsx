@@ -16,10 +16,13 @@ export const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
     return (
         <>
             <button
+                type="button"
                 className="ml-1 text-sm cursor-pointer text-card-foreground"
                 onClick={handleCopy}
+                aria-label="Copy to clipboard"
             >
                 <svg
+                    aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 -.5 25 25"

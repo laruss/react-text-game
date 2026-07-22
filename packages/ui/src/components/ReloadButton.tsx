@@ -3,7 +3,7 @@
 import { useRestartGame } from "@react-text-game/core/saves";
 import { twMerge } from "tailwind-merge";
 
-import { Button, ButtonProps } from "#components/common";
+import { Button, type ButtonProps } from "#components/common";
 
 export type ReloadButtonProps = Omit<ButtonProps, "children" | "onClick"> &
     Readonly<{
@@ -17,6 +17,7 @@ export type ReloadButtonProps = Omit<ButtonProps, "children" | "onClick"> &
 
 export const Icon = ({ className }: { className?: string }) => (
     <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

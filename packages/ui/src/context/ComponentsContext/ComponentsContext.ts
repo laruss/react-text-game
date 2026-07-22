@@ -2,7 +2,7 @@
 
 import { createContext } from "react";
 
-import { RequiredComponents } from "./types";
+import type { RequiredComponents } from "./types";
 
 export const ComponentsContext = createContext<RequiredComponents | undefined>(
     undefined

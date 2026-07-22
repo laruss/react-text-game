@@ -2,12 +2,12 @@
 
 import "@/game/registry";
 
+import { useGameIsStarted } from "@react-text-game/core";
 import {
     PassageController,
     ReloadButton,
     SaveButton,
 } from "@react-text-game/ui";
-import { useGameIsStarted } from "@react-text-game/core";
 
 export default function Home() {
     const isGameStarted = useGameIsStarted();

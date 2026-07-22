@@ -16,7 +16,11 @@ describe("deepMerge", () => {
         const source = { b: { c: 4 }, e: 5 };
         const result = deepMerge(target, source);
 
-        expect(result).toEqual({ a: 1, b: { c: 4, d: 3 }, e: 5 } as typeof result);
+        expect(result).toEqual({
+            a: 1,
+            b: { c: 4, d: 3 },
+            e: 5,
+        } as typeof result);
     });
 
     test("should replace arrays instead of merging", () => {
@@ -122,7 +126,9 @@ describe("deepMerge", () => {
         const source = { a: { nested: "value" } };
         const result = deepMerge(target, source);
 
-        expect(result).toEqual({ a: { nested: "value" } } as unknown as typeof result);
+        expect(result).toEqual({
+            a: { nested: "value" },
+        } as unknown as typeof result);
     });
 
     test("should not mutate target object", () => {

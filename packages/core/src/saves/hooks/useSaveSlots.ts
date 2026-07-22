@@ -2,7 +2,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { useMemo } from "react";
 
 import {
-    GameSave,
+    type GameSave,
     getAllSaves,
     useDeleteGame,
     useLoadGame,

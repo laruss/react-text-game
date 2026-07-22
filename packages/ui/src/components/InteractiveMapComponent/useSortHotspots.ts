@@ -1,6 +1,6 @@
 "use client";
 
-import {
+import type {
     AnyHotspot,
     MapImageHotspot,
     MapLabelHotspot,
@@ -27,13 +27,13 @@ type ReturnType = {
 export const useSortHotspots = ({ hotspots }: Props): ReturnType => {
     const sideHotspots = hotspots.filter(
         (hotspot): hotspot is SideLabelHotspot | SideImageHotspot =>
-            !("position" in hotspot)
+            typeof hotspot.position === "string"
     );
 
     return {
         mapHotspots: hotspots.filter(
             (hotspot): hotspot is MapLabelHotspot | MapImageHotspot =>
-                "position" in hotspot && hotspot.type !== "menu"
+                typeof hotspot.position !== "string" && hotspot.type !== "menu"
         ),
         topHotspots: sideHotspots.filter(
             (hotspot) => hotspot.position === "top"

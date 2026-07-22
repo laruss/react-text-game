@@ -1,5 +1,5 @@
-import { ConversationBubble } from "@react-text-game/core";
-import { ReactNode } from "react";
+import type { ConversationBubble } from "@react-text-game/core";
+import type { ReactNode } from "react";
 
 export type SayProps = Readonly<{
     children: ReactNode;

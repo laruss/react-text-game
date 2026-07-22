@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { Game } from "#game";
 import { newInteractiveMap } from "#passages/interactiveMap/fabric";
 import { InteractiveMap } from "#passages/interactiveMap/interactiveMap";
-import {
+import type {
     ImageHotspotContentObject,
     InteractiveMapOptions,
     MapImageHotspot,

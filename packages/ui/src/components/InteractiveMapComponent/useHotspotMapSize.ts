@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import {
+import type {
     ImagePositionInfo,
     UseHotspotMapSizeProps,
     UseHotspotMapSizeResult,

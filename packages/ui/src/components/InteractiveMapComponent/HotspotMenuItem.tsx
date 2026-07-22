@@ -1,6 +1,6 @@
 "use client";
 
-import { LabelHotspot } from "@react-text-game/core";
+import type { LabelHotspot } from "@react-text-game/core";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 

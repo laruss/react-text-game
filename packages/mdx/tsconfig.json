@@ -15,7 +15,7 @@
         // For nodejs:
         // "lib": ["esnext"],
         // "types": ["node"],
-        // and npm install -D @types/node
+        // and bun add -d @types/node
 
         // Other Outputs
         "sourceMap": true,

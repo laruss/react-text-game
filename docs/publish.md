@@ -1,7 +1,7 @@
 ### HOW TO PUBLISH
 
 ```shell
-bunx changeset
+bun run changeset
 ```
 
 Interactively select the affected packages (@react-text-game/core, @react-text-game/ui) and the bump type:

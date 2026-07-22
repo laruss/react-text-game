@@ -1,4 +1,4 @@
-import { AssertNoOptionals, InitVarsType } from "#types";
+import type { AssertNoOptionals, InitVarsType } from "#types";
 
 import { SimpleObject } from "./simpleObject";
 

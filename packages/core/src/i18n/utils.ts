@@ -1,5 +1,23 @@
 import i18next from "i18next";
 
+type UITranslations = Record<string, Record<string, object>>;
+type UITranslationsImporter = () => Promise<{
+    readonly uiTranslations: UITranslations;
+}>;
+
+/** @internal */
+export async function _loadUITranslationsFrom(
+    importUITranslations: UITranslationsImporter
+): Promise<UITranslations> {
+    try {
+        const { uiTranslations } = await importUITranslations();
+        return uiTranslations;
+    } catch (_e) {
+        // UI package isn't installed - this is expected for users with custom UIs
+        return {};
+    }
+}
+
 /**
  * Safely loads UI translations from the @react-text-game/ui package.
  *
@@ -21,23 +39,15 @@ import i18next from "i18next";
  * // Or: {} (if UI package not installed)
  * ```
  */
-export async function loadUITranslations(): Promise<
-    Record<string, Record<string, object>>
-> {
-    try {
+export function loadUITranslations(): Promise<UITranslations> {
+    return _loadUITranslationsFrom(async () => {
         // UI package is a peer dependency and may not be installed.
         // This dynamic import will fail gracefully at runtime if UI package is not available.
-        // Using @ts-ignore instead of @ts-expect-error because the error may or may not exist
-        // depending on whether the UI package is built/installed.
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // The optional peer may not resolve while compiling this package standalone.
+        // biome-ignore lint/suspicious/noTsIgnore: this optional peer import may or may not resolve for consumers.
         // @ts-ignore
-        const { uiTranslations } = await import("@react-text-game/ui/i18n");
-        return uiTranslations;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_e) {
-        // UI package isn't installed - this is expected for users with custom UIs
-        return {};
-    }
+        return import("@react-text-game/ui/i18n");
+    });
 }
 
 /**

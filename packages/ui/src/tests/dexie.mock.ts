@@ -5,6 +5,7 @@
 
 interface DexieTable<T = Record<string, unknown>> {
     add(item: T): Promise<number>;
+    delete(id: number): Promise<void>;
     where(query: Record<string, unknown> | string): DexieWhereClause<T>;
     filter(callback: (item: T) => boolean): DexieCollection<T>;
     toArray(): Promise<T[]>;
@@ -15,6 +16,7 @@ interface DexieTable<T = Record<string, unknown>> {
 interface DexieWhereClause<T = Record<string, unknown>> {
     equals(value: unknown): DexieCollection<T>;
     first(): Promise<T | undefined>;
+    toArray(): Promise<T[]>;
     delete(): Promise<void>;
 }
 
@@ -22,6 +24,18 @@ interface DexieCollection<T = Record<string, unknown>> {
     first(): Promise<T | undefined>;
     toArray(): Promise<T[]>;
     delete(): Promise<void>;
+    reverse(): DexieCollection<T>;
+    sortBy(key: keyof T): Promise<T[]>;
+}
+
+function compareValues(left: unknown, right: unknown): number {
+    if (left instanceof Date && right instanceof Date) {
+        return left.getTime() - right.getTime();
+    }
+    if (typeof left === "number" && typeof right === "number") {
+        return left - right;
+    }
+    return String(left).localeCompare(String(right));
 }
 
 class MockDexieTable<
@@ -30,16 +44,15 @@ class MockDexieTable<
 {
     private data: Map<number, T> = new Map();
     private nextId = 1;
-    private name: string;
-
-    constructor(name: string) {
-        this.name = name;
-    }
 
     async add(item: T): Promise<number> {
         const id = this.nextId++;
         this.data.set(id, { ...item, id } as T);
         return id;
+    }
+
+    async delete(id: number): Promise<void> {
+        this.data.delete(id);
     }
 
     where(query: Record<string, unknown> | string): DexieWhereClause<T> {
@@ -49,6 +62,12 @@ class MockDexieTable<
         const queryValue =
             typeof query === "string" ? undefined : Object.values(query)[0];
         const createCollection = this.createCollection.bind(this);
+        const selectedItems = () =>
+            Array.from(data.values()).filter(
+                (item: T) =>
+                    (item as Record<string, unknown>)[queryKey as string] ===
+                    queryValue
+            );
 
         return {
             equals(value: unknown): DexieCollection<T> {
@@ -63,13 +82,10 @@ class MockDexieTable<
                 );
             },
             async first(): Promise<T | undefined> {
-                const items = Array.from(data.values()).filter(
-                    (item: T) =>
-                        (item as Record<string, unknown>)[
-                            queryKey as string
-                        ] === queryValue
-                );
-                return items[0];
+                return selectedItems()[0];
+            },
+            async toArray(): Promise<T[]> {
+                return selectedItems();
             },
             async delete(): Promise<void> {
                 const itemsToDelete = Array.from(data.entries()).filter(
@@ -109,18 +125,33 @@ class MockDexieTable<
     }
 
     private createCollection(items: T[]): DexieCollection<T> {
-        return {
+        let direction: 1 | -1 = 1;
+        const orderedItems = () =>
+            direction === 1 ? [...items] : [...items].reverse();
+        const collection: DexieCollection<T> = {
             async first(): Promise<T | undefined> {
-                return items[0];
+                return orderedItems()[0];
             },
             async toArray(): Promise<T[]> {
-                return items;
+                return orderedItems();
             },
             async delete(): Promise<void> {
                 // In a real implementation, this would delete from the parent table
                 // For testing purposes, this is sufficient
             },
+            reverse(): DexieCollection<T> {
+                direction = direction === 1 ? -1 : 1;
+                return collection;
+            },
+            async sortBy(key: keyof T): Promise<T[]> {
+                return [...items].sort(
+                    (left, right) =>
+                        direction * compareValues(left[key], right[key])
+                );
+            },
         };
+
+        return collection;
     }
 }
 
@@ -131,20 +162,15 @@ interface MockDexieVersion {
 class MockDexie {
     [key: string]: unknown;
     private tables: Map<string, MockDexieTable> = new Map();
+    private transactionQueue: Promise<void> = Promise.resolve();
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    constructor(_databaseName: string) {
-        // Store database name for potential debugging
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     version(_versionNumber: number): MockDexieVersion {
         const versionObj: MockDexieVersion = {
             stores: (schema: Record<string, string>): MockDexieVersion => {
                 // Initialize tables based on schema
                 for (const tableName of Object.keys(schema)) {
                     if (!this.tables.has(tableName)) {
-                        const table = new MockDexieTable(tableName);
+                        const table = new MockDexieTable();
                         this.tables.set(tableName, table);
                         // Make table accessible as property
                         this[tableName] = table;
@@ -155,6 +181,19 @@ class MockDexie {
         };
 
         return versionObj;
+    }
+
+    transaction<T>(
+        _mode: "rw",
+        _table: unknown,
+        scope: () => Promise<T> | T
+    ): Promise<T> {
+        const result = this.transactionQueue.then(scope);
+        this.transactionQueue = result.then(
+            () => undefined,
+            () => undefined
+        );
+        return result;
     }
 }
 

@@ -2,7 +2,7 @@ import { proxy, subscribe } from "valtio";
 
 import { logger } from "#logger";
 import { Storage } from "#storage";
-import { JsonPath } from "#types";
+import type { JsonPath } from "#types";
 
 import { AUDIO_STORAGE_PATH, DEFAULT_AUDIO_OPTIONS } from "./constants";
 import type { AudioOptions, AudioSaveState, AudioState } from "./types";
@@ -469,10 +469,9 @@ export class AudioTrack {
      */
     load(): void {
         const savedState = Storage.getValue<AudioSaveState>(this.jsonPath);
+        const state = savedState[0];
 
-        if (savedState.length > 0) {
-            const state = savedState[0]!;
-
+        if (state) {
             this.state.volume = state.volume;
             this.state.loop = state.loop;
             this.state.playbackRate = state.playbackRate;
@@ -620,7 +619,9 @@ class AudioManagerClass {
      */
     muteAll(): void {
         this.state.isMuted = true;
-        this.tracks.forEach((track) => track.setMuted(true));
+        this.tracks.forEach((track) => {
+            track.setMuted(true);
+        });
         logger.log("All audio tracks muted");
     }
 
@@ -634,7 +635,9 @@ class AudioManagerClass {
      */
     unmuteAll(): void {
         this.state.isMuted = false;
-        this.tracks.forEach((track) => track.setMuted(false));
+        this.tracks.forEach((track) => {
+            track.setMuted(false);
+        });
         logger.log("All audio tracks unmuted");
     }
 
@@ -681,7 +684,9 @@ class AudioManagerClass {
      * ```
      */
     stopAll(): void {
-        this.tracks.forEach((track) => track.stop());
+        this.tracks.forEach((track) => {
+            track.stop();
+        });
         logger.log("All audio tracks stopped");
     }
 
@@ -746,7 +751,9 @@ class AudioManagerClass {
      * ```
      */
     disposeAll(): void {
-        this.tracks.forEach((track) => track.dispose());
+        this.tracks.forEach((track) => {
+            track.dispose();
+        });
         this.tracks.clear();
         logger.log("All audio tracks disposed");
     }

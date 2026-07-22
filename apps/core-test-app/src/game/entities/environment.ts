@@ -53,7 +53,7 @@ class Environment extends BaseGameObject<EnvironmentVariables> {
 export const environment = new Environment({
     id: "environment",
     variables: {
-        dateTimestamp: new Date().getTime(),
+        dateTimestamp: Date.now(),
         temperature: 22,
     },
 });

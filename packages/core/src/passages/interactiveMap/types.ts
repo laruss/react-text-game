@@ -1,4 +1,4 @@
-import { ButtonColor, ButtonVariant, MaybeCallable } from "#types";
+import type { ButtonColor, ButtonVariant, MaybeCallable } from "#types";
 
 /**
  * Position coordinates for hotspots on the map.

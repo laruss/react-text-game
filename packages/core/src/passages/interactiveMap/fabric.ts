@@ -1,5 +1,5 @@
 import { InteractiveMap } from "./interactiveMap";
-import { InteractiveMapOptions } from "./types";
+import type { InteractiveMapOptions } from "./types";
 
 export const newInteractiveMap = (
     id: string,

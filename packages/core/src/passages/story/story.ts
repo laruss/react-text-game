@@ -1,7 +1,7 @@
 import { Passage } from "#passages/passage";
-import { EmptyObject, InitVarsType } from "#types";
+import type { EmptyObject, InitVarsType } from "#types";
 
-import { Component, StoryContent, StoryOptions } from "./types";
+import type { Component, StoryContent, StoryOptions } from "./types";
 
 /**
  * Text-based narrative passage for displaying story content with rich components.

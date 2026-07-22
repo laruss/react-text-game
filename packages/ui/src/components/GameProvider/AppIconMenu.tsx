@@ -1,7 +1,7 @@
 "use client";
 
-import { NewOptions } from "@react-text-game/core";
-import { useState } from "react";
+import type { NewOptions } from "@react-text-game/core";
+import { type FocusEvent, useState } from "react";
 
 type AppIconMenuProps = Readonly<{
     options: NewOptions;
@@ -9,17 +9,34 @@ type AppIconMenuProps = Readonly<{
 }>;
 
 export const AppIconMenu = ({ options, setOptions }: AppIconMenuProps) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const { isDevMode } = options;
 
+    const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+            setIsOpen(false);
+        }
+    };
+
     return (
-        <div className="fixed bottom-3 left-2 z-10000000">
+        // biome-ignore lint/a11y/noStaticElementInteractions: The wrapper keeps the settings popup open while the pointer or focus moves between its controls.
+        <div
+            className="fixed bottom-3 left-2 z-10000000"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+            onBlur={handleBlur}
+        >
             <button
+                type="button"
                 className="cursor-pointer hover:opacity-50 active:scale-95 bg-primary-500 p-2 rounded-full"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => setIsOpen(true)}
+                onFocus={() => setIsOpen(true)}
+                aria-label="Open application settings"
+                aria-expanded={isOpen}
+                aria-haspopup="true"
             >
                 <svg
+                    aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -32,12 +49,8 @@ export const AppIconMenu = ({ options, setOptions }: AppIconMenuProps) => {
                     />
                 </svg>
             </button>
-            {isHovered && (
-                <div
-                    className="absolute left-full bottom-0 bg-popover border border-border rounded-lg shadow-lg p-3 whitespace-nowrap"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
+            {isOpen && (
+                <div className="absolute left-full bottom-0 bg-popover border border-border rounded-lg shadow-lg p-3 whitespace-nowrap">
                     <label className="flex items-center gap-2 cursor-pointer text-popover-foreground">
                         <input
                             type="checkbox"

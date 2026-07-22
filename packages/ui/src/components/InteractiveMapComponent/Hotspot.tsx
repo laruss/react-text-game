@@ -1,6 +1,6 @@
 "use client";
 
-import {
+import type {
     MapImageHotspot,
     MapLabelHotspot,
 } from "@react-text-game/core/passages";
@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
 import { callIfFunction } from "./helpers";
 import { ImageHotspot } from "./ImageHotspot";
 import { LabelHotspot } from "./LabelHotspot";
-import { ImagePositionInfo } from "./types";
+import type { ImagePositionInfo } from "./types";
 
 type HotspotProps = {
     hotspot: MapImageHotspot | MapLabelHotspot;
@@ -41,7 +41,11 @@ export const Hotspot = ({ hotspot, imagePositionInfo }: HotspotProps) => {
     }, [hotspot.position, imagePositionInfo]);
 
     return (
-        <div ref={hotspotRef} className="absolute z-10 pointer-events-none" id="hotspot-container">
+        <div
+            ref={hotspotRef}
+            className="absolute z-10 pointer-events-none"
+            id="hotspot-container"
+        >
             {hotspot.type === "image" ? (
                 <ImageHotspot
                     hotspot={hotspot}

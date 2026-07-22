@@ -1,5 +1,5 @@
-import { renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
+import { renderHook, waitFor } from "@testing-library/react";
 import i18next from "i18next";
 
 import { Game } from "#game";
@@ -62,7 +62,9 @@ describe("i18n", () => {
             // If translations exist, they should be organized by language
             if (Object.keys(translations).length > 0) {
                 const firstLang = Object.keys(translations)[0];
-                expect(typeof translations[firstLang!]).toBe("object");
+                expect(
+                    firstLang ? typeof translations[firstLang] : "undefined"
+                ).toBe("object");
             }
         });
     });

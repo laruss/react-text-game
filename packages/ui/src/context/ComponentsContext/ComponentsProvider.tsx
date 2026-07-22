@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren, useMemo } from "react";
+import { type PropsWithChildren, useMemo } from "react";
 
 import { MainMenu } from "#components/MainMenu";
 import {
@@ -13,7 +13,7 @@ import {
 } from "#components/StoryComponent/components";
 
 import { ComponentsContext } from "./ComponentsContext";
-import { Components, RequiredComponents } from "./types";
+import type { Components, RequiredComponents } from "./types";
 
 type ComponentsProviderProps = PropsWithChildren<{ components: Components }>;
 

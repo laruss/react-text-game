@@ -1,4 +1,4 @@
-import { Module, Resource } from "i18next";
+import type { Module, Resource } from "i18next";
 
 /**
  * Configuration options for initializing the i18n system in the game engine.

@@ -2,7 +2,7 @@
 
 import { createContext } from "react";
 
-import { SaveLoadMode } from "#context/SaveLoadMenuContext";
+import type { SaveLoadMode } from "#context/SaveLoadMenuContext";
 
 export interface SaveLoadMenuContextType {
     isOpen: boolean;

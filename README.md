@@ -204,14 +204,14 @@ This is a Turborepo monorepo using **Bun** as the package manager.
 
 ### Prerequisites
 
-- [Bun](https://bun.sh) 1.2.23 or later
-- Node.js 18 or later
+- [Bun](https://bun.sh) 1.3.9
+- Node.js 20 or later (for Node-based documentation tooling)
 
 ### Setup
 
 ```bash
 # Install dependencies
-bun install
+bun install --frozen-lockfile
 
 # Run all packages in watch mode
 bun run dev
@@ -220,13 +220,16 @@ bun run dev
 bun run build
 
 # Type checking
-bun run check-types
+bun run typecheck
 
 # Linting
 bun run lint
 
 # Code formatting
 bun run format
+
+# Tests with at least 99% package and 95% per-file coverage
+bun run test:coverage
 ```
 
 ### Turborepo Filtering
@@ -254,6 +257,9 @@ bun run typecheck --filter=@react-text-game/ui
 
 # Run lint for all packages
 bun run lint --filter='@react-text-game/*'
+
+# Run tests for the core package only
+bun run test --filter=@react-text-game/core
 ```
 
 #### Common Development Workflows
@@ -264,7 +270,7 @@ bun run lint --filter='@react-text-game/*'
 | Work on UI components  | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app`   |
 | Work on MDX package    | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/mdx --filter=example-game` |
 | Full stack development | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game`  |
-| Documentation site     | `bun run docs` or `bun run dev --filter=@react-text-game/docs`                                   |
+| Documentation site     | `bun run dev:docs` or `bun run dev --filter=@react-text-game/docs`                               |
 
 ### Repository Structure
 
@@ -327,7 +333,7 @@ bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter
 bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game
 
 # Documentation writing
-bun run docs
+bun run dev:docs
 ```
 
 #### 2. Follow Existing Patterns
@@ -339,8 +345,11 @@ bun run docs
 #### 3. Test Your Changes
 
 ```bash
-# Run tests
-bun test
+# Run all package tests
+bun run test
+
+# Run coverage and enforce the package thresholds
+bun run test:coverage
 
 # Type checking
 bun run typecheck
@@ -378,7 +387,7 @@ Follow the prompts to describe your changes. This generates version bumps and ch
 
 1. **Keep changes focused** - One feature or fix per PR
 2. **Update documentation** - If adding features, update `apps/docs`
-3. **Add tests** - For new functionality, add tests in the test apps
+3. **Add tests** - Add package tests under `packages/<package>/src/tests`
 4. **Follow semantic versioning** - Use changesets to indicate breaking changes
 
 ### Quick Reference
@@ -389,7 +398,8 @@ Follow the prompts to describe your changes. This generates version bumps and ch
 | Start dev (all)      | `bun run dev`                    |
 | Start dev (specific) | `bun run dev --filter=<package>` |
 | Build all            | `bun run build`                  |
-| Run tests            | `bun test`                       |
+| Run tests            | `bun run test`                   |
+| Verify coverage      | `bun run test:coverage`          |
 | Type check           | `bun run typecheck`              |
 | Lint                 | `bun run lint`                   |
 | Format               | `bun run format`                 |

@@ -1,4 +1,4 @@
-import { ProcessorOptions } from "@mdx-js/mdx";
+import type { ProcessorOptions } from "@mdx-js/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 
 import recmaStoryRegister from "./recma-story-register/index.js";

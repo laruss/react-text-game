@@ -1,7 +1,7 @@
-import type { Options, ThemeConfig } from "@docusaurus/preset-classic";
-import type { Config, LoadContext, Plugin } from "@docusaurus/types";
 import fs from "node:fs";
 import path from "node:path";
+import type { Options, ThemeConfig } from "@docusaurus/preset-classic";
+import type { Config, LoadContext, Plugin } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -170,7 +170,8 @@ const config: Config = {
                 docs: {
                     sidebarPath: "./sidebars.ts",
                     routeBasePath: "/",
-                    editUrl: "https://github.com/laruss/react-text-game/tree/main/apps/docs/",
+                    editUrl:
+                        "https://github.com/laruss/react-text-game/tree/main/apps/docs/",
                 },
                 blog: false,
                 theme: {

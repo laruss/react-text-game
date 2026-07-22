@@ -1,6 +1,6 @@
 import { logger } from "#logger";
 
-import { SaveMigration } from "./types";
+import type { SaveMigration } from "./types";
 
 /**
  * In-memory registry of all registered migrations.
@@ -101,10 +101,12 @@ export function findMigrationPath(
     const migrationMap = new Map<string, SaveMigration>();
 
     for (const migration of migrations.values()) {
-        if (!graph.has(migration.from)) {
-            graph.set(migration.from, []);
+        let destinations = graph.get(migration.from);
+        if (!destinations) {
+            destinations = [];
+            graph.set(migration.from, destinations);
         }
-        graph.get(migration.from)!.push(migration.to);
+        destinations.push(migration.to);
         migrationMap.set(
             getMigrationKey(migration.from, migration.to),
             migration
@@ -117,9 +119,7 @@ export function findMigrationPath(
     ];
     const visited = new Set<string>([fromVersion]);
 
-    while (queue.length > 0) {
-        const current = queue.shift()!;
-
+    for (const current of queue) {
         // Check if we reached the target
         if (current.version === toVersion) {
             // Reconstruct the migration path

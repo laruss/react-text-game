@@ -2,7 +2,7 @@
 
 import type { Heading, Image, Paragraph, PhrasingContent, Root } from "mdast";
 import type { MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx";
-import { toString } from "mdast-util-to-string";
+import { toString as mdastToString } from "mdast-util-to-string";
 import type { Plugin } from "unified";
 
 type Props = Record<string, unknown>;
@@ -100,11 +100,11 @@ function processChildrenWithVars(
                 }
             } else {
                 // Other JSX elements - convert to string
-                parts.push({ type: "text", value: toString(child) });
+                parts.push({ type: "text", value: mdastToString(child) });
             }
         } else {
             // Other node types (links, emphasis, etc.) - convert to string
-            parts.push({ type: "text", value: toString(child) });
+            parts.push({ type: "text", value: mdastToString(child) });
         }
     }
 
@@ -130,128 +130,126 @@ function processTextWithVars(
     return processChildrenWithVars(node.children);
 }
 
-const remarkMdxStruct: Plugin<[], Root> = function () {
-    return (tree, file) => {
-        const out: Item[] = [];
+const remarkMdxStruct: Plugin<[], Root> = () => (tree, file) => {
+    const out: Item[] = [];
 
-        function processJsxElement(element: MdxJsxFlowElement): Item | null {
-            const props: Props = {};
-            for (const attr of element.attributes ?? []) {
-                if (attr.type === "mdxJsxAttribute") {
-                    if (attr.value === null) {
-                        props[attr.name] = true;
-                    } else if (typeof attr.value === "string") {
-                        props[attr.name] = attr.value;
-                    } else if (
-                        typeof attr.value === "object" &&
-                        attr.value.type === "mdxJsxAttributeValueExpression"
-                    ) {
-                        // Expression value (functions, objects, etc.)
-                        // Store the estree data which will be used by recma plugin
-                        props[attr.name] = {
-                            type: "expression",
-                            value: attr.value.value,
-                            data: attr.value.data,
-                        };
-                    }
-                }
-            }
-
-            if (!element.name) {
-                return null;
-            }
-
-            const childItems: Item[] = [];
-            let hasJsxChildren = false;
-
-            if (element.children) {
-                for (const child of element.children) {
-                    if (child.type === "mdxJsxFlowElement") {
-                        hasJsxChildren = true;
-                        const processedChild = processJsxElement(
-                            child as MdxJsxFlowElement
-                        );
-                        if (processedChild) {
-                            childItems.push(processedChild);
-                        }
-                    }
-                }
-            }
-
-            // Determine children content
-            let children: string | Item[] | TemplateContent;
-            if (hasJsxChildren) {
-                // Has block JSX children (like <Action>, <Say>)
-                children = childItems;
-            } else if (element.children && element.children.length > 0) {
-                // Check if children contain a single paragraph (MDX wraps content in paragraphs)
-                if (
-                    element.children.length === 1 &&
-                    element.children[0]?.type === "paragraph"
+    function processJsxElement(element: MdxJsxFlowElement): Item | null {
+        const props: Props = {};
+        for (const attr of element.attributes ?? []) {
+            if (attr.type === "mdxJsxAttribute") {
+                if (attr.value === null) {
+                    props[attr.name] = true;
+                } else if (typeof attr.value === "string") {
+                    props[attr.name] = attr.value;
+                } else if (
+                    typeof attr.value === "object" &&
+                    attr.value.type === "mdxJsxAttributeValueExpression"
                 ) {
-                    // Unwrap the paragraph and process its inline children
-                    const paragraph = element.children[0] as Paragraph;
-                    children = processTextWithVars(paragraph);
-                } else {
-                    // Process as inline phrasing content (text, inline JSX like <Var>)
-                    // Force cast to PhrasingContent[] since we know these are inline nodes
-                    children = processChildrenWithVars(
-                        element.children as unknown as PhrasingContent[]
-                    );
+                    // Expression value (functions, objects, etc.)
+                    // Store the estree data which will be used by recma plugin
+                    props[attr.name] = {
+                        type: "expression",
+                        value: attr.value.value,
+                        data: attr.value.data,
+                    };
                 }
-            } else {
-                // No children
-                children = "";
             }
-
-            return { component: element.name, props, children };
         }
 
-        // Process only top-level nodes
-        for (const node of tree.children) {
-            if (node.type === "heading") {
-                const heading = node as Heading;
+        if (!element.name) {
+            return null;
+        }
+
+        const childItems: Item[] = [];
+        let hasJsxChildren = false;
+
+        if (element.children) {
+            for (const child of element.children) {
+                if (child.type === "mdxJsxFlowElement") {
+                    hasJsxChildren = true;
+                    const processedChild = processJsxElement(
+                        child as MdxJsxFlowElement
+                    );
+                    if (processedChild) {
+                        childItems.push(processedChild);
+                    }
+                }
+            }
+        }
+
+        // Determine children content
+        let children: string | Item[] | TemplateContent;
+        if (hasJsxChildren) {
+            // Has block JSX children (like <Action>, <Say>)
+            children = childItems;
+        } else if (element.children && element.children.length > 0) {
+            // Check if children contain a single paragraph (MDX wraps content in paragraphs)
+            if (
+                element.children.length === 1 &&
+                element.children[0]?.type === "paragraph"
+            ) {
+                // Unwrap the paragraph and process its inline children
+                const paragraph = element.children[0] as Paragraph;
+                children = processTextWithVars(paragraph);
+            } else {
+                // Process as inline phrasing content (text, inline JSX like <Var>)
+                // Force cast to PhrasingContent[] since we know these are inline nodes
+                children = processChildrenWithVars(
+                    element.children as unknown as PhrasingContent[]
+                );
+            }
+        } else {
+            // No children
+            children = "";
+        }
+
+        return { component: element.name, props, children };
+    }
+
+    // Process only top-level nodes
+    for (const node of tree.children) {
+        if (node.type === "heading") {
+            const heading = node as Heading;
+            out.push({
+                component: `h${heading.depth}`,
+                children: processTextWithVars(heading),
+                props: {},
+            });
+        } else if (node.type === "paragraph") {
+            const paragraph = node as Paragraph;
+
+            // Check if paragraph contains a single image (markdown image syntax)
+            if (
+                paragraph.children.length === 1 &&
+                paragraph.children[0]?.type === "image"
+            ) {
+                const image = paragraph.children[0] as Image;
                 out.push({
-                    component: `h${heading.depth}`,
-                    children: processTextWithVars(heading),
+                    component: "img",
+                    children: "",
+                    props: {
+                        src: image.url,
+                        alt: image.alt ?? undefined,
+                        title: image.title ?? undefined,
+                    },
+                });
+            } else {
+                // Regular paragraph
+                out.push({
+                    component: "p",
+                    children: processTextWithVars(paragraph),
                     props: {},
                 });
-            } else if (node.type === "paragraph") {
-                const paragraph = node as Paragraph;
-
-                // Check if paragraph contains a single image (markdown image syntax)
-                if (
-                    paragraph.children.length === 1 &&
-                    paragraph.children[0]?.type === "image"
-                ) {
-                    const image = paragraph.children[0] as Image;
-                    out.push({
-                        component: "img",
-                        children: "",
-                        props: {
-                            src: image.url,
-                            alt: image.alt ?? undefined,
-                            title: image.title ?? undefined,
-                        },
-                    });
-                } else {
-                    // Regular paragraph
-                    out.push({
-                        component: "p",
-                        children: processTextWithVars(paragraph),
-                        props: {},
-                    });
-                }
-            } else if (node.type === "mdxJsxFlowElement") {
-                const processed = processJsxElement(node as MdxJsxFlowElement);
-                if (processed) {
-                    out.push(processed);
-                }
+            }
+        } else if (node.type === "mdxJsxFlowElement") {
+            const processed = processJsxElement(node as MdxJsxFlowElement);
+            if (processed) {
+                out.push(processed);
             }
         }
+    }
 
-        file.data.mdxStruct = out;
-    };
+    file.data.mdxStruct = out;
 };
 
 export default remarkMdxStruct;

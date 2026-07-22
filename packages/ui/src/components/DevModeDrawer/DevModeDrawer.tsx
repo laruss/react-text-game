@@ -1,6 +1,10 @@
 "use client";
 
-import { Game, NewOptions, useCurrentPassage } from "@react-text-game/core";
+import {
+    Game,
+    type NewOptions,
+    useCurrentPassage,
+} from "@react-text-game/core";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -46,8 +50,14 @@ export const DevModeDrawer = ({ options }: DevModeDrawerProps) => {
                 )}
             >
                 <button
+                    type="button"
                     onClick={() => setIsOpen(!isOpen)}
                     className="w-full py-2 px-6 flex justify-center items-center cursor-pointer bg-primary-500 hover:bg-primary-600 rounded-t-lg"
+                    aria-label={
+                        isOpen
+                            ? "Close developer tools"
+                            : "Open developer tools"
+                    }
                 >
                     <div className="w-12 h-1 bg-muted-400 rounded-full" />
                 </button>

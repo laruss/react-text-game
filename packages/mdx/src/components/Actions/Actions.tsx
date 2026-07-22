@@ -1,4 +1,4 @@
-import { ActionsComponent } from "@react-text-game/core";
+import type { ActionsComponent } from "@react-text-game/core";
 
 import type { ActionType } from "./Action";
 

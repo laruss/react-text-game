@@ -2,7 +2,7 @@ import { snapshot } from "valtio";
 
 import { Game } from "#game";
 import { Storage } from "#storage";
-import { InitVarsType, JsonPath } from "#types";
+import type { InitVarsType, JsonPath } from "#types";
 
 /**
  * Base class for all game entities in the text game engine.

@@ -1,4 +1,4 @@
-import { VideoComponent } from "@react-text-game/core/passages";
+import type { VideoComponent } from "@react-text-game/core/passages";
 import { twMerge } from "tailwind-merge";
 
 export type VideoProps = Readonly<{

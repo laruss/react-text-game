@@ -1,2 +1,5 @@
 [test]
 preload = "./happydom.ts"
+coverageSkipTestFiles = true
+coveragePathIgnorePatterns = ["**/dist/**", "**/src/tests/**", "happydom.ts"]
+coverageReporter = ["text", "lcov"]

@@ -3,19 +3,19 @@
 To install dependencies:
 
 ```bash
-bun install
+bun install --frozen-lockfile
 ```
 
 To start a development server:
 
 ```bash
-bun dev
+bun run dev --filter=core-test-app
 ```
 
 To run for production:
 
 ```bash
-bun start
+bun run --cwd apps/core-test-app start
 ```
 
-This project was created using `bun init` in bun v1.2.23. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+This project is developed with Bun 1.3.9 as part of the monorepo.

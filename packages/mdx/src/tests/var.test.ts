@@ -1,5 +1,6 @@
-import { compile } from "@mdx-js/mdx";
+// biome-ignore-all lint/suspicious/noTemplateCurlyInString: These strings assert generated template-literal syntax.
 import { describe, expect, test } from "bun:test";
+import { compile } from "@mdx-js/mdx";
 
 import { reactTextGameStoryPlugin } from "../plugins";
 

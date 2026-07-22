@@ -1,5 +1,4 @@
-import { Game, newWidget } from "@react-text-game/core";
-import { useGameEntity } from "@react-text-game/core";
+import { Game, useGameEntity } from "@react-text-game/core";
 import { Button } from "@react-text-game/ui";
 
 import { environment, player } from "../entities";
@@ -7,7 +6,7 @@ import { environment, player } from "../entities";
 /**
  * Character Sheet Component
  */
-const CharacterSheetComponent = () => {
+export const CharacterSheetComponent = () => {
     // Use reactive player and environment state
     const reactivePlayer = useGameEntity(player);
     const reactiveEnvironment = useGameEntity(environment);
@@ -304,12 +303,3 @@ const CharacterSheetComponent = () => {
         </div>
     );
 };
-
-/**
- * Character Sheet Widget Passage
- * Demonstrates: Widget passage with reactive state display
- */
-export const characterSheetWidget = newWidget(
-    "characterSheet",
-    <CharacterSheetComponent />
-);

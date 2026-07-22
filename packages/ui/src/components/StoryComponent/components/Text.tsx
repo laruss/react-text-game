@@ -1,4 +1,4 @@
-import { TextComponent } from "@react-text-game/core/passages";
+import type { TextComponent } from "@react-text-game/core/passages";
 import { twMerge } from "tailwind-merge";
 
 export type TextProps = Readonly<{
@@ -17,6 +17,7 @@ export const Text = ({ component: { props, content } }: TextProps) => {
             <div
                 id="text-content"
                 className={className}
+                // biome-ignore lint/security/noDangerouslySetInnerHtml: isHTML explicitly opts into game-authored HTML content.
                 dangerouslySetInnerHTML={{ __html: content }}
             />
         );

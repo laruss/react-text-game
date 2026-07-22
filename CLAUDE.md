@@ -2,6 +2,48 @@
 
 Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
+## Repository Toolchain (Mandatory)
+
+This repository is developed with **Bun 1.3.9**. Run repository commands from the
+repository root unless a command below explicitly says otherwise.
+
+- Use `bun install`, `bun run <script>`, `bunx --bun <binary>`, and `bun pm`.
+- Do not use `npm`, `npx`, `pnpm`, or `yarn` for repository work, and do not
+  add another package-manager lockfile. `bun.lock` is the only lockfile.
+- Use Biome through the repository scripts. Do not invoke ESLint or Prettier.
+
+### Tests
+
+The root scripts are the source of truth:
+
+- `bun run test` runs the complete source test suite through Turborepo.
+- `bun run test --filter=@react-text-game/core` runs one workspace; replace the
+  filter with `@react-text-game/mdx` or `@react-text-game/ui` as needed.
+- `bun run test:coverage` is mandatory final verification for changes to a
+  publishable package. It enforces at least 99% aggregate function and line
+  coverage, at least 95% per runtime source file, and verifies that every such
+  file appears in LCOV.
+- During a tight edit loop only, `bun test packages/<package>/src/tests/<file>`
+  may run one test file. It never replaces the final root commands.
+- Never use `--if-present`, never run tests from generated `dist` or `api-docs`,
+  and treat a missing test script in `packages/core`, `packages/mdx`, or
+  `packages/ui` as a configuration error. Example apps are not coverage targets.
+- Every behavior change in `packages/core`, `packages/mdx`, or `packages/ui`
+  must add or update tests in that package before the task is complete.
+
+### Required Verification
+
+Run the checks relevant to the change, and for package code run all of them:
+
+```bash
+bun run lint
+bun run typecheck
+bun run test:coverage
+bun run build
+```
+
+Use `bun run format` to apply Biome formatting.
+
 **Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
 ## 1. Think Before Coding

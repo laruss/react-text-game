@@ -51,7 +51,10 @@ export const useLoadGame = () => async (id: number) => {
                 };
             }
 
-            gameData = migrationResult.data!;
+            if (!migrationResult.data) {
+                throw new Error("Migration completed without game data");
+            }
+            gameData = migrationResult.data;
 
             // Log migration info for user visibility
             if (migrationResult.migrationsApplied.length > 0) {

@@ -6,13 +6,8 @@ import { Passage } from "#passages/passage";
 import { newStory, Story } from "#passages/story";
 import { newWidget, Widget } from "#passages/widget";
 
-export * from "./constants";
-export * from "./hooks";
-export type * from "#types";
-
 // Export SimpleObject explicitly for documentation
 export type { SimpleObject } from "#gameObjects/simpleObject";
-
 // Export passage types
 export type {
     AnyHotspot,
@@ -45,20 +40,22 @@ export type {
     VideoComponent,
 } from "#passages/story";
 export type { WidgetContent } from "#passages/widget";
-
+export type * from "#types";
+export * from "./constants";
 // Export dev tools types
 export type { ReactTextGameDebug } from "./global";
+export * from "./hooks";
 
 export {
     BaseGameObject,
     createEntity,
     Game,
     InteractiveMap,
+    type NewOptions,
     newInteractiveMap,
-    NewOptions,
     newStory,
     newWidget,
-    Options,
+    type Options,
     Passage,
     Story,
     Widget,

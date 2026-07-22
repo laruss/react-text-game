@@ -3,9 +3,11 @@ import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { SYSTEM_PASSAGE_NAMES } from "#constants";
 import { Game } from "#game";
 import { BaseGameObject } from "#gameObjects";
+import { DEFAULT_CONFIG } from "#i18n/constants";
+import { newOptions } from "#options";
 import { Passage } from "#passages/passage";
 import { setupMockStorage, teardownMockStorage } from "#tests/helpers";
-import { GameSaveState } from "#types";
+import type { GameSaveState } from "#types";
 
 // Test helper classes
 class TestEntity extends BaseGameObject<{ health: number; name: string }> {
@@ -50,8 +52,24 @@ function uniqueId(prefix: string): string {
     return `${prefix}-${testCounter++}`;
 }
 
+function resetGameOptions(): void {
+    newOptions({
+        gameName: "",
+        gameId: "",
+        description: "",
+        gameVersion: "1.0.0",
+        startPassage: SYSTEM_PASSAGE_NAMES.START,
+        initialState: {},
+        author: "",
+        isDevMode: false,
+        translations: DEFAULT_CONFIG,
+    });
+}
+
 describe("Game", () => {
     beforeEach(async () => {
+        Game._resetForTesting();
+        resetGameOptions();
         setupMockStorage();
         sessionStorage.clear();
         await Game.init({ gameName: "Test Game", isDevMode: true });

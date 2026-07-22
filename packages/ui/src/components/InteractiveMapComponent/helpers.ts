@@ -3,13 +3,13 @@ import {
     Children,
     cloneElement,
     isValidElement,
-    MouseEvent,
-    ReactElement,
-    ReactNode,
-    RefObject,
+    type MouseEvent,
+    type ReactElement,
+    type ReactNode,
+    type RefObject,
 } from "react";
 
-import { ImagePositionInfo } from "./types";
+import type { ImagePositionInfo } from "./types";
 
 type RenderChildrenProps = {
     children: ReactNode;

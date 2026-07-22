@@ -4,9 +4,9 @@ import { useSaveSlots } from "@react-text-game/core/saves";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { SaveLoadMode } from "#context/SaveLoadMenuContext";
+import type { SaveLoadMode } from "#context/SaveLoadMenuContext";
 
-import { SaveSlot } from "./SaveSlot";
+import { SaveSlot, type SaveSlotAction } from "./SaveSlot";
 
 interface SaveLoadModalProps {
     isOpen: boolean;
@@ -52,12 +52,7 @@ export const SaveLoadModal = ({
 
     if (!isOpen) return null;
 
-    const handleAction = async (
-        slotIndex: number,
-        action: () => Promise<
-            void | { success: boolean; message: string } | undefined
-        >
-    ) => {
+    const handleAction = async (slotIndex: number, action: SaveSlotAction) => {
         setLoading(slotIndex);
         try {
             const result = await action();
@@ -75,7 +70,9 @@ export const SaveLoadModal = ({
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-            <div
+            <button
+                type="button"
+                aria-label="Close modal"
                 className="absolute inset-0 bg-overlay/40 backdrop-blur-sm"
                 onClick={onClose}
             />
@@ -90,11 +87,13 @@ export const SaveLoadModal = ({
                               : t("saves.title.saveLoad")}
                     </h2>
                     <button
+                        type="button"
                         onClick={onClose}
                         className="text-muted-foreground hover:text-foreground transition-colors p-2 hover:bg-muted rounded-lg"
                         aria-label="Close"
                     >
                         <svg
+                            aria-hidden="true"
                             className="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
@@ -115,6 +114,7 @@ export const SaveLoadModal = ({
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {saveSlots.map((slot, index) => (
                             <SaveSlot
+                                // biome-ignore lint/suspicious/noArrayIndexKey: The slot index is the persistent save-slot identity.
                                 key={index}
                                 slot={slot}
                                 index={index}
@@ -129,6 +129,7 @@ export const SaveLoadModal = ({
                 {/* Footer */}
                 <div className="p-4 md:p-6 border-t border-border bg-background">
                     <button
+                        type="button"
                         onClick={onClose}
                         className="w-full md:w-auto px-6 py-2 bg-muted hover:bg-muted-300 text-foreground rounded-lg transition-colors font-medium"
                     >

@@ -1,18 +1,18 @@
 "use client";
 
-import { MaybeCallable } from "@react-text-game/core";
-import {
-    ImageHotspot as ImageHotspotType,
+import type { MaybeCallable } from "@react-text-game/core";
+import type {
     ImageHotspotContentObject,
+    ImageHotspot as ImageHotspotType,
     MapImageHotspot,
 } from "@react-text-game/core/passages";
 import { useMemo, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { Placement, Tooltip } from "#components";
+import { type Placement, Tooltip } from "#components";
 
 import { callIfFunction } from "./helpers";
-import { ImagePositionInfo } from "./types";
+import type { ImagePositionInfo } from "./types";
 
 type ImageHotspotProps = {
     hotspot: MapImageHotspot | ImageHotspotType;
@@ -66,6 +66,7 @@ export const ImageHotspot = ({
     return (
         <>
             <button
+                type="button"
                 id="image-hotspot-button"
                 ref={ref}
                 className={twMerge(

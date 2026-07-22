@@ -1,4 +1,4 @@
-import { createElement, ReactNode } from "react";
+import { createElement, type ReactNode } from "react";
 
 import { Passage } from "#passages/passage";
 

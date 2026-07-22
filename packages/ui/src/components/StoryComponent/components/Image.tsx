@@ -1,7 +1,11 @@
 "use client";
 
-import { ImageComponent } from "@react-text-game/core/passages";
-import { useEffect, useId } from "react";
+import type { ImageComponent } from "@react-text-game/core/passages";
+import {
+    type KeyboardEvent as ReactKeyboardEvent,
+    useEffect,
+    useId,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
 export type ImageProps = Readonly<{ component: ImageComponent }>;
@@ -16,6 +20,21 @@ export const Image = ({ component }: ImageProps) => {
         if (component.props?.onClick) {
             component.props.onClick();
         }
+    };
+
+    const handleKeyDown = (event: ReactKeyboardEvent) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        handleClick();
+    };
+
+    const openModal = () => {
+        handleClick();
+        const checkbox = document.getElementById(
+            modalId
+        ) as HTMLInputElement | null;
+        if (checkbox) checkbox.checked = true;
     };
 
     useEffect(() => {
@@ -45,21 +64,23 @@ export const Image = ({ component }: ImageProps) => {
                     shouldBeClickable && "cursor-pointer",
                     component.props?.className
                 )}
-                onClick={handleClick}
+                onClick={component.props?.onClick ? handleClick : undefined}
+                onKeyDown={component.props?.onClick ? handleKeyDown : undefined}
+                role={component.props?.onClick ? "button" : undefined}
+                tabIndex={component.props?.onClick ? 0 : undefined}
             />
         );
     }
 
     return (
         <>
-            <input
-                type="checkbox"
-                id={modalId}
-                className="peer/modal hidden"
-                aria-hidden="true"
-            />
+            <input type="checkbox" id={modalId} className="peer/modal hidden" />
 
-            <label htmlFor={modalId} onClick={handleClick}>
+            <button
+                type="button"
+                onClick={openModal}
+                className="block border-0 bg-transparent p-0"
+            >
                 <img
                     id="image-content-modal"
                     src={component.content}
@@ -69,7 +90,7 @@ export const Image = ({ component }: ImageProps) => {
                         component.props?.className
                     )}
                 />
-            </label>
+            </button>
 
             {/* Modal Overlay */}
             <div
@@ -96,6 +117,7 @@ export const Image = ({ component }: ImageProps) => {
                         aria-label="Close modal"
                     >
                         <svg
+                            aria-hidden="true"
                             className="w-6 h-6 text-white"
                             fill="none"
                             stroke="currentColor"
