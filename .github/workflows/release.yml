@@ -1,4 +1,19 @@
-# TODO: uncomment and use when ready
+name: Release (disabled)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  disabled:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release is disabled
+        run: echo "Publishing is intentionally disabled."
+
+# TODO: replace the placeholder workflow above with this release workflow when ready
 #name: Release
 #
 #on:
