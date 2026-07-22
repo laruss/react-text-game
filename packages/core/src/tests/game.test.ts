@@ -1071,6 +1071,20 @@ describe("Game", () => {
             expect(saved).not.toBeNull();
         });
 
+        test("auto-saves entities registered after auto-save is enabled", async () => {
+            Game.enableAutoSave();
+            sessionStorage.clear();
+
+            const entity = new TestEntity(uniqueId("late-player"));
+            entity.setHealth(42);
+
+            await new Promise((resolve) => setTimeout(resolve, 600));
+
+            const saved = sessionStorage.getItem("gameAutoSave");
+            expect(saved).not.toBeNull();
+            expect(JSON.parse(saved as string)[entity.id].health).toBe(42);
+        });
+
         test("disableAutoSave stops auto-saving", async () => {
             const entityId = uniqueId("player");
             const entity = new TestEntity(entityId);

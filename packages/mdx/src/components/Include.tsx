@@ -1,4 +1,4 @@
-type IncludeProps = Readonly<{
+export type IncludeProps = Readonly<{
     storyId: string;
 }>;
 

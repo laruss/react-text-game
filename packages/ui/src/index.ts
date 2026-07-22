@@ -1,5 +1,9 @@
 export * from "./components";
-export type { Components } from "./context/ComponentsContext";
+export type {
+    Components,
+    PassageComponents,
+    StoryComponents,
+} from "./context/ComponentsContext";
 export type {
     SaveLoadMenuContextType,
     SaveLoadMode,

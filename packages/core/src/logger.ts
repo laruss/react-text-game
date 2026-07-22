@@ -1,6 +1,3 @@
-import { consola } from "consola/browser";
-import { colors } from "consola/utils";
-
 import { _getOptions } from "#options";
 
 const LEVELS = {
@@ -17,22 +14,22 @@ export const logger = {
     },
     debug(...what: unknown[]) {
         if (this.level <= LEVELS.DEBUG) {
-            consola.debug(colors.green("[DEBUG]"), ...what);
+            console.debug("[react-text-game:debug]", ...what);
         }
     },
     log(...what: unknown[]) {
         if (this.level <= LEVELS.INFO) {
-            consola.log(colors.blue("[INFO]"), ...what);
+            console.info("[react-text-game]", ...what);
         }
     },
     warn(...what: unknown[]) {
         if (this.level <= LEVELS.WARN) {
-            consola.warn(colors.yellow("[WARN]"), ...what);
+            console.warn("[react-text-game:warn]", ...what);
         }
     },
     error(...what: unknown[]) {
         if (this.level <= LEVELS.ERROR) {
-            consola.error(colors.red("[ERROR]"), ...what);
+            console.error("[react-text-game:error]", ...what);
         }
     },
 };

@@ -5,6 +5,7 @@
     "entryPointStrategy": "expand",
     "tsconfig": "../../packages/ui/tsconfig.json",
     "out": "./docs/api/ui",
+    "exclude": ["../../packages/ui/src/components/ErrorBoundary/**"],
     "excludePrivate": true,
     "excludeProtected": false,
     "readme": "none"

@@ -6,6 +6,7 @@ import { InteractiveMap } from "#passages/interactiveMap/interactiveMap";
 import type {
     ImageHotspotContentObject,
     InteractiveMapOptions,
+    MapImage,
     MapImageHotspot,
     MapLabelHotspot,
     MapMenu,
@@ -360,6 +361,33 @@ describe("InteractiveMap", () => {
     });
 
     describe("Hotspot Types - Map Image", () => {
+        test("displays a non-interactive mapImage entity", () => {
+            const mapImage: MapImage = {
+                type: "mapImage",
+                id: "castle-guard",
+                content: () => "/guard.png",
+                position: { x: 42, y: 68 },
+                props: {
+                    alt: "Castle guard",
+                    zoom: "75%",
+                    classNames: {
+                        container: "guard-container",
+                        image: "guard-image",
+                    },
+                },
+            };
+            const map = newInteractiveMap(uniqueId("map"), {
+                image: "/map.jpg",
+                hotspots: [mapImage],
+            });
+
+            const result = map.display();
+
+            expect(result.hotspots).toEqual([mapImage]);
+            expect(result.hotspots[0]?.type).toBe("mapImage");
+            expect("action" in (result.hotspots[0] as MapImage)).toBe(false);
+        });
+
         test("displays map with image hotspot", () => {
             const hotspot: MapImageHotspot = {
                 type: "image",

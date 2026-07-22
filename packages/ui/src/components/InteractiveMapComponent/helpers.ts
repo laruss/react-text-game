@@ -11,6 +11,24 @@ import {
 
 import type { ImagePositionInfo } from "./types";
 
+export const getMapPositionStyle = (
+    position: { x: number; y: number },
+    imagePositionInfo?: ImagePositionInfo
+) => {
+    if (!imagePositionInfo) {
+        return undefined;
+    }
+
+    const { offsetLeft, offsetTop, scaledWidth, scaledHeight } =
+        imagePositionInfo;
+
+    return {
+        left: `${offsetLeft + (position.x / 100) * scaledWidth}px`,
+        top: `${offsetTop + (position.y / 100) * scaledHeight}px`,
+        transform: "translate(-50%, -50%)",
+    } as const;
+};
+
 type RenderChildrenProps = {
     children: ReactNode;
     positionInfo: ImagePositionInfo;

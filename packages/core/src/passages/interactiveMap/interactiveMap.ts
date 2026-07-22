@@ -108,9 +108,13 @@ export class InteractiveMap extends Passage {
         props: T = {} as T
     ): InteractiveMapType {
         const hotspotsArray = callIfFunction(this.options.hotspots, props);
-        const hotspots = hotspotsArray
-            .map((callback) => callIfFunction(callback, props))
-            .filter((hotspot) => hotspot !== undefined);
+        const hotspots: InteractiveMapType["hotspots"] = [];
+        for (const candidate of hotspotsArray) {
+            const hotspot = callIfFunction(candidate, props);
+            if (hotspot !== undefined) {
+                hotspots.push(hotspot);
+            }
+        }
 
         const image = callIfFunction(this.options.image);
 

@@ -14,6 +14,24 @@ import type {
 
 import type { MdxStructItem, TemplateContent, TransformResult } from "#types";
 
+const ACTION_COLORS = new Set([
+    "default",
+    "primary",
+    "secondary",
+    "success",
+    "warning",
+    "danger",
+]);
+const ACTION_VARIANTS = new Set([
+    "solid",
+    "faded",
+    "bordered",
+    "light",
+    "flat",
+    "ghost",
+    "shadow",
+]);
+
 /**
  * Helper to extract string content from children (handles TemplateContent).
  * Note: TemplateContent is only used with auto-registration, so this is a fallback.
@@ -30,10 +48,13 @@ function extractStringContent(
         children.type === "template"
     ) {
         // Template content - extract text parts only (variables won't work in manual mode)
-        return children.parts
-            .filter((part) => part.type === "text")
-            .map((part) => (part.type === "text" ? part.value : ""))
-            .join("");
+        let content = "";
+        for (const part of children.parts) {
+            if (part.type === "text") {
+                content += part.value;
+            }
+        }
+        return content;
     }
     return ""; // Array children
 }
@@ -73,7 +94,6 @@ export function transformComponents(items: MdxStructItem[]): TransformResult {
 function transformSingleComponent(item: MdxStructItem): Component | null {
     const { component, props, children } = item;
 
-    // Handle heading elements (h1-h6)
     if (/^h[1-6]$/.test(component)) {
         return transformHeader(
             component as `h${1 | 2 | 3 | 4 | 5 | 6}`,
@@ -82,37 +102,22 @@ function transformSingleComponent(item: MdxStructItem): Component | null {
         );
     }
 
-    // Handle paragraph elements
-    if (component === "p") {
-        return transformText(children, props);
+    switch (component) {
+        case "p":
+            return transformText(children, props);
+        case "img":
+            return transformImage(props);
+        case "video":
+            return transformVideo(props);
+        case "Actions":
+            return transformActions(children, props);
+        case "Include":
+            return transformInclude(props);
+        case "Conversation":
+            return transformConversation(children, props);
+        default:
+            return null;
     }
-
-    // Handle image elements
-    if (component === "img") {
-        return transformImage(props);
-    }
-
-    // Handle video elements
-    if (component === "video") {
-        return transformVideo(props);
-    }
-
-    // Handle Actions component
-    if (component === "Actions") {
-        return transformActions(children, props);
-    }
-
-    // Handle Include component (maps to AnotherStoryComponent)
-    if (component === "Include") {
-        return transformInclude(props);
-    }
-
-    // Handle Conversation component
-    if (component === "Conversation") {
-        return transformConversation(children, props);
-    }
-
-    return null;
 }
 
 /**
@@ -288,35 +293,15 @@ function transformAction(item: MdxStructItem): ActionType | null {
     };
 
     // Add optional properties only if they are defined and valid
-    if (typeof props.color === "string") {
-        const validColors = [
-            "default",
-            "primary",
-            "secondary",
-            "success",
-            "warning",
-            "danger",
-        ] as const;
-        type ValidColor = (typeof validColors)[number];
-        if (validColors.includes(props.color as ValidColor)) {
-            action.color = props.color as ValidColor;
-        }
+    if (typeof props.color === "string" && ACTION_COLORS.has(props.color)) {
+        action.color = props.color as NonNullable<ActionType["color"]>;
     }
 
-    if (typeof props.variant === "string") {
-        const validVariants = [
-            "solid",
-            "faded",
-            "bordered",
-            "light",
-            "flat",
-            "ghost",
-            "shadow",
-        ] as const;
-        type ValidVariant = (typeof validVariants)[number];
-        if (validVariants.includes(props.variant as ValidVariant)) {
-            action.variant = props.variant as ValidVariant;
-        }
+    if (
+        typeof props.variant === "string" &&
+        ACTION_VARIANTS.has(props.variant)
+    ) {
+        action.variant = props.variant as NonNullable<ActionType["variant"]>;
     }
 
     if (typeof props.isDisabled === "boolean") {

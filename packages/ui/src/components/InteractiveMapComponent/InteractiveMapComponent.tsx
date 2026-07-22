@@ -2,7 +2,7 @@
 "use client";
 
 import type { InteractiveMap } from "@react-text-game/core";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Hotspot } from "./Hotspot";
@@ -11,15 +11,13 @@ import { HotspotMenu } from "./HotspotMenu";
 import { SideHotspot } from "./SideHotspot";
 import { useSortHotspots } from "./useSortHotspots";
 
-type InteractiveMapProps = {
+export type InteractiveMapComponentProps = {
     interactiveMap: InteractiveMap;
 };
 
 export const InteractiveMapComponent = ({
     interactiveMap,
-}: InteractiveMapProps) => {
-    const mapContainerRef = useRef<HTMLDivElement>(null);
-
+}: InteractiveMapComponentProps) => {
     const displayable = useMemo(
         () => interactiveMap.display(),
         [interactiveMap]
@@ -34,9 +32,7 @@ export const InteractiveMapComponent = ({
     } = useSortHotspots({ hotspots: displayable.hotspots });
 
     // Create a unique key for the displayable content to trigger animations
-    const displayableKey = useMemo(() => {
-        return `${displayable.image}-${displayable.bgImage}-${displayable.hotspots.length}`;
-    }, [displayable.image, displayable.bgImage, displayable.hotspots.length]);
+    const displayableKey = `${displayable.image}-${displayable.bgImage}-${displayable.hotspots.length}`;
 
     return (
         <div
@@ -92,12 +88,14 @@ export const InteractiveMapComponent = ({
                         </div>
                         <div
                             id="map-container"
-                            ref={mapContainerRef}
                             className="w-full h-full flex justify-center items-center relative z-10"
                         >
                             <HotspotMap imageUrl={displayable.image}>
                                 {mapHotspots.map((hotspot, index) => (
-                                    <Hotspot key={index} hotspot={hotspot} />
+                                    <Hotspot
+                                        key={hotspot.id ?? index}
+                                        hotspot={hotspot}
+                                    />
                                 ))}
                                 {menu.map((menuItem, index) => (
                                     <HotspotMenu

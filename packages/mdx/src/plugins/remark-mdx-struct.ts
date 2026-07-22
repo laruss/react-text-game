@@ -110,7 +110,13 @@ function processChildrenWithVars(
 
     // If no Var elements found, return plain string by joining parts
     if (!hasVars) {
-        return parts.map((p) => (p.type === "text" ? p.value : "")).join("");
+        let content = "";
+        for (const part of parts) {
+            if (part.type === "text") {
+                content += part.value;
+            }
+        }
+        return content;
     }
 
     // Return template structure

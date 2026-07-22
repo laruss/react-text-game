@@ -10,6 +10,7 @@ import {
 } from "bun:test";
 import { Game, type InteractiveMap } from "@react-text-game/core";
 import type {
+    MapImage,
     MapImageHotspot,
     MapLabelHotspot,
     MapMenu,
@@ -43,6 +44,7 @@ import {
 } from "#components/InteractiveMapComponent/helpers";
 import { InteractiveMapComponent } from "#components/InteractiveMapComponent/InteractiveMapComponent";
 import { LabelHotspot } from "#components/InteractiveMapComponent/LabelHotspot";
+import { MapImage as MapImageComponent } from "#components/InteractiveMapComponent/MapImage";
 import { SideHotspot } from "#components/InteractiveMapComponent/SideHotspot";
 import type { ImagePositionInfo } from "#components/InteractiveMapComponent/types";
 import { useSortHotspots } from "#components/InteractiveMapComponent/useSortHotspots";
@@ -176,6 +178,63 @@ describe("interactive map helpers", () => {
 });
 
 describe("hotspot variants", () => {
+    test("renders mapImage as a scaled, non-interactive image", () => {
+        const mapImage: MapImage = {
+            type: "mapImage",
+            id: "guard",
+            content: () => "/guard.png",
+            position: { x: 25, y: 40 },
+            props: {
+                alt: "Castle guard",
+                zoom: "50%",
+                classNames: {
+                    container: "guard-container",
+                    image: "guard-image",
+                },
+            },
+        };
+
+        const { container } = render(
+            createElement(Hotspot, {
+                hotspot: mapImage,
+                imagePositionInfo: positionInfo,
+            })
+        );
+
+        const image = screen.getByAltText("Castle guard");
+        const visual = container.querySelector(
+            '[data-map-entity="image"]'
+        ) as HTMLElement;
+        expect(image.getAttribute("src")).toBe("/guard.png");
+        expect(image.className).toContain("guard-image");
+        expect(visual.className).toContain("guard-container");
+        expect(visual.style.transform).toBe("scale(0.25)");
+        expect(container.querySelector("button")).toBeNull();
+        expect(
+            container.querySelector("#hotspot-container")?.getAttribute("style")
+        ).toContain("left: 60px");
+    });
+
+    test("mapImage falls back to its id for alt text and default scale", () => {
+        render(
+            createElement(MapImageComponent, {
+                mapImage: {
+                    type: "mapImage",
+                    id: "marker",
+                    content: "/marker.png",
+                    position: { x: 0, y: 0 },
+                },
+            })
+        );
+
+        expect(screen.getByAltText("marker")).toBeTruthy();
+        expect(
+            document
+                .querySelector('[data-map-entity="image"]')
+                ?.getAttribute("style")
+        ).toContain("scale(1)");
+    });
+
     test("renders and invokes a dynamic label hotspot with a tooltip", async () => {
         const user = userEvent.setup();
         const action = mock(() => {});
@@ -406,14 +465,19 @@ describe("hotspot menus and sorting", () => {
             position: "right",
             content: "Right",
         };
+        const mapImage: MapImage = {
+            type: "mapImage",
+            content: "/marker.png",
+            position: { x: 5, y: 6 },
+        };
         const { result } = renderHook(() =>
             useSortHotspots({
-                hotspots: [mapLabel, menu, top, bottom, left, right],
+                hotspots: [mapLabel, menu, top, bottom, left, right, mapImage],
             })
         );
 
         expect(result.current.menu).toEqual([menu]);
-        expect(result.current.mapHotspots).toEqual([mapLabel]);
+        expect(result.current.mapHotspots).toEqual([mapLabel, mapImage]);
         expect(result.current.mapHotspots).not.toContain(top);
         expect(result.current.topHotspots).toEqual([top]);
         expect(result.current.bottomHotspots).toEqual([bottom]);

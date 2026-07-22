@@ -72,6 +72,36 @@ describe("PassageController", () => {
             });
         });
 
+        test("uses a custom passage renderer from the component registry", async () => {
+            const storyId = "custom-renderer-story";
+            const story = newStory(storyId, () => []);
+            const CustomStory = ({
+                story: renderedStory,
+            }: {
+                story: typeof story;
+            }) =>
+                createElement(
+                    "output",
+                    { "data-testid": "custom-story" },
+                    renderedStory.id
+                );
+
+            Game.jumpTo(storyId);
+            render(
+                createElement(
+                    ComponentsProvider,
+                    { components: { passages: { Story: CustomStory } } },
+                    createElement(PassageController)
+                )
+            );
+
+            await waitFor(() => {
+                expect(screen.getByTestId("custom-story").textContent).toBe(
+                    storyId
+                );
+            });
+        });
+
         test("renders InteractiveMapComponent for interactiveMap passages", async () => {
             const mapId = "test-map";
             newInteractiveMap(mapId, {

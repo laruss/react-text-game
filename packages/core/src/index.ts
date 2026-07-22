@@ -11,9 +11,13 @@ export type { SimpleObject } from "#gameObjects/simpleObject";
 // Export passage types
 export type {
     AnyHotspot,
+    HotspotPosition,
+    ImageHotspot,
+    ImageHotspotContentObject,
     InteractiveMapOptions,
     InteractiveMapType,
     LabelHotspot,
+    MapImage,
     MapImageHotspot,
     MapLabelHotspot,
     MapMenu,
@@ -40,11 +44,22 @@ export type {
     VideoComponent,
 } from "#passages/story";
 export type { WidgetContent } from "#passages/widget";
+export type {
+    PreloadAsset,
+    PreloadAssetType,
+    PreloadFailure,
+    PreloadOptions,
+    PreloadProgress,
+    PreloadResult,
+    PreloadSource,
+    PreloadTask,
+} from "#preload";
 export type * from "#types";
 export * from "./constants";
 // Export dev tools types
 export type { ReactTextGameDebug } from "./global";
 export * from "./hooks";
+export { preloadContent } from "./preload";
 
 export {
     BaseGameObject,

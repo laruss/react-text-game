@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/core",
-    "version": "0.5.18",
+    "version": "0.6.0",
     "description": "A powerful React-based text game engine with reactive state management, passage-based navigation, and persistent save system for building interactive narrative experiences",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -8,15 +8,19 @@
     "repository": "github:laruss/react-text-game",
     "homepage": "https://reacttextgame.dev/",
     "private": false,
+    "sideEffects": [
+        "./dist/passages/story/index.js",
+        "./dist/passages/story/start.js"
+    ],
     "type": "module",
     "scripts": {
-        "dev": "tsc --watch & tsc-alias --watch",
-        "build": "tsc && tsc-alias",
+        "dev": "tsc -p tsconfig.build.json --watch & tsc-alias -p tsconfig.build.json --watch",
+        "build": "rm -rf dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
         "test": "bun test --cwd ../.. packages/core/src/tests",
         "test:coverage": "bun test --cwd ../.. --coverage --coverage-dir packages/core/coverage packages/core/src/tests && bun ../../scripts/check-coverage.ts packages/core",
         "check-types": "tsc --noEmit",
         "lint": "biome check --error-on-warnings .",
-        "prepack": "rm -rf dist && bun run build",
+        "prepack": "bun run build",
         "test-pack": "bun pm pack --dry-run && bunx --bun publint"
     },
     "author": "laruss",
@@ -29,7 +33,6 @@
         "dist"
     ],
     "dependencies": {
-        "consola": "^3.4.2",
         "crypto-js": "^4.2.0",
         "dexie": "^4.4.4",
         "dexie-react-hooks": "^4.4.0",

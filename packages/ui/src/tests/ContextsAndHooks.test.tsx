@@ -141,6 +141,7 @@ describe("component registry context", () => {
     test("fills defaults while preserving custom components", () => {
         const CustomMenu = () => createElement("div", null, "Custom menu");
         const CustomText = () => createElement("div", null, "Custom text");
+        const CustomMap = () => createElement("div", null, "Custom map");
         const wrapper = ({ children }: PropsWithChildren) =>
             createElement(
                 ComponentsProvider,
@@ -148,6 +149,7 @@ describe("component registry context", () => {
                     components: {
                         MainMenu: CustomMenu,
                         story: { Text: CustomText },
+                        passages: { InteractiveMap: CustomMap },
                     },
                 },
                 children
@@ -156,12 +158,19 @@ describe("component registry context", () => {
         const { result } = renderHook(() => useComponents(), { wrapper });
 
         expect(result.current.MainMenu).toBe(CustomMenu);
+        expect(result.current.LoadingScreen).toBeFunction();
+        expect(result.current.RTGSplashScreen).toBeFunction();
         expect(result.current.story.Text).toBe(CustomText);
         expect(result.current.story.Image).toBeFunction();
         expect(result.current.story.Video).toBeFunction();
         expect(result.current.story.Actions).toBeFunction();
         expect(result.current.story.Conversation).toBeFunction();
         expect(result.current.story.Heading).toBeFunction();
+        expect(result.current.passages.InteractiveMap).toBe(CustomMap);
+        expect(result.current.passages.Story).toBeFunction();
+        expect(result.current.passages.Widget).toBeFunction();
+        expect(result.current.passages.Empty).toBeFunction();
+        expect(result.current.passages.Unknown).toBeFunction();
     });
 
     test("throws when component registry is missing", () => {

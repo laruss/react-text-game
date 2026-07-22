@@ -5,6 +5,23 @@ All notable changes to `@react-text-game/ui` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-07-22
+
+### Added
+
+- Configurable loading screen with the RTG logo, accessible progress, background images, rotating text, class/style hooks, and a complete `LoadingScreen` component slot
+- Ordered splash screens with three-second defaults, fade-in/out, immediate pointer and keyboard skipping, non-interruptible entries, dev-mode control, and a replaceable RTG brand screen
+- `GameProvider` preloading lifecycle and `onPreloadComplete` results
+- Non-interactive `mapImage` rendering for decorative map artwork
+- Story, passage, bootstrap, and main-menu component slots for application-owned UI
+
+### Changed
+
+- `GameProvider` now initializes the engine and preloads content in parallel, then renders loading, splash, and game phases in deterministic order without duplicate Strict Mode work
+- Interactive maps share one resize observer and preserve hotspot centers across fitted image sizes
+- Passage rendering avoids duplicate display work while keeping navigation refresh behavior
+- Bootstrap animations respect `prefers-reduced-motion`
+
 ## [0.3.17] - 2026-01-24
 
 ### Changed

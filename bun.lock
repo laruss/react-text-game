@@ -109,9 +109,8 @@
     },
     "packages/core": {
       "name": "@react-text-game/core",
-      "version": "0.5.18",
+      "version": "0.6.0",
       "dependencies": {
-        "consola": "^3.4.2",
         "crypto-js": "^4.2.0",
         "dexie": "^4.4.4",
         "dexie-react-hooks": "^4.4.0",
@@ -136,7 +135,7 @@
     },
     "packages/mdx": {
       "name": "@react-text-game/mdx",
-      "version": "0.1.2",
+      "version": "0.2.0",
       "dependencies": {
         "estree-util-value-to-estree": "^3.4.0",
         "gray-matter": "^4.0.3",
@@ -169,7 +168,7 @@
     },
     "packages/ui": {
       "name": "@react-text-game/ui",
-      "version": "0.3.18",
+      "version": "0.4.0",
       "dependencies": {
         "tailwind-merge": "^3.3.1",
       },

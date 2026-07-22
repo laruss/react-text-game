@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/mdx",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "MDX support for React Text Game",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -8,15 +8,16 @@
     "repository": "github:laruss/react-text-game",
     "homepage": "https://reacttextgame.dev/",
     "private": false,
+    "sideEffects": false,
     "type": "module",
     "scripts": {
-        "dev": "tsc --watch & tsc-alias --watch",
-        "build": "tsc && tsc-alias",
+        "dev": "tsc -p tsconfig.build.json --watch & tsc-alias -p tsconfig.build.json --watch",
+        "build": "rm -rf dist && tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
         "test": "bun test --cwd ../.. packages/mdx/src/tests",
         "test:coverage": "bun test --cwd ../.. --coverage --coverage-dir packages/mdx/coverage packages/mdx/src/tests && bun ../../scripts/check-coverage.ts packages/mdx",
         "check-types": "tsc --noEmit",
         "lint": "biome check --error-on-warnings .",
-        "prepack": "rm -rf dist && bun run build",
+        "prepack": "bun run build",
         "test-pack": "bun pm pack --dry-run && bunx --bun publint"
     },
     "author": "laruss",

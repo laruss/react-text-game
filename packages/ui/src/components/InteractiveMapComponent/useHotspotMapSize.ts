@@ -8,6 +8,38 @@ import type {
     UseHotspotMapSizeResult,
 } from "./types";
 
+export const calculateImagePosition = (
+    containerWidth: number,
+    containerHeight: number,
+    naturalWidth: number,
+    naturalHeight: number
+): ImagePositionInfo => {
+    const scaleFactor = Math.min(
+        containerWidth / naturalWidth,
+        containerHeight / naturalHeight
+    );
+    const scaledWidth = naturalWidth * scaleFactor;
+    const scaledHeight = naturalHeight * scaleFactor;
+
+    return {
+        scaleFactor,
+        offsetLeft: (containerWidth - scaledWidth) / 2,
+        offsetTop: (containerHeight - scaledHeight) / 2,
+        scaledWidth,
+        scaledHeight,
+    };
+};
+
+const positionsMatch = (
+    left: ImagePositionInfo,
+    right: ImagePositionInfo
+): boolean =>
+    left.scaleFactor === right.scaleFactor &&
+    left.offsetLeft === right.offsetLeft &&
+    left.offsetTop === right.offsetTop &&
+    left.scaledWidth === right.scaledWidth &&
+    left.scaledHeight === right.scaledHeight;
+
 export const useHotspotMapSize = ({
     isLoading,
     naturalWidth,
@@ -15,7 +47,6 @@ export const useHotspotMapSize = ({
 }: UseHotspotMapSizeProps): UseHotspotMapSizeResult => {
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
-    const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
     const [positionInfo, setPositionInfo] = useState<ImagePositionInfo>({
         scaleFactor: 1,
@@ -37,37 +68,23 @@ export const useHotspotMapSize = ({
                 return;
 
             const containerRect = containerRef.current.getBoundingClientRect();
-            const containerWidth = containerRect.width;
-            const containerHeight = containerRect.height;
-
-            // Calculate scale ratios for both dimensions
-            const widthRatio = containerWidth / naturalWidth;
-            const heightRatio = containerHeight / naturalHeight;
-
-            // Use the smaller ratio to ensure the image fits entirely
-            const scaleFactor = Math.min(widthRatio, heightRatio);
-
-            const scaledWidth = naturalWidth * scaleFactor;
-            const scaledHeight = naturalHeight * scaleFactor;
-
-            // Calculate margins to center the image
-            const marginLeft = (containerWidth - scaledWidth) / 2;
-            const marginTop = (containerHeight - scaledHeight) / 2;
+            const nextPosition = calculateImagePosition(
+                containerRect.width,
+                containerRect.height,
+                naturalWidth,
+                naturalHeight
+            );
 
             // Apply dimensions and position to the image
-            imageRef.current.style.width = `${scaledWidth}px`;
-            imageRef.current.style.height = `${scaledHeight}px`;
-            imageRef.current.style.marginLeft = `${marginLeft}px`;
-            imageRef.current.style.marginTop = `${marginTop}px`;
+            imageRef.current.style.width = `${nextPosition.scaledWidth}px`;
+            imageRef.current.style.height = `${nextPosition.scaledHeight}px`;
+            imageRef.current.style.marginLeft = `${nextPosition.offsetLeft}px`;
+            imageRef.current.style.marginTop = `${nextPosition.offsetTop}px`;
 
             // Update position info for hotspots
-            setPositionInfo({
-                scaleFactor,
-                offsetLeft: marginLeft,
-                offsetTop: marginTop,
-                scaledWidth,
-                scaledHeight,
-            });
+            setPositionInfo((current) =>
+                positionsMatch(current, nextPosition) ? current : nextPosition
+            );
         };
 
         if (!isLoading && containerRef.current && imageRef.current) {
@@ -75,23 +92,15 @@ export const useHotspotMapSize = ({
             updateSize();
 
             // Set up ResizeObserver to detect any size changes in the container
-            resizeObserverRef.current = new ResizeObserver(() => {
+            const resizeObserver = new ResizeObserver(() => {
                 updateSize();
             });
 
-            resizeObserverRef.current.observe(containerRef.current);
-
-            // Also listen for window resize as a fallback
-            window.addEventListener("resize", updateSize);
+            resizeObserver.observe(containerRef.current);
+            return () => resizeObserver.disconnect();
         }
 
-        return () => {
-            // Clean up
-            if (resizeObserverRef.current) {
-                resizeObserverRef.current.disconnect();
-            }
-            window.removeEventListener("resize", updateSize);
-        };
+        return undefined;
     }, [isLoading, naturalWidth, naturalHeight]);
 
     return {

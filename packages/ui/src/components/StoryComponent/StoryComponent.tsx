@@ -11,7 +11,7 @@ import {
     useConversationClickContext,
 } from "#context/ConversationClickContext";
 
-type StoryComponentProps = {
+export type StoryComponentProps = {
     story: Story;
 };
 

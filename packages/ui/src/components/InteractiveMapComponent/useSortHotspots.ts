@@ -2,12 +2,14 @@
 
 import type {
     AnyHotspot,
+    MapImage,
     MapImageHotspot,
     MapLabelHotspot,
     MapMenu,
     SideImageHotspot,
     SideLabelHotspot,
 } from "@react-text-game/core/passages";
+import { useMemo } from "react";
 
 type Props = {
     hotspots: Array<AnyHotspot>;
@@ -16,7 +18,7 @@ type Props = {
 type SideHotspot = SideLabelHotspot | SideImageHotspot;
 
 type ReturnType = {
-    mapHotspots: Array<MapLabelHotspot | MapImageHotspot>;
+    mapHotspots: Array<MapImage | MapLabelHotspot | MapImageHotspot>;
     topHotspots: Array<SideHotspot>;
     bottomHotspots: Array<SideHotspot>;
     leftHotspots: Array<SideHotspot>;
@@ -24,31 +26,28 @@ type ReturnType = {
     menu: Array<MapMenu>;
 };
 
-export const useSortHotspots = ({ hotspots }: Props): ReturnType => {
-    const sideHotspots = hotspots.filter(
-        (hotspot): hotspot is SideLabelHotspot | SideImageHotspot =>
-            typeof hotspot.position === "string"
-    );
-
-    return {
-        mapHotspots: hotspots.filter(
-            (hotspot): hotspot is MapLabelHotspot | MapImageHotspot =>
-                typeof hotspot.position !== "string" && hotspot.type !== "menu"
-        ),
-        topHotspots: sideHotspots.filter(
-            (hotspot) => hotspot.position === "top"
-        ),
-        bottomHotspots: sideHotspots.filter(
-            (hotspot) => hotspot.position === "bottom"
-        ),
-        leftHotspots: sideHotspots.filter(
-            (hotspot) => hotspot.position === "left"
-        ),
-        rightHotspots: sideHotspots.filter(
-            (hotspot) => hotspot.position === "right"
-        ),
-        menu: hotspots.filter(
-            (hotspot): hotspot is MapMenu => hotspot.type === "menu"
-        ),
+export const sortHotspots = (hotspots: Array<AnyHotspot>): ReturnType => {
+    const result: ReturnType = {
+        mapHotspots: [],
+        topHotspots: [],
+        bottomHotspots: [],
+        leftHotspots: [],
+        rightHotspots: [],
+        menu: [],
     };
+
+    for (const hotspot of hotspots) {
+        if (hotspot.type === "menu") {
+            result.menu.push(hotspot);
+        } else if (typeof hotspot.position !== "string") {
+            result.mapHotspots.push(hotspot);
+        } else {
+            result[`${hotspot.position}Hotspots`].push(hotspot);
+        }
+    }
+
+    return result;
 };
+
+export const useSortHotspots = ({ hotspots }: Props): ReturnType =>
+    useMemo(() => sortHotspots(hotspots), [hotspots]);

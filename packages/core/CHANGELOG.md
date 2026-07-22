@@ -5,6 +5,19 @@ All notable changes to `@react-text-game/core` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-07-22
+
+### Added
+
+- `preloadContent()` with bounded concurrency, URL deduplication, abort support, image decoding, custom tasks, progress callbacks, and non-blocking failure results
+- Decorative `mapImage` interactive-map entities that preserve percentage coordinates without button, hover, or pointer behavior
+
+### Changed
+
+- Reduced hot-path allocations in entity and passage registration, navigation, logging, and initial-state handling
+- Save encryption now imports targeted CryptoJS modules to improve consumer tree-shaking without changing the persisted format
+- Late-registered entities now join auto-save subscriptions and accept falsy pending initial-state values correctly
+
 ## [0.5.18] - 2026-07-01
 
 ### Changed

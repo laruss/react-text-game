@@ -7,36 +7,40 @@ import {
     type Widget,
 } from "@react-text-game/core";
 
-import { InteractiveMapComponent } from "#components/InteractiveMapComponent";
-import { StoryComponent } from "#components/StoryComponent";
+import { useComponents } from "#context/ComponentsContext/useComponents";
 
 export const PassageController = () => {
     const [currentPassage, rerenderId] = useCurrentPassage();
+    const {
+        passages: {
+            Empty: EmptyRenderer,
+            InteractiveMap: InteractiveMapRenderer,
+            Story: StoryRenderer,
+            Unknown: UnknownRenderer,
+            Widget: WidgetRenderer,
+        },
+    } = useComponents();
+
+    if (!currentPassage) {
+        return <EmptyRenderer />;
+    }
 
     const renderComponent = () => {
-        switch (currentPassage?.type) {
+        switch (currentPassage.type) {
             case "story":
-                return <StoryComponent story={currentPassage as Story} />;
+                return <StoryRenderer story={currentPassage as Story} />;
             case "interactiveMap":
                 return (
-                    <InteractiveMapComponent
+                    <InteractiveMapRenderer
                         interactiveMap={currentPassage as InteractiveMap}
                     />
                 );
             case "widget":
-                return (currentPassage as Widget).display();
+                return <WidgetRenderer widget={currentPassage as Widget} />;
             default:
-                return <div>Unknown Passage Type {currentPassage?.type}</div>;
+                return <UnknownRenderer passage={currentPassage} />;
         }
     };
-
-    if (!currentPassage) {
-        return (
-            <div className="flex items-center justify-center w-full h-full">
-                <h1 className="text-2xl font-bold">NO PASSAGE SELECTED</h1>
-            </div>
-        );
-    }
 
     return (
         <div

@@ -8,7 +8,10 @@ import {
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { createElement } from "react";
 
-import { GameProvider } from "#components/GameProvider";
+import { GameProvider, type GameProviderProps } from "#components/GameProvider";
+
+const GameProviderWithoutSplash = (props: GameProviderProps) =>
+    createElement(GameProvider, { ...props, showSplashScreen: false });
 
 // Test passage class
 class TestPassage extends Passage {
@@ -43,7 +46,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options },
                     createElement("div", null, "Test content")
                 )
@@ -61,7 +64,7 @@ describe("GameProvider", () => {
         test("returns null before initialization is complete", () => {
             const { container } = render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -74,7 +77,7 @@ describe("GameProvider", () => {
         test("renders children after initialization", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement(
                         "div",
@@ -103,7 +106,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     {
                         options: {
                             gameName: "test",
@@ -125,7 +128,7 @@ describe("GameProvider", () => {
         test("sets currentPassage to START_MENU when startPassage is not provided", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -147,7 +150,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Default passage ready")
                 )
@@ -174,7 +177,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     {
                         options: {
                             gameName: "test",
@@ -214,7 +217,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" }, components },
                     createElement("div", null, "Test content")
                 )
@@ -228,7 +231,7 @@ describe("GameProvider", () => {
         test("uses default MainMenu when custom component is not provided", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -244,7 +247,7 @@ describe("GameProvider", () => {
         test("renders dev mode components when isDevMode is true", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test", isDevMode: true } },
                     createElement("div", null, "Test content")
                 )
@@ -260,7 +263,7 @@ describe("GameProvider", () => {
         test("does not render dev mode components when isDevMode is false", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test", isDevMode: false } },
                     createElement("div", null, "Test content")
                 )
@@ -274,7 +277,7 @@ describe("GameProvider", () => {
         test("does not render dev mode components when isDevMode is undefined", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -290,7 +293,7 @@ describe("GameProvider", () => {
         test("wraps children with ErrorBoundary", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -305,7 +308,7 @@ describe("GameProvider", () => {
         test("wraps children with ComponentsProvider", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -319,7 +322,7 @@ describe("GameProvider", () => {
         test("wraps children with SaveLoadMenuProvider", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -337,7 +340,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -356,7 +359,7 @@ describe("GameProvider", () => {
         test("registers START_MENU widget during initialization", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -379,7 +382,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" }, components },
                     createElement("div", null, "Test content")
                 )
@@ -397,7 +400,7 @@ describe("GameProvider", () => {
         test("handles re-initialization when options change", async () => {
             const { rerender } = render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test1" } },
                     createElement("div", null, "Test content 1")
                 )
@@ -411,7 +414,7 @@ describe("GameProvider", () => {
             // Re-render with different options
             rerender(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test2" } },
                     createElement("div", null, "Test content 2")
                 )
@@ -419,6 +422,7 @@ describe("GameProvider", () => {
 
             await waitFor(() => {
                 expect(screen.getByText("Test content 2")).toBeTruthy();
+                expect(Game.options.gameName).toBe("test2");
             });
         });
     });
@@ -435,7 +439,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -468,7 +472,7 @@ describe("GameProvider", () => {
 
             const { rerender } = render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test1" } },
                     createElement("div", null, "Test content 1")
                 )
@@ -477,7 +481,7 @@ describe("GameProvider", () => {
             // Trigger rapid re-renders during initialization
             rerender(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test1" } },
                     createElement("div", null, "Test content 2")
                 )
@@ -485,7 +489,7 @@ describe("GameProvider", () => {
 
             rerender(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test1" } },
                     createElement("div", null, "Test content 3")
                 )
@@ -520,7 +524,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options },
                     createElement("div", null, "Test content")
                 )
@@ -550,7 +554,7 @@ describe("GameProvider", () => {
 
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement("div", null, "Test content")
                 )
@@ -570,7 +574,7 @@ describe("GameProvider", () => {
         test("does not render children until initialization completes", () => {
             const { container } = render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement(
                         "div",
@@ -587,7 +591,7 @@ describe("GameProvider", () => {
         test("renders children after initialization completes", async () => {
             render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     { options: { gameName: "test" } },
                     createElement(
                         "div",
@@ -624,7 +628,7 @@ describe("GameProvider", () => {
 
             const { rerender } = render(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     {
                         options: {
                             gameName: "test",
@@ -639,7 +643,7 @@ describe("GameProvider", () => {
             // Trigger re-render immediately
             rerender(
                 createElement(
-                    GameProvider,
+                    GameProviderWithoutSplash,
                     {
                         options: {
                             gameName: "test",

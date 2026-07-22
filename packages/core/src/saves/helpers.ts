@@ -1,4 +1,8 @@
-import CryptoJS from "crypto-js";
+import AES from "crypto-js/aes";
+import WordArray from "crypto-js/core";
+import Base64 from "crypto-js/enc-base64";
+import Utf8 from "crypto-js/enc-utf8";
+import PBKDF2 from "crypto-js/pbkdf2";
 
 import { _getOptions } from "#options";
 
@@ -19,21 +23,17 @@ const getPassword = () => `${_getOptions().gameId}.${SAVE_POSTFIX}`;
  * @returns Uint8Array containing encrypted data with salt and IV prepended
  */
 export const encodeSf = <T>(data: T) => {
-    const salt = CryptoJS.lib.WordArray.random(128 / 8);
-    const key = CryptoJS.PBKDF2(getPassword(), salt, {
+    const salt = WordArray.lib.WordArray.random(128 / 8);
+    const key = PBKDF2(getPassword(), salt, {
         keySize: KEY_SIZE,
         iterations: ITERATIONS,
     });
-    const iv = CryptoJS.lib.WordArray.random(128 / 8);
-    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), key, {
-        iv: iv,
-        padding: CryptoJS.pad.Pkcs7,
-        mode: CryptoJS.mode.CBC,
+    const iv = WordArray.lib.WordArray.random(128 / 8);
+    const encrypted = AES.encrypt(JSON.stringify(data), key, {
+        iv,
     });
     const transitMessage =
-        salt.toString(CryptoJS.enc.Base64) +
-        iv.toString(CryptoJS.enc.Base64) +
-        encrypted.toString();
+        salt.toString(Base64) + iv.toString(Base64) + encrypted.toString();
 
     return new TextEncoder().encode(transitMessage);
 };
@@ -54,21 +54,19 @@ export const decodeSf = <T>(data: ArrayBuffer): T => {
     const ivString = transitMessage.substring(24, 48);
     const encryptedString = transitMessage.substring(48);
 
-    const salt = CryptoJS.enc.Base64.parse(saltString);
-    const iv = CryptoJS.enc.Base64.parse(ivString);
+    const salt = Base64.parse(saltString);
+    const iv = Base64.parse(ivString);
 
-    const key = CryptoJS.PBKDF2(getPassword(), salt, {
+    const key = PBKDF2(getPassword(), salt, {
         keySize: KEY_SIZE,
         iterations: ITERATIONS,
     });
 
-    const decrypted = CryptoJS.AES.decrypt(encryptedString, key, {
-        iv: iv,
-        padding: CryptoJS.pad.Pkcs7,
-        mode: CryptoJS.mode.CBC,
+    const decrypted = AES.decrypt(encryptedString, key, {
+        iv,
     });
 
-    const jsonString = decrypted.toString(CryptoJS.enc.Utf8);
+    const jsonString = decrypted.toString(Utf8);
     if (!jsonString) {
         throw new Error(
             "Failed to decrypt. Data might be corrupted or the password/logic has changed."

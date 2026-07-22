@@ -29,11 +29,22 @@ if (!rootElement) {
 createRoot(rootElement).render(
     <StrictMode>
         <GameProvider
+            loadingScreen={{
+                backgroundImage: "./assets/backgrounds/parchment.webp",
+                text: ["Loading the realm...", "Preparing your quest..."],
+                progressBarClassName: "bg-amber-500",
+            }}
             options={{
                 gameName: "the-knights-quest",
                 // startPassage: "castleMap",
                 isDevMode: import.meta.env.MODE === "development",
             }}
+            preload={[
+                "./assets/maps/world-map.webp",
+                "./assets/backgrounds/parchment.webp",
+                "./assets/ui/inventory-icon.webp",
+            ]}
+            showSplashScreenOnDev
             components={{
                 MainMenu: MainMenu,
             }}

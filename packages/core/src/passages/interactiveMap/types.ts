@@ -465,6 +465,53 @@ export interface MapLabelHotspot extends LabelHotspot, BaseMapHotspot {}
 export interface MapImageHotspot extends ImageHotspot, BaseMapHotspot {}
 
 /**
+ * Decorative image positioned on the map without interactive behavior.
+ *
+ * Unlike an image hotspot, a map image has no action, disabled state,
+ * tooltip, hover image, or active image. Use it for markers, characters,
+ * overlays, and other visual elements that must share the hotspot coordinate
+ * system without becoming controls.
+ *
+ * @example
+ * ```typescript
+ * {
+ *   type: 'mapImage',
+ *   content: '/characters/guard.png',
+ *   position: { x: 42, y: 68 },
+ *   props: {
+ *     alt: 'Castle guard',
+ *     zoom: '75%'
+ *   }
+ * }
+ * ```
+ */
+export interface MapImage extends BaseMapHotspot {
+    /** Discriminator identifying a non-interactive map image. */
+    type: "mapImage";
+
+    /** Optional identifier used as the rendered element id and default alt text. */
+    id?: string;
+
+    /** Static or dynamically resolved image URL/path. */
+    content: MaybeCallable<string>;
+
+    /** Optional presentation settings. */
+    props?: {
+        /** Accessible image description. Falls back to `id`, then an empty string. */
+        alt?: string;
+
+        /** Visual scale relative to the source image size. */
+        zoom?: `${number}%`;
+
+        /** CSS classes for the visual wrapper and image. */
+        classNames?: {
+            container?: string;
+            image?: string;
+        };
+    };
+}
+
+/**
  * Position mixin for hotspots placed on the edges/sides of the map.
  * Side hotspots appear outside the main map area in fixed positions.
  */
@@ -629,6 +676,7 @@ export interface MapMenu {
 export type AnyHotspot =
     | MapLabelHotspot
     | MapImageHotspot
+    | MapImage
     | SideLabelHotspot
     | SideImageHotspot
     | MapMenu;

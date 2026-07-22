@@ -2,7 +2,7 @@ import type { ConversationComponent } from "@react-text-game/core";
 
 import type { SayComponent } from "./Say";
 
-type ConversationProps = Readonly<{
+export type ConversationProps = Readonly<{
     children: SayComponent | SayComponent[];
 }> &
     Pick<ConversationComponent, "appearance"> &

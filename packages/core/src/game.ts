@@ -20,6 +20,7 @@ import type { GameSaveState, JsonPath } from "#types";
 
 const objectRegistry = new Map<string, BaseGameObject>();
 const passagesRegistry = new Map<string, Passage>();
+const systemPassageNames = new Set<string>(Object.values(SYSTEM_PASSAGE_NAMES));
 
 const jsonPath = `${STORAGE_SYSTEM_PATH}.game` as const satisfies JsonPath;
 
@@ -101,7 +102,7 @@ export class Game {
      * @return {void} This method does not return a value.
      */
     static registerEntity(...objects: Array<BaseGameObject>): void {
-        objects.forEach((object) => {
+        for (const object of objects) {
             if (objectRegistry.has(object.id)) {
                 throw new Error(`Object "${object.id}" is already registered.`);
             }
@@ -112,7 +113,7 @@ export class Game {
             logger.log(`Registered entity: ${object.id}`);
 
             // Check if there's pending initialState for this entity
-            if (Game.pendingInitialState[object.id]) {
+            if (Object.hasOwn(Game.pendingInitialState, object.id)) {
                 const pendingState = Game.pendingInitialState[object.id];
 
                 logger.log(
@@ -140,10 +141,17 @@ export class Game {
                 delete Game.pendingInitialState[object.id];
 
                 logger.log(
-                    `Successfully applied pending initialState: ${JSON.stringify(pendingState)}`
+                    "Successfully applied pending initialState:",
+                    pendingState
                 );
             }
-        });
+
+            if (Game.autoSaveEnabled) {
+                Game.unsubscribeFunctions.push(
+                    subscribe(proxiedObject, Game.saveToSessionStorage)
+                );
+            }
+        }
     }
 
     /**
@@ -155,15 +163,11 @@ export class Game {
      * @throws Error if Game.init() has not been called
      */
     static registerPassage(...passages: Array<Passage>): void {
-        const systemPassages = Object.values(SYSTEM_PASSAGE_NAMES);
-
-        passages.forEach((passage) => {
+        for (const passage of passages) {
             if (
                 passagesRegistry.has(passage.id) &&
                 // letting user to re-register system passages
-                !systemPassages.includes(
-                    passage.id as (typeof systemPassages)[number]
-                )
+                !systemPassageNames.has(passage.id)
             ) {
                 throw new Error(
                     `Passage "${passage.id}" is already registered.`
@@ -180,7 +184,7 @@ export class Game {
                 Game.pendingStartPassage = null;
                 logger.log(`Applied pending startPassage: ${passage.id}`);
             }
-        });
+        }
     }
 
     /**
@@ -265,15 +269,13 @@ export class Game {
 
         const passageId = typeof passage === "string" ? passage : passage.id;
 
-        const retrievedPassage = passagesRegistry.get(passageId) || null;
+        const retrievedPassage = passagesRegistry.get(passageId);
 
         if (!retrievedPassage) {
             throw new Error(`Passage "${passageId}" not found.`);
         }
 
-        Game.state.currentPassageId = retrievedPassage
-            ? retrievedPassage.id
-            : null;
+        Game.state.currentPassageId = retrievedPassage.id;
 
         logger.log(`Jumped to passage: ${passageId}`);
     }
@@ -342,7 +344,7 @@ export class Game {
 
         Storage.setValue(jsonPath, internalState, true);
 
-        logger.log(`Game state saved: ${JSON.stringify(internalState)}`);
+        logger.log("Game state saved:", internalState);
     }
 
     /**
@@ -360,7 +362,7 @@ export class Game {
         const { currentPassageId } = state;
         Game.state.currentPassageId = currentPassageId || null;
 
-        logger.log(`Game state loaded: ${JSON.stringify(state)}`);
+        logger.log("Game state loaded:", state);
     }
 
     /**
@@ -501,9 +503,9 @@ export class Game {
         }
 
         // Unsubscribe all listeners
-        Game.unsubscribeFunctions.forEach((unsubscribe) => {
+        for (const unsubscribe of Game.unsubscribeFunctions) {
             unsubscribe();
-        });
+        }
         Game.unsubscribeFunctions = [];
 
         Game.autoSaveEnabled = false;
@@ -655,12 +657,14 @@ export class Game {
             }
 
             logger.log(
-                `Applied initialState immediately: ${JSON.stringify(filteredInitialState)}`
+                "Applied initialState immediately:",
+                filteredInitialState
             );
 
             if (Object.keys(queuedInitialState).length > 0) {
                 logger.log(
-                    `Queued initialState for late-registering entities: ${JSON.stringify(queuedInitialState)}`
+                    "Queued initialState for late-registering entities:",
+                    queuedInitialState
                 );
             }
         }
@@ -721,7 +725,7 @@ export class Game {
             );
         }
 
-        logger.log(`Game initialized with options: ${JSON.stringify(opts)}`);
+        logger.log("Game initialized with options:", opts);
     }
 
     /**

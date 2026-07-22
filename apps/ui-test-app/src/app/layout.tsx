@@ -25,6 +25,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <GameProvider
+                    loadingScreen={{
+                        text: [
+                            "loading maps...",
+                            "loading characters...",
+                            "preparing the game...",
+                        ],
+                    }}
                     options={{
                         gameName: "ui-test-app",
                         isDevMode: true,
@@ -47,6 +54,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
                             },
                         },
                     }}
+                    preload={[
+                        "/kitchen.png",
+                        "/living_room.png",
+                        "/city.png",
+                        "/img.png",
+                        "/vasiliy.png",
+                        "/video.mp4",
+                    ]}
+                    showSplashScreenOnDev
                 >
                     {children}
                 </GameProvider>

@@ -8,6 +8,16 @@ export const testInteractiveMap = newInteractiveMap("testMap", {
     image: "city.png",
     bgImage: "img.png",
     hotspots: [
+        {
+            id: "decorative-map-image",
+            type: "mapImage",
+            content: "imageHotspot/idle.png",
+            position: { x: 40, y: 70 },
+            props: {
+                alt: "Decorative character",
+                zoom: "10%",
+            },
+        },
         () =>
             testInteractiveMapEntity.isSecretHotspotDisplayed
                 ? {
