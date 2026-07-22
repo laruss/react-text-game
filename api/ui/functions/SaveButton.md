@@ -2,7 +2,7 @@
 
 > **SaveButton**(`__namedParameters`): `Element`
 
-Defined in: [packages/ui/src/components/SaveButton.tsx:43](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/ui/src/components/SaveButton.tsx#L43)
+Defined in: [components/SaveButton.tsx:46](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/ui/src/components/SaveButton.tsx#L46)
 
 ## Parameters
 

@@ -2,7 +2,7 @@
 
 > **PassageController**(): `Element`
 
-Defined in: [packages/ui/src/components/PassageController/PassageController.tsx:13](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/ui/src/components/PassageController/PassageController.tsx#L13)
+Defined in: [components/PassageController/PassageController.tsx:12](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/ui/src/components/PassageController/PassageController.tsx#L12)
 
 ## Returns
 

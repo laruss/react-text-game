@@ -2,7 +2,7 @@
 
 > **useGameEntity**\<`T`\>(`gameObject`): `T`
 
-Defined in: [packages/core/src/hooks/useGameEntity.ts:58](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/hooks/useGameEntity.ts#L58)
+Defined in: [packages/core/src/hooks/useGameEntity.ts:58](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/hooks/useGameEntity.ts#L58)
 
 Monitors changes to a given game entity by wrapping it in a Valtio proxy.
 This hook enables React components to automatically re-render when the entity's state changes.

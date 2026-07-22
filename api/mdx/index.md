@@ -4,6 +4,8 @@
 
 - [ActionProps](type-aliases/ActionProps.md)
 - [ActionType](type-aliases/ActionType.md)
+- [ConversationProps](type-aliases/ConversationProps.md)
+- [IncludeProps](type-aliases/IncludeProps.md)
 - [SayComponent](type-aliases/SayComponent.md)
 - [SayProps](type-aliases/SayProps.md)
 - [VarProps](type-aliases/VarProps.md)

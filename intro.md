@@ -1,159 +1,77 @@
 ---
-sidebar_position: 1
 slug: /
 title: React Text Game
-description: Build interactive narrative experiences, visual novels, and text adventures in React with a powerful, type-safe game engine featuring reactive state management, story passages, interactive maps, and flexible JSONPath-based save system.
-keywords:
-    - react
-    - reactjs
-    - typescript
-    - text game
-    - text adventure
-    - interactive fiction
-    - react text game
-    - react text adventure
-    - react interactive fiction
-    - narrative engine
-    - story engine
-    - game engine
-    - browser game
-    - visual novel
-    - twine alternative
-    - ink alternative
-    - choicescript
-    - passages
-    - save system
-    - jsonpath
-    - valtio
-    - tailwindcss
+description: A type-safe React engine for interactive fiction, story passages, maps, reactive entities, and persistent saves.
 image: /img/og-image.webp
 ---
 
-# Welcome to React Text Game
+# React Text Game
 
-**React Text Game** is a powerful, reactive text-based game engine built for React applications. Create interactive narrative experiences with support for story passages, interactive maps, and comprehensive state management.
+Build interactive fiction with a small engine layer and use as much—or as little—of the supplied React UI as you want.
 
-## Key Features
+React Text Game is split into three libraries:
 
-- 🔄 **Reactive State Management** - Built on Valtio for automatic UI updates
-- 📖 **Multiple Passage Types** - Story, Interactive Map, and Widget passages
-- 📝 **MDX Support** - Write narratives in Markdown with embedded React components
-- 💾 **Flexible Save System** - IndexedDB-based storage with encryption and migrations
-- 🎮 **Entity Registry** - Automatic registration and proxying of game objects
-- 🏭 **Factory-Based Entities** - Plain-object factories for beginners with class-based escape hatches
-- 🔒 **Type-Safe** - Full TypeScript support with comprehensive types
-- ⚛️ **React Hooks** - Built-in hooks for seamless React integration
+| Package | Use it for |
+| --- | --- |
+| `@react-text-game/core` | reactive game entities, passage navigation, saves, migrations, audio, and i18n |
+| `@react-text-game/ui` | ready-made story and map renderers, save UI, and replaceable component slots |
+| `@react-text-game/mdx` | authoring story passages in MDX |
 
-## Packages
+## A passage in 30 seconds
 
-React Text Game consists of three packages:
+```tsx title="src/game/intro.ts"
+import { Game, newStory } from "@react-text-game/core";
 
-### [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
-
-The core game engine that handles state management, entity registration, passage navigation, and save/load functionality.
-
-```bash
-bun add @react-text-game/core
-```
-
-[View Core API Documentation →](/api/core/)
-
-### [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
-
-Ready-to-use React components with Tailwind CSS v4 and a semantic theming system.
-
-```bash
-bun add @react-text-game/core @react-text-game/ui
-```
-
-[View UI API Documentation →](/api/ui/)
-
-### [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
-
-MDX integration for writing game passages in Markdown with embedded React components. Perfect for narrative-focused games.
-
-```bash
-bun add @react-text-game/mdx @react-text-game/core @mdx-js/mdx @mdx-js/react
-```
-
-**Example MDX passage:**
-
-```mdx
----
-passageId: intro
----
-
-import { Game } from "@react-text-game/core";
-import { Action, Actions } from "@react-text-game/mdx";
-import { player } from "../entities/player";
-
-# Welcome, {player.name}!
-
-Your adventure begins in a dark forest...
-
-<Actions>
-    <Action onPerform={() => Game.jumpTo("forest")}>Enter the forest</Action>
-</Actions>
-```
-
-## Quick Example
-
-```tsx
-import { Game, createEntity, newStory } from "@react-text-game/core";
-
-// Initialize the game first (required!)
-await Game.init({
-    gameName: "My Text Adventure",
-    isDevMode: true,
-});
-
-// Create a game entity
-const player = createEntity("player", {
-    name: "Hero",
-    health: 100,
-});
-
-// Create a story passage
-const intro = newStory("intro", () => [
-    {
-        type: "header",
-        content: "Welcome to the Game",
-        props: { level: 1 },
-    },
-    {
-        type: "text",
-        content: `Hello, ${player.name}!`,
-    },
+export const intro = newStory("intro", () => [
+    { type: "header", content: "The station", props: { level: 1 } },
+    { type: "text", content: "The last train is waiting." },
     {
         type: "actions",
         content: [
             {
-                label: "Start Adventure",
-                action: () => Game.jumpTo("adventure"),
+                label: "Board the train",
+                action: () => Game.jumpTo("inside-train"),
             },
         ],
     },
 ]);
-
-// Navigate to passage
-Game.jumpTo(intro);
 ```
 
-## Next Steps
+Passages and entities register when their modules are imported. `GameProvider` initializes the engine and renders the current passage:
 
-- [**Getting Started**](/getting-started) - Installation and setup guide
-- [**Core Concepts**](/core-concepts) - Learn the fundamental concepts
-- [**Internationalization**](/i18n) - Configure translations, language switching, and i18next plugins
-- [**Core API**](/api/core/) - Complete API reference for the core package
-- [**UI API**](/api/ui/) - Complete API reference for the UI package
+```tsx title="src/main.tsx"
+import "./game/intro";
+import "@react-text-game/ui/styles";
+import { GameProvider, PassageController } from "@react-text-game/ui";
 
-## Resources
+const options = {
+    gameName: "Night Train",
+    startPassage: "intro",
+    isDevMode: import.meta.env.DEV,
+};
 
-- [GitHub Repository](https://github.com/laruss/react-text-game)
-- [Report Issues](https://github.com/laruss/react-text-game/issues)
-- [NPM - Core Package](https://www.npmjs.com/package/@react-text-game/core)
-- [NPM - UI Package](https://www.npmjs.com/package/@react-text-game/ui)
+root.render(
+    <GameProvider options={options}>
+        <PassageController />
+    </GameProvider>
+);
+```
 
-## License
+## Choose your path
 
-MIT © [laruss](https://github.com/laruss)
+- Follow [Installation](/getting-started) and [Build your first game](/first-game) for a working React setup.
+- Read [Core concepts](/core-concepts) when you need entities, saves, or custom passage logic.
+- Use [Interactive maps](/interactive-maps) for coordinate-safe hotspots and decorative `mapImage` entities.
+- Configure [preloading, loading progress, and splash screens](/loading-and-splash-screens) for the startup experience.
+- Open [Custom UI](/custom-ui) to replace one primitive, a whole passage renderer, or the entire presentation layer.
+- Install the [React Text Game agent skill](/agent-skill) so Codex and other compatible agents follow the library's lifecycle, map-coordinate, and verification contracts.
+- Use the [Core API](/api/core/), [UI API](/api/ui/), and [MDX API](/api/mdx/) for exact signatures.
+
+## Design principles
+
+- Game state belongs to core entities, not UI components.
+- A passage describes what to display; a renderer decides how it looks.
+- Map coordinates are percentages of the fitted source image, so hotspots remain anchored across viewport sizes.
+- Callable content is evaluated when a passage is displayed, allowing state-driven stories without a second schema.
+
+The packages are independently usable, fully typed, and published under the MIT license. Source and example applications are available on [GitHub](https://github.com/laruss/react-text-game).

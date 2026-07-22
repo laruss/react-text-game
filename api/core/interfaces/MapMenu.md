@@ -1,6 +1,6 @@
 # Interface: MapMenu
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:553](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/interactiveMap/types.ts#L553)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:600](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/interactiveMap/types.ts#L600)
 
 Contextual menu hotspot that displays multiple label buttons at a specific position.
 Useful for creating radial menus, action lists, or grouped choices on the map.
@@ -42,7 +42,7 @@ Useful for creating radial menus, action lists, or grouped choices on the map.
 
 > `optional` **direction**: `"horizontal"` \| `"vertical"`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:603](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/interactiveMap/types.ts#L603)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:650](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/interactiveMap/types.ts#L650)
 
 Layout direction for menu items.
 
@@ -61,7 +61,7 @@ Layout direction for menu items.
 
 > **items**: [`MaybeCallable`](../type-aliases/MaybeCallable.md)\<[`LabelHotspot`](LabelHotspot.md) \| `undefined`\>[]
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:583](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/interactiveMap/types.ts#L583)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:630](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/interactiveMap/types.ts#L630)
 
 Array of menu items to display.
 Each item is a LabelHotspot or a function returning one.
@@ -91,9 +91,9 @@ items: [
 
 ### position
 
-> **position**: `HotspotPosition`
+> **position**: [`HotspotPosition`](../type-aliases/HotspotPosition.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:592](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/interactiveMap/types.ts#L592)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:639](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/interactiveMap/types.ts#L639)
 
 Position of the menu on the map.
 Values are percentages (0-100) relative to the map dimensions.
@@ -101,7 +101,7 @@ Can be static or dynamic (function-based) for reactive positioning.
 
 #### See
 
-HotspotPosition for examples and coordinate system details
+[HotspotPosition](../type-aliases/HotspotPosition.md) for examples and coordinate system details
 
 ***
 
@@ -109,7 +109,7 @@ HotspotPosition for examples and coordinate system details
 
 > `optional` **props**: `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:608](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/interactiveMap/types.ts#L608)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:655](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/interactiveMap/types.ts#L655)
 
 Optional styling configuration.
 
@@ -131,6 +131,6 @@ className: 'bg-card/90 backdrop-blur-sm rounded-lg shadow-xl p-2'
 
 > **type**: `"menu"`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:557](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/interactiveMap/types.ts#L557)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:604](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/interactiveMap/types.ts#L604)
 
 Discriminator property identifying this as a menu hotspot.

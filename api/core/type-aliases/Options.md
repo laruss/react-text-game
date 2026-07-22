@@ -2,7 +2,7 @@
 
 > **Options** = `object`
 
-Defined in: [packages/core/src/options.ts:5](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L5)
+Defined in: [packages/core/src/options.ts:5](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L5)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [packages/core/src/options.ts:5](https://github.com/laruss/react-tex
 
 > **author**: `string`
 
-Defined in: [packages/core/src/options.ts:31](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L31)
+Defined in: [packages/core/src/options.ts:31](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L31)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/core/src/options.ts:31](https://github.com/laruss/react-te
 
 > **description**: `string`
 
-Defined in: [packages/core/src/options.ts:8](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L8)
+Defined in: [packages/core/src/options.ts:8](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L8)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/core/src/options.ts:8](https://github.com/laruss/react-tex
 
 > **gameId**: `string`
 
-Defined in: [packages/core/src/options.ts:7](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L7)
+Defined in: [packages/core/src/options.ts:7](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L7)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [packages/core/src/options.ts:7](https://github.com/laruss/react-tex
 
 > **gameName**: `string`
 
-Defined in: [packages/core/src/options.ts:6](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L6)
+Defined in: [packages/core/src/options.ts:6](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L6)
 
 ***
 
@@ -42,7 +42,7 @@ Defined in: [packages/core/src/options.ts:6](https://github.com/laruss/react-tex
 
 > **gameVersion**: `string`
 
-Defined in: [packages/core/src/options.ts:9](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L9)
+Defined in: [packages/core/src/options.ts:9](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L9)
 
 ***
 
@@ -50,7 +50,7 @@ Defined in: [packages/core/src/options.ts:9](https://github.com/laruss/react-tex
 
 > **initialState**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/options.ts:30](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L30)
+Defined in: [packages/core/src/options.ts:30](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L30)
 
 Initial state of the game entities.
 Use this prop to override default entity values for debugging or testing.
@@ -77,7 +77,7 @@ await Game.init({
 
 > **isDevMode**: `boolean`
 
-Defined in: [packages/core/src/options.ts:32](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L32)
+Defined in: [packages/core/src/options.ts:32](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L32)
 
 ***
 
@@ -85,7 +85,7 @@ Defined in: [packages/core/src/options.ts:32](https://github.com/laruss/react-te
 
 > **startPassage**: `string`
 
-Defined in: [packages/core/src/options.ts:10](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L10)
+Defined in: [packages/core/src/options.ts:10](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L10)
 
 ***
 
@@ -93,4 +93,4 @@ Defined in: [packages/core/src/options.ts:10](https://github.com/laruss/react-te
 
 > **translations**: `I18nConfig`
 
-Defined in: [packages/core/src/options.ts:33](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/options.ts#L33)
+Defined in: [packages/core/src/options.ts:33](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/options.ts#L33)

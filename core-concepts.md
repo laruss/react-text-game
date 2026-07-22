@@ -54,7 +54,9 @@ React Text Game uses a **registry pattern** with **reactive state management** (
 
 ## Game Initialization
 
-**IMPORTANT:** You must call `Game.init()` before using any other Game methods or creating entities.
+Entities and passages may register before initialization, which is the normal pattern for
+module-level game registries. You must await `Game.init()` before navigation, save, state,
+or option operations. When using `@react-text-game/ui`, `GameProvider` owns this step.
 
 ```tsx
 import { Game } from "@react-text-game/core";

@@ -1,6 +1,6 @@
 # Interface: HeaderComponent
 
-Defined in: [packages/core/src/passages/story/types.ts:132](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/story/types.ts#L132)
+Defined in: [packages/core/src/passages/story/types.ts:137](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/story/types.ts#L137)
 
 Component for displaying heading text at various levels.
 Headers provide semantic structure and visual hierarchy to story content.
@@ -28,7 +28,7 @@ Headers provide semantic structure and visual hierarchy to story content.
 
 > **content**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:142](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/story/types.ts#L142)
+Defined in: [packages/core/src/passages/story/types.ts:147](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/story/types.ts#L147)
 
 The header text to display.
 Plain text only - use TextComponent for rich content.
@@ -39,7 +39,7 @@ Plain text only - use TextComponent for rich content.
 
 > `optional` **id**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:19](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/story/types.ts#L19)
+Defined in: [packages/core/src/passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/story/types.ts#L24)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -58,9 +58,9 @@ Can be used to reference or manipulate specific components programmatically.
 
 ### initialVariant?
 
-> `optional` **initialVariant**: `"hidden"` \| `"display"` \| `"disclosure"`
+> `optional` **initialVariant**: `"display"` \| `"hidden"` \| `"disclosure"`
 
-Defined in: [packages/core/src/passages/story/types.ts:34](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/story/types.ts#L34)
+Defined in: [packages/core/src/passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/story/types.ts#L39)
 
 Controls the initial visibility state of the component.
 
@@ -87,7 +87,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > `optional` **props**: `object`
 
-Defined in: [packages/core/src/passages/story/types.ts:147](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/story/types.ts#L147)
+Defined in: [packages/core/src/passages/story/types.ts:152](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/story/types.ts#L152)
 
 Optional configuration for header level and styling.
 
@@ -123,6 +123,6 @@ Affects both visual size and document structure.
 
 > **type**: `"header"`
 
-Defined in: [packages/core/src/passages/story/types.ts:136](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/passages/story/types.ts#L136)
+Defined in: [packages/core/src/passages/story/types.ts:141](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/story/types.ts#L141)
 
 Discriminator property identifying this as a header component.

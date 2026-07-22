@@ -2,7 +2,7 @@
 
 > **SaveMigrationFn**\<`T`\> = (`data`) => `T`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:47](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/saves/migrations/types.ts#L47)
+Defined in: [packages/core/src/saves/migrations/types.ts:47](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/migrations/types.ts#L47)
 
 A function that migrates game save data from one version to another.
 

@@ -2,7 +2,7 @@
 
 > `const` **AUDIO\_STORAGE\_PATH**: `"$._system.audio"`
 
-Defined in: [constants.ts:10](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/constants.ts#L10)
+Defined in: [constants.ts:10](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/constants.ts#L10)
 
 Base JSONPath for audio storage within the system path.
 

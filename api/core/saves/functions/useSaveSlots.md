@@ -2,7 +2,7 @@
 
 > **useSaveSlots**(`config`): `object`[]
 
-Defined in: [packages/core/src/saves/hooks/useSaveSlots.ts:38](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/saves/hooks/useSaveSlots.ts#L38)
+Defined in: [packages/core/src/saves/hooks/useSaveSlots.ts:38](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/hooks/useSaveSlots.ts#L38)
 
 React hook that provides an array of save slots with live updates from IndexedDB.
 Each slot includes the save data and methods to save, load, and delete.

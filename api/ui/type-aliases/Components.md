@@ -1,5 +1,5 @@
 # Type Alias: Components
 
-> **Components** = `Readonly`\<\{ `MainMenu?`: () => `ReactNode`; `story?`: `StoryComponents`; \}\>
+> **Components** = `Readonly`\<\{ `LoadingScreen?`: (`props`) => `ReactNode`; `MainMenu?`: () => `ReactNode`; `passages?`: [`PassageComponents`](PassageComponents.md); `RTGSplashScreen?`: () => `ReactNode`; `story?`: [`StoryComponents`](StoryComponents.md); \}\>
 
-Defined in: [packages/ui/src/context/ComponentsContext/types.ts:21](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/ui/src/context/ComponentsContext/types.ts#L21)
+Defined in: [context/ComponentsContext/types.ts:34](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/ui/src/context/ComponentsContext/types.ts#L34)

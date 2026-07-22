@@ -1,6 +1,6 @@
 # Interface: AudioSaveState
 
-Defined in: [types.ts:110](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L110)
+Defined in: [types.ts:110](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L110)
 
 Saved state for audio track persistence.
 
@@ -12,7 +12,7 @@ This is a subset of AudioState that gets persisted to storage.
 
 > **currentTime**: `number`
 
-Defined in: [types.ts:117](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L117)
+Defined in: [types.ts:117](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L117)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:117](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **id**: `string`
 
-Defined in: [types.ts:111](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L111)
+Defined in: [types.ts:111](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L111)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:111](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **isPaused**: `boolean`
 
-Defined in: [types.ts:119](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L119)
+Defined in: [types.ts:119](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L119)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [types.ts:119](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **isPlaying**: `boolean`
 
-Defined in: [types.ts:118](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L118)
+Defined in: [types.ts:118](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L118)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [types.ts:118](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **loop**: `boolean`
 
-Defined in: [types.ts:114](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L114)
+Defined in: [types.ts:114](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L114)
 
 ***
 
@@ -52,7 +52,7 @@ Defined in: [types.ts:114](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **muted**: `boolean`
 
-Defined in: [types.ts:116](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L116)
+Defined in: [types.ts:116](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L116)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: [types.ts:116](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **playbackRate**: `number`
 
-Defined in: [types.ts:115](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L115)
+Defined in: [types.ts:115](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L115)
 
 ***
 
@@ -68,7 +68,7 @@ Defined in: [types.ts:115](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **src**: `string`
 
-Defined in: [types.ts:112](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L112)
+Defined in: [types.ts:112](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L112)
 
 ***
 
@@ -76,4 +76,4 @@ Defined in: [types.ts:112](https://github.com/laruss/react-text-game/blob/a8945b
 
 > **volume**: `number`
 
-Defined in: [types.ts:113](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/audio/types.ts#L113)
+Defined in: [types.ts:113](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L113)

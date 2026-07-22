@@ -1,6 +1,6 @@
 # Interface: ReactTextGameDebug
 
-Defined in: [packages/core/src/global.d.ts:5](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L5)
+Defined in: [packages/core/src/global.d.ts:5](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L5)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [packages/core/src/global.d.ts:5](https://github.com/laruss/react-te
 
 > `readonly` **currentPassage**: [`Passage`](../classes/Passage.md) \| `null`
 
-Defined in: [packages/core/src/global.d.ts:8](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L8)
+Defined in: [packages/core/src/global.d.ts:8](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L8)
 
 ***
 
@@ -16,7 +16,7 @@ Defined in: [packages/core/src/global.d.ts:8](https://github.com/laruss/react-te
 
 > **Game**: *typeof* [`Game`](../classes/Game.md)
 
-Defined in: [packages/core/src/global.d.ts:6](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L6)
+Defined in: [packages/core/src/global.d.ts:6](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L6)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [packages/core/src/global.d.ts:6](https://github.com/laruss/react-te
 
 > **getPassage**: (`passageId`) => [`Passage`](../classes/Passage.md) \| `null`
 
-Defined in: [packages/core/src/global.d.ts:12](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L12)
+Defined in: [packages/core/src/global.d.ts:12](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L12)
 
 Retrieves a passage by its unique identifier.
 
@@ -52,7 +52,7 @@ Error if Game.init() has not been called
 
 > **getState**: (`_fromI`) => [`GameSaveState`](../type-aliases/GameSaveState.md)
 
-Defined in: [packages/core/src/global.d.ts:13](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L13)
+Defined in: [packages/core/src/global.d.ts:13](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L13)
 
 Captures the complete game state including all entities and passages.
 
@@ -90,7 +90,7 @@ localStorage.setItem('save1', JSON.stringify(savedState));
 
 > **jumpTo**: (`passage`) => `void`
 
-Defined in: [packages/core/src/global.d.ts:11](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L11)
+Defined in: [packages/core/src/global.d.ts:11](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L11)
 
 Navigates the game to a specified passage.
 
@@ -137,7 +137,7 @@ Game.jumpTo('combat'); // renderId: "1234567891-0.456" (different!)
 
 > `readonly` **passages**: [`Passage`](../classes/Passage.md)[]
 
-Defined in: [packages/core/src/global.d.ts:10](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L10)
+Defined in: [packages/core/src/global.d.ts:10](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L10)
 
 ***
 
@@ -145,7 +145,7 @@ Defined in: [packages/core/src/global.d.ts:10](https://github.com/laruss/react-t
 
 > **setState**: (`state`) => `void`
 
-Defined in: [packages/core/src/global.d.ts:14](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L14)
+Defined in: [packages/core/src/global.d.ts:14](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L14)
 
 Restores the complete game state including all entities and passages.
 
@@ -183,7 +183,7 @@ Game.setState(savedState);
 
 > `readonly` **state**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/global.d.ts:9](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L9)
+Defined in: [packages/core/src/global.d.ts:9](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L9)
 
 ***
 
@@ -191,4 +191,4 @@ Defined in: [packages/core/src/global.d.ts:9](https://github.com/laruss/react-te
 
 > **Storage**: *typeof* `Storage`
 
-Defined in: [packages/core/src/global.d.ts:7](https://github.com/laruss/react-text-game/blob/a8945b21c86c79db7af71fbb39acd862002dd8a4/packages/core/src/global.d.ts#L7)
+Defined in: [packages/core/src/global.d.ts:7](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/global.d.ts#L7)
