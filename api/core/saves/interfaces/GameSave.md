@@ -1,6 +1,6 @@
 # Interface: GameSave
 
-Defined in: [packages/core/src/saves/types.ts:4](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L4)
+Defined in: [packages/core/src/saves/types.ts:4](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L4)
 
 Represents a saved game state
 
@@ -10,7 +10,7 @@ Represents a saved game state
 
 > `optional` **description**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:18](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L18)
+Defined in: [packages/core/src/saves/types.ts:18](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L18)
 
 User-provided description (optional)
 
@@ -20,7 +20,7 @@ User-provided description (optional)
 
 > **gameData**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/saves/types.ts:10](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L10)
+Defined in: [packages/core/src/saves/types.ts:10](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L10)
 
 Serialized game state data
 
@@ -30,7 +30,7 @@ Serialized game state data
 
 > `optional` **id**: `number`
 
-Defined in: [packages/core/src/saves/types.ts:6](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L6)
+Defined in: [packages/core/src/saves/types.ts:6](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L6)
 
 Database auto-generated ID
 
@@ -40,7 +40,7 @@ Database auto-generated ID
 
 > `optional` **isSystemSave**: `boolean`
 
-Defined in: [packages/core/src/saves/types.ts:20](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L20)
+Defined in: [packages/core/src/saves/types.ts:20](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L20)
 
 Mark as system save (won't be shown in UI)
 
@@ -50,7 +50,7 @@ Mark as system save (won't be shown in UI)
 
 > **name**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:8](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L8)
+Defined in: [packages/core/src/saves/types.ts:8](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L8)
 
 User-defined name for the save
 
@@ -60,7 +60,7 @@ User-defined name for the save
 
 > `optional` **screenshot**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:16](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L16)
+Defined in: [packages/core/src/saves/types.ts:16](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L16)
 
 Base64 encoded screenshot (optional)
 
@@ -70,7 +70,7 @@ Base64 encoded screenshot (optional)
 
 > **timestamp**: `Date`
 
-Defined in: [packages/core/src/saves/types.ts:12](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L12)
+Defined in: [packages/core/src/saves/types.ts:12](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L12)
 
 When the save was created
 
@@ -80,6 +80,6 @@ When the save was created
 
 > **version**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:14](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/types.ts#L14)
+Defined in: [packages/core/src/saves/types.ts:14](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/types.ts#L14)
 
 Game version when the save was created

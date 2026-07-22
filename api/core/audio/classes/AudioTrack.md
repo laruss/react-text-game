@@ -1,6 +1,6 @@
 # Class: AudioTrack
 
-Defined in: [audioTrack.ts:35](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L35)
+Defined in: [audioTrack.ts:35](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L35)
 
 Individual audio track with reactive state management.
 
@@ -33,7 +33,7 @@ music.setVolume(0.5);
 
 > **new AudioTrack**(`src`, `options`): `AudioTrack`
 
-Defined in: [audioTrack.ts:48](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L48)
+Defined in: [audioTrack.ts:48](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L48)
 
 #### Parameters
 
@@ -55,7 +55,7 @@ Defined in: [audioTrack.ts:48](https://github.com/laruss/react-text-game/blob/97
 
 > `readonly` **id**: `string`
 
-Defined in: [audioTrack.ts:36](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L36)
+Defined in: [audioTrack.ts:36](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L36)
 
 ***
 
@@ -63,7 +63,7 @@ Defined in: [audioTrack.ts:36](https://github.com/laruss/react-text-game/blob/97
 
 > `readonly` **src**: `string`
 
-Defined in: [audioTrack.ts:37](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L37)
+Defined in: [audioTrack.ts:37](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L37)
 
 ## Methods
 
@@ -71,7 +71,7 @@ Defined in: [audioTrack.ts:37](https://github.com/laruss/react-text-game/blob/97
 
 > **\_applyEffectiveVolume**(): `void`
 
-Defined in: [audioTrack.ts:247](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L247)
+Defined in: [audioTrack.ts:247](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L247)
 
 **`Internal`**
 
@@ -88,7 +88,7 @@ Internal method used by AudioManager to apply master volume changes.
 
 > **cancelFade**(): `void`
 
-Defined in: [audioTrack.ts:372](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L372)
+Defined in: [audioTrack.ts:372](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L372)
 
 Cancels any ongoing fade animation.
 
@@ -108,7 +108,7 @@ audio.cancelFade();
 
 > **dispose**(): `void`
 
-Defined in: [audioTrack.ts:509](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L509)
+Defined in: [audioTrack.ts:509](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L509)
 
 Cleans up the audio track and removes all listeners.
 
@@ -130,7 +130,7 @@ audio.dispose();
 
 > **fadeIn**(`duration`): `Promise`\<`void`\>
 
-Defined in: [audioTrack.ts:328](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L328)
+Defined in: [audioTrack.ts:328](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L328)
 
 Fades in the audio over a specified duration.
 
@@ -164,7 +164,7 @@ await audio.fadeIn(2000); // Fade in over 2 seconds
 
 > **fadeOut**(`duration`): `Promise`\<`void`\>
 
-Defined in: [audioTrack.ts:356](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L356)
+Defined in: [audioTrack.ts:356](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L356)
 
 Fades out the audio over a specified duration and stops.
 
@@ -194,7 +194,7 @@ await audio.fadeOut(1500); // Fade out over 1.5 seconds
 
 > **getState**(): [`AudioState`](../interfaces/AudioState.md)
 
-Defined in: [audioTrack.ts:429](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L429)
+Defined in: [audioTrack.ts:429](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L429)
 
 Gets the reactive audio state.
 
@@ -219,7 +219,7 @@ console.log(state.isPlaying); // true/false
 
 > **load**(): `void`
 
-Defined in: [audioTrack.ts:470](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L470)
+Defined in: [audioTrack.ts:470](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L470)
 
 Loads the audio state from storage.
 
@@ -242,7 +242,7 @@ audio.load();
 
 > **pause**(): `void`
 
-Defined in: [audioTrack.ts:189](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L189)
+Defined in: [audioTrack.ts:189](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L189)
 
 Pauses the audio track.
 
@@ -262,7 +262,7 @@ audio.pause();
 
 > **play**(): `Promise`\<`void`\>
 
-Defined in: [audioTrack.ts:172](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L172)
+Defined in: [audioTrack.ts:172](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L172)
 
 Plays the audio track.
 
@@ -292,7 +292,7 @@ try {
 
 > **resume**(): `void`
 
-Defined in: [audioTrack.ts:201](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L201)
+Defined in: [audioTrack.ts:201](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L201)
 
 Resumes playback if the audio is paused.
 
@@ -312,7 +312,7 @@ audio.resume();
 
 > **save**(): `void`
 
-Defined in: [audioTrack.ts:443](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L443)
+Defined in: [audioTrack.ts:443](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L443)
 
 Saves the current audio state to storage.
 
@@ -334,7 +334,7 @@ audio.save();
 
 > **seek**(`time`): `void`
 
-Defined in: [audioTrack.ts:308](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L308)
+Defined in: [audioTrack.ts:308](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L308)
 
 Seeks to a specific time in the audio.
 
@@ -362,7 +362,7 @@ audio.seek(30); // Seek to 30 seconds
 
 > **setLoop**(`loop`): `void`
 
-Defined in: [audioTrack.ts:263](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L263)
+Defined in: [audioTrack.ts:263](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L263)
 
 Sets whether the audio should loop.
 
@@ -390,7 +390,7 @@ audio.setLoop(true);
 
 > **setMuted**(`muted`): `void`
 
-Defined in: [audioTrack.ts:293](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L293)
+Defined in: [audioTrack.ts:293](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L293)
 
 Sets whether the audio is muted.
 
@@ -418,7 +418,7 @@ audio.setMuted(true);
 
 > **setPlaybackRate**(`rate`): `void`
 
-Defined in: [audioTrack.ts:278](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L278)
+Defined in: [audioTrack.ts:278](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L278)
 
 Sets the playback rate.
 
@@ -446,7 +446,7 @@ audio.setPlaybackRate(1.5); // 1.5x speed
 
 > **setVolume**(`volume`): `void`
 
-Defined in: [audioTrack.ts:235](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L235)
+Defined in: [audioTrack.ts:235](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L235)
 
 Sets the volume level.
 
@@ -474,7 +474,7 @@ audio.setVolume(0.5); // 50% volume
 
 > **stop**(): `void`
 
-Defined in: [audioTrack.ts:217](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/audioTrack.ts#L217)
+Defined in: [audioTrack.ts:217](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/audioTrack.ts#L217)
 
 Stops the audio track and resets to the beginning.
 

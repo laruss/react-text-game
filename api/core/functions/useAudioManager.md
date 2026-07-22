@@ -2,7 +2,7 @@
 
 > **useAudioManager**(): `object`
 
-Defined in: [packages/core/src/hooks/useAudioManager.ts:56](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/hooks/useAudioManager.ts#L56)
+Defined in: [packages/core/src/hooks/useAudioManager.ts:56](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/hooks/useAudioManager.ts#L56)
 
 React hook to access global audio manager state and controls.
 

@@ -1,6 +1,6 @@
 # Class: Widget
 
-Defined in: [packages/core/src/passages/widget.ts:68](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/widget.ts#L68)
+Defined in: [packages/core/src/passages/widget.ts:68](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/widget.ts#L68)
 
 Custom React component passage for fully customized UI.
 
@@ -51,7 +51,7 @@ newWidget - Factory function for creating Widget instances
 
 > **new Widget**(`id`, `content`): `Widget`
 
-Defined in: [packages/core/src/passages/widget.ts:80](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/widget.ts#L80)
+Defined in: [packages/core/src/passages/widget.ts:80](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/widget.ts#L80)
 
 Creates a new Widget passage.
 
@@ -83,7 +83,7 @@ React node or function returning React node to display
 
 > `protected` **\_lastDisplayResult**: `unknown` = `null`
 
-Defined in: [packages/core/src/passages/passage.ts:47](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/passage.ts#L47)
+Defined in: [packages/core/src/passages/passage.ts:47](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/passage.ts#L47)
 
 **`Internal`**
 
@@ -100,7 +100,7 @@ Used to access display data without re-executing content functions.
 
 > `readonly` **id**: `string`
 
-Defined in: [packages/core/src/passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/passage.ts#L34)
+Defined in: [packages/core/src/passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -115,7 +115,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [packages/core/src/passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/passage.ts#L40)
+Defined in: [packages/core/src/passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -130,7 +130,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**(): `ReactNode`
 
-Defined in: [packages/core/src/passages/widget.ts:96](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/widget.ts#L96)
+Defined in: [packages/core/src/passages/widget.ts:96](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/widget.ts#L96)
 
 Returns the React node for rendering.
 If content is a function, it is treated as a React component and
@@ -156,7 +156,7 @@ The React content to be rendered
 
 > **getLastDisplayResult**\<`T`\>(): `T` \| `null`
 
-Defined in: [packages/core/src/passages/passage.ts:96](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/passage.ts#L96)
+Defined in: [packages/core/src/passages/passage.ts:96](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/passage.ts#L96)
 
 Returns the cached result from the last display() call.
 Use this method to access passage data without re-executing content functions,
@@ -198,7 +198,7 @@ const cached = story.getLastDisplayResult();
 
 > **hasDisplayCache**(): `boolean`
 
-Defined in: [packages/core/src/passages/passage.ts:105](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/passages/passage.ts#L105)
+Defined in: [packages/core/src/passages/passage.ts:105](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/passages/passage.ts#L105)
 
 Checks if a cached display result exists.
 

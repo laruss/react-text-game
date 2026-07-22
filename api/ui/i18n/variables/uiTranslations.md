@@ -2,7 +2,7 @@
 
 > `const` **uiTranslations**: `object`
 
-Defined in: [index.ts:3](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/ui/src/i18n/index.ts#L3)
+Defined in: [index.ts:3](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/i18n/index.ts#L3)
 
 ## Type Declaration
 

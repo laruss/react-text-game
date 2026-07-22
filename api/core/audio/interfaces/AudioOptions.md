@@ -1,6 +1,6 @@
 # Interface: AudioOptions
 
-Defined in: [types.ts:14](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L14)
+Defined in: [types.ts:14](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L14)
 
 Configuration options for creating an audio track.
 
@@ -21,7 +21,7 @@ const audio = createAudio('music.mp3', {
 
 > `optional` **autoPlay**: `boolean`
 
-Defined in: [types.ts:51](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L51)
+Defined in: [types.ts:51](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L51)
 
 Auto-play on creation.
 Note: May be blocked by browser autoplay policies.
@@ -38,7 +38,7 @@ false
 
 > `optional` **id**: `string`
 
-Defined in: [types.ts:20](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L20)
+Defined in: [types.ts:20](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L20)
 
 Unique identifier for the audio track.
 Required for save/load functionality.
@@ -50,7 +50,7 @@ If not provided, a random ID will be generated.
 
 > `optional` **loop**: `boolean`
 
-Defined in: [types.ts:32](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L32)
+Defined in: [types.ts:32](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L32)
 
 Whether to loop the audio automatically.
 
@@ -66,7 +66,7 @@ false
 
 > `optional` **muted**: `boolean`
 
-Defined in: [types.ts:44](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L44)
+Defined in: [types.ts:44](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L44)
 
 Whether to start muted.
 
@@ -82,7 +82,7 @@ false
 
 > `optional` **playbackRate**: `number`
 
-Defined in: [types.ts:38](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L38)
+Defined in: [types.ts:38](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L38)
 
 Playback rate multiplier (0.5 = half speed, 2.0 = double speed).
 
@@ -98,7 +98,7 @@ Playback rate multiplier (0.5 = half speed, 2.0 = double speed).
 
 > `optional` **preload**: `"metadata"` \| `"auto"` \| `"none"`
 
-Defined in: [types.ts:60](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L60)
+Defined in: [types.ts:60](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L60)
 
 Preload strategy for the audio file.
 - 'none': Don't preload
@@ -117,7 +117,7 @@ Preload strategy for the audio file.
 
 > `optional` **volume**: `number`
 
-Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/audio/types.ts#L26)
+Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/audio/types.ts#L26)
 
 Initial volume level (0.0 to 1.0).
 

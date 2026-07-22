@@ -2,7 +2,7 @@
 
 > **saveGame**(`name`, `gameData`, `description?`, `screenshot?`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/saves/db.ts:86](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/core/src/saves/db.ts#L86)
+Defined in: [packages/core/src/saves/db.ts:86](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/core/src/saves/db.ts#L86)
 
 Save game data to the database
 

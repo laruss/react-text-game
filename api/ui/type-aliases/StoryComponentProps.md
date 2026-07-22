@@ -2,7 +2,7 @@
 
 > **StoryComponentProps** = `object`
 
-Defined in: [components/StoryComponent/StoryComponent.tsx:14](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/ui/src/components/StoryComponent/StoryComponent.tsx#L14)
+Defined in: [components/StoryComponent/StoryComponent.tsx:14](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/components/StoryComponent/StoryComponent.tsx#L14)
 
 ## Properties
 
@@ -10,4 +10,4 @@ Defined in: [components/StoryComponent/StoryComponent.tsx:14](https://github.com
 
 > **story**: `Story`
 
-Defined in: [components/StoryComponent/StoryComponent.tsx:15](https://github.com/laruss/react-text-game/blob/9737b4ebadc29a1bdfe4aa04d20ce15868420c88/packages/ui/src/components/StoryComponent/StoryComponent.tsx#L15)
+Defined in: [components/StoryComponent/StoryComponent.tsx:15](https://github.com/laruss/react-text-game/blob/199548cab9df84ae40a459c5cbe3bdd9abb88813/packages/ui/src/components/StoryComponent/StoryComponent.tsx#L15)
