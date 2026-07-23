@@ -1,6 +1,6 @@
 # Class: Story
 
-Defined in: [packages/core/src/passages/story/story.ts:44](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/story.ts#L44)
+Defined in: [packages/core/src/passages/story/story.ts:44](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/story/story.ts#L44)
 
 Text-based narrative passage for displaying story content with rich components.
 
@@ -52,7 +52,7 @@ newStory - Factory function for creating Story instances
 
 > **new Story**(`id`, `content`, `options`): `Story`
 
-Defined in: [packages/core/src/passages/story/story.ts:62](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/story.ts#L62)
+Defined in: [packages/core/src/passages/story/story.ts:62](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/story/story.ts#L62)
 
 Creates a new Story passage.
 
@@ -90,7 +90,7 @@ Optional configuration for background, styling, etc.
 
 > `protected` **\_lastDisplayResult**: `unknown` = `null`
 
-Defined in: [packages/core/src/passages/passage.ts:47](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L47)
+Defined in: [packages/core/src/passages/passage.ts:47](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L47)
 
 **`Internal`**
 
@@ -107,7 +107,7 @@ Used to access display data without re-executing content functions.
 
 > `readonly` **id**: `string`
 
-Defined in: [packages/core/src/passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L34)
+Defined in: [packages/core/src/passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -122,7 +122,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [packages/core/src/passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L40)
+Defined in: [packages/core/src/passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -137,7 +137,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**\<`T`\>(`props`): `object`
 
-Defined in: [packages/core/src/passages/story/story.ts:88](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/story/story.ts#L88)
+Defined in: [packages/core/src/passages/story/story.ts:88](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/story/story.ts#L88)
 
 Renders the story by invoking the content function with props.
 
@@ -195,7 +195,7 @@ const { components, options } = story.display();
 
 > **getLastDisplayResult**\<`T`\>(): `T` \| `null`
 
-Defined in: [packages/core/src/passages/passage.ts:96](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L96)
+Defined in: [packages/core/src/passages/passage.ts:96](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L96)
 
 Returns the cached result from the last display() call.
 Use this method to access passage data without re-executing content functions,
@@ -237,7 +237,7 @@ const cached = story.getLastDisplayResult();
 
 > **hasDisplayCache**(): `boolean`
 
-Defined in: [packages/core/src/passages/passage.ts:105](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L105)
+Defined in: [packages/core/src/passages/passage.ts:105](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L105)
 
 Checks if a cached display result exists.
 

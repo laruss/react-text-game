@@ -1,6 +1,6 @@
 # Class: InteractiveMap
 
-Defined in: [packages/core/src/passages/interactiveMap/interactiveMap.ts:49](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/interactiveMap/interactiveMap.ts#L49)
+Defined in: [packages/core/src/passages/interactiveMap/interactiveMap.ts:49](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/interactiveMap/interactiveMap.ts#L49)
 
 Map-based interactive passage with clickable hotspots.
 
@@ -56,7 +56,7 @@ newInteractiveMap - Factory function for creating InteractiveMap instances
 
 > **new InteractiveMap**(`id`, `options`): `InteractiveMap`
 
-Defined in: [packages/core/src/passages/interactiveMap/interactiveMap.ts:61](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/interactiveMap/interactiveMap.ts#L61)
+Defined in: [packages/core/src/passages/interactiveMap/interactiveMap.ts:61](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/interactiveMap/interactiveMap.ts#L61)
 
 Creates a new InteractiveMap passage.
 
@@ -88,7 +88,7 @@ Configuration including image, hotspots, and styling
 
 > `protected` **\_lastDisplayResult**: `unknown` = `null`
 
-Defined in: [packages/core/src/passages/passage.ts:47](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L47)
+Defined in: [packages/core/src/passages/passage.ts:47](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L47)
 
 **`Internal`**
 
@@ -105,7 +105,7 @@ Used to access display data without re-executing content functions.
 
 > `readonly` **id**: `string`
 
-Defined in: [packages/core/src/passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L34)
+Defined in: [packages/core/src/passages/passage.ts:34](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L34)
 
 Unique identifier for this passage.
 Used for navigation and registry lookup.
@@ -120,7 +120,7 @@ Used for navigation and registry lookup.
 
 > `readonly` **type**: [`PassageType`](../type-aliases/PassageType.md)
 
-Defined in: [packages/core/src/passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L40)
+Defined in: [packages/core/src/passages/passage.ts:40](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L40)
 
 The type of this passage.
 Determines how the passage should be rendered in the UI.
@@ -135,7 +135,7 @@ Determines how the passage should be rendered in the UI.
 
 > **display**\<`T`\>(`props`): [`InteractiveMapType`](../type-aliases/InteractiveMapType.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/interactiveMap.ts:107](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/interactiveMap/interactiveMap.ts#L107)
+Defined in: [packages/core/src/passages/interactiveMap/interactiveMap.ts:107](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/interactiveMap/interactiveMap.ts#L107)
 
 Renders the interactive map by resolving dynamic values and filtering hotspots.
 
@@ -206,7 +206,7 @@ const result2 = map2.display({ isInCombat: true });
 
 > **getLastDisplayResult**\<`T`\>(): `T` \| `null`
 
-Defined in: [packages/core/src/passages/passage.ts:96](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L96)
+Defined in: [packages/core/src/passages/passage.ts:96](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L96)
 
 Returns the cached result from the last display() call.
 Use this method to access passage data without re-executing content functions,
@@ -248,7 +248,7 @@ const cached = story.getLastDisplayResult();
 
 > **hasDisplayCache**(): `boolean`
 
-Defined in: [packages/core/src/passages/passage.ts:105](https://github.com/laruss/react-text-game/blob/64305e2af9f700712120b3eb6f2c37baf7743b28/packages/core/src/passages/passage.ts#L105)
+Defined in: [packages/core/src/passages/passage.ts:105](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/passage.ts#L105)
 
 Checks if a cached display result exists.
 
