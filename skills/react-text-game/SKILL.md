@@ -1,6 +1,6 @@
 ---
 name: react-text-game
-description: Build, refactor, review, or debug projects using @react-text-game/core, @react-text-game/ui, or @react-text-game/mdx. Use for game entities, passages, navigation, saves and migrations, content preloading, loading and splash screens, interactive maps and hotspots, mapImage decorations, custom UI component slots, MDX story authoring, performance work, and contributions to the react-text-game monorepo where state, bootstrap order, passage lifecycle, or responsive map coordinates must remain correct.
+description: Build, refactor, review, or debug projects using @react-text-game/core, @react-text-game/ui, or @react-text-game/mdx. Use for game entities, useGameEntity-backed reactive React components, passages, navigation, saves and migrations, GameProvider wrappers, content preloading, loading and splash screens, interactive maps and hotspots, mapImage decorations, custom UI component slots, MDX story authoring, performance work, and contributions to the react-text-game monorepo where state, bootstrap order, passage lifecycle, or responsive map coordinates must remain correct.
 ---
 
 # React Text Game
@@ -16,6 +16,19 @@ Implement React Text Game changes while preserving the engine contracts that are
    - `@react-text-game/mdx`: MDX components, AST transforms, or story compilation.
 3. Read the current public types and tests before changing behavior. Do not infer the API from an old example.
 4. State the invariant being protected and define a test that proves it.
+
+## Use the official documentation for API details
+
+For API signatures, configuration details, or behavior not covered here, consult [reacttextgame.dev](https://reacttextgame.dev) instead of guessing. Prefer the Markdown representation of a documentation page: remove its trailing slash and append `.md`.
+
+```text
+https://reacttextgame.dev/core-concepts.md
+https://reacttextgame.dev/custom-ui.md
+https://reacttextgame.dev/api/core/functions/useGameEntity.md
+https://reacttextgame.dev/api/ui/type-aliases/GameProviderProps.md
+```
+
+Use the normal HTML page only when its `.md` form is unavailable. When working inside the monorepo or against a pinned package version, also verify the matching exported types and tests because the deployed site may document a newer release.
 
 ## Preserve initialization and registry semantics
 
@@ -45,6 +58,50 @@ export * from "./maps/world";
 - Re-entering the same passage through `Game.jumpTo()` must produce a fresh render cycle. Do not cache display output across navigation events.
 - Avoid effects for pure derived display data. Memoization may reduce repeated pure display work, but do not depend on it to make side effects run exactly once.
 
+## Subscribe React components with `useGameEntity`
+
+Creating or importing an entity does not by itself subscribe a React component to that entity. Any component that reads entity fields during render must call `useGameEntity(entity)` and render values from the returned reactive object. Otherwise mutations can succeed while the displayed values remain stale.
+
+```tsx
+import { createEntity, useGameEntity } from "@react-text-game/core";
+
+export const player = createEntity("player", {
+    health: 100,
+    name: "Traveler",
+});
+
+export function PlayerStats() {
+    const reactivePlayer = useGameEntity(player);
+
+    const takeDamage = () => {
+        player.health -= 10;
+    };
+
+    return (
+        <button type="button" onClick={takeDamage}>
+            {reactivePlayer.name}: {reactivePlayer.health} HP
+        </button>
+    );
+}
+```
+
+Do not render `player.health` directly and expect React to update:
+
+```tsx
+// Wrong: this component has no reactive subscription.
+function PlayerStats() {
+    return <span>{player.health} HP</span>;
+}
+```
+
+Follow these rules:
+
+- Call the hook at the top level and only after the entity's module has registered it.
+- Use the returned object for every entity value read during render, including nested fields and derived calculations.
+- Keep writes in the original entity or domain actions; the hook provides the component's reactive read path.
+- Use one `useGameEntity` call per entity read by the component.
+- Use the dedicated public hook for other reactive engine state, such as `useCurrentPassage`, rather than polling or copying it into local state.
+
 ## Protect interactive-map coordinates
 
 Map positions are percentages of the fitted map image, not of the viewport or outer passage container:
@@ -71,6 +128,58 @@ Choose the correct entity:
 - `mapImage`: decorative image at map coordinates. It has no `action`, tooltip, hover/active/disabled state, button semantics, or pointer interception.
 - `sideLabel` / `sideImage`: controls in an edge rail, outside map coordinates.
 - `menu`: grouped controls anchored at one map coordinate.
+
+## Wrap the application once with `GameProvider`
+
+When using `@react-text-game/ui`, create one stable root wrapper and let it own initialization, preloading, loading UI, splash screens, component overrides, and the game UI lifecycle:
+
+```tsx
+import type { NewOptions } from "@react-text-game/core";
+import { GameProvider, PassageController } from "@react-text-game/ui";
+import type { PropsWithChildren } from "react";
+import "./game/registry";
+
+const gameOptions = {
+    gameName: "Forest Walk",
+    gameId: "forest-walk",
+    gameVersion: "1.0.0",
+    startPassage: "intro",
+    isDevMode: import.meta.env.DEV,
+} satisfies NewOptions;
+
+const preload = ["/maps/forest.webp", "/audio/theme.ogg"] as const;
+
+export function GameWrapper({ children }: PropsWithChildren) {
+    return (
+        <GameProvider
+            options={gameOptions}
+            preload={preload}
+            preloadConcurrency={4}
+            showSplashScreenOnDev
+        >
+            {children}
+        </GameProvider>
+    );
+}
+
+export function GameApp() {
+    return (
+        <GameWrapper>
+            <PassageController />
+        </GameWrapper>
+    );
+}
+```
+
+The main `GameProvider` settings are:
+
+- `options` (required): `gameName` plus optional `gameId`, `gameVersion`, `startPassage`, `isDevMode`, `initialState`, `author`, `description`, and `translations`.
+- `components`: stable replacements for story, passage, menu, loading, and RTG splash slots.
+- `preload`, `preloadConcurrency`, and `onPreloadComplete`: startup assets, queue concurrency, and completion reporting.
+- `loadingScreen`: text, background, class names, and styles for the default loading screen.
+- `showSplashScreen`, `showSplashScreenOnDev`, `showRTGSplashScreen`, and `splashScreens`: control the built-in and custom splash sequence.
+
+Keep `options`, `components`, `preload`, and splash configuration at module scope when they are static. Do not call `Game.init()` inside descendants of this wrapper. Consult the official `.md` documentation for the complete types and defaults.
 
 ## Customize UI through public slots
 
