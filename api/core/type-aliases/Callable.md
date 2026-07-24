@@ -2,7 +2,7 @@
 
 > **Callable**\<`T`\> = () => `T`
 
-Defined in: [packages/core/src/types.ts:39](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/types.ts#L39)
+Defined in: [packages/core/src/types.ts:39](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/types.ts#L39)
 
 ## Type Parameters
 

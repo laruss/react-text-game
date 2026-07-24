@@ -2,7 +2,7 @@
 
 > **HotspotPosition** = [`MaybeCallable`](MaybeCallable.md)\<\{ `x`: `number`; `y`: `number`; \}\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:25](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/core/src/passages/interactiveMap/types.ts#L25)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:25](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/interactiveMap/types.ts#L25)
 
 Position coordinates for hotspots on the map.
 Values are percentages (0-100) relative to the map's dimensions.

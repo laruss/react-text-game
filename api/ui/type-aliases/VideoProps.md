@@ -2,4 +2,4 @@
 
 > **VideoProps** = `Readonly`\<\{ `component`: `VideoComponent`; \}\>
 
-Defined in: [components/StoryComponent/components/Video.tsx:4](https://github.com/laruss/react-text-game/blob/f7dda31ab988f053b8ffa41bcea26ca861ac96ab/packages/ui/src/components/StoryComponent/components/Video.tsx#L4)
+Defined in: [components/StoryComponent/components/Video.tsx:4](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/ui/src/components/StoryComponent/components/Video.tsx#L4)
