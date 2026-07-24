@@ -41,6 +41,7 @@ import {
 
 import { DevModeDrawer } from "../DevModeDrawer";
 import { AppIconMenu } from "./AppIconMenu";
+import { consumeFreshTabSession } from "./sessionSplash";
 
 export type GameProviderProps = PropsWithChildren<{
     components?: Components;
@@ -191,12 +192,17 @@ export const GameProvider = ({
                 const isDevSplashDisabled =
                     initialOptionsRef.current.isDevMode &&
                     !initialShowSplashScreenOnDevRef.current;
-                setPhase(
+                const wantsSplash =
                     initialShowSplashScreenRef.current &&
-                        hasSplashScreens &&
-                        !isDevSplashDisabled
-                        ? "splash"
-                        : "ready"
+                    hasSplashScreens &&
+                    !isDevSplashDisabled;
+                // Greet a freshly opened tab with the splash sequence, but do
+                // not replay it when the same tab is reloaded.
+                // consumeFreshTabSession() reads and marks a per-tab
+                // sessionStorage flag, so it is only queried when a splash is
+                // otherwise wanted.
+                setPhase(
+                    wantsSplash && consumeFreshTabSession() ? "splash" : "ready"
                 );
             })
             .catch((error) => {

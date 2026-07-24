@@ -5,6 +5,12 @@ All notable changes to `@react-text-game/ui` will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-07-24
+
+### Fixed
+
+- Splash screens now play only when the game is opened in a new tab and no longer replay when the tab is reloaded. `GameProvider` tracks the splash sequence per tab session via `sessionStorage`, which persists across in-tab reloads but is empty for a freshly opened tab.
+
 ## [0.4.1] - 2026-07-22
 
 ### Fixed

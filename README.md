@@ -28,6 +28,7 @@ Whether you're building a visual novel, interactive fiction, or educational narr
 - **Multiple Passage Types** - Story passages, Interactive Maps, and custom Widget passages
 - **Comprehensive Save System** - IndexedDB persistence with encrypted export/import
 - **Audio System** - Full-featured audio management with reactive state, persistence, and global controls
+- **Asset Preloading** - Preload images, audio, and other assets with progress tracking and abort support
 - **Themeable UI Components** - Tailwind CSS v4 with semantic color tokens
 - **Internationalization** - i18next-powered translations with persistent language switching
 - **Type-Safe** - Full TypeScript support with detailed JSDoc documentation
@@ -46,10 +47,11 @@ The core game engine providing:
 - Game orchestration and entity registry
 - Reactive state management (Valtio)
 - JSONPath-based storage system
-- Story and Interactive Map passages
+- Story, Interactive Map, and Widget passages
 - Audio system with reactive state and persistence
+- Asset preloading with progress tracking and abort support
 - Save/load system with auto-save
-- React hooks for game integration
+- React hooks (`useGameEntity`, `useCurrentPassage`, `useGameIsStarted`, `useIsStoryMode`, `useAudio`, `useAudioManager`)
 
 [Core Package Documentation](./packages/core/README.md)
 
@@ -60,6 +62,8 @@ UI components library featuring:
 - Pre-built game components (GameProvider, MainMenu, PassageController)
 - Story and Interactive Map renderers
 - Save/Load modals with slot management
+- Error boundary and dev-mode debugging drawer
+- Loading screens and splash screen sequences
 - Tailwind CSS v4 semantic theming
 - Dark mode support
 
@@ -193,7 +197,8 @@ function StatusBar() {
 
 ## Documentation
 
-- **[Full Documentation](./apps/docs)** - Comprehensive guides and tutorials (Docusaurus site)
+- **[Live Documentation Site](https://reacttextgame.dev)** - Full guides, tutorials, and API reference
+- **[Documentation Source](./apps/docs)** - Docusaurus site source (guides and tutorials)
 - **[Handling Side Effects](./apps/docs/docs/side-effects.md)** - Best practices for state modifications in passages
 - **[API Reference](./apps/docs/api)** - Auto-generated TypeDoc API documentation
 - **[Example Game](./apps/example-game)** - Complete game implementation example

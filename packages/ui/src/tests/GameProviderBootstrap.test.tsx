@@ -11,9 +11,16 @@ import userEvent from "@testing-library/user-event";
 import { createElement, StrictMode } from "react";
 
 import { GameProvider } from "#components/GameProvider";
+import {
+    consumeFreshTabSession,
+    SPLASH_SESSION_KEY,
+} from "#components/GameProvider/sessionSplash";
 import type { LoadingScreenProps } from "#components/LoadingScreen";
 
-beforeEach(() => Game._resetForTesting());
+beforeEach(() => {
+    Game._resetForTesting();
+    sessionStorage.clear();
+});
 afterEach(() => {
     cleanup();
     mock.restore();
@@ -66,6 +73,55 @@ describe("GameProvider bootstrap", () => {
         );
         await waitFor(() =>
             expect(screen.getByText("Game ready")).toBeTruthy()
+        );
+    });
+
+    test("does not replay the splash sequence when the tab is reloaded", async () => {
+        // A previous page load in this tab already marked the session, which
+        // is exactly the state sessionStorage is left in after a reload.
+        sessionStorage.setItem(SPLASH_SESSION_KEY, "1");
+
+        render(
+            createElement(
+                GameProvider,
+                { options: { gameName: "reloaded" } },
+                createElement("div", null, "Reloaded ready")
+            )
+        );
+
+        await waitFor(() =>
+            expect(screen.getByText("Reloaded ready")).toBeTruthy()
+        );
+        expect(document.querySelector("[data-rtg-splash-screen]")).toBeNull();
+    });
+
+    test("shows the splash on a freshly opened tab and marks the session", async () => {
+        expect(sessionStorage.getItem(SPLASH_SESSION_KEY)).toBeNull();
+
+        render(
+            createElement(
+                GameProvider,
+                { options: { gameName: "fresh-tab" } },
+                createElement("div", null, "Fresh ready")
+            )
+        );
+
+        await waitFor(() =>
+            expect(
+                document.querySelector(
+                    '[data-rtg-splash-screen="react-text-game"]'
+                )
+            ).toBeTruthy()
+        );
+        // The session is now marked, so a later reload skips the splash.
+        expect(sessionStorage.getItem(SPLASH_SESSION_KEY)).toBe("1");
+        expect(screen.queryByText("Fresh ready")).toBeNull();
+
+        fireEvent.click(
+            screen.getByRole("button", { name: "Skip splash screen" })
+        );
+        await waitFor(() =>
+            expect(screen.getByText("Fresh ready")).toBeTruthy()
         );
     });
 
@@ -300,5 +356,19 @@ describe("GameProvider bootstrap", () => {
 
         unmount();
         await waitFor(() => expect(receivedSignal?.aborted).toBe(true));
+    });
+});
+
+describe("consumeFreshTabSession", () => {
+    test("marks the session and returns true on first call, false afterwards", () => {
+        expect(sessionStorage.getItem(SPLASH_SESSION_KEY)).toBeNull();
+        expect(consumeFreshTabSession()).toBe(true);
+        expect(sessionStorage.getItem(SPLASH_SESSION_KEY)).toBe("1");
+        expect(consumeFreshTabSession()).toBe(false);
+    });
+
+    test("returns false when the session marker already exists", () => {
+        sessionStorage.setItem(SPLASH_SESSION_KEY, "1");
+        expect(consumeFreshTabSession()).toBe(false);
     });
 });
