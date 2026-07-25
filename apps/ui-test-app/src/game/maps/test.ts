@@ -1,101 +1,93 @@
-import { createEntity, Game, newInteractiveMap } from "@react-text-game/core";
+import {
+    createEntity,
+    defineInteractiveMap,
+    Game,
+} from "@react-text-game/core";
 
 export const testInteractiveMapEntity = createEntity("testMapEntity", {
     isSecretHotspotDisplayed: false,
 });
 
-export const testInteractiveMap = newInteractiveMap("testMap", {
-    image: "city.png",
-    bgImage: "img.png",
-    hotspots: [
-        {
+export const testInteractiveMap = defineInteractiveMap(
+    "testMap",
+    (h) => [
+        h.mapImage("imageHotspot/idle.png", {
             id: "decorative-map-image",
-            type: "mapImage",
-            content: "imageHotspot/idle.png",
             position: { x: 40, y: 70 },
-            props: {
-                alt: "Decorative character",
-                zoom: "10%",
-            },
-        },
-        () =>
-            testInteractiveMapEntity.isSecretHotspotDisplayed
-                ? {
-                      action: () => Game.jumpTo("testStory"),
-                      type: "label",
-                      content: "Hotspot",
-                      position: { x: 50, y: 50 },
-                  }
-                : undefined,
-        {
-            action: () => Game.jumpTo("testMap2"),
-            type: "label",
-            content: "Hotspot 2",
+            alt: "Decorative character",
+            zoom: "10%",
+        }),
+        testInteractiveMapEntity.isSecretHotspotDisplayed &&
+            h.label("Hotspot", {
+                action: h.jump("testStory"),
+                position: { x: 50, y: 50 },
+            }),
+        h.label("Hotspot 2", {
+            action: h.jump("testMap2"),
             position: { x: 20, y: 20 },
             tooltip: {
                 content: "This is a tooltip for Hotspot 2",
                 position: "top",
             },
-        },
-        () => ({
-            action: () => {
-                testInteractiveMapEntity.isSecretHotspotDisplayed = true;
-                console.log("Image Hotspot clicked");
-                Game.jumpTo("testMap");
-            },
-            type: "image",
-            content: {
+        }),
+        h.image(
+            {
                 idle: "imageHotspot/idle.png",
                 hover: "imageHotspot/hover.png",
                 active: "imageHotspot/active.png",
                 disabled: "imageHotspot/disabled.png",
             },
-            // isDisabled: true,
-            position: { x: 70, y: 70 },
-            props: { zoom: "20%" },
-            tooltip: {
-                content: "This is an image hotspot",
-                position: "left",
-            },
-        }),
+            {
+                action: () => {
+                    testInteractiveMapEntity.isSecretHotspotDisplayed = true;
+                    console.log("Image Hotspot clicked");
+                    Game.jumpTo("testMap");
+                },
+                // isDisabled: true,
+                position: { x: 70, y: 70 },
+                zoom: "20%",
+                tooltip: {
+                    content: "This is an image hotspot",
+                    position: "left",
+                },
+            }
+        ),
     ],
-});
+    {
+        image: "city.png",
+        bgImage: "img.png",
+    }
+);
 
-export const testInteractiveMap2 = newInteractiveMap("testMap2", {
-    image: "kitchen.png",
-    bgImage: "img.png",
-    hotspots: [
-        () => ({
-            action: () => Game.jumpTo("testMap"),
-            type: "label",
-            content: "Hotspot",
+export const testInteractiveMap2 = defineInteractiveMap(
+    "testMap2",
+    (h) => [
+        h.label("Hotspot", {
+            action: h.jump("testMap"),
             position: { x: 50, y: 50 },
         }),
-        {
+        h.label("Hotspot 2", {
             action: () => console.log("Hotspot 2 clicked"),
-            type: "label",
-            content: "Hotspot 2",
             position: { x: 20, y: 20 },
             tooltip: {
                 content: "This is a tooltip for Hotspot 2",
                 position: "top",
             },
-        },
-        {
-            type: "menu",
-            items: [
-                {
-                    type: "label",
-                    content: "Menu Item 1",
+        }),
+        h.menu(
+            [
+                h.label("Menu Item 1", {
                     action: () => console.log("Menu Item 1 clicked"),
-                },
-                () => ({
-                    type: "label",
-                    content: "Menu Item 2",
+                }),
+                h.label("Menu Item 2", {
                     action: () => console.log("Menu Item 2 clicked"),
                 }),
             ],
-            position: { x: 80, y: 80 },
-        },
+            { position: { x: 80, y: 80 } }
+        ),
     ],
-});
+    {
+        image: "kitchen.png",
+        bgImage: "img.png",
+    }
+);

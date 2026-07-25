@@ -1,5 +1,5 @@
 import type { StoryComponents } from "@react-text-game/core";
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game, storyHelpers } from "@react-text-game/core";
 
 import {
     elderMarcus,
@@ -19,15 +19,14 @@ import {
  */
 
 // Common description component (demonstrates anotherStory)
-newStory("elderHouseDescription", () => [
-    {
-        type: "text",
-        content: `Elder Marcus's home is modest but well-kept. Books and scrolls line the walls, evidence of a scholarly mind. A warm fire crackles in the hearth, casting dancing shadows across the room.`,
-        props: { className: "text-base italic text-muted-foreground mb-4" },
-    },
+defineStory("elderHouseDescription", (h) => [
+    h.text(
+        `Elder Marcus's home is modest but well-kept. Books and scrolls line the walls, evidence of a scholarly mind. A warm fire crackles in the hearth, casting dancing shadows across the room.`,
+        { className: "text-base italic text-muted-foreground mb-4" }
+    ),
 ]);
 
-export const questGiverStory = newStory(
+export const questGiverStory = defineStory(
     "questGiverStory",
     () => {
         elderMarcus.conversationCount++;
@@ -61,30 +60,20 @@ function getQuestOfferContent(): StoryComponents {
     elderMarcus.dialogue.introducedSelf = true;
 
     return [
-        {
-            type: "header",
-            content: "Elder Marcus's Home",
-            props: { level: 1, className: "" },
-        },
+        storyHelpers.header("Elder Marcus's Home", { level: 1, className: "" }),
 
         // Embed common description
-        { type: "anotherStory", storyId: "elderHouseDescription" },
+        storyHelpers.include("elderHouseDescription"),
 
         // Elder's portrait
-        {
-            type: "image",
-            content: "./assets/characters/elder-marcus.webp",
-            props: {
-                alt: "Elder Marcus, a wise old man",
-                className: "rounded-lg shadow-lg mb-6 max-w-sm mx-auto",
-            },
-        },
+        storyHelpers.image("./assets/characters/elder-marcus.webp", {
+            alt: "Elder Marcus, a wise old man",
+            className: "rounded-lg shadow-lg mb-6 max-w-sm mx-auto",
+        }),
 
         // Conversation - byClick for dramatic effect
-        {
-            type: "conversation",
-            props: { variant: "messenger", className: "my-6" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content: `Ah, ${player.name}! I'm glad you came. Please, sit. We have much to discuss.`,
                     who: {
@@ -151,16 +140,12 @@ function getQuestOfferContent(): StoryComponents {
                     color: "#8B7355",
                 },
             ],
-        },
+            { variant: "messenger", className: "my-6" }
+        ),
 
         // Continue action to quest details
-        {
-            type: "actions",
-            props: {
-                direction: "horizontal",
-                className: "mt-8 justify-center",
-            },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: "Continue",
                     action: () => Game.jumpTo("questOfferDetails"),
@@ -168,33 +153,28 @@ function getQuestOfferContent(): StoryComponents {
                     variant: "solid",
                 },
             ],
-        },
+            { direction: "horizontal", className: "mt-8 justify-center" }
+        ),
     ];
 }
 
 // Quest offer content - Part 2: Quest details and acceptance
-newStory(
+defineStory(
     "questOfferDetails",
-    () => [
-        {
-            type: "header",
-            content: "Elder Marcus's Home",
-            props: { level: 1, className: "" },
-        },
+    (h) => [
+        h.header("Elder Marcus's Home", { level: 1, className: "" }),
 
         // Embed common description
-        { type: "anotherStory", storyId: "elderHouseDescription" },
+        h.include("elderHouseDescription"),
 
         // Quest acceptance actions
-        {
-            type: "header",
-            content: "Quest: The Dragon's Shadow",
-            props: { level: 2, className: "mt-6 " },
-        },
+        h.header("Quest: The Dragon's Shadow", {
+            level: 2,
+            className: "mt-6 ",
+        }),
 
-        {
-            type: "text",
-            content: `<p class="font-semibold  -mb-6">Objectives:</p>
+        h.text(
+            `<p class="font-semibold  -mb-6">Objectives:</p>
             <ul class="list-disc list-inside ml-4 -mt-8 ">
                 <li>Travel to Castle Valdoria</li>
                 <li>Speak with King Alderon III</li>
@@ -203,17 +183,12 @@ newStory(
                 <li>Defeat or negotiate with the dragon Vexarion</li>
             </ul>
             <p class="-mt-10 text-warning-400 ">Reward: 100 gold + Royal recognition</p>`,
-            props: { isHTML: true, className: "bg-grey/30 p-4 rounded-lg" },
-        },
+            { isHTML: true, className: "bg-grey/30 p-4 rounded-lg" }
+        ),
 
         // Accept/Decline actions
-        {
-            type: "actions",
-            props: {
-                direction: "horizontal",
-                className: "mt-8 justify-center gap-4",
-            },
-            content: [
+        h.actions(
+            [
                 {
                     label: "Accept Quest",
                     action: () => {
@@ -239,7 +214,8 @@ newStory(
                     variant: "bordered",
                 },
             ],
-        },
+            { direction: "horizontal", className: "mt-8 justify-center gap-4" }
+        ),
     ],
     {
         background: {
@@ -254,31 +230,19 @@ newStory(
 );
 
 // Quest accepted story
-newStory("questAccepted", () => [
-    {
-        type: "header",
-        content: "Quest Accepted!",
-        props: { level: 1, className: "text-success-400" },
-    },
-    {
-        type: "image",
-        content: "./assets/items/royal-seal.webp",
-        props: {
-            alt: "Elder Marcus's Royal Seal",
-            className: "rounded-lg shadow-lg my-6 max-w-xs mx-auto",
-            disableModal: true,
-        },
-    },
-    {
-        type: "text",
-        content: `*Elder Marcus places the sealed letter in your hands. You feel the weight of responsibility settle on your shoulders.*`,
-        props: { className: "italic text-center my-4" },
-    },
-    {
-        type: "conversation",
-        appearance: "atOnce",
-        props: { variant: "chat" },
-        content: [
+defineStory("questAccepted", (h) => [
+    h.header("Quest Accepted!", { level: 1, className: "text-success-400" }),
+    h.image("./assets/items/royal-seal.webp", {
+        alt: "Elder Marcus's Royal Seal",
+        className: "rounded-lg shadow-lg my-6 max-w-xs mx-auto",
+        disableModal: true,
+    }),
+    h.text(
+        `*Elder Marcus places the sealed letter in your hands. You feel the weight of responsibility settle on your shoulders.*`,
+        { className: "italic text-center my-4" }
+    ),
+    h.conversation(
+        [
             {
                 content: `Thank you, ${player.name}. The kingdom's fate rests in your hands. The castle gates will now be open to you. May the gods guide your blade.`,
                 who: {
@@ -289,17 +253,15 @@ newStory("questAccepted", () => [
                 color: "#8B7355",
             },
         ],
-    },
-    {
-        type: "text",
-        content: `<p class="text-center font-bold text-primary-400 my-6">New location discovered: Castle Valdoria!</p>
+        { appearance: "atOnce", variant: "chat" }
+    ),
+    h.text(
+        `<p class="text-center font-bold text-primary-400 my-6">New location discovered: Castle Valdoria!</p>
         <p class="text-center text-muted-foreground">Item received: Elder's Sealed Letter</p>`,
-        props: { isHTML: true },
-    },
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+        { isHTML: true }
+    ),
+    h.actions(
+        [
             {
                 label: "Go to World Map",
                 action: () => Game.jumpTo("worldMap"),
@@ -307,25 +269,22 @@ newStory("questAccepted", () => [
                 variant: "solid",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);
 
 // Active quest content (already accepted)
 function getActiveQuestContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "Elder Marcus's Home",
-            props: { level: 1, className: "text-amber-300" },
-        },
+        storyHelpers.header("Elder Marcus's Home", {
+            level: 1,
+            className: "text-amber-300",
+        }),
 
-        { type: "anotherStory", storyId: "elderHouseDescription" },
+        storyHelpers.include("elderHouseDescription"),
 
-        {
-            type: "conversation",
-            appearance: "atOnce",
-            props: { variant: "chat" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content: `${player.name}! Have you found the Princess? Defeated the dragon?`,
                     who: {
@@ -355,25 +314,24 @@ function getActiveQuestContent(): StoryComponents {
                     color: "#8B7355",
                 },
             ],
-        },
+            { appearance: "atOnce", variant: "chat" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-warning-400 text-center my-4">Quest in progress: The Dragon's Shadow</p>`,
-            props: { isHTML: true },
-        },
+        storyHelpers.text(
+            `<p class="text-warning-400 text-center my-4">Quest in progress: The Dragon's Shadow</p>`,
+            { isHTML: true }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: "Return to Village",
                     action: () => Game.jumpTo("villageMap"),
                     color: "primary",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 }
 
@@ -386,18 +344,15 @@ function getCompletedQuestContent(): StoryComponents {
     }
 
     return [
-        {
-            type: "header",
-            content: "A Hero's Welcome",
-            props: { level: 1, className: "text-success-400" },
-        },
+        storyHelpers.header("A Hero's Welcome", {
+            level: 1,
+            className: "text-success-400",
+        }),
 
-        { type: "anotherStory", storyId: "elderHouseDescription" },
+        storyHelpers.include("elderHouseDescription"),
 
-        {
-            type: "conversation",
-            props: { variant: "messenger" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content: `${player.name}! The hero of Valdoria returns! Word of your deeds has spread throughout the kingdom!`,
                     who: {
@@ -426,25 +381,24 @@ function getCompletedQuestContent(): StoryComponents {
                     color: "#8B7355",
                 },
             ],
-        },
+            { variant: "messenger" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-success-400 font-bold my-6">Quest Complete: The Dragon's Shadow</p>
+        storyHelpers.text(
+            `<p class="text-center text-success-400 font-bold my-6">Quest Complete: The Dragon's Shadow</p>
             <p class="text-center text-warning-400">Reward received: 100 gold!</p>`,
-            props: { isHTML: true },
-        },
+            { isHTML: true }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: "Return to Village",
                     action: () => Game.jumpTo("villageMap"),
                     color: "primary",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 }

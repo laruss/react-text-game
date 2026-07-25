@@ -252,7 +252,7 @@ Display dialogue or conversation sequences with multiple messages.
 
 ### `<Include>`
 
-Embed another story passage within the current one. You can include any registered story passage in the game, whether it's defined in a TypeScript file (using `newStory()` from `@react-text-game/core`) or another MDX file.
+Embed another story passage within the current one. You can include any registered story passage in the game, whether it's defined in a TypeScript file (using `defineStory()` — or the still-supported `newStory()` — from `@react-text-game/core`) or another MDX file.
 
 ```mdx
 <!-- Include an MDX story -->

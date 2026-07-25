@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.7.0
+
+### Minor Changes
+
+- Add helpers-first passage factories: `defineStory`, `defineInteractiveMap` and `defineWidget`.
+
+  Every passage type now has a factory with the same shape — `define*(id, (helpers, props) => content, options)` — where the content callback receives a toolbox of builders as its first argument and the display props as its second:
+
+  ```ts
+  defineStory("forest", (h) => [
+    h.header("The Whispering Woods", { level: 1 }),
+    h.text("The forest is ancient and alive."),
+    player.hasKey && h.text("The rusty key feels warm in your pocket."),
+    h.actions([{ label: "Go deeper", action: h.jump("forest-deep") }]),
+  ]);
+
+  defineInteractiveMap(
+    "world",
+    (h) => [
+      h.label("Village", {
+        position: { x: 30, y: 40 },
+        action: h.jump("village"),
+      }),
+      h.mapImage("/guard.png", { position: { x: 42, y: 68 }, alt: "Guard" }),
+    ],
+    { image: "/maps/world.jpg" }
+  );
+  ```
+
+  Highlights:
+
+  - Helpers (`storyHelpers`, `mapHelpers`) build plain component and hotspot objects, so helper calls and hand-written literals can be mixed in the same array. Both toolboxes are also exported for use outside a callback body.
+  - Each helper takes content first and a single **flat** options bag second — fields nested under `props` in the raw type are hoisted to the top level.
+  - Falsy array entries (`false`, `null`, `undefined`) are dropped, so conditional content can be written inline with `&&`.
+  - `defineStory<TProps>` and `defineInteractiveMap<TProps>` accept typed display props via the new `StoryContentFn` / `MapContentFn` generic aliases. The existing `StoryContent` is a generic _function_ type and cannot express typed props.
+  - `defineWidget` is identical to `newWidget` in behaviour and signature; it exists so every passage factory shares the same prefix.
+
+  This release is purely additive. `newStory`, `newInteractiveMap` and `newWidget` are unchanged, fully supported, and not scheduled for removal.
+
 All notable changes to `@react-text-game/core` will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),

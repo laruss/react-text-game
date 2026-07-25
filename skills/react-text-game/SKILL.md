@@ -58,6 +58,62 @@ export * from "./maps/world";
 - Re-entering the same passage through `Game.jumpTo()` must produce a fresh render cycle. Do not cache display output across navigation events.
 - Avoid effects for pure derived display data. Memoization may reduce repeated pure display work, but do not depend on it to make side effects run exactly once.
 
+## Create passages with the `define*` factories
+
+Every passage type shares one factory shape. The content callback receives a helper toolbox first and the display props second:
+
+```ts
+defineStory(id, (helpers, props) => components, options?)
+defineInteractiveMap(id, (helpers, props) => hotspots, options)
+defineWidget(id, reactNodeOrComponent)
+```
+
+Write new passages with these factories. Helpers build the component and hotspot objects, so `type` discriminators and nested `props` objects never have to be written by hand:
+
+```ts
+import { defineInteractiveMap, defineStory } from "@react-text-game/core";
+
+export const intro = defineStory(
+    "intro",
+    (h) => [
+        h.header("At the forest edge", { level: 1 }),
+        h.text(`Courage: ${player.courage}.`),
+        player.hasLantern && h.text("Your lantern casts a steady light."),
+        h.actions([
+            { label: "Enter the forest", action: h.jump("forest") },
+            player.hasKey && { label: "Unlock the gate", action: h.jump("gate") },
+        ]),
+    ],
+    { background: { image: "/backgrounds/forest.webp" } }
+);
+
+export const worldMap = defineInteractiveMap(
+    "world-map",
+    (h) => [
+        h.label("Harbor", { position: { x: 24, y: 68 }, action: h.jump("harbor") }),
+        h.mapImage("/maps/ship.webp", {
+            position: { x: 41, y: 73 },
+            zoom: "12%",
+            alt: "Ship at anchor",
+        }),
+        h.label("Inventory", { position: "top", action: h.jump("inventory") }),
+    ],
+    { image: "/maps/world.webp" }
+);
+```
+
+Rules for helper usage:
+
+- Story helpers are `text`, `header`, `image`, `video`, `actions`, `conversation`, and `include`. Map helpers are `label`, `image`, `mapImage`, and `menu`. Both toolboxes also carry `jump(passageOrId)` and `when(condition, value)`.
+- Each helper takes content first and one **flat** options bag second. Fields nested under `props` in the raw type are hoisted to the top level; `classNames` stays nested.
+- Falsy array entries (`false`, `null`, `undefined`) are dropped, so conditions belong inline rather than in a callback that returns `undefined`.
+- Helpers return plain component/hotspot objects, so hand-written literals remain valid in the same array. Import `storyHelpers` or `mapHelpers` to build content outside a callback body.
+- `h.label` requires `position` for a standalone hotspot and rejects it for an `h.menu` item, which the menu positions. Both forms are the same helper; the overload is selected by whether `position` is present.
+- `defineStory<TProps>` and `defineInteractiveMap<TProps>` type the props passed to `display()`. `StoryContent`, used by the older `newStory`, is a generic function type and cannot express typed props; `StoryContentFn` can.
+- Reading state in the content callback is safe; mutate state only inside `action` handlers. See the side-effects contract.
+
+`newStory`, `newInteractiveMap`, and `newWidget` remain fully supported and produce identical passage objects. Do not rewrite existing passages to the `define*` form unless the task asks for it, and do not mix the two forms within one passage.
+
 ## Subscribe React components with `useGameEntity`
 
 Creating or importing an entity does not by itself subscribe a React component to that entity. Any component that reads entity fields during render must call `useGameEntity(entity)` and render values from the returned reactive object. Otherwise mutations can succeed while the displayed values remain stale.
@@ -123,11 +179,12 @@ Maintain all of these rules:
 
 Choose the correct entity:
 
-- `label`: clickable text control on the map.
-- `image`: clickable image button with optional idle, hover, active, and disabled artwork.
-- `mapImage`: decorative image at map coordinates. It has no `action`, tooltip, hover/active/disabled state, button semantics, or pointer interception.
-- `sideLabel` / `sideImage`: controls in an edge rail, outside map coordinates.
-- `menu`: grouped controls anchored at one map coordinate.
+- `h.label`: clickable text control on the map.
+- `h.image`: clickable image button with optional idle, hover, active, and disabled artwork.
+- `h.mapImage`: decorative image at map coordinates. It has no `action`, tooltip, hover/active/disabled state, button semantics, or pointer interception.
+- `h.menu`: grouped controls anchored at one map coordinate.
+
+`position` selects the coordinate space: `{ x, y }` percentages place the entity on the map, while `"top"`, `"right"`, `"bottom"`, or `"left"` place it in an edge rail outside the map coordinate space (the `SideLabelHotspot` and `SideImageHotspot` types).
 
 ## Wrap the application once with `GameProvider`
 

@@ -19,6 +19,11 @@ describe("Public package entry points", () => {
         expect(core.newStory).toBeFunction();
         expect(core.newInteractiveMap).toBeFunction();
         expect(core.newWidget).toBeFunction();
+        expect(core.defineStory).toBeFunction();
+        expect(core.defineInteractiveMap).toBeFunction();
+        expect(core.defineWidget).toBeFunction();
+        expect(core.storyHelpers.text).toBeFunction();
+        expect(core.mapHelpers.label).toBeFunction();
 
         await Game.init({
             gameName: "Public API",

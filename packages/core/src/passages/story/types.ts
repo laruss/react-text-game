@@ -1,11 +1,14 @@
 import type { ReactNode } from "react";
 
+import type { Conditional, DefineFn } from "#passages/definition";
 import type {
     ButtonColor,
     ButtonVariant,
     EmptyObject,
     InitVarsType,
 } from "#types";
+
+import type { StoryHelpers } from "./helpers";
 
 /**
  * Base interface shared by all story components.
@@ -940,6 +943,53 @@ export type StoryComponents = Array<Component>;
 export type StoryContent = <T extends InitVarsType = EmptyObject>(
     props: T
 ) => StoryComponents;
+
+/**
+ * Array returned by a {@link StoryContentFn}.
+ *
+ * Accepts `false`, `null` and `undefined` entries, which are removed before
+ * the story is rendered. That makes conditional content expressible inline
+ * instead of through a callback that returns `undefined`.
+ *
+ * @example
+ * ```typescript
+ * const items: StoryContentItems = [
+ *   { type: 'text', content: 'A locked door blocks your way.' },
+ *   player.hasKey && { type: 'text', content: 'Your key fits the lock.' }
+ * ];
+ * ```
+ */
+export type StoryContentItems = Array<Conditional<Component>>;
+
+/**
+ * Content callback accepted by `defineStory`.
+ *
+ * Receives the {@link StoryHelpers} toolbox first and the display props
+ * second.
+ *
+ * @template TProps - Type of props passed to `story.display()`
+ *
+ * @remarks
+ * Unlike {@link StoryContent}, this is a generic *alias* rather than a generic
+ * function type, so authors can annotate their props and have them checked:
+ *
+ * ```typescript
+ * const content: StoryContentFn<{ playerName: string }> = (h, props) => [
+ *   h.text(`Hello, ${props.playerName}!`)
+ * ];
+ * ```
+ *
+ * @example
+ * ```typescript
+ * const content: StoryContentFn = (h) => [
+ *   h.header('Welcome'),
+ *   h.text('Your adventure begins...'),
+ *   h.actions([{ label: 'Start', action: h.jump('chapter-1') }])
+ * ];
+ * ```
+ */
+export type StoryContentFn<TProps extends InitVarsType = EmptyObject> =
+    DefineFn<StoryHelpers, StoryContentItems, TProps>;
 
 /**
  * Configuration options for story appearance and behavior.

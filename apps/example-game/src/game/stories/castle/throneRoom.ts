@@ -1,5 +1,5 @@
 import type { StoryComponents } from "@react-text-game/core";
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game, storyHelpers } from "@react-text-game/core";
 
 import { environment, kingAlderon, npcActions, player } from "@/game/entities";
 
@@ -11,7 +11,7 @@ import { environment, kingAlderon, npcActions, player } from "@/game/entities";
  * - Quest progression
  * - Multiple dialogue branches
  */
-export const throneRoom = newStory(
+export const throneRoom = defineStory(
     "throneRoom",
     () => {
         // First visit - seeking audience
@@ -41,38 +41,28 @@ export const throneRoom = newStory(
 
 function getFirstAudienceContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Throne Room",
-            props: { level: 1, className: "text-warning-400" },
-        },
+        storyHelpers.header("The Throne Room", {
+            level: 1,
+            className: "text-warning-400",
+        }),
 
-        {
-            type: "image",
-            content: "./assets/npc/king-alderon.webp",
-            props: {
-                alt: "King Alderon III on his throne",
-                className: "rounded-lg shadow-lg my-6 max-w-md mx-auto",
-            },
-        },
+        storyHelpers.image("./assets/npc/king-alderon.webp", {
+            alt: "King Alderon III on his throne",
+            className: "rounded-lg shadow-lg my-6 max-w-md mx-auto",
+        }),
 
-        {
-            type: "text",
-            content: `The grand throne room stretches before you, its vaulted ceiling supported by massive stone pillars. Tapestries depicting the kingdom's history line the walls, and a red carpet leads to the imposing throne where King Alderon III sits, his crown gleaming in the torchlight.`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `The grand throne room stretches before you, its vaulted ceiling supported by massive stone pillars. Tapestries depicting the kingdom's history line the walls, and a red carpet leads to the imposing throne where King Alderon III sits, his crown gleaming in the torchlight.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="font-semibold text-warning-400">"Approach, knight,"</p> the King commands, his voice echoing through the chamber. <p class="text-muted-foreground">"I have heard of your arrival. The Elder Marcus sent word ahead."</p>`,
-            props: { isHTML: true, className: "mb-6" },
-        },
+        storyHelpers.text(
+            `<p class="font-semibold text-warning-400">"Approach, knight,"</p> the King commands, his voice echoing through the chamber. <p class="text-muted-foreground">"I have heard of your arrival. The Elder Marcus sent word ahead."</p>`,
+            { isHTML: true, className: "mb-6" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "byClick",
-            props: { variant: "messenger" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content:
                         "Your Majesty, I come seeking your blessing to face the dragon Vexarion.",
@@ -114,49 +104,45 @@ function getFirstAudienceContent(): StoryComponents {
                     color: "#FFD700",
                 },
             ],
-        },
+            { appearance: "byClick", variant: "messenger" }
+        ),
 
-        { type: "anotherStory", storyId: "throneRoomDecision" },
+        storyHelpers.include("throneRoomDecision"),
     ];
 }
 
 // Decision point after initial dialogue
-newStory("throneRoomDecision", () => {
+defineStory("throneRoomDecision", (h) => {
     npcActions.incrementConversation(kingAlderon);
     kingAlderon.dialogue.gaveAudience = true;
     player.quests.talkedToKing = true;
 
     return [
-        {
-            type: "text",
-            content: `The King leans forward, studying you intently. "I will make you an offer, knight. Prove yourself worthy, and I shall grant you my blessing and access to the Royal Armory."`,
-            props: { className: "text-lg mb-4" },
-        },
+        h.text(
+            `The King leans forward, studying you intently. "I will make you an offer, knight. Prove yourself worthy, and I shall grant you my blessing and access to the Royal Armory."`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "header",
-            content: "The King's Challenge",
-            props: { level: 2, className: "text-primary-400" },
-        },
+        h.header("The King's Challenge", {
+            level: 2,
+            className: "text-primary-400",
+        }),
 
-        {
-            type: "text",
-            content: `"Tell me, knight - what drives you to face such danger? Is it glory? Gold? Or something more?"`,
-            props: { className: "italic text-muted-foreground mb-6" },
-        },
+        h.text(
+            `"Tell me, knight - what drives you to face such danger? Is it glory? Gold? Or something more?"`,
+            { className: "italic text-muted-foreground mb-6" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: '"I seek to protect the innocent."',
                     action: () => {
                         kingAlderon.mood = "pleased";
                         Game.jumpTo("throneRoomNobleAnswer");
                     },
-                    color: "primary" as const,
-                    variant: "bordered" as const,
+                    color: "primary",
+                    variant: "bordered",
                 },
                 {
                     label: '"I seek glory and honor."',
@@ -164,8 +150,8 @@ newStory("throneRoomDecision", () => {
                         kingAlderon.mood = "stern";
                         Game.jumpTo("throneRoomGloryAnswer");
                     },
-                    color: "secondary" as const,
-                    variant: "bordered" as const,
+                    color: "secondary",
+                    variant: "bordered",
                 },
                 {
                     label: '"I seek the dragon\'s treasure."',
@@ -173,36 +159,29 @@ newStory("throneRoomDecision", () => {
                         kingAlderon.mood = "angry";
                         Game.jumpTo("throneRoomGreedyAnswer");
                     },
-                    color: "warning" as const,
-                    variant: "bordered" as const,
+                    color: "warning",
+                    variant: "bordered",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
 // Noble answer - immediate blessing
-newStory("throneRoomNobleAnswer", () => [
-    {
-        type: "image",
-        content: "./assets/npc/king-pleased.webp",
-        props: {
-            alt: "King Alderon smiles approvingly",
-            className: "rounded-lg shadow-lg my-4 max-w-xs mx-auto",
-        },
-    },
+defineStory("throneRoomNobleAnswer", (h) => [
+    h.image("./assets/npc/king-pleased.webp", {
+        alt: "King Alderon smiles approvingly",
+        className: "rounded-lg shadow-lg my-4 max-w-xs mx-auto",
+    }),
 
-    {
-        type: "text",
-        content: `The King's stern expression softens, and he nods slowly. "A noble answer. Such selflessness is rare in these troubled times."`,
-        props: { className: "text-lg mb-4" },
-    },
+    h.text(
+        `The King's stern expression softens, and he nods slowly. "A noble answer. Such selflessness is rare in these troubled times."`,
+        { className: "text-lg mb-4" }
+    ),
 
-    {
-        type: "conversation",
-        appearance: "byClick",
-        props: { variant: "messenger" },
-        content: [
+    h.conversation(
+        [
             {
                 content:
                     "You have the heart of a true knight. Rise, and receive my blessing.",
@@ -214,57 +193,50 @@ newStory("throneRoomNobleAnswer", () => [
                 color: "#FFD700",
             },
         ],
-    },
+        { appearance: "byClick", variant: "messenger" }
+    ),
 
-    { type: "anotherStory", storyId: "receiveBlessing" },
+    h.include("receiveBlessing"),
 ]);
 
 // Glory answer - need to prove further
-newStory("throneRoomGloryAnswer", () => [
-    {
-        type: "text",
-        content: `The King's eyes narrow slightly. "Glory fades, knight. Songs are forgotten. I need to know you will not flee when the dragon's fire bears down upon you."`,
-        props: { className: "text-lg mb-4" },
-    },
+defineStory("throneRoomGloryAnswer", (h) => [
+    h.text(
+        `The King's eyes narrow slightly. "Glory fades, knight. Songs are forgotten. I need to know you will not flee when the dragon's fire bears down upon you."`,
+        { className: "text-lg mb-4" }
+    ),
 
-    {
-        type: "text",
-        content: `"Return to me after you have equipped yourself properly. Visit my armory - you have my permission. Let us see if you can find the courage to match your ambition."`,
-        props: { className: "mb-6" },
-    },
+    h.text(
+        `"Return to me after you have equipped yourself properly. Visit my armory - you have my permission. Let us see if you can find the courage to match your ambition."`,
+        { className: "mb-6" }
+    ),
 
-    {
-        type: "text",
-        content: `<p class="text-center text-primary-400">You may now access the Royal Armory</p>`,
-        props: { isHTML: true, className: "my-4" },
-    },
+    h.text(
+        `<p class="text-center text-primary-400">You may now access the Royal Armory</p>`,
+        { isHTML: true, className: "my-4" }
+    ),
 
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+    h.actions(
+        [
             {
                 label: "Return to the castle",
                 action: () => Game.jumpTo("castleMap"),
-                color: "primary" as const,
+                color: "primary",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);
 
 // Greedy answer - must do more to prove worth
-newStory("throneRoomGreedyAnswer", () => [
-    {
-        type: "text",
-        content: `The King's face hardens, and he grips the arms of his throne. "Treasure? You would risk your life for gold?"`,
-        props: { className: "text-lg mb-4 text-danger-300" },
-    },
+defineStory("throneRoomGreedyAnswer", (h) => [
+    h.text(
+        `The King's face hardens, and he grips the arms of his throne. "Treasure? You would risk your life for gold?"`,
+        { className: "text-lg mb-4 text-danger-300" }
+    ),
 
-    {
-        type: "conversation",
-        appearance: "byClick",
-        props: { variant: "messenger" },
-        content: [
+    h.conversation(
+        [
             {
                 content:
                     "I should have you thrown from this castle. But perhaps there is hope for you yet.",
@@ -286,29 +258,28 @@ newStory("throneRoomGreedyAnswer", () => [
                 color: "#FFD700",
             },
         ],
-    },
+        { appearance: "byClick", variant: "messenger" }
+    ),
 
-    {
-        type: "text",
-        content: `<p class="text-center text-muted-foreground italic">You may now visit Princess Elara's Tower</p>`,
-        props: { isHTML: true, className: "my-4" },
-    },
+    h.text(
+        `<p class="text-center text-muted-foreground italic">You may now visit Princess Elara's Tower</p>`,
+        { isHTML: true, className: "my-4" }
+    ),
 
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+    h.actions(
+        [
             {
                 label: "Leave the throne room",
                 action: () => Game.jumpTo("castleMap"),
-                color: "default" as const,
+                color: "default",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);
 
 // Receive blessing scene
-newStory("receiveBlessing", () => {
+defineStory("receiveBlessing", (h) => {
     // Grant the blessing
     player.quests.hasRoyalBlessing = true;
     kingAlderon.dialogue.gaveBlessing = true;
@@ -316,117 +287,103 @@ newStory("receiveBlessing", () => {
     environment.discoveredLocations.dragonLair = true;
 
     return [
-        {
-            type: "header",
-            content: "The King's Blessing",
-            props: { level: 2, className: "text-warning-400" },
-        },
+        h.header("The King's Blessing", {
+            level: 2,
+            className: "text-warning-400",
+        }),
 
-        {
-            type: "text",
-            content: `King Alderon rises from his throne and draws his ceremonial sword. He places the flat of the blade on your shoulders.`,
-            props: { className: "text-lg mb-4" },
-        },
+        h.text(
+            `King Alderon rises from his throne and draws his ceremonial sword. He places the flat of the blade on your shoulders.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center italic text-warning-400">"By the power vested in me as King of Valdoria, I grant you my blessing. May the light of our ancestors guide your blade and shield your heart."</p>`,
-            props: { isHTML: true, className: "my-6 text-lg" },
-        },
+        h.text(
+            `<p class="text-center italic text-warning-400">"By the power vested in me as King of Valdoria, I grant you my blessing. May the light of our ancestors guide your blade and shield your heart."</p>`,
+            { isHTML: true, className: "my-6 text-lg" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-success-400 font-bold">Received: Royal Blessing</p>
+        h.text(
+            `<p class="text-center text-success-400 font-bold">Received: Royal Blessing</p>
             <p class="text-center text-primary-400">Dragon's Lair is now accessible!</p>
             <p class="text-center text-warning-400">Royal Armory is now unlocked!</p>`,
-            props: { isHTML: true, className: "my-4" },
-        },
+            { isHTML: true, className: "my-4" }
+        ),
 
-        {
-            type: "text",
-            content: `"The dragon's lair lies to the northeast, on Mount Doom. My scouts will guide you to its location. Go now, and may you return victorious."`,
-            props: { className: "mb-6" },
-        },
+        h.text(
+            `"The dragon's lair lies to the northeast, on Mount Doom. My scouts will guide you to its location. Go now, and may you return victorious."`,
+            { className: "mb-6" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: "Visit the Royal Armory first",
                     action: () => Game.jumpTo("castleArmory"),
-                    color: "warning" as const,
-                    variant: "solid" as const,
+                    color: "warning",
+                    variant: "solid",
                 },
                 {
                     label: "Head to the Dragon's Lair immediately",
                     action: () => Game.jumpTo("worldMap"),
-                    color: "danger" as const,
-                    variant: "bordered" as const,
+                    color: "danger",
+                    variant: "bordered",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
 // Return visit content
 function getReturnVisitContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Throne Room",
-            props: { level: 1, className: "text-warning-400" },
-        },
+        storyHelpers.header("The Throne Room", {
+            level: 1,
+            className: "text-warning-400",
+        }),
 
-        {
-            type: "text",
-            content: `King Alderon looks up as you approach. "${player.name}, you have returned. Are you ready to prove yourself?"`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `King Alderon looks up as you approach. "${player.name}, you have returned. Are you ready to prove yourself?"`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: '"I am ready, Your Majesty."',
                     action: () => {
                         kingAlderon.mood = "pleased";
                         Game.jumpTo("receiveBlessing");
                     },
-                    color: "primary" as const,
+                    color: "primary",
                 },
                 {
                     label: "I need more time to prepare",
                     action: () => Game.jumpTo("castleMap"),
-                    color: "default" as const,
-                    variant: "bordered" as const,
+                    color: "default",
+                    variant: "bordered",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 }
 
 // Already blessed content
 function getBlessedContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Throne Room",
-            props: { level: 1, className: "text-warning-400" },
-        },
+        storyHelpers.header("The Throne Room", {
+            level: 1,
+            className: "text-warning-400",
+        }),
 
-        {
-            type: "text",
-            content: `King Alderon nods as you enter. "Knight, you bear my blessing. The dragon awaits. Why do you linger?"`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `King Alderon nods as you enter. "Knight, you bear my blessing. The dragon awaits. Why do you linger?"`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "atOnce",
-            props: { variant: "chat" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content:
                         "I wanted to pay my respects before I depart, Your Majesty.",
@@ -448,23 +405,23 @@ function getBlessedContent(): StoryComponents {
                     color: "#FFD700",
                 },
             ],
-        },
+            { appearance: "atOnce", variant: "chat" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "horizontal" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: "Return to Castle",
                     action: () => Game.jumpTo("castleMap"),
-                    color: "default" as const,
+                    color: "default",
                 },
                 {
                     label: "Head to Dragon's Lair",
                     action: () => Game.jumpTo("worldMap"),
-                    color: "danger" as const,
+                    color: "danger",
                 },
             ],
-        },
+            { direction: "horizontal" }
+        ),
     ];
 }

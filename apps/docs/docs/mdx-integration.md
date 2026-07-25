@@ -201,6 +201,8 @@ Embed another story passage within the current one.
 
 - `storyId: string` - ID of the story passage to include (required)
 
+The story can come from another MDX file or from a TypeScript file created with `defineStory()` (or `newStory()`). In TypeScript, the equivalent is `h.include("common-intro")`.
+
 ### Dynamic Variables
 
 Embed dynamic variables that are evaluated at runtime when the story is displayed.

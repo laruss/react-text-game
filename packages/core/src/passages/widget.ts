@@ -116,6 +116,11 @@ export class Widget extends Passage {
  * component and rendered via `createElement`. This ensures hooks work correctly
  * even in minified production builds where function names are mangled.
  *
+ * @remarks
+ * Fully supported and not scheduled for removal. New code is encouraged to use
+ * {@link defineWidget}, which is identical but keeps every passage factory
+ * under the same `define*` name.
+ *
  * @param id - Unique identifier for the widget
  * @param content - React node or React functional component to display
  * @returns New Widget instance
@@ -139,4 +144,44 @@ export class Widget extends Passage {
  * ```
  */
 export const newWidget = (id: string, content: WidgetContent) =>
+    new Widget(id, content);
+
+/**
+ * Factory function for creating Widget passages.
+ *
+ * Identical in behaviour and signature to {@link newWidget}; it exists so that
+ * every passage factory shares the `define*` prefix (`defineStory`,
+ * `defineInteractiveMap`, `defineWidget`).
+ *
+ * **Important:** When passing a function, it is always treated as a React
+ * component and rendered via `createElement`. This ensures hooks work correctly
+ * even in minified production builds where function names are mangled.
+ *
+ * @remarks
+ * Widgets take no helper toolbox and no display props: they are ordinary React
+ * trees, and `Widget.display()` accepts no arguments. Use `Game.jumpTo()`
+ * directly for navigation inside a widget.
+ *
+ * @param id - Unique identifier for the widget
+ * @param content - React node or React functional component to display
+ * @returns New Widget instance
+ *
+ * @example
+ * ```typescript
+ * import { defineWidget } from '@react-text-game/core';
+ *
+ * // With ReactNode (static content)
+ * const inventory = defineWidget('inventory', <InventoryComponent />);
+ *
+ * // With React component (supports hooks)
+ * const MyMenu = () => {
+ *   const [selected, setSelected] = useState(null);
+ *   return <MenuUI selected={selected} onSelect={setSelected} />;
+ * };
+ * const menu = defineWidget('menu', MyMenu);
+ * ```
+ *
+ * @see newWidget - Previous name for the same factory, still supported
+ */
+export const defineWidget = (id: string, content: WidgetContent): Widget =>
     new Widget(id, content);

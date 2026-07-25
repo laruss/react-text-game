@@ -27,42 +27,42 @@ player.courage += 1;
 ## 2. Create passages
 
 ```tsx title="src/game/passages.ts"
-import { Game, newStory } from "@react-text-game/core";
+import { Game, defineStory } from "@react-text-game/core";
 import { player } from "./player";
 
-export const intro = newStory("intro", () => [
-    { type: "header", content: "At the forest edge", props: { level: 1 } },
-    {
-        type: "text",
-        content: `Courage: ${player.courage}. A narrow path disappears into the fog.`,
-    },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Enter the forest",
-                action: () => {
-                    player.courage += 1;
-                    Game.jumpTo("forest");
-                },
+export const intro = defineStory("intro", (h) => [
+    h.header("At the forest edge", { level: 1 }),
+    h.text(
+        `Courage: ${player.courage}. A narrow path disappears into the fog.`
+    ),
+    h.actions([
+        {
+            label: "Enter the forest",
+            action: () => {
+                player.courage += 1;
+                Game.jumpTo("forest");
             },
-        ],
-    },
+        },
+    ]),
 ]);
 
-export const forest = newStory("forest", () => [
-    { type: "header", content: "Under the trees", props: { level: 1 } },
-    { type: "text", content: () => `Your courage is now ${player.courage}.` },
-    {
-        type: "actions",
-        content: [
-            { label: "Return", action: () => Game.jumpTo("intro") },
-        ],
-    },
+export const forest = defineStory("forest", (h) => [
+    h.header("Under the trees", { level: 1 }),
+    h.text(`Your courage is now ${player.courage}.`),
+    h.actions([{ label: "Return", action: h.jump("intro") }]),
 ]);
 ```
 
-The content factory runs each time the passage is displayed, so returning to `intro` shows the current state.
+The content callback runs each time the passage is displayed, so returning to `intro` shows the current state.
+
+`h` is the story helper toolbox: `h.text`, `h.header`, `h.image`, `h.video`, `h.actions`, `h.conversation` and `h.include` build components, while `h.jump(passageId)` builds a navigation handler and `h.when(condition, value)` builds a conditional one. Anything falsy in the array is dropped, so conditional content can be written inline:
+
+```ts
+export const clearing = defineStory("clearing", (h) => [
+    h.text("A quiet clearing opens up."),
+    player.courage > 2 && h.text("You feel ready for whatever comes next."),
+]);
+```
 
 ## 3. Render the current passage
 

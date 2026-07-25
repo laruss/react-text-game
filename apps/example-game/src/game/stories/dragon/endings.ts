@@ -1,4 +1,4 @@
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game } from "@react-text-game/core";
 
 import {
     elderMarcus,
@@ -19,9 +19,9 @@ import {
  */
 
 // Ending: Dragon Slain (combat victory)
-newStory(
+defineStory(
     "endingDragonSlain",
-    () => {
+    (h) => {
         // Play victory music
         switchBgMusic(musicVictory);
 
@@ -35,57 +35,42 @@ newStory(
         playerActions.addItem("dragon_heart");
 
         return [
-            {
-                type: "header",
-                content: "Victory!",
-                props: { level: 1, className: "text-warning-400" },
-            },
+            h.header("Victory!", { level: 1, className: "text-warning-400" }),
 
-            {
-                type: "image",
-                content: "./assets/backgrounds/ending-victory.webp",
-                props: {
-                    alt: "The hero stands victorious",
-                    className: "rounded-lg shadow-lg my-6",
-                },
-            },
+            h.image("./assets/backgrounds/ending-victory.webp", {
+                alt: "The hero stands victorious",
+                className: "rounded-lg shadow-lg my-6",
+            }),
 
-            {
-                type: "text",
-                content: `The dragon Vexarion is slain. As the beast's final breath rattles through the chamber, you feel... empty. Was this truly necessary?`,
-                props: { className: "text-lg mb-4" },
-            },
+            h.text(
+                `The dragon Vexarion is slain. As the beast's final breath rattles through the chamber, you feel... empty. Was this truly necessary?`,
+                { className: "text-lg mb-4" }
+            ),
 
-            {
-                type: "text",
-                content: `You return to the kingdom as a hero. Songs are sung of your valor. The King honors you with gold and title. But sometimes, late at night, you wonder if there might have been another way.`,
-                props: { className: "mb-6" },
-            },
+            h.text(
+                `You return to the kingdom as a hero. Songs are sung of your valor. The King honors you with gold and title. But sometimes, late at night, you wonder if there might have been another way.`,
+                { className: "mb-6" }
+            ),
 
-            {
-                type: "text",
-                content: `<p class="text-center text-warning-400 font-bold text-xl my-6">ENDING: THE DRAGON SLAYER</p>
+            h.text(
+                `<p class="text-center text-warning-400 font-bold text-xl my-6">ENDING: THE DRAGON SLAYER</p>
                 <p class="text-center text-success-400">+500 Gold</p>
                 <p class="text-center text-muted-foreground">Quest Complete: The Dragon's Shadow</p>`,
-                props: { isHTML: true },
-            },
+                { isHTML: true }
+            ),
 
-            {
-                type: "header",
-                content: "Epilogue",
-                props: { level: 2, className: "text-muted-foreground" },
-            },
+            h.header("Epilogue", {
+                level: 2,
+                className: "text-muted-foreground",
+            }),
 
-            {
-                type: "text",
-                content: `Years later, you would learn from ancient texts that Vexarion was the last of his kind - a guardian dragon who had protected Valdoria for centuries. His death marked the end of an age.`,
-                props: { className: "italic text-muted-foreground mb-6" },
-            },
+            h.text(
+                `Years later, you would learn from ancient texts that Vexarion was the last of his kind - a guardian dragon who had protected Valdoria for centuries. His death marked the end of an age.`,
+                { className: "italic text-muted-foreground mb-6" }
+            ),
 
-            {
-                type: "actions",
-                props: { direction: "vertical" },
-                content: [
+            h.actions(
+                [
                     {
                         label: "Return to Main Menu",
                         action: () => Game.jumpTo("mainMenu"),
@@ -98,7 +83,8 @@ newStory(
                         variant: "bordered",
                     },
                 ],
-            },
+                { direction: "vertical" }
+            ),
         ];
     },
     {
@@ -114,9 +100,9 @@ newStory(
 );
 
 // Ending: Peaceful Resolution
-newStory(
+defineStory(
     "endingPeaceful",
-    () => {
+    (h) => {
         // Play victory music
         switchBgMusic(musicVictory);
 
@@ -129,32 +115,23 @@ newStory(
         playerActions.addItem("dragon_scale_gift");
 
         return [
-            {
-                type: "header",
-                content: "Peace Restored",
-                props: { level: 1, className: "text-success-400" },
-            },
+            h.header("Peace Restored", {
+                level: 1,
+                className: "text-success-400",
+            }),
 
-            {
-                type: "image",
-                content: "./assets/backgrounds/ending-peace.webp",
-                props: {
-                    alt: "Dragon and humans in harmony",
-                    className: "rounded-lg shadow-lg my-6",
-                },
-            },
+            h.image("./assets/backgrounds/ending-peace.webp", {
+                alt: "Dragon and humans in harmony",
+                className: "rounded-lg shadow-lg my-6",
+            }),
 
-            {
-                type: "text",
-                content: `You return to the kingdom not with a dragon's head, but with something far more valuable - peace. King Alderon is skeptical at first, but Princess Elara speaks on your behalf.`,
-                props: { className: "text-lg mb-4" },
-            },
+            h.text(
+                `You return to the kingdom not with a dragon's head, but with something far more valuable - peace. King Alderon is skeptical at first, but Princess Elara speaks on your behalf.`,
+                { className: "text-lg mb-4" }
+            ),
 
-            {
-                type: "conversation",
-                appearance: "byClick",
-                props: { variant: "messenger" },
-                content: [
+            h.conversation(
+                [
                     {
                         content:
                             "Sir " +
@@ -168,39 +145,31 @@ newStory(
                         color: "#FFB6C1",
                     },
                 ],
-            },
+                { appearance: "byClick", variant: "messenger" }
+            ),
 
-            {
-                type: "text",
-                content: `In time, Vexarion becomes a symbol of Valdoria - no longer a terror, but a guardian once more. You are hailed not as a dragon slayer, but as a peacemaker.`,
-                props: { className: "mb-6" },
-            },
+            h.text(
+                `In time, Vexarion becomes a symbol of Valdoria - no longer a terror, but a guardian once more. You are hailed not as a dragon slayer, but as a peacemaker.`,
+                { className: "mb-6" }
+            ),
 
-            {
-                type: "text",
-                content: `<p class="text-center text-success-400 font-bold text-xl my-6">ENDING: THE PEACEMAKER</p>
+            h.text(
+                `<p class="text-center text-success-400 font-bold text-xl my-6">ENDING: THE PEACEMAKER</p>
                 <p class="text-center text-success-400">+300 Gold</p>
                 <p class="text-center text-primary-400">Received: Dragon Scale (gift of friendship)</p>
                 <p class="text-center text-muted-foreground">Quest Complete: The Dragon's Shadow</p>`,
-                props: { isHTML: true },
-            },
+                { isHTML: true }
+            ),
 
-            {
-                type: "header",
-                content: "Epilogue",
-                props: { level: 2, className: "text-success-400" },
-            },
+            h.header("Epilogue", { level: 2, className: "text-success-400" }),
 
-            {
-                type: "text",
-                content: `The alliance between dragon and kingdom endures for generations. Children grow up hearing tales of the knight who chose compassion over violence, and of the dragon who remembered what it meant to have friends.`,
-                props: { className: "italic text-success-300 mb-6" },
-            },
+            h.text(
+                `The alliance between dragon and kingdom endures for generations. Children grow up hearing tales of the knight who chose compassion over violence, and of the dragon who remembered what it meant to have friends.`,
+                { className: "italic text-success-300 mb-6" }
+            ),
 
-            {
-                type: "actions",
-                props: { direction: "vertical" },
-                content: [
+            h.actions(
+                [
                     {
                         label: "Return to Main Menu",
                         action: () => Game.jumpTo("mainMenu"),
@@ -213,7 +182,8 @@ newStory(
                         variant: "bordered",
                     },
                 ],
-            },
+                { direction: "vertical" }
+            ),
         ];
     },
     {
@@ -229,41 +199,29 @@ newStory(
 );
 
 // Ending: Defeat (game over)
-newStory(
+defineStory(
     "endingDefeat",
-    () => [
-        {
-            type: "header",
-            content: "Defeat",
-            props: { level: 1, className: "text-danger-400" },
-        },
+    (h) => [
+        h.header("Defeat", { level: 1, className: "text-danger-400" }),
 
-        {
-            type: "image",
-            content: "./assets/backgrounds/ending-defeat.webp",
-            props: {
-                alt: "Fallen hero",
-                className: "rounded-lg shadow-lg my-6",
-            },
-        },
+        h.image("./assets/backgrounds/ending-defeat.webp", {
+            alt: "Fallen hero",
+            className: "rounded-lg shadow-lg my-6",
+        }),
 
-        {
-            type: "text",
-            content: `The dragon's fire was too fierce, your blade too slow. As darkness claims you, your last thought is of the kingdom you failed to save.`,
-            props: { className: "text-lg mb-4 text-danger-300" },
-        },
+        h.text(
+            `The dragon's fire was too fierce, your blade too slow. As darkness claims you, your last thought is of the kingdom you failed to save.`,
+            { className: "text-lg mb-4 text-danger-300" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-danger-400 font-bold text-xl my-6">GAME OVER</p>
+        h.text(
+            `<p class="text-center text-danger-400 font-bold text-xl my-6">GAME OVER</p>
             <p class="text-center text-muted-foreground">The dragon continues its reign of terror...</p>`,
-            props: { isHTML: true },
-        },
+            { isHTML: true }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: "Load Last Save",
                     action: () => Game.jumpTo("saveLoadWidget"),
@@ -276,7 +234,8 @@ newStory(
                     variant: "bordered",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ],
     {
         background: {

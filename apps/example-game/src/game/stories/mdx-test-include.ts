@@ -1,9 +1,6 @@
-import { newStory } from "@react-text-game/core";
+import { defineStory } from "@react-text-game/core";
 
-export const mdxTestInclude = newStory("mdxTestInclude", () => [
-    { type: "header", content: "MDX Test Include", props: { level: 1 } },
-    {
-        type: "text",
-        content: "This is a story included from an MDX file.",
-    },
+export const mdxTestInclude = defineStory("mdxTestInclude", (h) => [
+    h.header("MDX Test Include", { level: 1 }),
+    h.text("This is a story included from an MDX file."),
 ]);

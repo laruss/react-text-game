@@ -1,4 +1,4 @@
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game } from "@react-text-game/core";
 import { toast } from "sonner";
 
 import { player, playerActions } from "@/game/entities";
@@ -10,49 +10,39 @@ import { player, playerActions } from "@/game/entities";
  * - Healing location
  * - Optional stat boost
  */
-export const dragonLairShrine = newStory(
+export const dragonLairShrine = defineStory(
     "dragonLairShrine",
-    () => {
+    (h) => {
         const hasBlessed = playerActions.hasItem("shrine_blessing");
 
         return [
-            {
-                type: "header" as const,
-                content: "Ancient Shrine",
-                props: { level: 1 as const, className: "text-primary-400" },
-            },
+            h.header("Ancient Shrine", {
+                level: 1,
+                className: "text-primary-400",
+            }),
 
-            {
-                type: "image" as const,
-                content: "./assets/backgrounds/ancient-shrine.webp",
-                props: {
-                    alt: "A mystical shrine in the volcanic cave",
-                    className: "rounded-lg shadow-lg my-4",
-                },
-            },
+            h.image("./assets/backgrounds/ancient-shrine.webp", {
+                alt: "A mystical shrine in the volcanic cave",
+                className: "rounded-lg shadow-lg my-4",
+            }),
 
-            {
-                type: "text" as const,
-                content: `In a quiet alcove away from the heat, you find an ancient shrine. Carved from obsidian, it depicts figures that might be dragons and humans standing together. Offerings of gold and gemstones lie at its base, untouched for centuries.`,
-                props: { className: "text-lg mb-4" },
-            },
+            h.text(
+                `In a quiet alcove away from the heat, you find an ancient shrine. Carved from obsidian, it depicts figures that might be dragons and humans standing together. Offerings of gold and gemstones lie at its base, untouched for centuries.`,
+                { className: "text-lg mb-4" }
+            ),
 
-            {
-                type: "text" as const,
-                content: `A faint magical energy emanates from the shrine, soothing your wounds and calming your mind.`,
-                props: { className: "italic text-muted-foreground mb-6" },
-            },
+            h.text(
+                `A faint magical energy emanates from the shrine, soothing your wounds and calming your mind.`,
+                { className: "italic text-muted-foreground mb-6" }
+            ),
 
-            {
-                type: "text" as const,
-                content: `<p class="text-muted-foreground">Current HP: <span class="${player.health < player.maxHealth ? "text-warning-400" : "text-success-400"}">${player.health}</span> / ${player.maxHealth}</p>`,
-                props: { isHTML: true, className: "text-center mb-6" },
-            },
+            h.text(
+                `<p class="text-muted-foreground">Current HP: <span class="${player.health < player.maxHealth ? "text-warning-400" : "text-success-400"}">${player.health}</span> / ${player.maxHealth}</p>`,
+                { isHTML: true, className: "text-center mb-6" }
+            ),
 
-            {
-                type: "actions" as const,
-                props: { direction: "vertical" as const },
-                content: [
+            h.actions(
+                [
                     {
                         label: "Pray at the shrine (Full heal)",
                         action: () => {
@@ -61,14 +51,14 @@ export const dragonLairShrine = newStory(
                             toast.success(`Fully healed! +${healAmount} HP`);
                             Game.jumpTo("shrinePrayer");
                         },
-                        color: "success" as const,
-                        variant: "solid" as const,
+                        color: "success",
+                        variant: "solid",
                         isDisabled: player.health >= player.maxHealth,
                         tooltip:
                             player.health >= player.maxHealth
                                 ? {
                                       content: "Already at full health",
-                                      position: "right" as const,
+                                      position: "right",
                                   }
                                 : undefined,
                     },
@@ -83,29 +73,30 @@ export const dragonLairShrine = newStory(
                             toast.success("Max HP increased by 10!");
                             Game.jumpTo("shrineBlessing");
                         },
-                        color: "primary" as const,
-                        variant: "solid" as const,
+                        color: "primary",
+                        variant: "solid",
                         isDisabled: hasBlessed,
                         tooltip: hasBlessed
                             ? {
                                   content:
                                       "You have already received this blessing",
-                                  position: "right" as const,
+                                  position: "right",
                               }
                             : {
                                   content:
                                       "A one-time blessing from the ancient gods",
-                                  position: "right" as const,
+                                  position: "right",
                               },
                     },
                     {
                         label: "Return to the lair",
                         action: () => Game.jumpTo("dragonLairMap"),
-                        color: "default" as const,
-                        variant: "bordered" as const,
+                        color: "default",
+                        variant: "bordered",
                     },
                 ],
-            },
+                { direction: "vertical" as const }
+            ),
         ];
     },
     {
@@ -120,63 +111,49 @@ export const dragonLairShrine = newStory(
     }
 );
 
-newStory("shrinePrayer", () => [
-    {
-        type: "header",
-        content: "Healing Light",
-        props: { level: 2, className: "text-success-400" },
-    },
-    {
-        type: "text",
-        content: `A warm, golden light washes over you as you kneel before the shrine. Your wounds close, your fatigue fades, and you feel renewed.`,
-        props: { className: "text-lg mb-4 text-center" },
-    },
-    {
-        type: "text",
-        content: `<p class="text-center text-success-400 font-bold">Fully healed!</p>
+defineStory("shrinePrayer", (h) => [
+    h.header("Healing Light", { level: 2, className: "text-success-400" }),
+    h.text(
+        `A warm, golden light washes over you as you kneel before the shrine. Your wounds close, your fatigue fades, and you feel renewed.`,
+        { className: "text-lg mb-4 text-center" }
+    ),
+    h.text(
+        `<p class="text-center text-success-400 font-bold">Fully healed!</p>
         <p class="text-center text-muted-foreground">HP: ${player.health}/${player.maxHealth}</p>`,
-        props: { isHTML: true },
-    },
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+        { isHTML: true }
+    ),
+    h.actions(
+        [
             {
                 label: "Continue",
                 action: () => Game.jumpTo("dragonLairShrine"),
                 color: "primary",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);
 
-newStory("shrineBlessing", () => [
-    {
-        type: "header",
-        content: "Ancient Blessing",
-        props: { level: 2, className: "text-primary-400" },
-    },
-    {
-        type: "text",
-        content: `As you touch the shrine, ancient words echo in your mind - a language long forgotten, yet somehow understood. Power flows into you, strengthening your very essence.`,
-        props: { className: "text-lg mb-4 text-center" },
-    },
-    {
-        type: "text",
-        content: `<p class="text-center text-primary-400 font-bold">Blessing received!</p>
+defineStory("shrineBlessing", (h) => [
+    h.header("Ancient Blessing", { level: 2, className: "text-primary-400" }),
+    h.text(
+        `As you touch the shrine, ancient words echo in your mind - a language long forgotten, yet somehow understood. Power flows into you, strengthening your very essence.`,
+        { className: "text-lg mb-4 text-center" }
+    ),
+    h.text(
+        `<p class="text-center text-primary-400 font-bold">Blessing received!</p>
         <p class="text-center text-success-400">+10 Maximum HP (permanent)</p>
         <p class="text-center text-muted-foreground">New Max HP: ${player.maxHealth}</p>`,
-        props: { isHTML: true },
-    },
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+        { isHTML: true }
+    ),
+    h.actions(
+        [
             {
                 label: "Continue",
                 action: () => Game.jumpTo("dragonLairShrine"),
                 color: "primary",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);

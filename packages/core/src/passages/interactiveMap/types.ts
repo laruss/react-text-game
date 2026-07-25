@@ -1,4 +1,13 @@
-import type { ButtonColor, ButtonVariant, MaybeCallable } from "#types";
+import type { Conditional, DefineFn } from "#passages/definition";
+import type {
+    ButtonColor,
+    ButtonVariant,
+    EmptyObject,
+    InitVarsType,
+    MaybeCallable,
+} from "#types";
+
+import type { MapHelpers } from "./helpers";
 
 /**
  * Position coordinates for hotspots on the map.
@@ -911,6 +920,65 @@ export type InteractiveMapOptions = {
         rightHotspots?: string;
     };
 };
+
+/**
+ * Map configuration accepted by `defineInteractiveMap`.
+ *
+ * Identical to {@link InteractiveMapOptions} minus `hotspots`, which the
+ * content callback supplies instead.
+ *
+ * @example
+ * ```typescript
+ * const options: MapDefineOptions = {
+ *   image: '/maps/world.jpg',
+ *   caption: 'Kingdom of Eldoria',
+ *   classNames: { container: 'bg-slate-900' }
+ * };
+ * ```
+ */
+export type MapDefineOptions = Omit<InteractiveMapOptions, "hotspots">;
+
+/**
+ * Array returned by a {@link MapContentFn}.
+ *
+ * Accepts `false`, `null` and `undefined` entries, which are removed before
+ * the map is rendered. That makes conditional hotspots expressible inline
+ * instead of through a callback that returns `undefined`.
+ *
+ * @example
+ * ```typescript
+ * const hotspots: MapContentItems = [
+ *   { type: 'label', content: 'Home', position: { x: 50, y: 50 }, action: goHome },
+ *   player.hasKey && {
+ *     type: 'label',
+ *     content: 'Secret Room',
+ *     position: { x: 80, y: 30 },
+ *     action: goSecret
+ *   }
+ * ];
+ * ```
+ */
+export type MapContentItems = Array<Conditional<AnyHotspot>>;
+
+/**
+ * Content callback accepted by `defineInteractiveMap`.
+ *
+ * Receives the {@link MapHelpers} toolbox first and the display props second.
+ *
+ * @template TProps - Type of props passed to `map.display()`
+ *
+ * @example
+ * ```typescript
+ * const content: MapContentFn = (h) => [
+ *   h.label('Village', { position: { x: 30, y: 40 }, action: h.jump('village') })
+ * ];
+ * ```
+ */
+export type MapContentFn<TProps extends InitVarsType = EmptyObject> = DefineFn<
+    MapHelpers,
+    MapContentItems,
+    TProps
+>;
 
 /**
  * Resolved/processed interactive map data returned by `InteractiveMap.display()`.

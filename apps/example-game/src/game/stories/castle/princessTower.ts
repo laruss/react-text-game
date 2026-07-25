@@ -1,5 +1,5 @@
 import type { StoryComponents } from "@react-text-game/core";
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game, storyHelpers } from "@react-text-game/core";
 
 import { dragon, player, princessElara } from "@/game/entities";
 
@@ -10,7 +10,7 @@ import { dragon, player, princessElara } from "@/game/entities";
  * - Lore revelation (dragon's secret)
  * - Alternative quest path (peaceful resolution hint)
  */
-export const princessTower = newStory(
+export const princessTower = defineStory(
     "princessTower",
     () => {
         if (!princessElara.dialogue.introducedSelf) {
@@ -37,38 +37,28 @@ export const princessTower = newStory(
 
 function getFirstMeetingContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Princess's Tower",
-            props: { level: 1, className: "text-pink-400" },
-        },
+        storyHelpers.header("The Princess's Tower", {
+            level: 1,
+            className: "text-pink-400",
+        }),
 
-        {
-            type: "image",
-            content: "./assets/npc/princess-elara.webp",
-            props: {
-                alt: "Princess Elara",
-                className: "rounded-lg shadow-lg my-4 max-w-sm mx-auto",
-            },
-        },
+        storyHelpers.image("./assets/npc/princess-elara.webp", {
+            alt: "Princess Elara",
+            className: "rounded-lg shadow-lg my-4 max-w-sm mx-auto",
+        }),
 
-        {
-            type: "text",
-            content: `The tower chamber is elegant yet modest, filled with books and paintings. At the window stands a young woman with flowing golden hair, gazing out at the distant mountains.`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `The tower chamber is elegant yet modest, filled with books and paintings. At the window stands a young woman with flowing golden hair, gazing out at the distant mountains.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "text",
-            content: `She turns as you enter, her eyes bright with curiosity. "A visitor? Father rarely lets anyone up here. You must be the knight everyone is talking about."`,
-            props: { className: "mb-4" },
-        },
+        storyHelpers.text(
+            `She turns as you enter, her eyes bright with curiosity. "A visitor? Father rarely lets anyone up here. You must be the knight everyone is talking about."`,
+            { className: "mb-4" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "byClick",
-            props: { variant: "messenger" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content:
                         "Princess Elara, I am honored to meet you. I am " +
@@ -111,65 +101,59 @@ function getFirstMeetingContent(): StoryComponents {
                     color: "#FFB6C1",
                 },
             ],
-        },
+            { appearance: "byClick", variant: "messenger" }
+        ),
 
-        { type: "anotherStory", storyId: "princessFirstMeetingContinue" },
+        storyHelpers.include("princessFirstMeetingContinue"),
     ];
 }
 
-newStory("princessFirstMeetingContinue", () => {
+defineStory("princessFirstMeetingContinue", (h) => {
     princessElara.dialogue.introducedSelf = true;
 
     return [
-        {
-            type: "text",
-            content: `The princess's words give you pause. She seems to know something she isn't saying directly.`,
-            props: { className: "italic text-muted-foreground mb-4" },
-        },
+        h.text(
+            `The princess's words give you pause. She seems to know something she isn't saying directly.`,
+            { className: "italic text-muted-foreground mb-4" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: '"What do you know about the dragon?"',
                     action: () => Game.jumpTo("princessDragonSecret"),
-                    color: "primary" as const,
-                    variant: "bordered" as const,
+                    color: "primary",
+                    variant: "bordered",
                 },
                 {
                     label: "Take your leave politely",
                     action: () => Game.jumpTo("castleMap"),
-                    color: "default" as const,
-                    variant: "bordered" as const,
+                    color: "default",
+                    variant: "bordered",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
-newStory("princessDragonSecret", () => {
+defineStory("princessDragonSecret", (h) => {
     princessElara.dialogue.revealedDragonSecret = true;
     dragon.dialogue.learnedMotivation = true;
 
     return [
-        {
-            type: "header",
-            content: "The Dragon's Secret",
-            props: { level: 2, className: "text-primary-400" },
-        },
+        h.header("The Dragon's Secret", {
+            level: 2,
+            className: "text-primary-400",
+        }),
 
-        {
-            type: "text",
-            content: `Elara looks around conspiratorially, then beckons you closer. Her voice drops to a whisper.`,
-            props: { className: "text-lg mb-4" },
-        },
+        h.text(
+            `Elara looks around conspiratorially, then beckons you closer. Her voice drops to a whisper.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "byClick",
-            props: { variant: "messenger" },
-            content: [
+        h.conversation(
+            [
                 {
                     content:
                         "I have studied the ancient texts. Vexarion was not always a terror. He was once the guardian of this land.",
@@ -210,87 +194,77 @@ newStory("princessDragonSecret", () => {
                     color: "#FFB6C1",
                 },
             ],
-        },
+            { appearance: "byClick", variant: "messenger" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-primary-400 italic my-4">"Perhaps, Sir Knight, the sword is not the only solution."</p>`,
-            props: { isHTML: true },
-        },
+        h.text(
+            `<p class="text-center text-primary-400 italic my-4">"Perhaps, Sir Knight, the sword is not the only solution."</p>`,
+            { isHTML: true }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-success-400">You've learned the dragon's secret!</p>
+        h.text(
+            `<p class="text-center text-success-400">You've learned the dragon's secret!</p>
             <p class="text-center text-muted-foreground">A peaceful resolution may be possible...</p>`,
-            props: { isHTML: true, className: "my-4" },
-        },
+            { isHTML: true, className: "my-4" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: '"Thank you, Princess. This changes everything."',
                     action: () => Game.jumpTo("castleMap"),
-                    color: "primary" as const,
+                    color: "primary",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
 function getSecondVisitContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Princess's Tower",
-            props: { level: 1, className: "text-pink-400" },
-        },
+        storyHelpers.header("The Princess's Tower", {
+            level: 1,
+            className: "text-pink-400",
+        }),
 
-        {
-            type: "text",
-            content: `Princess Elara smiles as you enter. "Sir ${player.name}, you've returned. Have you more questions about the dragon?"`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `Princess Elara smiles as you enter. "Sir ${player.name}, you've returned. Have you more questions about the dragon?"`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: '"Tell me more about Vexarion."',
                     action: () => Game.jumpTo("princessDragonSecret"),
-                    color: "primary" as const,
+                    color: "primary",
                 },
                 {
                     label: "Just visiting",
                     action: () => Game.jumpTo("castleMap"),
-                    color: "default" as const,
+                    color: "default",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 }
 
 function getReturnVisitContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Princess's Tower",
-            props: { level: 1, className: "text-pink-400" },
-        },
+        storyHelpers.header("The Princess's Tower", {
+            level: 1,
+            className: "text-pink-400",
+        }),
 
-        {
-            type: "text",
-            content: `Elara looks up from her book with a warm smile. "Sir Knight! How fares your quest?"`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `Elara looks up from her book with a warm smile. "Sir Knight! How fares your quest?"`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "atOnce",
-            props: { variant: "chat" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content:
                         "Remember what I told you about Vexarion. Violence is not the only path.",
@@ -302,18 +276,18 @@ function getReturnVisitContent(): StoryComponents {
                     color: "#FFB6C1",
                 },
             ],
-        },
+            { appearance: "atOnce", variant: "chat" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: "Return to the castle",
                     action: () => Game.jumpTo("castleMap"),
-                    color: "default" as const,
+                    color: "default",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 }

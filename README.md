@@ -101,7 +101,7 @@ npm install @react-text-game/mdx @mdx-js/mdx @mdx-js/react
 ### Basic Example
 
 ```tsx
-import { Game, createEntity, newStory } from "@react-text-game/core";
+import { Game, createEntity, defineStory } from "@react-text-game/core";
 import { GameProvider, PassageController } from "@react-text-game/ui";
 import "@react-text-game/ui/styles";
 
@@ -132,26 +132,12 @@ const player = createEntity("player", {
     inventory: [] as string[],
 });
 
-// Create a story passage
-const intro = newStory("intro", () => [
-    {
-        type: "header",
-        content: "Welcome to the Game",
-        props: { level: 1 },
-    },
-    {
-        type: "text",
-        content: `Hello, ${player.name}!`,
-    },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Start Adventure",
-                action: () => Game.jumpTo("chapter-1"),
-            },
-        ],
-    },
+// Create a story passage. The callback receives a toolbox of component
+// builders, so you never have to write component objects by hand.
+const intro = defineStory("intro", (h) => [
+    h.header("Welcome to the Game", { level: 1 }),
+    h.text(`Hello, ${player.name}!`),
+    h.actions([{ label: "Start Adventure", action: h.jump("chapter-1") }]),
 ]);
 
 // React component
@@ -343,7 +329,7 @@ bun run dev:docs
 
 #### 2. Follow Existing Patterns
 
-- **Core package**: Use factory functions (`createEntity`, `newStory`, `newInteractiveMap`)
+- **Core package**: Use factory functions (`createEntity`, `defineStory`, `defineInteractiveMap`, `defineWidget`)
 - **UI package**: Use semantic color tokens (never hardcode colors like `bg-blue-500`)
 - **All packages**: Write TypeScript with proper types
 

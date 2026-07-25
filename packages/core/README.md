@@ -33,7 +33,7 @@ pnpm add @react-text-game/core
 ## Quick Start
 
 ```tsx
-import { Game, createEntity, newStory } from "@react-text-game/core";
+import { Game, createEntity, defineStory } from "@react-text-game/core";
 
 // IMPORTANT: Initialize the game first
 await Game.init({
@@ -70,26 +70,12 @@ player.stats.health -= 10;
 // Persist manual changes when you need them stored
 player.save();
 
-// Create a story passage
-const introStory = newStory("intro", () => [
-    {
-        type: "header",
-        content: "Welcome to the Game",
-        props: { level: 1 },
-    },
-    {
-        type: "text",
-        content: `Hello, ${player.name}!`,
-    },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Start Adventure",
-                action: () => Game.jumpTo("adventure"),
-            },
-        ],
-    },
+// Create a story passage. The callback receives a toolbox of component
+// builders, so you never have to write component objects by hand.
+const introStory = defineStory("intro", (h) => [
+    h.header("Welcome to the Game", { level: 1 }),
+    h.text(`Hello, ${player.name}!`),
+    h.actions([{ label: "Start Adventure", action: h.jump("adventure") }]),
 ]);
 
 // Navigate to passage
@@ -676,77 +662,134 @@ class Inventory extends BaseGameObject<{ items: string[] }> {
 
 ### Passages
 
-Passages represent different screens or scenes in your game. Three types are available:
+Passages represent different screens or scenes in your game. Three types are available, and each has a `define*` factory:
+
+```typescript
+defineStory(id, (helpers, props) => components, options?)
+defineInteractiveMap(id, (helpers, props) => hotspots, options)
+defineWidget(id, reactNodeOrComponent)
+```
+
+The content callback always receives a toolbox of builders as its first argument and the display props as its second, so learning one factory teaches all of them.
+
+> **Migrating?** The original `newStory`, `newInteractiveMap` and `newWidget` factories are fully supported and are not scheduled for removal. See [Legacy factories](#legacy-factories) for their signatures.
 
 #### Story Passages
 
 Text-based narrative passages with rich components:
 
 ```typescript
-import { newStory } from "@react-text-game/core";
+import { defineStory } from "@react-text-game/core";
 
-const myStory = newStory(
+const myStory = defineStory(
     "my-story",
-    (props) => [
-        {
-            type: "header",
-            content: "Chapter 1",
-            props: { level: 1 },
-        },
-        {
-            type: "text",
-            content: "Once upon a time...",
-        },
-        {
-            type: "image",
-            content: "/assets/scene.jpg",
-            props: { alt: "A beautiful scene" },
-        },
-        {
-            type: "video",
-            content: "/assets/intro.mp4",
-            props: { controls: true, autoPlay: false },
-        },
-        {
-            type: "conversation",
-            content: [
+    (h) => [
+        h.header("Chapter 1", { level: 1 }),
+        h.text("Once upon a time..."),
+        h.image("/assets/scene.jpg", { alt: "A beautiful scene" }),
+        h.video("/assets/intro.mp4", { controls: true, autoPlay: false }),
+        h.conversation(
+            [
                 {
                     content: "Hello there!",
                     who: { name: "NPC", avatar: "/avatars/npc.png" },
                     side: "left",
                 },
-                {
-                    content: "Hi!",
-                    who: { name: "Player" },
-                    side: "right",
-                },
+                { content: "Hi!", who: { name: "Player" }, side: "right" },
             ],
-            props: { variant: "messenger" },
-            appearance: "atOnce",
-        },
-        {
-            type: "actions",
-            content: [
+            { variant: "messenger", appearance: "atOnce" }
+        ),
+        h.actions(
+            [
                 {
                     label: "Continue",
-                    action: () => Game.jumpTo("chapter-2"),
+                    action: h.jump("chapter-2"),
                     color: "primary",
                 },
                 {
                     label: "Go Back",
-                    action: () => Game.jumpTo("intro"),
+                    action: h.jump("intro"),
                     color: "secondary",
                     variant: "bordered",
                 },
             ],
-            props: { direction: "horizontal" },
-        },
+            { direction: "horizontal" }
+        ),
     ],
     {
         background: { image: "/bg.jpg" },
         classNames: { container: "story-container" },
     }
 );
+```
+
+**Story helpers (`h`):**
+
+| Helper | Builds | Signature |
+| --- | --- | --- |
+| `h.text` | `text` component | `(content, options?)` |
+| `h.header` | `header` component | `(content, options?)` |
+| `h.image` | `image` component | `(src, options?)` |
+| `h.video` | `video` component | `(src, options?)` |
+| `h.actions` | `actions` component | `(items, options?)` |
+| `h.conversation` | `conversation` component | `(bubbles, options?)` |
+| `h.include` | `anotherStory` component | `(storyId, options?)` |
+| `h.jump` | click handler | `(passageOrId)` |
+| `h.when` | conditional value | `(condition, value)` |
+
+Each helper takes the component's content first and a **single flat options bag** second. Everything that lives under `props` in the raw component type is hoisted into that bag, so there is only one level to fill in: `h.header("Chapter 1", { level: 1, className: "text-center" })`.
+
+**Conditional content**
+
+Falsy entries are removed from the array, so conditions can be written inline instead of through a callback that returns `undefined`:
+
+```typescript
+defineStory("room", (h) => [
+    h.text("A locked door blocks your way."),
+    player.hasKey && h.text("The rusty key feels warm in your pocket."),
+    h.actions([
+        { label: "Look around", action: h.jump("room-search") },
+        player.hasKey && { label: "Unlock", action: h.jump("vault") },
+    ]),
+]);
+```
+
+**Mixing helpers and plain objects**
+
+Helpers return plain component objects, so hand-written literals still work in the same array — useful when migrating a story a piece at a time:
+
+```typescript
+defineStory("mixed", (h) => [
+    h.text("Built with a helper"),
+    { type: "text", content: "Written by hand" },
+]);
+```
+
+**Splitting a story across files**
+
+Import `storyHelpers` directly when you need builders outside the callback body:
+
+```typescript
+import { defineStory, storyHelpers } from "@react-text-game/core";
+
+const sharedIntro = () => [storyHelpers.header("The Whispering Woods")];
+
+defineStory("forest", (h) => [
+    ...sharedIntro(),
+    h.text("The forest is ancient and alive."),
+]);
+```
+
+**Typed props**
+
+`defineStory` is generic over the props passed to `display()`:
+
+```typescript
+const greeting = defineStory<{ playerName: string }>("greeting", (h, props) => [
+    h.text(`Hello, ${props.playerName}!`),
+]);
+
+greeting.display({ playerName: "Hero" });
 ```
 
 **Available Components:**
@@ -761,85 +804,96 @@ const myStory = newStory(
 
 #### Interactive Map Passages
 
-Map-based interactive passages with hotspots:
+Map-based interactive passages with hotspots. The hotspots come from the content callback; everything else (image, caption, styling) stays in the options object:
 
 ```typescript
-import { newInteractiveMap } from "@react-text-game/core";
+import { defineInteractiveMap } from "@react-text-game/core";
 
-const worldMap = newInteractiveMap("world-map", {
-    caption: "World Map",
-    image: "/maps/world.jpg",
-    bgImage: "/maps/world-bg.jpg",
-    props: { bgOpacity: 0.3 },
-    hotspots: [
+const worldMap = defineInteractiveMap(
+    "world-map",
+    (h) => [
         // Map label hotspot - positioned on the map
-        {
-            type: "label",
-            content: "Village",
+        h.label("Village", {
             position: { x: 30, y: 40 }, // Percentage-based (0-100)
-            action: () => Game.jumpTo("village"),
-            props: { color: "primary", variant: "solid" },
-        },
+            action: h.jump("village"),
+            color: "primary",
+            variant: "solid",
+        }),
         // Map image hotspot - with state-dependent images
-        {
-            type: "image",
-            content: {
+        h.image(
+            {
                 idle: "/icons/chest.png",
                 hover: "/icons/chest-glow.png",
                 active: "/icons/chest-open.png",
                 disabled: "/icons/chest-locked.png",
             },
-            position: { x: 60, y: 70 },
-            action: () => openChest(),
-            isDisabled: () => !player.hasKey,
-            tooltip: {
-                content: () => (player.hasKey ? "Open chest" : "Locked"),
-                position: "top",
-            },
-            props: { zoom: "150%" },
-        },
+            {
+                position: { x: 60, y: 70 },
+                action: () => openChest(),
+                isDisabled: () => !player.hasKey,
+                tooltip: {
+                    content: () => (player.hasKey ? "Open chest" : "Locked"),
+                    position: "top",
+                },
+                zoom: "150%",
+            }
+        ),
         // Conditional hotspot - only visible if discovered
-        () =>
-            player.hasDiscovered("forest")
-                ? {
-                      type: "label",
-                      content: "Forest",
-                      position: { x: 80, y: 50 },
-                      action: () => Game.jumpTo("forest"),
-                  }
-                : undefined,
+        player.hasDiscovered("forest") &&
+            h.label("Forest", {
+                position: { x: 80, y: 50 },
+                action: h.jump("forest"),
+            }),
+        // Decorative, non-interactive image
+        h.mapImage("/characters/guard.png", {
+            position: { x: 42, y: 68 },
+            alt: "Castle guard",
+        }),
         // Side hotspot - positioned on edge
-        {
-            type: "label",
-            content: "Menu",
+        h.label("Menu", {
             position: "top", // top/bottom/left/right
             action: () => openMenu(),
-        },
+        }),
         // Context menu - multiple choices at a location
-        {
-            type: "menu",
-            position: { x: 50, y: 50 },
-            direction: "vertical",
-            items: [
-                { type: "label", content: "Examine", action: () => examine() },
-                { type: "label", content: "Take", action: () => take() },
-                () =>
-                    player.hasMagic
-                        ? {
-                              type: "label",
-                              content: "Cast Spell",
-                              action: () => castSpell(),
-                          }
-                        : undefined,
+        h.menu(
+            [
+                h.label("Examine", { action: () => examine() }),
+                h.label("Take", { action: () => take() }),
+                player.hasMagic &&
+                    h.label("Cast Spell", { action: () => castSpell() }),
             ],
-        },
+            { position: { x: 50, y: 50 }, direction: "vertical" }
+        ),
     ],
-    classNames: {
-        container: "bg-gradient-to-b from-sky-900 to-indigo-900",
-        topHotspots: "bg-muted/50 backdrop-blur-sm",
-    },
-});
+    {
+        caption: "World Map",
+        image: "/maps/world.jpg",
+        bgImage: "/maps/world-bg.jpg",
+        props: { bgOpacity: 0.3 },
+        classNames: {
+            container: "bg-gradient-to-b from-sky-900 to-indigo-900",
+            topHotspots: "bg-muted/50 backdrop-blur-sm",
+        },
+    }
+);
 ```
+
+**Map helpers (`h`):**
+
+| Helper | Builds | Signature |
+| --- | --- | --- |
+| `h.label` | label hotspot | `(content, options)` |
+| `h.image` | image hotspot | `(content, options)` |
+| `h.mapImage` | decorative map image | `(src, options)` |
+| `h.menu` | contextual menu | `(items, options)` |
+| `h.jump` | click handler | `(passageOrId)` |
+| `h.when` | conditional value | `(condition, value)` |
+
+`position` decides placement: `{ x, y }` percentages put the hotspot on the map, while `"top"`, `"bottom"`, `"left"` or `"right"` dock it to an edge. As with story helpers, the options bag is flat — `color`, `variant`, `zoom` and `classNames` are written at the top level even though they live under `props` in the raw hotspot type.
+
+Omit `position` from `h.label` to build a menu item; the menu supplies the position for its items. A position-less label is rejected by the type system anywhere a standalone hotspot is expected.
+
+Import `mapHelpers` directly when a map is split across several files, exactly like `storyHelpers`.
 
 **Hotspot Types:**
 
@@ -851,7 +905,8 @@ const worldMap = newInteractiveMap("world-map", {
 
 **Dynamic Features:**
 
-- Hotspots can be functions returning `undefined` for conditional visibility
+- Falsy hotspot entries are dropped, so conditional visibility can be written inline with `&&`
+- Hotspots can also be functions returning `undefined` for conditional visibility
 - Images and positions support dynamic functions: `image: () => '/maps/' + season + '.jpg'`
 - Disabled states with custom tooltips explaining why actions are unavailable
 
@@ -860,16 +915,73 @@ const worldMap = newInteractiveMap("world-map", {
 Custom React components as passages:
 
 ```tsx
-import { newWidget } from "@react-text-game/core";
+import { defineWidget } from "@react-text-game/core";
 
-const customUI = newWidget(
+const customUI = defineWidget(
     "custom-ui",
     <div>
         <h1>Custom Interface</h1>
         <MyCustomComponent />
     </div>
 );
+
+// Pass a component (not an element) when you need hooks
+const MyMenu = () => {
+    const [selected, setSelected] = useState(null);
+    return <MenuUI selected={selected} onSelect={setSelected} />;
+};
+const menu = defineWidget("menu", MyMenu);
 ```
+
+Widgets take no helper toolbox and no display props: they are ordinary React trees, and `Widget.display()` accepts no arguments. Use `Game.jumpTo()` directly for navigation inside a widget. `defineWidget` is identical to `newWidget` in behaviour and signature — it exists so every passage factory shares the same prefix.
+
+#### Legacy factories
+
+`newStory`, `newInteractiveMap` and `newWidget` remain fully supported. They take the content as data rather than through a builder callback:
+
+```typescript
+import { newInteractiveMap, newStory, newWidget } from "@react-text-game/core";
+
+newStory(
+    "my-story",
+    (props) => [
+        { type: "header", content: "Chapter 1", props: { level: 1 } },
+        { type: "text", content: "Once upon a time..." },
+    ],
+    { background: { image: "/bg.jpg" } }
+);
+
+newInteractiveMap("world-map", {
+    image: "/maps/world.jpg",
+    hotspots: [
+        {
+            type: "label",
+            content: "Village",
+            position: { x: 30, y: 40 },
+            action: () => Game.jumpTo("village"),
+        },
+        // conditional hotspots use a callback returning undefined
+        () =>
+            player.hasKey
+                ? {
+                      type: "label",
+                      content: "Secret",
+                      position: { x: 80, y: 30 },
+                      action: () => Game.jumpTo("secret"),
+                  }
+                : undefined,
+    ],
+});
+
+newWidget("custom-ui", <MyCustomComponent />);
+```
+
+Two differences worth knowing when you compare the two styles:
+
+- **Typed props.** `StoryContent` is a generic *function* type, so a content function cannot annotate its props (`(props: { playerName: string }) => ...` fails to type-check). `StoryContentFn`, used by `defineStory`, is a generic *alias*, so typed props work.
+- **Conditional entries.** Only the `define*` factories drop `false`/`null`/`undefined` entries from the arrays.
+
+Migration is mechanical and can be done one passage at a time — the two styles produce identical passage objects and interoperate freely.
 
 ### Storage
 
@@ -1258,19 +1370,29 @@ Methods:
 **Story:**
 
 ```typescript
+defineStory<TProps>(id: string, content: StoryContentFn<TProps>, options?: StoryOptions): Story
 newStory(id: string, content: StoryContent, options?: StoryOptions): Story
 ```
 
 **Interactive Map:**
 
 ```typescript
+defineInteractiveMap<TProps>(id: string, content: MapContentFn<TProps>, options: MapDefineOptions): InteractiveMap
 newInteractiveMap(id: string, options: InteractiveMapOptions): InteractiveMap
 ```
 
 **Widget:**
 
 ```typescript
-newWidget(id: string, content: ReactNode): Widget
+defineWidget(id: string, content: WidgetContent): Widget
+newWidget(id: string, content: WidgetContent): Widget
+```
+
+**Helper toolboxes:**
+
+```typescript
+storyHelpers: StoryHelpers  // text, header, image, video, actions, conversation, include, jump, when
+mapHelpers: MapHelpers      // label, image, mapImage, menu, jump, when
 ```
 
 ## TypeScript
@@ -1292,6 +1414,8 @@ import type {
 import type {
     Component,
     StoryContent,
+    StoryContentFn,
+    StoryContentItems,
     StoryOptions,
     TextComponent,
     HeaderComponent,
@@ -1310,6 +1434,9 @@ import type {
 import type {
     InteractiveMapOptions,
     InteractiveMapType,
+    MapContentFn,
+    MapContentItems,
+    MapDefineOptions,
     AnyHotspot,
     MapLabelHotspot,
     MapImageHotspot,
@@ -1319,6 +1446,15 @@ import type {
     LabelHotspot,
     ImageHotspot,
 } from "@react-text-game/core/passages";
+
+// Import helper toolbox types from the main package
+import type {
+    StoryHelpers,
+    MapHelpers,
+    CommonHelpers,
+    DefineFn,
+    Conditional,
+} from "@react-text-game/core";
 ```
 
 All types include comprehensive JSDoc comments with:

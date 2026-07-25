@@ -1,46 +1,36 @@
-import { newStory } from "@react-text-game/core";
+import { defineStory } from "@react-text-game/core";
 
-export const testStory = newStory("testStory", () => [
-    { type: "header", content: "Test Story", props: { level: 1 } },
-    {
-        type: "text",
-        content: `
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-    `,
-    },
-    { type: "image", content: "living_room.png" },
-    { type: "video", content: "video.mp4" },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Action 1",
-                action: () => console.log("Action 1 executed"),
+export const testStory = defineStory("testStory", (h) => [
+    h.header("Test Story", { level: 1 }),
+    h.text(`
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    `),
+    h.image("living_room.png"),
+    h.video("video.mp4"),
+    h.actions([
+        {
+            label: "Action 1",
+            action: () => console.log("Action 1 executed"),
+        },
+        {
+            label: "Action 2",
+            action: () => console.log("Action 2 executed"),
+            isDisabled: true,
+            tooltip: {
+                content: "This action is disabled",
+                position: "top",
+                className: "bg-red-500 text-white",
             },
-            {
-                label: "Action 2",
-                action: () => console.log("Action 2 executed"),
-                isDisabled: true,
-                tooltip: {
-                    content: "This action is disabled",
-                    position: "top",
-                    className: "bg-red-500 text-white",
-                },
-            },
-        ],
-    },
-    { type: "anotherStory", storyId: "anotherStory" },
+        },
+    ]),
+    h.include("anotherStory"),
 ]);
 
-newStory("anotherStory", () => [
-    { type: "header", content: "Another Story", props: { level: 2 } },
-    { type: "text", content: "This is another story with different content." },
-    {
-        type: "conversation",
-        props: {
-            variant: "messenger",
-        },
-        content: [
+defineStory("anotherStory", (h) => [
+    h.header("Another Story", { level: 2 }),
+    h.text("This is another story with different content."),
+    h.conversation(
+        [
             { content: "Hello, this is a conversation line." },
             {
                 content: "This is another line.",
@@ -65,5 +55,6 @@ newStory("anotherStory", () => [
                 side: "right",
             },
         ],
-    },
+        { variant: "messenger" }
+    ),
 ]);

@@ -1,5 +1,5 @@
 import type { StoryComponents } from "@react-text-game/core";
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game, storyHelpers } from "@react-text-game/core";
 
 import {
     dragon,
@@ -20,7 +20,7 @@ import {
  * - Peaceful resolution path (based on learned lore)
  * - Multiple endings trigger
  */
-export const dragonEncounter = newStory(
+export const dragonEncounter = defineStory(
     "dragonEncounter",
     () => {
         // Already defeated
@@ -55,32 +55,23 @@ function getFirstEncounterContent(): StoryComponents {
     sfxDragonRoar.play();
 
     return [
-        {
-            type: "header",
-            content: "The Dragon's Chamber",
-            props: { level: 1, className: "text-danger-400" },
-        },
+        storyHelpers.header("The Dragon's Chamber", {
+            level: 1,
+            className: "text-danger-400",
+        }),
 
-        {
-            type: "image",
-            content: "./assets/npc/vexarion.webp",
-            props: {
-                alt: "Vexarion the Terrible",
-                className: "rounded-lg shadow-lg my-6 max-w-lg mx-auto",
-            },
-        },
+        storyHelpers.image("./assets/npc/vexarion.webp", {
+            alt: "Vexarion the Terrible",
+            className: "rounded-lg shadow-lg my-6 max-w-lg mx-auto",
+        }),
 
-        {
-            type: "text",
-            content: `The chamber is vast, lit by rivers of molten rock flowing along the walls. At its center, upon a mountain of gold and bones, lies Vexarion - a dragon of terrible majesty. His scales shimmer like liquid fire, and his eyes, ancient and weary, fix upon you.`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `The chamber is vast, lit by rivers of molten rock flowing along the walls. At its center, upon a mountain of gold and bones, lies Vexarion - a dragon of terrible majesty. His scales shimmer like liquid fire, and his eyes, ancient and weary, fix upon you.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "byClick",
-            props: { variant: "messenger" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content:
                         "*A voice like rumbling thunder fills your mind* Another knight come to slay me. How... tiresome.",
@@ -114,76 +105,68 @@ function getFirstEncounterContent(): StoryComponents {
                     color: "#8B0000",
                 },
             ],
-        },
+            { appearance: "byClick", variant: "messenger" }
+        ),
 
-        { type: "anotherStory", storyId: "dragonEncounterChoice" },
+        storyHelpers.include("dragonEncounterChoice"),
     ];
 }
 
 // Choice after initial encounter
-newStory("dragonEncounterChoice", () => {
+defineStory("dragonEncounterChoice", (h) => {
     const knowsSecret = dragon.dialogue.learnedMotivation;
     const hasStrongWeapon = playerActions.hasItem("dragon_slayer");
 
     return [
-        {
-            type: "header",
-            content: "What Do You Do?",
-            props: { level: 2, className: "text-warning-400" },
-        },
+        h.header("What Do You Do?", {
+            level: 2,
+            className: "text-warning-400",
+        }),
 
-        {
-            type: "text",
-            content: knowsSecret
+        h.text(
+            knowsSecret
                 ? `*You remember what Princess Elara told you - the dragon is lonely, not evil. Perhaps there is another way...*`
                 : `*The dragon's words give you pause, but your duty is clear... isn't it?*`,
-            props: {
-                className: "italic text-muted-foreground mb-6",
-            },
-        },
+            { className: "italic text-muted-foreground mb-6" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 // Attack option
                 {
                     label: "Attack! (Combat)",
                     action: () => Game.jumpTo("dragonCombat"),
-                    color: "danger" as const,
-                    variant: "solid" as const,
+                    color: "danger",
+                    variant: "solid",
                     tooltip: {
                         content: hasStrongWeapon
                             ? "Dragon Slayer equipped - good odds"
                             : "Standard weapons - dangerous fight",
-                        position: "right" as const,
+                        position: "right",
                     },
                 },
                 // Peaceful option (only if learned secret)
-                ...(knowsSecret
-                    ? [
-                          {
-                              label: '"Why do you do this, Vexarion?"',
-                              action: () => Game.jumpTo("dragonPeacefulPath"),
-                              color: "primary" as const,
-                              variant: "bordered" as const,
-                          },
-                      ]
-                    : []),
+                knowsSecret && {
+                    label: '"Why do you do this, Vexarion?"',
+                    action: () => Game.jumpTo("dragonPeacefulPath"),
+                    color: "primary",
+                    variant: "bordered",
+                },
                 // Retreat option
                 {
                     label: "Retreat (I need to prepare more)",
                     action: () => Game.jumpTo("dragonLairMap"),
-                    color: "default" as const,
-                    variant: "bordered" as const,
+                    color: "default",
+                    variant: "bordered",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
 // Combat path
-newStory("dragonCombat", () => {
+defineStory("dragonCombat", (h) => {
     // Switch to battle music
     switchBgMusic(musicBattle);
 
@@ -204,63 +187,47 @@ newStory("dragonCombat", () => {
     playerActions.takeDamage(dragonDamage);
 
     return [
-        {
-            type: "header",
-            content: "COMBAT!",
-            props: { level: 1, className: "text-danger-400" },
-        },
+        h.header("COMBAT!", { level: 1, className: "text-danger-400" }),
 
-        {
-            type: "image",
-            content: "./assets/backgrounds/dragon-battle.webp",
-            props: {
-                alt: "Battle with Vexarion",
-                className: "rounded-lg shadow-lg my-4",
-            },
-        },
+        h.image("./assets/backgrounds/dragon-battle.webp", {
+            alt: "Battle with Vexarion",
+            className: "rounded-lg shadow-lg my-4",
+        }),
 
-        {
-            type: "text",
-            content: hasStrongWeapon
+        h.text(
+            hasStrongWeapon
                 ? `Your Dragon Slayer sword flares with magical energy as you charge! The blade bites deep into the dragon's scales, drawing a roar of pain!`
                 : `You charge forward, your blade ringing against the dragon's iron scales! The impact numbs your arm, but you press on!`,
-            props: { className: "text-lg mb-4" },
-        },
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-success-400 font-bold">You dealt ${playerDamage} damage!</p>
+        h.text(
+            `<p class="text-center text-success-400 font-bold">You dealt ${playerDamage} damage!</p>
             <p class="text-center text-danger-400 font-bold">Vexarion dealt ${dragonDamage} damage to you!</p>`,
-            props: { isHTML: true, className: "my-4" },
-        },
+            { isHTML: true, className: "my-4" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-muted-foreground">Your HP: <span class="${player.health < 30 ? "text-danger-400" : "text-success-400"}">${player.health}</span>/${player.maxHealth}</p>
+        h.text(
+            `<p class="text-muted-foreground">Your HP: <span class="${player.health < 30 ? "text-danger-400" : "text-success-400"}">${player.health}</span>/${player.maxHealth}</p>
             <p class="text-muted-foreground">Dragon HP: <span class="${dragon.health < 50 ? "text-danger-400" : "text-warning-400"}">${dragon.health}</span>/${dragon.maxHealth}</p>`,
-            props: { isHTML: true, className: "text-center my-4" },
-        },
+            { isHTML: true, className: "text-center my-4" }
+        ),
 
-        { type: "anotherStory", storyId: "dragonCombatContinue" },
+        h.include("dragonCombatContinue"),
     ];
 });
 
 // Combat continuation
-newStory("dragonCombatContinue", () => {
+defineStory("dragonCombatContinue", (h) => {
     // Check win/lose conditions
     if (dragon.health <= 0) {
         return [
-            {
-                type: "text",
-                content: `*With a final, mighty blow, you drive your blade into the dragon's heart. Vexarion lets out a thunderous roar that shakes the mountain, then falls silent.*`,
-                props: {
-                    className: "text-lg text-center mb-4 text-warning-400",
-                },
-            },
-            {
-                type: "actions",
-                props: { direction: "vertical" },
-                content: [
+            h.text(
+                `*With a final, mighty blow, you drive your blade into the dragon's heart. Vexarion lets out a thunderous roar that shakes the mountain, then falls silent.*`,
+                { className: "text-lg text-center mb-4 text-warning-400" }
+            ),
+            h.actions(
+                [
                     {
                         label: "Continue...",
                         action: () => {
@@ -269,33 +236,30 @@ newStory("dragonCombatContinue", () => {
                             player.stats.monstersDefeated++;
                             Game.jumpTo("endingDragonSlain");
                         },
-                        color: "warning" as const,
+                        color: "warning",
                     },
                 ],
-            },
+                { direction: "vertical" }
+            ),
         ];
     }
 
     if (player.health <= 0) {
         return [
-            {
-                type: "text",
-                content: `*The dragon's fire engulfs you. Your vision fades to black...*`,
-                props: {
-                    className: "text-lg text-center mb-4 text-danger-400",
-                },
-            },
-            {
-                type: "actions",
-                props: { direction: "vertical" },
-                content: [
+            h.text(
+                `*The dragon's fire engulfs you. Your vision fades to black...*`,
+                { className: "text-lg text-center mb-4 text-danger-400" }
+            ),
+            h.actions(
+                [
                     {
                         label: "Game Over",
                         action: () => Game.jumpTo("endingDefeat"),
-                        color: "danger" as const,
+                        color: "danger",
                     },
                 ],
-            },
+                { direction: "vertical" }
+            ),
         ];
     }
 
@@ -303,33 +267,25 @@ newStory("dragonCombatContinue", () => {
     const knowsSecret = dragon.dialogue.learnedMotivation;
 
     return [
-        {
-            type: "text",
-            content: `The battle rages on! Vexarion circles above, preparing another attack.`,
-            props: { className: "text-lg mb-4" },
-        },
+        h.text(
+            `The battle rages on! Vexarion circles above, preparing another attack.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: "Continue attacking!",
                     action: () => Game.jumpTo("dragonCombat"),
-                    color: "danger" as const,
+                    color: "danger",
                 },
                 // Can still try peace mid-combat if know secret
-                ...(knowsSecret
-                    ? [
-                          {
-                              label: '"Wait! I know why you\'re doing this!"',
-                              action: () =>
-                                  Game.jumpTo("dragonPeacefulPathMidCombat"),
-                              color: "primary" as const,
-                              variant: "bordered" as const,
-                          },
-                      ]
-                    : []),
+                knowsSecret && {
+                    label: '"Wait! I know why you\'re doing this!"',
+                    action: () => Game.jumpTo("dragonPeacefulPathMidCombat"),
+                    color: "primary",
+                    variant: "bordered",
+                },
                 {
                     label: "Use health potion",
                     action: () => {
@@ -342,7 +298,7 @@ newStory("dragonCombatContinue", () => {
                         }
                         Game.jumpTo("dragonCombat");
                     },
-                    color: "success" as const,
+                    color: "success",
                     isDisabled:
                         !playerActions.hasItem("health_potion") &&
                         !playerActions.hasItem("greater_health_potion"),
@@ -351,34 +307,30 @@ newStory("dragonCombatContinue", () => {
                         !playerActions.hasItem("greater_health_potion")
                             ? {
                                   content: "No health potions!",
-                                  position: "right" as const,
+                                  position: "right",
                               }
                             : undefined,
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
 // Peaceful path
-newStory("dragonPeacefulPath", () => [
-    {
-        type: "header",
-        content: "A Different Approach",
-        props: { level: 2, className: "text-primary-400" },
-    },
+defineStory("dragonPeacefulPath", (h) => [
+    h.header("A Different Approach", {
+        level: 2,
+        className: "text-primary-400",
+    }),
 
-    {
-        type: "text",
-        content: `You lower your weapon. The dragon's eyes narrow with suspicion, but also... curiosity.`,
-        props: { className: "text-lg mb-4" },
-    },
+    h.text(
+        `You lower your weapon. The dragon's eyes narrow with suspicion, but also... curiosity.`,
+        { className: "text-lg mb-4" }
+    ),
 
-    {
-        type: "conversation",
-        appearance: "byClick",
-        props: { variant: "messenger" },
-        content: [
+    h.conversation(
+        [
             {
                 content:
                     "You're lonely, aren't you? The last of your kind. The Princess told me about you.",
@@ -420,43 +372,35 @@ newStory("dragonPeacefulPath", () => [
                 color: "#8B0000",
             },
         ],
-    },
+        { appearance: "byClick", variant: "messenger" }
+    ),
 
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+    h.actions(
+        [
             {
                 label: '"What if things could be different?"',
                 action: () => {
                     dragon.dialogue.offeredPeace = true;
                     Game.jumpTo("dragonPeacefulResolution");
                 },
-                color: "primary" as const,
+                color: "primary",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);
 
 // Mid-combat peaceful option
-newStory("dragonPeacefulPathMidCombat", () => [
-    {
-        type: "header",
-        content: "A Pause in Battle",
-        props: { level: 2, className: "text-warning-400" },
-    },
+defineStory("dragonPeacefulPathMidCombat", (h) => [
+    h.header("A Pause in Battle", { level: 2, className: "text-warning-400" }),
 
-    {
-        type: "text",
-        content: `You throw down your weapon and raise your hands. The dragon hesitates, fire dying in its throat.`,
-        props: { className: "text-lg mb-4" },
-    },
+    h.text(
+        `You throw down your weapon and raise your hands. The dragon hesitates, fire dying in its throat.`,
+        { className: "text-lg mb-4" }
+    ),
 
-    {
-        type: "conversation",
-        appearance: "byClick",
-        props: { variant: "messenger" },
-        content: [
+    h.conversation(
+        [
             {
                 content:
                     "Wait! I know why you do this! The Princess told me - you're not evil, you're alone!",
@@ -488,58 +432,50 @@ newStory("dragonPeacefulPathMidCombat", () => [
                 color: "#4169E1",
             },
         ],
-    },
+        { appearance: "byClick", variant: "messenger" }
+    ),
 
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+    h.actions(
+        [
             {
                 label: "Offer peace",
                 action: () => {
                     dragon.dialogue.offeredPeace = true;
                     Game.jumpTo("dragonPeacefulResolution");
                 },
-                color: "primary" as const,
+                color: "primary",
             },
             {
                 label: "No, finish the fight!",
                 action: () => Game.jumpTo("dragonCombat"),
-                color: "danger" as const,
-                variant: "bordered" as const,
+                color: "danger",
+                variant: "bordered",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);
 
 // Peaceful resolution
-newStory("dragonPeacefulResolution", () => {
+defineStory("dragonPeacefulResolution", (h) => {
     dragon.dialogue.acceptedPeace = true;
     dragon.isDefeated = true;
     player.flags.sparedDragon = true;
     environment.worldEvents.peacefulEnding = true;
 
     return [
-        {
-            type: "header",
-            content: "An Ancient Alliance Renewed",
-            props: { level: 1, className: "text-success-400" },
-        },
+        h.header("An Ancient Alliance Renewed", {
+            level: 1,
+            className: "text-success-400",
+        }),
 
-        {
-            type: "image",
-            content: "./assets/backgrounds/dragon-peace.webp",
-            props: {
-                alt: "Knight and Dragon in peace",
-                className: "rounded-lg shadow-lg my-6",
-            },
-        },
+        h.image("./assets/backgrounds/dragon-peace.webp", {
+            alt: "Knight and Dragon in peace",
+            className: "rounded-lg shadow-lg my-6",
+        }),
 
-        {
-            type: "conversation",
-            appearance: "byClick",
-            props: { variant: "messenger" },
-            content: [
+        h.conversation(
+            [
                 {
                     content:
                         "Long ago, dragons and humans were allies. We guarded this land together. Perhaps... perhaps that could be again.",
@@ -573,49 +509,43 @@ newStory("dragonPeacefulResolution", () => {
                     color: "#228B22",
                 },
             ],
-        },
+            { appearance: "byClick", variant: "messenger" }
+        ),
 
-        {
-            type: "text",
-            content: `<p class="text-center text-success-400 font-bold my-4">Peace achieved!</p>
+        h.text(
+            `<p class="text-center text-success-400 font-bold my-4">Peace achieved!</p>
             <p class="text-center text-muted-foreground">The dragon has agreed to stop terrorizing the kingdom.</p>`,
-            props: { isHTML: true },
-        },
+            { isHTML: true }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        h.actions(
+            [
                 {
                     label: "Continue to the ending...",
                     action: () => Game.jumpTo("endingPeaceful"),
-                    color: "success" as const,
+                    color: "success",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 });
 
 // Continued encounter (if returned after initial talk)
 function getContinuedEncounterContent(): StoryComponents {
     return [
-        {
-            type: "header",
-            content: "The Dragon's Chamber",
-            props: { level: 1, className: "text-danger-400" },
-        },
+        storyHelpers.header("The Dragon's Chamber", {
+            level: 1,
+            className: "text-danger-400",
+        }),
 
-        {
-            type: "text",
-            content: `Vexarion raises his head as you enter. His ancient eyes study you with weary recognition.`,
-            props: { className: "text-lg mb-4" },
-        },
+        storyHelpers.text(
+            `Vexarion raises his head as you enter. His ancient eyes study you with weary recognition.`,
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "conversation",
-            appearance: "atOnce",
-            props: { variant: "chat" },
-            content: [
+        storyHelpers.conversation(
+            [
                 {
                     content:
                         "You return, knight. Have you come to fight, or to talk?",
@@ -627,9 +557,10 @@ function getContinuedEncounterContent(): StoryComponents {
                     color: "#8B0000",
                 },
             ],
-        },
+            { appearance: "atOnce", variant: "chat" }
+        ),
 
-        { type: "anotherStory", storyId: "dragonEncounterChoice" },
+        storyHelpers.include("dragonEncounterChoice"),
     ];
 }
 
@@ -638,62 +569,51 @@ function getPostDefeatContent(): StoryComponents {
     const peaceful = player.flags.sparedDragon;
 
     return [
-        {
-            type: "header",
-            content: "The Dragon's Chamber",
-            props: {
-                level: 1,
-                className: peaceful
-                    ? "text-success-400"
-                    : "text-muted-foreground",
-            },
-        },
+        storyHelpers.header("The Dragon's Chamber", {
+            level: 1,
+            className: peaceful ? "text-success-400" : "text-muted-foreground",
+        }),
 
-        {
-            type: "text",
-            content: peaceful
+        storyHelpers.text(
+            peaceful
                 ? `Vexarion rests peacefully, a gentle smoke rising from his nostrils. He acknowledges your presence with a respectful nod.`
                 : `The chamber is silent now. The dragon's body lies still upon its treasure hoard, a monument to your victory... and perhaps, to a tragedy.`,
-            props: { className: "text-lg mb-4" },
-        },
+            { className: "text-lg mb-4" }
+        ),
 
-        {
-            type: "actions",
-            props: { direction: "vertical" },
-            content: [
+        storyHelpers.actions(
+            [
                 {
                     label: "Return to the lair",
                     action: () => Game.jumpTo("dragonLairMap"),
-                    color: "default" as const,
+                    color: "default",
                 },
             ],
-        },
+            { direction: "vertical" }
+        ),
     ];
 }
 
 // Empty chamber story (for map link after defeat)
-newStory("dragonChamberEmpty", () => [
-    {
-        type: "header",
-        content: "The Dragon's Chamber",
-        props: { level: 2, className: "text-muted-foreground" },
-    },
-    {
-        type: "text",
-        content: player.flags.sparedDragon
+defineStory("dragonChamberEmpty", (h) => [
+    h.header("The Dragon's Chamber", {
+        level: 2,
+        className: "text-muted-foreground",
+    }),
+    h.text(
+        player.flags.sparedDragon
             ? "Vexarion rests here, awaiting news of the peace negotiations."
             : "The chamber holds only memories now.",
-        props: { className: "text-lg mb-4 text-center" },
-    },
-    {
-        type: "actions",
-        props: { direction: "vertical" },
-        content: [
+        { className: "text-lg mb-4 text-center" }
+    ),
+    h.actions(
+        [
             {
                 label: "Return",
                 action: () => Game.jumpTo("dragonLairMap"),
                 color: "default",
             },
         ],
-    },
+        { direction: "vertical" }
+    ),
 ]);

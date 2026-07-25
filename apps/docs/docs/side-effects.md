@@ -33,15 +33,15 @@ If you put side effects directly in the passage body, they will execute **every 
 
 ```tsx
 // BAD: Side effect in passage body
-const treasureRoom = newStory("treasure-room", () => {
+const treasureRoom = defineStory("treasure-room", (h) => {
     // This runs EVERY TIME the passage is displayed!
     player.gold += 100; // Player gets 100 gold on first visit
     player.gold += 100; // ...and again when loading a save
     player.gold += 100; // ...and again on any re-render
 
     return [
-        { type: "text", content: "You found a treasure chest!" },
-        { type: "text", content: `You now have ${player.gold} gold.` },
+        h.text("You found a treasure chest!"),
+        h.text(`You now have ${player.gold} gold.`),
     ];
 });
 ```
@@ -66,36 +66,24 @@ This is a critical bug - the player's gold keeps increasing every time they load
 
 ```tsx
 // GOOD: Side effect in action
-const treasureRoom = newStory("treasure-room", () => [
-    { type: "text", content: "You found a treasure chest!" },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Open the chest",
-                action: () => {
-                    // This only runs when the player clicks the button
-                    player.gold += 100;
-                    Game.jumpTo("treasure-collected");
-                },
+const treasureRoom = defineStory("treasure-room", (h) => [
+    h.text("You found a treasure chest!"),
+    h.actions([
+        {
+            label: "Open the chest",
+            action: () => {
+                // This only runs when the player clicks the button
+                player.gold += 100;
+                Game.jumpTo("treasure-collected");
             },
-            {
-                label: "Leave it alone",
-                action: () => Game.jumpTo("corridor"),
-            },
-        ],
-    },
+        },
+        { label: "Leave it alone", action: h.jump("corridor") },
+    ]),
 ]);
 
-const treasureCollected = newStory("treasure-collected", () => [
-    {
-        type: "text",
-        content: `You collected 100 gold! You now have ${player.gold} gold.`,
-    },
-    {
-        type: "actions",
-        content: [{ label: "Continue", action: () => Game.jumpTo("corridor") }],
-    },
+const treasureCollected = defineStory("treasure-collected", (h) => [
+    h.text(`You collected 100 gold! You now have ${player.gold} gold.`),
+    h.actions([{ label: "Continue", action: h.jump("corridor") }]),
 ]);
 ```
 
@@ -114,31 +102,31 @@ const player = createEntity("player", {
     inventory: [] as string[],
 });
 
-const secretRoom = newStory("secret-room", () => [
-    {
-        type: "text",
-        content: player.foundSecretRoom
+const secretRoom = defineStory("secret-room", (h) => [
+    h.text(
+        player.foundSecretRoom
             ? "The secret room is empty now."
-            : "You discovered a hidden chamber with an ancient artifact!",
-    },
-    {
-        type: "actions",
-        content: player.foundSecretRoom
-            ? [{ label: "Leave", action: () => Game.jumpTo("main-hall") }]
-            : [
-                  {
-                      label: "Take the artifact",
-                      action: () => {
-                          player.inventory.push("ancient-artifact");
-                          player.foundSecretRoom = true;
-                          player.save();
-                          Game.jumpTo("secret-room"); // Refresh to show new state
-                      },
-                  },
-              ],
-    },
+            : "You discovered a hidden chamber with an ancient artifact!"
+    ),
+    h.actions([
+        player.foundSecretRoom && {
+            label: "Leave",
+            action: h.jump("main-hall"),
+        },
+        !player.foundSecretRoom && {
+            label: "Take the artifact",
+            action: () => {
+                player.inventory.push("ancient-artifact");
+                player.foundSecretRoom = true;
+                player.save();
+                Game.jumpTo("secret-room"); // Refresh to show new state
+            },
+        },
+    ]),
 ]);
 ```
+
+Falsy entries are dropped from helper arrays, so mutually exclusive choices can be listed inline instead of branching on the whole array.
 
 ### Scenario 2: Combat or Resource Changes
 
@@ -146,34 +134,25 @@ For passages involving combat or resource management:
 
 ```tsx
 // GOOD: Combat in actions
-const battlePassage = newStory("battle", () => [
-    {
-        type: "text",
-        content: `A goblin appears! Your health: ${player.health}`,
-    },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Attack",
-                action: () => {
-                    const damage = Math.floor(Math.random() * 10) + 5;
-                    player.health -= damage;
-                    player.save();
+const battlePassage = defineStory("battle", (h) => [
+    h.text(`A goblin appears! Your health: ${player.health}`),
+    h.actions([
+        {
+            label: "Attack",
+            action: () => {
+                const damage = Math.floor(Math.random() * 10) + 5;
+                player.health -= damage;
+                player.save();
 
-                    if (player.health <= 0) {
-                        Game.jumpTo("game-over");
-                    } else {
-                        Game.jumpTo("battle-result");
-                    }
-                },
+                if (player.health <= 0) {
+                    Game.jumpTo("game-over");
+                } else {
+                    Game.jumpTo("battle-result");
+                }
             },
-            {
-                label: "Run away",
-                action: () => Game.jumpTo("forest"),
-            },
-        ],
-    },
+        },
+        { label: "Run away", action: h.jump("forest") },
+    ]),
 ]);
 ```
 
@@ -187,7 +166,7 @@ const player = createEntity("player", {
     currentEventSeed: null as number | null,
 });
 
-const randomEncounter = newStory("random-encounter", () => {
+const randomEncounter = defineStory("random-encounter", (h) => {
     // Use stored seed or generate new one
     const seed = player.currentEventSeed ?? Math.random();
 
@@ -196,32 +175,26 @@ const randomEncounter = newStory("random-encounter", () => {
         seed < 0.3 ? "merchant" : seed < 0.7 ? "traveler" : "bandit";
 
     return [
-        {
-            type: "text",
-            content: `You encounter a ${encounterType} on the road.`,
-        },
-        {
-            type: "actions",
-            content: [
-                {
-                    label: "Approach",
-                    action: () => {
-                        // Clear seed when leaving so next encounter is different
-                        player.currentEventSeed = null;
-                        player.save();
-                        Game.jumpTo(`encounter-${encounterType}`);
-                    },
+        h.text(`You encounter a ${encounterType} on the road.`),
+        h.actions([
+            {
+                label: "Approach",
+                action: () => {
+                    // Clear seed when leaving so next encounter is different
+                    player.currentEventSeed = null;
+                    player.save();
+                    Game.jumpTo(`encounter-${encounterType}`);
                 },
-                {
-                    label: "Avoid",
-                    action: () => {
-                        player.currentEventSeed = null;
-                        player.save();
-                        Game.jumpTo("continue-road");
-                    },
+            },
+            {
+                label: "Avoid",
+                action: () => {
+                    player.currentEventSeed = null;
+                    player.save();
+                    Game.jumpTo("continue-road");
                 },
-            ],
-        },
+            },
+        ]),
     ];
 });
 
@@ -243,27 +216,22 @@ const gameState = createEntity("gameState", {
     tavernVisits: 0,
 });
 
-const tavernEntrance = newStory("tavern-entrance", () => [
-    {
-        type: "text",
-        content:
-            gameState.tavernVisits === 0
-                ? "You enter the tavern for the first time. The smell of ale fills the air."
-                : `You return to the tavern. The bartender recognizes you.`,
-    },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Enter",
-                action: () => {
-                    gameState.tavernVisits += 1;
-                    gameState.save();
-                    Game.jumpTo("tavern-interior");
-                },
+const tavernEntrance = defineStory("tavern-entrance", (h) => [
+    h.text(
+        gameState.tavernVisits === 0
+            ? "You enter the tavern for the first time. The smell of ale fills the air."
+            : `You return to the tavern. The bartender recognizes you.`
+    ),
+    h.actions([
+        {
+            label: "Enter",
+            action: () => {
+                gameState.tavernVisits += 1;
+                gameState.save();
+                Game.jumpTo("tavern-interior");
             },
-        ],
-    },
+        },
+    ]),
 ]);
 ```
 
@@ -273,12 +241,10 @@ The same principles apply to Interactive Map passages:
 
 ```tsx
 // GOOD: Side effects in hotspot actions
-const worldMap = newInteractiveMap("world-map", {
-    image: "/maps/world.jpg",
-    hotspots: [
-        {
-            type: "label",
-            content: "Treasure Island",
+const worldMap = defineInteractiveMap(
+    "world-map",
+    (h) => [
+        h.label("Treasure Island", {
             position: { x: 70, y: 60 },
             action: () => {
                 // Side effect in action - safe!
@@ -288,19 +254,16 @@ const worldMap = newInteractiveMap("world-map", {
                 }
                 Game.jumpTo("treasure-island");
             },
-        },
-        // Conditional hotspot - reading state is fine in passage body
-        () =>
-            player.hasMap
-                ? {
-                      type: "label",
-                      content: "Secret Cove",
-                      position: { x: 20, y: 80 },
-                      action: () => Game.jumpTo("secret-cove"),
-                  }
-                : undefined,
+        }),
+        // Conditional hotspot - reading state is fine in the content callback
+        player.hasMap &&
+            h.label("Secret Cove", {
+                position: { x: 20, y: 80 },
+                action: h.jump("secret-cove"),
+            }),
     ],
-});
+    { image: "/maps/world.jpg" }
+);
 ```
 
 ## Summary: The Golden Rule

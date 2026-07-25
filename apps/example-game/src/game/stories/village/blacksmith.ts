@@ -1,4 +1,4 @@
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game } from "@react-text-game/core";
 
 import {
     blacksmith,
@@ -18,9 +18,9 @@ import {
  * - Dynamic action state based on player gold/inventory
  * - Conversation with "atOnce" appearance
  */
-export const blacksmithStory = newStory(
+export const blacksmithStory = defineStory(
     "blacksmithStory",
-    () => {
+    (h) => {
         blacksmith.conversationCount++;
         const isFirstVisit = blacksmith.conversationCount === 1;
         const hasDiscount = tavernKeeper.rumors.blacksmithSecret;
@@ -41,35 +41,26 @@ export const blacksmithStory = newStory(
 
         return [
             // Scene header
-            {
-                type: "header",
-                content: "Gareth's Smithy",
-                props: { level: 1, className: "text-orange-400" },
-            },
+            h.header("Gareth's Smithy", {
+                level: 1,
+                className: "text-orange-400",
+            }),
 
             // Scene image
-            {
-                type: "image",
-                content: "./assets/backgrounds/blacksmith-interior.webp",
-                props: {
-                    alt: "Inside the blacksmith's forge",
-                    className: "rounded-lg shadow-lg mb-6",
-                },
-            },
+            h.image("./assets/backgrounds/blacksmith-interior.webp", {
+                alt: "Inside the blacksmith's forge",
+                className: "rounded-lg shadow-lg mb-6",
+            }),
 
             // Scene description
-            {
-                type: "text",
-                content: `The heat from the forge hits you as you enter. Gareth, a burly man with arms like tree trunks, looks up from his work.`,
-                props: { className: "text-lg mb-4" },
-            },
+            h.text(
+                `The heat from the forge hits you as you enter. Gareth, a burly man with arms like tree trunks, looks up from his work.`,
+                { className: "text-lg mb-4" }
+            ),
 
             // Conversation - atOnce for quick exchange
-            {
-                type: "conversation",
-                appearance: "atOnce",
-                props: { variant: "chat", className: "my-4" },
-                content: [
+            h.conversation(
+                [
                     {
                         content: isFirstVisit
                             ? `A knight, eh? Haven't seen many of your kind around here lately. Looking for weapons or armor?`
@@ -81,72 +72,52 @@ export const blacksmithStory = newStory(
                         side: "left",
                         color: "#CD853F", // Peru/tan color for blacksmith
                     },
-                    ...(hasDiscount && isFirstVisit
-                        ? [
-                              {
-                                  content:
-                                      "Martha from the tavern sent me. She said you might offer a fair price.",
-                                  who: {
-                                      name: player.name,
-                                      avatar: "./assets/avatars/knight.webp",
-                                  },
-                                  side: "right" as const,
-                                  color: "#4169E1" as const,
-                              },
-                              {
-                                  content: `*Gareth's expression softens* Ah, Martha! Fine woman, that one. Alright, friend of Martha's gets 20% off. Take a look at what I've got.`,
-                                  who: {
-                                      name: "Gareth",
-                                      avatar: "./assets/avatars/gareth.webp",
-                                  },
-                                  side: "left" as const,
-                                  color: "#CD853F" as const,
-                              },
-                          ]
-                        : []),
+                    hasDiscount &&
+                        isFirstVisit && {
+                            content:
+                                "Martha from the tavern sent me. She said you might offer a fair price.",
+                            who: {
+                                name: player.name,
+                                avatar: "./assets/avatars/knight.webp",
+                            },
+                            side: "right",
+                            color: "#4169E1",
+                        },
+                    hasDiscount &&
+                        isFirstVisit && {
+                            content: `*Gareth's expression softens* Ah, Martha! Fine woman, that one. Alright, friend of Martha's gets 20% off. Take a look at what I've got.`,
+                            who: {
+                                name: "Gareth",
+                                avatar: "./assets/avatars/gareth.webp",
+                            },
+                            side: "left",
+                            color: "#CD853F",
+                        },
                 ],
-            },
+                { appearance: "atOnce", variant: "chat", className: "my-4" }
+            ),
 
             // Player's gold display
-            {
-                type: "header",
-                content: `Your Gold: ${player.gold}`,
-                props: {
-                    level: 3,
-                    className: "text-yellow-400 text-center my-4",
-                },
-            },
+            h.header(`Your Gold: ${player.gold}`, {
+                level: 3,
+                className: "text-yellow-400 text-center my-4",
+            }),
 
             // Discount notice if applicable
-            ...(hasDiscount
-                ? [
-                      {
-                          type: "text" as const,
-                          content:
-                              "*You have Martha's discount: 20% off all items!*",
-                          props: {
-                              className:
-                                  "text-success-400 text-center italic mb-4",
-                          },
-                      },
-                  ]
-                : []),
+            hasDiscount &&
+                h.text("*You have Martha's discount: 20% off all items!*", {
+                    className: "text-success-400 text-center italic mb-4",
+                }),
 
             // Shop header - Weapons
-            {
-                type: "header",
-                content: "Weapons",
-                props: {
-                    level: 4,
-                    className: "text-muted-foreground mt-6 mb-2",
-                },
-            },
+            h.header("Weapons", {
+                level: 4,
+                className: "text-muted-foreground mt-6 mb-2",
+            }),
 
             // Weapons actions - demonstrates different button colors
-            {
-                type: "actions",
-                props: { direction: "vertical", className: "gap-2" },
-                content: [
+            h.actions(
+                [
                     // Iron Sword - primary color, solid variant
                     {
                         label: `Iron Sword (${prices.ironSword} gold)`,
@@ -215,23 +186,18 @@ export const blacksmithStory = newStory(
                                     },
                     },
                 ],
-            },
+                { direction: "vertical", className: "gap-2" }
+            ),
 
             // Shop header - Armor
-            {
-                type: "header",
-                content: "Armor",
-                props: {
-                    level: 4,
-                    className: "text-muted-foreground mt-6 mb-2",
-                },
-            },
+            h.header("Armor", {
+                level: 4,
+                className: "text-muted-foreground mt-6 mb-2",
+            }),
 
             // Armor actions - demonstrates more variants
-            {
-                type: "actions",
-                props: { direction: "vertical", className: "gap-2" },
-                content: [
+            h.actions(
+                [
                     // Chainmail - success color, light variant
                     {
                         label: `Chainmail (${prices.chainmail} gold)`,
@@ -284,26 +250,18 @@ export const blacksmithStory = newStory(
                               },
                     },
                 ],
-            },
+                { direction: "vertical", className: "gap-2" }
+            ),
 
             // Shop header - Shields
-            {
-                type: "header",
-                content: "Shields",
-                props: {
-                    level: 4,
-                    className: "text-muted-foreground mt-6 mb-2",
-                },
-            },
+            h.header("Shields", {
+                level: 4,
+                className: "text-muted-foreground mt-6 mb-2",
+            }),
 
             // Shields - demonstrates horizontal layout
-            {
-                type: "actions",
-                props: {
-                    direction: "horizontal",
-                    className: "gap-2 flex-wrap",
-                },
-                content: [
+            h.actions(
+                [
                     // Wooden Shield - default color, flat variant
                     {
                         label: `Wooden Shield (${prices.woodenShield}g)`,
@@ -341,23 +299,18 @@ export const blacksmithStory = newStory(
                         tooltip: { content: "Defense +7", position: "top" },
                     },
                 ],
-            },
+                { direction: "horizontal", className: "gap-2 flex-wrap" }
+            ),
 
             // Shop header - Consumables
-            {
-                type: "header",
-                content: "Consumables",
-                props: {
-                    level: 4,
-                    className: "text-muted-foreground mt-6 mb-2",
-                },
-            },
+            h.header("Consumables", {
+                level: 4,
+                className: "text-muted-foreground mt-6 mb-2",
+            }),
 
             // Health Potion - danger color, ghost variant
-            {
-                type: "actions",
-                props: { direction: "horizontal" },
-                content: [
+            h.actions(
+                [
                     {
                         label: `Health Potion (${prices.healthPotion} gold)`,
                         action: () => {
@@ -376,19 +329,14 @@ export const blacksmithStory = newStory(
                         },
                     },
                 ],
-            },
+                { direction: "horizontal" }
+            ),
 
             // Navigation actions
-            {
-                type: "header",
-                content: "",
-                props: { level: 6 }, // Just for spacing
-            },
+            h.header("", { level: 6 }),
 
-            {
-                type: "actions",
-                props: { direction: "horizontal", className: "mt-8" },
-                content: [
+            h.actions(
+                [
                     {
                         label: "Return to Village",
                         action: () => Game.jumpTo("villageMap"),
@@ -402,7 +350,8 @@ export const blacksmithStory = newStory(
                         variant: "bordered",
                     },
                 ],
-            },
+                { direction: "horizontal", className: "mt-8" }
+            ),
         ];
     },
     {

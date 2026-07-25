@@ -1,4 +1,4 @@
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory, Game } from "@react-text-game/core";
 
 import { player, tavernKeeper } from "@/game/entities";
 
@@ -12,9 +12,9 @@ import { player, tavernKeeper } from "@/game/entities";
  * - Dynamic content based on NPC state
  * - Actions after conversation
  */
-export const tavernStory = newStory(
+export const tavernStory = defineStory(
     "tavernStory",
-    () => {
+    (h) => {
         // Increment conversation count
         tavernKeeper.conversationCount++;
 
@@ -40,36 +40,27 @@ export const tavernStory = newStory(
 
         return [
             // Scene header
-            {
-                type: "header",
-                content: "The Golden Flagon",
-                props: { level: 1, className: "text-amber-400" },
-            },
+            h.header("The Golden Flagon", {
+                level: 1,
+                className: "text-amber-400",
+            }),
 
             // Scene description
-            {
-                type: "text",
-                content: `The tavern is warm and inviting, filled with the scent of roasting meat and fresh bread. 
+            h.text(
+                `The tavern is warm and inviting, filled with the scent of roasting meat and fresh bread. 
                 ${isFirstVisit ? "Martha, the tavern keeper, looks up as you enter and waves you over with a friendly smile." : "Martha nods in recognition as you approach the bar."}`,
-                props: { className: "text-lg mb-4" },
-            },
+                { className: "text-lg mb-4" }
+            ),
 
             // Scene image
-            {
-                type: "image",
-                content: "./assets/backgrounds/tavern-interior.webp",
-                props: {
-                    alt: "Inside The Golden Flagon tavern",
-                    className: "rounded-lg shadow-lg mb-6",
-                },
-            },
+            h.image("./assets/backgrounds/tavern-interior.webp", {
+                alt: "Inside The Golden Flagon tavern",
+                className: "rounded-lg shadow-lg mb-6",
+            }),
 
             // Conversation with Martha - byClick for interactive feel
-            {
-                type: "conversation",
-                appearance: "byClick",
-                props: { variant: "messenger", className: "my-6" },
-                content: [
+            h.conversation(
+                [
                     // Martha's greeting
                     {
                         content: isFirstVisit
@@ -105,60 +96,48 @@ export const tavernStory = newStory(
                         color: "#8B4513",
                     },
                     // Dragon rumor
-                    ...(learnedDragonRumor
-                        ? [
-                              {
-                                  content:
-                                      "They say a dragon has awakened in the northern mountains. Farmers have seen smoke rising from Mount Doom, and some claim to have heard terrible roars in the night.",
-                                  who: {
-                                      name: "Martha",
-                                      avatar: "./assets/avatars/martha.webp",
-                                  },
-                                  side: "left" as const,
-                                  color: "#8B4513" as const,
-                              },
-                              {
-                                  content:
-                                      "A dragon? That's troubling news indeed. Has anyone done anything about it?",
-                                  who: {
-                                      name: player.name,
-                                      avatar: "./assets/avatars/knight.webp",
-                                  },
-                                  side: "right" as const,
-                                  color: "#4169E1" as const,
-                              },
-                          ]
-                        : []),
+                    learnedDragonRumor && {
+                        content:
+                            "They say a dragon has awakened in the northern mountains. Farmers have seen smoke rising from Mount Doom, and some claim to have heard terrible roars in the night.",
+                        who: {
+                            name: "Martha",
+                            avatar: "./assets/avatars/martha.webp",
+                        },
+                        side: "left",
+                        color: "#8B4513",
+                    },
+                    learnedDragonRumor && {
+                        content:
+                            "A dragon? That's troubling news indeed. Has anyone done anything about it?",
+                        who: {
+                            name: player.name,
+                            avatar: "./assets/avatars/knight.webp",
+                        },
+                        side: "right",
+                        color: "#4169E1",
+                    },
                     // Castle rumor
-                    ...(learnedCastleRumor
-                        ? [
-                              {
-                                  content:
-                                      "The King has sent messengers throughout the realm, seeking brave warriors. But there's something else... *she glances around nervously* ...they say the Princess herself ventured north three days ago and hasn't returned.",
-                                  who: {
-                                      name: "Martha",
-                                      avatar: "./assets/avatars/martha.webp",
-                                  },
-                                  side: "left" as const,
-                                  color: "#8B4513" as const,
-                              },
-                          ]
-                        : []),
+                    learnedCastleRumor && {
+                        content:
+                            "The King has sent messengers throughout the realm, seeking brave warriors. But there's something else... *she glances around nervously* ...they say the Princess herself ventured north three days ago and hasn't returned.",
+                        who: {
+                            name: "Martha",
+                            avatar: "./assets/avatars/martha.webp",
+                        },
+                        side: "left",
+                        color: "#8B4513",
+                    },
                     // Forest treasure hint
-                    ...(learnedForestRumor
-                        ? [
-                              {
-                                  content:
-                                      "Oh, and one more thing. Old Tom the woodcutter swears he saw something glinting in the heart of the Whispering Woods. Could be treasure, could be danger. Who knows with that cursed forest?",
-                                  who: {
-                                      name: "Martha",
-                                      avatar: "./assets/avatars/martha.webp",
-                                  },
-                                  side: "left" as const,
-                                  color: "#8B4513" as const,
-                              },
-                          ]
-                        : []),
+                    learnedForestRumor && {
+                        content:
+                            "Oh, and one more thing. Old Tom the woodcutter swears he saw something glinting in the heart of the Whispering Woods. Could be treasure, could be danger. Who knows with that cursed forest?",
+                        who: {
+                            name: "Martha",
+                            avatar: "./assets/avatars/martha.webp",
+                        },
+                        side: "left",
+                        color: "#8B4513",
+                    },
                     // Final exchange
                     {
                         content:
@@ -180,23 +159,22 @@ export const tavernStory = newStory(
                         color: "#8B4513",
                     },
                 ],
-            },
+                {
+                    appearance: "byClick",
+                    variant: "messenger",
+                    className: "my-6",
+                }
+            ),
 
             // Text after conversation
-            {
-                type: "text",
-                content:
-                    "*Martha hands you a small loaf of fresh bread. The warmth is comforting.*",
-                props: {
-                    className: "italic text-muted-foreground text-center my-4",
-                },
-            },
+            h.text(
+                "*Martha hands you a small loaf of fresh bread. The warmth is comforting.*",
+                { className: "italic text-muted-foreground text-center my-4" }
+            ),
 
             // Actions
-            {
-                type: "actions",
-                props: { direction: "vertical", className: "mt-6" },
-                content: [
+            h.actions(
+                [
                     {
                         label: "Return to Village",
                         action: () => Game.jumpTo("villageMap"),
@@ -220,7 +198,8 @@ export const tavernStory = newStory(
                             : undefined,
                     },
                 ],
-            },
+                { direction: "vertical", className: "mt-6" }
+            ),
         ];
     },
     {
@@ -236,17 +215,13 @@ export const tavernStory = newStory(
 );
 
 // Bonus story about the blacksmith (demonstrates anotherStory component)
-newStory("blacksmithHint", () => [
-    {
-        type: "header",
-        content: "A Secret About Gareth",
-        props: { level: 2, className: "text-amber-400" },
-    },
-    {
-        type: "conversation",
-        appearance: "atOnce", // Shows all at once
-        props: { variant: "chat" },
-        content: [
+defineStory("blacksmithHint", (h) => [
+    h.header("A Secret About Gareth", {
+        level: 2,
+        className: "text-amber-400",
+    }),
+    h.conversation(
+        [
             {
                 content:
                     "*Martha's eyes light up* Ah, old Gareth! Did you know he used to be a royal blacksmith at the castle? He made armor for the King's own guard!",
@@ -271,16 +246,16 @@ newStory("blacksmithHint", () => [
                 color: "#8B4513",
             },
         ],
-    },
-    {
-        type: "actions",
-        props: { direction: "horizontal" },
-        content: [
+        { appearance: "atOnce", variant: "chat" }
+    ),
+    h.actions(
+        [
             {
                 label: "Continue",
                 action: () => Game.jumpTo("tavernStory"),
                 color: "primary",
             },
         ],
-    },
+        { direction: "horizontal" }
+    ),
 ]);

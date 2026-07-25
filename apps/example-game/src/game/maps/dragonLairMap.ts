@@ -1,5 +1,5 @@
 import type { AnyHotspot } from "@react-text-game/core";
-import { Game, newInteractiveMap } from "@react-text-game/core";
+import { defineInteractiveMap, Game } from "@react-text-game/core";
 
 import { dragon, musicDragonLair, switchBgMusic } from "../entities";
 
@@ -11,13 +11,9 @@ import { dragon, musicDragonLair, switchBgMusic } from "../entities";
  * - Treasure and loot hotspots
  * - Environmental storytelling
  */
-export const dragonLairMap = newInteractiveMap("dragonLairMap", {
-    caption: "Mount Doom - Dragon's Lair",
-    image: "./assets/maps/dragon-lair-map.webp",
-    bgImage: "./assets/backgrounds/volcanic-cave.webp",
-    props: { bgOpacity: 0.3 },
-
-    hotspots: (): AnyHotspot[] => {
+export const dragonLairMap = defineInteractiveMap(
+    "dragonLairMap",
+    (h): AnyHotspot[] => {
         // Play dragon lair music when map is displayed
         switchBgMusic(musicDragonLair);
 
@@ -58,122 +54,122 @@ export const dragonLairMap = newInteractiveMap("dragonLairMap", {
 
         // Dragon's Chamber - main encounter
         if (!dragon.isDefeated) {
-            hotspots.push({
-                type: "image",
-                content: {
-                    idle: "./assets/hotspots/dragon-chamber-idle.webp",
-                    hover: "./assets/hotspots/dragon-chamber-hover.webp",
-                    active: "./assets/hotspots/dragon-chamber-active.webp",
-                },
-                position: { x: 50, y: 35 },
-                action: () => Game.jumpTo("dragonEncounter"),
-                tooltip: {
-                    content:
-                        "The Dragon's Chamber - Vexarion awaits within. Proceed with caution.",
-                    position: "bottom",
-                },
-                props: {
-                    zoom: "30%",
-                },
-            });
+            hotspots.push(
+                h.image(
+                    {
+                        idle: "./assets/hotspots/dragon-chamber-idle.webp",
+                        hover: "./assets/hotspots/dragon-chamber-hover.webp",
+                        active: "./assets/hotspots/dragon-chamber-active.webp",
+                    },
+                    {
+                        position: { x: 50, y: 35 },
+                        action: () => Game.jumpTo("dragonEncounter"),
+                        tooltip: {
+                            content:
+                                "The Dragon's Chamber - Vexarion awaits within. Proceed with caution.",
+                            position: "bottom",
+                        },
+                        zoom: "30%",
+                    }
+                )
+            );
         } else {
             // After dragon defeated/befriended
-            hotspots.push({
-                type: "label",
-                content: "Dragon's Chamber",
-                position: { x: 50, y: 35 },
-                action: () => Game.jumpTo("dragonChamberEmpty"),
-                props: {
+            hotspots.push(
+                h.label("Dragon's Chamber", {
+                    position: { x: 50, y: 35 },
+                    action: () => Game.jumpTo("dragonChamberEmpty"),
+                    tooltip: {
+                        content: "The chamber is peaceful now",
+                        position: "bottom",
+                    },
                     variant: "bordered",
                     color: "success",
-                },
-                tooltip: {
-                    content: "The chamber is peaceful now",
-                    position: "bottom",
-                },
-            });
+                })
+            );
         }
 
         // Treasure Hoard - only accessible after dragon dealt with
-        hotspots.push({
-            type: "image",
-            content: {
-                idle: "./assets/hotspots/treasure-hoard-idle.webp",
-                hover: "./assets/hotspots/treasure-hoard-hover.webp",
-                disabled: "./assets/hotspots/treasure-hoard-locked.webp",
-            },
-            position: { x: 75, y: 55 },
-            action: () => Game.jumpTo("dragonTreasure"),
-            isDisabled: !dragon.isDefeated,
-            tooltip: {
-                content: dragon.isDefeated
-                    ? "The Dragon's Treasure Hoard"
-                    : "Too dangerous while the dragon lives",
-                position: "left",
-            },
-            props: {
-                zoom: "30%",
-            },
-        });
+        hotspots.push(
+            h.image(
+                {
+                    idle: "./assets/hotspots/treasure-hoard-idle.webp",
+                    hover: "./assets/hotspots/treasure-hoard-hover.webp",
+                    disabled: "./assets/hotspots/treasure-hoard-locked.webp",
+                },
+                {
+                    position: { x: 75, y: 55 },
+                    action: () => Game.jumpTo("dragonTreasure"),
+                    isDisabled: !dragon.isDefeated,
+                    tooltip: {
+                        content: dragon.isDefeated
+                            ? "The Dragon's Treasure Hoard"
+                            : "Too dangerous while the dragon lives",
+                        position: "left",
+                    },
+                    zoom: "30%",
+                }
+            )
+        );
 
         // Ancient Shrine - lore/healing spot
-        hotspots.push({
-            type: "label",
-            content: "Ancient Shrine",
-            position: { x: 25, y: 60 },
-            action: () => Game.jumpTo("dragonLairShrine"),
-            props: {
+        hotspots.push(
+            h.label("Ancient Shrine", {
+                position: { x: 25, y: 60 },
+                action: () => Game.jumpTo("dragonLairShrine"),
+                tooltip: {
+                    content: "An ancient shrine to forgotten gods",
+                    position: "right",
+                },
                 color: "primary",
-            },
-            tooltip: {
-                content: "An ancient shrine to forgotten gods",
-                position: "right",
-            },
-        });
+            })
+        );
 
         // Cave entrance (escape route)
-        hotspots.push({
-            type: "label",
-            content: "Exit to World Map",
-            position: { x: 50, y: 85 },
-            action: () => Game.jumpTo("worldMap"),
-            props: {
+        hotspots.push(
+            h.label("Exit to World Map", {
+                position: { x: 50, y: 85 },
+                action: () => Game.jumpTo("worldMap"),
+                tooltip: {
+                    content: "Return to the world map",
+                    position: "top",
+                },
                 color: "default",
-            },
-            tooltip: {
-                content: "Return to the world map",
-                position: "top",
-            },
-        });
+            })
+        );
 
         // ===== NAVIGATION MENU =====
-        hotspots.push({
-            type: "menu",
-            position: { x: 50, y: 5 },
-            direction: "horizontal",
-            items: [
-                {
-                    type: "label",
-                    content: () =>
-                        dragon.isDefeated
-                            ? "Quest Status: Dragon Resolved"
-                            : `Dragon HP: ${dragon.health}/${dragon.maxHealth}`,
-                    action: () => {},
-                    isDisabled: true,
-                    props: {
-                        variant: "flat",
-                        color: dragon.isDefeated ? "success" : "danger",
-                    },
-                },
-            ],
-        });
+        hotspots.push(
+            h.menu(
+                [
+                    h.label(
+                        () =>
+                            dragon.isDefeated
+                                ? "Quest Status: Dragon Resolved"
+                                : `Dragon HP: ${dragon.health}/${dragon.maxHealth}`,
+                        {
+                            action: () => {},
+                            isDisabled: true,
+                            variant: "flat",
+                            color: dragon.isDefeated ? "success" : "danger",
+                        }
+                    ),
+                ],
+                { position: { x: 50, y: 5 }, direction: "horizontal" }
+            )
+        );
 
         return hotspots;
     },
-
-    classNames: {
-        container: "bg-gradient-to-b from-red-900/50 to-orange-900/50",
-        topHotspots: "p-3 bg-card/80 backdrop-blur-sm",
-        bottomHotspots: "p-3 bg-card/80 backdrop-blur-sm",
-    },
-});
+    {
+        caption: "Mount Doom - Dragon's Lair",
+        image: "./assets/maps/dragon-lair-map.webp",
+        bgImage: "./assets/backgrounds/volcanic-cave.webp",
+        props: { bgOpacity: 0.3 },
+        classNames: {
+            container: "bg-gradient-to-b from-red-900/50 to-orange-900/50",
+            topHotspots: "p-3 bg-card/80 backdrop-blur-sm",
+            bottomHotspots: "p-3 bg-card/80 backdrop-blur-sm",
+        },
+    }
+);

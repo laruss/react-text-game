@@ -20,22 +20,16 @@ React Text Game is split into three libraries:
 ## A passage in 30 seconds
 
 ```tsx title="src/game/intro.ts"
-import { Game, newStory } from "@react-text-game/core";
+import { defineStory } from "@react-text-game/core";
 
-export const intro = newStory("intro", () => [
-    { type: "header", content: "The station", props: { level: 1 } },
-    { type: "text", content: "The last train is waiting." },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Board the train",
-                action: () => Game.jumpTo("inside-train"),
-            },
-        ],
-    },
+export const intro = defineStory("intro", (h) => [
+    h.header("The station", { level: 1 }),
+    h.text("The last train is waiting."),
+    h.actions([{ label: "Board the train", action: h.jump("inside-train") }]),
 ]);
 ```
+
+The content callback receives a toolbox of component builders (`h`) as its first argument, so you never have to write component objects by hand.
 
 Passages and entities register when their modules are imported. `GameProvider` initializes the engine and renders the current passage:
 
