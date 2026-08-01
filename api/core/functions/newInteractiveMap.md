@@ -2,7 +2,9 @@
 
 > **newInteractiveMap**(`id`, `options`): [`InteractiveMap`](../classes/InteractiveMap.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/fabric.ts:4](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/interactiveMap/fabric.ts#L4)
+Defined in: [packages/core/src/passages/interactiveMap/fabric.ts:39](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/interactiveMap/fabric.ts#L39)
+
+Creates an interactive map passage from a plain options object.
 
 ## Parameters
 
@@ -10,10 +12,38 @@ Defined in: [packages/core/src/passages/interactiveMap/fabric.ts:4](https://gith
 
 `string`
 
+Unique identifier for the map
+
 ### options
 
 [`InteractiveMapOptions`](../type-aliases/InteractiveMapOptions.md)
 
+Map image, hotspots and styling configuration
+
 ## Returns
 
 [`InteractiveMap`](../classes/InteractiveMap.md)
+
+New InteractiveMap instance, already registered with the Game
+
+## Remarks
+
+Fully supported and not scheduled for removal. New code is encouraged to use
+[defineInteractiveMap](defineInteractiveMap.md) instead, which hands the hotspot callback a
+toolbox of builders so hotspot objects never have to be written by hand.
+
+## Example
+
+```typescript
+newInteractiveMap('world', {
+  image: '/maps/world.jpg',
+  hotspots: [
+    {
+      type: 'label',
+      content: 'Village',
+      position: { x: 30, y: 40 },
+      action: () => Game.jumpTo('village')
+    }
+  ]
+});
+```

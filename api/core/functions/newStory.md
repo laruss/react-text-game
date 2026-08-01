@@ -2,7 +2,9 @@
 
 > **newStory**(`id`, `content`, `options?`): [`Story`](../classes/Story.md)
 
-Defined in: [packages/core/src/passages/story/fabric.ts:4](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/fabric.ts#L4)
+Defined in: [packages/core/src/passages/story/fabric.ts:29](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/fabric.ts#L29)
+
+Creates a story passage from a props-first content callback.
 
 ## Parameters
 
@@ -10,14 +12,37 @@ Defined in: [packages/core/src/passages/story/fabric.ts:4](https://github.com/la
 
 `string`
 
+Unique identifier for the story
+
 ### content
 
 [`StoryContent`](../type-aliases/StoryContent.md)
+
+Function returning the story's components
 
 ### options?
 
 [`StoryOptions`](../type-aliases/StoryOptions.md)
 
+Optional background and styling configuration
+
 ## Returns
 
 [`Story`](../classes/Story.md)
+
+New Story instance, already registered with the Game
+
+## Remarks
+
+Fully supported and not scheduled for removal. New code is encouraged to use
+[defineStory](defineStory.md) instead, which hands the content callback a toolbox of
+component builders so component objects never have to be written by hand.
+
+## Example
+
+```typescript
+newStory('intro', () => [
+  { type: 'header', content: 'Chapter 1', props: { level: 1 } },
+  { type: 'text', content: 'Your journey begins...' }
+]);
+```

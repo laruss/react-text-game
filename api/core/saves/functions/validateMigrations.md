@@ -2,7 +2,7 @@
 
 > **validateMigrations**(`latestVersion`): `object`
 
-Defined in: [packages/core/src/saves/migrations/registry.ts:169](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/migrations/registry.ts#L169)
+Defined in: [packages/core/src/saves/migrations/registry.ts:169](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/registry.ts#L169)
 
 Validates that the migration registry forms a valid chain.
 

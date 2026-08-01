@@ -2,7 +2,7 @@
 
 > **useLastLoadGame**(): `object`
 
-Defined in: [packages/core/src/saves/hooks/useLastLoadGame.ts:43](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/hooks/useLastLoadGame.ts#L43)
+Defined in: [packages/core/src/saves/hooks/useLastLoadGame.ts:43](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/hooks/useLastLoadGame.ts#L43)
 
 A custom hook for managing the loading of the last saved game state.
 

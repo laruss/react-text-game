@@ -2,7 +2,7 @@
 
 > **newWidget**(`id`, `content`): [`Widget`](../classes/Widget.md)
 
-Defined in: [packages/core/src/passages/widget.ts:141](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/widget.ts#L141)
+Defined in: [packages/core/src/passages/widget.ts:146](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/widget.ts#L146)
 
 Factory function for creating Widget passages.
 
@@ -29,6 +29,12 @@ React node or React functional component to display
 [`Widget`](../classes/Widget.md)
 
 New Widget instance
+
+## Remarks
+
+Fully supported and not scheduled for removal. New code is encouraged to use
+[defineWidget](defineWidget.md), which is identical but keeps every passage factory
+under the same `define*` name.
 
 ## Example
 

@@ -8,8 +8,8 @@
 <link rel="apple-touch-icon" sizes="192x192" href="/img/favicon-192x192.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"React Text Game","url":"https://reacttextgame.dev/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://reacttextgame.dev/?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"React Text Game","applicationCategory":"DeveloperApplication","operatingSystem":"Web Browser","description":"A powerful, reactive text-based game engine for React applications. Create interactive narrative experiences with support for story passages, interactive maps, and comprehensive state management.","url":"https://reacttextgame.dev/","author":{"@type":"Person","name":"laruss","url":"https://github.com/laruss"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"programmingLanguage":["TypeScript","JavaScript"],"softwareVersion":"1.0.0","keywords":"react, text game, interactive fiction, narrative engine, game engine, typescript, valtio"}</script><link rel="stylesheet" href="/assets/css/styles.405c160f.css">
-<script src="/assets/js/runtime~main.64a4221f.js" defer="defer"></script>
-<script src="/assets/js/main.546e5153.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.2f5d7b2c.js" defer="defer"></script>
+<script src="/assets/js/main.b33f7f96.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <svg style="display: none;"><defs>
@@ -52,14 +52,20 @@
 <li><a href="/api/core/type-aliases/ButtonColor">ButtonColor</a></li>
 <li><a href="/api/core/type-aliases/ButtonVariant">ButtonVariant</a></li>
 <li><a href="/api/core/type-aliases/Callable">Callable</a></li>
+<li><a href="/api/core/type-aliases/CommonHelpers">CommonHelpers</a></li>
 <li><a href="/api/core/type-aliases/Component">Component</a></li>
+<li><a href="/api/core/type-aliases/Conditional">Conditional</a></li>
 <li><a href="/api/core/type-aliases/ConversationAppearance">ConversationAppearance</a></li>
 <li><a href="/api/core/type-aliases/ConversationBubble">ConversationBubble</a></li>
 <li><a href="/api/core/type-aliases/ConversationBubbleSide">ConversationBubbleSide</a></li>
 <li><a href="/api/core/type-aliases/ConversationVariant">ConversationVariant</a></li>
+<li><a href="/api/core/type-aliases/DefineFn">DefineFn</a></li>
 <li><a href="/api/core/type-aliases/EmptyObject">EmptyObject</a></li>
 <li><a href="/api/core/type-aliases/GameSaveState">GameSaveState</a></li>
 <li><a href="/api/core/type-aliases/HeaderLevel">HeaderLevel</a></li>
+<li><a href="/api/core/type-aliases/HelperOptions">HelperOptions</a></li>
+<li><a href="/api/core/type-aliases/HotspotImageOptions">HotspotImageOptions</a></li>
+<li><a href="/api/core/type-aliases/HotspotLabelOptions">HotspotLabelOptions</a></li>
 <li><a href="/api/core/type-aliases/HotspotPosition">HotspotPosition</a></li>
 <li><a href="/api/core/type-aliases/Identity">Identity</a></li>
 <li><a href="/api/core/type-aliases/ImageHotspotContentObject">ImageHotspotContentObject</a></li>
@@ -67,8 +73,16 @@
 <li><a href="/api/core/type-aliases/InteractiveMapOptions">InteractiveMapOptions</a></li>
 <li><a href="/api/core/type-aliases/InteractiveMapType">InteractiveMapType</a></li>
 <li><a href="/api/core/type-aliases/JsonPath">JsonPath</a></li>
+<li><a href="/api/core/type-aliases/MapContentFn">MapContentFn</a></li>
+<li><a href="/api/core/type-aliases/MapContentItems">MapContentItems</a></li>
+<li><a href="/api/core/type-aliases/MapDefineOptions">MapDefineOptions</a></li>
+<li><a href="/api/core/type-aliases/MapHelpers">MapHelpers</a></li>
+<li><a href="/api/core/type-aliases/MapImageOptions">MapImageOptions</a></li>
+<li><a href="/api/core/type-aliases/MapLabelBuilder">MapLabelBuilder</a></li>
+<li><a href="/api/core/type-aliases/MapMenuOptions">MapMenuOptions</a></li>
 <li><a href="/api/core/type-aliases/MaybeCallable">MaybeCallable</a></li>
 <li><a href="/api/core/type-aliases/MaybeOptionalCallable">MaybeOptionalCallable</a></li>
+<li><a href="/api/core/type-aliases/MenuLabelOptions">MenuLabelOptions</a></li>
 <li><a href="/api/core/type-aliases/NewOptions">NewOptions</a></li>
 <li><a href="/api/core/type-aliases/OptionalCallable">OptionalCallable</a></li>
 <li><a href="/api/core/type-aliases/OptionalKeys">OptionalKeys</a></li>
@@ -85,19 +99,34 @@
 <li><a href="/api/core/type-aliases/Replace">Replace</a></li>
 <li><a href="/api/core/type-aliases/SimpleObject">SimpleObject</a></li>
 <li><a href="/api/core/type-aliases/SimpleObject-1">SimpleObject</a></li>
+<li><a href="/api/core/type-aliases/StoryActionsOptions">StoryActionsOptions</a></li>
 <li><a href="/api/core/type-aliases/StoryComponents">StoryComponents</a></li>
 <li><a href="/api/core/type-aliases/StoryContent">StoryContent</a></li>
+<li><a href="/api/core/type-aliases/StoryContentFn">StoryContentFn</a></li>
+<li><a href="/api/core/type-aliases/StoryContentItems">StoryContentItems</a></li>
+<li><a href="/api/core/type-aliases/StoryConversationOptions">StoryConversationOptions</a></li>
+<li><a href="/api/core/type-aliases/StoryHeaderOptions">StoryHeaderOptions</a></li>
+<li><a href="/api/core/type-aliases/StoryHelpers">StoryHelpers</a></li>
+<li><a href="/api/core/type-aliases/StoryImageOptions">StoryImageOptions</a></li>
+<li><a href="/api/core/type-aliases/StoryIncludeOptions">StoryIncludeOptions</a></li>
 <li><a href="/api/core/type-aliases/StoryOptions">StoryOptions</a></li>
+<li><a href="/api/core/type-aliases/StoryTextOptions">StoryTextOptions</a></li>
+<li><a href="/api/core/type-aliases/StoryVideoOptions">StoryVideoOptions</a></li>
 <li><a href="/api/core/type-aliases/WidgetContent">WidgetContent</a></li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_fF9Z" id="variables">Variables<a href="#variables" class="hash-link" aria-label="Direct link to Variables" title="Direct link to Variables" translate="no">​</a></h2>
 <ul>
+<li><a href="/api/core/variables/mapHelpers">mapHelpers</a></li>
 <li><a href="/api/core/variables/STORAGE_SYSTEM_PATH">STORAGE_SYSTEM_PATH</a></li>
+<li><a href="/api/core/variables/storyHelpers">storyHelpers</a></li>
 <li><a href="/api/core/variables/SYSTEM_PASSAGE_NAMES">SYSTEM_PASSAGE_NAMES</a></li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_fF9Z" id="functions">Functions<a href="#functions" class="hash-link" aria-label="Direct link to Functions" title="Direct link to Functions" translate="no">​</a></h2>
 <ul>
 <li><a href="/api/core/functions/createEntity">createEntity</a></li>
+<li><a href="/api/core/functions/defineInteractiveMap">defineInteractiveMap</a></li>
+<li><a href="/api/core/functions/defineStory">defineStory</a></li>
+<li><a href="/api/core/functions/defineWidget">defineWidget</a></li>
 <li><a href="/api/core/functions/newInteractiveMap">newInteractiveMap</a></li>
 <li><a href="/api/core/functions/newStory">newStory</a></li>
 <li><a href="/api/core/functions/newWidget">newWidget</a></li>

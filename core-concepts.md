@@ -155,46 +155,101 @@ const inventory = new Inventory();
 
 ## Passages
 
-Passages represent different screens or scenes in your game. Three types are available:
+Passages represent different screens or scenes in your game. Three types are available, and each has a `define*` factory that follows the same shape:
+
+```typescript
+defineStory(id, (helpers, props) => components, options?)
+defineInteractiveMap(id, (helpers, props) => hotspots, options)
+defineWidget(id, reactNodeOrComponent)
+```
+
+The content callback receives a toolbox of builders as its first argument and the display props as its second, so learning one factory teaches all of them. The original `newStory`, `newInteractiveMap` and `newWidget` factories are fully supported and are not scheduled for removal — see [Legacy factories](#legacy-factories).
 
 ### Story Passages
 
 Text-based narrative passages with rich components:
 
 ```tsx
-import { newStory, Game } from "@react-text-game/core";
+import { defineStory } from "@react-text-game/core";
 
-const chapter1 = newStory("chapter1", () => [
-    {
-        type: "header",
-        content: "The Beginning",
-        props: { level: 1 },
-    },
-    {
-        type: "text",
-        content: "You find yourself in a dark forest...",
-    },
-    {
-        type: "image",
-        content: "/assets/forest.jpg",
-        props: { alt: "Dark forest" },
-    },
-    {
-        type: "actions",
-        content: [
-            {
-                label: "Go North",
-                action: () => Game.jumpTo("north-path"),
-                color: "primary",
-            },
-            {
-                label: "Go South",
-                action: () => Game.jumpTo("south-path"),
-                color: "secondary",
-            },
-        ],
-    },
+const chapter1 = defineStory("chapter1", (h) => [
+    h.header("The Beginning", { level: 1 }),
+    h.text("You find yourself in a dark forest..."),
+    h.image("/assets/forest.jpg", { alt: "Dark forest" }),
+    h.actions([
+        { label: "Go North", action: h.jump("north-path"), color: "primary" },
+        { label: "Go South", action: h.jump("south-path"), color: "secondary" },
+    ]),
 ]);
+```
+
+**Story helpers (`h`):**
+
+| Helper | Builds | Signature |
+| --- | --- | --- |
+| `h.text` | `text` component | `(content, options?)` |
+| `h.header` | `header` component | `(content, options?)` |
+| `h.image` | `image` component | `(src, options?)` |
+| `h.video` | `video` component | `(src, options?)` |
+| `h.actions` | `actions` component | `(items, options?)` |
+| `h.conversation` | `conversation` component | `(bubbles, options?)` |
+| `h.include` | `anotherStory` component | `(storyId, options?)` |
+| `h.jump` | click handler | `(passageOrId)` |
+| `h.when` | conditional value | `(condition, value)` |
+
+Each helper takes the component's content first and a **single flat options bag** second. Everything nested under `props` in the raw component type is hoisted into that bag, so there is only one level to fill in.
+
+#### Conditional content
+
+Falsy entries are removed from the array, so conditions can be written inline:
+
+```typescript
+defineStory("room", (h) => [
+    h.text("A locked door blocks your way."),
+    player.hasKey && h.text("The rusty key feels warm in your pocket."),
+    h.actions([
+        { label: "Look around", action: h.jump("room-search") },
+        player.hasKey && { label: "Unlock", action: h.jump("vault") },
+    ]),
+]);
+```
+
+#### Mixing helpers and plain objects
+
+Helpers return plain component objects, so hand-written literals still work in the same array — useful when migrating a story a piece at a time:
+
+```typescript
+defineStory("mixed", (h) => [
+    h.text("Built with a helper"),
+    { type: "text", content: "Written by hand" },
+]);
+```
+
+#### Splitting a story across files
+
+Import `storyHelpers` when you need builders outside the callback body:
+
+```typescript
+import { defineStory, storyHelpers } from "@react-text-game/core";
+
+const sharedIntro = () => [storyHelpers.header("The Whispering Woods")];
+
+defineStory("forest", (h) => [
+    ...sharedIntro(),
+    h.text("The forest is ancient and alive."),
+]);
+```
+
+#### Typed props
+
+`defineStory` is generic over the props passed to `display()`:
+
+```typescript
+const greeting = defineStory<{ playerName: string }>("greeting", (h, props) => [
+    h.text(`Hello, ${props.playerName}!`),
+]);
+
+greeting.display({ playerName: "Hero" });
 ```
 
 **Available Components:**
@@ -213,12 +268,8 @@ For simple HTML content without needing JSX/TSX files, use the `isHTML` prop:
 
 ```typescript
 // In a .ts file (no JSX needed)
-newStory("example", () => [
-    {
-        type: "text",
-        content: "<strong>Bold</strong> and <em>italic</em> text",
-        props: { isHTML: true },
-    },
+defineStory("example", (h) => [
+    h.text("<strong>Bold</strong> and <em>italic</em> text", { isHTML: true }),
 ]);
 ```
 
@@ -229,60 +280,63 @@ with event handlers or React state, use `.tsx` files with React components.
 
 ### Interactive Map Passages
 
-Map-based interactive passages with hotspots:
+Map-based interactive passages with hotspots. The hotspots come from the content callback; the image, caption and styling stay in the options object:
 
 ```tsx
-import { newInteractiveMap, Game } from "@react-text-game/core";
+import { defineInteractiveMap } from "@react-text-game/core";
 
-const worldMap = newInteractiveMap("world-map", {
-    caption: "World Map",
-    image: "/maps/world.jpg",
-    hotspots: [
+const worldMap = defineInteractiveMap(
+    "world-map",
+    (h) => [
         // Label hotspot on map
-        {
-            type: "label",
-            content: "Village",
+        h.label("Village", {
             position: { x: 30, y: 40 }, // Percentage (0-100)
-            action: () => Game.jumpTo("village"),
-            props: { color: "primary" },
-        },
+            action: h.jump("village"),
+            color: "primary",
+        }),
         // Simple image hotspot (just a string)
-        {
-            type: "image",
-            content: "/icons/treasure.png",
+        h.image("/icons/treasure.png", {
             position: { x: 50, y: 60 },
             action: () => collectTreasure(),
-        },
+        }),
         // Image hotspot with hover effect (object with states)
-        {
-            type: "image",
-            content: {
-                idle: "/icons/chest.png",
-                hover: "/icons/chest-glow.png",
-            },
-            position: { x: 60, y: 70 },
-            action: () => openChest(),
-        },
+        h.image(
+            { idle: "/icons/chest.png", hover: "/icons/chest-glow.png" },
+            { position: { x: 60, y: 70 }, action: () => openChest() }
+        ),
         // Dynamic image hotspot (function)
-        {
-            type: "image",
-            content: () => `/icons/portal-${player.level}.png`,
+        h.image(() => `/icons/portal-${player.level}.png`, {
             position: { x: 75, y: 80 },
             action: () => enterPortal(),
-        },
+        }),
+        // Decorative, non-interactive image
+        h.mapImage("/characters/guard.png", {
+            position: { x: 42, y: 68 },
+            alt: "Castle guard",
+        }),
         // Conditional hotspot
-        () =>
-            player.hasDiscovered("forest")
-                ? {
-                      type: "label",
-                      content: "Forest",
-                      position: { x: 80, y: 50 },
-                      action: () => Game.jumpTo("forest"),
-                  }
-                : undefined,
+        player.hasDiscovered("forest") &&
+            h.label("Forest", {
+                position: { x: 80, y: 50 },
+                action: h.jump("forest"),
+            }),
     ],
-});
+    { caption: "World Map", image: "/maps/world.jpg" }
+);
 ```
+
+**Map helpers (`h`):**
+
+| Helper | Builds | Signature |
+| --- | --- | --- |
+| `h.label` | label hotspot | `(content, options)` |
+| `h.image` | image hotspot | `(content, options)` |
+| `h.mapImage` | decorative map image | `(src, options)` |
+| `h.menu` | contextual menu | `(items, options)` |
+| `h.jump` | click handler | `(passageOrId)` |
+| `h.when` | conditional value | `(condition, value)` |
+
+`position` decides placement: `{ x, y }` percentages put the hotspot on the map, while `"top"`, `"bottom"`, `"left"` or `"right"` dock it to an edge. Options are flat here too — `color`, `variant`, `zoom` and `classNames` go at the top level. Import `mapHelpers` when a map is split across several files.
 
 **Hotspot Types:**
 
@@ -290,6 +344,7 @@ const worldMap = newInteractiveMap("world-map", {
 - `MapImageHotspot` - Image buttons with state variants
 - `SideLabelHotspot` - Text buttons on edges (top/bottom/left/right)
 - `SideImageHotspot` - Image buttons on edges
+- `MapImage` - Decorative, non-interactive artwork anchored to map coordinates
 - `MapMenu` - Context menu with multiple items
 
 ### Widget Passages
@@ -297,10 +352,10 @@ const worldMap = newInteractiveMap("world-map", {
 Custom React components as passages:
 
 ```tsx
-import { newWidget } from "@react-text-game/core";
+import { defineWidget } from "@react-text-game/core";
 
 // With ReactNode (static content)
-const customUI = newWidget(
+const customUI = defineWidget(
     "custom-ui",
     <div>
         <h1>Custom Interface</h1>
@@ -313,20 +368,66 @@ const MyMenu = () => {
     const [selected, setSelected] = useState(null);
     return <MenuUI selected={selected} onSelect={setSelected} />;
 };
-const menuWidget = newWidget("menu", MyMenu);
+const menuWidget = defineWidget("menu", MyMenu);
 ```
 
+Widgets take no helper toolbox and no display props: they are ordinary React trees, and `Widget.display()` accepts no arguments. Use `Game.jumpTo()` directly for navigation inside a widget. `defineWidget` is identical to `newWidget` in behaviour and signature — it exists so every passage factory shares the same prefix.
+
 :::warning Important: Function Content Handling
-When passing a function to `newWidget`, it is **always treated as a React component** and rendered via `createElement`. This ensures hooks work correctly even in minified production builds where function names are mangled.
+When passing a function to `defineWidget` or `newWidget`, it is **always treated as a React component** and rendered via `createElement`. This ensures hooks work correctly even in minified production builds where function names are mangled.
 
 If you need dynamic content without hooks (e.g., a simple render function), pre-evaluate it:
 
 ```tsx
 // For dynamic content without hooks, pre-evaluate the function:
-const timestampWidget = newWidget("time", (() => <div>{Date.now()}</div>)());
+const timestampWidget = defineWidget("time", (() => <div>{Date.now()}</div>)());
 ```
 
 :::
+
+### Legacy factories
+
+`newStory`, `newInteractiveMap` and `newWidget` remain fully supported and produce identical passage objects, so a project can migrate one passage at a time. They take content as data rather than through a builder callback:
+
+```tsx
+import { Game, newInteractiveMap, newStory } from "@react-text-game/core";
+
+newStory("chapter1", () => [
+    { type: "header", content: "The Beginning", props: { level: 1 } },
+    { type: "text", content: "You find yourself in a dark forest..." },
+    {
+        type: "actions",
+        content: [{ label: "Go North", action: () => Game.jumpTo("north") }],
+    },
+]);
+
+newInteractiveMap("world-map", {
+    image: "/maps/world.jpg",
+    hotspots: [
+        {
+            type: "label",
+            content: "Village",
+            position: { x: 30, y: 40 },
+            action: () => Game.jumpTo("village"),
+        },
+        // conditional hotspots use a callback returning undefined
+        () =>
+            player.hasKey
+                ? {
+                      type: "label",
+                      content: "Vault",
+                      position: { x: 80, y: 30 },
+                      action: () => Game.jumpTo("vault"),
+                  }
+                : undefined,
+    ],
+});
+```
+
+Two differences are worth knowing when comparing the styles:
+
+- **Typed props.** `StoryContent` is a generic *function* type, so a content function cannot annotate its props — `(props: { playerName: string }) => ...` fails to type-check. `StoryContentFn`, used by `defineStory`, is a generic *alias*, so typed props work.
+- **Conditional entries.** Only the `define*` factories drop `false`/`null`/`undefined` entries from the arrays.
 
 :::caution Save System and Widget Passages
 The save system caches passage display results for performance. However, **Widget passages with function content (React components) cannot be reliably cached** because they return React elements rather than serializable data.

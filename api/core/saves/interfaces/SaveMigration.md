@@ -1,6 +1,6 @@
 # Interface: SaveMigration\<T\>
 
-Defined in: [packages/core/src/saves/migrations/types.ts:93](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/migrations/types.ts#L93)
+Defined in: [packages/core/src/saves/migrations/types.ts:93](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/types.ts#L93)
 
 Defines a migration from one game version to another.
 
@@ -56,7 +56,7 @@ The shape of the game save state for this migration. Can be a partial
 
 > **description**: `string`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:115](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/migrations/types.ts#L115)
+Defined in: [packages/core/src/saves/migrations/types.ts:115](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/types.ts#L115)
 
 Human-readable description of what this migration does.
 Used for logging and debugging.
@@ -77,7 +77,7 @@ Used for logging and debugging.
 
 > **from**: `string`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:100](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/migrations/types.ts#L100)
+Defined in: [packages/core/src/saves/migrations/types.ts:100](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/types.ts#L100)
 
 The source version this migration starts from.
 Should be a valid semver string (e.g., "1.0.0", "1.2.3")
@@ -88,7 +88,7 @@ Should be a valid semver string (e.g., "1.0.0", "1.2.3")
 
 > **migrate**: [`SaveMigrationFn`](../type-aliases/SaveMigrationFn.md)\<`T`\>
 
-Defined in: [packages/core/src/saves/migrations/types.ts:121](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/migrations/types.ts#L121)
+Defined in: [packages/core/src/saves/migrations/types.ts:121](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/types.ts#L121)
 
 The migration function that transforms the data.
 Should be pure and not mutate the input.
@@ -99,7 +99,7 @@ Should be pure and not mutate the input.
 
 > **to**: `string`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:106](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/saves/migrations/types.ts#L106)
+Defined in: [packages/core/src/saves/migrations/types.ts:106](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/types.ts#L106)
 
 The target version this migration migrates to.
 Should be a valid semver string (e.g., "1.1.0", "2.0.0")

@@ -1,6 +1,6 @@
 # Interface: TextComponent
 
-Defined in: [packages/core/src/passages/story/types.ts:58](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/types.ts#L58)
+Defined in: [packages/core/src/passages/story/types.ts:61](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L61)
 
 Component for displaying text content in the story.
 Supports rich text, JSX elements, and multi-line content with preserved whitespace.
@@ -28,7 +28,7 @@ Supports rich text, JSX elements, and multi-line content with preserved whitespa
 
 > **content**: `ReactNode`
 
-Defined in: [packages/core/src/passages/story/types.ts:69](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/types.ts#L69)
+Defined in: [packages/core/src/passages/story/types.ts:72](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L72)
 
 The text or React element to display.
 Supports strings, numbers, JSX elements, and any valid React node.
@@ -40,7 +40,7 @@ Multi-line text is rendered with preserved whitespace and line breaks.
 
 > `optional` **id**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:24](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/types.ts#L24)
+Defined in: [packages/core/src/passages/story/types.ts:27](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L27)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -61,7 +61,7 @@ Can be used to reference or manipulate specific components programmatically.
 
 > `optional` **initialVariant**: `"display"` \| `"hidden"` \| `"disclosure"`
 
-Defined in: [packages/core/src/passages/story/types.ts:39](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/types.ts#L39)
+Defined in: [packages/core/src/passages/story/types.ts:42](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L42)
 
 Controls the initial visibility state of the component.
 
@@ -88,7 +88,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > `optional` **props**: `object`
 
-Defined in: [packages/core/src/passages/story/types.ts:74](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/types.ts#L74)
+Defined in: [packages/core/src/passages/story/types.ts:77](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L77)
 
 Optional configuration for styling and behavior.
 
@@ -143,6 +143,6 @@ false
 
 > **type**: `"text"`
 
-Defined in: [packages/core/src/passages/story/types.ts:62](https://github.com/laruss/react-text-game/blob/a568b67a5a70142c4d99c081d8fed675aca313c3/packages/core/src/passages/story/types.ts#L62)
+Defined in: [packages/core/src/passages/story/types.ts:65](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L65)
 
 Discriminator property identifying this as a text component.
