@@ -120,7 +120,7 @@ export const blacksmithStory = defineStory(
                 [
                     // Iron Sword - primary color, solid variant
                     {
-                        label: `Iron Sword (${prices.ironSword} gold)`,
+                        content: `Iron Sword (${prices.ironSword} gold)`,
                         action: () => {
                             if (playerActions.spendGold(prices.ironSword)) {
                                 sfxCoinPickup.play();
@@ -154,7 +154,7 @@ export const blacksmithStory = defineStory(
                     },
                     // Steel Sword - secondary color, bordered variant
                     {
-                        label: `Steel Sword (${prices.steelSword} gold)`,
+                        content: `Steel Sword (${prices.steelSword} gold)`,
                         action: () => {
                             if (playerActions.spendGold(prices.steelSword)) {
                                 sfxCoinPickup.play();
@@ -200,7 +200,7 @@ export const blacksmithStory = defineStory(
                 [
                     // Chainmail - success color, light variant
                     {
-                        label: `Chainmail (${prices.chainmail} gold)`,
+                        content: `Chainmail (${prices.chainmail} gold)`,
                         action: () => {
                             if (playerActions.spendGold(prices.chainmail)) {
                                 sfxCoinPickup.play();
@@ -222,7 +222,7 @@ export const blacksmithStory = defineStory(
                     },
                     // Plate Armor - warning color, shadow variant (locked until later)
                     {
-                        label: `Plate Armor (${prices.plateArmor} gold)`,
+                        content: `Plate Armor (${prices.plateArmor} gold)`,
                         action: () => {
                             if (playerActions.spendGold(prices.plateArmor)) {
                                 sfxCoinPickup.play();
@@ -264,7 +264,7 @@ export const blacksmithStory = defineStory(
                 [
                     // Wooden Shield - default color, flat variant
                     {
-                        label: `Wooden Shield (${prices.woodenShield}g)`,
+                        content: `Wooden Shield (${prices.woodenShield}g)`,
                         action: () => {
                             if (playerActions.spendGold(prices.woodenShield)) {
                                 sfxCoinPickup.play();
@@ -282,7 +282,7 @@ export const blacksmithStory = defineStory(
                     },
                     // Iron Shield - primary color, faded variant
                     {
-                        label: `Iron Shield (${prices.ironShield}g)`,
+                        content: `Iron Shield (${prices.ironShield}g)`,
                         action: () => {
                             if (playerActions.spendGold(prices.ironShield)) {
                                 sfxCoinPickup.play();
@@ -312,7 +312,7 @@ export const blacksmithStory = defineStory(
             h.actions(
                 [
                     {
-                        label: `Health Potion (${prices.healthPotion} gold)`,
+                        content: `Health Potion (${prices.healthPotion} gold)`,
                         action: () => {
                             if (playerActions.spendGold(prices.healthPotion)) {
                                 sfxCoinPickup.play();
@@ -338,13 +338,13 @@ export const blacksmithStory = defineStory(
             h.actions(
                 [
                     {
-                        label: "Return to Village",
+                        content: "Return to Village",
                         action: () => Game.jumpTo("villageMap"),
                         color: "default",
                         variant: "bordered",
                     },
                     {
-                        label: "View Inventory",
+                        content: "View Inventory",
                         action: () => Game.jumpTo("inventory"),
                         color: "secondary",
                         variant: "bordered",

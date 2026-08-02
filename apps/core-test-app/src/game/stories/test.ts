@@ -13,11 +13,11 @@ export const testStory = defineStory("testStory", (h) => {
         h.video("video.mp4"),
         h.actions([
             {
-                label: "Action 1",
+                content: "Action 1",
                 action: () => console.log("Action 1 executed"),
             },
             {
-                label: "Action 2",
+                content: "Action 2",
                 action: () => console.log("Action 2 executed"),
                 isDisabled: true,
                 tooltip: {

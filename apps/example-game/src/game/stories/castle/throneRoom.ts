@@ -136,7 +136,7 @@ defineStory("throneRoomDecision", (h) => {
         h.actions(
             [
                 {
-                    label: '"I seek to protect the innocent."',
+                    content: '"I seek to protect the innocent."',
                     action: () => {
                         kingAlderon.mood = "pleased";
                         Game.jumpTo("throneRoomNobleAnswer");
@@ -145,7 +145,7 @@ defineStory("throneRoomDecision", (h) => {
                     variant: "bordered",
                 },
                 {
-                    label: '"I seek glory and honor."',
+                    content: '"I seek glory and honor."',
                     action: () => {
                         kingAlderon.mood = "stern";
                         Game.jumpTo("throneRoomGloryAnswer");
@@ -154,7 +154,7 @@ defineStory("throneRoomDecision", (h) => {
                     variant: "bordered",
                 },
                 {
-                    label: '"I seek the dragon\'s treasure."',
+                    content: '"I seek the dragon\'s treasure."',
                     action: () => {
                         kingAlderon.mood = "angry";
                         Game.jumpTo("throneRoomGreedyAnswer");
@@ -219,7 +219,7 @@ defineStory("throneRoomGloryAnswer", (h) => [
     h.actions(
         [
             {
-                label: "Return to the castle",
+                content: "Return to the castle",
                 action: () => Game.jumpTo("castleMap"),
                 color: "primary",
             },
@@ -269,7 +269,7 @@ defineStory("throneRoomGreedyAnswer", (h) => [
     h.actions(
         [
             {
-                label: "Leave the throne room",
+                content: "Leave the throne room",
                 action: () => Game.jumpTo("castleMap"),
                 color: "default",
             },
@@ -317,13 +317,13 @@ defineStory("receiveBlessing", (h) => {
         h.actions(
             [
                 {
-                    label: "Visit the Royal Armory first",
+                    content: "Visit the Royal Armory first",
                     action: () => Game.jumpTo("castleArmory"),
                     color: "warning",
                     variant: "solid",
                 },
                 {
-                    label: "Head to the Dragon's Lair immediately",
+                    content: "Head to the Dragon's Lair immediately",
                     action: () => Game.jumpTo("worldMap"),
                     color: "danger",
                     variant: "bordered",
@@ -350,7 +350,7 @@ function getReturnVisitContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: '"I am ready, Your Majesty."',
+                    content: '"I am ready, Your Majesty."',
                     action: () => {
                         kingAlderon.mood = "pleased";
                         Game.jumpTo("receiveBlessing");
@@ -358,7 +358,7 @@ function getReturnVisitContent(): StoryComponents {
                     color: "primary",
                 },
                 {
-                    label: "I need more time to prepare",
+                    content: "I need more time to prepare",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                     variant: "bordered",
@@ -411,12 +411,12 @@ function getBlessedContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to Castle",
+                    content: "Return to Castle",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                 },
                 {
-                    label: "Head to Dragon's Lair",
+                    content: "Head to Dragon's Lair",
                     action: () => Game.jumpTo("worldMap"),
                     color: "danger",
                 },

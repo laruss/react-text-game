@@ -52,7 +52,7 @@ function getRestrictedContent() {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to the castle",
+                    content: "Return to the castle",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                 },
@@ -101,7 +101,7 @@ function getArmoryContent() {
             [
                 // Dragon Slayer Sword - the ultimate weapon
                 {
-                    label: `Dragon Slayer Sword - 200 gold ${hasDragonSlayer ? "(Owned)" : ""}`,
+                    content: `Dragon Slayer Sword - 200 gold ${hasDragonSlayer ? "(Owned)" : ""}`,
                     action: () => {
                         if (playerActions.spendGold(200)) {
                             playerActions.addItem("dragon_slayer");
@@ -131,7 +131,7 @@ function getArmoryContent() {
                 },
                 // Royal Plate Armor
                 {
-                    label: `Royal Plate Armor - 150 gold ${hasRoyalArmor ? "(Owned)" : ""}`,
+                    content: `Royal Plate Armor - 150 gold ${hasRoyalArmor ? "(Owned)" : ""}`,
                     action: () => {
                         if (playerActions.spendGold(150)) {
                             playerActions.addItem("royal_armor");
@@ -166,7 +166,7 @@ function getArmoryContent() {
                 },
                 // Health potions (can buy multiple)
                 {
-                    label: "Greater Health Potion - 30 gold",
+                    content: "Greater Health Potion - 30 gold",
                     action: () => {
                         if (playerActions.spendGold(30)) {
                             playerActions.addItem("greater_health_potion");
@@ -188,7 +188,7 @@ function getArmoryContent() {
                               },
                 },
                 {
-                    label: "Return to Castle",
+                    content: "Return to Castle",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                     variant: "bordered",
@@ -221,7 +221,7 @@ defineStory("armoryPurchaseDragonSlayer", (h) => [
     h.actions(
         [
             {
-                label: "Continue shopping",
+                content: "Continue shopping",
                 action: () => Game.jumpTo("castleArmory"),
                 color: "primary",
             },
@@ -247,7 +247,7 @@ defineStory("armoryPurchaseArmor", (h) => [
     h.actions(
         [
             {
-                label: "Continue shopping",
+                content: "Continue shopping",
                 action: () => Game.jumpTo("castleArmory"),
                 color: "primary",
             },
@@ -270,7 +270,7 @@ defineStory("armoryPurchasePotion", (h) => [
     h.actions(
         [
             {
-                label: "Continue shopping",
+                content: "Continue shopping",
                 action: () => Game.jumpTo("castleArmory"),
                 color: "primary",
             },

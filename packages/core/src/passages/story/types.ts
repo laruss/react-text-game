@@ -382,17 +382,22 @@ export interface VideoComponent extends BaseComponent {
  * Represents an interactive button action within a story.
  * Used to create player choices, navigation buttons, and interactive elements.
  *
+ * @remarks
+ * Give every action a `content`. The legacy {@link ActionType.label} field is
+ * still read when `content` is absent, but it is deprecated and accepts plain
+ * strings only.
+ *
  * @example
  * ```typescript
  * // Simple navigation action
  * {
- *   label: 'Continue',
+ *   content: 'Continue',
  *   action: () => Game.jumpTo('next-scene')
  * }
  *
- * // Action with styling
+ * // Rich content
  * {
- *   label: 'Attack',
+ *   content: <><Icon name="sword" /> Attack</>,
  *   action: () => combat.attack(),
  *   color: 'danger',
  *   variant: 'solid'
@@ -400,7 +405,7 @@ export interface VideoComponent extends BaseComponent {
  *
  * // Disabled action with tooltip
  * {
- *   label: 'Open Door',
+ *   content: 'Open Door',
  *   action: () => {},
  *   isDisabled: true,
  *   tooltip: {
@@ -412,10 +417,31 @@ export interface VideoComponent extends BaseComponent {
  */
 export type ActionType = {
     /**
+     * The content displayed on the button.
+     * Supports strings, numbers, JSX elements, and any valid React node.
+     * Should clearly describe the action the player will take.
+     *
+     * @remarks
+     * Takes precedence over {@link ActionType.label}. Provide one of the two:
+     * an action with neither renders an empty button.
+     *
+     * @example
+     * ```typescript
+     * content: 'Continue'
+     * content: <><Icon name="key" /> Unlock the gate</>
+     * ```
+     */
+    content?: ReactNode;
+
+    /**
      * The text displayed on the button.
      * Should clearly describe the action the player will take.
+     *
+     * @deprecated Use {@link ActionType.content} instead, which accepts any
+     * React node. `label` is only used when `content` is not provided and will
+     * be removed in a future major release.
      */
-    label: string;
+    label?: string;
 
     /**
      * Callback function executed when the button is clicked.
@@ -531,8 +557,8 @@ export type ActionType = {
  * {
  *   type: 'actions',
  *   content: [
- *     { label: 'Go North', action: () => Game.jumpTo('north-room') },
- *     { label: 'Go South', action: () => Game.jumpTo('south-room') }
+ *     { content: 'Go North', action: () => Game.jumpTo('north-room') },
+ *     { content: 'Go South', action: () => Game.jumpTo('south-room') }
  *   ]
  * }
  *
@@ -541,9 +567,9 @@ export type ActionType = {
  *   type: 'actions',
  *   props: { direction: 'vertical' },
  *   content: [
- *     { label: 'Tell the truth', action: () => increaseHonesty() },
- *     { label: 'Lie', action: () => decreaseHonesty() },
- *     { label: 'Say nothing', action: () => Game.jumpTo('silence') }
+ *     { content: 'Tell the truth', action: () => increaseHonesty() },
+ *     { content: 'Lie', action: () => decreaseHonesty() },
+ *     { content: 'Say nothing', action: () => Game.jumpTo('silence') }
  *   ]
  * }
  * ```
@@ -922,7 +948,7 @@ export type StoryComponents = Array<Component>;
  *     type: 'actions',
  *     content: [
  *       {
- *         label: 'Open Door',
+ *         content: 'Open Door',
  *         action: () => Game.jumpTo('next-room'),
  *         isDisabled: !props.hasKey,
  *         tooltip: props.hasKey ? undefined : {
@@ -984,7 +1010,7 @@ export type StoryContentItems = Array<Conditional<Component>>;
  * const content: StoryContentFn = (h) => [
  *   h.header('Welcome'),
  *   h.text('Your adventure begins...'),
- *   h.actions([{ label: 'Start', action: h.jump('chapter-1') }])
+ *   h.actions([{ content: 'Start', action: h.jump('chapter-1') }])
  * ];
  * ```
  */

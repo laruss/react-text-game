@@ -28,7 +28,7 @@ import type { Component, StoryContent, StoryOptions } from "./types";
  *     type: 'actions',
  *     content: [
  *       {
- *         label: 'Continue',
+ *         content: 'Continue',
  *         action: () => Game.jumpTo('chapter-1')
  *       }
  *     ]

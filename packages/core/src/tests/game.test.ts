@@ -5,7 +5,10 @@ import { Game } from "#game";
 import { BaseGameObject } from "#gameObjects";
 import { DEFAULT_CONFIG } from "#i18n/constants";
 import { newOptions } from "#options";
+import { newInteractiveMap } from "#passages/interactiveMap/fabric";
 import { Passage } from "#passages/passage";
+import { newStory } from "#passages/story/fabric";
+import { newWidget } from "#passages/widget";
 import { setupMockStorage, teardownMockStorage } from "#tests/helpers";
 import type { GameSaveState } from "#types";
 
@@ -591,6 +594,46 @@ describe("Game", () => {
             expect(Game.selfState.currentPassageId).toBe(passageId);
         });
 
+        test("accepts a passage instance as startPassage", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const passage = new TestPassage(uniqueId("intro"));
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: passage,
+            });
+
+            expect(Game.options.startPassage).toBe(passage.id);
+            expect(Game.selfState.currentPassageId).toBe(passage.id);
+        });
+
+        test("queues a passage instance that registers after init", async () => {
+            Game._resetForTesting();
+            setupMockStorage();
+
+            const passage = new TestPassage(uniqueId("late-intro"));
+
+            // Wipe the registry so the instance has to re-register later
+            Game._resetForTesting();
+            setupMockStorage();
+
+            await Game.init({
+                gameName: "Test Game",
+                isDevMode: true,
+                startPassage: passage,
+            });
+
+            expect(Game.options.startPassage).toBe(passage.id);
+            expect(Game.selfState.currentPassageId).toBeNull();
+
+            Game.registerPassage(passage);
+
+            expect(Game.selfState.currentPassageId).toBe(passage.id);
+        });
+
         test("queues startPassage when passage not yet registered", async () => {
             Game._resetForTesting();
             setupMockStorage();
@@ -908,6 +951,52 @@ describe("Game", () => {
             expect(() => {
                 Game.jumpTo("nonexistent");
             }).toThrow('Passage "nonexistent" not found');
+        });
+
+        test("jumps to a Story instance", () => {
+            const story = newStory(uniqueId("story"), () => []);
+
+            Game.jumpTo(story);
+
+            expect(Game.selfState.currentPassageId).toBe(story.id);
+            expect(Game.currentPassage).toBe(story);
+        });
+
+        test("jumps to an InteractiveMap instance", () => {
+            const map = newInteractiveMap(uniqueId("map"), {
+                image: "/map.png",
+                hotspots: [],
+            });
+
+            Game.jumpTo(map);
+
+            expect(Game.selfState.currentPassageId).toBe(map.id);
+            expect(Game.currentPassage).toBe(map);
+        });
+
+        test("jumps to a Widget instance", () => {
+            const widget = newWidget(uniqueId("widget"), null);
+
+            Game.jumpTo(widget);
+
+            expect(Game.selfState.currentPassageId).toBe(widget.id);
+            expect(Game.currentPassage).toBe(widget);
+        });
+
+        test("registers a passage instance that is missing from the registry", async () => {
+            const passage = new TestPassage(uniqueId("orphan"));
+
+            // Wipe the registry while keeping the instance around
+            Game._resetForTesting();
+            setupMockStorage();
+            await Game.init({ gameName: "Test Game", isDevMode: true });
+
+            expect(Game.getPassageById(passage.id)).toBeNull();
+
+            Game.jumpTo(passage);
+
+            expect(Game.selfState.currentPassageId).toBe(passage.id);
+            expect(Game.getPassageById(passage.id)).toBe(passage);
         });
 
         test("sets current passage without validation", () => {

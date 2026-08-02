@@ -75,7 +75,7 @@ player.save();
 const introStory = defineStory("intro", (h) => [
     h.header("Welcome to the Game", { level: 1 }),
     h.text(`Hello, ${player.name}!`),
-    h.actions([{ label: "Start Adventure", action: h.jump("adventure") }]),
+    h.actions([{ content: "Start Adventure", action: h.jump("adventure") }]),
 ]);
 
 // Navigate to passage
@@ -594,8 +594,9 @@ Game.registerEntity(player, inventory, quest);
 // Register passages
 Game.registerPassage(intro, chapter1, finalBattle);
 
-// Navigate
+// Navigate - by id or by passage instance (Story, InteractiveMap, Widget)
 Game.jumpTo("chapter1");
+Game.jumpTo(chapter1);
 
 // Save/Load
 const savedState = Game.getState();
@@ -702,12 +703,12 @@ const myStory = defineStory(
         h.actions(
             [
                 {
-                    label: "Continue",
+                    content: "Continue",
                     action: h.jump("chapter-2"),
                     color: "primary",
                 },
                 {
-                    label: "Go Back",
+                    content: "Go Back",
                     action: h.jump("intro"),
                     color: "secondary",
                     variant: "bordered",
@@ -739,6 +740,21 @@ const myStory = defineStory(
 
 Each helper takes the component's content first and a **single flat options bag** second. Everything that lives under `props` in the raw component type is hoisted into that bag, so there is only one level to fill in: `h.header("Chapter 1", { level: 1, className: "text-center" })`.
 
+**Action buttons**
+
+An action's caption lives in its `content` field, which accepts any React node — not just a string:
+
+```tsx
+h.actions([
+    { content: "Go North", action: h.jump("north-path") },
+    { content: <><KeyIcon /> Unlock the gate</>, action: h.jump("vault") },
+]);
+```
+
+> **Deprecated:** actions used to take a plain-string `label`. It is still read when
+> `content` is absent, so existing stories keep working, but it is deprecated and will
+> be removed in a future major release. Prefer `content`.
+
 **Conditional content**
 
 Falsy entries are removed from the array, so conditions can be written inline instead of through a callback that returns `undefined`:
@@ -748,8 +764,8 @@ defineStory("room", (h) => [
     h.text("A locked door blocks your way."),
     player.hasKey && h.text("The rusty key feels warm in your pocket."),
     h.actions([
-        { label: "Look around", action: h.jump("room-search") },
-        player.hasKey && { label: "Unlock", action: h.jump("vault") },
+        { content: "Look around", action: h.jump("room-search") },
+        player.hasKey && { content: "Unlock", action: h.jump("vault") },
     ]),
 ]);
 ```
@@ -1331,8 +1347,8 @@ Static methods:
 - `init(options)` - **Initialize the game (REQUIRED - must be called first)**
 - `registerEntity(...objects)` - Register game objects
 - `registerPassage(...passages)` - Register passages
-- `jumpTo(passage)` - Navigate to passage
-- `setCurrent(passage)` - Set current passage
+- `jumpTo(passage)` - Navigate to passage (passage instance or registered id)
+- `setCurrent(passage)` - Set current passage (passage instance or registered id)
 - `getPassageById(id)` - Get passage by ID
 - `getAllPassages()` - Get all passages
 - `getState()` - Get full game state
@@ -1405,6 +1421,7 @@ import type {
     GameSaveState,
     JsonPath,
     InitVarsType,
+    PassageTarget,
     PassageType,
     ButtonColor,
     ButtonVariant,

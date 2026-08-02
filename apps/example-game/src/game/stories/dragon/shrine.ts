@@ -44,7 +44,7 @@ export const dragonLairShrine = defineStory(
             h.actions(
                 [
                     {
-                        label: "Pray at the shrine (Full heal)",
+                        content: "Pray at the shrine (Full heal)",
                         action: () => {
                             const healAmount = player.maxHealth - player.health;
                             player.health = player.maxHealth;
@@ -63,7 +63,7 @@ export const dragonLairShrine = defineStory(
                                 : undefined,
                     },
                     {
-                        label: hasBlessed
+                        content: hasBlessed
                             ? "Receive blessing (already blessed)"
                             : "Receive blessing (+10 max HP permanently)",
                         action: () => {
@@ -89,7 +89,7 @@ export const dragonLairShrine = defineStory(
                               },
                     },
                     {
-                        label: "Return to the lair",
+                        content: "Return to the lair",
                         action: () => Game.jumpTo("dragonLairMap"),
                         color: "default",
                         variant: "bordered",
@@ -125,7 +125,7 @@ defineStory("shrinePrayer", (h) => [
     h.actions(
         [
             {
-                label: "Continue",
+                content: "Continue",
                 action: () => Game.jumpTo("dragonLairShrine"),
                 color: "primary",
             },
@@ -149,7 +149,7 @@ defineStory("shrineBlessing", (h) => [
     h.actions(
         [
             {
-                label: "Continue",
+                content: "Continue",
                 action: () => Game.jumpTo("dragonLairShrine"),
                 color: "primary",
             },

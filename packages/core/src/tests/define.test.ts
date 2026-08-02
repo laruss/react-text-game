@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { createElement } from "react";
 
 import { Game } from "#game";
 import {
@@ -274,6 +275,24 @@ describe("Passage definition helpers", () => {
                     content: [{ label: "Go", action: go }],
                 } as ActionsComponent
             );
+        });
+
+        test("actions accept ReactNode content", () => {
+            const go = () => {};
+            const node = createElement("b", null, "Go");
+
+            expect(
+                storyHelpers.actions([
+                    { content: node, action: go },
+                    { content: "Stay", action: go },
+                ])
+            ).toEqual({
+                type: "actions",
+                content: [
+                    { content: node, action: go },
+                    { content: "Stay", action: go },
+                ],
+            } as ActionsComponent);
         });
 
         test("conversation keeps appearance at the top level", () => {

@@ -1,5 +1,5 @@
 import { Game } from "#game";
-import type { Passage } from "#passages/passage";
+import type { PassageTarget } from "#passages/passage";
 import type { EmptyObject, InitVarsType } from "#types";
 
 /**
@@ -38,7 +38,7 @@ export type DefineFn<
  * ```typescript
  * defineStory('room', (h) => [
  *   h.text('A locked door blocks your way.'),
- *   player.hasKey && h.actions([{ label: 'Unlock', action: h.jump('hall') }])
+ *   player.hasKey && h.actions([{ content: 'Unlock', action: h.jump('hall') }])
  * ]);
  * ```
  */
@@ -62,15 +62,17 @@ export type CommonHelpers = {
     /**
      * Builds a click handler that navigates to another passage.
      *
-     * @param target - Passage instance or registered passage id
+     * @param target - Passage instance (`Story`, `InteractiveMap`, `Widget`) or
+     * registered passage id
      * @returns Callback suitable for any `action` field
      *
      * @example
      * ```typescript
-     * h.actions([{ label: 'Continue', action: h.jump('chapter-2') }]);
+     * h.actions([{ content: 'Continue', action: h.jump('chapter-2') }]);
+     * h.actions([{ content: 'Continue', action: h.jump(chapter2) }]);
      * ```
      */
-    jump: (target: Passage | string) => () => void;
+    jump: (target: PassageTarget) => () => void;
 
     /**
      * Returns `value` when `condition` is truthy, otherwise `undefined`.

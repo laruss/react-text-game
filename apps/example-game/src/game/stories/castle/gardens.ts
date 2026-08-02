@@ -49,7 +49,7 @@ export const castleGardens = defineStory(
             h.actions(
                 [
                     {
-                        label: "Rest by the fountain (+30 HP)",
+                        content: "Rest by the fountain (+30 HP)",
                         action: () => {
                             playerActions.heal(30);
                             Game.jumpTo("gardensRest");
@@ -66,7 +66,7 @@ export const castleGardens = defineStory(
                                 : undefined,
                     },
                     {
-                        label: "Drink from the healing fountain (+50 HP)",
+                        content: "Drink from the healing fountain (+50 HP)",
                         action: () => {
                             playerActions.heal(50);
                             Game.jumpTo("gardensFountain");
@@ -76,7 +76,7 @@ export const castleGardens = defineStory(
                         isDisabled: player.health >= player.maxHealth,
                     },
                     {
-                        label: "Return to the castle",
+                        content: "Return to the castle",
                         action: () => Game.jumpTo("castleMap"),
                         color: "default",
                         variant: "bordered",
@@ -112,13 +112,13 @@ defineStory("gardensRest", (h) => [
     h.actions(
         [
             {
-                label: "Rest more",
+                content: "Rest more",
                 action: () => Game.jumpTo("castleGardens"),
                 color: "success",
                 variant: "bordered",
             },
             {
-                label: "Return to castle",
+                content: "Return to castle",
                 action: () => Game.jumpTo("castleMap"),
                 color: "default",
             },
@@ -141,12 +141,12 @@ defineStory("gardensFountain", (h) => [
     h.actions(
         [
             {
-                label: "Return to the gardens",
+                content: "Return to the gardens",
                 action: () => Game.jumpTo("castleGardens"),
                 color: "success",
             },
             {
-                label: "Return to castle",
+                content: "Return to castle",
                 action: () => Game.jumpTo("castleMap"),
                 color: "default",
             },

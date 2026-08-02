@@ -134,7 +134,7 @@ defineStory("dragonEncounterChoice", (h) => {
             [
                 // Attack option
                 {
-                    label: "Attack! (Combat)",
+                    content: "Attack! (Combat)",
                     action: () => Game.jumpTo("dragonCombat"),
                     color: "danger",
                     variant: "solid",
@@ -147,14 +147,14 @@ defineStory("dragonEncounterChoice", (h) => {
                 },
                 // Peaceful option (only if learned secret)
                 knowsSecret && {
-                    label: '"Why do you do this, Vexarion?"',
+                    content: '"Why do you do this, Vexarion?"',
                     action: () => Game.jumpTo("dragonPeacefulPath"),
                     color: "primary",
                     variant: "bordered",
                 },
                 // Retreat option
                 {
-                    label: "Retreat (I need to prepare more)",
+                    content: "Retreat (I need to prepare more)",
                     action: () => Game.jumpTo("dragonLairMap"),
                     color: "default",
                     variant: "bordered",
@@ -229,7 +229,7 @@ defineStory("dragonCombatContinue", (h) => {
             h.actions(
                 [
                     {
-                        label: "Continue...",
+                        content: "Continue...",
                         action: () => {
                             dragon.isDefeated = true;
                             player.quests.defeatedDragon = true;
@@ -253,7 +253,7 @@ defineStory("dragonCombatContinue", (h) => {
             h.actions(
                 [
                     {
-                        label: "Game Over",
+                        content: "Game Over",
                         action: () => Game.jumpTo("endingDefeat"),
                         color: "danger",
                     },
@@ -275,19 +275,19 @@ defineStory("dragonCombatContinue", (h) => {
         h.actions(
             [
                 {
-                    label: "Continue attacking!",
+                    content: "Continue attacking!",
                     action: () => Game.jumpTo("dragonCombat"),
                     color: "danger",
                 },
                 // Can still try peace mid-combat if know secret
                 knowsSecret && {
-                    label: '"Wait! I know why you\'re doing this!"',
+                    content: '"Wait! I know why you\'re doing this!"',
                     action: () => Game.jumpTo("dragonPeacefulPathMidCombat"),
                     color: "primary",
                     variant: "bordered",
                 },
                 {
-                    label: "Use health potion",
+                    content: "Use health potion",
                     action: () => {
                         if (playerActions.hasItem("greater_health_potion")) {
                             playerActions.removeItem("greater_health_potion");
@@ -378,7 +378,7 @@ defineStory("dragonPeacefulPath", (h) => [
     h.actions(
         [
             {
-                label: '"What if things could be different?"',
+                content: '"What if things could be different?"',
                 action: () => {
                     dragon.dialogue.offeredPeace = true;
                     Game.jumpTo("dragonPeacefulResolution");
@@ -438,7 +438,7 @@ defineStory("dragonPeacefulPathMidCombat", (h) => [
     h.actions(
         [
             {
-                label: "Offer peace",
+                content: "Offer peace",
                 action: () => {
                     dragon.dialogue.offeredPeace = true;
                     Game.jumpTo("dragonPeacefulResolution");
@@ -446,7 +446,7 @@ defineStory("dragonPeacefulPathMidCombat", (h) => [
                 color: "primary",
             },
             {
-                label: "No, finish the fight!",
+                content: "No, finish the fight!",
                 action: () => Game.jumpTo("dragonCombat"),
                 color: "danger",
                 variant: "bordered",
@@ -521,7 +521,7 @@ defineStory("dragonPeacefulResolution", (h) => {
         h.actions(
             [
                 {
-                    label: "Continue to the ending...",
+                    content: "Continue to the ending...",
                     action: () => Game.jumpTo("endingPeaceful"),
                     color: "success",
                 },
@@ -584,7 +584,7 @@ function getPostDefeatContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to the lair",
+                    content: "Return to the lair",
                     action: () => Game.jumpTo("dragonLairMap"),
                     color: "default",
                 },
@@ -609,7 +609,7 @@ defineStory("dragonChamberEmpty", (h) => [
     h.actions(
         [
             {
-                label: "Return",
+                content: "Return",
                 action: () => Game.jumpTo("dragonLairMap"),
                 color: "default",
             },

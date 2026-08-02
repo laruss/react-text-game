@@ -1,5 +1,13 @@
 # ui-test-app
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @react-text-game/core@0.8.0
+  - @react-text-game/ui@0.6.0
+
 ## 0.1.2
 
 ### Patch Changes

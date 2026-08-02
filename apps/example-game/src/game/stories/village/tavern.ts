@@ -176,13 +176,13 @@ export const tavernStory = defineStory(
             h.actions(
                 [
                     {
-                        label: "Return to Village",
+                        content: "Return to Village",
                         action: () => Game.jumpTo("villageMap"),
                         color: "primary",
                         variant: "solid",
                     },
                     {
-                        label: "Ask about the blacksmith",
+                        content: "Ask about the blacksmith",
                         action: () => {
                             tavernKeeper.rumors.blacksmithSecret = true;
                             Game.jumpTo("blacksmithHint");
@@ -251,7 +251,7 @@ defineStory("blacksmithHint", (h) => [
     h.actions(
         [
             {
-                label: "Continue",
+                content: "Continue",
                 action: () => Game.jumpTo("tavernStory"),
                 color: "primary",
             },

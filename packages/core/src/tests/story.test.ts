@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { createElement } from "react";
 
 import { Game } from "#game";
 import { _loadUITranslationsFrom } from "#i18n/utils";
@@ -242,6 +243,31 @@ describe("Story", () => {
             expect(actComp.content).toHaveLength(2);
             expect(actComp.content[0]?.label).toBe("Continue");
             expect(actComp.props?.direction).toBe("horizontal");
+        });
+
+        test("actions carry ReactNode content", () => {
+            const mockAction = () => {};
+            const node = createElement("span", null, "Unlock the gate");
+            const content = () => [
+                {
+                    type: "actions",
+                    content: [
+                        { content: node, action: mockAction },
+                        { content: "Wait", action: mockAction },
+                        // legacy label stays supported alongside content
+                        { label: "Leave", action: mockAction },
+                    ],
+                } as ActionsComponent,
+            ];
+            const story = newStory(uniqueId("story"), content);
+
+            const actComp = story.display().components[0] as ActionsComponent;
+
+            expect(actComp.content[0]?.content).toBe(node);
+            expect(actComp.content[0]?.label).toBeUndefined();
+            expect(actComp.content[1]?.content).toBe("Wait");
+            expect(actComp.content[2]?.content).toBeUndefined();
+            expect(actComp.content[2]?.label).toBe("Leave");
         });
 
         test("displays story with conversation component", () => {

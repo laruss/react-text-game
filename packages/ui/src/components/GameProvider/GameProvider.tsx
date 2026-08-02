@@ -169,15 +169,21 @@ export const GameProvider = ({
 
                 // Only set if not already set by Game.init() or registerPassage
                 if (!Game.currentPassage) {
+                    // startPassage accepts a passage instance as well as an id
+                    const configuredStartPassage =
+                        initialOptionsRef.current.startPassage;
+                    const startPassageId =
+                        typeof configuredStartPassage === "string"
+                            ? configuredStartPassage
+                            : configuredStartPassage?.id;
                     const initialPassage =
-                        initialOptionsRef.current.startPassage ||
-                        SYSTEM_PASSAGE_NAMES.START_MENU;
+                        startPassageId || SYSTEM_PASSAGE_NAMES.START_MENU;
 
                     // Check if passage exists, warn if not
                     const passage = Game.getPassageById(initialPassage);
-                    if (!passage && initialOptionsRef.current.startPassage) {
+                    if (!passage && startPassageId) {
                         console.warn(
-                            `[react-text-game] startPassage "${initialOptionsRef.current.startPassage}" not found, falling back to START_MENU`
+                            `[react-text-game] startPassage "${startPassageId}" not found, falling back to START_MENU`
                         );
                         Game.setCurrent(SYSTEM_PASSAGE_NAMES.START_MENU);
                     } else {

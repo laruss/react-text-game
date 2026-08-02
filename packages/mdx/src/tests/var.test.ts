@@ -72,7 +72,7 @@ import { Var, Conversation, Say } from "@react-text-game/mdx";
         expect(code).toContain("What are you doing, ${player.name}?");
     });
 
-    test("should convert Var to template literal in Action label", async () => {
+    test("should convert Var to template literal in Action content", async () => {
         const mdxSource = `---
 passageId: test
 ---
@@ -255,7 +255,7 @@ You meet {npc.name}.
             "Hello ${npc.name}, I have ${player.questItems.length} quest items"
         );
 
-        // Check Action label
+        // Check Action content
         expect(code).toContain(
             "Trade with ${npc.name} (${npc.reputation} reputation)"
         );

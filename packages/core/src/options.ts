@@ -1,12 +1,20 @@
 import { SYSTEM_PASSAGE_NAMES } from "#constants";
 import type { I18nConfig } from "#i18n";
 import { DEFAULT_CONFIG } from "#i18n/constants";
+import type { PassageTarget } from "#passages/passage";
 
 export type Options = {
     gameName: string;
     gameId: string;
     description: string;
     gameVersion: string;
+    /**
+     * Id of the passage the game opens on.
+     *
+     * @remarks
+     * Always a string here: a passage instance passed to `Game.init()` is
+     * resolved to its id before the options are stored.
+     */
     startPassage: string;
     /**
      * Initial state of the game entities.
@@ -34,7 +42,24 @@ export type Options = {
 };
 
 export type NewOptions = Pick<Options, "gameName"> &
-    Partial<Omit<Options, "gameName">>;
+    Partial<Omit<Options, "gameName" | "startPassage">> & {
+        /**
+         * The passage the game opens on.
+         *
+         * Accepts a passage instance (`Story`, `InteractiveMap`, `Widget`, or
+         * any other `Passage`) or the id of a registered passage. The passage
+         * may register after `Game.init()`; navigation waits for it.
+         *
+         * @example
+         * ```typescript
+         * import { intro } from './game/stories/intro';
+         *
+         * await Game.init({ gameName: 'My Game', startPassage: intro });
+         * await Game.init({ gameName: 'My Game', startPassage: 'intro' });
+         * ```
+         */
+        startPassage?: PassageTarget;
+    };
 
 const options: Options = {
     gameName: "",
@@ -49,7 +74,14 @@ const options: Options = {
 };
 
 export const newOptions = (opts: NewOptions) => {
-    Object.assign(options, opts);
+    const { startPassage, ...rest } = opts;
+
+    Object.assign(options, rest);
+
+    if (startPassage !== undefined) {
+        options.startPassage =
+            typeof startPassage === "string" ? startPassage : startPassage.id;
+    }
 };
 
 export const _getOptions = () => options;

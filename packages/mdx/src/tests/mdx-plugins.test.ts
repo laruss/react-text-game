@@ -204,8 +204,10 @@ import {Actions, Action} from '@react-text-game/mdx';
             const code = result.value;
 
             expect(code).toContain('type: "actions"');
-            expect(code).toContain('label: "Click Me"');
-            expect(code).toContain('label: "Alert"');
+            expect(code).toContain('content: "Click Me"');
+            expect(code).toContain('content: "Alert"');
+            // the deprecated label field is no longer emitted
+            expect(code).not.toContain("label:");
             expect(code).toContain("console.log('clicked')");
             expect(code).toContain("alert('hello')");
             // Should not contain MDX component imports

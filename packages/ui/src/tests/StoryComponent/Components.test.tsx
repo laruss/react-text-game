@@ -175,6 +175,37 @@ describe("story leaf components", () => {
             expect(screen.getByText("Move ahead")).toBeTruthy()
         );
     });
+
+    test("renders action content, preferring it over the deprecated label", () => {
+        const action = mock(() => {});
+        const component: ActionsComponent = {
+            type: "actions",
+            content: [
+                {
+                    content: createElement(
+                        "span",
+                        { "data-testid": "rich-action" },
+                        "Unlock the gate"
+                    ),
+                    action,
+                },
+                { content: "Wait", label: "ignored", action },
+                { label: "Leave", action },
+            ],
+        };
+
+        render(createElement(Actions, { component }));
+
+        expect(screen.getByTestId("rich-action").textContent).toBe(
+            "Unlock the gate"
+        );
+        expect(
+            screen.getByRole("button", { name: "Unlock the gate" })
+        ).toBeTruthy();
+        expect(screen.getByRole("button", { name: "Wait" })).toBeTruthy();
+        expect(screen.queryByText("ignored")).toBeNull();
+        expect(screen.getByRole("button", { name: "Leave" })).toBeTruthy();
+    });
 });
 
 describe("StoryComponent", () => {

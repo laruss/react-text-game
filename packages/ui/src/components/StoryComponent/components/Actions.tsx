@@ -27,7 +27,7 @@ const Action = ({ action }: { action: ActionType }) => {
                     disabled={action.isDisabled}
                     onClick={action.action}
                 >
-                    {action.label}
+                    {action.content ?? action.label}
                 </Button>
             </div>
             <Tooltip

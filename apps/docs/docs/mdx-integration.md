@@ -141,7 +141,7 @@ Container for interactive action buttons. Each `<Action>` represents a clickable
 **Props for `<Action>`:**
 
 - `onPerform: () => void` - Callback executed when clicked (required)
-- `children: string` - Button label text (required)
+- `children: string` - Button caption, compiled into the action's `content` (required)
 - `color?: ButtonColor` - Color scheme: `"default"`, `"primary"`, `"secondary"`, `"success"`, `"warning"`, `"danger"`
 - `variant?: ButtonVariant` - Style variant: `"solid"`, `"bordered"`, `"light"`, `"flat"`, `"faded"`, `"shadow"`, `"ghost"`
 - `isDisabled?: boolean` - Disable the button

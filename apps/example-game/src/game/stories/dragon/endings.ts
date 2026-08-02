@@ -72,12 +72,12 @@ defineStory(
             h.actions(
                 [
                     {
-                        label: "Return to Main Menu",
+                        content: "Return to Main Menu",
                         action: () => Game.jumpTo("mainMenu"),
                         color: "primary",
                     },
                     {
-                        label: "Continue Exploring",
+                        content: "Continue Exploring",
                         action: () => Game.jumpTo("worldMap"),
                         color: "default",
                         variant: "bordered",
@@ -171,12 +171,12 @@ defineStory(
             h.actions(
                 [
                     {
-                        label: "Return to Main Menu",
+                        content: "Return to Main Menu",
                         action: () => Game.jumpTo("mainMenu"),
                         color: "primary",
                     },
                     {
-                        label: "Continue Exploring",
+                        content: "Continue Exploring",
                         action: () => Game.jumpTo("worldMap"),
                         color: "default",
                         variant: "bordered",
@@ -223,12 +223,12 @@ defineStory(
         h.actions(
             [
                 {
-                    label: "Load Last Save",
+                    content: "Load Last Save",
                     action: () => Game.jumpTo("saveLoadWidget"),
                     color: "primary",
                 },
                 {
-                    label: "Return to Main Menu",
+                    content: "Return to Main Menu",
                     action: () => Game.jumpTo("mainMenu"),
                     color: "default",
                     variant: "bordered",

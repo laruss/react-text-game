@@ -126,8 +126,8 @@ export type StoryHelpers = CommonHelpers & {
      * @example
      * ```typescript
      * h.actions([
-     *   { label: 'Go north', action: h.jump('north-room') },
-     *   player.hasKey && { label: 'Unlock', action: h.jump('vault') }
+     *   { content: 'Go north', action: h.jump('north-room') },
+     *   player.hasKey && { content: 'Unlock', action: h.jump('vault') }
      * ], { direction: 'vertical' })
      * ```
      */

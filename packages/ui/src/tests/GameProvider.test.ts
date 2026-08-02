@@ -125,6 +125,28 @@ describe("GameProvider", () => {
             );
         });
 
+        test("resolves a passage instance passed as startPassage", async () => {
+            const startPassage = new TestPassage("instance-start");
+
+            await Game.init({ gameName: "test", startPassage });
+            Game.selfState.currentPassageId = null;
+
+            render(
+                createElement(
+                    GameProviderWithoutSplash,
+                    { options: { gameName: "test", startPassage } },
+                    createElement("div", null, "Instance start ready")
+                )
+            );
+
+            await waitFor(
+                () => {
+                    expect(Game.currentPassage?.id).toBe("instance-start");
+                },
+                { timeout: 1000 }
+            );
+        });
+
         test("sets currentPassage to START_MENU when startPassage is not provided", async () => {
             render(
                 createElement(

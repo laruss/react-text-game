@@ -4,7 +4,7 @@ export type ActionProps = Readonly<{
     children: string;
     onPerform: () => void;
 }> &
-    Omit<CoreAction, "label" | "action">;
+    Omit<CoreAction, "content" | "label" | "action">;
 
 /**
  * Action button component for MDX stories.

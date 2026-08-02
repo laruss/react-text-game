@@ -1,5 +1,14 @@
 # example-game
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @react-text-game/core@0.8.0
+  - @react-text-game/ui@0.6.0
+  - @react-text-game/mdx@0.3.0
+
 ## 0.0.2
 
 ### Patch Changes

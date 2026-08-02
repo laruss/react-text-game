@@ -177,8 +177,8 @@ const chapter1 = defineStory("chapter1", (h) => [
     h.text("You find yourself in a dark forest..."),
     h.image("/assets/forest.jpg", { alt: "Dark forest" }),
     h.actions([
-        { label: "Go North", action: h.jump("north-path"), color: "primary" },
-        { label: "Go South", action: h.jump("south-path"), color: "secondary" },
+        { content: "Go North", action: h.jump("north-path"), color: "primary" },
+        { content: "Go South", action: h.jump("south-path"), color: "secondary" },
     ]),
 ]);
 ```
@@ -199,6 +199,30 @@ const chapter1 = defineStory("chapter1", (h) => [
 
 Each helper takes the component's content first and a **single flat options bag** second. Everything nested under `props` in the raw component type is hoisted into that bag, so there is only one level to fill in.
 
+#### Action buttons
+
+An action's caption lives in its `content` field, which accepts any React node — not just a string:
+
+```tsx
+h.actions([
+    { content: "Go North", action: h.jump("north-path") },
+    {
+        content: (
+            <>
+                <KeyIcon /> Unlock the gate
+            </>
+        ),
+        action: h.jump("vault"),
+    },
+]);
+```
+
+:::warning Deprecated: `label`
+Actions used to take a plain-string `label`. It is still read when `content` is
+absent, so existing stories keep working, but it is deprecated and will be removed
+in a future major release. Prefer `content`.
+:::
+
 #### Conditional content
 
 Falsy entries are removed from the array, so conditions can be written inline:
@@ -208,8 +232,8 @@ defineStory("room", (h) => [
     h.text("A locked door blocks your way."),
     player.hasKey && h.text("The rusty key feels warm in your pocket."),
     h.actions([
-        { label: "Look around", action: h.jump("room-search") },
-        player.hasKey && { label: "Unlock", action: h.jump("vault") },
+        { content: "Look around", action: h.jump("room-search") },
+        player.hasKey && { content: "Unlock", action: h.jump("vault") },
     ]),
 ]);
 ```
@@ -397,7 +421,7 @@ newStory("chapter1", () => [
     { type: "text", content: "You find yourself in a dark forest..." },
     {
         type: "actions",
-        content: [{ label: "Go North", action: () => Game.jumpTo("north") }],
+        content: [{ content: "Go North", action: () => Game.jumpTo("north") }],
     },
 ]);
 
@@ -524,8 +548,10 @@ import { Game } from "@react-text-game/core";
 // Jump to a passage by ID
 Game.jumpTo("chapter1");
 
-// Jump to a passage object
+// Jump to a passage instance - Story, InteractiveMap and Widget all work
 Game.jumpTo(chapter1);
+Game.jumpTo(worldMap);
+Game.jumpTo(inventoryWidget);
 
 // Set current without navigation effects
 Game.setCurrent("chapter1");
@@ -533,6 +559,22 @@ Game.setCurrent("chapter1");
 // Get current passage
 const current = Game.currentPassage;
 ```
+
+Everywhere the engine asks for a passage — `Game.jumpTo()`, `Game.setCurrent()`,
+the `startPassage` option and the `h.jump()` helper — it accepts either a passage
+instance or the id of a registered passage (the exported `PassageTarget` type).
+Passing the instance is preferred: the id is read from the object, so a renamed
+passage cannot silently become a dead link.
+
+```tsx
+import { intro } from "./game/stories/intro";
+
+await Game.init({ gameName: "My Game", startPassage: intro });
+```
+
+A passage instance handed to `Game.jumpTo()` that is missing from the registry is
+registered on the spot, so navigating to an instance never fails with
+`Passage "…" not found`. Only a string id can refer to a passage that does not exist.
 
 ### Other Game methods
 

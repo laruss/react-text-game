@@ -46,6 +46,7 @@ export type {
     SideImageHotspot,
     SideLabelHotspot,
 } from "#passages/interactiveMap";
+export type { PassageTarget } from "#passages/passage";
 export type {
     ActionsComponent,
     ActionType,

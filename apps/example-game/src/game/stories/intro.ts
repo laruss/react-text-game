@@ -85,7 +85,7 @@ export const introStory = defineStory(
             h.actions(
                 [
                     {
-                        label: "Begin Your Quest",
+                        content: "Begin Your Quest",
                         action: async () => {
                             void switchMusic(musicVillage, musicMainTheme);
                             Game.jumpTo("worldMap");

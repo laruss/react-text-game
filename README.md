@@ -137,7 +137,7 @@ const player = createEntity("player", {
 const intro = defineStory("intro", (h) => [
     h.header("Welcome to the Game", { level: 1 }),
     h.text(`Hello, ${player.name}!`),
-    h.actions([{ label: "Start Adventure", action: h.jump("chapter-1") }]),
+    h.actions([{ content: "Start Adventure", action: h.jump("chapter-1") }]),
 ]);
 
 // React component

@@ -12,7 +12,7 @@ import {
     newOptions,
     type Options,
 } from "#options";
-import type { Passage } from "#passages/passage";
+import type { Passage, PassageTarget } from "#passages/passage";
 import { createOrUpdateSystemSave } from "#saves";
 import { validateMigrations } from "#saves/migrations";
 import { Storage } from "#storage";
@@ -243,31 +243,48 @@ export class Game {
      * to force remounts when revisiting the same passage. This is useful for
      * resetting component state, restarting animations, or clearing forms.
      *
-     * @param {Passage|string} passage - The passage object or identifier of the passage to jump to.
+     * @param {PassageTarget} passage - A passage instance (`Story`, `InteractiveMap`,
+     * `Widget`, or any other `Passage`) or the id of a registered passage.
      * @return {void} Does not return any value.
-     * @throws {Error} Throws an error if the specified passage is not found or if Game.init() has not been called
+     * @throws {Error} Throws an error if a passage id is not found in the registry or if Game.init() has not been called
+     *
+     * @remarks
+     * A passage instance that is not in the registry is registered on the spot,
+     * so navigating to an instance never fails with "Passage not found". Only a
+     * string id can refer to a passage that does not exist.
      *
      * @example
      * ```typescript
      * // Jump to a passage by ID
      * Game.jumpTo('intro');
      *
-     * // Jump to a passage object
-     * const chapter1 = newStory('chapter1', () => [...]);
+     * // Jump to a passage instance - Story, InteractiveMap and Widget all work
+     * const chapter1 = defineStory('chapter1', (h) => [...]);
+     * const worldMap = defineInteractiveMap('world', (h) => [...], { image: '/world.png' });
+     * const inventory = defineWidget('inventory', <InventoryUI />);
+     *
      * Game.jumpTo(chapter1);
+     * Game.jumpTo(worldMap);
+     * Game.jumpTo(inventory);
      *
      * // Jumping to the same passage multiple times will generate different renderIds
      * Game.jumpTo('combat'); // renderId: "1234567890-0.123"
      * Game.jumpTo('combat'); // renderId: "1234567891-0.456" (different!)
      * ```
      */
-    static jumpTo(passage: Passage | string): void {
+    static jumpTo(passage: PassageTarget): void {
         Game.ensureInitialized();
 
         // generating new renderId to force rerendering
         Game.state.renderId = `${Date.now()}-${Math.random()}`;
 
         const passageId = typeof passage === "string" ? passage : passage.id;
+
+        // a passage instance carries everything the registry needs, so an
+        // unregistered one is registered instead of rejected
+        if (typeof passage !== "string" && !passagesRegistry.has(passageId)) {
+            Game.registerPassage(passage);
+        }
 
         const retrievedPassage = passagesRegistry.get(passageId);
 
@@ -283,11 +300,15 @@ export class Game {
     /**
      * Sets the current passage in the game state.
      *
-     * @param {Passage|string} passage - The passage to be set as current. Can be either a Passage object or a string representing the passage ID.
+     * Unlike {@link Game.jumpTo}, this does not generate a new renderId and does
+     * not verify that the passage exists.
+     *
+     * @param {PassageTarget} passage - A passage instance (`Story`, `InteractiveMap`,
+     * `Widget`, or any other `Passage`) or the id of a registered passage.
      * @return {void} This method does not return a value.
      * @throws Error if Game.init() has not been called
      */
-    static setCurrent(passage: Passage | string): void {
+    static setCurrent(passage: PassageTarget): void {
         Game.ensureInitialized();
 
         Game.state.currentPassageId =

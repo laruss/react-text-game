@@ -162,7 +162,7 @@ describe("transformComponents", () => {
             type: "actions",
             content: [
                 {
-                    label: "Continue",
+                    content: "Continue",
                     action: perform,
                     color: "primary",
                     variant: "ghost",
@@ -174,7 +174,7 @@ describe("transformComponents", () => {
                         className: "hint",
                     },
                 },
-                { label: "Spend  gold", action: perform },
+                { content: "Spend  gold", action: perform },
             ],
             props: { direction: "vertical", className: "choices" },
         });

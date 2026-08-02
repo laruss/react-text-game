@@ -94,13 +94,13 @@ function getForestExplorationContent() {
         storyHelpers.actions(
             [
                 {
-                    label: "Leave the forest",
+                    content: "Leave the forest",
                     action: () => Game.jumpTo("worldMap"),
                     color: "default",
                     variant: "bordered",
                 },
                 {
-                    label: "Search elsewhere",
+                    content: "Search elsewhere",
                     action: () => {
                         // Random chance of finding something or getting hurt
                         const roll = Math.random();
@@ -146,7 +146,7 @@ defineStory("forestTreasureFound", (h) => [
     h.actions(
         [
             {
-                label: "Return to the World Map",
+                content: "Return to the World Map",
                 action: () => Game.jumpTo("worldMap"),
                 color: "primary",
                 variant: "solid",
@@ -169,12 +169,12 @@ defineStory("forestMinorFind", (h) => [
     h.actions(
         [
             {
-                label: "Continue exploring",
+                content: "Continue exploring",
                 action: () => Game.jumpTo("forestEncounter"),
                 color: "secondary",
             },
             {
-                label: "Leave the forest",
+                content: "Leave the forest",
                 action: () => Game.jumpTo("worldMap"),
                 color: "default",
             },
@@ -202,13 +202,13 @@ defineStory("forestDanger", (h) => [
     h.actions(
         [
             {
-                label: "Retreat to safety",
+                content: "Retreat to safety",
                 action: () => Game.jumpTo("worldMap"),
                 color: "warning",
                 variant: "solid",
             },
             {
-                label: "Continue exploring",
+                content: "Continue exploring",
                 action: () => Game.jumpTo("forestEncounter"),
                 color: "danger",
                 variant: "bordered",
@@ -236,12 +236,12 @@ defineStory("forestNothing", (h) => [
     h.actions(
         [
             {
-                label: "Keep searching",
+                content: "Keep searching",
                 action: () => Game.jumpTo("forestEncounter"),
                 color: "secondary",
             },
             {
-                label: "Leave the forest",
+                content: "Leave the forest",
                 action: () => Game.jumpTo("worldMap"),
                 color: "default",
             },
@@ -276,13 +276,13 @@ function getExploredForestContent() {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to World Map",
+                    content: "Return to World Map",
                     action: () => Game.jumpTo("worldMap"),
                     color: "primary",
                     variant: "solid",
                 },
                 {
-                    label: "Rest here (+20 HP)",
+                    content: "Rest here (+20 HP)",
                     action: () => {
                         playerActions.heal(20);
                         Game.jumpTo("forestRest");
@@ -319,7 +319,7 @@ defineStory("forestRest", (h) => [
     h.actions(
         [
             {
-                label: "Continue your journey",
+                content: "Continue your journey",
                 action: () => Game.jumpTo("worldMap"),
                 color: "primary",
             },

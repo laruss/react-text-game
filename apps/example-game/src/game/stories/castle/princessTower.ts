@@ -120,13 +120,13 @@ defineStory("princessFirstMeetingContinue", (h) => {
         h.actions(
             [
                 {
-                    label: '"What do you know about the dragon?"',
+                    content: '"What do you know about the dragon?"',
                     action: () => Game.jumpTo("princessDragonSecret"),
                     color: "primary",
                     variant: "bordered",
                 },
                 {
-                    label: "Take your leave politely",
+                    content: "Take your leave politely",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                     variant: "bordered",
@@ -211,7 +211,7 @@ defineStory("princessDragonSecret", (h) => {
         h.actions(
             [
                 {
-                    label: '"Thank you, Princess. This changes everything."',
+                    content: '"Thank you, Princess. This changes everything."',
                     action: () => Game.jumpTo("castleMap"),
                     color: "primary",
                 },
@@ -236,12 +236,12 @@ function getSecondVisitContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: '"Tell me more about Vexarion."',
+                    content: '"Tell me more about Vexarion."',
                     action: () => Game.jumpTo("princessDragonSecret"),
                     color: "primary",
                 },
                 {
-                    label: "Just visiting",
+                    content: "Just visiting",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                 },
@@ -282,7 +282,7 @@ function getReturnVisitContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to the castle",
+                    content: "Return to the castle",
                     action: () => Game.jumpTo("castleMap"),
                     color: "default",
                 },

@@ -173,7 +173,7 @@ function buildActionsProperties(item: MdxStructItem): Property[] {
 
             const actionProps: Property[] = [
                 createProperty(
-                    "label",
+                    "content",
                     contentToExpression(
                         child.children as string | TemplateContent
                     )

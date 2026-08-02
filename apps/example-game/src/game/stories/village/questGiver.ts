@@ -147,7 +147,7 @@ function getQuestOfferContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: "Continue",
+                    content: "Continue",
                     action: () => Game.jumpTo("questOfferDetails"),
                     color: "primary",
                     variant: "solid",
@@ -190,7 +190,7 @@ defineStory(
         h.actions(
             [
                 {
-                    label: "Accept Quest",
+                    content: "Accept Quest",
                     action: () => {
                         elderMarcus.questState = "accepted";
                         elderMarcus.dialogue.explainedSituation = true;
@@ -205,7 +205,7 @@ defineStory(
                     className: "px-8",
                 },
                 {
-                    label: "I need to prepare first",
+                    content: "I need to prepare first",
                     action: () => {
                         elderMarcus.questState = "offered";
                         Game.jumpTo("villageMap");
@@ -263,7 +263,7 @@ defineStory("questAccepted", (h) => [
     h.actions(
         [
             {
-                label: "Go to World Map",
+                content: "Go to World Map",
                 action: () => Game.jumpTo("worldMap"),
                 color: "primary",
                 variant: "solid",
@@ -325,7 +325,7 @@ function getActiveQuestContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to Village",
+                    content: "Return to Village",
                     action: () => Game.jumpTo("villageMap"),
                     color: "primary",
                 },
@@ -393,7 +393,7 @@ function getCompletedQuestContent(): StoryComponents {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to Village",
+                    content: "Return to Village",
                     action: () => Game.jumpTo("villageMap"),
                     color: "primary",
                 },

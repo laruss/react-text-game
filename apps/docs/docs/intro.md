@@ -25,7 +25,7 @@ import { defineStory } from "@react-text-game/core";
 export const intro = defineStory("intro", (h) => [
     h.header("The station", { level: 1 }),
     h.text("The last train is waiting."),
-    h.actions([{ label: "Board the train", action: h.jump("inside-train") }]),
+    h.actions([{ content: "Board the train", action: h.jump("inside-train") }]),
 ]);
 ```
 

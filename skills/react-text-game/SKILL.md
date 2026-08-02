@@ -37,6 +37,7 @@ Use the normal HTML page only when its `.md` form is unavailable. When working i
 - With the supplied UI, let `GameProvider` own initialization. Do not call `Game.init()` again in a child.
 - Keep the `options` and `components` objects stable when practical. Update a running game through supported option updates; do not reinitialize it because React rendered again.
 - Passage ids and entity ids are persistent identifiers. Never silently rename them in saved games or navigation code.
+- `Game.jumpTo()`, `Game.setCurrent()`, the `startPassage` option and `h.jump()` all take a `PassageTarget`: a passage instance (`Story`, `InteractiveMap`, `Widget`) or a registered passage id. Prefer the instance, so a renamed passage cannot become a dead link. A passage instance is registered on the spot by `jumpTo()` if it is missing from the registry; a string id that is not registered still throws.
 - Late-registered entities may have queued initial state and must participate in auto-save after registration.
 
 Use a registry entry in consumer applications:
@@ -80,8 +81,8 @@ export const intro = defineStory(
         h.text(`Courage: ${player.courage}.`),
         player.hasLantern && h.text("Your lantern casts a steady light."),
         h.actions([
-            { label: "Enter the forest", action: h.jump("forest") },
-            player.hasKey && { label: "Unlock the gate", action: h.jump("gate") },
+            { content: "Enter the forest", action: h.jump("forest") },
+            player.hasKey && { content: "Unlock the gate", action: h.jump("gate") },
         ]),
     ],
     { background: { image: "/backgrounds/forest.webp" } }
@@ -106,6 +107,7 @@ Rules for helper usage:
 
 - Story helpers are `text`, `header`, `image`, `video`, `actions`, `conversation`, and `include`. Map helpers are `label`, `image`, `mapImage`, and `menu`. Both toolboxes also carry `jump(passageOrId)` and `when(condition, value)`.
 - Each helper takes content first and one **flat** options bag second. Fields nested under `props` in the raw type are hoisted to the top level; `classNames` stays nested.
+- An action button's caption is `content` and accepts any React node. `ActionType.label` is deprecated: it is still rendered when `content` is absent, so do not break existing stories, but write `content` in new code and prefer it when touching an action for another reason.
 - Falsy array entries (`false`, `null`, `undefined`) are dropped, so conditions belong inline rather than in a callback that returns `undefined`.
 - Helpers return plain component/hotspot objects, so hand-written literals remain valid in the same array. Import `storyHelpers` or `mapHelpers` to build content outside a callback body.
 - `h.label` requires `position` for a standalone hotspot and rejects it for an `h.menu` item, which the menu positions. Both forms are the same helper; the overload is selected by whether `position` is present.

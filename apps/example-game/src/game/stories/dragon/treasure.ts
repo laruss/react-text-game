@@ -62,7 +62,7 @@ function getPeacefulTreasureContent() {
         storyHelpers.actions(
             [
                 {
-                    label: "Accept the dragon's gifts",
+                    content: "Accept the dragon's gifts",
                     action: () => {
                         dragon.treasureLooted = true;
                         playerActions.addGold(200);
@@ -74,7 +74,7 @@ function getPeacefulTreasureContent() {
                     variant: "solid",
                 },
                 {
-                    label: '"Your friendship is gift enough."',
+                    content: '"Your friendship is gift enough."',
                     action: () => {
                         dragon.treasureLooted = true;
                         // Still get something small for being humble
@@ -116,7 +116,7 @@ function getCombatTreasureContent() {
         storyHelpers.actions(
             [
                 {
-                    label: "Take everything of value",
+                    content: "Take everything of value",
                     action: () => {
                         dragon.treasureLooted = true;
                         playerActions.addGold(500);
@@ -129,7 +129,7 @@ function getCombatTreasureContent() {
                     variant: "solid",
                 },
                 {
-                    label: "Take only what you need",
+                    content: "Take only what you need",
                     action: () => {
                         dragon.treasureLooted = true;
                         playerActions.addGold(200);
@@ -160,7 +160,7 @@ function getAlreadyLootedContent() {
         storyHelpers.actions(
             [
                 {
-                    label: "Return to the lair",
+                    content: "Return to the lair",
                     action: () => Game.jumpTo("dragonLairMap"),
                     color: "default",
                 },
@@ -186,7 +186,7 @@ defineStory("treasureAccepted", (h) => [
     h.actions(
         [
             {
-                label: "Return to the lair",
+                content: "Return to the lair",
                 action: () => Game.jumpTo("dragonLairMap"),
                 color: "primary",
             },
@@ -214,7 +214,7 @@ defineStory("treasureDeclined", (h) => [
     h.actions(
         [
             {
-                label: "Return to the lair",
+                content: "Return to the lair",
                 action: () => Game.jumpTo("dragonLairMap"),
                 color: "primary",
             },
@@ -242,7 +242,7 @@ defineStory("treasureLootedFull", (h) => [
     h.actions(
         [
             {
-                label: "Return to the lair",
+                content: "Return to the lair",
                 action: () => Game.jumpTo("dragonLairMap"),
                 color: "primary",
             },
@@ -265,7 +265,7 @@ defineStory("treasureLootedPartial", (h) => [
     h.actions(
         [
             {
-                label: "Return to the lair",
+                content: "Return to the lair",
                 action: () => Game.jumpTo("dragonLairMap"),
                 color: "primary",
             },

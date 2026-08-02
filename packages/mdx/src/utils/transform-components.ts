@@ -275,8 +275,8 @@ function transformActions(
 function transformAction(item: MdxStructItem): ActionType | null {
     const { props, children } = item;
 
-    // Label is the text content of the Action component
-    const label = extractStringContent(children);
+    // The button caption is the text content of the Action component
+    const content = extractStringContent(children);
 
     // onPerform is the action callback
     const onPerform = props.onPerform as (() => void) | undefined;
@@ -288,7 +288,7 @@ function transformAction(item: MdxStructItem): ActionType | null {
 
     // Build the action object, only including defined properties
     const action: ActionType = {
-        label,
+        content,
         action: onPerform,
     };
 
