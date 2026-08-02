@@ -71,6 +71,7 @@
 - [OptionalCallable](type-aliases/OptionalCallable.md)
 - [OptionalKeys](type-aliases/OptionalKeys.md)
 - [Options](type-aliases/Options.md)
+- [PassageTarget](type-aliases/PassageTarget.md)
 - [PassageType](type-aliases/PassageType.md)
 - [PreloadAsset](type-aliases/PreloadAsset.md)
 - [PreloadAssetType](type-aliases/PreloadAssetType.md)

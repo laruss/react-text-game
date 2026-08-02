@@ -70,20 +70,20 @@ const treasureRoom = defineStory("treasure-room", (h) => [
     h.text("You found a treasure chest!"),
     h.actions([
         {
-            label: "Open the chest",
+            content: "Open the chest",
             action: () => {
                 // This only runs when the player clicks the button
                 player.gold += 100;
                 Game.jumpTo("treasure-collected");
             },
         },
-        { label: "Leave it alone", action: h.jump("corridor") },
+        { content: "Leave it alone", action: h.jump("corridor") },
     ]),
 ]);
 
 const treasureCollected = defineStory("treasure-collected", (h) => [
     h.text(`You collected 100 gold! You now have ${player.gold} gold.`),
-    h.actions([{ label: "Continue", action: h.jump("corridor") }]),
+    h.actions([{ content: "Continue", action: h.jump("corridor") }]),
 ]);
 ```
 
@@ -110,11 +110,11 @@ const secretRoom = defineStory("secret-room", (h) => [
     ),
     h.actions([
         player.foundSecretRoom && {
-            label: "Leave",
+            content: "Leave",
             action: h.jump("main-hall"),
         },
         !player.foundSecretRoom && {
-            label: "Take the artifact",
+            content: "Take the artifact",
             action: () => {
                 player.inventory.push("ancient-artifact");
                 player.foundSecretRoom = true;
@@ -138,7 +138,7 @@ const battlePassage = defineStory("battle", (h) => [
     h.text(`A goblin appears! Your health: ${player.health}`),
     h.actions([
         {
-            label: "Attack",
+            content: "Attack",
             action: () => {
                 const damage = Math.floor(Math.random() * 10) + 5;
                 player.health -= damage;
@@ -151,7 +151,7 @@ const battlePassage = defineStory("battle", (h) => [
                 }
             },
         },
-        { label: "Run away", action: h.jump("forest") },
+        { content: "Run away", action: h.jump("forest") },
     ]),
 ]);
 ```
@@ -178,7 +178,7 @@ const randomEncounter = defineStory("random-encounter", (h) => {
         h.text(`You encounter a ${encounterType} on the road.`),
         h.actions([
             {
-                label: "Approach",
+                content: "Approach",
                 action: () => {
                     // Clear seed when leaving so next encounter is different
                     player.currentEventSeed = null;
@@ -187,7 +187,7 @@ const randomEncounter = defineStory("random-encounter", (h) => {
                 },
             },
             {
-                label: "Avoid",
+                content: "Avoid",
                 action: () => {
                     player.currentEventSeed = null;
                     player.save();
@@ -224,7 +224,7 @@ const tavernEntrance = defineStory("tavern-entrance", (h) => [
     ),
     h.actions([
         {
-            label: "Enter",
+            content: "Enter",
             action: () => {
                 gameState.tavernVisits += 1;
                 gameState.save();

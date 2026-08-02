@@ -1,6 +1,6 @@
 # Interface: ReactTextGameDebug
 
-Defined in: [packages/core/src/global.d.ts:5](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L5)
+Defined in: [packages/core/src/global.d.ts:5](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L5)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [packages/core/src/global.d.ts:5](https://github.com/laruss/react-te
 
 > `readonly` **currentPassage**: [`Passage`](../classes/Passage.md) \| `null`
 
-Defined in: [packages/core/src/global.d.ts:8](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L8)
+Defined in: [packages/core/src/global.d.ts:8](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L8)
 
 ***
 
@@ -16,7 +16,7 @@ Defined in: [packages/core/src/global.d.ts:8](https://github.com/laruss/react-te
 
 > **Game**: *typeof* [`Game`](../classes/Game.md)
 
-Defined in: [packages/core/src/global.d.ts:6](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L6)
+Defined in: [packages/core/src/global.d.ts:6](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L6)
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: [packages/core/src/global.d.ts:6](https://github.com/laruss/react-te
 
 > **getPassage**: (`passageId`) => [`Passage`](../classes/Passage.md) \| `null`
 
-Defined in: [packages/core/src/global.d.ts:12](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L12)
+Defined in: [packages/core/src/global.d.ts:12](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L12)
 
 Retrieves a passage by its unique identifier.
 
@@ -52,7 +52,7 @@ Error if Game.init() has not been called
 
 > **getState**: (`_fromI`) => [`GameSaveState`](../type-aliases/GameSaveState.md)
 
-Defined in: [packages/core/src/global.d.ts:13](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L13)
+Defined in: [packages/core/src/global.d.ts:13](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L13)
 
 Captures the complete game state including all entities and passages.
 
@@ -90,7 +90,7 @@ localStorage.setItem('save1', JSON.stringify(savedState));
 
 > **jumpTo**: (`passage`) => `void`
 
-Defined in: [packages/core/src/global.d.ts:11](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L11)
+Defined in: [packages/core/src/global.d.ts:11](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L11)
 
 Navigates the game to a specified passage.
 
@@ -102,9 +102,10 @@ resetting component state, restarting animations, or clearing forms.
 
 ##### passage
 
-The passage object or identifier of the passage to jump to.
+[`PassageTarget`](../type-aliases/PassageTarget.md)
 
-`string` | [`Passage`](../classes/Passage.md)
+A passage instance (`Story`, `InteractiveMap`,
+`Widget`, or any other `Passage`) or the id of a registered passage.
 
 #### Returns
 
@@ -114,7 +115,13 @@ Does not return any value.
 
 #### Throws
 
-Throws an error if the specified passage is not found or if Game.init() has not been called
+Throws an error if a passage id is not found in the registry or if Game.init() has not been called
+
+#### Remarks
+
+A passage instance that is not in the registry is registered on the spot,
+so navigating to an instance never fails with "Passage not found". Only a
+string id can refer to a passage that does not exist.
 
 #### Example
 
@@ -122,9 +129,14 @@ Throws an error if the specified passage is not found or if Game.init() has not 
 // Jump to a passage by ID
 Game.jumpTo('intro');
 
-// Jump to a passage object
-const chapter1 = newStory('chapter1', () => [...]);
+// Jump to a passage instance - Story, InteractiveMap and Widget all work
+const chapter1 = defineStory('chapter1', (h) => [...]);
+const worldMap = defineInteractiveMap('world', (h) => [...], { image: '/world.png' });
+const inventory = defineWidget('inventory', <InventoryUI />);
+
 Game.jumpTo(chapter1);
+Game.jumpTo(worldMap);
+Game.jumpTo(inventory);
 
 // Jumping to the same passage multiple times will generate different renderIds
 Game.jumpTo('combat'); // renderId: "1234567890-0.123"
@@ -137,7 +149,7 @@ Game.jumpTo('combat'); // renderId: "1234567891-0.456" (different!)
 
 > `readonly` **passages**: [`Passage`](../classes/Passage.md)[]
 
-Defined in: [packages/core/src/global.d.ts:10](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L10)
+Defined in: [packages/core/src/global.d.ts:10](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L10)
 
 ***
 
@@ -145,7 +157,7 @@ Defined in: [packages/core/src/global.d.ts:10](https://github.com/laruss/react-t
 
 > **setState**: (`state`) => `void`
 
-Defined in: [packages/core/src/global.d.ts:14](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L14)
+Defined in: [packages/core/src/global.d.ts:14](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L14)
 
 Restores the complete game state including all entities and passages.
 
@@ -183,7 +195,7 @@ Game.setState(savedState);
 
 > `readonly` **state**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/global.d.ts:9](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L9)
+Defined in: [packages/core/src/global.d.ts:9](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L9)
 
 ***
 
@@ -191,4 +203,4 @@ Defined in: [packages/core/src/global.d.ts:9](https://github.com/laruss/react-te
 
 > **Storage**: *typeof* `Storage`
 
-Defined in: [packages/core/src/global.d.ts:7](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/global.d.ts#L7)
+Defined in: [packages/core/src/global.d.ts:7](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/global.d.ts#L7)

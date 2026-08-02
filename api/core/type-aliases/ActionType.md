@@ -2,23 +2,29 @@
 
 > **ActionType** = `object`
 
-Defined in: [packages/core/src/passages/story/types.ts:413](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L413)
+Defined in: [packages/core/src/passages/story/types.ts:418](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L418)
 
 Represents an interactive button action within a story.
 Used to create player choices, navigation buttons, and interactive elements.
+
+## Remarks
+
+Give every action a `content`. The legacy [ActionType.label](#label) field is
+still read when `content` is absent, but it is deprecated and accepts plain
+strings only.
 
 ## Example
 
 ```typescript
 // Simple navigation action
 {
-  label: 'Continue',
+  content: 'Continue',
   action: () => Game.jumpTo('next-scene')
 }
 
-// Action with styling
+// Rich content
 {
-  label: 'Attack',
+  content: <><Icon name="sword" /> Attack</>,
   action: () => combat.attack(),
   color: 'danger',
   variant: 'solid'
@@ -26,7 +32,7 @@ Used to create player choices, navigation buttons, and interactive elements.
 
 // Disabled action with tooltip
 {
-  label: 'Open Door',
+  content: 'Open Door',
   action: () => {},
   isDisabled: true,
   tooltip: {
@@ -42,7 +48,7 @@ Used to create player choices, navigation buttons, and interactive elements.
 
 > **action**: () => `void`
 
-Defined in: [packages/core/src/passages/story/types.ts:432](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L432)
+Defined in: [packages/core/src/passages/story/types.ts:458](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L458)
 
 Callback function executed when the button is clicked.
 Typically used for navigation, state changes, or triggering game events.
@@ -66,7 +72,7 @@ action: () => {
 
 > `optional` **className**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:521](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L521)
+Defined in: [packages/core/src/passages/story/types.ts:547](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L547)
 
 CSS class name(s) to apply to the button element.
 
@@ -82,7 +88,7 @@ className: 'w-full text-lg font-bold'
 
 > `optional` **color**: [`ButtonColor`](ButtonColor.md)
 
-Defined in: [packages/core/src/passages/story/types.ts:449](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L449)
+Defined in: [packages/core/src/passages/story/types.ts:475](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L475)
 
 Visual color scheme for the button.
 Maps to semantic color tokens in the UI theme.
@@ -103,11 +109,35 @@ Available colors:
 
 ***
 
+### content?
+
+> `optional` **content**: `ReactNode`
+
+Defined in: [packages/core/src/passages/story/types.ts:434](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L434)
+
+The content displayed on the button.
+Supports strings, numbers, JSX elements, and any valid React node.
+Should clearly describe the action the player will take.
+
+#### Remarks
+
+Takes precedence over [ActionType.label](#label). Provide one of the two:
+an action with neither renders an empty button.
+
+#### Example
+
+```typescript
+content: 'Continue'
+content: <><Icon name="key" /> Unlock the gate</>
+```
+
+***
+
 ### isDisabled?
 
 > `optional` **isDisabled**: `boolean`
 
-Defined in: [packages/core/src/passages/story/types.ts:478](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L478)
+Defined in: [packages/core/src/passages/story/types.ts:504](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L504)
 
 Whether the button should be disabled (non-interactive).
 Disabled buttons are visually dimmed and cannot be clicked.
@@ -125,14 +155,20 @@ Combine with `tooltip` to explain why the action is unavailable.
 
 ***
 
-### label
+### ~~label?~~
 
-> **label**: `string`
+> `optional` **label**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:418](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L418)
+Defined in: [packages/core/src/passages/story/types.ts:444](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L444)
 
 The text displayed on the button.
 Should clearly describe the action the player will take.
+
+#### Deprecated
+
+Use [ActionType.content](#content) instead, which accepts any
+React node. `label` is only used when `content` is not provided and will
+be removed in a future major release.
 
 ***
 
@@ -140,7 +176,7 @@ Should clearly describe the action the player will take.
 
 > `optional` **tooltip**: `object`
 
-Defined in: [packages/core/src/passages/story/types.ts:484](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L484)
+Defined in: [packages/core/src/passages/story/types.ts:510](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L510)
 
 Optional tooltip configuration.
 Displays additional information when the user hovers over the button.
@@ -185,7 +221,7 @@ Position of the tooltip relative to the button.
 
 > `optional` **variant**: [`ButtonVariant`](ButtonVariant.md)
 
-Defined in: [packages/core/src/passages/story/types.ts:466](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L466)
+Defined in: [packages/core/src/passages/story/types.ts:492](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L492)
 
 Visual style variant for the button.
 

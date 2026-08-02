@@ -2,7 +2,7 @@
 
 > **deleteAllGameSaves**(): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/saves/db.ts:214](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/db.ts#L214)
+Defined in: [packages/core/src/saves/db.ts:214](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/saves/db.ts#L214)
 
 Deletes all game save data from the database.
 

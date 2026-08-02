@@ -2,7 +2,7 @@
 
 > **CommonHelpers** = `object`
 
-Defined in: [packages/core/src/passages/definition.ts:61](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/definition.ts#L61)
+Defined in: [packages/core/src/passages/definition.ts:61](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/definition.ts#L61)
 
 Helpers available in every passage type's toolbox.
 
@@ -12,7 +12,7 @@ Helpers available in every passage type's toolbox.
 
 > **jump**: (`target`) => () => `void`
 
-Defined in: [packages/core/src/passages/definition.ts:73](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/definition.ts#L73)
+Defined in: [packages/core/src/passages/definition.ts:75](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/definition.ts#L75)
 
 Builds a click handler that navigates to another passage.
 
@@ -20,9 +20,10 @@ Builds a click handler that navigates to another passage.
 
 ##### target
 
-Passage instance or registered passage id
+[`PassageTarget`](PassageTarget.md)
 
-[`Passage`](../classes/Passage.md) | `string`
+Passage instance (`Story`, `InteractiveMap`, `Widget`) or
+registered passage id
 
 #### Returns
 
@@ -37,7 +38,8 @@ Callback suitable for any `action` field
 #### Example
 
 ```typescript
-h.actions([{ label: 'Continue', action: h.jump('chapter-2') }]);
+h.actions([{ content: 'Continue', action: h.jump('chapter-2') }]);
+h.actions([{ content: 'Continue', action: h.jump(chapter2) }]);
 ```
 
 ***
@@ -46,7 +48,7 @@ h.actions([{ label: 'Continue', action: h.jump('chapter-2') }]);
 
 > **when**: \<`T`\>(`condition`, `value`) => `T` \| `undefined`
 
-Defined in: [packages/core/src/passages/definition.ts:88](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/definition.ts#L88)
+Defined in: [packages/core/src/passages/definition.ts:90](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/definition.ts#L90)
 
 Returns `value` when `condition` is truthy, otherwise `undefined`.
 

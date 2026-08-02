@@ -2,7 +2,7 @@
 
 > **StoryContentFn**\<`TProps`\> = [`DefineFn`](DefineFn.md)\<[`StoryHelpers`](StoryHelpers.md), [`StoryContentItems`](StoryContentItems.md), `TProps`\>
 
-Defined in: [packages/core/src/passages/story/types.ts:991](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L991)
+Defined in: [packages/core/src/passages/story/types.ts:1017](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L1017)
 
 Content callback accepted by `defineStory`.
 
@@ -34,6 +34,6 @@ const content: StoryContentFn<{ playerName: string }> = (h, props) => [
 const content: StoryContentFn = (h) => [
   h.header('Welcome'),
   h.text('Your adventure begins...'),
-  h.actions([{ label: 'Start', action: h.jump('chapter-1') }])
+  h.actions([{ content: 'Start', action: h.jump('chapter-1') }])
 ];
 ```

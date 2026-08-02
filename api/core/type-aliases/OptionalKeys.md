@@ -2,7 +2,7 @@
 
 > **OptionalKeys**\<`T`\> = `{ [K in keyof T]-?: object extends Pick<T, K> ? K : never }`\[keyof `T`\]
 
-Defined in: [packages/core/src/types.ts:14](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/types.ts#L14)
+Defined in: [packages/core/src/types.ts:14](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/types.ts#L14)
 
 ## Type Parameters
 

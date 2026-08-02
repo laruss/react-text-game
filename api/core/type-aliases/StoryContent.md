@@ -2,7 +2,7 @@
 
 > **StoryContent** = \<`T`\>(`props`) => [`StoryComponents`](StoryComponents.md)
 
-Defined in: [packages/core/src/passages/story/types.ts:943](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/passages/story/types.ts#L943)
+Defined in: [packages/core/src/passages/story/types.ts:969](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/passages/story/types.ts#L969)
 
 Function type for story content generation.
 Receives props and returns an array of components to display.
@@ -45,7 +45,7 @@ const story: StoryContent<{ playerName: string; hasKey: boolean }> = (props) => 
     type: 'actions',
     content: [
       {
-        label: 'Open Door',
+        content: 'Open Door',
         action: () => Game.jumpTo('next-room'),
         isDisabled: !props.hasKey,
         tooltip: props.hasKey ? undefined : {

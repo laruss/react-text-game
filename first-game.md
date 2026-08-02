@@ -37,7 +37,7 @@ export const intro = defineStory("intro", (h) => [
     ),
     h.actions([
         {
-            label: "Enter the forest",
+            content: "Enter the forest",
             action: () => {
                 player.courage += 1;
                 Game.jumpTo("forest");
@@ -49,7 +49,7 @@ export const intro = defineStory("intro", (h) => [
 export const forest = defineStory("forest", (h) => [
     h.header("Under the trees", { level: 1 }),
     h.text(`Your courage is now ${player.courage}.`),
-    h.actions([{ label: "Return", action: h.jump("intro") }]),
+    h.actions([{ content: "Return", action: h.jump("intro") }]),
 ]);
 ```
 

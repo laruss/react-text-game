@@ -2,7 +2,7 @@
 
 > **useImportSaves**(): () => `Promise`\<\{ `count`: `number`; `error`: `string`; `success`: `boolean`; \} \| \{ `count`: `number`; `error`: `null`; `success`: `boolean`; \}\>
 
-Defined in: [packages/core/src/saves/hooks/useImportSaves.ts:47](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/hooks/useImportSaves.ts#L47)
+Defined in: [packages/core/src/saves/hooks/useImportSaves.ts:47](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/saves/hooks/useImportSaves.ts#L47)
 
 React hook that provides a function to import game saves from an encrypted file.
 Opens a file picker, decrypts the selected file, and replaces all existing saves.

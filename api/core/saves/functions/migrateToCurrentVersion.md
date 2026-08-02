@@ -2,7 +2,7 @@
 
 > **migrateToCurrentVersion**(`data`, `fromVersion`, `options?`): [`MigrationResult`](../interfaces/MigrationResult.md)
 
-Defined in: [packages/core/src/saves/migrations/runner.ts:184](https://github.com/laruss/react-text-game/blob/9aa52c3412169f451c3f63f9c39fe9fb6e314383/packages/core/src/saves/migrations/runner.ts#L184)
+Defined in: [packages/core/src/saves/migrations/runner.ts:184](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/saves/migrations/runner.ts#L184)
 
 Convenience function to migrate save data to the current game version.
 
