@@ -2,7 +2,7 @@
 
 > `const` **AudioManager**: `AudioManagerClass`
 
-Defined in: [audioTrack.ts:775](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/audio/audioTrack.ts#L775)
+Defined in: [audioTrack.ts:775](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/audio/audioTrack.ts#L775)
 
 Singleton instance of the AudioManager.
 

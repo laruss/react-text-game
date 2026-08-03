@@ -1,6 +1,6 @@
 # Class: Game
 
-Defined in: [packages/core/src/game.ts:62](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L62)
+Defined in: [packages/core/src/game.ts:62](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L62)
 
 Central orchestrator for the text game engine.
 
@@ -50,7 +50,7 @@ Game.loadFromSessionStorage();
 
 > **get** `static` **currentPassage**(): [`Passage`](Passage.md) \| `null`
 
-Defined in: [packages/core/src/game.ts:207](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L207)
+Defined in: [packages/core/src/game.ts:207](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L207)
 
 Retrieves the current passage from the passage registry based on the current passage ID in the game state.
 If the current passage ID is null or the passage cannot be found, returns null.
@@ -73,7 +73,7 @@ The current passage object or null if not available.
 
 > **get** `static` **options**(): [`Options`](../type-aliases/Options.md)
 
-Defined in: [packages/core/src/game.ts:758](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L758)
+Defined in: [packages/core/src/game.ts:758](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L758)
 
 Gets the game options.
 
@@ -95,7 +95,7 @@ The current game options
 
 > **get** `static` **registeredPassages**(): `IterableIterator`\<[`Passage`](Passage.md)\>
 
-Defined in: [packages/core/src/game.ts:196](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L196)
+Defined in: [packages/core/src/game.ts:196](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L196)
 
 Retrieves all registered passages from the passage registry.
 
@@ -117,7 +117,7 @@ An iterator containing all the Passage objects.
 
 > **get** `static` **selfState**(): `object`
 
-Defined in: [packages/core/src/game.ts:348](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L348)
+Defined in: [packages/core/src/game.ts:348](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L348)
 
 Provides access to the internal game state for reactive hooks.
 
@@ -145,7 +145,7 @@ The game's internal reactive state
 
 > `static` **\_getAllProxiedObjects**(): [`BaseGameObject`](BaseGameObject.md)\<[`InitVarsType`](../type-aliases/InitVarsType.md)\>[]
 
-Defined in: [packages/core/src/game.ts:338](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L338)
+Defined in: [packages/core/src/game.ts:338](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L338)
 
 **`Internal`**
 
@@ -165,7 +165,7 @@ An array of BaseGameObject instances stored in the object registry
 
 > `static` **\_getProxiedObject**\<`T`\>(`object`): `T`
 
-Defined in: [packages/core/src/game.ts:328](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L328)
+Defined in: [packages/core/src/game.ts:328](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L328)
 
 **`Internal`**
 
@@ -200,7 +200,7 @@ The proxied object from the registry if present, otherwise the original object
 
 > `static` **\_resetForTesting**(): `void`
 
-Defined in: [packages/core/src/game.ts:784](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L784)
+Defined in: [packages/core/src/game.ts:784](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L784)
 
 **`Internal`**
 
@@ -219,7 +219,7 @@ This method is intended for use in test environments only.
 
 > `static` **clearAutoSave**(): `void`
 
-Defined in: [packages/core/src/game.ts:582](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L582)
+Defined in: [packages/core/src/game.ts:582](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L582)
 
 Clears the auto-saved state from session storage.
 
@@ -243,7 +243,7 @@ Game.clearAutoSave(); // Remove auto-save data
 
 > `static` **disableAutoSave**(): `void`
 
-Defined in: [packages/core/src/game.ts:512](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L512)
+Defined in: [packages/core/src/game.ts:512](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L512)
 
 Disables auto-save functionality and clears all subscriptions.
 
@@ -263,7 +263,7 @@ Error if Game.init() has not been called
 
 > `static` **enableAutoSave**(): `void`
 
-Defined in: [packages/core/src/game.ts:478](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L478)
+Defined in: [packages/core/src/game.ts:478](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L478)
 
 Enables auto-save functionality.
 
@@ -292,7 +292,7 @@ player.health = 50; // Will trigger auto-save
 
 > `static` **getAllPassages**(): [`Passage`](Passage.md)[]
 
-Defined in: [packages/core/src/game.ts:234](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L234)
+Defined in: [packages/core/src/game.ts:234](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L234)
 
 Retrieves all the passages from the passages registry.
 
@@ -312,7 +312,7 @@ Error if Game.init() has not been called
 
 > `static` **getPassageById**(`passageId`): [`Passage`](Passage.md) \| `null`
 
-Defined in: [packages/core/src/game.ts:223](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L223)
+Defined in: [packages/core/src/game.ts:223](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L223)
 
 Retrieves a passage by its unique identifier.
 
@@ -340,7 +340,7 @@ Error if Game.init() has not been called
 
 > `static` **getState**(`_fromI`): [`GameSaveState`](../type-aliases/GameSaveState.md)
 
-Defined in: [packages/core/src/game.ts:406](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L406)
+Defined in: [packages/core/src/game.ts:406](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L406)
 
 Captures the complete game state including all entities and passages.
 
@@ -378,7 +378,7 @@ localStorage.setItem('save1', JSON.stringify(savedState));
 
 > `static` **init**(`opts`): `Promise`\<`void`\>
 
-Defined in: [packages/core/src/game.ts:609](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L609)
+Defined in: [packages/core/src/game.ts:609](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L609)
 
 Initializes the game engine with the provided options.
 
@@ -418,7 +418,7 @@ Game.jumpTo('start');
 
 > `static` **jumpTo**(`passage`): `void`
 
-Defined in: [packages/core/src/game.ts:275](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L275)
+Defined in: [packages/core/src/game.ts:275](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L275)
 
 Navigates the game to a specified passage.
 
@@ -477,7 +477,7 @@ Game.jumpTo('combat'); // renderId: "1234567891-0.456" (different!)
 
 > `static` **loadFromSessionStorage**(): `boolean`
 
-Defined in: [packages/core/src/game.ts:552](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L552)
+Defined in: [packages/core/src/game.ts:552](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L552)
 
 Loads game state from session storage if available.
 
@@ -507,7 +507,7 @@ if (Game.loadFromSessionStorage()) {
 
 > `static` **registerEntity**(...`objects`): `void`
 
-Defined in: [packages/core/src/game.ts:104](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L104)
+Defined in: [packages/core/src/game.ts:104](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L104)
 
 Registers and proxies the provided game objects for further use by adding them to the object registry.
 
@@ -531,7 +531,7 @@ This method does not return a value.
 
 > `static` **registerPassage**(...`passages`): `void`
 
-Defined in: [packages/core/src/game.ts:165](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L165)
+Defined in: [packages/core/src/game.ts:165](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L165)
 
 Registers one or more passages into the passage registry. Each passage must have a unique identifier.
 Throws an error if a passage with the same id is already registered.
@@ -560,7 +560,7 @@ Error if Game.init() has not been called
 
 > `static` **setCurrent**(`passage`): `void`
 
-Defined in: [packages/core/src/game.ts:311](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L311)
+Defined in: [packages/core/src/game.ts:311](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L311)
 
 Sets the current passage in the game state.
 
@@ -592,7 +592,7 @@ Error if Game.init() has not been called
 
 > `static` **setState**(`state`): `void`
 
-Defined in: [packages/core/src/game.ts:435](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L435)
+Defined in: [packages/core/src/game.ts:435](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L435)
 
 Restores the complete game state including all entities and passages.
 
@@ -630,7 +630,7 @@ Game.setState(savedState);
 
 > `static` **updateOptions**(`options`): `void`
 
-Defined in: [packages/core/src/game.ts:770](https://github.com/laruss/react-text-game/blob/2ad06f0c2b75629ab66c4b4b4c41ce3af0a24310/packages/core/src/game.ts#L770)
+Defined in: [packages/core/src/game.ts:770](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/game.ts#L770)
 
 Updates the game options with the provided settings.
 
