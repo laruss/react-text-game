@@ -1,4 +1,4 @@
 interface:
   display_name: "React Text Game"
-  short_description: "Build and refactor React Text Game projects safely"
-  default_prompt: "Use $react-text-game to implement or review this React Text Game change while preserving engine and map invariants."
+  short_description: "Build and debug games made with React Text Game"
+  default_prompt: "Use $react-text-game to implement or review this React Text Game change. Keep state mutations out of passage render paths."
