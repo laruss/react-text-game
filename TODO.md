@@ -32,3 +32,5 @@
 - [ ] new utils package (dev mode);
 - [ ] ai integration;
 - [ ] support other save formats;
+- [x] messenger package, headless (`packages/messenger`);
+- [ ] messenger package UI (see `packages/messenger/TODO.md`);

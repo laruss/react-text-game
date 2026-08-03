@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        // File Layout
+        "rootDir": "./src",
+        "outDir": "./dist",
+
+        // Environment Settings
+        "module": "esnext",
+        "target": "esnext",
+        "lib": ["esnext", "DOM"],
+        "moduleResolution": "bundler",
+        "types": ["bun", "react", "react-dom"],
+
+        // Other Outputs
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+
+        // Stricter Typechecking Options
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "allowArbitraryExtensions": false,
+
+        // Recommended Options
+        "strict": true,
+        "jsx": "react-jsx",
+        "isolatedModules": true,
+        "noUncheckedSideEffectImports": true,
+        "moduleDetection": "force",
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "#*": ["./src/*"]
+        }
+    },
+    "include": ["src"],
+    "exclude": ["dist", "node_modules"]
+}

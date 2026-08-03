@@ -1,0 +1,12 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+    "name": "Clock",
+    "entryPoints": ["../../packages/core/src/clock/index.ts"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "../../packages/core/tsconfig.json",
+    "out": "./docs/api/core/clock",
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "readme": "none"
+}

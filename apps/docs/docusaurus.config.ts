@@ -267,6 +267,7 @@ const config: Config = {
                         { to: "/api/core/", label: "Overview" },
                         { to: "/api/core/saves/", label: "Saves & Migrations" },
                         { to: "/api/core/audio/", label: "Audio" },
+                        { to: "/api/core/clock/", label: "Clock" },
                         { to: "/api/core/i18n/", label: "i18n" },
                     ],
                 },
@@ -287,6 +288,11 @@ const config: Config = {
                         { to: "/api/mdx/", label: "Overview" },
                         { to: "/api/mdx/plugin/", label: "Build Plugin" },
                     ],
+                },
+                {
+                    to: "/api/messenger/",
+                    label: "Messenger API",
+                    position: "left",
                 },
                 {
                     href: "https://github.com/laruss/react-text-game",
@@ -322,12 +328,20 @@ const config: Config = {
                             to: "/api/core/audio/",
                         },
                         {
+                            label: "Clock API",
+                            to: "/api/core/clock/",
+                        },
+                        {
                             label: "UI API",
                             to: "/api/ui/",
                         },
                         {
                             label: "MDX API",
                             to: "/api/mdx/",
+                        },
+                        {
+                            label: "Messenger API",
+                            to: "/api/messenger/",
                         },
                     ],
                 },
@@ -345,6 +359,10 @@ const config: Config = {
                         {
                             label: "@react-text-game/mdx",
                             href: "https://www.npmjs.com/package/@react-text-game/mdx",
+                        },
+                        {
+                            label: "@react-text-game/messenger",
+                            href: "https://www.npmjs.com/package/@react-text-game/messenger",
                         },
                     ],
                 },

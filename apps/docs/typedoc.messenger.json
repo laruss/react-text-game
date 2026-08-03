@@ -1,0 +1,12 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown", "typedoc-docusaurus-theme"],
+    "name": "Messenger",
+    "entryPoints": ["../../packages/messenger/src/index.ts"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "../../packages/messenger/tsconfig.json",
+    "out": "./docs/api/messenger",
+    "excludePrivate": true,
+    "excludeProtected": false,
+    "readme": "none"
+}

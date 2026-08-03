@@ -22,6 +22,8 @@ const sidebars: SidebarsConfig = {
                 "loading-and-splash-screens",
                 "agent-skill",
                 "mdx-integration",
+                "messenger",
+                "game-clock",
                 "i18n",
                 "migrations",
             ],
@@ -38,6 +40,7 @@ const sidebars: SidebarsConfig = {
                 { type: "link", label: "Core", href: "/api/core/" },
                 { type: "link", label: "UI", href: "/api/ui/" },
                 { type: "link", label: "MDX", href: "/api/mdx/" },
+                { type: "link", label: "Messenger", href: "/api/messenger/" },
             ],
         },
         {

@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- Add a game clock and a public translation-registration API.
+
+  `@react-text-game/core/clock` is a new entry point exporting `Clock` plus the
+  `SECOND`/`MINUTE`/`HOUR`/`DAY` helpers, and the main entry point gains a
+  `useGameTime` hook. Game time is in-fiction time: it starts at a fixed fictional
+  timestamp rather than `Date.now()`, persists with the save, and by default only
+  advances when the game calls `Clock.advance()`. A `"realtime"` mode derives the
+  value from a stored anchor pair on every read, so no timer is needed for
+  correctness and the clock survives saves, page reloads and suspended tabs. On
+  load, game time is restored exactly and real-time flow is re-anchored, so real
+  time that passed while a save sat unused never leaks into the story. Configure it
+  through the new `clock` option of `Game.init()`.
+
+  `registerTranslations()` from `@react-text-game/core/i18n` lets a companion
+  package ship its own namespace of default strings. Precedence runs registered
+  package defaults, then `@react-text-game/ui` defaults, then the author's
+  `translations.resources`, so a game can always override a package string. Call
+  order does not matter: registering after `Game.init()` adds the bundle without
+  overwriting keys that are already present.
+
+  Both additions are backwards compatible.
+
 ## 0.8.0
 
 ### Minor Changes

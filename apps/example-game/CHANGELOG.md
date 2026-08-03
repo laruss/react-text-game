@@ -1,5 +1,12 @@
 # example-game
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @react-text-game/core@0.9.0
+
 ## 0.0.3
 
 ### Patch Changes

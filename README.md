@@ -7,6 +7,7 @@ A powerful, reactive text-based game engine for React applications. Build intera
 [![@react-text-game/core](https://img.shields.io/npm/v/@react-text-game/core?label=core)](https://www.npmjs.com/package/@react-text-game/core)
 [![@react-text-game/ui](https://img.shields.io/npm/v/@react-text-game/ui?label=ui)](https://www.npmjs.com/package/@react-text-game/ui)
 [![@react-text-game/mdx](https://img.shields.io/npm/v/@react-text-game/mdx?label=mdx)](https://www.npmjs.com/package/@react-text-game/mdx)
+[![@react-text-game/messenger](https://img.shields.io/npm/v/@react-text-game/messenger?label=messenger)](https://www.npmjs.com/package/@react-text-game/messenger)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why React Text Game?
@@ -28,6 +29,8 @@ Whether you're building a visual novel, interactive fiction, or educational narr
 - **Multiple Passage Types** - Story passages, Interactive Maps, and custom Widget passages
 - **Comprehensive Save System** - IndexedDB persistence with encrypted export/import
 - **Audio System** - Full-featured audio management with reactive state, persistence, and global controls
+- **Game Clock** - In-fiction time that persists with the save, deterministic by default
+- **Messenger & Transcripts** - Persistent message logs with seen tracking, for chat sims and visual novels
 - **Asset Preloading** - Preload images, audio, and other assets with progress tracking and abort support
 - **Themeable UI Components** - Tailwind CSS v4 with semantic color tokens
 - **Internationalization** - i18next-powered translations with persistent language switching
@@ -38,7 +41,7 @@ Whether you're building a visual novel, interactive fiction, or educational narr
 
 ## Packages
 
-This monorepo contains three publishable packages:
+This monorepo contains four publishable packages:
 
 ### [@react-text-game/core](./packages/core)
 
@@ -49,9 +52,10 @@ The core game engine providing:
 - JSONPath-based storage system
 - Story, Interactive Map, and Widget passages
 - Audio system with reactive state and persistence
+- Game clock with manual and real-time modes, persisted with the save
 - Asset preloading with progress tracking and abort support
 - Save/load system with auto-save
-- React hooks (`useGameEntity`, `useCurrentPassage`, `useGameIsStarted`, `useIsStoryMode`, `useAudio`, `useAudioManager`)
+- React hooks (`useGameEntity`, `useCurrentPassage`, `useGameIsStarted`, `useIsStoryMode`, `useAudio`, `useAudioManager`, `useGameTime`)
 
 [Core Package Documentation](./packages/core/README.md)
 
@@ -82,6 +86,20 @@ MDX integration package enabling:
 
 [MDX Package Documentation](./packages/mdx/README.md)
 
+### [@react-text-game/messenger](./packages/messenger)
+
+Headless messenger and visual-novel transcript engine:
+
+- Persistent, append-only message logs that survive saves, loads and remounts
+- Seen tracking at four levels, including a cross-save record for skip-already-read
+- Direct and group chats, with membership, titles and optional pictures
+- Media messages: photos, videos, captions and mixed albums
+- Message forwarding, in-fiction read receipts, and read-only channels
+- Scheduled delivery and typing indicators measured in game time, with no live timers
+- Headless hooks (`useChat`, `useChatList`, `useUnreadTotal`) - UI ships in a later release
+
+[Messenger Package Documentation](./packages/messenger/README.md)
+
 ## Quick Start
 
 ### Installation
@@ -92,6 +110,9 @@ bun add @react-text-game/core @react-text-game/ui
 
 # Optional: Add MDX support for Markdown-based passages
 bun add @react-text-game/mdx @mdx-js/mdx @mdx-js/react
+
+# Optional: Add messenger and visual-novel transcripts
+bun add @react-text-game/messenger
 
 # Or use npm/yarn/pnpm
 npm install @react-text-game/core @react-text-game/ui
@@ -260,6 +281,7 @@ bun run test --filter=@react-text-game/core
 | Work on core engine    | `bun run dev --filter=@react-text-game/core --filter=core-test-app`                              |
 | Work on UI components  | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app`   |
 | Work on MDX package    | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/mdx --filter=example-game` |
+| Work on messenger      | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/messenger`                 |
 | Full stack development | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game`  |
 | Documentation site     | `bun run dev:docs` or `bun run dev --filter=@react-text-game/docs`                               |
 
@@ -270,7 +292,8 @@ react-text-game/
 ├── packages/
 │   ├── core/          # @react-text-game/core - Game engine
 │   ├── ui/            # @react-text-game/ui - UI components
-│   └── mdx/           # @react-text-game/mdx - MDX integration
+│   ├── mdx/           # @react-text-game/mdx - MDX integration
+│   └── messenger/     # @react-text-game/messenger - Message transcripts
 ├── apps/
 │   ├── docs/          # Docusaurus documentation site
 │   ├── example-game/  # Example game implementation
@@ -301,11 +324,14 @@ Understanding the dependency graph helps you run only what's needed:
 @react-text-game/ui (depends on core)
        ↑
 @react-text-game/mdx (depends on core)
+       ↑
+@react-text-game/messenger (depends on core)
 ```
 
 - **Working on core?** Run core + a test app to see changes
 - **Working on UI?** Run core + UI + a test app (UI depends on core)
 - **Working on MDX?** Run core + MDX + example-game
+- **Working on messenger?** Run core + messenger; it is headless, so its tests are the feedback loop
 
 ### Development Workflow
 
@@ -366,7 +392,7 @@ bun run format
 
 #### 5. Create a Changeset
 
-If you're modifying a publishable package (`core`, `ui`, or `mdx`):
+If you're modifying a publishable package (`core`, `ui`, `mdx`, or `messenger`):
 
 ```bash
 bun run changeset
@@ -406,5 +432,6 @@ MIT (c) [laruss](https://github.com/laruss)
     - [@react-text-game/core](https://www.npmjs.com/package/@react-text-game/core)
     - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
     - [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
+    - [@react-text-game/messenger](https://www.npmjs.com/package/@react-text-game/messenger)
 - **Repository:** [GitHub](https://github.com/laruss/react-text-game)
 - **Issues:** Report bugs and request features on GitHub Issues

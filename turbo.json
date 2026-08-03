@@ -23,7 +23,10 @@
                 "$TURBO_ROOT$/packages/mdx/tsconfig.json",
                 "$TURBO_ROOT$/packages/ui/package.json",
                 "$TURBO_ROOT$/packages/ui/src/**",
-                "$TURBO_ROOT$/packages/ui/tsconfig.json"
+                "$TURBO_ROOT$/packages/ui/tsconfig.json",
+                "$TURBO_ROOT$/packages/messenger/package.json",
+                "$TURBO_ROOT$/packages/messenger/src/**",
+                "$TURBO_ROOT$/packages/messenger/tsconfig.json"
             ],
             "outputs": ["build/**"]
         },

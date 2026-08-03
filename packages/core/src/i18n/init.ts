@@ -1,10 +1,12 @@
 import i18next, { type Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import { deepMerge } from "#helpers";
 import { logger } from "#logger";
 import { getSetting } from "#saves/db";
 
 import { DEFAULT_CONFIG } from "./constants";
+import { _getRegisteredTranslations } from "./registry";
 import type { I18nConfig } from "./types";
 import { loadUITranslations } from "./utils";
 
@@ -84,24 +86,31 @@ export async function initI18n(config?: I18nConfig) {
         logger.log("UI translations loaded successfully.");
     }
 
-    // Merge user resources with UI translations
-    // User resources take precedence over UI translations
+    const packageTranslations = _getRegisteredTranslations();
+
+    // Layer the three sources by precedence: package defaults registered
+    // through registerTranslations(), then UI defaults, then user resources.
+    const userResources = resources || {};
+    const languages = new Set([
+        ...Object.keys(packageTranslations),
+        ...Object.keys(uiTranslations),
+        ...Object.keys(userResources),
+    ]);
+
     const mergedResources: Resource = {};
 
-    for (const [lang, namespaces] of Object.entries(resources || {})) {
-        mergedResources[lang] = {
-            // UI translations as defaults
-            ...(uiTranslations[lang] || {}),
-            // User resources can override UI translations
-            ...namespaces,
-        };
-    }
+    for (const lang of languages) {
+        // Merged per key, not per namespace: overriding a single string of a
+        // namespace must not drop the rest of that namespace's defaults.
+        const withUi = deepMerge(
+            (packageTranslations[lang] || {}) as Record<string, unknown>,
+            (uiTranslations[lang] || {}) as Record<string, unknown>
+        );
 
-    // Add UI translations for languages not provided by user
-    for (const [lang, translations] of Object.entries(uiTranslations)) {
-        if (!mergedResources[lang]) {
-            mergedResources[lang] = translations;
-        }
+        mergedResources[lang] = deepMerge(
+            withUi,
+            (userResources[lang] || {}) as Record<string, unknown>
+        ) as Resource[string];
     }
 
     // Load saved language preference from database (if available)

@@ -1,5 +1,6 @@
 import { proxy, subscribe } from "valtio";
 
+import { Clock } from "#clock";
 import { STORAGE_SYSTEM_PATH, SYSTEM_PASSAGE_NAMES } from "#constants";
 import { cleanupDevTools, exposeDevTools } from "#devTools";
 import type { BaseGameObject } from "#gameObjects";
@@ -409,6 +410,7 @@ export class Game {
         }
 
         Game.save();
+        Clock.save();
         for (const [, object] of objectRegistry) {
             object.save();
         }
@@ -437,6 +439,7 @@ export class Game {
 
         Storage.setState(state);
         Game.load();
+        Clock.load();
         for (const [, object] of objectRegistry) {
             object.load();
         }
@@ -615,6 +618,11 @@ export class Game {
         }
 
         newOptions(opts);
+
+        // Validated before the initialized flag is set: a rejected clock option
+        // must leave the engine re-initializable instead of half-initialized.
+        Clock.init(opts.clock);
+
         Game.initialized = true;
 
         // Store whether user explicitly provided startPassage
@@ -790,6 +798,9 @@ export class Game {
         // Clear all registries
         objectRegistry.clear();
         passagesRegistry.clear();
+
+        // Reset the game clock to its defaults
+        Clock._resetForTesting();
 
         // Reset initialization state
         Game.initialized = false;

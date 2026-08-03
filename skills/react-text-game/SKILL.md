@@ -1,11 +1,11 @@
 ---
 name: react-text-game
-description: Builds, reviews, and debugs games made with @react-text-game/core, @react-text-game/ui, or @react-text-game/mdx. Use when writing passages, stories, scenes, dialogue, or branching choices; when modelling game entities and reactive React components; when wiring GameProvider, save/load, migrations, audio, i18n, asset preloading, interactive maps, or custom UI slots; when working with .mdx story files; or when contributing to the react-text-game monorepo. Not for React applications that do not depend on a @react-text-game/* package.
+description: Builds, reviews, and debugs games made with @react-text-game/core, @react-text-game/ui, @react-text-game/mdx, or @react-text-game/messenger. Use when writing passages, stories, scenes, dialogue, or branching choices; when modelling game entities and reactive React components; when wiring GameProvider, save/load, migrations, audio, the game clock, i18n, asset preloading, interactive maps, or custom UI slots; when building messenger-simulator chats or visual-novel transcripts with unread and seen tracking; when working with .mdx story files; or when contributing to the react-text-game monorepo. Not for React applications that do not depend on a @react-text-game/* package.
 ---
 
 # React Text Game
 
-The engine keeps persistent game data in **entities** and describes screens as **passages**. Passages are pure display descriptions that the engine re-renders freely, so the one rule that breaks saved games is mutating state while a passage renders. Start there, then use the smallest layer that solves the request: `core` for behaviour, `ui` for presentation, `mdx` for authoring.
+The engine keeps persistent game data in **entities** and describes screens as **passages**. Passages are pure display descriptions that the engine re-renders freely, so the one rule that breaks saved games is mutating state while a passage renders. Start there, then use the smallest layer that solves the request: `core` for behaviour, `ui` for presentation, `mdx` for authoring, `messenger` for persistent chat transcripts.
 
 ## Route the task
 
@@ -15,6 +15,7 @@ The engine keeps persistent game data in **entities** and describes screens as *
 | Hotspot placement, coordinate bugs, custom map renderer | [references/interactive-maps.md](references/interactive-maps.md) |
 | `GameProvider`, preloading, loading and splash screens, UI slots | [references/ui-and-bootstrap.md](references/ui-and-bootstrap.md) |
 | Writing or fixing `.mdx` story files | [references/mdx-authoring.md](references/mdx-authoring.md) |
+| Chats, message logs, unread state, visual-novel backlogs | [references/messenger.md](references/messenger.md) |
 | Changing the library itself under `packages/` | [references/contributing.md](references/contributing.md) |
 
 ## Never mutate game state while a passage renders
@@ -160,15 +161,26 @@ function PlayerStats() {
 - Register a migration whenever the persisted shape of an entity changes, and validate the chain against `gameVersion`.
 - Auto-save serialises the whole state tree to `sessionStorage` on a 500 ms debounce. Keep unbounded collections (logs, transcripts, history) capped or archived.
 
+## Use game time, not wall-clock time
+
+In-fiction time belongs to `Clock` from `@react-text-game/core/clock`, never to `Date.now()`. A fresh game starts at a fixed fictional timestamp, so two players who make the same choices see the same in-fiction time and tests stay reproducible.
+
+- `Clock.now()` is safe to read while rendering. `advance`, `set`, `pause`, `resume`, `setMode` and `setScale` change state, so they belong in action handlers.
+- The default `"manual"` mode only moves when the game moves it. `"realtime"` derives the value from a stored anchor pair on every read, so no timer is needed for correctness and the clock survives saves, reloads and suspended tabs.
+- Game time persists with the save; on load it is restored exactly and real-time flow is re-anchored, so real time that passed while a save sat unused never leaks into the story.
+- `useGameTime()` re-renders on clock state changes. In `"realtime"` mode flowing time mutates nothing, so pass `useGameTime(tickMs)` for a display that has to tick by itself.
+
 ## Import from the published entry points
 
 - `@react-text-game/core` -- `Game`, entities, passages, hooks, `preloadContent`.
 - `@react-text-game/core/saves` -- save hooks, Dexie database helpers, `getSetting`/`setSetting`, migrations.
-- `@react-text-game/core/i18n` -- `useGameTranslation`, `getGameTranslation`.
+- `@react-text-game/core/i18n` -- `useGameTranslation`, `getGameTranslation`, `registerTranslations`.
 - `@react-text-game/core/audio` -- audio tracks and manager.
+- `@react-text-game/core/clock` -- `Clock` and the `SECOND`/`MINUTE`/`HOUR`/`DAY` helpers. `useGameTime` comes from the main entry point.
 - `@react-text-game/core/passages` -- **types only**; it has no runtime export, so never import a value from it.
 - `@react-text-game/ui`, `@react-text-game/ui/styles`, `@react-text-game/ui/i18n`.
 - `@react-text-game/mdx`, `@react-text-game/mdx/plugin`.
+- `@react-text-game/messenger` -- single entry point; there are no subpaths.
 
 ## Look up API details in the live docs
 

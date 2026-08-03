@@ -1,3 +1,5 @@
+import { DEFAULT_CLOCK_OPTIONS } from "#clock/constants";
+import type { ClockOptions } from "#clock/types";
 import { SYSTEM_PASSAGE_NAMES } from "#constants";
 import type { I18nConfig } from "#i18n";
 import { DEFAULT_CONFIG } from "#i18n/constants";
@@ -39,6 +41,23 @@ export type Options = {
     author: string;
     isDevMode: boolean;
     translations: I18nConfig;
+    /**
+     * Configuration for the in-fiction game clock.
+     *
+     * @remarks
+     * Defaults to a manual clock starting at a fixed fictional timestamp, so
+     * game time never depends on when the game was played. Read the resolved
+     * values through `Clock` from `@react-text-game/core/clock`.
+     *
+     * @example
+     * ```typescript
+     * await Game.init({
+     *   gameName: 'My Game',
+     *   clock: { startAt: Date.UTC(2031, 4, 12, 8, 30), mode: 'realtime', scale: 60 },
+     * });
+     * ```
+     */
+    clock: ClockOptions;
 };
 
 export type NewOptions = Pick<Options, "gameName"> &
@@ -71,6 +90,7 @@ const options: Options = {
     author: "",
     isDevMode: false,
     translations: DEFAULT_CONFIG,
+    clock: DEFAULT_CLOCK_OPTIONS,
 };
 
 export const newOptions = (opts: NewOptions) => {

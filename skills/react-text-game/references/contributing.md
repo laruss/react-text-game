@@ -16,11 +16,11 @@ Applies only to work inside the `react-text-game` repository itself. For buildin
 
 `CLAUDE.md` at the repository root is authoritative and is loaded automatically; follow it rather than re-deriving the rules here. In short: Bun 1.3.9 only, repository scripts only, Biome for lint and format, `bun.lock` as the single lockfile.
 
-Dependency direction is `core <- ui` and `core <- mdx`. Nothing depends on `ui` or `mdx`. Keep it that way; a new cross-package dependency needs an explicit decision.
+Dependency direction is `core <- ui`, `core <- mdx` and `core <- messenger`. Nothing depends on `ui`, `mdx` or `messenger`. Keep it that way; a new cross-package dependency needs an explicit decision.
 
 ## Tests and coverage
 
-- Tests live in `packages/<package>/src/tests`. Every behaviour change in `core`, `ui`, or `mdx` must add or update tests in that package.
+- Tests live in `packages/<package>/src/tests`. Every behaviour change in `core`, `ui`, `mdx`, or `messenger` must add or update tests in that package.
 - `bun run test:coverage` enforces at least 99% aggregate function and line coverage, at least 95% per runtime source file, and that every runtime file appears in LCOV.
 - Never run tests from generated `dist` or `api-docs`, and never use `--if-present`.
 - Example apps are not coverage targets.
@@ -42,7 +42,7 @@ Then add checks proportional to the change:
 - Build or pack each affected public package and confirm tests are absent from `dist`.
 - Run the example app that exercises the changed path (`core-test-app`, `ui-test-app`, or `example-game`).
 - For map work, follow the numeric checklist in [interactive-maps.md](interactive-maps.md).
-- Add a changeset with `bun run changeset` for any change to `core`, `ui`, or `mdx`.
+- Add a changeset with `bun run changeset` for any change to `core`, `ui`, `mdx`, or `messenger`.
 
 ## Changing MDX transforms
 

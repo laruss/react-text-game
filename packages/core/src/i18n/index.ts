@@ -64,5 +64,6 @@
  */
 export * from "./hooks";
 export * from "./init";
+export { registerTranslations } from "./registry";
 export * from "./types";
 export { getGameTranslation } from "./utils";
