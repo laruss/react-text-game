@@ -15,4 +15,5 @@
 
 - [getGameTranslation](functions/getGameTranslation.md)
 - [initI18n](functions/initI18n.md)
+- [registerTranslations](functions/registerTranslations.md)
 - [useGameTranslation](functions/useGameTranslation.md)

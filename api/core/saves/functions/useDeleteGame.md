@@ -2,7 +2,7 @@
 
 > **useDeleteGame**(): (`id`) => `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
 
-Defined in: [packages/core/src/saves/hooks/useDeleteGame.ts:21](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/core/src/saves/hooks/useDeleteGame.ts#L21)
+Defined in: [packages/core/src/saves/hooks/useDeleteGame.ts:21](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/core/src/saves/hooks/useDeleteGame.ts#L21)
 
 React hook that provides a function to delete a saved game by its ID.
 Removes the save from IndexedDB storage.

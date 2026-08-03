@@ -121,4 +121,5 @@
 - [useCurrentPassage](functions/useCurrentPassage.md)
 - [useGameEntity](functions/useGameEntity.md)
 - [useGameIsStarted](functions/useGameIsStarted.md)
+- [useGameTime](functions/useGameTime.md)
 - [useIsStoryMode](functions/useIsStoryMode.md)

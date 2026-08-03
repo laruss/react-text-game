@@ -2,7 +2,7 @@
 
 > **LanguageToggle**(`__namedParameters`): `Element` \| `null`
 
-Defined in: [components/LanguageToggle.tsx:53](https://github.com/laruss/react-text-game/blob/244de4160e09d8c345e60cd6f5b8a8a3c66be8a9/packages/ui/src/components/LanguageToggle.tsx#L53)
+Defined in: [components/LanguageToggle.tsx:53](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/ui/src/components/LanguageToggle.tsx#L53)
 
 A themed language toggle dropdown component that opens on hover.
 Uses the UI package's semantic theming system for automatic dark mode support.
