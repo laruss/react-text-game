@@ -350,6 +350,62 @@ describe("Clock", () => {
             expect(saved?.anchorGame).toBe(2 * HOUR);
         });
 
+        test("does not persist the wall-clock anchor", () => {
+            Clock.init({ startAt: HOUR, mode: "realtime", scale: 5 });
+
+            Clock.save();
+
+            const [saved] =
+                Storage.getValue<Record<string, unknown>>(CLOCK_STORAGE_PATH);
+            expect(saved).toEqual({
+                anchorGame: HOUR,
+                mode: "realtime",
+                scale: 5,
+                paused: false,
+            });
+            expect(saved).not.toHaveProperty("anchorReal");
+        });
+
+        test("produces an identical snapshot while nothing changes", () => {
+            let realNow = 0;
+            Clock._setNowProvider(() => realNow);
+            Clock.init({ startAt: 0, mode: "realtime" });
+
+            Clock.save();
+            const first = structuredClone(
+                Storage.getValue<object>(CLOCK_STORAGE_PATH)[0]
+            );
+
+            // Wall-clock time moves, but nothing about the clock's configuration
+            // has changed, so the saved shape must not churn.
+            realNow += 5 * SECOND;
+            Clock.set(0);
+            Clock.save();
+
+            expect(Storage.getValue<object>(CLOCK_STORAGE_PATH)[0]).toEqual(
+                first
+            );
+        });
+
+        test("still loads a save that predates dropping the anchor", () => {
+            Storage.setValue(
+                CLOCK_STORAGE_PATH,
+                {
+                    anchorGame: 3 * HOUR,
+                    anchorReal: 1_700_000_000_000,
+                    mode: "manual",
+                    scale: 1,
+                    paused: false,
+                },
+                true
+            );
+
+            Clock.load();
+
+            expect(Clock.now()).toBe(3 * HOUR);
+            expect(Clock.mode).toBe("manual");
+        });
+
         test("restores game time and configuration", () => {
             Clock._setNowProvider(() => 0);
             Clock.init({ startAt: 0, mode: "realtime", scale: 30 });

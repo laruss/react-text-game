@@ -1,4 +1,4 @@
-import { proxy, snapshot, subscribe } from "valtio";
+import { proxy, subscribe } from "valtio";
 
 import { logger } from "#logger";
 import { Storage } from "#storage";
@@ -276,10 +276,14 @@ export class Clock {
      * @internal
      */
     static save(): void {
+        // `anchorReal` is deliberately absent: load() always re-anchors it to the
+        // current wall clock, so persisting it would store a value that is never
+        // read - and make every snapshot differ from the last one for no reason.
         const saveState = {
-            ...snapshot(state),
             anchorGame: Clock.now(),
-            anchorReal: nowProvider(),
+            mode: state.mode,
+            scale: state.scale,
+            paused: state.paused,
         } satisfies ClockSaveState;
 
         Storage.setValue(CLOCK_STORAGE_PATH, saveState, true);

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.9.1
+
+### Patch Changes
+
+- Stop persisting the clock's wall-clock anchor.
+
+  `Clock.load()` always re-anchors real time to the moment of loading, so the
+  `anchorReal` field written into `$._system.clock` was never read back. Keeping it
+  meant every `Game.getState()` produced a slightly different snapshot even when
+  nothing about the game had changed, which made save diffs churn for no reason.
+
+  The field is now omitted from the persisted shape, and `ClockSaveState` reflects
+  that. Saves written by 0.9.0 remain loadable - the extra key is simply ignored -
+  so no migration is required, and game time still survives a save/load round-trip
+  exactly as before.
+
 ## 0.9.0
 
 ### Minor Changes

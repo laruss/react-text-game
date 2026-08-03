@@ -3,6 +3,7 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const sidebars: SidebarsConfig = {
     docsSidebar: [
         "intro",
+        "agent-skill",
         {
             type: "category",
             label: "Start here",
@@ -20,7 +21,6 @@ const sidebars: SidebarsConfig = {
             items: [
                 "interactive-maps",
                 "loading-and-splash-screens",
-                "agent-skill",
                 "mdx-integration",
                 "messenger",
                 "game-clock",

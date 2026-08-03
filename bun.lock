@@ -22,7 +22,7 @@
     },
     "apps/core-test-app": {
       "name": "core-test-app",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "dependencies": {
         "@react-text-game/core": "workspace:*",
         "react": "^19",
@@ -58,7 +58,7 @@
     },
     "apps/example-game": {
       "name": "example-game",
-      "version": "0.0.4",
+      "version": "0.0.5",
       "dependencies": {
         "@mdx-js/mdx": "^3.1.1",
         "@mdx-js/react": "^3.1.1",
@@ -91,7 +91,7 @@
     },
     "apps/ui-test-app": {
       "name": "ui-test-app",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "dependencies": {
         "@react-text-game/core": "workspace:*",
         "@react-text-game/ui": "workspace:*",
@@ -110,7 +110,7 @@
     },
     "packages/core": {
       "name": "@react-text-game/core",
-      "version": "0.9.0",
+      "version": "0.9.1",
       "dependencies": {
         "crypto-js": "^4.2.0",
         "dexie": "^4.4.4",

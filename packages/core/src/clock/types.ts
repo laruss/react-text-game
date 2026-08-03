@@ -79,8 +79,13 @@ export type ClockState = {
  * Shape persisted at `$._system.clock`.
  *
  * @remarks
- * `anchorGame` holds the resolved game time at the moment of saving, and
- * `anchorReal` is re-anchored on load, so real time that passed while the save
- * sat on disk never leaks into game time.
+ * `anchorGame` holds the resolved game time at the moment of saving.
+ * {@link ClockState.anchorReal} is deliberately not persisted: loading always
+ * re-anchors it to the current wall clock, so real time that passed while a save
+ * sat unused never leaks into game time. Storing it would keep a value nothing
+ * reads and make consecutive snapshots differ even when nothing changed.
+ *
+ * Saves written before this field was dropped remain loadable - the extra key is
+ * simply ignored - so no migration is required.
  */
-export type ClockSaveState = ClockState;
+export type ClockSaveState = Omit<ClockState, "anchorReal">;
