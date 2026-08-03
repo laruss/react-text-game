@@ -23,6 +23,11 @@ describe("Clock", () => {
     beforeEach(() => {
         setupMockStorage();
         Clock._resetForTesting();
+        // Freeze wall-clock time for the whole suite. Without this, any test that
+        // touches "realtime" mode races the real clock - and `scale` multiplies a
+        // single elapsed millisecond, so the failure is intermittent rather than
+        // obvious. Tests that need time to move install their own provider.
+        Clock._setNowProvider(() => 0);
     });
 
     afterEach(() => {
