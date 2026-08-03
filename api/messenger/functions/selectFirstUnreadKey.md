@@ -2,7 +2,7 @@
 
 > **selectFirstUnreadKey**(`vars`): `string` \| `null`
 
-Defined in: [selectors.ts:11](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/messenger/src/selectors.ts#L11)
+Defined in: [selectors.ts:11](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/selectors.ts#L11)
 
 Key of the oldest entry the player has not seen, or `null` when the chat is
 fully read.

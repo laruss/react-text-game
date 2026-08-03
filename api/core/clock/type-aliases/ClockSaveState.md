@@ -2,7 +2,7 @@
 
 > **ClockSaveState** = [`ClockState`](ClockState.md)
 
-Defined in: [types.ts:86](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/core/src/clock/types.ts#L86)
+Defined in: [types.ts:86](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/core/src/clock/types.ts#L86)
 
 Shape persisted at `$._system.clock`.
 

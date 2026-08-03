@@ -2,7 +2,7 @@
 
 > `const` **mapHelpers**: [`MapHelpers`](../type-aliases/MapHelpers.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:228](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/core/src/passages/interactiveMap/helpers.ts#L228)
+Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:228](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/core/src/passages/interactiveMap/helpers.ts#L228)
 
 Interactive map hotspot builders.
 

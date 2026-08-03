@@ -2,7 +2,7 @@
 
 > **StaticText** = `string` \| `number` \| [`I18nText`](I18nText.md)
 
-Defined in: [types.ts:72](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/messenger/src/types.ts#L72)
+Defined in: [types.ts:72](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/types.ts#L72)
 
 Text that can be persisted without a script to point back to.
 

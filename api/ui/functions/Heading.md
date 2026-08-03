@@ -2,7 +2,7 @@
 
 > **Heading**(`__namedParameters`): `Element`
 
-Defined in: [components/StoryComponent/components/Heading.tsx:20](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/ui/src/components/StoryComponent/components/Heading.tsx#L20)
+Defined in: [components/StoryComponent/components/Heading.tsx:20](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/ui/src/components/StoryComponent/components/Heading.tsx#L20)
 
 ## Parameters
 

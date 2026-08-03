@@ -2,7 +2,7 @@
 
 > **createEntity**\<`Vars`\>(`id`, `variables`): [`SimpleObject`](../type-aliases/SimpleObject.md)\<`Vars` & [`AssertNoOptionals`](../type-aliases/AssertNoOptionals.md)\<`Vars`\>\>
 
-Defined in: [packages/core/src/gameObjects/fabric.ts:48](https://github.com/laruss/react-text-game/blob/8eb82456bbd558066ac161867d5ee62b2a1d337c/packages/core/src/gameObjects/fabric.ts#L48)
+Defined in: [packages/core/src/gameObjects/fabric.ts:48](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/core/src/gameObjects/fabric.ts#L48)
 
 Convenience factory that wraps [SimpleObject](../type-aliases/SimpleObject.md) creation.
 
