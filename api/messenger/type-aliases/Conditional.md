@@ -2,7 +2,7 @@
 
 > **Conditional**\<`T`\> = `T` \| `false` \| `null` \| `undefined`
 
-Defined in: [scripts/types.ts:18](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/scripts/types.ts#L18)
+Defined in: [scripts/types.ts:18](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/scripts/types.ts#L18)
 
 A value that may be omitted from a beat array.
 

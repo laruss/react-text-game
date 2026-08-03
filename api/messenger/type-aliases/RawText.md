@@ -2,7 +2,7 @@
 
 > **RawText** = `object`
 
-Defined in: [types.ts:25](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/types.ts#L25)
+Defined in: [types.ts:25](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/types.ts#L25)
 
 A frozen literal string.
 
@@ -12,7 +12,7 @@ A frozen literal string.
 
 > **kind**: `"raw"`
 
-Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/types.ts#L26)
+Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/types.ts#L26)
 
 ***
 
@@ -20,4 +20,4 @@ Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/daa646c
 
 > **text**: `string`
 
-Defined in: [types.ts:27](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/types.ts#L27)
+Defined in: [types.ts:27](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/types.ts#L27)
