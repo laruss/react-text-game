@@ -2,7 +2,7 @@
 
 > **useChat**(`chat`): [`ChatSnapshot`](../type-aliases/ChatSnapshot.md)
 
-Defined in: [hooks/useChat.ts:72](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/hooks/useChat.ts#L72)
+Defined in: [hooks/useChat.ts:72](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/hooks/useChat.ts#L72)
 
 Subscribes a component to one chat.
 

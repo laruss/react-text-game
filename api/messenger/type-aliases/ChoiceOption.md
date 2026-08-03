@@ -2,7 +2,7 @@
 
 > **ChoiceOption** = `object`
 
-Defined in: [scripts/types.ts:116](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/scripts/types.ts#L116)
+Defined in: [scripts/types.ts:116](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/scripts/types.ts#L116)
 
 One selectable reply.
 
@@ -12,7 +12,7 @@ One selectable reply.
 
 > **content**: [`TextInput`](TextInput.md)
 
-Defined in: [scripts/types.ts:118](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/scripts/types.ts#L118)
+Defined in: [scripts/types.ts:118](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/scripts/types.ts#L118)
 
 Label shown to the player, and logged once chosen.
 
@@ -22,7 +22,7 @@ Label shown to the player, and logged once chosen.
 
 > `optional` **next**: [`Script`](Script.md) \| () => `void`
 
-Defined in: [scripts/types.ts:126](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/scripts/types.ts#L126)
+Defined in: [scripts/types.ts:126](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/scripts/types.ts#L126)
 
 What happens after the reply is logged.
 

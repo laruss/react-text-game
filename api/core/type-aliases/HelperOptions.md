@@ -2,7 +2,7 @@
 
 > **HelperOptions**\<`T`\> = `Omit`\<`T`, `"props"`\> & `T` *extends* `object` ? `NonNullable`\<`TProps`\> : `unknown`
 
-Defined in: [packages/core/src/passages/definition.ts:55](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/core/src/passages/definition.ts#L55)
+Defined in: [packages/core/src/passages/definition.ts:55](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/core/src/passages/definition.ts#L55)
 
 Flattens a component or hotspot type into the single options bag its helper
 accepts: everything nested under `props` is hoisted to the top level.

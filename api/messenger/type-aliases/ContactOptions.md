@@ -2,7 +2,7 @@
 
 > **ContactOptions** = `object`
 
-Defined in: [contacts.ts:33](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/contacts.ts#L33)
+Defined in: [contacts.ts:33](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/contacts.ts#L33)
 
 Options accepted by [defineContact](../functions/defineContact.md).
 
@@ -12,7 +12,7 @@ Options accepted by [defineContact](../functions/defineContact.md).
 
 > `optional` **avatar**: `string`
 
-Defined in: [contacts.ts:35](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/contacts.ts#L35)
+Defined in: [contacts.ts:35](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/contacts.ts#L35)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [contacts.ts:35](https://github.com/laruss/react-text-game/blob/2fea
 
 > `optional` **meta**: `Record`\<`string`, `unknown`\>
 
-Defined in: [contacts.ts:36](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/contacts.ts#L36)
+Defined in: [contacts.ts:36](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/contacts.ts#L36)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [contacts.ts:36](https://github.com/laruss/react-text-game/blob/2fea
 
 > `optional` **name**: [`StaticText`](StaticText.md)
 
-Defined in: [contacts.ts:34](https://github.com/laruss/react-text-game/blob/2feaccf7cc721dee02f37759df31ed424b0f0e17/packages/messenger/src/contacts.ts#L34)
+Defined in: [contacts.ts:34](https://github.com/laruss/react-text-game/blob/daa646ced57537a6f88dd821fec37a65997af962/packages/messenger/src/contacts.ts#L34)
