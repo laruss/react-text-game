@@ -83,7 +83,7 @@ describe("i18n", () => {
                 fallbackLanguage: "en",
                 resources: {
                     ru: {
-                        common: { greeting: "@825B" },
+                        common: { greeting: "Привет" },
                     },
                     en: {
                         common: { greeting: "Hello" },
@@ -104,8 +104,8 @@ describe("i18n", () => {
                         common: { save: "Save", load: "Load" },
                     },
                     ru: {
-                        passages: { intro: ">1@> ?>60;>20BL 2 83@C" },
-                        common: { save: "!>E@0=8BL", load: "03@C78BL" },
+                        passages: { intro: "Добро пожаловать в игру" },
+                        common: { save: "Сохранить", load: "Загрузить" },
                     },
                 },
             };
@@ -166,7 +166,7 @@ describe("i18n", () => {
                 defaultLanguage: "en",
                 resources: {
                     en: { common: { test: "English" } },
-                    ru: { common: { test: " CAA:89" } },
+                    ru: { common: { test: "Русский" } },
                 },
             };
 
@@ -232,7 +232,7 @@ describe("i18n", () => {
             const config: I18nConfig = {
                 resources: {
                     en: { common: { greeting: "Hello" } },
-                    ru: { common: { greeting: "@825B" } },
+                    ru: { common: { greeting: "Привет" } },
                     de: { common: { greeting: "Hallo" } },
                     fr: { common: { greeting: "Bonjour" } },
                 },
@@ -281,12 +281,12 @@ describe("i18n", () => {
                     },
                     ru: {
                         passages: {
-                            intro: ">1@> ?>60;>20BL",
-                            forest: "K 2 ;5AC",
+                            intro: "Добро пожаловать",
+                            forest: "Вы в лесу",
                         },
                         common: {
-                            save: "!>E@0=8BL",
-                            load: "03@C78BL",
+                            save: "Сохранить",
+                            load: "Загрузить",
                         },
                     },
                 },
@@ -319,8 +319,8 @@ describe("i18n", () => {
 
             const t = getGameTranslation("passages");
 
-            expect(t("intro")).toBe(">1@> ?>60;>20BL");
-            expect(t("forest")).toBe("K 2 ;5AC");
+            expect(t("intro")).toBe("Добро пожаловать");
+            expect(t("forest")).toBe("Вы в лесу");
         });
 
         test("updates when language changes", async () => {
@@ -330,7 +330,7 @@ describe("i18n", () => {
             await i18next.changeLanguage("ru");
 
             const tRu = getGameTranslation("common");
-            expect(tRu("save")).toBe("!>E@0=8BL");
+            expect(tRu("save")).toBe("Сохранить");
         });
 
         test("falls back to key when translation missing", () => {
@@ -366,8 +366,8 @@ describe("i18n", () => {
                         common: { save: "Save", load: "Load" },
                     },
                     ru: {
-                        passages: { intro: ">1@> ?>60;>20BL" },
-                        common: { save: "!>E@0=8BL", load: "03@C78BL" },
+                        passages: { intro: "Добро пожаловать" },
+                        common: { save: "Сохранить", load: "Загрузить" },
                     },
                     de: {
                         passages: { intro: "Willkommen" },
@@ -454,7 +454,7 @@ describe("i18n", () => {
             await result.current.changeLanguage("ru");
 
             await waitFor(() => {
-                expect(result.current.t("intro")).toBe(">1@> ?>60;>20BL");
+                expect(result.current.t("intro")).toBe("Добро пожаловать");
             });
         });
 
@@ -489,7 +489,7 @@ describe("i18n", () => {
 
             await result.current.changeLanguage("ru");
             await waitFor(() => {
-                expect(result.current.t("intro")).toBe(">1@> ?>60;>20BL");
+                expect(result.current.t("intro")).toBe("Добро пожаловать");
             });
 
             await result.current.changeLanguage("de");
@@ -516,8 +516,8 @@ describe("i18n", () => {
                         common: { continue: "Continue" },
                     },
                     ru: {
-                        passages: { story: "4=064K..." },
-                        common: { continue: "@>4>;68BL" },
+                        passages: { story: "Однажды..." },
+                        common: { continue: "Продолжить" },
                     },
                 },
             });
@@ -531,7 +531,7 @@ describe("i18n", () => {
 
             // 4. Get new translation function
             const tRu = getGameTranslation("passages");
-            expect(tRu("story")).toBe("4=064K...");
+            expect(tRu("story")).toBe("Однажды...");
         });
 
         test("multiple namespaces across different languages", async () => {
@@ -638,7 +638,7 @@ describe("i18n", () => {
                     en: {
                         passages: {
                             special: "Test \"quotes\" and 'apostrophes'",
-                            unicode: "Test `} E1-('",
+                            unicode: "Тест 🎮 中文 العربية",
                             newlines: "Line 1\nLine 2",
                         },
                     },
@@ -648,7 +648,7 @@ describe("i18n", () => {
             const t = getGameTranslation("passages");
 
             expect(t("special")).toBe("Test \"quotes\" and 'apostrophes'");
-            expect(t("unicode")).toBe("Test `} E1-('");
+            expect(t("unicode")).toBe("Тест 🎮 中文 العربية");
             expect(t("newlines")).toBe("Line 1\nLine 2");
         });
 
