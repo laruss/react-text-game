@@ -36,6 +36,7 @@ const sidebars: SidebarsConfig = {
                 "game-clock",
                 "i18n",
                 "migrations",
+                "keep-saves-valid",
             ],
         },
         {
@@ -51,6 +52,7 @@ const sidebars: SidebarsConfig = {
                 { type: "link", label: "UI", href: "/api/ui/" },
                 { type: "link", label: "MDX", href: "/api/mdx/" },
                 { type: "link", label: "Messenger", href: "/api/messenger/" },
+                { type: "link", label: "Devtools", href: "/api/devtools/" },
             ],
         },
         {

@@ -1,4 +1,10 @@
 {
     "extends": "./tsconfig.json",
-    "exclude": ["dist", "node_modules", "src/tests"]
+    "exclude": ["dist", "node_modules", "src/tests"],
+    // Node's ESM resolver needs explicit file extensions and cannot resolve a
+    // directory to its index. Without this, `dist` ships specifiers like
+    // "./game" and Node fails with ERR_MODULE_NOT_FOUND.
+    "tsc-alias": {
+        "resolveFullPaths": true
+    }
 }

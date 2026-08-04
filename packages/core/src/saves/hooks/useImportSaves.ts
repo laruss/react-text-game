@@ -109,7 +109,10 @@ export const useImportSaves = () => {
                     save.name,
                     save.gameData,
                     save.description,
-                    save.screenshot
+                    save.screenshot,
+                    // Keep the version the save was created with: migrations are
+                    // selected by comparing it against the current one.
+                    save.version
                 );
                 count++;
             } catch (e) {

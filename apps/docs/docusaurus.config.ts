@@ -295,6 +295,11 @@ const config: Config = {
                     position: "left",
                 },
                 {
+                    to: "/api/devtools/",
+                    label: "Devtools API",
+                    position: "left",
+                },
+                {
                     href: "https://github.com/laruss/react-text-game",
                     label: "GitHub",
                     position: "right",
@@ -314,6 +319,10 @@ const config: Config = {
                         {
                             label: "Save Migrations",
                             to: "/migrations",
+                        },
+                        {
+                            label: "Keep your saves valid",
+                            to: "/keep-saves-valid",
                         },
                         {
                             label: "Core API",
@@ -343,6 +352,10 @@ const config: Config = {
                             label: "Messenger API",
                             to: "/api/messenger/",
                         },
+                        {
+                            label: "Devtools API",
+                            to: "/api/devtools/",
+                        },
                     ],
                 },
                 {
@@ -363,6 +376,10 @@ const config: Config = {
                         {
                             label: "@react-text-game/messenger",
                             href: "https://www.npmjs.com/package/@react-text-game/messenger",
+                        },
+                        {
+                            label: "@react-text-game/devtools",
+                            href: "https://www.npmjs.com/package/@react-text-game/devtools",
                         },
                     ],
                 },

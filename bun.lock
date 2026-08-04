@@ -133,6 +133,22 @@
         "react-dom": "^18.0.0 || ^19.0.0",
       },
     },
+    "packages/devtools": {
+      "name": "@react-text-game/devtools",
+      "version": "0.1.0",
+      "bin": {
+        "rtg": "dist/bin.js",
+      },
+      "devDependencies": {
+        "@react-text-game/core": "workspace:*",
+        "@types/bun": "1.3.9",
+        "@types/node": "^24.6.2",
+        "tsc-alias": "^1.8.16",
+      },
+      "peerDependencies": {
+        "@react-text-game/core": ">=0.10.0",
+      },
+    },
     "packages/mdx": {
       "name": "@react-text-game/mdx",
       "version": "0.3.0",
@@ -861,6 +877,8 @@
     "@radix-ui/react-slot": ["@radix-ui/react-slot@1.2.3", "", { "dependencies": { "@radix-ui/react-compose-refs": "1.1.2" }, "peerDependencies": { "@types/react": "*", "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc" }, "optionalPeers": ["@types/react"] }, "sha512-aeNmHnBxbi2St0au6VBVC7JXFlhLlOnvIIlePNniyUNAClzmtAUEY8/pBiK3iHjufOlwA+c20/8jngo7xcrg8A=="],
 
     "@react-text-game/core": ["@react-text-game/core@workspace:packages/core"],
+
+    "@react-text-game/devtools": ["@react-text-game/devtools@workspace:packages/devtools"],
 
     "@react-text-game/docs": ["@react-text-game/docs@workspace:apps/docs"],
 

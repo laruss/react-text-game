@@ -93,6 +93,8 @@ export * from "./constants";
 export type { ReactTextGameDebug } from "./global";
 export * from "./hooks";
 export { preloadContent } from "./preload";
+// Save-shape introspection for build-time tooling (@react-text-game/devtools).
+export { getSaveSchemaSource, type SaveSchemaSource } from "./saveSchema";
 
 export {
     BaseGameObject,

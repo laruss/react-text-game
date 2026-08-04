@@ -1,8 +1,11 @@
-import AES from "crypto-js/aes";
-import WordArray from "crypto-js/core";
-import Base64 from "crypto-js/enc-base64";
-import Utf8 from "crypto-js/enc-utf8";
-import PBKDF2 from "crypto-js/pbkdf2";
+// crypto-js ships no "exports" map, so Node's ESM resolver cannot add the
+// extension for us. Spell these subpaths out in full to keep the built package
+// importable by Node as well as by bundlers.
+import AES from "crypto-js/aes.js";
+import WordArray from "crypto-js/core.js";
+import Base64 from "crypto-js/enc-base64.js";
+import Utf8 from "crypto-js/enc-utf8.js";
+import PBKDF2 from "crypto-js/pbkdf2.js";
 
 import { _getOptions } from "#options";
 
@@ -10,9 +13,12 @@ import { ITERATIONS, KEY_SIZE, SAVE_POSTFIX } from "./constants";
 
 /**
  * Generates the encryption password by combining game ID with save postfix
+ * @param gameId - Game ID to use instead of the configured one. Lets tooling
+ * read a save file without booting the game it belongs to.
  * @returns Password string for encryption/decryption
  */
-const getPassword = () => `${_getOptions().gameId}.${SAVE_POSTFIX}`;
+const getPassword = (gameId?: string) =>
+    `${gameId ?? _getOptions().gameId}.${SAVE_POSTFIX}`;
 
 /**
  * Encodes (encrypts) data using AES encryption with PBKDF2 key derivation.
@@ -20,11 +26,13 @@ const getPassword = () => `${_getOptions().gameId}.${SAVE_POSTFIX}`;
  *
  * @template T - Type of data to encode
  * @param data - Data to encrypt
+ * @param gameId - Game ID to derive the password from. Defaults to the game ID
+ * in the current options.
  * @returns Uint8Array containing encrypted data with salt and IV prepended
  */
-export const encodeSf = <T>(data: T) => {
+export const encodeSf = <T>(data: T, gameId?: string) => {
     const salt = WordArray.lib.WordArray.random(128 / 8);
-    const key = PBKDF2(getPassword(), salt, {
+    const key = PBKDF2(getPassword(gameId), salt, {
         keySize: KEY_SIZE,
         iterations: ITERATIONS,
     });
@@ -44,10 +52,12 @@ export const encodeSf = <T>(data: T) => {
  *
  * @template T - Expected type of the decrypted data
  * @param data - ArrayBuffer containing encrypted data
+ * @param gameId - Game ID to derive the password from. Defaults to the game ID
+ * in the current options.
  * @returns Decrypted data of type T
  * @throws Error if decryption fails (corrupted data or password mismatch)
  */
-export const decodeSf = <T>(data: ArrayBuffer): T => {
+export const decodeSf = <T>(data: ArrayBuffer, gameId?: string): T => {
     const transitMessage = new TextDecoder().decode(data);
 
     const saltString = transitMessage.substring(0, 24);
@@ -57,7 +67,7 @@ export const decodeSf = <T>(data: ArrayBuffer): T => {
     const salt = Base64.parse(saltString);
     const iv = Base64.parse(ivString);
 
-    const key = PBKDF2(getPassword(), salt, {
+    const key = PBKDF2(getPassword(gameId), salt, {
         keySize: KEY_SIZE,
         iterations: ITERATIONS,
     });

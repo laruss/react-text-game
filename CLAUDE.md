@@ -18,8 +18,8 @@ The root scripts are the source of truth:
 
 - `bun run test` runs the complete source test suite through Turborepo.
 - `bun run test --filter=@react-text-game/core` runs one workspace; replace the
-  filter with `@react-text-game/mdx`, `@react-text-game/ui`, or
-  `@react-text-game/messenger` as needed.
+  filter with `@react-text-game/mdx`, `@react-text-game/ui`,
+  `@react-text-game/messenger`, or `@react-text-game/devtools` as needed.
 - `bun run test:coverage` is mandatory final verification for changes to a
   publishable package. It enforces at least 99% aggregate function and line
   coverage, at least 95% per runtime source file, and verifies that every such
@@ -28,10 +28,11 @@ The root scripts are the source of truth:
   may run one test file. It never replaces the final root commands.
 - Never use `--if-present`, never run tests from generated `dist` or `api-docs`,
   and treat a missing test script in `packages/core`, `packages/mdx`,
-  `packages/ui`, or `packages/messenger` as a configuration error. Example apps are not coverage targets.
-- Every behavior change in `packages/core`, `packages/mdx`, `packages/ui`, or
-  `packages/messenger` must add or update tests in that package before the task
-  is complete.
+  `packages/ui`, `packages/messenger`, or `packages/devtools` as a configuration
+  error. Example apps are not coverage targets.
+- Every behavior change in `packages/core`, `packages/mdx`, `packages/ui`,
+  `packages/messenger`, or `packages/devtools` must add or update tests in that
+  package before the task is complete.
 
 ### Required Verification
 

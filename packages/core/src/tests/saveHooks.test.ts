@@ -394,6 +394,46 @@ describe("Save hooks", () => {
         }
     });
 
+    test("preserves the version each imported save was created with", async () => {
+        const restorePicker = installFilePicker(
+            makeSaveFile([
+                {
+                    name: "1",
+                    gameData: { progress: 10 },
+                    timestamp: new Date(),
+                    version: "0.1.0",
+                },
+                {
+                    name: "2",
+                    gameData: { progress: 20 },
+                    timestamp: new Date(),
+                    version: "0.2.0",
+                },
+            ])
+        );
+
+        try {
+            const { result } = renderHook(() => useImportSaves());
+            expect(await result.current()).toEqual({
+                success: true,
+                count: 2,
+                error: null,
+            });
+        } finally {
+            restorePicker();
+        }
+
+        const imported = await getAllSaves();
+        expect(
+            imported
+                .map((save) => [save.name, save.version])
+                .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
+        ).toEqual([
+            ["1", "0.1.0"],
+            ["2", "0.2.0"],
+        ]);
+    });
+
     test("rejects corrupted and structurally invalid imports", async () => {
         const corruptPicker = installFilePicker(
             new File(["corrupt"], "backup.sx")

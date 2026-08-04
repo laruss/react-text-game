@@ -81,13 +81,17 @@ export const db = getDatabase();
  * @param gameData - Game state data to save
  * @param description - Optional description
  * @param screenshot - Optional base64 encoded screenshot
+ * @param version - Version to stamp the save with. Defaults to the current game
+ * version. Pass the original version when restoring a save that was created by
+ * an older build, otherwise migrations will never run for it.
  * @returns Promise<number> - The ID of the save
  */
 export async function saveGame(
     name: string | number,
     gameData: Record<string, unknown>,
     description?: string,
-    screenshot?: string
+    screenshot?: string,
+    version?: string
 ): Promise<number> {
     const normalizedName = `${name}`;
     if (normalizedName === SYSTEM_SAVE_NAME) {
@@ -99,7 +103,7 @@ export async function saveGame(
             name: normalizedName,
             gameData,
             timestamp: new Date(),
-            version: _getOptions().gameVersion,
+            version: version ?? _getOptions().gameVersion,
             description: String(description),
             screenshot: String(screenshot),
         };

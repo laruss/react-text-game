@@ -26,7 +26,10 @@
                 "$TURBO_ROOT$/packages/ui/tsconfig.json",
                 "$TURBO_ROOT$/packages/messenger/package.json",
                 "$TURBO_ROOT$/packages/messenger/src/**",
-                "$TURBO_ROOT$/packages/messenger/tsconfig.json"
+                "$TURBO_ROOT$/packages/messenger/tsconfig.json",
+                "$TURBO_ROOT$/packages/devtools/package.json",
+                "$TURBO_ROOT$/packages/devtools/src/**",
+                "$TURBO_ROOT$/packages/devtools/tsconfig.json"
             ],
             "outputs": ["build/**"]
         },

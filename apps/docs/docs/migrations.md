@@ -14,6 +14,7 @@ A complete solution for versioning and migrating game saves in your text game en
 - [Quick Start](#quick-start)
 - [How It Works](#how-it-works)
 - [Usage Guide](#usage-guide)
+- [Do I Need a Migration?](#do-i-need-a-migration)
 - [Semantic Versioning Strategy](#semantic-versioning-strategy)
 - [Best Practices](#best-practices)
 - [API Reference](#api-reference)
@@ -228,6 +229,32 @@ const convertInventory: SaveMigration<OldInventoryFormat> = {
 registerMigration(convertInventory);
 ```
 
+## Do I Need a Migration?
+
+Answering this by hand is unreliable, because the consequences of a change are not
+what intuition suggests. Adding a field to an entity is safe — loading merges the
+save over freshly built defaults. Adding a whole **entity** is not: a save holding
+no data for it has its variables cleared rather than defaulted.
+
+`@react-text-game/devtools` decides for you. It records the shape of your saves as
+a committed file and compares later versions against it:
+
+```bash
+# once per release
+bunx rtg saves snapshot --entry src/game/registry.ts
+
+# on every commit, exits non-zero when a migration is missing
+bunx rtg saves check --entry src/game/registry.ts
+```
+
+It also catches the two failures that are invisible from the code: a shape change
+whose `gameVersion` was not bumped (migrations only run when the versions differ,
+so nothing would migrate), and a deleted passage that leaves old saves pointing at
+an id which silently resolves to nothing.
+
+See [Keep your saves valid](/keep-saves-valid) for the full workflow, including how
+to recover a baseline for a game that is already in production.
+
 ## Semantic Versioning Strategy
 
 Follow [semver](https://semver.org/) to communicate the impact of changes:
@@ -242,12 +269,15 @@ Follow [semver](https://semver.org/) to communicate the impact of changes:
 
 Register a migration when you:
 
-- ✅ Add a new required field
-- ✅ Rename or remove a field
+- ✅ Add a new entity — old saves have no data for it, so loading clears its
+  variables instead of keeping their defaults
+- ✅ Rename or remove a field, or rename an entity
 - ✅ Change the structure of existing data
 - ✅ Change data types (string → number)
+- ✅ Remove or rename a passage — a save left on it resolves to no passage at all
+- ❌ Add a new field to an existing entity (it keeps its default)
+- ❌ Add a new passage (nothing points at it yet)
 - ❌ Fix a bug (no migration needed)
-- ❌ Add a new passage or entity (no migration needed)
 
 ## Best Practices
 

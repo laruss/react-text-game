@@ -118,6 +118,24 @@ describe("GameDatabase", () => {
         expect((await getAllSaves()).map((save) => save.name)).toEqual(["2"]);
     });
 
+    test("stamps an explicit version instead of the current one", async () => {
+        await saveGame(
+            11,
+            { player: { health: 10 } },
+            undefined,
+            undefined,
+            "1.3.0"
+        );
+
+        expect((await loadGame(11))?.version).toBe("1.3.0");
+    });
+
+    test("falls back to the current game version when none is given", async () => {
+        await saveGame(12, { player: { health: 10 } });
+
+        expect((await loadGame(12))?.version).toBe("2.4.0");
+    });
+
     test("serializes concurrent writes to the same new slot", async () => {
         const [firstId, secondId] = await Promise.all([
             saveGame(7, { checkpoint: "first" }),

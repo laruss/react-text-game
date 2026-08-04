@@ -26,7 +26,7 @@
         "build": "turbo run build",
         "dev": "turbo run dev",
         "dev:docs": "turbo run dev --filter @react-text-game/docs",
-        "docs:api": "typedoc --options apps/docs/typedoc.core.json && typedoc --options apps/docs/typedoc.core-saves.json && typedoc --options apps/docs/typedoc.core-audio.json && typedoc --options apps/docs/typedoc.core-clock.json && typedoc --options apps/docs/typedoc.core-i18n.json && typedoc --options apps/docs/typedoc.ui.json && typedoc --options apps/docs/typedoc.ui-i18n.json && typedoc --options apps/docs/typedoc.mdx.json && typedoc --options apps/docs/typedoc.mdx-plugin.json && typedoc --options apps/docs/typedoc.messenger.json",
+        "docs:api": "typedoc --options apps/docs/typedoc.core.json && typedoc --options apps/docs/typedoc.core-saves.json && typedoc --options apps/docs/typedoc.core-audio.json && typedoc --options apps/docs/typedoc.core-clock.json && typedoc --options apps/docs/typedoc.core-i18n.json && typedoc --options apps/docs/typedoc.ui.json && typedoc --options apps/docs/typedoc.ui-i18n.json && typedoc --options apps/docs/typedoc.mdx.json && typedoc --options apps/docs/typedoc.mdx-plugin.json && typedoc --options apps/docs/typedoc.messenger.json && typedoc --options apps/docs/typedoc.devtools.json",
         "lint": "turbo run lint",
         "lint:root": "biome check --error-on-warnings biome.json package.json turbo.json context7.json skills-lock.json happydom.ts scripts",
         "format": "biome check --write biome.json package.json turbo.json context7.json skills-lock.json happydom.ts scripts apps packages",

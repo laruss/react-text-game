@@ -1,0 +1,9 @@
+{
+    "extends": "./tsconfig.json",
+    "exclude": ["dist", "node_modules", "src/tests"],
+    // The published `rtg` binary runs under plain Node, whose ESM resolver needs
+    // explicit file extensions and cannot resolve a directory to its index.
+    "tsc-alias": {
+        "resolveFullPaths": true
+    }
+}

@@ -10,7 +10,7 @@
 - [ ] set up script for automatic version update;
 - [ ] redo tooltip implementation in interactiveMap component in core;
 - [ ] add theme trigger to ui package;
-- [ ] add utility to determine whether a developer needs to create a save migration or not.
+- [x] add utility to determine whether a developer needs to create a save migration or not.
 - [x] add i18n support;
 - [x] add to git ignore `apps/docs/api` folder and build it on CI;
 - [x] add the possibility to add basic styling to text components;
@@ -29,7 +29,7 @@
     - [ ] enchase the main menu: to add customization chances and possible to change or add buttons;
 - [x] i18n support;
 - [ ] create own components registry;
-- [ ] new utils package (dev mode);
+- [x] new utils package (dev mode);
 - [ ] ai integration;
 - [ ] support other save formats;
 - [x] messenger package, headless (`packages/messenger`);

@@ -8,6 +8,7 @@ A powerful, reactive text-based game engine for React applications. Build intera
 [![@react-text-game/ui](https://img.shields.io/npm/v/@react-text-game/ui?label=ui)](https://www.npmjs.com/package/@react-text-game/ui)
 [![@react-text-game/mdx](https://img.shields.io/npm/v/@react-text-game/mdx?label=mdx)](https://www.npmjs.com/package/@react-text-game/mdx)
 [![@react-text-game/messenger](https://img.shields.io/npm/v/@react-text-game/messenger?label=messenger)](https://www.npmjs.com/package/@react-text-game/messenger)
+[![@react-text-game/devtools](https://img.shields.io/npm/v/@react-text-game/devtools?label=devtools)](https://www.npmjs.com/package/@react-text-game/devtools)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why React Text Game?
@@ -41,7 +42,7 @@ Whether you're building a visual novel, interactive fiction, or educational narr
 
 ## Packages
 
-This monorepo contains four publishable packages:
+This monorepo contains five publishable packages — four libraries and one development-time CLI:
 
 ### [@react-text-game/core](./packages/core)
 
@@ -100,6 +101,19 @@ Headless messenger and visual-novel transcript engine:
 
 [Messenger Package Documentation](./packages/messenger/README.md)
 
+### [@react-text-game/devtools](./packages/devtools)
+
+Development-time CLI (`rtg`) that answers whether a release needs a save migration:
+
+- Records your save shape as a committed baseline, then diffs later versions against it
+- Classifies each difference by what it actually does to an old save, not by how it looks
+- Catches the silent failures: a new entity whose variables get cleared, a shape change with no `gameVersion` bump, a deleted passage that old saves still point at
+- Verifies that a registered migration chain covers the version bump, so it works as a CI gate
+- Recovers a baseline from a game already in production, via an exported save or an IndexedDB dump
+- Runs under both Bun and Node
+
+[Devtools Package Documentation](./packages/devtools/README.md)
+
 ## Quick Start
 
 ### Installation
@@ -113,6 +127,9 @@ bun add @react-text-game/mdx @mdx-js/mdx @mdx-js/react
 
 # Optional: Add messenger and visual-novel transcripts
 bun add @react-text-game/messenger
+
+# Recommended: the rtg CLI, which flags releases that need a save migration
+bun add -d @react-text-game/devtools
 
 # Or use npm/yarn/pnpm
 npm install @react-text-game/core @react-text-game/ui
@@ -282,6 +299,7 @@ bun run test --filter=@react-text-game/core
 | Work on UI components  | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=ui-test-app`   |
 | Work on MDX package    | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/mdx --filter=example-game` |
 | Work on messenger      | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/messenger`                 |
+| Work on devtools       | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/devtools`                   |
 | Full stack development | `bun run dev --filter=@react-text-game/core --filter=@react-text-game/ui --filter=example-game`  |
 | Documentation site     | `bun run dev:docs` or `bun run dev --filter=@react-text-game/docs`                               |
 
@@ -293,7 +311,8 @@ react-text-game/
 │   ├── core/          # @react-text-game/core - Game engine
 │   ├── ui/            # @react-text-game/ui - UI components
 │   ├── mdx/           # @react-text-game/mdx - MDX integration
-│   └── messenger/     # @react-text-game/messenger - Message transcripts
+│   ├── messenger/     # @react-text-game/messenger - Message transcripts
+│   └── devtools/      # @react-text-game/devtools - rtg CLI (save-schema checks)
 ├── apps/
 │   ├── docs/          # Docusaurus documentation site
 │   ├── example-game/  # Example game implementation
@@ -326,12 +345,15 @@ Understanding the dependency graph helps you run only what's needed:
 @react-text-game/mdx (depends on core)
        ↑
 @react-text-game/messenger (depends on core)
+       ↑
+@react-text-game/devtools (depends on core)
 ```
 
 - **Working on core?** Run core + a test app to see changes
 - **Working on UI?** Run core + UI + a test app (UI depends on core)
 - **Working on MDX?** Run core + MDX + example-game
 - **Working on messenger?** Run core + messenger; it is headless, so its tests are the feedback loop
+- **Working on devtools?** Run core + devtools, then exercise the CLI against `apps/core-test-app/src/game/registry.ts`
 
 ### Development Workflow
 
@@ -392,7 +414,7 @@ bun run format
 
 #### 5. Create a Changeset
 
-If you're modifying a publishable package (`core`, `ui`, `mdx`, or `messenger`):
+If you're modifying a publishable package (`core`, `ui`, `mdx`, `messenger`, or `devtools`):
 
 ```bash
 bun run changeset
@@ -433,5 +455,6 @@ MIT (c) [laruss](https://github.com/laruss)
     - [@react-text-game/ui](https://www.npmjs.com/package/@react-text-game/ui)
     - [@react-text-game/mdx](https://www.npmjs.com/package/@react-text-game/mdx)
     - [@react-text-game/messenger](https://www.npmjs.com/package/@react-text-game/messenger)
+    - [@react-text-game/devtools](https://www.npmjs.com/package/@react-text-game/devtools)
 - **Repository:** [GitHub](https://github.com/laruss/react-text-game)
 - **Issues:** Report bugs and request features on GitHub Issues
