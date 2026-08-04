@@ -2,7 +2,7 @@
 
 > **MediaItemInput** = `object`
 
-Defined in: [types.ts:101](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L101)
+Defined in: [types.ts:101](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L101)
 
 Author-facing form of [MediaItem](MediaItem.md), built with `m.image()` / `m.video()`.
 
@@ -12,7 +12,7 @@ Author-facing form of [MediaItem](MediaItem.md), built with `m.image()` / `m.vid
 
 > `optional` **alt**: [`TextInput`](TextInput.md)
 
-Defined in: [types.ts:104](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L104)
+Defined in: [types.ts:104](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L104)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:104](https://github.com/laruss/react-text-game/blob/82dd17
 
 > `optional` **durationMs**: `number`
 
-Defined in: [types.ts:106](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L106)
+Defined in: [types.ts:106](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L106)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:106](https://github.com/laruss/react-text-game/blob/82dd17
 
 > **kind**: `"image"` \| `"video"`
 
-Defined in: [types.ts:102](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L102)
+Defined in: [types.ts:102](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L102)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [types.ts:102](https://github.com/laruss/react-text-game/blob/82dd17
 
 > `optional` **poster**: `string`
 
-Defined in: [types.ts:105](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L105)
+Defined in: [types.ts:105](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L105)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [types.ts:105](https://github.com/laruss/react-text-game/blob/82dd17
 
 > `optional` **spoiler**: `boolean`
 
-Defined in: [types.ts:107](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L107)
+Defined in: [types.ts:107](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L107)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [types.ts:107](https://github.com/laruss/react-text-game/blob/82dd17
 
 > **src**: `string`
 
-Defined in: [types.ts:103](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L103)
+Defined in: [types.ts:103](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L103)

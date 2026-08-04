@@ -2,7 +2,7 @@
 
 > **Messenger** = `object`
 
-Defined in: [messenger.ts:48](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L48)
+Defined in: [messenger.ts:48](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/messenger.ts#L48)
 
 Cross-chat facade: the chat list, the total unread badge, and the delivery tick.
 
@@ -12,7 +12,7 @@ Cross-chat facade: the chat list, the total unread badge, and the delivery tick.
 
 > `readonly` **chats**: [`ChatSummary`](ChatSummary.md)[]
 
-Defined in: [messenger.ts:50](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L50)
+Defined in: [messenger.ts:50](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/messenger.ts#L50)
 
 Every managed chat, most recently active first.
 
@@ -22,7 +22,7 @@ Every managed chat, most recently active first.
 
 > `readonly` **unreadTotal**: `number`
 
-Defined in: [messenger.ts:53](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L53)
+Defined in: [messenger.ts:53](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/messenger.ts#L53)
 
 Total unseen entries across every chat, for a single badge.
 
@@ -32,7 +32,7 @@ Total unseen entries across every chat, for a single badge.
 
 > **deliverDueAll**(): `void`
 
-Defined in: [messenger.ts:62](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L62)
+Defined in: [messenger.ts:62](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/messenger.ts#L62)
 
 Delivers everything that has become due in every chat.
 
@@ -51,7 +51,7 @@ focus, on passage change, after moving the clock, or on an interval.
 
 > **flushSeen**(): `Promise`\<`void`\>
 
-Defined in: [messenger.ts:72](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L72)
+Defined in: [messenger.ts:72](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/messenger.ts#L72)
 
 Forces the cross-save seen record to be written now.
 
@@ -65,7 +65,7 @@ Forces the cross-save seen record to be written now.
 
 > **loadSeen**(): `Promise`\<`void`\>
 
-Defined in: [messenger.ts:67](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L67)
+Defined in: [messenger.ts:67](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/messenger.ts#L67)
 
 Loads the cross-save seen record. Call once during bootstrap.
 

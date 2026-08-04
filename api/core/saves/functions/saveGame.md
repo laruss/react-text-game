@@ -1,8 +1,8 @@
 # Function: saveGame()
 
-> **saveGame**(`name`, `gameData`, `description?`, `screenshot?`): `Promise`\<`number`\>
+> **saveGame**(`name`, `gameData`, `description?`, `screenshot?`, `version?`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/saves/db.ts:86](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/db.ts#L86)
+Defined in: [packages/core/src/saves/db.ts:89](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/saves/db.ts#L89)
 
 Save game data to the database
 
@@ -31,6 +31,14 @@ Optional description
 `string`
 
 Optional base64 encoded screenshot
+
+### version?
+
+`string`
+
+Version to stamp the save with. Defaults to the current game
+version. Pass the original version when restoring a save that was created by
+an older build, otherwise migrations will never run for it.
 
 ## Returns
 

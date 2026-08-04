@@ -20,6 +20,12 @@ React Text Game is split into four libraries:
 
 Only `core` is required. Each of the others is optional and independently usable.
 
+One more package ships as a development tool rather than a library:
+
+| Package | Use it for |
+| --- | --- |
+| `@react-text-game/devtools` | the `rtg` CLI, which tells you whether a release needs a [save migration](/keep-saves-valid) |
+
 ## A passage in 30 seconds
 
 ```tsx title="src/game/intro.ts"
@@ -64,7 +70,8 @@ root.render(
 - Reach for the [Game Clock](/game-clock) whenever the story needs in-fiction time: schedules, cooldowns, or "three hours later".
 - Open [Custom UI](/custom-ui) to replace one primitive, a whole passage renderer, or the entire presentation layer.
 - Install the [React Text Game agent skill](/agent-skill) so Codex and other compatible agents follow the library's lifecycle, map-coordinate, and verification contracts.
-- Use the [Core API](/api/core/), [UI API](/api/ui/), [MDX API](/api/mdx/), and [Messenger API](/api/messenger/) for exact signatures.
+- Run [Keep your saves valid](/keep-saves-valid) before every release so a shape change never reaches players unmigrated.
+- Use the [Core API](/api/core/), [UI API](/api/ui/), [MDX API](/api/mdx/), [Messenger API](/api/messenger/), and [Devtools API](/api/devtools/) for exact signatures.
 
 ## Design principles
 

@@ -26,9 +26,11 @@
 
 - [clearMigrations](functions/clearMigrations.md)
 - [createOrUpdateSystemSave](functions/createOrUpdateSystemSave.md)
+- [decodeSf](functions/decodeSf.md)
 - [deleteAllGameSaves](functions/deleteAllGameSaves.md)
 - [deleteSave](functions/deleteSave.md)
 - [deleteSetting](functions/deleteSetting.md)
+- [encodeSf](functions/encodeSf.md)
 - [findMigrationPath](functions/findMigrationPath.md)
 - [getAllMigrations](functions/getAllMigrations.md)
 - [getAllSaves](functions/getAllSaves.md)

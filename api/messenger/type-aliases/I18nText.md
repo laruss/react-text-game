@@ -2,7 +2,7 @@
 
 > **I18nText** = `object`
 
-Defined in: [types.ts:40](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L40)
+Defined in: [types.ts:40](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L40)
 
 A translation key resolved at read time, with its interpolation values frozen
 at delivery time.
@@ -20,7 +20,7 @@ retroactively.
 
 > **key**: `string`
 
-Defined in: [types.ts:42](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L42)
+Defined in: [types.ts:42](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L42)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [types.ts:42](https://github.com/laruss/react-text-game/blob/82dd17c
 
 > **kind**: `"i18n"`
 
-Defined in: [types.ts:41](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L41)
+Defined in: [types.ts:41](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L41)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [types.ts:41](https://github.com/laruss/react-text-game/blob/82dd17c
 
 > `optional` **params**: [`Params`](Params.md)
 
-Defined in: [types.ts:43](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L43)
+Defined in: [types.ts:43](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L43)

@@ -2,7 +2,7 @@
 
 > **PassageTarget** = [`Passage`](../classes/Passage.md) \| `string`
 
-Defined in: [packages/core/src/passages/passage.ts:132](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/passages/passage.ts#L132)
+Defined in: [packages/core/src/passages/passage.ts:132](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/passages/passage.ts#L132)
 
 Anything the engine accepts as a navigation target.
 

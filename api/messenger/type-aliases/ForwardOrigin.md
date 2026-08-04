@@ -2,7 +2,7 @@
 
 > **ForwardOrigin** = `object`
 
-Defined in: [types.ts:126](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L126)
+Defined in: [types.ts:126](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L126)
 
 Where a forwarded message originally came from.
 
@@ -17,7 +17,7 @@ attribute it to a known contact, or a `label` for an unknown source.
 
 > `optional` **at**: `number`
 
-Defined in: [types.ts:130](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L130)
+Defined in: [types.ts:130](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L130)
 
 Original timestamp, if the game wants to show one.
 
@@ -27,7 +27,7 @@ Original timestamp, if the game wants to show one.
 
 > **from**: `string` \| \{ `label`: [`RichText`](RichText.md); \}
 
-Defined in: [types.ts:128](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L128)
+Defined in: [types.ts:128](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L128)
 
 Contact id, or a free-form label for a source with no contact.
 
@@ -37,7 +37,7 @@ Contact id, or a free-form label for a source with no contact.
 
 > `optional` **sourceChatId**: `string`
 
-Defined in: [types.ts:132](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L132)
+Defined in: [types.ts:132](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L132)
 
 Chat the message was forwarded out of, when there is one.
 
@@ -47,6 +47,6 @@ Chat the message was forwarded out of, when there is one.
 
 > `optional` **sourceKey**: `string`
 
-Defined in: [types.ts:134](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L134)
+Defined in: [types.ts:134](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L134)
 
 Key of the original entry, when there is one.

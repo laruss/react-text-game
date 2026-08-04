@@ -2,7 +2,7 @@
 
 > **createSeenStore**(`transport`): [`SeenStore`](../type-aliases/SeenStore.md)
 
-Defined in: [seen/seenStore.ts:46](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/seen/seenStore.ts#L46)
+Defined in: [seen/seenStore.ts:46](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/seen/seenStore.ts#L46)
 
 Creates the default cross-save seen store.
 

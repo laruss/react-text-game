@@ -2,7 +2,7 @@
 
 > **RefText** = `object`
 
-Defined in: [types.ts:54](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L54)
+Defined in: [types.ts:54](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L54)
 
 A pointer back into the script beat that produced the text.
 
@@ -18,7 +18,7 @@ must travel through `params` rather than being interpolated into the node.
 
 > **beatId**: `string`
 
-Defined in: [types.ts:57](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L57)
+Defined in: [types.ts:57](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L57)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [types.ts:57](https://github.com/laruss/react-text-game/blob/82dd17c
 
 > **kind**: `"ref"`
 
-Defined in: [types.ts:55](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L55)
+Defined in: [types.ts:55](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L55)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [types.ts:55](https://github.com/laruss/react-text-game/blob/82dd17c
 
 > **scriptId**: `string`
 
-Defined in: [types.ts:56](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L56)
+Defined in: [types.ts:56](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L56)
 
 ***
 
@@ -42,6 +42,6 @@ Defined in: [types.ts:56](https://github.com/laruss/react-text-game/blob/82dd17c
 
 > **slot**: `string`
 
-Defined in: [types.ts:59](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L59)
+Defined in: [types.ts:59](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L59)
 
 Which text of the beat this refers to, e.g. `"text"`, `"caption"`, `"alt:0"`.

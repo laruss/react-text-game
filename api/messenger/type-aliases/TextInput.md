@@ -2,7 +2,7 @@
 
 > **TextInput** = [`StaticText`](StaticText.md) \| `ReactNode`
 
-Defined in: [types.ts:81](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/types.ts#L81)
+Defined in: [types.ts:81](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/messenger/src/types.ts#L81)
 
 Text an author may pass to a message beat.
 

@@ -2,7 +2,7 @@
 
 > **createOrUpdateSystemSave**(`gameData`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/saves/db.ts:274](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/db.ts#L274)
+Defined in: [packages/core/src/saves/db.ts:278](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/saves/db.ts#L278)
 
 Creates or updates the system save with the provided game data.
 

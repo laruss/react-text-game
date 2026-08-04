@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_react_text_game_docs=self.webpackChunk_react_text_game_docs||[]).push([[9647],{23531:(e,s,r)=>{r.r(s),r.d(s,{default:()=>n});r(14041);var t=r(54357),a=r(57473),c=r(58582),u=r(68150),_=r(6270),d=r(31085);function n(e){return(0,d.jsx)(c.e3,{className:(0,t.A)(a.G.wrapper.docsPages),children:(0,d.jsx)(_.A,{children:(0,u.v)(e.route.routes)})})}}}]);
