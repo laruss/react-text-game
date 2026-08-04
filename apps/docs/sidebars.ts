@@ -8,7 +8,16 @@ const sidebars: SidebarsConfig = {
             type: "category",
             label: "Start here",
             collapsed: false,
-            items: ["getting-started", "first-game"],
+            items: [
+                "getting-started",
+                {
+                    type: "category",
+                    label: "Build your first game",
+                    collapsed: false,
+                    link: { type: "doc", id: "first-game/index" },
+                    items: ["first-game/core+ui", "first-game/core"],
+                },
+            ],
         },
         {
             type: "category",
@@ -23,6 +32,7 @@ const sidebars: SidebarsConfig = {
                 "loading-and-splash-screens",
                 "mdx-integration",
                 "messenger",
+                "messenger-game",
                 "game-clock",
                 "i18n",
                 "migrations",
