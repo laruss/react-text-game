@@ -24,6 +24,10 @@ skip-already-read.
 This release is **headless**: state, delivery and selectors, with no components.
 UI ships in a later release.
 
+This page is the model and the reference. For a working game built on it — chat
+list, chat view, scheduled delivery wired to the clock, replies that branch the
+story — follow [Build a messenger game](/messenger-game).
+
 ## Install
 
 ```bash
@@ -428,6 +432,7 @@ The package warns once a transcript passes 1000 entries without one.
 
 ## Related topics
 
+- [Build a messenger game](/messenger-game) - the same primitives, assembled into a playable game
 - [Game Clock](/game-clock) - the time base for scheduled delivery
 - [Handling Side Effects](/side-effects) - why mutations belong in actions
 - [Internationalization](/i18n) - how the `messenger` namespace is merged

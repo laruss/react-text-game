@@ -2,7 +2,7 @@
 
 > **ChatSummary** = `object`
 
-Defined in: [messenger.ts:37](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/messenger.ts#L37)
+Defined in: [messenger.ts:37](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L37)
 
 A chat as it appears in a chat list.
 
@@ -12,7 +12,7 @@ A chat as it appears in a chat list.
 
 > **avatar**: `string` \| `undefined`
 
-Defined in: [messenger.ts:40](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/messenger.ts#L40)
+Defined in: [messenger.ts:40](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L40)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [messenger.ts:40](https://github.com/laruss/react-text-game/blob/5e5
 
 > **chat**: [`Chat`](../classes/Chat.md)
 
-Defined in: [messenger.ts:38](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/messenger.ts#L38)
+Defined in: [messenger.ts:38](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L38)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [messenger.ts:38](https://github.com/laruss/react-text-game/blob/5e5
 
 > **lastActivityAt**: `number`
 
-Defined in: [messenger.ts:42](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/messenger.ts#L42)
+Defined in: [messenger.ts:42](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L42)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [messenger.ts:42](https://github.com/laruss/react-text-game/blob/5e5
 
 > **title**: `string`
 
-Defined in: [messenger.ts:39](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/messenger.ts#L39)
+Defined in: [messenger.ts:39](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L39)
 
 ***
 
@@ -44,4 +44,4 @@ Defined in: [messenger.ts:39](https://github.com/laruss/react-text-game/blob/5e5
 
 > **unread**: `number`
 
-Defined in: [messenger.ts:41](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/messenger.ts#L41)
+Defined in: [messenger.ts:41](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/messenger.ts#L41)

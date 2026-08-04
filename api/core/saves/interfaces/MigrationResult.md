@@ -1,6 +1,6 @@
 # Interface: MigrationResult\<T\>
 
-Defined in: [packages/core/src/saves/migrations/types.ts:155](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/saves/migrations/types.ts#L155)
+Defined in: [packages/core/src/saves/migrations/types.ts:155](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/migrations/types.ts#L155)
 
 Result of running a migration chain.
 
@@ -44,7 +44,7 @@ The type of the migrated data. Should match the target version's
 
 > `optional` **data**: `T`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:164](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/saves/migrations/types.ts#L164)
+Defined in: [packages/core/src/saves/migrations/types.ts:164](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/migrations/types.ts#L164)
 
 The migrated data (if successful)
 
@@ -54,7 +54,7 @@ The migrated data (if successful)
 
 > `optional` **error**: `string`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:169](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/saves/migrations/types.ts#L169)
+Defined in: [packages/core/src/saves/migrations/types.ts:169](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/migrations/types.ts#L169)
 
 Error message (if failed)
 
@@ -64,7 +64,7 @@ Error message (if failed)
 
 > **migrationsApplied**: `object`[]
 
-Defined in: [packages/core/src/saves/migrations/types.ts:174](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/saves/migrations/types.ts#L174)
+Defined in: [packages/core/src/saves/migrations/types.ts:174](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/migrations/types.ts#L174)
 
 List of migrations that were applied, in order
 
@@ -86,6 +86,6 @@ List of migrations that were applied, in order
 
 > **success**: `boolean`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:159](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/saves/migrations/types.ts#L159)
+Defined in: [packages/core/src/saves/migrations/types.ts:159](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/saves/migrations/types.ts#L159)
 
 Whether the migration was successful

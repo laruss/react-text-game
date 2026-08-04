@@ -2,7 +2,7 @@
 
 > **useAudio**(`audio`): `object`
 
-Defined in: [packages/core/src/hooks/useAudio.ts:42](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/hooks/useAudio.ts#L42)
+Defined in: [packages/core/src/hooks/useAudio.ts:42](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/hooks/useAudio.ts#L42)
 
 React hook to access reactive audio state.
 

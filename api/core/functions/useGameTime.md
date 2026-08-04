@@ -2,7 +2,7 @@
 
 > **useGameTime**(`tickMs?`): `number`
 
-Defined in: [packages/core/src/hooks/useGameTime.ts:34](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/core/src/hooks/useGameTime.ts#L34)
+Defined in: [packages/core/src/hooks/useGameTime.ts:34](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/core/src/hooks/useGameTime.ts#L34)
 
 React hook returning the current game time in milliseconds.
 

@@ -2,7 +2,7 @@
 
 > **ChoiceBeatInput** = `object`
 
-Defined in: [scripts/types.ts:130](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/scripts/types.ts#L130)
+Defined in: [scripts/types.ts:130](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/scripts/types.ts#L130)
 
 Blocks the script until the player picks a reply.
 
@@ -12,7 +12,7 @@ Blocks the script until the player picks a reply.
 
 > **id**: `string`
 
-Defined in: [scripts/types.ts:133](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/scripts/types.ts#L133)
+Defined in: [scripts/types.ts:133](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/scripts/types.ts#L133)
 
 Required: choices stay addressable, so their id must not shift.
 
@@ -22,7 +22,7 @@ Required: choices stay addressable, so their id must not shift.
 
 > **options**: [`ChoiceOption`](ChoiceOption.md)[]
 
-Defined in: [scripts/types.ts:134](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/scripts/types.ts#L134)
+Defined in: [scripts/types.ts:134](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/scripts/types.ts#L134)
 
 ***
 
@@ -30,4 +30,4 @@ Defined in: [scripts/types.ts:134](https://github.com/laruss/react-text-game/blo
 
 > **type**: `"choice"`
 
-Defined in: [scripts/types.ts:131](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/scripts/types.ts#L131)
+Defined in: [scripts/types.ts:131](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/scripts/types.ts#L131)

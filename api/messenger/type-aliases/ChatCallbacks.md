@@ -2,7 +2,7 @@
 
 > **ChatCallbacks** = `object`
 
-Defined in: [chat.ts:78](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L78)
+Defined in: [chat.ts:78](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L78)
 
 Optional callbacks fired after a chat changes.
 
@@ -18,7 +18,7 @@ ones registered on `defineMessenger()`.
 
 > `optional` **onChoice**: (`event`) => `void`
 
-Defined in: [chat.ts:99](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L99)
+Defined in: [chat.ts:99](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L99)
 
 Fires after the player's reply has been logged.
 
@@ -52,7 +52,7 @@ Fires after the player's reply has been logged.
 
 > `optional` **onParticipantChange**: (`event`) => `void`
 
-Defined in: [chat.ts:113](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L113)
+Defined in: [chat.ts:113](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L113)
 
 Fires when a group's membership changes.
 
@@ -86,7 +86,7 @@ Fires when a group's membership changes.
 
 > `optional` **onScriptEnd**: (`event`) => `void`
 
-Defined in: [chat.ts:110](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L110)
+Defined in: [chat.ts:110](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L110)
 
 Fires when a script runs out of beats.
 
@@ -112,7 +112,7 @@ Fires when a script runs out of beats.
 
 > `optional` **onSeen**: (`event`) => `void`
 
-Defined in: [chat.ts:96](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L96)
+Defined in: [chat.ts:96](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L96)
 
 Fires when entries transition to seen, with the entries that changed.
 
@@ -138,7 +138,7 @@ Fires when entries transition to seen, with the entries that changed.
 
 > `optional` **onSend**: (`event`) => `void`
 
-Defined in: [chat.ts:93](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L93)
+Defined in: [chat.ts:93](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L93)
 
 Fires for every entry appended to the transcript - from a contact, from the
 player, and for system notices alike.
@@ -176,7 +176,7 @@ defineChat('anna', {
 
 > `optional` **onTyping**: (`event`) => `void`
 
-Defined in: [chat.ts:107](https://github.com/laruss/react-text-game/blob/5e52bf22ebaede422c00449cdff1947a516a3506/packages/messenger/src/chat.ts#L107)
+Defined in: [chat.ts:107](https://github.com/laruss/react-text-game/blob/82dd17c6be044470eb82037b1d8d59eedbfff48e/packages/messenger/src/chat.ts#L107)
 
 Fires when the set of typing contacts changes.
 
