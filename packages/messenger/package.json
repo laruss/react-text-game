@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/messenger",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Headless messenger and visual-novel transcript engine for React Text Game: persistent message logs, seen tracking, group chats, media albums and scheduled delivery",
     "main": "dist/index.js",
     "module": "dist/index.js",
