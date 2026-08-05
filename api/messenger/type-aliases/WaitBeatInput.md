@@ -2,7 +2,7 @@
 
 > **WaitBeatInput** = `object`
 
-Defined in: [scripts/types.ts:109](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/scripts/types.ts#L109)
+Defined in: [scripts/types.ts:109](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L109)
 
 Holds the next beat back for `ms` of game time.
 
@@ -12,7 +12,7 @@ Holds the next beat back for `ms` of game time.
 
 > `optional` **id**: `string`
 
-Defined in: [scripts/types.ts:111](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/scripts/types.ts#L111)
+Defined in: [scripts/types.ts:111](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L111)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [scripts/types.ts:111](https://github.com/laruss/react-text-game/blo
 
 > **ms**: `number`
 
-Defined in: [scripts/types.ts:112](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/scripts/types.ts#L112)
+Defined in: [scripts/types.ts:112](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L112)
 
 ***
 
@@ -28,4 +28,4 @@ Defined in: [scripts/types.ts:112](https://github.com/laruss/react-text-game/blo
 
 > **type**: `"wait"`
 
-Defined in: [scripts/types.ts:110](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/scripts/types.ts#L110)
+Defined in: [scripts/types.ts:110](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L110)

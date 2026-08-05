@@ -2,7 +2,7 @@
 
 > **writeSchema**(`filePath`, `schema`): `Promise`\<`void`\>
 
-Defined in: [store.ts:104](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/devtools/src/store.ts#L104)
+Defined in: [store.ts:104](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/store.ts#L104)
 
 Writes a snapshot, creating the directory if needed.
 

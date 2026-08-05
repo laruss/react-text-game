@@ -2,7 +2,7 @@
 
 > **ImageHotspotContentObject** = `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:220](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L220)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:220](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L220)
 
 ## Properties
 
@@ -10,7 +10,7 @@ Defined in: [packages/core/src/passages/interactiveMap/types.ts:220](https://git
 
 > `optional` **active**: [`MaybeCallable`](MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:259](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L259)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:259](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L259)
 
 Optional image displayed briefly when the hotspot is clicked.
 Creates visual feedback for the click action.
@@ -33,7 +33,7 @@ The active state is shown for ~100ms when clicked, then returns to idle/hover.
 
 > `optional` **disabled**: [`MaybeCallable`](MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:271](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L271)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:271](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L271)
 
 Optional image displayed when the hotspot is disabled.
 If not provided, the idle image is shown with reduced opacity when disabled.
@@ -51,7 +51,7 @@ disabled: '/icons/button-locked.png'
 
 > `optional` **hover**: [`MaybeCallable`](MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:243](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L243)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:243](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L243)
 
 Optional image displayed when the hotspot is hovered.
 If not provided, the idle image is shown on hover.
@@ -69,7 +69,7 @@ hover: () => `/icons/button-${hoverColor}.png`
 
 > **idle**: [`MaybeCallable`](MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:231](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L231)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:231](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L231)
 
 Image displayed in the default/resting state.
 Always shown when no other state is active.

@@ -2,7 +2,7 @@
 
 > **t**(`key`, `params?`): [`I18nText`](../type-aliases/I18nText.md)
 
-Defined in: [text.ts:43](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/text.ts#L43)
+Defined in: [text.ts:43](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/text.ts#L43)
 
 Marks a translation key as a message's text.
 

@@ -2,7 +2,7 @@
 
 > **InteractiveMapOptions** = `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:744](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L744)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:744](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L744)
 
 Configuration options for creating an interactive map passage.
 Defines the map image, background, hotspots, and styling.
@@ -41,7 +41,7 @@ const mapOptions: InteractiveMapOptions = {
 
 > `optional` **bgImage**: [`MaybeCallable`](MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:857](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L857)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:857](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L857)
 
 Optional background image URL or path.
 Displayed behind the main map image with configurable opacity.
@@ -70,7 +70,7 @@ Use this for:
 
 > `optional` **caption**: `string`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:755](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L755)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:755](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L755)
 
 Optional caption or title for the map.
 Displayed above the map area (implementation depends on UI).
@@ -88,7 +88,7 @@ caption: 'Floor 1 - Dungeon'
 
 > `optional` **classNames**: `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:881](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L881)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:881](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L881)
 
 CSS class name overrides for different map regions.
 
@@ -145,7 +145,7 @@ topHotspots: 'bg-muted/50 backdrop-blur-sm p-2'
 
 > **hotspots**: [`MaybeCallable`](MaybeCallable.md)\<[`MaybeCallable`](MaybeCallable.md)\<[`AnyHotspot`](AnyHotspot.md) \| `undefined`\>[]\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:835](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L835)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:835](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L835)
 
 Array of hotspots to display on the map.
 Can be a static array, or a function that returns an array.
@@ -214,7 +214,7 @@ hotspots: () => {
 
 > **image**: [`MaybeCallable`](MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:773](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L773)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:773](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L773)
 
 URL or path to the main map image.
 Can be static string or a function for dynamic map selection.
@@ -238,7 +238,7 @@ image: () => `/maps/world-level-${player.level}.jpg`
 
 > `optional` **props**: `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:862](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/types.ts#L862)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:862](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L862)
 
 Optional configuration for map behavior.
 
