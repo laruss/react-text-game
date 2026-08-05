@@ -2,7 +2,7 @@
 
 > **ChatSnapshot** = `object`
 
-Defined in: [hooks/useChat.ts:15](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L15)
+Defined in: [hooks/useChat.ts:15](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L15)
 
 Everything a chat view needs, recomputed whenever the chat changes.
 
@@ -12,7 +12,7 @@ Everything a chat view needs, recomputed whenever the chat changes.
 
 > **activeScriptId**: `string` \| `null`
 
-Defined in: [hooks/useChat.ts:34](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L34)
+Defined in: [hooks/useChat.ts:34](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L34)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [hooks/useChat.ts:34](https://github.com/laruss/react-text-game/blob
 
 > **avatar**: `string` \| `undefined`
 
-Defined in: [hooks/useChat.ts:22](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L22)
+Defined in: [hooks/useChat.ts:22](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L22)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [hooks/useChat.ts:22](https://github.com/laruss/react-text-game/blob
 
 > **canReply**: `boolean`
 
-Defined in: [hooks/useChat.ts:27](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L27)
+Defined in: [hooks/useChat.ts:27](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L27)
 
 `false` in a read-only chat, regardless of what is pending.
 
@@ -38,7 +38,7 @@ Defined in: [hooks/useChat.ts:27](https://github.com/laruss/react-text-game/blob
 
 > **entries**: [`TranscriptEntry`](TranscriptEntry.md)[]
 
-Defined in: [hooks/useChat.ts:16](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L16)
+Defined in: [hooks/useChat.ts:16](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L16)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [hooks/useChat.ts:16](https://github.com/laruss/react-text-game/blob
 
 > **firstUnreadKey**: `string` \| `null`
 
-Defined in: [hooks/useChat.ts:19](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L19)
+Defined in: [hooks/useChat.ts:19](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L19)
 
 Anchor for an "unread" divider and for auto-scroll.
 
@@ -56,7 +56,7 @@ Anchor for an "unread" divider and for auto-scroll.
 
 > **isGroup**: `boolean`
 
-Defined in: [hooks/useChat.ts:25](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L25)
+Defined in: [hooks/useChat.ts:25](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L25)
 
 ***
 
@@ -64,7 +64,7 @@ Defined in: [hooks/useChat.ts:25](https://github.com/laruss/react-text-game/blob
 
 > **lastActivityAt**: `number`
 
-Defined in: [hooks/useChat.ts:32](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L32)
+Defined in: [hooks/useChat.ts:32](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L32)
 
 ***
 
@@ -72,7 +72,7 @@ Defined in: [hooks/useChat.ts:32](https://github.com/laruss/react-text-game/blob
 
 > **lastEntry**: [`TranscriptEntry`](TranscriptEntry.md) \| `null`
 
-Defined in: [hooks/useChat.ts:20](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L20)
+Defined in: [hooks/useChat.ts:20](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L20)
 
 ***
 
@@ -80,7 +80,7 @@ Defined in: [hooks/useChat.ts:20](https://github.com/laruss/react-text-game/blob
 
 > **lastSeenAt**: `number`
 
-Defined in: [hooks/useChat.ts:33](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L33)
+Defined in: [hooks/useChat.ts:33](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L33)
 
 ***
 
@@ -88,7 +88,7 @@ Defined in: [hooks/useChat.ts:33](https://github.com/laruss/react-text-game/blob
 
 > **nextDueAt**: `number` \| `null`
 
-Defined in: [hooks/useChat.ts:31](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L31)
+Defined in: [hooks/useChat.ts:31](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L31)
 
 ***
 
@@ -96,7 +96,7 @@ Defined in: [hooks/useChat.ts:31](https://github.com/laruss/react-text-game/blob
 
 > **participantCount**: `number`
 
-Defined in: [hooks/useChat.ts:24](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L24)
+Defined in: [hooks/useChat.ts:24](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L24)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [hooks/useChat.ts:24](https://github.com/laruss/react-text-game/blob
 
 > **participants**: `string`[]
 
-Defined in: [hooks/useChat.ts:23](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L23)
+Defined in: [hooks/useChat.ts:23](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L23)
 
 ***
 
@@ -112,7 +112,7 @@ Defined in: [hooks/useChat.ts:23](https://github.com/laruss/react-text-game/blob
 
 > **pendingChoice**: [`PendingChoice`](PendingChoice.md) \| `null`
 
-Defined in: [hooks/useChat.ts:29](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L29)
+Defined in: [hooks/useChat.ts:29](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L29)
 
 The reply awaiting the player, or `null` when nothing is pending.
 
@@ -122,7 +122,7 @@ The reply awaiting the player, or `null` when nothing is pending.
 
 > **title**: `string`
 
-Defined in: [hooks/useChat.ts:21](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L21)
+Defined in: [hooks/useChat.ts:21](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L21)
 
 ***
 
@@ -130,7 +130,7 @@ Defined in: [hooks/useChat.ts:21](https://github.com/laruss/react-text-game/blob
 
 > **typing**: `string`[]
 
-Defined in: [hooks/useChat.ts:30](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L30)
+Defined in: [hooks/useChat.ts:30](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L30)
 
 ***
 
@@ -138,4 +138,4 @@ Defined in: [hooks/useChat.ts:30](https://github.com/laruss/react-text-game/blob
 
 > **unread**: `number`
 
-Defined in: [hooks/useChat.ts:17](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChat.ts#L17)
+Defined in: [hooks/useChat.ts:17](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChat.ts#L17)

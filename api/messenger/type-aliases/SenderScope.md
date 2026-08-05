@@ -2,7 +2,7 @@
 
 > **SenderScope** = `object`
 
-Defined in: [scripts/types.ts:164](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/scripts/types.ts#L164)
+Defined in: [scripts/types.ts:164](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/scripts/types.ts#L164)
 
 Builders for messages sent by one particular sender.
 
@@ -12,7 +12,7 @@ Builders for messages sent by one particular sender.
 
 > **custom**: (`name`, `data`, `options?`) => [`CustomBeatInput`](CustomBeatInput.md)
 
-Defined in: [scripts/types.ts:205](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/scripts/types.ts#L205)
+Defined in: [scripts/types.ts:205](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/scripts/types.ts#L205)
 
 An author-defined payload, passed through to the UI untouched.
 
@@ -40,7 +40,7 @@ An author-defined payload, passed through to the UI untouched.
 
 > **image**: (`src`, `options?`) => [`MessageBeatInput`](MessageBeatInput.md)
 
-Defined in: [scripts/types.ts:193](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/scripts/types.ts#L193)
+Defined in: [scripts/types.ts:193](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/scripts/types.ts#L193)
 
 Shorthand for a single-image media message.
 
@@ -64,7 +64,7 @@ Shorthand for a single-image media message.
 
 > **media**: (`items`, `options?`) => [`MessageBeatInput`](MessageBeatInput.md)
 
-Defined in: [scripts/types.ts:187](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/scripts/types.ts#L187)
+Defined in: [scripts/types.ts:187](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/scripts/types.ts#L187)
 
 A media message. One item is a single photo or video, several make an
 album, and `caption` is the comment shown with them.
@@ -96,7 +96,7 @@ m.from(anna).media([m.image("/1.webp"), m.video("/2.mp4")])
 
 > **text**: (`content`, `options?`) => [`MessageBeatInput`](MessageBeatInput.md)
 
-Defined in: [scripts/types.ts:175](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/scripts/types.ts#L175)
+Defined in: [scripts/types.ts:175](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/scripts/types.ts#L175)
 
 A text message.
 
@@ -128,7 +128,7 @@ m.from(anna).text(<>look at <b>this</b></>)
 
 > **video**: (`src`, `options?`) => [`MessageBeatInput`](MessageBeatInput.md)
 
-Defined in: [scripts/types.ts:199](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/scripts/types.ts#L199)
+Defined in: [scripts/types.ts:199](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/scripts/types.ts#L199)
 
 Shorthand for a single-video media message.
 

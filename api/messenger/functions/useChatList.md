@@ -2,7 +2,7 @@
 
 > **useChatList**(`chats?`): [`ChatListItem`](../type-aliases/ChatListItem.md)[]
 
-Defined in: [hooks/useChatList.ts:41](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L41)
+Defined in: [hooks/useChatList.ts:41](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L41)
 
 Subscribes a component to every chat, most recently active first.
 

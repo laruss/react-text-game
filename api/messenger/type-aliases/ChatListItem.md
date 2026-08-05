@@ -2,7 +2,7 @@
 
 > **ChatListItem** = `object`
 
-Defined in: [hooks/useChatList.ts:10](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L10)
+Defined in: [hooks/useChatList.ts:10](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L10)
 
 One row of a chat list.
 
@@ -12,7 +12,7 @@ One row of a chat list.
 
 > **avatar**: `string` \| `undefined`
 
-Defined in: [hooks/useChatList.ts:13](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L13)
+Defined in: [hooks/useChatList.ts:13](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L13)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [hooks/useChatList.ts:13](https://github.com/laruss/react-text-game/
 
 > **chat**: [`Chat`](../classes/Chat.md)
 
-Defined in: [hooks/useChatList.ts:11](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L11)
+Defined in: [hooks/useChatList.ts:11](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L11)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [hooks/useChatList.ts:11](https://github.com/laruss/react-text-game/
 
 > **isEmpty**: `boolean`
 
-Defined in: [hooks/useChatList.ts:17](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L17)
+Defined in: [hooks/useChatList.ts:17](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L17)
 
 `true` when the chat has never received anything.
 
@@ -38,7 +38,7 @@ Defined in: [hooks/useChatList.ts:17](https://github.com/laruss/react-text-game/
 
 > **lastActivityAt**: `number`
 
-Defined in: [hooks/useChatList.ts:15](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L15)
+Defined in: [hooks/useChatList.ts:15](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L15)
 
 ***
 
@@ -46,7 +46,7 @@ Defined in: [hooks/useChatList.ts:15](https://github.com/laruss/react-text-game/
 
 > **title**: `string`
 
-Defined in: [hooks/useChatList.ts:12](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L12)
+Defined in: [hooks/useChatList.ts:12](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L12)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [hooks/useChatList.ts:12](https://github.com/laruss/react-text-game/
 
 > **unread**: `number`
 
-Defined in: [hooks/useChatList.ts:14](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/hooks/useChatList.ts#L14)
+Defined in: [hooks/useChatList.ts:14](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/hooks/useChatList.ts#L14)

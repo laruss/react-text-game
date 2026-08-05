@@ -1,6 +1,6 @@
 # Interface: MapImage
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:497](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/interactiveMap/types.ts#L497)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:497](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/types.ts#L497)
 
 Decorative image positioned on the map without interactive behavior.
 
@@ -33,7 +33,7 @@ system without becoming controls.
 
 > **content**: [`MaybeCallable`](../type-aliases/MaybeCallable.md)\<`string`\>
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:505](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/interactiveMap/types.ts#L505)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:505](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/types.ts#L505)
 
 Static or dynamically resolved image URL/path.
 
@@ -43,7 +43,7 @@ Static or dynamically resolved image URL/path.
 
 > `optional` **id**: `string`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:502](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/interactiveMap/types.ts#L502)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:502](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/types.ts#L502)
 
 Optional identifier used as the rendered element id and default alt text.
 
@@ -53,7 +53,7 @@ Optional identifier used as the rendered element id and default alt text.
 
 > **position**: [`HotspotPosition`](../type-aliases/HotspotPosition.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:438](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/interactiveMap/types.ts#L438)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:438](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/types.ts#L438)
 
 Position coordinates on the map.
 Values are percentages (0-100) of the map's width and height.
@@ -73,7 +73,7 @@ Can be static or dynamic (function-based) for reactive positioning.
 
 > `optional` **props**: `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:508](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/interactiveMap/types.ts#L508)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:508](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/types.ts#L508)
 
 Optional presentation settings.
 
@@ -109,6 +109,6 @@ Visual scale relative to the source image size.
 
 > **type**: `"mapImage"`
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:499](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/interactiveMap/types.ts#L499)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:499](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/types.ts#L499)
 
 Discriminator identifying a non-interactive map image.

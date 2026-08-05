@@ -2,7 +2,7 @@
 
 > **DefineFn**\<`THelpers`, `TContent`, `TProps`\> = (`helpers`, `props`) => `TContent`
 
-Defined in: [packages/core/src/passages/definition.ts:24](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/definition.ts#L24)
+Defined in: [packages/core/src/passages/definition.ts:24](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/definition.ts#L24)
 
 Signature shared by every `define*` passage factory.
 

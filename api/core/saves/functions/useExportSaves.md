@@ -2,7 +2,7 @@
 
 > **useExportSaves**(): () => `Promise`\<\{ `error`: `string`; `success`: `boolean`; \} \| \{ `error`: `null`; `success`: `boolean`; \}\>
 
-Defined in: [packages/core/src/saves/hooks/useExportSaves.ts:27](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/saves/hooks/useExportSaves.ts#L27)
+Defined in: [packages/core/src/saves/hooks/useExportSaves.ts:27](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/saves/hooks/useExportSaves.ts#L27)
 
 React hook that provides a function to export all game saves to an encrypted file.
 The exported file is downloaded with the game name, version, and .sx extension.

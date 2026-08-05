@@ -2,7 +2,7 @@
 
 > **Conditional**\<`T`\> = `T` \| `false` \| `null` \| `undefined`
 
-Defined in: [packages/core/src/passages/definition.ts:45](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/definition.ts#L45)
+Defined in: [packages/core/src/passages/definition.ts:45](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/definition.ts#L45)
 
 A value that may be omitted from a helper array.
 

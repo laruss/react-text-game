@@ -2,7 +2,7 @@
 
 > **TranscriptEntry** = `object`
 
-Defined in: [types.ts:172](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L172)
+Defined in: [types.ts:172](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L172)
 
 One delivered message in a chat's transcript.
 
@@ -18,7 +18,7 @@ forwarded or marked deleted.
 
 > **at**: `number`
 
-Defined in: [types.ts:177](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L177)
+Defined in: [types.ts:177](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L177)
 
 Game time the entry was delivered at, from `Clock.now()`.
 
@@ -28,7 +28,7 @@ Game time the entry was delivered at, from `Clock.now()`.
 
 > `optional` **deleted**: `boolean`
 
-Defined in: [types.ts:197](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L197)
+Defined in: [types.ts:197](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L197)
 
 In-fiction "message deleted" marker. The payload is kept.
 
@@ -38,7 +38,7 @@ In-fiction "message deleted" marker. The payload is kept.
 
 > `optional` **edited**: `boolean`
 
-Defined in: [types.ts:194](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L194)
+Defined in: [types.ts:194](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L194)
 
 In-fiction "edited" marker.
 
@@ -48,7 +48,7 @@ In-fiction "edited" marker.
 
 > `optional` **forwarded**: [`ForwardOrigin`](ForwardOrigin.md)
 
-Defined in: [types.ts:191](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L191)
+Defined in: [types.ts:191](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L191)
 
 Set when the message was forwarded into this chat.
 
@@ -58,7 +58,7 @@ Set when the message was forwarded into this chat.
 
 > **from**: `string`
 
-Defined in: [types.ts:180](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L180)
+Defined in: [types.ts:180](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L180)
 
 Contact id, `"player"`, or `"system"`.
 
@@ -68,7 +68,7 @@ Contact id, `"player"`, or `"system"`.
 
 > **key**: `string`
 
-Defined in: [types.ts:174](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L174)
+Defined in: [types.ts:174](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L174)
 
 Stable, unique within the chat.
 
@@ -78,7 +78,7 @@ Stable, unique within the chat.
 
 > `optional` **origin**: `object`
 
-Defined in: [types.ts:200](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L200)
+Defined in: [types.ts:200](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L200)
 
 Script beat that produced the entry, when it came from a script.
 
@@ -96,7 +96,7 @@ Script beat that produced the entry, when it came from a script.
 
 > **payload**: [`Payload`](Payload.md)
 
-Defined in: [types.ts:182](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L182)
+Defined in: [types.ts:182](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L182)
 
 ***
 
@@ -104,7 +104,7 @@ Defined in: [types.ts:182](https://github.com/laruss/react-text-game/blob/415f8c
 
 > `optional` **receipt**: [`Receipt`](Receipt.md)
 
-Defined in: [types.ts:188](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L188)
+Defined in: [types.ts:188](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L188)
 
 In-fiction delivery state, controlled by the author.
 
@@ -114,6 +114,6 @@ In-fiction delivery state, controlled by the author.
 
 > **seen**: `boolean`
 
-Defined in: [types.ts:185](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L185)
+Defined in: [types.ts:185](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L185)
 
 Whether the player has looked at this entry.

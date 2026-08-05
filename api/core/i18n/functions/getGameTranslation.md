@@ -2,7 +2,7 @@
 
 > **getGameTranslation**(`namespace?`): `TFunction`\<`string`, `undefined`\>
 
-Defined in: [utils.ts:84](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/i18n/utils.ts#L84)
+Defined in: [utils.ts:84](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/i18n/utils.ts#L84)
 
 Gets a translation function (t) scoped to a specific namespace and the current language.
 

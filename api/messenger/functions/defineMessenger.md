@@ -2,7 +2,7 @@
 
 > **defineMessenger**(`options`): [`Messenger`](../type-aliases/Messenger.md)
 
-Defined in: [messenger.ts:110](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/messenger.ts#L110)
+Defined in: [messenger.ts:110](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/messenger.ts#L110)
 
 Configures messenger-wide behaviour and returns the cross-chat facade.
 
