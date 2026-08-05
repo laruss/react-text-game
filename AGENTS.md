@@ -8,6 +8,10 @@ This repository is developed with **Bun 1.3.9**. Run repository commands from th
 repository root unless a command below explicitly says otherwise.
 
 - Use `bun install`, `bun run <script>`, `bunx --bun <binary>`, and `bun pm`.
+- One exception to `--bun`: the root `release` script stays plain
+  `changeset publish`. `--bun` also forces the `npm publish` that changesets
+  spawns onto Bun's runtime, where signing the npm provenance attestation dies
+  with `ERR_OSSL_NO_DEFAULT_DIGEST` (BoringSSL). See `docs/publish.md`.
 - Do not use `npm`, `npx`, `pnpm`, or `yarn` for repository work, and do not
   add another package-manager lockfile. `bun.lock` is the only lockfile.
 - Use Biome through the repository scripts. Do not invoke ESLint or Prettier.
