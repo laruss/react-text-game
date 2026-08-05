@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.1
+
+### Patch Changes
+
+- Ship the `ReactTextGameDebug` type from a module `tsc` actually emits. `src/global.d.ts` was declaration-only, so it never landed in `dist` and `dist/index.d.ts` re-exported `"./global"` — a specifier that resolved to nothing and failed with `TS2834` for consumers on `moduleResolution: "nodenext"`. The `window.ReactTextGame` global augmentation now reaches consumers as well.
+
 ## 0.10.0
 
 ### Minor Changes
