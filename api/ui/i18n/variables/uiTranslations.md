@@ -2,7 +2,7 @@
 
 > `const` **uiTranslations**: `object`
 
-Defined in: [index.ts:3](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/ui/src/i18n/index.ts#L3)
+Defined in: [index.ts:3](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/ui/src/i18n/index.ts#L3)
 
 ## Type Declaration
 
@@ -13,6 +13,15 @@ Defined in: [index.ts:3](https://github.com/laruss/react-text-game/blob/0d143cb8
 #### en.ui
 
 > **ui**: `object`
+
+English defaults for the `ui` namespace.
+
+##### Remarks
+
+A TypeScript module rather than JSON on purpose: Node's ESM resolver requires
+an `with { type: "json" }` import attribute for JSON modules, so a bare JSON
+import makes this entry unloadable under plain Node (SSR, or `Game.init`
+reaching it through core's dynamic import).
 
 #### en.ui.mainMenu
 

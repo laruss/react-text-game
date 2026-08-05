@@ -1,6 +1,6 @@
 # Class: Clock
 
-Defined in: [clock.ts:83](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L83)
+Defined in: [clock.ts:83](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L83)
 
 The in-fiction clock of the game.
 
@@ -51,7 +51,7 @@ Clock.setScale(60);
 
 > **get** `static` **isPaused**(): `boolean`
 
-Defined in: [clock.ts:121](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L121)
+Defined in: [clock.ts:121](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L121)
 
 Whether `"realtime"` accrual is frozen.
 
@@ -67,7 +67,7 @@ Whether `"realtime"` accrual is frozen.
 
 > **get** `static` **mode**(): [`ClockMode`](../type-aliases/ClockMode.md)
 
-Defined in: [clock.ts:107](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L107)
+Defined in: [clock.ts:107](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L107)
 
 How game time currently advances.
 
@@ -83,7 +83,7 @@ How game time currently advances.
 
 > **get** `static` **scale**(): `number`
 
-Defined in: [clock.ts:114](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L114)
+Defined in: [clock.ts:114](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L114)
 
 Multiplier applied to elapsed wall-clock time in `"realtime"` mode.
 
@@ -99,7 +99,7 @@ Multiplier applied to elapsed wall-clock time in `"realtime"` mode.
 
 > **get** `static` **selfState**(): [`ClockState`](../type-aliases/ClockState.md)
 
-Defined in: [clock.ts:91](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L91)
+Defined in: [clock.ts:91](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L91)
 
 Reactive clock state, for hooks that need to re-render on clock changes.
 
@@ -118,7 +118,7 @@ subscription, not for arithmetic.
 
 > `static` **\_resetForTesting**(): `void`
 
-Defined in: [clock.ts:331](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L331)
+Defined in: [clock.ts:331](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L331)
 
 **`Internal`**
 
@@ -134,7 +134,7 @@ Restores defaults and the real wall-clock source.
 
 > `static` **\_setNowProvider**(`provider`): `void`
 
-Defined in: [clock.ts:322](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L322)
+Defined in: [clock.ts:322](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L322)
 
 **`Internal`**
 
@@ -156,7 +156,7 @@ Replaces the wall-clock source. Tests only.
 
 > `static` **advance**(`ms`): `void`
 
-Defined in: [clock.ts:141](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L141)
+Defined in: [clock.ts:141](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L141)
 
 Moves game time forward by `ms`.
 
@@ -193,7 +193,7 @@ h.actions([
 
 > `static` **init**(`options?`): `void`
 
-Defined in: [clock.ts:251](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L251)
+Defined in: [clock.ts:251](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L251)
 
 **`Internal`**
 
@@ -215,7 +215,7 @@ Applies clock options during `Game.init()`.
 
 > `static` **load**(): `void`
 
-Defined in: [clock.ts:301](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L301)
+Defined in: [clock.ts:301](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L301)
 
 **`Internal`**
 
@@ -236,7 +236,7 @@ disk out of game time. A save without clock data leaves the clock alone.
 
 > `static` **now**(): `number`
 
-Defined in: [clock.ts:100](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L100)
+Defined in: [clock.ts:100](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L100)
 
 Current game time in milliseconds.
 
@@ -252,7 +252,7 @@ Game time, suitable for `new Date(...)`
 
 > `static` **pause**(): `void`
 
-Defined in: [clock.ts:205](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L205)
+Defined in: [clock.ts:205](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L205)
 
 Freezes `"realtime"` accrual, preserving the current game time.
 
@@ -271,7 +271,7 @@ not flow on its own.
 
 > `static` **resume**(): `void`
 
-Defined in: [clock.ts:220](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L220)
+Defined in: [clock.ts:220](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L220)
 
 Resumes `"realtime"` accrual from the current game time.
 
@@ -285,7 +285,7 @@ Resumes `"realtime"` accrual from the current game time.
 
 > `static` **save**(): `void`
 
-Defined in: [clock.ts:278](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L278)
+Defined in: [clock.ts:278](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L278)
 
 **`Internal`**
 
@@ -301,7 +301,7 @@ Writes the resolved game time to storage.
 
 > `static` **set**(`timestamp`): `void`
 
-Defined in: [clock.ts:156](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L156)
+Defined in: [clock.ts:156](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L156)
 
 Sets game time to an absolute timestamp.
 
@@ -327,7 +327,7 @@ Error if `timestamp` is not finite
 
 > `static` **setMode**(`mode`): `void`
 
-Defined in: [clock.ts:170](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L170)
+Defined in: [clock.ts:170](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L170)
 
 Switches how game time advances, preserving the current game time.
 
@@ -349,7 +349,7 @@ The new clock mode
 
 > `static` **setScale**(`scale`): `void`
 
-Defined in: [clock.ts:184](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L184)
+Defined in: [clock.ts:184](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L184)
 
 Changes the `"realtime"` multiplier, preserving the current game time.
 
@@ -375,7 +375,7 @@ Error if `scale` is not a finite positive number
 
 > `static` **subscribe**(`callback`): () => `void`
 
-Defined in: [clock.ts:242](https://github.com/laruss/react-text-game/blob/0d143cb8a19ec7bec1893fbcc47e9d755c567f87/packages/core/src/clock/clock.ts#L242)
+Defined in: [clock.ts:242](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/clock/clock.ts#L242)
 
 Subscribes to clock state changes.
 
