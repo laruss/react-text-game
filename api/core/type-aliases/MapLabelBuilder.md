@@ -2,7 +2,7 @@
 
 > **MapLabelBuilder** = \{(`content`, `options`): [`MapLabelHotspot`](../interfaces/MapLabelHotspot.md) \| [`SideLabelHotspot`](../interfaces/SideLabelHotspot.md); (`content`, `options`): [`LabelHotspot`](../interfaces/LabelHotspot.md); \}
 
-Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:86](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/interactiveMap/helpers.ts#L86)
+Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:86](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/interactiveMap/helpers.ts#L86)
 
 Builder for label hotspots.
 

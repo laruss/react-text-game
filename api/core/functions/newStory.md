@@ -2,7 +2,7 @@
 
 > **newStory**(`id`, `content`, `options?`): [`Story`](../classes/Story.md)
 
-Defined in: [packages/core/src/passages/story/fabric.ts:29](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/story/fabric.ts#L29)
+Defined in: [packages/core/src/passages/story/fabric.ts:29](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/story/fabric.ts#L29)
 
 Creates a story passage from a props-first content callback.
 

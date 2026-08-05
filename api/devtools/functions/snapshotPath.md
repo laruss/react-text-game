@@ -2,7 +2,7 @@
 
 > **snapshotPath**(`directory`, `gameVersion`): `string`
 
-Defined in: [store.ts:47](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/devtools/src/store.ts#L47)
+Defined in: [store.ts:47](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/devtools/src/store.ts#L47)
 
 Builds the conventional file path for a version's snapshot.
 

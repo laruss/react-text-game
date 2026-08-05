@@ -2,7 +2,7 @@
 
 > **formatCheckResult**(`result`): `string`
 
-Defined in: [report.ts:37](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/devtools/src/report.ts#L37)
+Defined in: [report.ts:37](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/devtools/src/report.ts#L37)
 
 Renders a full check report: what was compared, every finding, and the verdict.
 

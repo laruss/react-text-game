@@ -2,7 +2,7 @@
 
 > `const` **messengerTranslations**: `object`
 
-Defined in: [i18n/index.ts:15](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/i18n/index.ts#L15)
+Defined in: [i18n/index.ts:15](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/i18n/index.ts#L15)
 
 This package's default strings, keyed by language and namespace.
 

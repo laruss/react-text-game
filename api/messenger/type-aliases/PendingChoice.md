@@ -2,7 +2,7 @@
 
 > **PendingChoice** = `object`
 
-Defined in: [chat.ts:65](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/chat.ts#L65)
+Defined in: [chat.ts:65](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/chat.ts#L65)
 
 A reply the player can currently pick.
 
@@ -12,7 +12,7 @@ A reply the player can currently pick.
 
 > **choiceId**: `string`
 
-Defined in: [chat.ts:66](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/chat.ts#L66)
+Defined in: [chat.ts:66](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/chat.ts#L66)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [chat.ts:66](https://github.com/laruss/react-text-game/blob/fe357d1c
 
 > **options**: `object`[]
 
-Defined in: [chat.ts:67](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/chat.ts#L67)
+Defined in: [chat.ts:67](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/chat.ts#L67)
 
 #### content
 

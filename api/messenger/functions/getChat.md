@@ -2,7 +2,7 @@
 
 > **getChat**(`id`): [`Chat`](../classes/Chat.md) \| `undefined`
 
-Defined in: [chat.ts:1205](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/chat.ts#L1205)
+Defined in: [chat.ts:1205](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/chat.ts#L1205)
 
 Looks up a defined chat.
 

@@ -2,7 +2,7 @@
 
 > **preloadContent**(`assets`, `options`): `Promise`\<`Readonly`\<\{ `completed`: `number`; `failed`: `number`; `failures`: readonly `Readonly`\<\{ `asset`: [`PreloadAsset`](../type-aliases/PreloadAsset.md); `error`: `unknown`; \}\>[]; `succeeded`: `number`; `total`: `number`; \}\>\>
 
-Defined in: [packages/core/src/preload.ts:204](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/preload.ts#L204)
+Defined in: [packages/core/src/preload.ts:204](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/preload.ts#L204)
 
 Preloads and fully consumes a list of game assets with bounded concurrency.
 Duplicate sources are loaded once, individual failures are collected, and an

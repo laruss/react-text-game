@@ -2,7 +2,7 @@
 
 > **findMigrationPath**(`fromVersion`, `toVersion`): [`SaveMigration`](../interfaces/SaveMigration.md)\<`GameSaveState`\>[] \| `null`
 
-Defined in: [packages/core/src/saves/migrations/registry.ts:90](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/saves/migrations/registry.ts#L90)
+Defined in: [packages/core/src/saves/migrations/registry.ts:90](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/saves/migrations/registry.ts#L90)
 
 Finds the shortest migration path from one version to another using BFS.
 

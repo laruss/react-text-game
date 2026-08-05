@@ -2,7 +2,7 @@
 
 > **ChatVars** = `object`
 
-Defined in: [types.ts:212](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L212)
+Defined in: [types.ts:212](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L212)
 
 Persisted state of a single chat.
 
@@ -19,7 +19,7 @@ never needs a save migration.
 
 > **activeScriptId**: `string` \| `null`
 
-Defined in: [types.ts:216](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L216)
+Defined in: [types.ts:216](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L216)
 
 Script currently being played, if any.
 
@@ -29,7 +29,7 @@ Script currently being played, if any.
 
 > `optional` **avatar**: `string` \| `null`
 
-Defined in: [types.ts:244](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L244)
+Defined in: [types.ts:244](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L244)
 
 In-fiction avatar. `null` means the avatar was explicitly removed.
 
@@ -39,7 +39,7 @@ In-fiction avatar. `null` means the avatar was explicitly removed.
 
 > **beatCounts**: `Record`\<`string`, `number`\>
 
-Defined in: [types.ts:222](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L222)
+Defined in: [types.ts:222](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L222)
 
 Raw beat count per script, used to warn about script drift.
 
@@ -49,7 +49,7 @@ Raw beat count per script, used to warn about script drift.
 
 > **cursors**: `Record`\<`string`, `number`\>
 
-Defined in: [types.ts:219](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L219)
+Defined in: [types.ts:219](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L219)
 
 Next beat index per script, indexed into the script's raw beat array.
 
@@ -59,7 +59,7 @@ Next beat index per script, indexed into the script's raw beat array.
 
 > **entries**: [`TranscriptEntry`](TranscriptEntry.md)[]
 
-Defined in: [types.ts:213](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L213)
+Defined in: [types.ts:213](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L213)
 
 ***
 
@@ -67,7 +67,7 @@ Defined in: [types.ts:213](https://github.com/laruss/react-text-game/blob/fe357d
 
 > **lastActivityAt**: `number`
 
-Defined in: [types.ts:259](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L259)
+Defined in: [types.ts:259](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L259)
 
 Game time of the newest entry.
 
@@ -77,7 +77,7 @@ Game time of the newest entry.
 
 > **lastSeenAt**: `number`
 
-Defined in: [types.ts:256](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L256)
+Defined in: [types.ts:256](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L256)
 
 Game time the chat was last marked seen at.
 
@@ -87,7 +87,7 @@ Game time the chat was last marked seen at.
 
 > **nextDueAt**: `number` \| `null`
 
-Defined in: [types.ts:232](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L232)
+Defined in: [types.ts:232](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L232)
 
 Game time delivery is blocked until, or `null` when nothing is pending.
 
@@ -103,7 +103,7 @@ simply delivers what became due while it was away.
 
 > **nextKey**: `number`
 
-Defined in: [types.ts:262](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L262)
+Defined in: [types.ts:262](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L262)
 
 Counter behind [TranscriptEntry.key](TranscriptEntry.md#key).
 
@@ -113,7 +113,7 @@ Counter behind [TranscriptEntry.key](TranscriptEntry.md#key).
 
 > **participants**: `string`[]
 
-Defined in: [types.ts:247](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L247)
+Defined in: [types.ts:247](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L247)
 
 Current members, as contact ids. Empty for a direct chat.
 
@@ -123,7 +123,7 @@ Current members, as contact ids. Empty for a direct chat.
 
 > **pendingChoiceKey**: `string` \| `null`
 
-Defined in: [types.ts:238](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L238)
+Defined in: [types.ts:238](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L238)
 
 Choice id awaiting the player's reply, or `null`.
 
@@ -133,7 +133,7 @@ Choice id awaiting the player's reply, or `null`.
 
 > **readOnly**: `boolean`
 
-Defined in: [types.ts:250](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L250)
+Defined in: [types.ts:250](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L250)
 
 Whether the player can never reply in this chat.
 
@@ -143,7 +143,7 @@ Whether the player can never reply in this chat.
 
 > `optional` **title**: [`RichText`](RichText.md)
 
-Defined in: [types.ts:241](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L241)
+Defined in: [types.ts:241](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L241)
 
 In-fiction title, once renamed.
 
@@ -153,7 +153,7 @@ In-fiction title, once renamed.
 
 > **typingUntil**: `Record`\<`string`, `number`\>
 
-Defined in: [types.ts:235](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L235)
+Defined in: [types.ts:235](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L235)
 
 Game time each contact's typing indicator expires at.
 
@@ -163,6 +163,6 @@ Game time each contact's typing indicator expires at.
 
 > **unread**: `number`
 
-Defined in: [types.ts:253](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/messenger/src/types.ts#L253)
+Defined in: [types.ts:253](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/messenger/src/types.ts#L253)
 
 Number of entries the player has not seen.

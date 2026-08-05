@@ -2,7 +2,7 @@
 
 > **runMigrations**(`data`, `fromVersion`, `toVersion`, `options`): [`MigrationResult`](../interfaces/MigrationResult.md)
 
-Defined in: [packages/core/src/saves/migrations/runner.ts:32](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/saves/migrations/runner.ts#L32)
+Defined in: [packages/core/src/saves/migrations/runner.ts:32](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/saves/migrations/runner.ts#L32)
 
 Runs the migration chain to migrate save data from one version to another.
 

@@ -2,7 +2,7 @@
 
 > **SchemaKind** = `string`
 
-Defined in: [types.ts:32](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/devtools/src/types.ts#L32)
+Defined in: [types.ts:32](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/devtools/src/types.ts#L32)
 
 A value's *kind*, not its value.
 

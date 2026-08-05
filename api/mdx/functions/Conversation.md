@@ -2,7 +2,7 @@
 
 > **Conversation**(`props`): `Element`
 
-Defined in: [mdx/src/components/Conversation/Conversation.tsx:20](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/mdx/src/components/Conversation/Conversation.tsx#L20)
+Defined in: [mdx/src/components/Conversation/Conversation.tsx:20](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/mdx/src/components/Conversation/Conversation.tsx#L20)
 
 Conversation container component for MDX stories.
 

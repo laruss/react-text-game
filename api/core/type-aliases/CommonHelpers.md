@@ -2,7 +2,7 @@
 
 > **CommonHelpers** = `object`
 
-Defined in: [packages/core/src/passages/definition.ts:61](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/definition.ts#L61)
+Defined in: [packages/core/src/passages/definition.ts:61](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/definition.ts#L61)
 
 Helpers available in every passage type's toolbox.
 
@@ -12,7 +12,7 @@ Helpers available in every passage type's toolbox.
 
 > **jump**: (`target`) => () => `void`
 
-Defined in: [packages/core/src/passages/definition.ts:75](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/definition.ts#L75)
+Defined in: [packages/core/src/passages/definition.ts:75](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/definition.ts#L75)
 
 Builds a click handler that navigates to another passage.
 
@@ -48,7 +48,7 @@ h.actions([{ content: 'Continue', action: h.jump(chapter2) }]);
 
 > **when**: \<`T`\>(`condition`, `value`) => `T` \| `undefined`
 
-Defined in: [packages/core/src/passages/definition.ts:90](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/passages/definition.ts#L90)
+Defined in: [packages/core/src/passages/definition.ts:90](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/passages/definition.ts#L90)
 
 Returns `value` when `condition` is truthy, otherwise `undefined`.
 

@@ -2,7 +2,7 @@
 
 > **loadGame**(`id`): `Promise`\<[`GameSave`](../interfaces/GameSave.md) \| `undefined`\>
 
-Defined in: [packages/core/src/saves/db.ts:139](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/core/src/saves/db.ts#L139)
+Defined in: [packages/core/src/saves/db.ts:139](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/core/src/saves/db.ts#L139)
 
 Load game data from the database
 

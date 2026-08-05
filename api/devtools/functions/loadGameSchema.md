@@ -2,7 +2,7 @@
 
 > **loadGameSchema**(`entryPath`, `gameVersion`): `Promise`\<[`LoadedGame`](../interfaces/LoadedGame.md)\>
 
-Defined in: [loadEntry.ts:192](https://github.com/laruss/react-text-game/blob/fe357d1c2eb420359700f4e6a85ba5017204954d/packages/devtools/src/loadEntry.ts#L192)
+Defined in: [loadEntry.ts:192](https://github.com/laruss/react-text-game/blob/7afdceba63b91ff6ce8e4983ca24c5de0550b15f/packages/devtools/src/loadEntry.ts#L192)
 
 Imports a game's modules and captures the shape of its saves.
 
