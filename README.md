@@ -422,6 +422,9 @@ bun run changeset
 
 Follow the prompts to describe your changes. This generates version bumps and changelog entries.
 
+Releasing is then two steps: `bun run version-packages` to apply the bumps, and a push to
+`main` — CI publishes to npm once the checks are green. See [docs/publish.md](docs/publish.md).
+
 ### Contribution Guidelines
 
 1. **Keep changes focused** - One feature or fix per PR
@@ -443,6 +446,7 @@ Follow the prompts to describe your changes. This generates version bumps and ch
 | Lint                 | `bun run lint`                   |
 | Format               | `bun run format`                 |
 | Create changeset     | `bun run changeset`              |
+| Bump versions        | `bun run version-packages`       |
 
 ## License
 

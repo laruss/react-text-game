@@ -35,7 +35,9 @@
         "test:coverage": "turbo run test:coverage",
         "typecheck": "turbo run check-types",
         "docs:build": "turbo run build --filter @react-text-game/docs",
-        "changeset": "bunx --bun changeset"
+        "changeset": "bunx --bun changeset",
+        "version-packages": "bunx --bun changeset version && bun install --lockfile-only",
+        "release": "bunx --bun changeset publish"
     },
     "workspaces": [
         "apps/*",

@@ -10,7 +10,11 @@
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
-    "repository": "github:laruss/react-text-game",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/laruss/react-text-game.git",
+        "directory": "packages/ui"
+    },
     "homepage": "https://reacttextgame.dev/",
     "scripts": {
         "dev": "tsc -p tsconfig.build.json --watch & tsc-alias -p tsconfig.build.json --watch & bun run build:css",

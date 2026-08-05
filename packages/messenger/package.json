@@ -5,7 +5,11 @@
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
-    "repository": "github:laruss/react-text-game",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/laruss/react-text-game.git",
+        "directory": "packages/messenger"
+    },
     "homepage": "https://reacttextgame.dev/",
     "private": false,
     "sideEffects": [
