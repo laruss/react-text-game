@@ -52,3 +52,7 @@ the bumps instead of publishing. Merge it to release, or drop it and run step 2 
   "disallow tokens" variant blocks CI publishing).
 - Provenance is enabled via `NPM_CONFIG_PROVENANCE`, which is why every publishable
   package carries an explicit `repository` object with its `directory`.
+- `release` is the one script that deliberately skips `bunx --bun`. `--bun` also forces
+  the `npm publish` that changesets spawns onto Bun's runtime, and signing the provenance
+  attestation there dies with `ERR_OSSL_NO_DEFAULT_DIGEST` (BoringSSL). Plain
+  `changeset publish` keeps npm on Node, where the signing works.
