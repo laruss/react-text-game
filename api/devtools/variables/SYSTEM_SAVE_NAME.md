@@ -2,7 +2,7 @@
 
 > `const` **SYSTEM\_SAVE\_NAME**: `"__SYSTEM_INITIAL_STATE__"` = `"__SYSTEM_INITIAL_STATE__"`
 
-Defined in: [artifacts.ts:15](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/artifacts.ts#L15)
+Defined in: [artifacts.ts:15](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/artifacts.ts#L15)
 
 Name the engine reserves for the pristine initial state it writes on every
 `Game.init()`.

@@ -1,6 +1,6 @@
 # Interface: VideoComponent
 
-Defined in: [packages/core/src/passages/story/types.ts:303](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/types.ts#L303)
+Defined in: [packages/core/src/passages/story/types.ts:303](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/types.ts#L303)
 
 Component for displaying video content with standard HTML5 video controls.
 Supports local files and remote URLs with customizable playback behavior.
@@ -38,7 +38,7 @@ Supports local files and remote URLs with customizable playback behavior.
 
 > **content**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:320](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/types.ts#L320)
+Defined in: [packages/core/src/passages/story/types.ts:320](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/types.ts#L320)
 
 URL or path to the video file.
 Supports common formats (MP4, WebM, OGG) depending on browser support.
@@ -57,7 +57,7 @@ content: 'cutscene.mp4'                   // Public folder asset
 
 > `optional` **id**: `string`
 
-Defined in: [packages/core/src/passages/story/types.ts:27](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/types.ts#L27)
+Defined in: [packages/core/src/passages/story/types.ts:27](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/types.ts#L27)
 
 Optional unique identifier for this component.
 Can be used to reference or manipulate specific components programmatically.
@@ -78,7 +78,7 @@ Can be used to reference or manipulate specific components programmatically.
 
 > `optional` **initialVariant**: `"display"` \| `"hidden"` \| `"disclosure"`
 
-Defined in: [packages/core/src/passages/story/types.ts:42](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/types.ts#L42)
+Defined in: [packages/core/src/passages/story/types.ts:42](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/types.ts#L42)
 
 Controls the initial visibility state of the component.
 
@@ -105,7 +105,7 @@ Currently defined but not yet implemented in the UI layer.
 
 > `optional` **props**: `object`
 
-Defined in: [packages/core/src/passages/story/types.ts:325](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/types.ts#L325)
+Defined in: [packages/core/src/passages/story/types.ts:325](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/types.ts#L325)
 
 Optional configuration for video playback and styling.
 
@@ -194,6 +194,6 @@ Users can still unmute via controls if `controls: true`.
 
 > **type**: `"video"`
 
-Defined in: [packages/core/src/passages/story/types.ts:307](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/types.ts#L307)
+Defined in: [packages/core/src/passages/story/types.ts:307](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/types.ts#L307)
 
 Discriminator property identifying this as a video component.

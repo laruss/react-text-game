@@ -2,7 +2,7 @@
 
 > **useDeleteAllSaves**(): () => `Promise`\<`void`\>
 
-Defined in: [packages/core/src/saves/hooks/useDeleteAllSlots.ts:18](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/saves/hooks/useDeleteAllSlots.ts#L18)
+Defined in: [packages/core/src/saves/hooks/useDeleteAllSlots.ts:18](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/hooks/useDeleteAllSlots.ts#L18)
 
 React hook that provides a function to delete all game saves.
 This function clears all saved game data from the database.

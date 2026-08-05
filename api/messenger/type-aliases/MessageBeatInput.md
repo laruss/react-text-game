@@ -2,7 +2,7 @@
 
 > **MessageBeatInput** = `object`
 
-Defined in: [scripts/types.ts:74](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L74)
+Defined in: [scripts/types.ts:74](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L74)
 
 A message from a specific sender.
 
@@ -12,7 +12,7 @@ A message from a specific sender.
 
 > **body**: [`MessageBody`](MessageBody.md)
 
-Defined in: [scripts/types.ts:78](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L78)
+Defined in: [scripts/types.ts:78](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L78)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [scripts/types.ts:78](https://github.com/laruss/react-text-game/blob
 
 > `optional` **forwardedFrom**: [`ForwardOriginInput`](ForwardOriginInput.md)
 
-Defined in: [scripts/types.ts:79](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L79)
+Defined in: [scripts/types.ts:79](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L79)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [scripts/types.ts:79](https://github.com/laruss/react-text-game/blob
 
 > **from**: `string`
 
-Defined in: [scripts/types.ts:77](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L77)
+Defined in: [scripts/types.ts:77](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L77)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [scripts/types.ts:77](https://github.com/laruss/react-text-game/blob
 
 > `optional` **id**: `string`
 
-Defined in: [scripts/types.ts:76](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L76)
+Defined in: [scripts/types.ts:76](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L76)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: [scripts/types.ts:76](https://github.com/laruss/react-text-game/blob
 
 > `optional` **receipt**: [`Receipt`](Receipt.md)
 
-Defined in: [scripts/types.ts:80](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L80)
+Defined in: [scripts/types.ts:80](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L80)
 
 ***
 
@@ -52,4 +52,4 @@ Defined in: [scripts/types.ts:80](https://github.com/laruss/react-text-game/blob
 
 > **type**: `"message"`
 
-Defined in: [scripts/types.ts:75](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/types.ts#L75)
+Defined in: [scripts/types.ts:75](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L75)

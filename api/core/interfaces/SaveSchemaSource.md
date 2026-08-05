@@ -1,6 +1,6 @@
 # Interface: SaveSchemaSource
 
-Defined in: [packages/core/src/saveSchema.ts:14](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/saveSchema.ts#L14)
+Defined in: [packages/core/src/saveSchema.ts:14](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saveSchema.ts#L14)
 
 Everything needed to describe the shape of this game's saves.
 
@@ -17,7 +17,7 @@ so the engine stays free of any particular schema format.
 
 > **gameData**: [`GameSaveState`](../type-aliases/GameSaveState.md)
 
-Defined in: [packages/core/src/saveSchema.ts:22](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/saveSchema.ts#L22)
+Defined in: [packages/core/src/saveSchema.ts:22](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saveSchema.ts#L22)
 
 The state a save would contain right now, exactly as `Game.getState()`
 would produce it - entity variables plus the `_system` paths owned by the
@@ -29,7 +29,7 @@ engine.
 
 > **gameVersion**: `string`
 
-Defined in: [packages/core/src/saveSchema.ts:16](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/saveSchema.ts#L16)
+Defined in: [packages/core/src/saveSchema.ts:16](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saveSchema.ts#L16)
 
 Version the game currently declares through `Game.init()`.
 
@@ -39,7 +39,7 @@ Version the game currently declares through `Game.init()`.
 
 > **passageIds**: `string`[]
 
-Defined in: [packages/core/src/saveSchema.ts:31](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/saveSchema.ts#L31)
+Defined in: [packages/core/src/saveSchema.ts:31](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saveSchema.ts#L31)
 
 Ids of every registered passage, sorted.
 

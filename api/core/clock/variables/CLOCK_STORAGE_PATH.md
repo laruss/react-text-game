@@ -2,7 +2,7 @@
 
 > `const` **CLOCK\_STORAGE\_PATH**: `"$._system.clock"`
 
-Defined in: [constants.ts:13](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/clock/constants.ts#L13)
+Defined in: [constants.ts:13](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/clock/constants.ts#L13)
 
 JSONPath the clock persists its state at.
 

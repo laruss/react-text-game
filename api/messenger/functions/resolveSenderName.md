@@ -2,7 +2,7 @@
 
 > **resolveSenderName**(`id`): `string`
 
-Defined in: [contacts.ts:103](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/contacts.ts#L103)
+Defined in: [contacts.ts:103](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/contacts.ts#L103)
 
 Resolves a sender id to a display name.
 

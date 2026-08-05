@@ -2,7 +2,7 @@
 
 > **getScript**(`id`): [`Script`](../type-aliases/Script.md) \| `undefined`
 
-Defined in: [scripts/define.ts:57](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/scripts/define.ts#L57)
+Defined in: [scripts/define.ts:57](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/define.ts#L57)
 
 Looks up a defined script.
 

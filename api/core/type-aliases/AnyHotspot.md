@@ -2,7 +2,7 @@
 
 > **AnyHotspot** = [`MapLabelHotspot`](../interfaces/MapLabelHotspot.md) \| [`MapImageHotspot`](../interfaces/MapImageHotspot.md) \| [`MapImage`](../interfaces/MapImage.md) \| [`SideLabelHotspot`](../interfaces/SideLabelHotspot.md) \| [`SideImageHotspot`](../interfaces/SideImageHotspot.md) \| [`MapMenu`](../interfaces/MapMenu.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/types.ts:685](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/interactiveMap/types.ts#L685)
+Defined in: [packages/core/src/passages/interactiveMap/types.ts:685](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/interactiveMap/types.ts#L685)
 
 Union type of all possible hotspot types.
 Used for type-safe hotspot arrays in interactive maps.

@@ -2,7 +2,7 @@
 
 > **StoryHelpers** = [`CommonHelpers`](CommonHelpers.md) & `object`
 
-Defined in: [packages/core/src/passages/story/helpers.ts:81](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/passages/story/helpers.ts#L81)
+Defined in: [packages/core/src/passages/story/helpers.ts:81](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/story/helpers.ts#L81)
 
 Toolbox handed to the content callback of [defineStory](../functions/defineStory.md).
 

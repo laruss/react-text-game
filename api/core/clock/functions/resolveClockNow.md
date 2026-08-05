@@ -2,7 +2,7 @@
 
 > **resolveClockNow**(`clockState`): `number`
 
-Defined in: [clock.ts:42](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/core/src/clock/clock.ts#L42)
+Defined in: [clock.ts:42](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/clock/clock.ts#L42)
 
 **`Internal`**
 

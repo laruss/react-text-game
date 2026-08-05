@@ -2,7 +2,7 @@
 
 > **ChatOptions** = [`ChatCallbacks`](ChatCallbacks.md) & `object`
 
-Defined in: [chat.ts:124](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/messenger/src/chat.ts#L124)
+Defined in: [chat.ts:124](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/chat.ts#L124)
 
 Options accepted by [defineChat](../functions/defineChat.md).
 

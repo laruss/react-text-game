@@ -1,6 +1,6 @@
 # Interface: Finding
 
-Defined in: [types.ts:95](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/types.ts#L95)
+Defined in: [types.ts:95](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/types.ts#L95)
 
 One difference between two schemas.
 
@@ -10,7 +10,7 @@ One difference between two schemas.
 
 > **code**: [`FindingCode`](../type-aliases/FindingCode.md)
 
-Defined in: [types.ts:97](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/types.ts#L97)
+Defined in: [types.ts:97](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/types.ts#L97)
 
 See [FindingCode](../type-aliases/FindingCode.md).
 
@@ -20,7 +20,7 @@ See [FindingCode](../type-aliases/FindingCode.md).
 
 > **message**: `string`
 
-Defined in: [types.ts:106](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/types.ts#L106)
+Defined in: [types.ts:106](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/types.ts#L106)
 
 Human-readable explanation, including why it matters.
 
@@ -30,7 +30,7 @@ Human-readable explanation, including why it matters.
 
 > **severity**: [`Severity`](../type-aliases/Severity.md)
 
-Defined in: [types.ts:99](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/types.ts#L99)
+Defined in: [types.ts:99](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/types.ts#L99)
 
 See [Severity](../type-aliases/Severity.md).
 
@@ -40,7 +40,7 @@ See [Severity](../type-aliases/Severity.md).
 
 > **subject**: `string`
 
-Defined in: [types.ts:104](https://github.com/laruss/react-text-game/blob/7b0de9d1745a4d5d61bf751fa93c904f39754886/packages/devtools/src/types.ts#L104)
+Defined in: [types.ts:104](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/types.ts#L104)
 
 What the finding is about: an entity id, a dotted path, or a passage id.
 Empty for findings about the schema as a whole.
