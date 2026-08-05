@@ -1,4 +1,4 @@
-import ui from "./locales/en/ui.json";
+import { ui } from "./locales/en/ui";
 
 export const uiTranslations = {
     en: { ui },
