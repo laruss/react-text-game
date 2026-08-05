@@ -1,6 +1,6 @@
 # Interface: CheckResult
 
-Defined in: [types.ts:112](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L112)
+Defined in: [types.ts:112](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L112)
 
 Outcome of comparing a baseline snapshot against the current shape.
 
@@ -10,7 +10,7 @@ Outcome of comparing a baseline snapshot against the current shape.
 
 > **baselineVersion**: `string`
 
-Defined in: [types.ts:137](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L137)
+Defined in: [types.ts:137](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L137)
 
 Version the baseline snapshot describes.
 
@@ -20,7 +20,7 @@ Version the baseline snapshot describes.
 
 > **currentVersion**: `string`
 
-Defined in: [types.ts:139](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L139)
+Defined in: [types.ts:139](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L139)
 
 Version the current shape declares.
 
@@ -30,7 +30,7 @@ Version the current shape declares.
 
 > **findings**: [`Finding`](Finding.md)[]
 
-Defined in: [types.ts:114](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L114)
+Defined in: [types.ts:114](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L114)
 
 Every difference found, most severe first.
 
@@ -40,7 +40,7 @@ Every difference found, most severe first.
 
 > **migrationRequired**: `boolean`
 
-Defined in: [types.ts:122](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L122)
+Defined in: [types.ts:122](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L122)
 
 Whether the shape change means old saves need a migration.
 
@@ -55,7 +55,7 @@ because a suspected rename silently loses player data if it really is one.
 
 > **migrationSatisfied**: `boolean`
 
-Defined in: [types.ts:135](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L135)
+Defined in: [types.ts:135](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L135)
 
 Whether a registered migration chain already covers the change.
 

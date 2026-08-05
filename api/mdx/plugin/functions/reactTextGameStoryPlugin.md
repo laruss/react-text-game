@@ -2,7 +2,7 @@
 
 > **reactTextGameStoryPlugin**(): `Pick`\<`ProcessorOptions`, `"recmaPlugins"` \| `"remarkPlugins"`\>
 
-Defined in: [index.ts:50](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/mdx/src/plugins/index.ts#L50)
+Defined in: [index.ts:50](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/mdx/src/plugins/index.ts#L50)
 
 MDX processor plugin for auto-registering stories on import.
 This variant transforms MDX files into self-registering story modules.

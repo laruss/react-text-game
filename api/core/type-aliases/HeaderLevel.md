@@ -2,7 +2,7 @@
 
 > **HeaderLevel** = `1` \| `2` \| `3` \| `4` \| `5` \| `6`
 
-Defined in: [packages/core/src/passages/story/types.ts:122](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/passages/story/types.ts#L122)
+Defined in: [packages/core/src/passages/story/types.ts:122](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/passages/story/types.ts#L122)
 
 Defines the heading level for a HeaderComponent.
 Maps to HTML heading elements (h1-h6), where:

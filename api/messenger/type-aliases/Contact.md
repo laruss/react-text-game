@@ -2,7 +2,7 @@
 
 > **Contact** = `object`
 
-Defined in: [contacts.ts:17](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/contacts.ts#L17)
+Defined in: [contacts.ts:17](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/contacts.ts#L17)
 
 A participant in a chat: an NPC, a channel, or the player.
 
@@ -18,7 +18,7 @@ game has shipped.
 
 > `readonly` `optional` **avatar**: `string`
 
-Defined in: [contacts.ts:24](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/contacts.ts#L24)
+Defined in: [contacts.ts:24](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/contacts.ts#L24)
 
 Avatar image, used as the fallback avatar of a direct chat.
 
@@ -28,7 +28,7 @@ Avatar image, used as the fallback avatar of a direct chat.
 
 > `readonly` **id**: `string`
 
-Defined in: [contacts.ts:18](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/contacts.ts#L18)
+Defined in: [contacts.ts:18](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/contacts.ts#L18)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [contacts.ts:18](https://github.com/laruss/react-text-game/blob/423d
 
 > `readonly` `optional` **meta**: `Record`\<`string`, `unknown`\>
 
-Defined in: [contacts.ts:27](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/contacts.ts#L27)
+Defined in: [contacts.ts:27](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/contacts.ts#L27)
 
 Arbitrary author data, for example a phone number or an online flag.
 
@@ -46,6 +46,6 @@ Arbitrary author data, for example a phone number or an online flag.
 
 > `readonly` `optional` **name**: [`PlainRichText`](PlainRichText.md)
 
-Defined in: [contacts.ts:21](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/contacts.ts#L21)
+Defined in: [contacts.ts:21](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/contacts.ts#L21)
 
 Display name, resolved through i18next when built with `m.t()`.

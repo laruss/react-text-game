@@ -1,6 +1,6 @@
 # Interface: SaveSchema
 
-Defined in: [types.ts:47](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L47)
+Defined in: [types.ts:47](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L47)
 
 A comparable description of one version's save shape.
 
@@ -10,7 +10,7 @@ A comparable description of one version's save shape.
 
 > **capturedFrom**: [`CaptureSource`](../type-aliases/CaptureSource.md)
 
-Defined in: [types.ts:53](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L53)
+Defined in: [types.ts:53](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L53)
 
 See [CaptureSource](../type-aliases/CaptureSource.md).
 
@@ -20,7 +20,7 @@ See [CaptureSource](../type-aliases/CaptureSource.md).
 
 > **entities**: `string`[]
 
-Defined in: [types.ts:55](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L55)
+Defined in: [types.ts:55](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L55)
 
 Sorted ids of every game entity, excluding engine-owned system state.
 
@@ -30,7 +30,7 @@ Sorted ids of every game entity, excluding engine-owned system state.
 
 > **gameVersion**: `string`
 
-Defined in: [types.ts:51](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L51)
+Defined in: [types.ts:51](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L51)
 
 Game version this shape belongs to.
 
@@ -40,7 +40,7 @@ Game version this shape belongs to.
 
 > **passages**: `string`[] \| `null`
 
-Defined in: [types.ts:64](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L64)
+Defined in: [types.ts:64](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L64)
 
 Sorted ids of every registered passage, or `null` when the capture source
 could not know them.
@@ -56,7 +56,7 @@ just the one id the player was on, so passage checks are skipped for them.
 
 > **paths**: `Record`\<`string`, [`SchemaKind`](../type-aliases/SchemaKind.md)\>
 
-Defined in: [types.ts:66](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L66)
+Defined in: [types.ts:66](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L66)
 
 Dotted path to kind, for every node in the state tree, sorted by path.
 
@@ -66,6 +66,6 @@ Dotted path to kind, for every node in the state tree, sorted by path.
 
 > **schemaVersion**: `number`
 
-Defined in: [types.ts:49](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/devtools/src/types.ts#L49)
+Defined in: [types.ts:49](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/devtools/src/types.ts#L49)
 
 See [SCHEMA\_VERSION](../variables/SCHEMA_VERSION.md).

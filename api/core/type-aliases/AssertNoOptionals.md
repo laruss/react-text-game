@@ -2,7 +2,7 @@
 
 > **AssertNoOptionals**\<`T`\> = \[[`OptionalKeys`](OptionalKeys.md)\<`T`\>\] *extends* \[`never`\] ? `unknown` : `object`
 
-Defined in: [packages/core/src/types.ts:25](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/core/src/types.ts#L25)
+Defined in: [packages/core/src/types.ts:25](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/core/src/types.ts#L25)
 
 A utility type that enforces the absence of optional keys in a given type `T`.
 If `T` contains any optional keys, it will produce a compile-time error listing the keys

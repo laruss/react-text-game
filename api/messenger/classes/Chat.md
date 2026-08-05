@@ -1,6 +1,6 @@
 # Class: Chat
 
-Defined in: [chat.ts:274](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L274)
+Defined in: [chat.ts:274](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L274)
 
 A single conversation: its transcript, its delivery cursor, and everything the
 player has or has not seen in it.
@@ -21,7 +21,7 @@ defineChat - Factory for creating a chat
 
 > **new Chat**(`id`, `options`): `Chat`
 
-Defined in: [chat.ts:301](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L301)
+Defined in: [chat.ts:301](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L301)
 
 Creates a chat. Prefer [defineChat](../functions/defineChat.md).
 
@@ -49,7 +49,7 @@ Peer or participants, title, avatar, callbacks
 
 > `readonly` **id**: `string`
 
-Defined in: [chat.ts:276](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L276)
+Defined in: [chat.ts:276](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L276)
 
 Unique, persistent identifier.
 
@@ -59,7 +59,7 @@ Unique, persistent identifier.
 
 > `readonly` **kind**: [`ChatKind`](../type-aliases/ChatKind.md)
 
-Defined in: [chat.ts:279](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L279)
+Defined in: [chat.ts:279](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L279)
 
 Whether this is a one-to-one chat or a group.
 
@@ -69,7 +69,7 @@ Whether this is a one-to-one chat or a group.
 
 > `readonly` **maxEntries**: `number`
 
-Defined in: [chat.ts:285](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L285)
+Defined in: [chat.ts:285](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L285)
 
 Upper bound on retained entries. `Infinity` when uncapped.
 
@@ -79,7 +79,7 @@ Upper bound on retained entries. `Infinity` when uncapped.
 
 > `readonly` **peerId**: `string` \| `undefined`
 
-Defined in: [chat.ts:282](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L282)
+Defined in: [chat.ts:282](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L282)
 
 The other participant of a direct chat.
 
@@ -91,7 +91,7 @@ The other participant of a direct chat.
 
 > **get** **activeScript**(): [`Script`](../type-aliases/Script.md) \| `null`
 
-Defined in: [chat.ts:488](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L488)
+Defined in: [chat.ts:488](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L488)
 
 Script currently being played, or `null`.
 
@@ -107,7 +107,7 @@ Script currently being played, or `null`.
 
 > **get** **canReply**(): `boolean`
 
-Defined in: [chat.ts:424](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L424)
+Defined in: [chat.ts:424](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L424)
 
 Whether a reply is possible at all.
 
@@ -128,7 +128,7 @@ now still reports `true` - check [Chat.pendingChoice](#pendingchoice) for that.
 
 > **get** **entries**(): [`TranscriptEntry`](../type-aliases/TranscriptEntry.md)[]
 
-Defined in: [chat.ts:378](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L378)
+Defined in: [chat.ts:378](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L378)
 
 Delivered entries, oldest first.
 
@@ -144,7 +144,7 @@ Delivered entries, oldest first.
 
 > **get** **firstUnreadKey**(): `string` \| `null`
 
-Defined in: [chat.ts:388](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L388)
+Defined in: [chat.ts:388](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L388)
 
 Key of the oldest unseen entry, or `null`.
 
@@ -160,7 +160,7 @@ Key of the oldest unseen entry, or `null`.
 
 > **get** **isGroup**(): `boolean`
 
-Defined in: [chat.ts:398](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L398)
+Defined in: [chat.ts:398](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L398)
 
 Whether this chat has several members rather than one peer.
 
@@ -176,7 +176,7 @@ Whether this chat has several members rather than one peer.
 
 > **get** **lastEntry**(): [`TranscriptEntry`](../type-aliases/TranscriptEntry.md) \| `null`
 
-Defined in: [chat.ts:393](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L393)
+Defined in: [chat.ts:393](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L393)
 
 Newest entry, or `null` when the transcript is empty.
 
@@ -192,7 +192,7 @@ Newest entry, or `null` when the transcript is empty.
 
 > **get** **nextDueAt**(): `number` \| `null`
 
-Defined in: [chat.ts:497](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L497)
+Defined in: [chat.ts:497](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L497)
 
 Game time delivery is blocked until, or `null` when nothing is waiting.
 
@@ -208,7 +208,7 @@ Game time delivery is blocked until, or `null` when nothing is waiting.
 
 > **get** **participantCount**(): `number`
 
-Defined in: [chat.ts:408](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L408)
+Defined in: [chat.ts:408](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L408)
 
 How many members the group currently has.
 
@@ -224,7 +224,7 @@ How many members the group currently has.
 
 > **get** **participants**(): `string`[]
 
-Defined in: [chat.ts:403](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L403)
+Defined in: [chat.ts:403](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L403)
 
 Current members, as contact ids.
 
@@ -240,7 +240,7 @@ Current members, as contact ids.
 
 > **get** **pendingChoice**(): [`PendingChoice`](../type-aliases/PendingChoice.md) \| `null`
 
-Defined in: [chat.ts:504](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L504)
+Defined in: [chat.ts:504](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L504)
 
 The reply the player is expected to pick, or `null`.
 
@@ -256,7 +256,7 @@ The reply the player is expected to pick, or `null`.
 
 > **get** **readOnly**(): `boolean`
 
-Defined in: [chat.ts:413](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L413)
+Defined in: [chat.ts:413](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L413)
 
 Whether the player is structurally barred from replying.
 
@@ -272,7 +272,7 @@ Whether the player is structurally barred from replying.
 
 > **get** **resolvedAvatar**(): `string` \| `undefined`
 
-Defined in: [chat.ts:462](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L462)
+Defined in: [chat.ts:462](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L462)
 
 Chat picture, or `undefined` when the chat has none.
 
@@ -293,7 +293,7 @@ removed), then the definition's avatar, then the peer's avatar.
 
 > **get** **resolvedTitle**(): `string`
 
-Defined in: [chat.ts:435](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L435)
+Defined in: [chat.ts:435](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L435)
 
 Title, resolved through the definition and the peer.
 
@@ -314,7 +314,7 @@ the peer's name, then the chat id.
 
 > **get** **typingContacts**(): `string`[]
 
-Defined in: [chat.ts:483](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L483)
+Defined in: [chat.ts:483](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L483)
 
 Contacts currently shown as typing.
 
@@ -330,7 +330,7 @@ Contacts currently shown as typing.
 
 > **get** **unread**(): `number`
 
-Defined in: [chat.ts:383](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L383)
+Defined in: [chat.ts:383](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L383)
 
 Number of entries the player has not seen.
 
@@ -346,7 +346,7 @@ Number of entries the player has not seen.
 
 > **get** **vars**(): [`ChatVars`](../type-aliases/ChatVars.md)
 
-Defined in: [chat.ts:365](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L365)
+Defined in: [chat.ts:365](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L365)
 
 This chat's persisted state, materialized on first access.
 
@@ -366,7 +366,7 @@ rendering does - never writes to the store.
 
 > **addParticipant**(`contact`): `void`
 
-Defined in: [chat.ts:759](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L759)
+Defined in: [chat.ts:759](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L759)
 
 Adds a member and records an in-fiction notice.
 
@@ -388,7 +388,7 @@ Who joined
 
 > **advance**(`count`): `void`
 
-Defined in: [chat.ts:583](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L583)
+Defined in: [chat.ts:583](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L583)
 
 Delivers up to `count` messages from the active script.
 
@@ -420,7 +420,7 @@ h.actions([{ content: 'Read on', action: () => chat.advance() }]);
 
 > **choose**(`index`): `void`
 
-Defined in: [chat.ts:640](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L640)
+Defined in: [chat.ts:640](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L640)
 
 Logs the player's reply and continues.
 
@@ -453,7 +453,7 @@ continues the current script.
 
 > **clear**(): `void`
 
-Defined in: [chat.ts:856](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L856)
+Defined in: [chat.ts:856](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L856)
 
 Empties the transcript and resets every cursor.
 
@@ -472,7 +472,7 @@ player has read across all playthroughs.
 
 > **deliverDue**(): `void`
 
-Defined in: [chat.ts:597](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L597)
+Defined in: [chat.ts:597](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L597)
 
 Delivers everything that has become due, and clears expired typing
 indicators.
@@ -494,7 +494,7 @@ long after a message was scheduled simply delivers it now.
 
 > **initialVars**(): [`ChatVars`](../type-aliases/ChatVars.md)
 
-Defined in: [chat.ts:339](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L339)
+Defined in: [chat.ts:339](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L339)
 
 The initial persisted state of this chat.
 
@@ -513,7 +513,7 @@ as a fallback while rendering a chat nothing has written to yet.
 
 > **isSeenEver**(`beatId`): `boolean`
 
-Defined in: [chat.ts:537](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L537)
+Defined in: [chat.ts:537](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L537)
 
 Whether the player has ever seen a script beat, across every save.
 
@@ -538,7 +538,7 @@ Backs "skip already-read text" and gallery unlocks. Call
 
 > **markSeen**(): `void`
 
-Defined in: [chat.ts:714](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L714)
+Defined in: [chat.ts:714](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L714)
 
 Marks every entry as seen.
 
@@ -558,7 +558,7 @@ seen store.
 
 > **markSeenUpTo**(`key`): `void`
 
-Defined in: [chat.ts:727](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L727)
+Defined in: [chat.ts:727](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L727)
 
 Marks entries up to and including `key` as seen.
 
@@ -585,7 +585,7 @@ An unknown key marks nothing.
 
 > **play**(`script`): `void`
 
-Defined in: [chat.ts:551](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L551)
+Defined in: [chat.ts:551](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L551)
 
 Starts a script from its first beat.
 
@@ -616,7 +616,7 @@ the first message appears. Call [Chat.advance](#advance) next.
 
 > **push**(`beat`): [`TranscriptEntry`](../type-aliases/TranscriptEntry.md)
 
-Defined in: [chat.ts:624](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L624)
+Defined in: [chat.ts:624](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L624)
 
 Appends a message outside of any script.
 
@@ -653,7 +653,7 @@ chat.push(m.from(anna).text('look', { forwardedFrom: boris }));
 
 > **removeParticipant**(`contact`): `void`
 
-Defined in: [chat.ts:785](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L785)
+Defined in: [chat.ts:785](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L785)
 
 Removes a member and records an in-fiction notice.
 
@@ -675,7 +675,7 @@ Who left
 
 > **rename**(`title`): `void`
 
-Defined in: [chat.ts:812](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L812)
+Defined in: [chat.ts:812](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L812)
 
 Renames the chat in-fiction.
 
@@ -697,7 +697,7 @@ New title, or `undefined` to fall back to the definition
 
 > **setAvatar**(`src`): `void`
 
-Defined in: [chat.ts:829](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L829)
+Defined in: [chat.ts:829](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L829)
 
 Changes the chat picture in-fiction.
 
@@ -720,7 +720,7 @@ to the definition
 
 > **setReadOnly**(`readOnly`): `void`
 
-Defined in: [chat.ts:845](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L845)
+Defined in: [chat.ts:845](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L845)
 
 Opens or closes the chat for replies in-fiction.
 
@@ -742,7 +742,7 @@ Whether replies are barred
 
 > **setTyping**(`sender`, `ms`): `void`
 
-Defined in: [chat.ts:747](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/chat.ts#L747)
+Defined in: [chat.ts:747](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/chat.ts#L747)
 
 Shows a typing indicator for `ms` of game time, without holding anything
 back.

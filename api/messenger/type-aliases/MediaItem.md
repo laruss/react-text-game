@@ -2,7 +2,7 @@
 
 > **MediaItem** = `object`
 
-Defined in: [types.ts:86](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L86)
+Defined in: [types.ts:86](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L86)
 
 A single photo or video inside a message.
 
@@ -12,7 +12,7 @@ A single photo or video inside a message.
 
 > `optional` **alt**: [`RichText`](RichText.md)
 
-Defined in: [types.ts:89](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L89)
+Defined in: [types.ts:89](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L89)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [types.ts:89](https://github.com/laruss/react-text-game/blob/423d8d0
 
 > `optional` **durationMs**: `number`
 
-Defined in: [types.ts:93](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L93)
+Defined in: [types.ts:93](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L93)
 
 Video length in milliseconds, for duration labels.
 
@@ -30,7 +30,7 @@ Video length in milliseconds, for duration labels.
 
 > **kind**: `"image"` \| `"video"`
 
-Defined in: [types.ts:87](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L87)
+Defined in: [types.ts:87](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L87)
 
 ***
 
@@ -38,7 +38,7 @@ Defined in: [types.ts:87](https://github.com/laruss/react-text-game/blob/423d8d0
 
 > `optional` **poster**: `string`
 
-Defined in: [types.ts:91](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L91)
+Defined in: [types.ts:91](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L91)
 
 Preview frame for a video.
 
@@ -48,7 +48,7 @@ Preview frame for a video.
 
 > `optional` **spoiler**: `boolean`
 
-Defined in: [types.ts:95](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L95)
+Defined in: [types.ts:95](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L95)
 
 Whether the item should be hidden behind a tap-to-reveal overlay.
 
@@ -58,4 +58,4 @@ Whether the item should be hidden behind a tap-to-reveal overlay.
 
 > **src**: `string`
 
-Defined in: [types.ts:88](https://github.com/laruss/react-text-game/blob/423d8d0db749bd837c975abed775d8768670d2b3/packages/messenger/src/types.ts#L88)
+Defined in: [types.ts:88](https://github.com/laruss/react-text-game/blob/415f8c5bf941043d9ac69002f1e57d7da1774219/packages/messenger/src/types.ts#L88)
