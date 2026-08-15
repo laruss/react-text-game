@@ -2,7 +2,7 @@
 
 > **useImportSaves**(): (`file?`, `options?`) => `Promise`\<[`WriteSavesResult`](../type-aliases/WriteSavesResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useImportSaves.ts:38](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/hooks/useImportSaves.ts#L38)
+Defined in: [packages/core/src/saves/hooks/useImportSaves.ts:38](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/hooks/useImportSaves.ts#L38)
 
 React hook that imports game saves from an encrypted file: opens a file
 picker, decodes the selection and writes what it holds.

@@ -2,7 +2,7 @@
 
 > `const` **DEFAULT\_CLOCK\_START\_AT**: `number`
 
-Defined in: [constants.ts:35](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/constants.ts#L35)
+Defined in: [constants.ts:35](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/clock/constants.ts#L35)
 
 Game time a fresh game starts at: 2000-01-01, 09:00 UTC.
 

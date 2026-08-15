@@ -2,7 +2,7 @@
 
 > `const` **ENTRY\_WARN\_THRESHOLD**: `1000` = `1000`
 
-Defined in: [constants.ts:53](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/constants.ts#L53)
+Defined in: [constants.ts:53](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/constants.ts#L53)
 
 Entry count after which a chat warns about an unbounded transcript.
 

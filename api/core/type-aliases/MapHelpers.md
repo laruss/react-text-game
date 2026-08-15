@@ -2,7 +2,7 @@
 
 > **MapHelpers** = [`CommonHelpers`](CommonHelpers.md) & `object`
 
-Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:129](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/passages/interactiveMap/helpers.ts#L129)
+Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:129](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/passages/interactiveMap/helpers.ts#L129)
 
 Toolbox handed to the content callback of [defineInteractiveMap](../functions/defineInteractiveMap.md).
 

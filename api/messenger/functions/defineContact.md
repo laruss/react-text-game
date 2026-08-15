@@ -2,7 +2,7 @@
 
 > **defineContact**(`id`, `options`): [`Contact`](../type-aliases/Contact.md)
 
-Defined in: [contacts.ts:59](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/contacts.ts#L59)
+Defined in: [contacts.ts:59](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/contacts.ts#L59)
 
 Defines a chat participant.
 

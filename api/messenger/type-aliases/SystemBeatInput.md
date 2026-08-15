@@ -2,7 +2,7 @@
 
 > **SystemBeatInput** = `object`
 
-Defined in: [scripts/types.ts:84](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L84)
+Defined in: [scripts/types.ts:84](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L84)
 
 An in-fiction system notice, always translated.
 
@@ -12,7 +12,7 @@ An in-fiction system notice, always translated.
 
 > `optional` **id**: `string`
 
-Defined in: [scripts/types.ts:86](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L86)
+Defined in: [scripts/types.ts:86](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L86)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [scripts/types.ts:86](https://github.com/laruss/react-text-game/blob
 
 > **key**: `string`
 
-Defined in: [scripts/types.ts:87](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L87)
+Defined in: [scripts/types.ts:87](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L87)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [scripts/types.ts:87](https://github.com/laruss/react-text-game/blob
 
 > `optional` **params**: [`Params`](Params.md)
 
-Defined in: [scripts/types.ts:88](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L88)
+Defined in: [scripts/types.ts:88](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L88)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [scripts/types.ts:88](https://github.com/laruss/react-text-game/blob
 
 > **type**: `"system"`
 
-Defined in: [scripts/types.ts:85](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L85)
+Defined in: [scripts/types.ts:85](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L85)

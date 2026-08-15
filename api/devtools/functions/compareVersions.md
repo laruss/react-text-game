@@ -2,7 +2,7 @@
 
 > **compareVersions**(`left`, `right`): `number`
 
-Defined in: [store.ts:14](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/devtools/src/store.ts#L14)
+Defined in: [store.ts:14](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/devtools/src/store.ts#L14)
 
 Compares two version strings by their leading numeric segments.
 

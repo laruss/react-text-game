@@ -2,7 +2,7 @@
 
 > **createMemorySeenStore**(): [`SeenStore`](../type-aliases/SeenStore.md)
 
-Defined in: [seen/seenStore.ts:107](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/seen/seenStore.ts#L107)
+Defined in: [seen/seenStore.ts:107](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/seen/seenStore.ts#L107)
 
 Creates a seen store that never persists.
 

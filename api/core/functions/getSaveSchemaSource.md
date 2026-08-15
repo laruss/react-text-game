@@ -2,7 +2,7 @@
 
 > **getSaveSchemaSource**(): [`SaveSchemaSource`](../interfaces/SaveSchemaSource.md)
 
-Defined in: [packages/core/src/saveSchema.ts:61](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saveSchema.ts#L61)
+Defined in: [packages/core/src/saveSchema.ts:61](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saveSchema.ts#L61)
 
 Captures the current shape of this game's saves.
 

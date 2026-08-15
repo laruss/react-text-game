@@ -2,7 +2,7 @@
 
 > **useRestartGame**(): () => `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useRestartGame.ts:20](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/hooks/useRestartGame.ts#L20)
+Defined in: [packages/core/src/saves/hooks/useRestartGame.ts:20](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/hooks/useRestartGame.ts#L20)
 
 React hook that provides a function to restart the game from the initial state.
 Loads the system save (initial game state), clears auto-save, and navigates to start passage.

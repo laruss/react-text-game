@@ -2,7 +2,7 @@
 
 > **Action**(`props`): `Element`
 
-Defined in: [mdx/src/components/Actions/Action.tsx:18](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/mdx/src/components/Actions/Action.tsx#L18)
+Defined in: [mdx/src/components/Actions/Action.tsx:18](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/mdx/src/components/Actions/Action.tsx#L18)
 
 Action button component for MDX stories.
 

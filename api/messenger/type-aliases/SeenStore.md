@@ -2,7 +2,7 @@
 
 > **SeenStore** = `object`
 
-Defined in: [types.ts:272](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/types.ts#L272)
+Defined in: [types.ts:272](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L272)
 
 Cross-save record of which script beats the player has ever seen.
 
@@ -16,7 +16,7 @@ in-memory set and persists it through the engine's settings table.
 
 > **add**(`beatId`): `void`
 
-Defined in: [types.ts:277](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/types.ts#L277)
+Defined in: [types.ts:277](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L277)
 
 Records a beat as seen. Persisting may be debounced.
 
@@ -36,7 +36,7 @@ Records a beat as seen. Persisting may be debounced.
 
 > **flush**(): `Promise`\<`void`\>
 
-Defined in: [types.ts:283](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/types.ts#L283)
+Defined in: [types.ts:283](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L283)
 
 Forces any pending write to complete.
 
@@ -50,7 +50,7 @@ Forces any pending write to complete.
 
 > **has**(`beatId`): `boolean`
 
-Defined in: [types.ts:274](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/types.ts#L274)
+Defined in: [types.ts:274](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L274)
 
 Whether a beat has ever been seen. Synchronous by design.
 
@@ -70,7 +70,7 @@ Whether a beat has ever been seen. Synchronous by design.
 
 > **load**(): `Promise`\<`void`\>
 
-Defined in: [types.ts:280](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/types.ts#L280)
+Defined in: [types.ts:280](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L280)
 
 Loads persisted data. Call once during bootstrap.
 
