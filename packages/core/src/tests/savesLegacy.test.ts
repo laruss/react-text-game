@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test } from "bun:test";
+import { afterAll, beforeEach, describe, expect, test } from "bun:test";
 import Dexie, { type EntityTable } from "dexie";
 
 import { newOptions } from "#options";
@@ -114,6 +114,14 @@ const failLegacyRead = (error: Error) => {
 
 describe("migrateLegacySaves", () => {
     beforeEach(async () => {
+        await legacyDatabase().saves.clear();
+        await legacyDatabase().settings.clear();
+    });
+
+    // "-gamedb" is shared with every other suite in this process. Left seeded,
+    // the next file to call `Game.init()` with an empty database would adopt
+    // these records exactly as a real game would.
+    afterAll(async () => {
         await legacyDatabase().saves.clear();
         await legacyDatabase().settings.clear();
     });

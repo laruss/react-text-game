@@ -34,7 +34,9 @@ const {
     getSystemSave,
     loadGame,
     saveGame,
+    setSetting,
 } = await import("#saves/db");
+const { LEGACY_MIGRATION_SETTING } = await import("#saves/legacy");
 const { encodeSf } = await import("#saves/helpers");
 const {
     useDeleteAllSaves,
@@ -108,14 +110,22 @@ describe("Save hooks", () => {
         Game._resetForTesting();
         Storage.setState({});
         sessionStorage.clear();
-        await db.saves.clear();
-        await db.settings.clear();
+        // Options first: `db` resolves to whichever game is configured at the
+        // moment it is touched, so clearing before this would empty whatever
+        // database the previous test file left selected and leave this one's
+        // rows in place.
         newOptions({
             gameName: "Hook Coverage Game",
             gameId: "hook-coverage-game",
             gameVersion: "2.0.0",
             isDevMode: true,
         });
+        await db.saves.clear();
+        await db.settings.clear();
+        // This suite does not exercise the copy out of the shared pre-gameId
+        // database. Recording it as already done stops `Game.init()` adopting
+        // whatever another test file happens to have left in "-gamedb".
+        await setSetting(LEGACY_MIGRATION_SETTING, true);
         await Game.init({
             gameName: "Hook Coverage Game",
             gameId: "hook-coverage-game",
