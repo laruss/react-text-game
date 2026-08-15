@@ -23,7 +23,7 @@
         "test:coverage": "bun test --cwd ../.. --coverage --coverage-dir packages/messenger/coverage packages/messenger/src/tests && bun ../../scripts/check-coverage.ts packages/messenger",
         "check-types": "tsc --noEmit",
         "lint": "biome check --error-on-warnings .",
-        "prepack": "bun run build",
+        "prepack": "bun ../../scripts/assert-built.ts",
         "test-pack": "bun pm pack --dry-run && bunx --bun publint"
     },
     "author": "laruss",

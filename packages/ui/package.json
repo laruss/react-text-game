@@ -24,7 +24,7 @@
         "test:coverage": "bun test --cwd ../.. --coverage --coverage-dir packages/ui/coverage packages/ui/src/tests && bun ../../scripts/check-coverage.ts packages/ui",
         "check-types": "tsc --noEmit",
         "lint": "biome check --error-on-warnings .",
-        "prepack": "bun run build",
+        "prepack": "bun ../../scripts/assert-built.ts",
         "test-pack": "bun pm pack --dry-run && bunx --bun publint"
     },
     "author": "laruss",

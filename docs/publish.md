@@ -56,3 +56,14 @@ the bumps instead of publishing. Merge it to release, or drop it and run step 2 
   the `npm publish` that changesets spawns onto Bun's runtime, and signing the provenance
   attestation there dies with `ERR_OSSL_NO_DEFAULT_DIGEST` (BoringSSL). Plain
   `changeset publish` keeps npm on Node, where the signing works.
+- `prepack` checks that `dist` exists rather than rebuilding it
+  (`scripts/assert-built.ts`). It used to run `bun run build`, which cannot be done
+  safely during a release: `changeset publish` packs several packages at once, every
+  build begins with `rm -rf dist`, and the packages that depend on
+  `@react-text-game/core` compile against the directory core's own build has just
+  deleted. That is not hypothetical — it is what published `core@0.11.0` while
+  `ui@0.7.0` and `devtools@0.1.1` failed with `TS2307: Cannot find module
+  '@react-text-game/core'`. The workflow builds the whole workspace through Turborepo,
+  in dependency order, immediately before publishing, so `dist` only needs checking.
+  When a release does fail partway, fix the cause and push: the next run publishes
+  whichever packages are still missing from npm and skips the rest.
