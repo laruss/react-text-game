@@ -2,7 +2,7 @@
 
 > **MenuLabelOptions** = [`HelperOptions`](HelperOptions.md)\<`Omit`\<[`LabelHotspot`](../interfaces/LabelHotspot.md), `"type"` \| `"content"`\>\>
 
-Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:70](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/passages/interactiveMap/helpers.ts#L70)
+Defined in: [packages/core/src/passages/interactiveMap/helpers.ts:70](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/passages/interactiveMap/helpers.ts#L70)
 
 Options accepted by [MapHelpers.label](MapHelpers.md) when the label is a
 [MapMenu](../interfaces/MapMenu.md) item.

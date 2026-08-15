@@ -2,7 +2,7 @@
 
 > **schemaFromDump**(`dump`, `gameVersion?`): [`SaveSchema`](../interfaces/SaveSchema.md)
 
-Defined in: [artifacts.ts:140](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/artifacts.ts#L140)
+Defined in: [artifacts.ts:147](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/devtools/src/artifacts.ts#L147)
 
 Derives a schema from an IndexedDB record copied out of a browser.
 

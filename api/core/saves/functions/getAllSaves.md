@@ -2,7 +2,7 @@
 
 > **getAllSaves**(): `Promise`\<[`GameSave`](../interfaces/GameSave.md)[]\>
 
-Defined in: [packages/core/src/saves/db.ts:159](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L159)
+Defined in: [packages/core/src/saves/db.ts:303](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L303)
 
 Retrieves all saved games from the database (excluding system saves).
 

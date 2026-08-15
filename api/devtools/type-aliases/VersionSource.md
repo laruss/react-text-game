@@ -2,7 +2,7 @@
 
 > **VersionSource** = `"--game-version"` \| `"entry export"` \| `"package.json"` \| `"engine default"`
 
-Defined in: [loadEntry.ts:34](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/devtools/src/loadEntry.ts#L34)
+Defined in: [loadEntry.ts:34](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/devtools/src/loadEntry.ts#L34)
 
 Where the game version in a capture came from.
 

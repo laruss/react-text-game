@@ -2,7 +2,7 @@
 
 > **Script** = `object`
 
-Defined in: [scripts/types.ts:265](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L265)
+Defined in: [scripts/types.ts:265](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L265)
 
 A named, addressable sequence of beats.
 
@@ -12,7 +12,7 @@ A named, addressable sequence of beats.
 
 > `readonly` **build**: [`ScriptBuilder`](ScriptBuilder.md)
 
-Defined in: [scripts/types.ts:267](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L267)
+Defined in: [scripts/types.ts:267](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L267)
 
 ***
 
@@ -20,4 +20,4 @@ Defined in: [scripts/types.ts:267](https://github.com/laruss/react-text-game/blo
 
 > `readonly` **id**: `string`
 
-Defined in: [scripts/types.ts:266](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/scripts/types.ts#L266)
+Defined in: [scripts/types.ts:266](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L266)

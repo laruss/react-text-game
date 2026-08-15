@@ -1,36 +1,36 @@
 # Function: useDeleteGame()
 
-> **useDeleteGame**(): (`id`) => `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
+> **useDeleteGame**(): (`slot`) => `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useDeleteGame.ts:21](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/hooks/useDeleteGame.ts#L21)
+Defined in: [packages/core/src/saves/hooks/useDeleteGame.ts:24](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/hooks/useDeleteGame.ts#L24)
 
-React hook that provides a function to delete a saved game by its ID.
+React hook that provides a function to delete the save in a slot.
 Removes the save from IndexedDB storage.
 
 ## Returns
 
-Function that accepts a save ID and deletes the game, returning a result object on failure
+Function that accepts a slot and deletes the save it holds
 
-> (`id`): `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
+> (`slot`): `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
 ### Parameters
 
-#### id
+#### slot
 
-`number`
+`string` | `number`
 
 ### Returns
 
-`Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
+`Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
 ## Example
 
 ```tsx
 const deleteGame = useDeleteGame();
 const handleDelete = async () => {
-  const result = await deleteGame(saveId);
-  if (result?.success === false) {
-    console.error('Delete failed:', result.message);
+  const result = await deleteGame(slotIndex);
+  if (!result.success) {
+    console.error('Delete failed:', result.error);
   }
 };
 ```

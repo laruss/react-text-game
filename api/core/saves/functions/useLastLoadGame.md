@@ -2,14 +2,12 @@
 
 > **useLastLoadGame**(): `object`
 
-Defined in: [packages/core/src/saves/hooks/useLastLoadGame.ts:43](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/hooks/useLastLoadGame.ts#L43)
+Defined in: [packages/core/src/saves/hooks/useLastLoadGame.ts:49](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/hooks/useLastLoadGame.ts#L49)
 
 A custom hook for managing the loading of the last saved game state.
 
 This hook provides functionality to determine the availability of the last saved game, as well as to load and restore the game data from the saved state.
 It uses reactive data fetching and caching mechanisms to seamlessly manage game state retrieval.
-
- useLastLoadGame
 
 ## Returns
 
@@ -35,16 +33,23 @@ Returns an object containing:
 
 ### loadLastGame()
 
-> **loadLastGame**: () => `Promise`\<\{ `error`: `string`; `success`: `boolean`; \} \| `undefined`\>
+> **loadLastGame**: () => `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
 #### Returns
 
-`Promise`\<\{ `error`: `string`; `success`: `boolean`; \} \| `undefined`\>
+`Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
+
+## Remarks
+
+Loading goes through the same path as `useLoadGame`, so a save written by an
+older build is migrated here too.
+
+ useLastLoadGame
 
 ## Example
 
 ```tsx
-const { hasLastSave, loadLastGame, isLoading } = useGetLastLoadGame();
+const { hasLastSave, loadLastGame, isLoading } = useLastLoadGame();
 
 if (isLoading) {
   return <div>Loading...</div>;

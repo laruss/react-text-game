@@ -1,6 +1,6 @@
 # Interface: MigrationOptions
 
-Defined in: [packages/core/src/saves/migrations/types.ts:184](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/migrations/types.ts#L184)
+Defined in: [packages/core/src/saves/migrations/types.ts:184](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/migrations/types.ts#L184)
 
 Options for migration behavior
 
@@ -10,7 +10,7 @@ Options for migration behavior
 
 > `optional` **strict**: `boolean`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:190](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/migrations/types.ts#L190)
+Defined in: [packages/core/src/saves/migrations/types.ts:190](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/migrations/types.ts#L190)
 
 Whether to throw an error if no migration path is found.
 If false, returns the original data unchanged.
@@ -27,7 +27,7 @@ false
 
 > `optional` **verbose**: `boolean`
 
-Defined in: [packages/core/src/saves/migrations/types.ts:196](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/migrations/types.ts#L196)
+Defined in: [packages/core/src/saves/migrations/types.ts:196](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/migrations/types.ts#L196)
 
 Whether to log migration steps for debugging.
 

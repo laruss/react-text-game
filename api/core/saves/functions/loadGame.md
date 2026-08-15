@@ -1,21 +1,21 @@
 # Function: loadGame()
 
-> **loadGame**(`id`): `Promise`\<[`GameSave`](../interfaces/GameSave.md) \| `undefined`\>
+> **loadGame**(`slot`): `Promise`\<[`GameSave`](../interfaces/GameSave.md) \| `undefined`\>
 
-Defined in: [packages/core/src/saves/db.ts:139](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L139)
+Defined in: [packages/core/src/saves/db.ts:279](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L279)
 
-Load game data from the database
+Load the save occupying a slot
 
 ## Parameters
 
-### id
+### slot
 
-`number`
+Slot to read, *not* [GameSave.id](../interfaces/GameSave.md#id)
 
-ID of the save to load
+`string` | `number`
 
 ## Returns
 
 `Promise`\<[`GameSave`](../interfaces/GameSave.md) \| `undefined`\>
 
-Promise<GameSave | undefined> - The save data or undefined if not found
+Promise<GameSave | undefined> - The save data or undefined if the slot is empty

@@ -2,4 +2,4 @@
 
 > **VarProps** = `Readonly`\<\{ `children`: `ReactNode`; \}\>
 
-Defined in: [mdx/src/components/Var.tsx:3](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/mdx/src/components/Var.tsx#L3)
+Defined in: [mdx/src/components/Var.tsx:3](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/mdx/src/components/Var.tsx#L3)

@@ -14,12 +14,22 @@
 
 ## Type Aliases
 
+- [ReadSaveFileResult](type-aliases/ReadSaveFileResult.md)
+- [SaveErrorCode](type-aliases/SaveErrorCode.md)
 - [SaveMigrationFn](type-aliases/SaveMigrationFn.md)
+- [SaveOptions](type-aliases/SaveOptions.md)
+- [SaveResult](type-aliases/SaveResult.md)
+- [SaveSlot](type-aliases/SaveSlot.md)
 - [SaveSlotsData](type-aliases/SaveSlotsData.md)
+- [SaveUpdate](type-aliases/SaveUpdate.md)
+- [WriteSavesMode](type-aliases/WriteSavesMode.md)
+- [WriteSavesResult](type-aliases/WriteSavesResult.md)
 
 ## Variables
 
 - [db](variables/db.md)
+- [LEGACY\_DATABASE\_NAME](variables/LEGACY_DATABASE_NAME.md)
+- [LEGACY\_MIGRATION\_SETTING](variables/LEGACY_MIGRATION_SETTING.md)
 - [SYSTEM\_SAVE\_NAME](variables/SYSTEM_SAVE_NAME.md)
 
 ## Functions
@@ -40,19 +50,27 @@
 - [getSetting](functions/getSetting.md)
 - [getSystemSave](functions/getSystemSave.md)
 - [loadGame](functions/loadGame.md)
-- [loadGameByName](functions/loadGameByName.md)
+- [loadGameBySlot](functions/loadGameBySlot.md)
+- [loadGameIntoState](functions/loadGameIntoState.md)
+- [migrateLegacySaves](functions/migrateLegacySaves.md)
 - [migrateToCurrentVersion](functions/migrateToCurrentVersion.md)
+- [putSaves](functions/putSaves.md)
 - [registerMigration](functions/registerMigration.md)
 - [runMigrations](functions/runMigrations.md)
 - [saveGame](functions/saveGame.md)
 - [setSetting](functions/setSetting.md)
+- [toSaveRecord](functions/toSaveRecord.md)
+- [updateSave](functions/updateSave.md)
 - [useDeleteAllSaves](functions/useDeleteAllSaves.md)
 - [useDeleteGame](functions/useDeleteGame.md)
 - [useExportSaves](functions/useExportSaves.md)
 - [useImportSaves](functions/useImportSaves.md)
 - [useLastLoadGame](functions/useLastLoadGame.md)
 - [useLoadGame](functions/useLoadGame.md)
+- [useReadSaveFile](functions/useReadSaveFile.md)
 - [useRestartGame](functions/useRestartGame.md)
 - [useSaveGame](functions/useSaveGame.md)
 - [useSaveSlots](functions/useSaveSlots.md)
+- [useUpdateSave](functions/useUpdateSave.md)
+- [useWriteSaves](functions/useWriteSaves.md)
 - [validateMigrations](functions/validateMigrations.md)

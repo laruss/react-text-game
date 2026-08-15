@@ -1,6 +1,6 @@
 # Class: GameDatabase
 
-Defined in: [packages/core/src/saves/db.ts:17](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L17)
+Defined in: [packages/core/src/saves/db.ts:18](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L18)
 
 Dexie database class for managing game saves and settings.
 Uses IndexedDB for browser-based persistent storage.
@@ -15,7 +15,7 @@ Uses IndexedDB for browser-based persistent storage.
 
 > **new GameDatabase**(`gameId`): `GameDatabase`
 
-Defined in: [packages/core/src/saves/db.ts:27](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L27)
+Defined in: [packages/core/src/saves/db.ts:28](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L28)
 
 Creates a new GameDatabase instance
 
@@ -195,7 +195,7 @@ Defined in: node\_modules/dexie/dist/dexie.d.ts:855
 
 > **saves**: `EntityTable`\<[`GameSave`](../interfaces/GameSave.md), `"id"`\>
 
-Defined in: [packages/core/src/saves/db.ts:19](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L19)
+Defined in: [packages/core/src/saves/db.ts:20](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L20)
 
 Table for storing game saves
 
@@ -205,7 +205,7 @@ Table for storing game saves
 
 > **settings**: `EntityTable`\<[`GameSettings`](../interfaces/GameSettings.md), `"id"`\>
 
-Defined in: [packages/core/src/saves/db.ts:21](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L21)
+Defined in: [packages/core/src/saves/db.ts:22](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L22)
 
 Table for storing game settings
 

@@ -2,7 +2,7 @@
 
 > **registerTranslations**(`resources`): `void`
 
-Defined in: [registry.ts:47](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/i18n/registry.ts#L47)
+Defined in: [registry.ts:47](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/i18n/registry.ts#L47)
 
 Registers default translations contributed by a package.
 

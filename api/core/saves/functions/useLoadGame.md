@@ -1,10 +1,10 @@
 # Function: useLoadGame()
 
-> **useLoadGame**(): (`id`) => `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
+> **useLoadGame**(): (`slot`) => `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useLoadGame.ts:25](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/hooks/useLoadGame.ts#L25)
+Defined in: [packages/core/src/saves/hooks/useLoadGame.ts:99](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/hooks/useLoadGame.ts#L99)
 
-React hook that provides a function to load a saved game by its ID.
+React hook that provides a function to load the save in a slot.
 Restores the game state from the specified save.
 
 **Automatic Migration**: If the save version differs from the current game version,
@@ -12,28 +12,40 @@ registered migrations will be automatically applied to bring the save data up to
 
 ## Returns
 
-Function that accepts an optional save ID and loads the game, returning a result object on failure
+Function that accepts a slot and loads the game
 
-> (`id`): `Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
+> (`slot`): `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
+
+Loads the save in a slot, applying migrations when it predates the current
+game version.
 
 ### Parameters
 
-#### id
+#### slot
 
-`number`
+Slot to load, *not* the save's database id
+
+`string` | `number`
 
 ### Returns
 
-`Promise`\<\{ `message`: `string`; `success`: `boolean`; \} \| `undefined`\>
+`Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
+
+The outcome of the load
+
+### Remarks
+
+Shared by useLoadGame and `useLastLoadGame` so that both paths into a
+save run the same migrations.
 
 ## Example
 
 ```tsx
 const loadGame = useLoadGame();
 const handleLoad = async () => {
-  const result = await loadGame(saveId);
-  if (result?.success === false) {
-    console.error('Load failed:', result.message);
+  const result = await loadGame(slotIndex);
+  if (!result.success) {
+    console.error('Load failed:', result.error);
   }
 };
 ```

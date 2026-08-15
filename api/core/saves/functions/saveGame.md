@@ -1,16 +1,16 @@
 # Function: saveGame()
 
-> **saveGame**(`name`, `gameData`, `description?`, `screenshot?`, `version?`): `Promise`\<`number`\>
+> **saveGame**(`slot`, `gameData`, `options`): `Promise`\<`number`\>
 
-Defined in: [packages/core/src/saves/db.ts:89](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/db.ts#L89)
+Defined in: [packages/core/src/saves/db.ts:120](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L120)
 
 Save game data to the database
 
 ## Parameters
 
-### name
+### slot
 
-Name of the save (e.g., slot number or custom name)
+Slot the save occupies (e.g., a slot number or custom key)
 
 `string` | `number`
 
@@ -20,25 +20,14 @@ Name of the save (e.g., slot number or custom name)
 
 Game state data to save
 
-### description?
+### options
 
-`string`
+[`SaveOptions`](../type-aliases/SaveOptions.md) & `object` = `{}`
 
-Optional description
-
-### screenshot?
-
-`string`
-
-Optional base64 encoded screenshot
-
-### version?
-
-`string`
-
-Version to stamp the save with. Defaults to the current game
-version. Pass the original version when restoring a save that was created by
-an older build, otherwise migrations will never run for it.
+Player-facing annotations and, for restores, the version to
+stamp the save with. `version` defaults to the current game version; pass the
+original when restoring a save created by an older build, otherwise
+migrations will never run for it.
 
 ## Returns
 

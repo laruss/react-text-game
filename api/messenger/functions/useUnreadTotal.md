@@ -2,7 +2,7 @@
 
 > **useUnreadTotal**(`chats?`): `number`
 
-Defined in: [hooks/useUnreadTotal.ts:20](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/messenger/src/hooks/useUnreadTotal.ts#L20)
+Defined in: [hooks/useUnreadTotal.ts:20](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/hooks/useUnreadTotal.ts#L20)
 
 Subscribes a component to the total number of unseen entries.
 

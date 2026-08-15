@@ -2,7 +2,7 @@
 
 > **createAudio**(`src`, `options?`): [`AudioTrack`](../classes/AudioTrack.md)
 
-Defined in: [fabric.ts:35](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/audio/fabric.ts#L35)
+Defined in: [fabric.ts:35](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/audio/fabric.ts#L35)
 
 Factory function to create a new audio track.
 

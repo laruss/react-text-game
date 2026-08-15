@@ -1,21 +1,43 @@
 # Function: useImportSaves()
 
-> **useImportSaves**(): () => `Promise`\<\{ `count`: `number`; `error`: `string`; `success`: `boolean`; \} \| \{ `count`: `number`; `error`: `null`; `success`: `boolean`; \}\>
+> **useImportSaves**(): (`file?`, `options?`) => `Promise`\<[`WriteSavesResult`](../type-aliases/WriteSavesResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useImportSaves.ts:47](https://github.com/laruss/react-text-game/blob/1ccfff1d3271b87953efc0736e0001c41b54aeae/packages/core/src/saves/hooks/useImportSaves.ts#L47)
+Defined in: [packages/core/src/saves/hooks/useImportSaves.ts:38](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/hooks/useImportSaves.ts#L38)
 
-React hook that provides a function to import game saves from an encrypted file.
-Opens a file picker, decrypts the selected file, and replaces all existing saves.
+React hook that imports game saves from an encrypted file: opens a file
+picker, decodes the selection and writes what it holds.
 
 ## Returns
 
-Callback function that imports saves and returns a result object with success status, count, and error
+Callback that imports saves and reports how many landed
 
-> (): `Promise`\<\{ `count`: `number`; `error`: `string`; `success`: `boolean`; \} \| \{ `count`: `number`; `error`: `null`; `success`: `boolean`; \}\>
+> (`file?`, `options?`): `Promise`\<[`WriteSavesResult`](../type-aliases/WriteSavesResult.md)\>
+
+### Parameters
+
+#### file?
+
+`File`
+
+#### options?
+
+##### mode?
+
+[`WriteSavesMode`](../type-aliases/WriteSavesMode.md)
 
 ### Returns
 
-`Promise`\<\{ `count`: `number`; `error`: `string`; `success`: `boolean`; \} \| \{ `count`: `number`; `error`: `null`; `success`: `boolean`; \}\>
+`Promise`\<[`WriteSavesResult`](../type-aliases/WriteSavesResult.md)\>
+
+## Remarks
+
+A convenience wrapper over `useReadSaveFile` and `useWriteSaves`. Reach for
+those two directly when the flow needs to confirm the import with the file
+already chosen - this hook cannot show the player what they are about to
+replace, because it picks and writes in one call.
+
+Nothing is deleted until the whole file has decoded and validated, and the
+timestamps in the file are preserved.
 
 ## Example
 
@@ -25,7 +47,7 @@ const handleImport = async () => {
   const result = await importSaves();
   if (result.success) {
     console.log(`Successfully imported ${result.count} saves`);
-  } else {
+  } else if (result.code !== 'cancelled') {
     console.error('Import failed:', result.error);
   }
 };
