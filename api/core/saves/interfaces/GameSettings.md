@@ -1,6 +1,6 @@
 # Interface: GameSettings
 
-Defined in: [packages/core/src/saves/types.ts:123](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L123)
+Defined in: [packages/core/src/saves/types.ts:123](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L123)
 
 Represents a game setting stored in the database
 
@@ -10,7 +10,7 @@ Represents a game setting stored in the database
 
 > `optional` **id**: `number`
 
-Defined in: [packages/core/src/saves/types.ts:125](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L125)
+Defined in: [packages/core/src/saves/types.ts:125](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L125)
 
 Database auto-generated ID
 
@@ -20,7 +20,7 @@ Database auto-generated ID
 
 > **key**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:127](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L127)
+Defined in: [packages/core/src/saves/types.ts:127](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L127)
 
 Unique key for the setting
 
@@ -30,7 +30,7 @@ Unique key for the setting
 
 > **timestamp**: `Date`
 
-Defined in: [packages/core/src/saves/types.ts:131](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L131)
+Defined in: [packages/core/src/saves/types.ts:131](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L131)
 
 When the setting was last updated
 
@@ -40,7 +40,7 @@ When the setting was last updated
 
 > **value**: `string` \| `number` \| `boolean` \| `object`
 
-Defined in: [packages/core/src/saves/types.ts:129](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L129)
+Defined in: [packages/core/src/saves/types.ts:129](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L129)
 
 Setting value (can be string, number, boolean, or object)
 
@@ -50,6 +50,6 @@ Setting value (can be string, number, boolean, or object)
 
 > **version**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:133](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L133)
+Defined in: [packages/core/src/saves/types.ts:133](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L133)
 
 Game version when the setting was created/updated

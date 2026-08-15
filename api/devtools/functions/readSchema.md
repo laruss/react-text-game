@@ -2,7 +2,7 @@
 
 > **readSchema**(`filePath`): `Promise`\<[`SaveSchema`](../interfaces/SaveSchema.md)\>
 
-Defined in: [store.ts:78](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/devtools/src/store.ts#L78)
+Defined in: [store.ts:78](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/devtools/src/store.ts#L78)
 
 Reads and validates one snapshot file.
 

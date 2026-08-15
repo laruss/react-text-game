@@ -2,7 +2,7 @@
 
 > **Json** = `string` \| `number` \| `boolean` \| `null` \| `Json`[] \| \{\[`key`: `string`\]: `Json`; \}
 
-Defined in: [types.ts:9](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L9)
+Defined in: [types.ts:9](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/types.ts#L9)
 
 Any JSON-serializable value.
 

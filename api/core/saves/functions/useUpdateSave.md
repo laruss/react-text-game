@@ -2,7 +2,7 @@
 
 > **useUpdateSave**(): (`slot`, `changes`) => `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useUpdateSave.ts:28](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/hooks/useUpdateSave.ts#L28)
+Defined in: [packages/core/src/saves/hooks/useUpdateSave.ts:28](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/hooks/useUpdateSave.ts#L28)
 
 React hook that provides a function to edit a save's label and metadata
 without recapturing the game state.

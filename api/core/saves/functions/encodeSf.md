@@ -2,7 +2,7 @@
 
 > **encodeSf**\<`T`\>(`data`, `gameId?`): `Uint8Array`\<`ArrayBuffer`\>
 
-Defined in: [packages/core/src/saves/helpers.ts:33](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/helpers.ts#L33)
+Defined in: [packages/core/src/saves/helpers.ts:33](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/helpers.ts#L33)
 
 Encodes (encrypts) data using AES encryption with PBKDF2 key derivation.
 The output is a byte array that can be saved to a file.

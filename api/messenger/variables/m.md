@@ -2,7 +2,7 @@
 
 > `const` **m**: [`MessengerHelpers`](../type-aliases/MessengerHelpers.md)
 
-Defined in: [scripts/builder.ts:112](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/builder.ts#L112)
+Defined in: [scripts/builder.ts:112](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/scripts/builder.ts#L112)
 
 Beat builders, normally received as the argument of a [defineScript](../functions/defineScript.md)
 callback.

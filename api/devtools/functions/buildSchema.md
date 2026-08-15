@@ -2,7 +2,7 @@
 
 > **buildSchema**(`__namedParameters`): [`SaveSchema`](../interfaces/SaveSchema.md)
 
-Defined in: [schema.ts:100](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/devtools/src/schema.ts#L100)
+Defined in: [schema.ts:100](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/devtools/src/schema.ts#L100)
 
 Builds a comparable schema from one save state object.
 

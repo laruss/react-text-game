@@ -2,7 +2,7 @@
 
 > **resolveText**(`text`): `ReactNode`
 
-Defined in: [resolve.ts:31](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/resolve.ts#L31)
+Defined in: [resolve.ts:31](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/resolve.ts#L31)
 
 Resolves persisted text to something renderable.
 

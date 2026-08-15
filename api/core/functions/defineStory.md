@@ -2,7 +2,7 @@
 
 > **defineStory**\<`TProps`\>(`id`, `content`, `options?`): [`Story`](../classes/Story.md)
 
-Defined in: [packages/core/src/passages/story/fabric.ts:81](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/passages/story/fabric.ts#L81)
+Defined in: [packages/core/src/passages/story/fabric.ts:81](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/passages/story/fabric.ts#L81)
 
 Creates a story passage from a helpers-first content callback.
 

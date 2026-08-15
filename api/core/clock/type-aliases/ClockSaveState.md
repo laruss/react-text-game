@@ -2,7 +2,7 @@
 
 > **ClockSaveState** = `Omit`\<[`ClockState`](ClockState.md), `"anchorReal"`\>
 
-Defined in: [types.ts:91](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/clock/types.ts#L91)
+Defined in: [types.ts:91](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/clock/types.ts#L91)
 
 Shape persisted at `$._system.clock`.
 

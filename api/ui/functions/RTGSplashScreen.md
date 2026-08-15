@@ -2,7 +2,7 @@
 
 > **RTGSplashScreen**(): `Element`
 
-Defined in: [components/SplashScreen/RTGSplashScreen.tsx:3](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/ui/src/components/SplashScreen/RTGSplashScreen.tsx#L3)
+Defined in: [components/SplashScreen/RTGSplashScreen.tsx:3](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/ui/src/components/SplashScreen/RTGSplashScreen.tsx#L3)
 
 ## Returns
 

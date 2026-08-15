@@ -2,7 +2,7 @@
 
 > **toSaveRecord**(`value`): [`GameSave`](../interfaces/GameSave.md) \| `null`
 
-Defined in: [packages/core/src/saves/records.ts:68](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/records.ts#L68)
+Defined in: [packages/core/src/saves/records.ts:68](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/records.ts#L68)
 
 Reads an unknown value as a save record, normalizing legacy field names.
 

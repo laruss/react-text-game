@@ -2,7 +2,7 @@
 
 > **SaveUpdate** = `object`
 
-Defined in: [packages/core/src/saves/types.ts:78](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L78)
+Defined in: [packages/core/src/saves/types.ts:78](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L78)
 
 Fields of an existing save that can be edited without recapturing state.
 
@@ -17,7 +17,7 @@ exactly as it was, `timestamp` included.
 
 > `optional` **meta**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/saves/types.ts:82](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L82)
+Defined in: [packages/core/src/saves/types.ts:82](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L82)
 
 Game-owned metadata - see [GameSave.meta](../interfaces/GameSave.md#meta)
 
@@ -27,7 +27,7 @@ Game-owned metadata - see [GameSave.meta](../interfaces/GameSave.md#meta)
 
 > `optional` **screenshot**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:84](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L84)
+Defined in: [packages/core/src/saves/types.ts:84](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L84)
 
 Base64 encoded screenshot
 
@@ -37,6 +37,6 @@ Base64 encoded screenshot
 
 > `optional` **title**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:80](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/types.ts#L80)
+Defined in: [packages/core/src/saves/types.ts:80](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/types.ts#L80)
 
 Label to show in a slot list

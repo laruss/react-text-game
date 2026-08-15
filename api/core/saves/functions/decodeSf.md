@@ -2,7 +2,7 @@
 
 > **decodeSf**\<`T`\>(`data`, `gameId?`): `T`
 
-Defined in: [packages/core/src/saves/helpers.ts:60](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/core/src/saves/helpers.ts#L60)
+Defined in: [packages/core/src/saves/helpers.ts:60](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/helpers.ts#L60)
 
 Decodes (decrypts) data that was encrypted using encodeSf.
 Extracts salt and IV from the encrypted data and uses them to decrypt.

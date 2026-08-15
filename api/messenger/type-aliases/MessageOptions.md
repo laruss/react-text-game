@@ -2,7 +2,7 @@
 
 > **MessageOptions** = `object`
 
-Defined in: [scripts/types.ts:30](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L30)
+Defined in: [scripts/types.ts:30](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/scripts/types.ts#L30)
 
 Options shared by every message beat.
 
@@ -12,7 +12,7 @@ Options shared by every message beat.
 
 > `optional` **forwardedFrom**: [`ForwardOriginInput`](ForwardOriginInput.md)
 
-Defined in: [scripts/types.ts:49](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L49)
+Defined in: [scripts/types.ts:49](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/scripts/types.ts#L49)
 
 Marks the message as forwarded from somewhere else.
 
@@ -27,7 +27,7 @@ free-form label all work.
 
 > `optional` **id**: `string`
 
-Defined in: [scripts/types.ts:40](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L40)
+Defined in: [scripts/types.ts:40](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/scripts/types.ts#L40)
 
 Explicit beat id.
 
@@ -44,6 +44,6 @@ reorder the script.
 
 > `optional` **receipt**: [`Receipt`](Receipt.md)
 
-Defined in: [scripts/types.ts:52](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/scripts/types.ts#L52)
+Defined in: [scripts/types.ts:52](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/scripts/types.ts#L52)
 
 In-fiction delivery state shown to the player.

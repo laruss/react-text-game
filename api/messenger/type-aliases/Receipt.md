@@ -2,7 +2,7 @@
 
 > **Receipt** = `"sent"` \| `"delivered"` \| `"read"`
 
-Defined in: [types.ts:117](https://github.com/laruss/react-text-game/blob/1ff7cc12f6153268e252c2e249777b24bc45408e/packages/messenger/src/types.ts#L117)
+Defined in: [types.ts:117](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/types.ts#L117)
 
 In-fiction delivery state of a message - the "ticks" a character sees.
 
