@@ -2,7 +2,7 @@
 
 > **LoadingScreen**(`__namedParameters`): `Element`
 
-Defined in: [components/LoadingScreen/LoadingScreen.tsx:48](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/ui/src/components/LoadingScreen/LoadingScreen.tsx#L48)
+Defined in: [components/LoadingScreen/LoadingScreen.tsx:48](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/ui/src/components/LoadingScreen/LoadingScreen.tsx#L48)
 
 ## Parameters
 

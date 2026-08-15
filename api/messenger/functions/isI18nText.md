@@ -2,7 +2,7 @@
 
 > **isI18nText**(`value`): `value is I18nText`
 
-Defined in: [text.ts:51](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/text.ts#L51)
+Defined in: [text.ts:51](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/text.ts#L51)
 
 Whether a value was produced by [t](t.md).
 

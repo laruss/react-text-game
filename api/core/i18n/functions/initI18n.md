@@ -2,7 +2,7 @@
 
 > **initI18n**(`config?`): `Promise`\<`void`\>
 
-Defined in: [init.ts:72](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/i18n/init.ts#L72)
+Defined in: [init.ts:72](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/i18n/init.ts#L72)
 
 Initializes the i18n (internationalization) system for the game engine.
 

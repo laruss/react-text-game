@@ -2,7 +2,7 @@
 
 > **SaveSlotsData** = `object`
 
-Defined in: [packages/core/src/saves/types.ts:139](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L139)
+Defined in: [packages/core/src/saves/types.ts:139](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L139)
 
 Represents the state of save slots, used by React hooks
 
@@ -12,7 +12,7 @@ Represents the state of save slots, used by React hooks
 
 > **data**: [`GameSave`](../interfaces/GameSave.md)[]
 
-Defined in: [packages/core/src/saves/types.ts:149](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L149)
+Defined in: [packages/core/src/saves/types.ts:149](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L149)
 
 Array of game saves
 
@@ -22,7 +22,7 @@ Array of game saves
 
 > **error**: `Error` \| `null`
 
-Defined in: [packages/core/src/saves/types.ts:147](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L147)
+Defined in: [packages/core/src/saves/types.ts:147](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L147)
 
 Error object if an error occurred
 
@@ -32,7 +32,7 @@ Error object if an error occurred
 
 > **isEmpty**: `boolean`
 
-Defined in: [packages/core/src/saves/types.ts:141](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L141)
+Defined in: [packages/core/src/saves/types.ts:141](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L141)
 
 Whether there are no saves
 
@@ -42,7 +42,7 @@ Whether there are no saves
 
 > **isError**: `boolean`
 
-Defined in: [packages/core/src/saves/types.ts:145](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L145)
+Defined in: [packages/core/src/saves/types.ts:145](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L145)
 
 Whether there was an error loading saves
 
@@ -52,6 +52,6 @@ Whether there was an error loading saves
 
 > **isLoading**: `boolean`
 
-Defined in: [packages/core/src/saves/types.ts:143](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L143)
+Defined in: [packages/core/src/saves/types.ts:143](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L143)
 
 Whether saves are currently being loaded

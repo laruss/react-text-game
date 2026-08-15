@@ -2,7 +2,7 @@
 
 > **newInteractiveMap**(`id`, `options`): [`InteractiveMap`](../classes/InteractiveMap.md)
 
-Defined in: [packages/core/src/passages/interactiveMap/fabric.ts:39](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/passages/interactiveMap/fabric.ts#L39)
+Defined in: [packages/core/src/passages/interactiveMap/fabric.ts:39](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/passages/interactiveMap/fabric.ts#L39)
 
 Creates an interactive map passage from a plain options object.
 

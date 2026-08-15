@@ -2,7 +2,7 @@
 
 > **WidgetContent** = `ReactNode` \| `React.FC`
 
-Defined in: [packages/core/src/passages/widget.ts:29](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/passages/widget.ts#L29)
+Defined in: [packages/core/src/passages/widget.ts:29](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/passages/widget.ts#L29)
 
 Content type for Widget passages.
 Can be a ReactNode directly, or a React functional component.

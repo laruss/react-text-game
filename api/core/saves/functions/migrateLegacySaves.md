@@ -2,7 +2,7 @@
 
 > **migrateLegacySaves**(): `Promise`\<\{ `saves`: `number`; `settings`: `number`; \}\>
 
-Defined in: [packages/core/src/saves/legacy.ts:146](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/legacy.ts#L146)
+Defined in: [packages/core/src/saves/legacy.ts:146](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/legacy.ts#L146)
 
 Copies saves and settings out of the shared pre-`gameId` database on first
 open.

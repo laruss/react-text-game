@@ -2,7 +2,7 @@
 
 > **SaveResult**\<`TData`\> = `object` & `TData` \| `object` & `TData`
 
-Defined in: [packages/core/src/saves/types.ts:116](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L116)
+Defined in: [packages/core/src/saves/types.ts:116](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L116)
 
 Result of every save operation, discriminated on `success`.
 

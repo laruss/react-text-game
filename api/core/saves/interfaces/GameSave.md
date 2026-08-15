@@ -1,6 +1,6 @@
 # Interface: GameSave
 
-Defined in: [packages/core/src/saves/types.ts:4](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L4)
+Defined in: [packages/core/src/saves/types.ts:4](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L4)
 
 Represents a saved game state
 
@@ -10,7 +10,7 @@ Represents a saved game state
 
 > **gameData**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/saves/types.ts:17](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L17)
+Defined in: [packages/core/src/saves/types.ts:17](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L17)
 
 Serialized game state data
 
@@ -20,7 +20,7 @@ Serialized game state data
 
 > `optional` **id**: `number`
 
-Defined in: [packages/core/src/saves/types.ts:6](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L6)
+Defined in: [packages/core/src/saves/types.ts:6](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L6)
 
 Database auto-generated ID. Never use it to address a slot - see [GameSave.slot](#slot).
 
@@ -30,7 +30,7 @@ Database auto-generated ID. Never use it to address a slot - see [GameSave.slot]
 
 > `optional` **isSystemSave**: `boolean`
 
-Defined in: [packages/core/src/saves/types.ts:56](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L56)
+Defined in: [packages/core/src/saves/types.ts:56](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L56)
 
 Mark as system save (won't be shown in UI)
 
@@ -40,7 +40,7 @@ Mark as system save (won't be shown in UI)
 
 > `optional` **meta**: `Record`\<`string`, `unknown`\>
 
-Defined in: [packages/core/src/saves/types.ts:54](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L54)
+Defined in: [packages/core/src/saves/types.ts:54](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L54)
 
 Free-form annotation owned by the game (optional).
 
@@ -63,7 +63,7 @@ slot.save({ title: "Before the boss", meta: { day: 3, place: "flat" } });
 
 > `optional` **screenshot**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:37](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L37)
+Defined in: [packages/core/src/saves/types.ts:37](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L37)
 
 Base64 encoded screenshot (optional).
 
@@ -78,7 +78,7 @@ Pass it through [SaveOptions.screenshot](../type-aliases/SaveOptions.md#screensh
 
 > **slot**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:15](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L15)
+Defined in: [packages/core/src/saves/types.ts:15](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L15)
 
 Slot the save occupies, as a string.
 
@@ -94,7 +94,7 @@ It is *not* [GameSave.id](#id), which is the database's own primary key.
 
 > **timestamp**: `Date`
 
-Defined in: [packages/core/src/saves/types.ts:27](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L27)
+Defined in: [packages/core/src/saves/types.ts:27](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L27)
 
 When the run was captured.
 
@@ -111,7 +111,7 @@ trip through a file.
 
 > `optional` **title**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:39](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L39)
+Defined in: [packages/core/src/saves/types.ts:39](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L39)
 
 Player-facing label for the save (optional)
 
@@ -121,6 +121,6 @@ Player-facing label for the save (optional)
 
 > **version**: `string`
 
-Defined in: [packages/core/src/saves/types.ts:29](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/types.ts#L29)
+Defined in: [packages/core/src/saves/types.ts:29](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/types.ts#L29)
 
 Game version when the save was created

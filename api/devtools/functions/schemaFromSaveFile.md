@@ -2,7 +2,7 @@
 
 > **schemaFromSaveFile**(`bytes`, `gameId`, `gameVersion?`): [`SaveSchema`](../interfaces/SaveSchema.md)
 
-Defined in: [artifacts.ts:102](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/devtools/src/artifacts.ts#L102)
+Defined in: [artifacts.ts:102](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/devtools/src/artifacts.ts#L102)
 
 Derives a schema from an exported `.sx` save file.
 

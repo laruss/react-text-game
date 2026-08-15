@@ -2,7 +2,7 @@
 
 > **getSystemSave**(): `Promise`\<[`GameSave`](../interfaces/GameSave.md) \| `undefined`\>
 
-Defined in: [packages/core/src/saves/db.ts:411](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L411)
+Defined in: [packages/core/src/saves/db.ts:411](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/db.ts#L411)
 
 Retrieves the system save from the database.
 

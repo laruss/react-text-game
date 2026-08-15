@@ -2,7 +2,7 @@
 
 > `const` **DEFAULT\_AUDIO\_OPTIONS**: `object`
 
-Defined in: [constants.ts:16](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/audio/constants.ts#L16)
+Defined in: [constants.ts:16](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/audio/constants.ts#L16)
 
 Default audio configuration values.
 

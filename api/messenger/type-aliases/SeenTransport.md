@@ -2,7 +2,7 @@
 
 > **SeenTransport** = `object`
 
-Defined in: [seen/seenStore.ts:13](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/seen/seenStore.ts#L13)
+Defined in: [seen/seenStore.ts:13](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/seen/seenStore.ts#L13)
 
 Where a [SeenStore](SeenStore.md) keeps its data.
 
@@ -15,7 +15,7 @@ game can persist the record somewhere else entirely.
 
 > **read**(): `Promise`\<`string`[]\>
 
-Defined in: [seen/seenStore.ts:14](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/seen/seenStore.ts#L14)
+Defined in: [seen/seenStore.ts:14](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/seen/seenStore.ts#L14)
 
 #### Returns
 
@@ -27,7 +27,7 @@ Defined in: [seen/seenStore.ts:14](https://github.com/laruss/react-text-game/blo
 
 > **write**(`beatIds`): `Promise`\<`void`\>
 
-Defined in: [seen/seenStore.ts:15](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/seen/seenStore.ts#L15)
+Defined in: [seen/seenStore.ts:15](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/seen/seenStore.ts#L15)
 
 #### Parameters
 

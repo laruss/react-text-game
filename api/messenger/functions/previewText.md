@@ -2,7 +2,7 @@
 
 > **previewText**(`text`): `string`
 
-Defined in: [resolve.ts:68](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/resolve.ts#L68)
+Defined in: [resolve.ts:68](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/resolve.ts#L68)
 
 Resolves persisted text to a plain string, for chat list previews and
 accessibility labels.

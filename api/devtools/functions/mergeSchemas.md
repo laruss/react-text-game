@@ -2,7 +2,7 @@
 
 > **mergeSchemas**(`schemas`): [`SaveSchema`](../interfaces/SaveSchema.md)
 
-Defined in: [schema.ts:139](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/devtools/src/schema.ts#L139)
+Defined in: [schema.ts:139](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/devtools/src/schema.ts#L139)
 
 Merges schemas captured from several saves of the same game version.
 

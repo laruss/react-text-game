@@ -2,7 +2,7 @@
 
 > **ClockState** = `object`
 
-Defined in: [types.ts:61](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/clock/types.ts#L61)
+Defined in: [types.ts:61](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/types.ts#L61)
 
 Reactive state backing the game clock.
 
@@ -19,7 +19,7 @@ which is why the clock needs no interval to stay accurate.
 
 > **anchorGame**: `number`
 
-Defined in: [types.ts:63](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/clock/types.ts#L63)
+Defined in: [types.ts:63](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/types.ts#L63)
 
 Game time, in milliseconds, at the last re-anchor.
 
@@ -29,7 +29,7 @@ Game time, in milliseconds, at the last re-anchor.
 
 > **anchorReal**: `number`
 
-Defined in: [types.ts:66](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/clock/types.ts#L66)
+Defined in: [types.ts:66](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/types.ts#L66)
 
 Wall-clock time, in milliseconds, at the last re-anchor.
 
@@ -39,7 +39,7 @@ Wall-clock time, in milliseconds, at the last re-anchor.
 
 > **mode**: [`ClockMode`](ClockMode.md)
 
-Defined in: [types.ts:69](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/clock/types.ts#L69)
+Defined in: [types.ts:69](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/types.ts#L69)
 
 How game time advances.
 
@@ -49,7 +49,7 @@ How game time advances.
 
 > **paused**: `boolean`
 
-Defined in: [types.ts:75](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/clock/types.ts#L75)
+Defined in: [types.ts:75](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/types.ts#L75)
 
 Whether `"realtime"` accrual is currently frozen.
 
@@ -59,6 +59,6 @@ Whether `"realtime"` accrual is currently frozen.
 
 > **scale**: `number`
 
-Defined in: [types.ts:72](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/clock/types.ts#L72)
+Defined in: [types.ts:72](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/clock/types.ts#L72)
 
 Multiplier applied to elapsed wall-clock time in `"realtime"` mode.

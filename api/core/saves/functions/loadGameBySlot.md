@@ -2,7 +2,7 @@
 
 > **loadGameBySlot**(`slot`): `Promise`\<[`GameSave`](../interfaces/GameSave.md) \| `undefined`\>
 
-Defined in: [packages/core/src/saves/db.ts:292](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/core/src/saves/db.ts#L292)
+Defined in: [packages/core/src/saves/db.ts:292](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/core/src/saves/db.ts#L292)
 
 Load a game save by its exact slot key, including reserved ones
 

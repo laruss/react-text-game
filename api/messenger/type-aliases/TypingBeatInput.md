@@ -2,7 +2,7 @@
 
 > **TypingBeatInput** = `object`
 
-Defined in: [scripts/types.ts:101](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L101)
+Defined in: [scripts/types.ts:101](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L101)
 
 Shows a typing indicator and holds the next beat back for `ms` of game time.
 
@@ -12,7 +12,7 @@ Shows a typing indicator and holds the next beat back for `ms` of game time.
 
 > **from**: `string`
 
-Defined in: [scripts/types.ts:104](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L104)
+Defined in: [scripts/types.ts:104](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L104)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: [scripts/types.ts:104](https://github.com/laruss/react-text-game/blo
 
 > `optional` **id**: `string`
 
-Defined in: [scripts/types.ts:103](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L103)
+Defined in: [scripts/types.ts:103](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L103)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [scripts/types.ts:103](https://github.com/laruss/react-text-game/blo
 
 > **ms**: `number`
 
-Defined in: [scripts/types.ts:105](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L105)
+Defined in: [scripts/types.ts:105](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L105)
 
 ***
 
@@ -36,4 +36,4 @@ Defined in: [scripts/types.ts:105](https://github.com/laruss/react-text-game/blo
 
 > **type**: `"typing"`
 
-Defined in: [scripts/types.ts:102](https://github.com/laruss/react-text-game/blob/ed8cf48740aa02a9a967fcd73e3ff84f36e6c837/packages/messenger/src/scripts/types.ts#L102)
+Defined in: [scripts/types.ts:102](https://github.com/laruss/react-text-game/blob/d090054fc3e36a25c4143bb02c5270527e427321/packages/messenger/src/scripts/types.ts#L102)
