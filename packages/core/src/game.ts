@@ -14,7 +14,7 @@ import {
     type Options,
 } from "#options";
 import type { Passage, PassageTarget } from "#passages/passage";
-import { createOrUpdateSystemSave } from "#saves";
+import { createOrUpdateSystemSave, migrateLegacySaves } from "#saves";
 import { validateMigrations } from "#saves/migrations";
 import { Storage } from "#storage";
 import type { GameSaveState, JsonPath } from "#types";
@@ -627,6 +627,15 @@ export class Game {
 
         // Store whether user explicitly provided startPassage
         const userProvidedStartPassage = opts.startPassage !== undefined;
+
+        // Before anything reads storage: saves written by builds that predate
+        // the gameId fix live in a database shared with every other game on
+        // this origin, and have to be copied across first.
+        try {
+            await migrateLegacySaves();
+        } catch (e) {
+            logger.warn("Failed to migrate saves from the legacy database:", e);
+        }
 
         await initI18n(opts.translations);
 

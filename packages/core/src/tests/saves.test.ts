@@ -15,12 +15,21 @@ import {
     getSetting,
     getSystemSave,
     loadGame,
-    loadGameByName,
+    loadGameBySlot,
+    putSaves,
     SYSTEM_SAVE_NAME,
     saveGame,
     setSetting,
+    updateSave,
 } from "#saves/db";
-import { decodeSf, encodeSf, getDateString } from "#saves/helpers";
+import {
+    decodeSf,
+    encodeSf,
+    errorMessage,
+    getDateString,
+} from "#saves/helpers";
+import { normalizeSaveRecord, toSaveRecord } from "#saves/records";
+import type { GameSave } from "#saves/types";
 
 describe("Save helpers", () => {
     beforeEach(() => {
@@ -59,6 +68,14 @@ describe("Save helpers", () => {
         expect(() => decodeSf(corrupted.buffer as ArrayBuffer)).toThrow();
     });
 
+    test("reads a message off a thrown value, falling back when it carries none", () => {
+        expect(errorMessage(new Error("disk is full"), "fallback")).toBe(
+            "disk is full"
+        );
+        expect(errorMessage(new Error(""), "fallback")).toBe("fallback");
+        expect(errorMessage("just a string", "fallback")).toBe("fallback");
+    });
+
     test("formats a timestamp for display", () => {
         const formatted = getDateString(new Date(2025, 0, 15, 14, 30));
 
@@ -94,38 +111,36 @@ describe("GameDatabase", () => {
         const firstId = await saveGame(
             1,
             { player: { health: 80 } },
-            "Before the boss",
-            "data:image/png;base64,shot"
+            {
+                title: "Before the boss",
+                screenshot: "data:image/png;base64,shot",
+                meta: { day: 3, place: "flat" },
+            }
         );
         await saveGame(2, { player: { health: 50 } });
 
         const first = await loadGame(1);
         expect(first?.id).toBe(firstId);
-        expect(first?.name).toBe("1");
+        expect(first?.slot).toBe("1");
         expect(first?.gameData).toEqual({ player: { health: 80 } });
-        expect(first?.description).toBe("Before the boss");
+        expect(first?.title).toBe("Before the boss");
+        expect(first?.meta).toEqual({ day: 3, place: "flat" });
         expect(first?.screenshot).toBe("data:image/png;base64,shot");
         expect(first?.version).toBe("2.4.0");
         expect(first?.timestamp).toBeInstanceOf(Date);
 
-        expect((await loadGameByName("2"))?.gameData).toEqual({
+        expect((await loadGameBySlot("2"))?.gameData).toEqual({
             player: { health: 50 },
         });
         expect(await getAllSaves()).toHaveLength(2);
 
         await deleteSave(1);
         expect(await loadGame(1)).toBeUndefined();
-        expect((await getAllSaves()).map((save) => save.name)).toEqual(["2"]);
+        expect((await getAllSaves()).map((save) => save.slot)).toEqual(["2"]);
     });
 
     test("stamps an explicit version instead of the current one", async () => {
-        await saveGame(
-            11,
-            { player: { health: 10 } },
-            undefined,
-            undefined,
-            "1.3.0"
-        );
+        await saveGame(11, { player: { health: 10 } }, { version: "1.3.0" });
 
         expect((await loadGame(11))?.version).toBe("1.3.0");
     });
@@ -144,7 +159,7 @@ describe("GameDatabase", () => {
 
         expect(secondId).toBe(firstId);
         expect(
-            (await getAllSaves()).filter((save) => save.name === "7")
+            (await getAllSaves()).filter((save) => save.slot === "7")
         ).toHaveLength(1);
         expect((await loadGame(7))?.gameData).toEqual({
             checkpoint: "second",
@@ -153,7 +168,7 @@ describe("GameDatabase", () => {
 
     test("heals historical duplicate rows when overwriting a slot", async () => {
         const firstId = await db.saves.add({
-            name: "8",
+            slot: "8",
             gameData: { checkpoint: "oldest" },
             timestamp: new Date("2024-01-01T00:00:00.000Z"),
             version: "1.0.0",
@@ -162,7 +177,7 @@ describe("GameDatabase", () => {
             throw new Error("Expected the historical save to receive an ID");
         }
         await db.saves.add({
-            name: "8",
+            slot: "8",
             gameData: { checkpoint: "stale duplicate" },
             timestamp: new Date("2024-01-02T00:00:00.000Z"),
             version: "1.0.0",
@@ -170,7 +185,7 @@ describe("GameDatabase", () => {
 
         expect(await saveGame(8, { checkpoint: "current" })).toBe(firstId);
         expect(
-            (await getAllSaves()).filter((save) => save.name === "8")
+            (await getAllSaves()).filter((save) => save.slot === "8")
         ).toHaveLength(1);
         expect((await loadGame(8))?.gameData).toEqual({
             checkpoint: "current",
@@ -241,7 +256,7 @@ describe("GameDatabase", () => {
 
         expect(created).toMatchObject({
             id,
-            name: SYSTEM_SAVE_NAME,
+            slot: SYSTEM_SAVE_NAME,
             isSystemSave: true,
             gameData: { player: { health: 100 } },
         });
@@ -309,5 +324,358 @@ describe("GameDatabase", () => {
         } finally {
             table.add = originalAdd;
         }
+    });
+});
+
+describe("Database resolution", () => {
+    test("writes into the database of the game configured at call time", async () => {
+        newOptions({
+            gameName: "Game A",
+            gameId: "isolation-a",
+            gameVersion: "1.0.0",
+        });
+        await saveGame(0, { who: "a" });
+
+        // The bug this guards against resolved the database once, while the
+        // module was being imported, so every game shared the one built from
+        // the default empty gameId.
+        newOptions({
+            gameName: "Game B",
+            gameId: "isolation-b",
+            gameVersion: "1.0.0",
+        });
+        expect(await loadGame(0)).toBeUndefined();
+        expect(await getAllSaves()).toEqual([]);
+
+        await saveGame(0, { who: "b" });
+        expect((await loadGame(0))?.gameData).toEqual({ who: "b" });
+
+        newOptions({
+            gameName: "Game A",
+            gameId: "isolation-a",
+            gameVersion: "1.0.0",
+        });
+        expect((await loadGame(0))?.gameData).toEqual({ who: "a" });
+    });
+
+    test("keeps settings separate between games on one origin", async () => {
+        newOptions({
+            gameName: "Game A",
+            gameId: "settings-a",
+            gameVersion: "1.0.0",
+        });
+        await setSetting("language", "en");
+
+        newOptions({
+            gameName: "Game B",
+            gameId: "settings-b",
+            gameVersion: "1.0.0",
+        });
+        expect(await getSetting("language", "none")).toBe("none");
+    });
+
+    test("exposes the current game's database through the `db` binding", () => {
+        newOptions({
+            gameName: "Game A",
+            gameId: "binding-a",
+            gameVersion: "1.0.0",
+        });
+        expect(db.saves).toBe(getGameDatabase("binding-a").saves);
+
+        newOptions({
+            gameName: "Game B",
+            gameId: "binding-b",
+            gameVersion: "1.0.0",
+        });
+        expect(db.saves).toBe(getGameDatabase("binding-b").saves);
+        expect(typeof db.transaction).toBe("function");
+    });
+
+    test("upgrades stored records to the current field names", async () => {
+        const database = getGameDatabase("upgrade-game") as GameDatabase & {
+            runUpgrades: () => Promise<void>;
+        };
+        await database.saves.clear();
+        await database.saves.add({
+            name: "3",
+            description: "undefined",
+            screenshot: "undefined",
+            gameData: { progress: 1 },
+            timestamp: new Date("2024-05-01T00:00:00.000Z"),
+            version: "1.0.0",
+        } as unknown as GameSave);
+        await database.saves.add({
+            name: "4",
+            description: "Real label",
+            gameData: { progress: 2 },
+            timestamp: new Date("2024-05-02T00:00:00.000Z"),
+            version: "1.0.0",
+        } as unknown as GameSave);
+
+        await database.runUpgrades();
+
+        const [stale, labelled] = await database.saves.toArray();
+        expect(stale).toMatchObject({ slot: "3", gameData: { progress: 1 } });
+        expect(stale).not.toHaveProperty("name");
+        expect(stale).not.toHaveProperty("description");
+        expect(stale).not.toHaveProperty("title");
+        expect(stale).not.toHaveProperty("screenshot");
+        expect(labelled).toMatchObject({ slot: "4", title: "Real label" });
+    });
+});
+
+describe("Save annotations", () => {
+    beforeEach(async () => {
+        newOptions({
+            gameName: "Annotations Game",
+            gameId: "annotations-game",
+            gameVersion: "3.0.0",
+        });
+        await db.saves.clear();
+    });
+
+    test("leaves absent annotations absent instead of storing 'undefined'", async () => {
+        await saveGame(1, { progress: 1 });
+
+        const save = await loadGame(1);
+        expect(save).not.toHaveProperty("title");
+        expect(save).not.toHaveProperty("screenshot");
+        expect(save).not.toHaveProperty("meta");
+    });
+
+    test("stores only the annotations that were supplied", async () => {
+        await saveGame(2, { progress: 2 }, { title: "Only a title" });
+
+        const save = await loadGame(2);
+        expect(save?.title).toBe("Only a title");
+        expect(save).not.toHaveProperty("screenshot");
+    });
+
+    test("does not carry the previous save's annotations into a new capture", async () => {
+        await saveGame(
+            5,
+            { progress: 1 },
+            {
+                title: "Before the boss",
+                meta: { day: 3 },
+                screenshot: "data:image/png;base64,old",
+            }
+        );
+
+        await saveGame(5, { progress: 2 });
+
+        const save = await loadGame(5);
+        expect(save?.gameData).toEqual({ progress: 2 });
+        expect(save).not.toHaveProperty("title");
+        expect(save).not.toHaveProperty("meta");
+        expect(save).not.toHaveProperty("screenshot");
+    });
+
+    test("edits a label without moving the timestamp", async () => {
+        await saveGame(3, { progress: 3 }, { title: "First name" });
+        const before = await loadGame(3);
+
+        expect(await updateSave(3, { title: "Renamed" })).toBe(true);
+
+        const after = await loadGame(3);
+        expect(after?.title).toBe("Renamed");
+        expect(after?.timestamp).toEqual(before?.timestamp as Date);
+        expect(after?.gameData).toEqual({ progress: 3 });
+    });
+
+    test("writes only the keys it is given", async () => {
+        await saveGame(4, { progress: 4 }, { title: "Keep", meta: { day: 1 } });
+
+        await updateSave(4, { meta: { day: 2 } });
+
+        expect(await loadGame(4)).toMatchObject({
+            title: "Keep",
+            meta: { day: 2 },
+        });
+
+        await updateSave(4, {});
+        expect(await loadGame(4)).toMatchObject({
+            title: "Keep",
+            meta: { day: 2 },
+        });
+    });
+
+    test("reports an empty slot instead of creating one", async () => {
+        expect(await updateSave(99, { title: "Nothing here" })).toBe(false);
+        expect(await loadGame(99)).toBeUndefined();
+    });
+});
+
+describe("putSaves", () => {
+    const record = (slot: string, at: string): GameSave => ({
+        slot,
+        gameData: { at },
+        timestamp: new Date(at),
+        version: "1.0.0",
+        title: `Save ${slot}`,
+    });
+
+    beforeEach(async () => {
+        newOptions({
+            gameName: "Restore Game",
+            gameId: "restore-game",
+            gameVersion: "3.0.0",
+        });
+        await db.saves.clear();
+    });
+
+    test("preserves the timestamp and version each record carries", async () => {
+        const written = await putSaves([
+            record("1", "2024-01-01T00:00:00.000Z"),
+            record("2", "2024-02-01T00:00:00.000Z"),
+        ]);
+
+        expect(written).toBe(2);
+        const saves = await getAllSaves();
+        expect(saves.map((save) => save.timestamp)).toEqual([
+            new Date("2024-01-01T00:00:00.000Z"),
+            new Date("2024-02-01T00:00:00.000Z"),
+        ]);
+        expect(saves.every((save) => save.version === "1.0.0")).toBe(true);
+    });
+
+    test("replaces the player's saves while keeping the system baseline", async () => {
+        await createOrUpdateSystemSave({ initial: true });
+        await saveGame(5, { progress: 5 });
+
+        await putSaves([record("1", "2024-01-01T00:00:00.000Z")]);
+
+        expect((await getAllSaves()).map((save) => save.slot)).toEqual(["1"]);
+        expect((await getSystemSave())?.gameData).toEqual({ initial: true });
+    });
+
+    test("merges into the existing saves, overwriting only the named slots", async () => {
+        await saveGame(1, { progress: "old" });
+        await saveGame(2, { progress: "untouched" });
+
+        const written = await putSaves(
+            [record("1", "2024-03-01T00:00:00.000Z")],
+            "merge"
+        );
+
+        expect(written).toBe(1);
+        expect((await loadGame(1))?.gameData).toEqual({
+            at: "2024-03-01T00:00:00.000Z",
+        });
+        expect((await loadGame(2))?.gameData).toEqual({
+            progress: "untouched",
+        });
+    });
+
+    test("replaces a slot outright rather than merging into it", async () => {
+        await saveGame(
+            1,
+            { progress: "old" },
+            { title: "Local label", screenshot: "data:image/png;base64,old" }
+        );
+
+        const incoming = record("1", "2024-03-01T00:00:00.000Z");
+        delete incoming.title;
+
+        await putSaves([incoming], "merge");
+
+        const save = await loadGame(1);
+        expect(save?.gameData).toEqual({ at: "2024-03-01T00:00:00.000Z" });
+        expect(save).not.toHaveProperty("title");
+        expect(save).not.toHaveProperty("screenshot");
+    });
+
+    test("ignores a system save smuggled in through a file", async () => {
+        await createOrUpdateSystemSave({ initial: true });
+
+        const written = await putSaves(
+            [
+                {
+                    ...record("1", "2024-01-01T00:00:00.000Z"),
+                    slot: SYSTEM_SAVE_NAME,
+                },
+            ],
+            "merge"
+        );
+
+        expect(written).toBe(0);
+        expect((await getSystemSave())?.gameData).toEqual({ initial: true });
+    });
+
+    test("drops the source database id so records land in fresh rows", async () => {
+        await putSaves([
+            { ...record("1", "2024-01-01T00:00:00.000Z"), id: 9999 },
+        ]);
+
+        const saves = await getAllSaves();
+        expect(saves).toHaveLength(1);
+        expect(saves[0]?.id).not.toBe(9999);
+        expect(saves[0]?.slot).toBe("1");
+    });
+});
+
+describe("Save record normalization", () => {
+    test("renames legacy fields and drops stringified undefined", () => {
+        const record: Record<string, unknown> = {
+            name: "2",
+            description: "undefined",
+            screenshot: "undefined",
+            gameData: {},
+        };
+
+        normalizeSaveRecord(record as never);
+
+        expect(record).toEqual({ slot: "2", gameData: {} });
+    });
+
+    test("keeps current field names untouched", () => {
+        const record: Record<string, unknown> = {
+            slot: "2",
+            title: "Kept",
+            screenshot: "data:image/png;base64,x",
+            gameData: {},
+        };
+
+        normalizeSaveRecord(record as never);
+
+        expect(record).toEqual({
+            slot: "2",
+            title: "Kept",
+            screenshot: "data:image/png;base64,x",
+            gameData: {},
+        });
+    });
+
+    test("reads a decoded record, revitalizing its timestamp", () => {
+        const save = toSaveRecord({
+            name: "1",
+            description: "From a file",
+            gameData: { progress: 1 },
+            timestamp: "2024-06-01T10:00:00.000Z",
+            version: "1.2.0",
+        });
+
+        expect(save).toMatchObject({
+            slot: "1",
+            title: "From a file",
+            version: "1.2.0",
+        });
+        expect(save?.timestamp).toEqual(new Date("2024-06-01T10:00:00.000Z"));
+    });
+
+    test("falls back for a record that records no timestamp or version", () => {
+        const save = toSaveRecord({ slot: "1", gameData: {} });
+
+        expect(save?.timestamp).toEqual(new Date(0));
+        expect(save?.version).toBe("");
+    });
+
+    test("rejects anything that cannot be a save", () => {
+        expect(toSaveRecord(null)).toBeNull();
+        expect(toSaveRecord("a string")).toBeNull();
+        expect(toSaveRecord({ gameData: {} })).toBeNull();
+        expect(toSaveRecord({ slot: "", gameData: {} })).toBeNull();
+        expect(toSaveRecord({ slot: "1" })).toBeNull();
+        expect(toSaveRecord({ slot: "1", gameData: null })).toBeNull();
     });
 });

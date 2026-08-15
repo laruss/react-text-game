@@ -1,34 +1,30 @@
 import { Game } from "#game";
 import { loadGame } from "#saves";
+import { errorMessage } from "#saves/helpers";
 import { migrateToCurrentVersion } from "#saves/migrations";
+import type { SaveResult } from "#saves/types";
 
 /**
- * React hook that provides a function to load a saved game by its ID.
- * Restores the game state from the specified save.
+ * Loads the save in a slot, applying migrations when it predates the current
+ * game version.
  *
- * **Automatic Migration**: If the save version differs from the current game version,
- * registered migrations will be automatically applied to bring the save data up to date.
+ * @remarks
+ * Shared by {@link useLoadGame} and `useLastLoadGame` so that both paths into a
+ * save run the same migrations.
  *
- * @returns Function that accepts an optional save ID and loads the game, returning a result object on failure
- *
- * @example
- * ```tsx
- * const loadGame = useLoadGame();
- * const handleLoad = async () => {
- *   const result = await loadGame(saveId);
- *   if (result?.success === false) {
- *     console.error('Load failed:', result.message);
- *   }
- * };
- * ```
+ * @param slot - Slot to load, *not* the save's database id
+ * @returns The outcome of the load
  */
-export const useLoadGame = () => async (id: number) => {
+export const loadGameIntoState = async (
+    slot: string | number
+): Promise<SaveResult> => {
     try {
-        const data = await loadGame(id);
+        const data = await loadGame(slot);
         if (!data) {
             return {
                 success: false,
-                message: "The requested game save does not exist",
+                code: "not-found",
+                error: "The requested game save does not exist",
             };
         }
 
@@ -47,7 +43,8 @@ export const useLoadGame = () => async (id: number) => {
             if (!migrationResult.success) {
                 return {
                     success: false,
-                    message: `Failed to migrate save from version ${saveVersion} to ${currentVersion}: ${migrationResult.error}`,
+                    code: "migration-failed",
+                    error: `Failed to migrate save from version ${saveVersion} to ${currentVersion}: ${migrationResult.error}`,
                 };
             }
 
@@ -65,13 +62,38 @@ export const useLoadGame = () => async (id: number) => {
         }
 
         Game.setState(gameData);
+        return { success: true, error: null };
     } catch (e) {
         console.error("Failed to load game:", e);
         return {
             success: false,
-            message:
-                (e as Error).message ||
-                "Failed to load game. Check console for more info.",
+            code: "storage-failed",
+            error: errorMessage(
+                e,
+                "Failed to load game. Check console for more info."
+            ),
         };
     }
 };
+
+/**
+ * React hook that provides a function to load the save in a slot.
+ * Restores the game state from the specified save.
+ *
+ * **Automatic Migration**: If the save version differs from the current game version,
+ * registered migrations will be automatically applied to bring the save data up to date.
+ *
+ * @returns Function that accepts a slot and loads the game
+ *
+ * @example
+ * ```tsx
+ * const loadGame = useLoadGame();
+ * const handleLoad = async () => {
+ *   const result = await loadGame(slotIndex);
+ *   if (!result.success) {
+ *     console.error('Load failed:', result.error);
+ *   }
+ * };
+ * ```
+ */
+export const useLoadGame = () => loadGameIntoState;

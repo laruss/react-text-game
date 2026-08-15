@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { SYSTEM_PASSAGE_NAMES } from "#constants";
 import { Game } from "#game";
 import { getSystemSave } from "#saves";
+import type { SaveResult } from "#saves/types";
 
 /**
  * React hook that provides a function to restart the game from the initial state.
@@ -17,12 +18,13 @@ import { getSystemSave } from "#saves";
  * ```
  */
 export const useRestartGame = () => {
-    return useCallback(async () => {
+    return useCallback(async (): Promise<SaveResult> => {
         const systemSave = await getSystemSave();
 
         if (!systemSave) {
             return {
                 success: false,
+                code: "not-found",
                 error: "System save not found. Cannot restart game.",
             };
         }

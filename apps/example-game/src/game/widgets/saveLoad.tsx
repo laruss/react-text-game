@@ -61,13 +61,8 @@ export const SaveLoadComponent = () => {
                                 {slot.data ? (
                                     <div className="mb-3">
                                         <p className="text-sm text-muted-foreground">
-                                            {slot.data.name || "Unnamed Save"}
+                                            {slot.data.title || "Unnamed Save"}
                                         </p>
-                                        {slot.data.description && (
-                                            <p className="text-xs text-muted-foreground mt-1">
-                                                {slot.data.description}
-                                            </p>
-                                        )}
                                     </div>
                                 ) : (
                                     <p className="text-sm text-muted-foreground mb-3 italic">

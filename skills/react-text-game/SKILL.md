@@ -19,6 +19,7 @@ presentation, `mdx` for authoring, `messenger` for persistent chat transcripts.
 | `GameProvider`, preloading, loading and splash screens, UI slots | [references/ui-and-bootstrap.md](references/ui-and-bootstrap.md)                      |
 | Writing or fixing `.mdx` story files                             | [references/mdx-authoring.md](references/mdx-authoring.md)                            |
 | Chats, message logs, unread state, visual-novel backlogs         | [references/messenger.md](references/messenger.md)                                    |
+| Save slots, naming saves, save browsers, import/export           | [references/saves.md](references/saves.md)                                            |
 | Deciding whether a change to persisted state needs a migration   | the save-shape rules below, then [references/migrations.md](references/migrations.md) |
 | Changing the library itself under `packages/`                    | [references/contributing.md](references/contributing.md)                              |
 

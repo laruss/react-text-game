@@ -130,7 +130,10 @@ export const App = () => {
                             <button type="button" onClick={exportCallback}>
                                 Export saves
                             </button>
-                            <button type="button" onClick={importCallback}>
+                            <button
+                                type="button"
+                                onClick={() => importCallback()}
+                            >
                                 Import saves
                             </button>
                         </div>

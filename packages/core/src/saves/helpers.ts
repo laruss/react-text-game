@@ -87,6 +87,16 @@ export const decodeSf = <T>(data: ArrayBuffer, gameId?: string): T => {
 };
 
 /**
+ * Reads a human-readable message off a thrown value.
+ *
+ * @param error - Value caught from a `try` block
+ * @param fallback - Message to use when the value carries none
+ * @returns Message to put in a failed `SaveResult`
+ */
+export const errorMessage = (error: unknown, fallback: string): string =>
+    (error instanceof Error && error.message) || fallback;
+
+/**
  * Formats a Date object into a human-readable string.
  * Format: "DD of MONTH, YYYY HH:MM" (24-hour format)
  *

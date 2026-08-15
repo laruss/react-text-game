@@ -56,7 +56,7 @@ export const SaveLoadModal = ({
         setLoading(slotIndex);
         try {
             const result = await action();
-            if (!result || result.success) {
+            if (result.success) {
                 // Success - close modal
                 onClose();
             }

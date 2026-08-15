@@ -39,6 +39,13 @@
       one is that mdx passages cannot be translated at all, the next is that ui
       and messenger ship English defaults only;
 - [x] fix ui package: conversation on click doesn't work; init passage isn't shown (and add tests for it);
+- [ ] give the save hooks stable identities: `useSaveGame`, `useDeleteGame` and
+      `useUpdateSave` each return a fresh closure on every render, so the
+      `useMemo` in `useSaveSlots` rebuilds every slot on every render and never
+      actually memoizes (`useLoadGame` is already stable - it returns the
+      module-level `loadGameIntoState`); `useCallback` is the fix, but it makes
+      the hooks illegal to call outside a render, so the `saveHooks` tests that
+      invoke them directly have to move to `renderHook` first;
 
 ### ROADMAP
 

@@ -3,7 +3,8 @@ import { useCallback } from "react";
 import { _getOptions } from "#options";
 import { SAFE_FILE_EXTENSION } from "#saves/constants";
 import { getAllSaves } from "#saves/db";
-import { encodeSf } from "#saves/helpers";
+import { encodeSf, errorMessage } from "#saves/helpers";
+import type { SaveResult } from "#saves/types";
 
 /**
  * React hook that provides a function to export all game saves to an encrypted file.
@@ -16,21 +17,23 @@ import { encodeSf } from "#saves/helpers";
  * const exportSaves = useExportSaves();
  * const handleExport = async () => {
  *   const result = await exportSaves();
- *   if (result.success) {
- *     console.log('Saves exported successfully');
- *   } else {
+ *   if (!result.success) {
  *     console.error('Export failed:', result.error);
  *   }
  * };
  * ```
  */
 export const useExportSaves = () => {
-    return useCallback(async () => {
+    return useCallback(async (): Promise<SaveResult> => {
         const options = _getOptions();
 
         const allSaves = await getAllSaves();
         if (allSaves.length === 0) {
-            return { success: false, error: "No saves found" };
+            return {
+                success: false,
+                code: "not-found",
+                error: "No saves found",
+            };
         }
 
         try {
@@ -49,9 +52,11 @@ export const useExportSaves = () => {
             console.error(e);
             return {
                 success: false,
-                error:
-                    (e as Error).message ||
-                    "Unknown error, check console for more info",
+                code: "storage-failed",
+                error: errorMessage(
+                    e,
+                    "Unknown error, check console for more info"
+                ),
             };
         }
     }, []);

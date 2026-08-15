@@ -43,14 +43,19 @@ const {
     useImportSaves,
     useLastLoadGame,
     useLoadGame,
+    useReadSaveFile,
     useRestartGame,
     useSaveGame,
     useSaveSlots,
+    useUpdateSave,
+    useWriteSaves,
 } = await import("#saves/hooks");
 const { clearMigrations, registerMigration } = await import(
     "#saves/migrations"
 );
 const { Storage } = await import("#storage");
+
+type GameSave = import("#saves/types").GameSave;
 
 type PickerMode = "change" | "cancel";
 
@@ -92,6 +97,8 @@ function makeSaveFile(data: unknown, name = "backup.sx") {
     });
 }
 
+const OK = { success: true, error: null } as const;
+
 describe("Save hooks", () => {
     beforeEach(async () => {
         liveQueryValue = undefined;
@@ -128,19 +135,40 @@ describe("Save hooks", () => {
 
     test("deletes all user saves but preserves the system save", async () => {
         await saveGame(1, { progress: 1 });
-        const deleteAll = useDeleteAllSaves();
+        const { result } = renderHook(() => useDeleteAllSaves());
 
-        await deleteAll();
+        expect(await result.current()).toEqual(OK);
 
         expect(await getAllSaves()).toEqual([]);
         expect(await getSystemSave()).toBeDefined();
+    });
+
+    test("reports a database failure while deleting every save", async () => {
+        const table = db.saves as unknown as {
+            toArray: () => Promise<unknown[]>;
+        };
+        const originalToArray = table.toArray;
+        table.toArray = async () => {
+            throw new Error("wipe unavailable");
+        };
+
+        try {
+            const { result } = renderHook(() => useDeleteAllSaves());
+            expect(await result.current()).toEqual({
+                success: false,
+                code: "storage-failed",
+                error: "wipe unavailable",
+            });
+        } finally {
+            table.toArray = originalToArray;
+        }
     });
 
     test("deletes one save and reports a database error", async () => {
         await saveGame(3, { progress: 3 });
         const deleteGame = useDeleteGame();
 
-        expect(await deleteGame(3)).toBeUndefined();
+        expect(await deleteGame(3)).toEqual(OK);
         expect(await loadGame(3)).toBeUndefined();
 
         const table = db.saves as unknown as {
@@ -153,7 +181,8 @@ describe("Save hooks", () => {
         try {
             expect(await deleteGame(4)).toEqual({
                 success: false,
-                message: "delete unavailable",
+                code: "storage-failed",
+                error: "delete unavailable",
             });
         } finally {
             table.where = originalWhere;
@@ -164,7 +193,7 @@ describe("Save hooks", () => {
         Storage.setValue("$.player", { health: 64 });
         const saveCurrentGame = useSaveGame();
 
-        expect(await saveCurrentGame(4)).toBeUndefined();
+        expect(await saveCurrentGame(4)).toEqual(OK);
         expect((await loadGame(4))?.gameData.player).toEqual({ health: 64 });
 
         const table = db.saves as unknown as {
@@ -177,11 +206,31 @@ describe("Save hooks", () => {
         try {
             expect(await saveCurrentGame(5)).toEqual({
                 success: false,
-                message: "disk full",
+                code: "storage-failed",
+                error: "disk full",
             });
         } finally {
             table.add = originalAdd;
         }
+    });
+
+    test("carries a title, metadata and a screenshot into the save", async () => {
+        Storage.setValue("$.player", { health: 64 });
+        const saveCurrentGame = useSaveGame();
+
+        expect(
+            await saveCurrentGame(4, {
+                title: "Before the plumber",
+                meta: { day: 3, hour: 14, place: "flat" },
+                screenshot: "data:image/png;base64,shot",
+            })
+        ).toEqual(OK);
+
+        expect(await loadGame(4)).toMatchObject({
+            title: "Before the plumber",
+            meta: { day: 3, hour: 14, place: "flat" },
+            screenshot: "data:image/png;base64,shot",
+        });
     });
 
     test("loads an existing save and rejects an unknown slot", async () => {
@@ -191,11 +240,12 @@ describe("Save hooks", () => {
         Storage.setValue("$.player.health", 99);
 
         const loadSavedGame = useLoadGame();
-        expect(await loadSavedGame(6)).toBeUndefined();
+        expect(await loadSavedGame(6)).toEqual(OK);
         expect(Storage.getValue<number>("$.player.health")).toEqual([20]);
         expect(await loadSavedGame(999)).toEqual({
             success: false,
-            message: "The requested game save does not exist",
+            code: "not-found",
+            error: "The requested game save does not exist",
         });
     });
 
@@ -214,21 +264,21 @@ describe("Save hooks", () => {
         const oldState = structuredClone(Game.getState());
         oldState.player = { hp: 45 };
         await db.saves.add({
-            name: "7",
+            slot: "7",
             gameData: oldState,
             timestamp: new Date(),
             version: "1.0.0",
         });
 
         const loadSavedGame = useLoadGame();
-        expect(await loadSavedGame(7)).toBeUndefined();
+        expect(await loadSavedGame(7)).toEqual(OK);
         expect(Storage.getValue<number>("$.player.health")).toEqual([45]);
     });
 
     test("returns migration and database failures from load", async () => {
         const oldState = structuredClone(Game.getState());
         await db.saves.add({
-            name: "8",
+            slot: "8",
             gameData: oldState,
             timestamp: new Date(),
             version: "0.5.0",
@@ -237,7 +287,8 @@ describe("Save hooks", () => {
 
         expect(await loadSavedGame(8)).toEqual({
             success: false,
-            message: expect.stringContaining(
+            code: "migration-failed",
+            error: expect.stringContaining(
                 "Failed to migrate save from version 0.5.0 to 2.0.0"
             ),
         });
@@ -252,7 +303,52 @@ describe("Save hooks", () => {
         try {
             expect(await loadSavedGame(8)).toEqual({
                 success: false,
-                message: "read unavailable",
+                code: "storage-failed",
+                error: "read unavailable",
+            });
+        } finally {
+            table.where = originalWhere;
+        }
+    });
+
+    test("renames a save without recapturing state or moving its timestamp", async () => {
+        Storage.setValue("$.player", { health: 42 });
+        await saveGame(9, structuredClone(Game.getState()), {
+            title: "First name",
+        });
+        const before = await loadGame(9);
+        Storage.setValue("$.player.health", 1);
+
+        const updateSaveHandler = useUpdateSave();
+        expect(await updateSaveHandler(9, { title: "Renamed" })).toEqual(OK);
+
+        const after = await loadGame(9);
+        expect(after?.title).toBe("Renamed");
+        expect(after?.timestamp).toEqual(before?.timestamp as Date);
+        expect(after?.gameData).toEqual(before?.gameData as never);
+    });
+
+    test("reports an empty slot and a database failure from a rename", async () => {
+        const updateSaveHandler = useUpdateSave();
+
+        expect(await updateSaveHandler(404, { title: "Nothing" })).toEqual({
+            success: false,
+            code: "not-found",
+            error: "The requested game save does not exist",
+        });
+
+        const table = db.saves as unknown as {
+            where: (query: unknown) => unknown;
+        };
+        const originalWhere = table.where;
+        table.where = () => {
+            throw new Error("rename unavailable");
+        };
+        try {
+            expect(await updateSaveHandler(1, { title: "Nope" })).toEqual({
+                success: false,
+                code: "storage-failed",
+                error: "rename unavailable",
             });
         } finally {
             table.where = originalWhere;
@@ -274,7 +370,7 @@ describe("Save hooks", () => {
             restartResult = await result.current();
         });
 
-        expect(restartResult).toEqual({ success: true, error: null });
+        expect(restartResult).toEqual(OK);
         expect(Storage.getValue<number>("$.player.health")).toEqual([100]);
         expect(Game.currentPassage?.id).toBe(SYSTEM_PASSAGE_NAMES.START_MENU);
         expect(sessionStorage.getItem("gameAutoSave")).toBeNull();
@@ -286,6 +382,7 @@ describe("Save hooks", () => {
 
         expect(await result.current()).toEqual({
             success: false,
+            code: "not-found",
             error: "System save not found. Cannot restart game.",
         });
     });
@@ -326,10 +423,7 @@ describe("Save hooks", () => {
 
         try {
             const { result } = renderHook(() => useExportSaves());
-            expect(await result.current()).toEqual({
-                success: true,
-                error: null,
-            });
+            expect(await result.current()).toEqual(OK);
         } finally {
             document.createElement = originalCreateElement;
             URL.createObjectURL = originalCreateObjectURL;
@@ -348,6 +442,7 @@ describe("Save hooks", () => {
         const { result } = renderHook(() => useExportSaves());
         expect(await result.current()).toEqual({
             success: false,
+            code: "not-found",
             error: "No saves found",
         });
 
@@ -359,6 +454,7 @@ describe("Save hooks", () => {
         try {
             expect(await result.current()).toEqual({
                 success: false,
+                code: "storage-failed",
                 error: "blob unavailable",
             });
         } finally {
@@ -366,177 +462,245 @@ describe("Save hooks", () => {
         }
     });
 
-    test("handles cancelled and invalid import selections", async () => {
+    test("tells a cancelled file dialog apart from a real failure", async () => {
         const restoreCancelledPicker = installFilePicker(null, "cancel");
         try {
-            const { result } = renderHook(() => useImportSaves());
+            const { result } = renderHook(() => useReadSaveFile());
             expect(await result.current()).toEqual({
                 success: false,
-                count: 0,
+                code: "cancelled",
                 error: "No file selected",
+                saves: [],
             });
         } finally {
             restoreCancelledPicker();
         }
-
-        const restoreInvalidPicker = installFilePicker(
-            new File(["text"], "backup.txt")
-        );
-        try {
-            const { result } = renderHook(() => useImportSaves());
-            expect(await result.current()).toEqual({
-                success: false,
-                count: 0,
-                error: "Invalid file type. Please select a file with .sx extension.",
-            });
-        } finally {
-            restoreInvalidPicker();
-        }
     });
 
-    test("preserves the version each imported save was created with", async () => {
-        const restorePicker = installFilePicker(
+    test("rejects a file that is not a save file", async () => {
+        const { result } = renderHook(() => useReadSaveFile());
+
+        expect(await result.current(new File(["text"], "backup.txt"))).toEqual({
+            success: false,
+            code: "bad-file",
+            error: "Invalid file type. Please select a file with .sx extension.",
+            saves: [],
+        });
+    });
+
+    test("reads records out of a save file without writing anything", async () => {
+        await saveGame(1, { progress: "already here" });
+        const { result } = renderHook(() => useReadSaveFile());
+
+        const read = await result.current(
             makeSaveFile([
                 {
                     name: "1",
+                    description: "From an old build",
                     gameData: { progress: 10 },
-                    timestamp: new Date(),
+                    timestamp: new Date("2024-01-01T00:00:00.000Z"),
                     version: "0.1.0",
-                },
-                {
-                    name: "2",
-                    gameData: { progress: 20 },
-                    timestamp: new Date(),
-                    version: "0.2.0",
                 },
             ])
         );
 
+        expect(read.success).toBe(true);
+        expect(read.saves).toHaveLength(1);
+        expect(read.saves[0]).toMatchObject({
+            slot: "1",
+            title: "From an old build",
+            version: "0.1.0",
+        });
+        // Reading must not touch storage - that is the whole point of the split.
+        expect((await loadGame(1))?.gameData).toEqual({
+            progress: "already here",
+        });
+    });
+
+    test("rejects corrupted and structurally invalid save files", async () => {
+        const { result } = renderHook(() => useReadSaveFile());
+
+        const corrupt = await result.current(
+            new File(["corrupt"], "backup.sx")
+        );
+        expect(corrupt.success).toBe(false);
+        expect(corrupt).toMatchObject({ code: "decode-failed", saves: [] });
+
+        expect(await result.current(makeSaveFile({ not: "an array" }))).toEqual(
+            {
+                success: false,
+                code: "bad-file",
+                error: "Invalid save file format",
+                saves: [],
+            }
+        );
+
+        expect(
+            await result.current(makeSaveFile([{ gameData: {} }, "junk"]))
+        ).toEqual({
+            success: false,
+            code: "bad-file",
+            error: "Save file holds 2 unreadable record(s)",
+            saves: [],
+        });
+    });
+
+    test("writes records verbatim, replacing or merging as asked", async () => {
+        const records: GameSave[] = [
+            {
+                slot: "1",
+                gameData: { progress: 10 },
+                timestamp: new Date("2024-01-01T00:00:00.000Z"),
+                version: "0.1.0",
+            },
+        ];
+        await saveGame(2, { progress: "mine" });
+        const { result } = renderHook(() => useWriteSaves());
+
+        expect(await result.current(records, { mode: "merge" })).toEqual({
+            ...OK,
+            count: 1,
+        });
+        expect((await loadGame(2))?.gameData).toEqual({ progress: "mine" });
+
+        expect(await result.current(records)).toEqual({ ...OK, count: 1 });
+        expect((await getAllSaves()).map((save) => save.slot)).toEqual(["1"]);
+    });
+
+    test("reports a database failure while writing saves", async () => {
+        const table = db.saves as unknown as {
+            toArray: () => Promise<unknown[]>;
+        };
+        const originalToArray = table.toArray;
+        table.toArray = async () => {
+            throw new Error("write unavailable");
+        };
+
         try {
-            const { result } = renderHook(() => useImportSaves());
-            expect(await result.current()).toEqual({
-                success: true,
-                count: 2,
-                error: null,
+            const { result } = renderHook(() => useWriteSaves());
+            expect(await result.current([])).toEqual({
+                success: false,
+                code: "storage-failed",
+                error: "write unavailable",
+                count: 0,
             });
         } finally {
-            restorePicker();
+            table.toArray = originalToArray;
         }
+    });
 
-        const imported = await getAllSaves();
+    test("imports a file and keeps the timestamp each save was taken with", async () => {
+        const taken = [
+            new Date("2024-01-01T00:00:00.000Z"),
+            new Date("2024-06-01T00:00:00.000Z"),
+        ];
+        const { result } = renderHook(() => useImportSaves());
+
         expect(
-            imported
-                .map((save) => [save.name, save.version])
-                .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
+            await result.current(
+                makeSaveFile([
+                    {
+                        name: "1",
+                        gameData: { progress: 10 },
+                        timestamp: taken[0],
+                        version: "0.1.0",
+                    },
+                    {
+                        name: "2",
+                        gameData: { progress: 20 },
+                        timestamp: taken[1],
+                        version: "0.2.0",
+                    },
+                ])
+            )
+        ).toEqual({ ...OK, count: 2 });
+
+        const imported = (await getAllSaves()).sort((left, right) =>
+            left.slot.localeCompare(right.slot)
+        );
+        expect(
+            imported.map((save) => ({
+                slot: save.slot,
+                version: save.version,
+                timestamp: save.timestamp,
+            }))
         ).toEqual([
-            ["1", "0.1.0"],
-            ["2", "0.2.0"],
+            { slot: "1", version: "0.1.0", timestamp: taken[0] as Date },
+            { slot: "2", version: "0.2.0", timestamp: taken[1] as Date },
         ]);
     });
 
-    test("rejects corrupted and structurally invalid imports", async () => {
-        const corruptPicker = installFilePicker(
-            new File(["corrupt"], "backup.sx")
-        );
-        try {
-            const { result } = renderHook(() => useImportSaves());
-            const importResult = await result.current();
-            expect(importResult.success).toBe(false);
-            expect(importResult.count).toBe(0);
-            expect(importResult.error).toBeString();
-        } finally {
-            corruptPicker();
-        }
+    test("leaves the existing saves alone when the file is unusable", async () => {
+        await saveGame(1, { progress: "precious" });
+        const { result } = renderHook(() => useImportSaves());
 
-        const invalidFormatPicker = installFilePicker(
-            makeSaveFile({ not: "an array" })
-        );
+        expect(
+            await result.current(makeSaveFile([{ gameData: {} }]))
+        ).toMatchObject({ success: false, code: "bad-file", count: 0 });
+
+        // Nothing is deleted until the whole file has decoded and validated.
+        expect((await loadGame(1))?.gameData).toEqual({ progress: "precious" });
+    });
+
+    test("reports a cancelled picker through the import wrapper", async () => {
+        const restorePicker = installFilePicker(null, "cancel");
         try {
             const { result } = renderHook(() => useImportSaves());
             expect(await result.current()).toEqual({
                 success: false,
+                code: "cancelled",
+                error: "No file selected",
                 count: 0,
-                error: "Invalid save file format",
             });
         } finally {
-            invalidFormatPicker();
-        }
-    });
-
-    test("imports valid saves and continues after one failed item", async () => {
-        const saves = [
-            {
-                name: "bad",
-                gameData: { progress: 10 },
-                timestamp: new Date(),
-                version: "2.0.0",
-            },
-            {
-                name: "good",
-                gameData: { progress: 20 },
-                timestamp: new Date(),
-                version: "2.0.0",
-                description: "kept",
-                screenshot: "shot",
-            },
-        ];
-        const restorePicker = installFilePicker(makeSaveFile(saves));
-        const table = db.saves as unknown as {
-            add: (value: { name: string }) => Promise<number>;
-        };
-        const originalAdd = table.add;
-        table.add = async (value) => {
-            if (value.name === "bad") {
-                throw new Error("bad slot");
-            }
-            return originalAdd.call(db.saves, value);
-        };
-
-        try {
-            const { result } = renderHook(() => useImportSaves());
-            expect(await result.current()).toEqual({
-                success: true,
-                count: 1,
-                error: null,
-            });
-        } finally {
-            table.add = originalAdd;
             restorePicker();
         }
-
-        expect((await getAllSaves()).map((save) => save.name)).toEqual([
-            "good",
-        ]);
     });
 
-    test("reports a failure while clearing existing saves during import", async () => {
+    test("imports through the file picker when no file is handed in", async () => {
         const restorePicker = installFilePicker(
             makeSaveFile([
                 {
                     name: "1",
                     gameData: { progress: 10 },
-                    timestamp: new Date(),
+                    timestamp: new Date("2024-01-01T00:00:00.000Z"),
                     version: "2.0.0",
                 },
             ])
         );
-        const table = db.saves as unknown as { clear: () => Promise<void> };
-        const originalClear = table.clear;
-        table.clear = async () => {
-            throw new Error("clear unavailable");
-        };
 
         try {
             const { result } = renderHook(() => useImportSaves());
-            expect(await result.current()).toEqual({
-                success: false,
-                count: 0,
-                error: "clear unavailable",
-            });
+            expect(await result.current()).toEqual({ ...OK, count: 1 });
         } finally {
-            table.clear = originalClear;
             restorePicker();
         }
+
+        expect((await getAllSaves()).map((save) => save.slot)).toEqual(["1"]);
+    });
+
+    test("merges an imported save into the saves already on the device", async () => {
+        await saveGame(2, { progress: "mine" });
+        const { result } = renderHook(() => useImportSaves());
+
+        expect(
+            await result.current(
+                makeSaveFile([
+                    {
+                        slot: "1",
+                        gameData: { progress: 10 },
+                        timestamp: new Date("2024-01-01T00:00:00.000Z"),
+                        version: "2.0.0",
+                    },
+                ]),
+                { mode: "merge" }
+            )
+        ).toEqual({ ...OK, count: 1 });
+
+        expect((await getAllSaves()).map((save) => save.slot).sort()).toEqual([
+            "1",
+            "2",
+        ]);
     });
 
     test("loads the latest save and exposes loading metadata", async () => {
@@ -552,8 +716,35 @@ describe("Save hooks", () => {
         expect(result.current.lastSave?.id).toBe(id);
 
         Storage.setValue("$.player.health", 90);
-        expect(await result.current.loadLastGame()).toBeUndefined();
+        expect(await result.current.loadLastGame()).toEqual(OK);
         expect(Storage.getValue<number>("$.player.health")).toEqual([30]);
+    });
+
+    test("migrates the latest save before restoring it", async () => {
+        registerMigration({
+            from: "1.0.0",
+            to: "2.0.0",
+            description: "Rename hp",
+            migrate: (state) => ({
+                ...state,
+                player: {
+                    health: (state.player as { hp: number }).hp,
+                },
+            }),
+        });
+        const oldState = structuredClone(Game.getState());
+        oldState.player = { hp: 33 };
+        await db.saves.add({
+            slot: "13",
+            gameData: oldState,
+            timestamp: new Date(),
+            version: "1.0.0",
+        });
+        liveQueryValue = await loadGame(13);
+
+        const { result } = renderHook(() => useLastLoadGame());
+        expect(await result.current.loadLastGame()).toEqual(OK);
+        expect(Storage.getValue<number>("$.player.health")).toEqual([33]);
     });
 
     test("handles last-save edge cases", async () => {
@@ -564,23 +755,15 @@ describe("Save hooks", () => {
             isLoading: false,
             lastSave: null,
         });
-        expect(await noSave.result.current.loadLastGame()).toBeUndefined();
+        expect(await noSave.result.current.loadLastGame()).toEqual({
+            success: false,
+            code: "not-found",
+            error: "There is no save to load",
+        });
 
         liveQueryValue = {
             id: 1,
-            name: "not-a-number",
-            gameData: {},
-            timestamp: new Date(),
-            version: "2.0.0",
-        };
-        const invalid = renderHook(() => useLastLoadGame());
-        await expect(invalid.result.current.loadLastGame()).rejects.toThrow(
-            "Invalid save ID"
-        );
-
-        liveQueryValue = {
-            id: 1,
-            name: "999",
+            slot: "999",
             gameData: {},
             timestamp: new Date(),
             version: "2.0.0",
@@ -588,14 +771,15 @@ describe("Save hooks", () => {
         const missing = renderHook(() => useLastLoadGame());
         expect(await missing.result.current.loadLastGame()).toEqual({
             success: false,
-            error: "Game data not found",
+            code: "not-found",
+            error: "The requested game save does not exist",
         });
     });
 
     test("reports a database failure while loading the latest save", async () => {
         liveQueryValue = {
             id: 1,
-            name: "42",
+            slot: "42",
             gameData: {},
             timestamp: new Date(),
             version: "2.0.0",
@@ -612,6 +796,7 @@ describe("Save hooks", () => {
             const { result } = renderHook(() => useLastLoadGame());
             expect(await result.current.loadLastGame()).toEqual({
                 success: false,
+                code: "storage-failed",
                 error: "latest save unavailable",
             });
         } finally {
@@ -622,7 +807,7 @@ describe("Save hooks", () => {
     test("queries saves newest-first for the last-save hook", async () => {
         const newest = {
             id: 2,
-            name: "2",
+            slot: "2",
             gameData: {},
             timestamp: new Date(),
             version: "2.0.0",
@@ -667,13 +852,13 @@ describe("Save hooks", () => {
 
     test("selects the newest user save by timestamp", async () => {
         const olderId = await db.saves.add({
-            name: "1",
+            slot: "1",
             gameData: { checkpoint: "older" },
             timestamp: new Date("2024-01-01T00:00:00.000Z"),
             version: "2.0.0",
         });
         const newestId = await db.saves.add({
-            name: "2",
+            slot: "2",
             gameData: { checkpoint: "newest" },
             timestamp: new Date("2024-01-02T00:00:00.000Z"),
             version: "2.0.0",
@@ -686,7 +871,7 @@ describe("Save hooks", () => {
 
         expect(lastSave).toMatchObject({
             id: newestId,
-            name: "2",
+            slot: "2",
             gameData: { checkpoint: "newest" },
         });
         expect(lastSave).not.toMatchObject({ id: olderId });
@@ -695,7 +880,7 @@ describe("Save hooks", () => {
     test("overwrites an existing slot without creating a duplicate", async () => {
         const originalTimestamp = new Date("2020-01-01T00:00:00.000Z");
         const existingId = await db.saves.add({
-            name: "0",
+            slot: "0",
             gameData: { player: { health: 10 } },
             timestamp: originalTimestamp,
             version: "2.0.0",
@@ -712,7 +897,7 @@ describe("Save hooks", () => {
         });
 
         const slotSaves = (await getAllSaves()).filter(
-            (save) => save.name === "0"
+            (save) => save.slot === "0"
         );
         expect(slotSaves).toHaveLength(1);
         const overwrittenSave = slotSaves[0];
@@ -720,7 +905,7 @@ describe("Save hooks", () => {
             throw new Error("Expected overwritten slot 0 save");
         expect(overwrittenSave).toMatchObject({
             id: existingId,
-            name: "0",
+            slot: "0",
         });
         expect(overwrittenSave.gameData.player).toEqual({ health: 90 });
         expect(overwrittenSave.timestamp.getTime()).toBeGreaterThan(
@@ -728,12 +913,12 @@ describe("Save hooks", () => {
         );
     });
 
-    test("builds save slots with working save, load and delete actions", async () => {
+    test("builds save slots with working save, load, update and delete actions", async () => {
         Storage.setValue("$.player", { health: 70 });
         const state = structuredClone(Game.getState());
         const slot = {
             id: 1,
-            name: "0",
+            slot: "0",
             gameData: state,
             timestamp: new Date(),
             version: "2.0.0",
@@ -745,10 +930,13 @@ describe("Save hooks", () => {
         expect(result.current[0]?.data).toBe(slot);
         expect(result.current[1]?.data).toBeNull();
 
-        await result.current[0]?.save();
+        expect(await result.current[0]?.save({ title: "Chapter 2" })).toEqual(
+            OK
+        );
         const savedSlot = await loadGame(0);
         expect(savedSlot?.gameData).toHaveProperty("_system.game");
         expect(savedSlot?.gameData.player).toEqual({ health: 70 });
+        expect(savedSlot?.title).toBe("Chapter 2");
         if (!savedSlot) {
             throw new Error("Expected slot 0 to be saved");
         }
@@ -756,11 +944,23 @@ describe("Save hooks", () => {
         // stores references, so clone here to preserve the real DB contract.
         savedSlot.gameData = structuredClone(savedSlot.gameData);
 
+        expect(
+            await result.current[0]?.update({
+                title: "Renamed",
+                meta: { a: 1 },
+            })
+        ).toEqual(OK);
+        expect(await loadGame(0)).toMatchObject({
+            title: "Renamed",
+            meta: { a: 1 },
+            timestamp: savedSlot.timestamp,
+        });
+
         Storage.setValue("$.player.health", 5);
-        await result.current[0]?.load();
+        expect(await result.current[0]?.load()).toEqual(OK);
         expect(Storage.getValue<number>("$.player.health")).toEqual([70]);
 
-        await result.current[0]?.delete();
+        expect(await result.current[0]?.delete()).toEqual(OK);
         expect(await loadGame(0)).toBeUndefined();
 
         liveQueryValue = [];
@@ -779,7 +979,7 @@ describe("Save hooks", () => {
         expect(queried).toHaveLength(1);
         expect(queried[0]).toEqual([
             expect.objectContaining({
-                name: "0",
+                slot: "0",
                 gameData: { player: { health: 88 } },
             }),
         ]);

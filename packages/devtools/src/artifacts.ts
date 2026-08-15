@@ -15,10 +15,15 @@ import type { CaptureSource, SaveSchema } from "#types";
 export const SYSTEM_SAVE_NAME = "__SYSTEM_INITIAL_STATE__";
 
 interface SaveRecord {
+    /** Slot key. Files written before 0.11.0 spell this `name`. */
+    slot?: string;
     name?: string;
     gameData?: Record<string, unknown>;
     version?: string;
 }
+
+const slotOf = (record: SaveRecord): string | undefined =>
+    record.slot ?? record.name;
 
 const isSaveRecord = (value: unknown): value is SaveRecord =>
     typeof value === "object" &&
@@ -31,7 +36,9 @@ const schemaFromRecords = (
     capturedFrom: CaptureSource,
     gameVersion?: string
 ): SaveSchema => {
-    const system = records.find((record) => record.name === SYSTEM_SAVE_NAME);
+    const system = records.find(
+        (record) => slotOf(record) === SYSTEM_SAVE_NAME
+    );
     // The pristine baseline beats any played save when both are present.
     const usable = system ? [system] : records;
 

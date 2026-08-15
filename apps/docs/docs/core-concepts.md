@@ -605,7 +605,7 @@ function SavesList() {
                     <p>
                         Slot {index + 1}: {slot.data ? "Saved" : "Empty"}
                     </p>
-                    {slot.data && <p>{slot.data.description}</p>}
+                    {slot.data && <p>{slot.data.title}</p>}
                     <button onClick={() => slot.save()}>Save</button>
                     <button onClick={() => slot.load()} disabled={!slot.data}>
                         Load
@@ -624,15 +624,21 @@ function SavesList() {
 
 All save-related hooks are available from `@react-text-game/core/saves`:
 
-- `useSaveSlots` - Manage multiple save slots with save/load/delete actions
-- `useSaveGame` - Save current game state
+- `useSaveSlots` - Manage multiple save slots with save/load/update/delete actions
+- `useSaveGame` - Save current game state, with an optional title and metadata
 - `useLoadGame` - Load saved game state
+- `useUpdateSave` - Rename a save without recapturing state or moving its timestamp
 - `useDeleteGame` - Delete a specific save
 - `useDeleteAllSaves` - Delete all saves (except system save)
 - `useLastLoadGame` - Load the most recent save
 - `useExportSaves` - Export saves to encrypted file
+- `useReadSaveFile` - Decode a save file without writing anything
+- `useWriteSaves` - Write save records, replacing or merging
 - `useImportSaves` - Import saves from encrypted file
 - `useRestartGame` - Restart game from initial state
+
+Every one of them returns a `SaveResult`: `{ success: true, error: null }` or
+`{ success: false, code, error }`, where `code` is a machine-readable `SaveErrorCode`.
 
 ### Direct API
 
@@ -646,10 +652,14 @@ import {
     deleteSave,
 } from "@react-text-game/core/saves";
 
-// Save to slot 1 with optional description and screenshot.
-// The first argument is the save "slot" name (string or number);
+// Save to slot 1 with optional annotations.
+// The first argument is the save's slot (string or number);
 // loadGame/deleteSave look a save up by this same value.
-await saveGame(1, gameData, "Before boss fight", screenshotBase64);
+await saveGame(1, gameData, {
+    title: "Before boss fight",
+    meta: { day: 3, place: "castle" },
+    screenshot: screenshotBase64,
+});
 
 // Load the save in slot 1
 const save = await loadGame(1);
@@ -661,7 +671,9 @@ const allSaves = await getAllSaves();
 await deleteSave(1);
 ```
 
-**Note:** `saveGame` returns an auto-incremented database id, but `loadGame` and `deleteSave` look saves up by the **slot name** you passed to `saveGame` (compared as a string) — so pass the same value to save and load. The system also maintains a special `SYSTEM_SAVE_NAME` for initial state restoration.
+**Note:** `saveGame` returns an auto-incremented database id, but `loadGame` and `deleteSave` address a save by its **slot** — the same value you passed to `saveGame`, compared as a string. `loadGame(save.id)` compiles and is wrong; pass `save.slot`. The system also maintains a special `SYSTEM_SAVE_NAME` for initial state restoration.
+
+For named slots, per-save metadata, renaming, import/export and error codes, read [Saves](./saves.md).
 
 ## Audio System
 

@@ -1,12 +1,14 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { useCallback } from "react";
 
-import { Game } from "#game";
-import { db, type GameSave, loadGame } from "#saves";
+import { type GameSave, getDatabase } from "#saves";
+import type { SaveResult } from "#saves/types";
+
+import { loadGameIntoState } from "./useLoadGame";
 
 const getLastSave = async (): Promise<GameSave | null> => {
-    const save = await db.saves
-        .filter((save) => !save.isSystemSave)
+    const save = await getDatabase()
+        .saves.filter((save) => !save.isSystemSave)
         .reverse()
         .sortBy("timestamp");
     return save[0] ?? null;
@@ -18,6 +20,10 @@ const getLastSave = async (): Promise<GameSave | null> => {
  * This hook provides functionality to determine the availability of the last saved game, as well as to load and restore the game data from the saved state.
  * It uses reactive data fetching and caching mechanisms to seamlessly manage game state retrieval.
  *
+ * @remarks
+ * Loading goes through the same path as `useLoadGame`, so a save written by an
+ * older build is migrated here too.
+ *
  * @function useLastLoadGame
  * @returns Returns an object containing:
  * - `hasLastSave` {boolean}: Indicates whether a last saved game exists.
@@ -27,7 +33,7 @@ const getLastSave = async (): Promise<GameSave | null> => {
  *
  * @example
  * ```tsx
- * const { hasLastSave, loadLastGame, isLoading } = useGetLastLoadGame();
+ * const { hasLastSave, loadLastGame, isLoading } = useLastLoadGame();
  *
  * if (isLoading) {
  *   return <div>Loading...</div>;
@@ -43,30 +49,17 @@ const getLastSave = async (): Promise<GameSave | null> => {
 export const useLastLoadGame = () => {
     const lastSave = useLiveQuery(getLastSave, [], null);
 
-    const loadLastGame = useCallback(async () => {
-        if (!lastSave?.id) return;
-
-        const saveId = Number(lastSave.name);
-        if (Number.isNaN(saveId)) {
-            throw new Error("Invalid save ID");
-        }
-
-        try {
-            const data = await loadGame(saveId);
-            if (!data) {
-                return { success: false, error: "Game data not found" };
-            }
-            Game.setState(data.gameData);
-        } catch (e) {
-            console.error("Failed to load last game:", e);
+    const loadLastGame = useCallback(async (): Promise<SaveResult> => {
+        if (!lastSave) {
             return {
                 success: false,
-                error:
-                    (e as Error).message ||
-                    "Unknown error occurred while loading the game, please, check console for more info",
+                code: "not-found",
+                error: "There is no save to load",
             };
         }
-    }, [lastSave?.id, lastSave?.name]);
+
+        return loadGameIntoState(lastSave.slot);
+    }, [lastSave]);
 
     return {
         hasLastSave: !!lastSave,

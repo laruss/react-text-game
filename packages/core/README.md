@@ -1088,9 +1088,11 @@ function SaveButton({ slotNumber }) {
     const saveGame = useSaveGame();
 
     const handleSave = async () => {
-        const result = await saveGame(slotNumber);
-        if (result?.success === false) {
-            alert(result.message);
+        const result = await saveGame(slotNumber, {
+            title: "Before the boss",
+        });
+        if (!result.success) {
+            alert(result.error);
         }
     };
 
@@ -1098,16 +1100,16 @@ function SaveButton({ slotNumber }) {
 }
 ```
 
-**useLoadGame** - Load a saved game by ID:
+**useLoadGame** - Load the save held by a slot:
 
 ```tsx
-function LoadButton({ saveId }) {
+function LoadButton({ slotNumber }) {
     const loadGame = useLoadGame();
 
     const handleLoad = async () => {
-        const result = await loadGame(saveId);
-        if (result?.success === false) {
-            alert(result.message);
+        const result = await loadGame(slotNumber);
+        if (!result.success) {
+            alert(result.error);
         }
     };
 
@@ -1115,16 +1117,16 @@ function LoadButton({ saveId }) {
 }
 ```
 
-**useDeleteGame** - Delete a saved game by ID:
+**useDeleteGame** - Delete the save held by a slot:
 
 ```tsx
-function DeleteButton({ saveId }) {
+function DeleteButton({ slotNumber }) {
     const deleteGame = useDeleteGame();
 
     const handleDelete = async () => {
-        const result = await deleteGame(saveId);
-        if (result?.success === false) {
-            alert(result.message);
+        const result = await deleteGame(slotNumber);
+        if (!result.success) {
+            alert(result.error);
         }
     };
 
@@ -1212,10 +1214,14 @@ import {
 } from "@react-text-game/core/saves";
 
 // Save game manually
-await saveGame("my-save", gameData, "Description", screenshotBase64);
+await saveGame("my-save", gameData, {
+    title: "Before the boss",
+    meta: { day: 3 },
+    screenshot: screenshotBase64,
+});
 
-// Load by ID
-const save = await loadGame(1);
+// Load the save held by a slot
+const save = await loadGame("my-save");
 
 // Get all saves
 const allSaves = await getAllSaves();
@@ -1224,7 +1230,7 @@ const allSaves = await getAllSaves();
 await deleteSave(1);
 
 // Direct Dexie access
-await db.saves.where("name").equals("my-save").first();
+await db.saves.where("slot").equals("my-save").first();
 ```
 
 #### Save File Encryption

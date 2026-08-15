@@ -26,11 +26,14 @@ import { uiTranslations } from "#i18n";
 
 type Slot = Parameters<typeof SaveSlot>[0]["slot"];
 
+const ok = { success: true, error: null } as const;
+
 const createSlot = (data: GameSave | null = null): Slot => ({
     data,
-    save: mock(async () => undefined),
-    load: mock(async () => undefined),
-    delete: mock(async () => undefined),
+    save: mock(async () => ok),
+    load: mock(async () => ok),
+    delete: mock(async () => ok),
+    update: mock(async () => ok),
 });
 
 beforeAll(async () => {
@@ -62,11 +65,11 @@ describe("SaveSlot", () => {
         const onAction = mock(() => {});
         const slot = createSlot({
             id: 1,
-            name: "2",
+            slot: "2",
             gameData: { score: 42 },
             timestamp: new Date("2026-01-02T03:04:00Z"),
             version: "1.0.0",
-            description: "At the castle gate",
+            title: "At the castle gate",
             screenshot: "data:image/png;base64,save",
         });
 
@@ -97,12 +100,10 @@ describe("SaveSlot", () => {
 
     test("shows loading labels and disables every available action", () => {
         const slot = createSlot({
-            name: "0",
+            slot: "0",
             gameData: {},
             timestamp: new Date("2026-01-01T00:00:00Z"),
             version: "1.0.0",
-            description: "undefined",
-            screenshot: "undefined",
         });
 
         const { rerender } = render(
@@ -116,7 +117,8 @@ describe("SaveSlot", () => {
         );
 
         expect(screen.getByText("Loading...")).toBeTruthy();
-        expect(screen.queryByText("undefined")).toBeNull();
+        // A save with no title and no screenshot renders neither.
+        expect(screen.queryByAltText("Save screenshot")).toBeNull();
         expect(
             screen
                 .getAllByRole("button")

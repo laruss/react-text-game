@@ -128,7 +128,7 @@ expect(result.data?.wallet).toEqual({ gold: 0, items: [] });
 expect(result.data?.player).toMatchObject({ title: "Ada" });
 ```
 
-Feed it the `gameData` of an actual export from the old build, and keep the test. Do **not** verify by importing a save file through the UI and loading it: import re-stamps each save with the version it was created with, so this only works from `@react-text-game/core` 0.10.0 onwards -- and going through `runMigrations` directly is the assertion you want anyway.
+Feed it the `gameData` of an actual export from the old build, and keep the test. Do **not** verify by importing a save file through the UI and loading it: import preserves the version each save was created with, so this only works from `@react-text-game/core` 0.10.0 onwards -- and going through `runMigrations` directly is the assertion you want anyway.
 
 ## Recovering a baseline from a live game
 
@@ -138,6 +138,8 @@ Capture it **before** deploying the new version, which overwrites that record, a
 
 ```bash
 # DevTools -> Application -> IndexedDB -> <gameId>-gamedb -> saves
+# (before 0.11.0 the gameId never reached the database name, so a game that
+# has not been upgraded yet keeps its records in "-gamedb")
 bunx rtg saves snapshot --from-dump system-save.json
 
 # or from any exported save file; --game-id must match the built gameId,

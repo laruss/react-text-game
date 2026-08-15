@@ -62,20 +62,18 @@ export const SaveSlot = ({
             <div className="p-3">
                 {slot.data ? (
                     <div className="space-y-2">
-                        {slot.data.description &&
-                            slot.data.description !== "undefined" && (
-                                <p className="text-sm text-card-foreground line-clamp-2">
-                                    {slot.data.description}
-                                </p>
-                            )}
-                        {slot.data.screenshot &&
-                            slot.data.screenshot !== "undefined" && (
-                                <img
-                                    src={slot.data.screenshot}
-                                    alt="Save screenshot"
-                                    className="w-full h-32 object-cover rounded"
-                                />
-                            )}
+                        {slot.data.title && (
+                            <p className="text-sm text-card-foreground line-clamp-2">
+                                {slot.data.title}
+                            </p>
+                        )}
+                        {slot.data.screenshot && (
+                            <img
+                                src={slot.data.screenshot}
+                                alt="Save screenshot"
+                                className="w-full h-32 object-cover rounded"
+                            />
+                        )}
                         <div className="flex gap-2">
                             {(mode === "load" || mode === "saveLoad") && (
                                 <Button
