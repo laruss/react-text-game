@@ -1,6 +1,6 @@
 {
     "name": "@react-text-game/devtools",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Development-time CLI for React Text Game: detects whether a save migration is needed by diffing your game's save schema against a committed baseline",
     "main": "dist/index.js",
     "module": "dist/index.js",

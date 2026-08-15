@@ -1,5 +1,13 @@
 # example-game
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies [7dc0550]
+  - @react-text-game/core@0.11.0
+  - @react-text-game/ui@0.7.0
+
 ## 0.0.8
 
 ### Patch Changes
