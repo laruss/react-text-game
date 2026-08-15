@@ -142,6 +142,9 @@ describe("resolveGameVersion", () => {
         ).toBe("package.json");
     });
 
+    // The fixtures carry their own manifest, pinned at 0.1.0, so this asserts
+    // the walk up stops at the nearest one - and does not break every time
+    // `packages/devtools` is released.
     test("falls back to the nearest package.json", async () => {
         expect(await resolveGameVersion({ ...base, explicit: null })).toEqual({
             version: "0.1.0",
