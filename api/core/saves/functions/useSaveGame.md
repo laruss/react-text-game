@@ -2,7 +2,7 @@
 
 > **useSaveGame**(): (`slot`, `options?`) => `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useSaveGame.ts:28](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/core/src/saves/hooks/useSaveGame.ts#L28)
+Defined in: [packages/core/src/saves/hooks/useSaveGame.ts:28](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/saves/hooks/useSaveGame.ts#L28)
 
 React hook that provides a function to save the current game state to a specific slot.
 The save is stored in IndexedDB with the slot number as its slot key.

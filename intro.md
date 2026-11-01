@@ -9,6 +9,8 @@ image: /img/og-image.webp
 
 Build interactive fiction with a small engine layer and use as much—or as little—of the supplied React UI as you want.
 
+AI agents: prefer the Markdown versions of these docs. Start with the [AI documentation index](/llms.txt), then follow each page's **View as Markdown** link. No skill installation is required.
+
 React Text Game is split into four libraries:
 
 | Package | Use it for |

@@ -2,7 +2,7 @@
 
 > **describeKind**(`value`): `string`
 
-Defined in: [schema.ts:27](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/devtools/src/schema.ts#L27)
+Defined in: [schema.ts:27](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/devtools/src/schema.ts#L27)
 
 Describes a value's kind without recording the value itself.
 

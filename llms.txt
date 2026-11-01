@@ -1,0 +1,53 @@
+# React Text Game
+
+> React Text Game is a type-safe React engine for interactive fiction, story passages, maps, reactive entities, and persistent saves.
+
+Prefer Markdown when reading the documentation. No agent skill installation is required.
+Every HTML documentation page has a "View as Markdown" link and a <link rel="alternate" type="text/markdown"> pointing to its Markdown source.
+Most guide and API detail URLs support removing the trailing slash and appending .md, for example /core-concepts/ becomes /core-concepts.md.
+The home page is /intro.md; section overview pages use /index.md, for example /api/core/ becomes /api/core/index.md.
+Follow the explicit Markdown links below or on each HTML page when the paths differ. Request those .md URLs directly; requesting an HTML URL with Accept: text/markdown does not select the Markdown version.
+
+## Start here
+
+- [Overview](https://reacttextgame.dev/intro.md): Packages, architecture, and a minimal passage.
+- [Installation](https://reacttextgame.dev/getting-started.md): Set up the libraries.
+- [First game with core and UI](https://reacttextgame.dev/first-game/core+ui.md): Build a game with the supplied React renderers.
+- [First game with core only](https://reacttextgame.dev/first-game/core.md): Build your own renderer.
+- [Core concepts](https://reacttextgame.dev/core-concepts.md): Entities, passages, navigation, and state.
+- [Side effects](https://reacttextgame.dev/side-effects.md): Keep passage rendering pure and mutate state in actions.
+
+## Guides
+
+- [Interactive maps](https://reacttextgame.dev/interactive-maps.md): Hotspots, coordinates, and decorative images.
+- [Loading and splash screens](https://reacttextgame.dev/loading-and-splash-screens.md): Preloading and startup lifecycle.
+- [Custom UI](https://reacttextgame.dev/custom-ui.md): Replace primitives and passage renderers.
+- [MDX integration](https://reacttextgame.dev/mdx-integration.md): Author passages with Markdown and JSX.
+- [Messenger](https://reacttextgame.dev/messenger.md): Persistent transcripts and unread tracking.
+- [Messenger game tutorial](https://reacttextgame.dev/messenger-game.md): Build a chat-driven game.
+- [Game clock](https://reacttextgame.dev/game-clock.md): In-fiction time and scheduling.
+- [Internationalization](https://reacttextgame.dev/i18n.md): Translate game content and UI.
+- [Saves](https://reacttextgame.dev/saves.md): Save slots, metadata, and import/export.
+- [Save migrations](https://reacttextgame.dev/migrations.md): Version persisted game state.
+- [Keep your saves valid](https://reacttextgame.dev/keep-saves-valid.md): Check save compatibility with the rtg CLI.
+
+## API reference
+
+These Markdown overview pages link to the individual classes, functions, interfaces, and types.
+
+- [Core](https://reacttextgame.dev/api/core/index.md)
+- [Saves and migrations](https://reacttextgame.dev/api/core/saves/index.md)
+- [Audio](https://reacttextgame.dev/api/core/audio/index.md)
+- [Clock](https://reacttextgame.dev/api/core/clock/index.md)
+- [Core internationalization](https://reacttextgame.dev/api/core/i18n/index.md)
+- [UI](https://reacttextgame.dev/api/ui/index.md)
+- [UI internationalization](https://reacttextgame.dev/api/ui/i18n/index.md)
+- [MDX](https://reacttextgame.dev/api/mdx/index.md)
+- [MDX build plugin](https://reacttextgame.dev/api/mdx/plugin/index.md)
+- [Messenger](https://reacttextgame.dev/api/messenger/index.md)
+- [Devtools](https://reacttextgame.dev/api/devtools/index.md)
+
+## Optional
+
+- [Agent skill](https://reacttextgame.dev/agent-skill.md): Installable guidance for compatible coding agents.
+- [Source repository](https://github.com/laruss/react-text-game): Source code, tests, and examples.

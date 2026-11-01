@@ -2,7 +2,7 @@
 
 > **defineScript**(`id`, `build`): [`Script`](../type-aliases/Script.md)
 
-Defined in: [scripts/define.ts:43](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/messenger/src/scripts/define.ts#L43)
+Defined in: [scripts/define.ts:43](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/messenger/src/scripts/define.ts#L43)
 
 Defines an addressable sequence of beats for a chat.
 

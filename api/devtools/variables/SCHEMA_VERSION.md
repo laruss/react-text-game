@@ -2,7 +2,7 @@
 
 > `const` **SCHEMA\_VERSION**: `1` = `1`
 
-Defined in: [types.ts:8](https://github.com/laruss/react-text-game/blob/4ac7aac37690a99d98e7617adadc0f09958a2135/packages/devtools/src/types.ts#L8)
+Defined in: [types.ts:8](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/devtools/src/types.ts#L8)
 
 Format version of the snapshot files this tool writes and reads.
 
