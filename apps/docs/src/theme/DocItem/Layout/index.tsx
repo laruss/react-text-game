@@ -9,6 +9,9 @@ type Props = WrapperProps<typeof LayoutType>;
 
 export default function LayoutWrapper(props: Props) {
     const { metadata } = useDoc();
+    const markdownPath = metadata.source
+        .replace(/^@site\/docs\//, "/")
+        .replace(/\.mdx?$/, ".md");
 
     // Build breadcrumb items from the doc's path
     const breadcrumbItems = React.useMemo(() => {
@@ -52,11 +55,24 @@ export default function LayoutWrapper(props: Props) {
     return (
         <>
             <Head>
+                <link
+                    rel="alternate"
+                    type="text/markdown"
+                    href={markdownPath}
+                    title="Markdown"
+                />
                 <script type="application/ld+json">
                     {JSON.stringify(breadcrumbSchema)}
                 </script>
             </Head>
-            <Layout {...props} />
+            <Layout {...props}>
+                <p>
+                    <a href={markdownPath}>View as Markdown</a>
+                    {" · "}
+                    <a href="/llms.txt">AI documentation index</a>
+                </p>
+                {props.children}
+            </Layout>
         </>
     );
 }
