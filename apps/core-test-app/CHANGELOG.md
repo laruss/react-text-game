@@ -1,5 +1,12 @@
 # core-test-app
 
+## 0.1.9
+
+### Patch Changes
+
+- Updated dependencies [7e5f6f3]
+  - @react-text-game/core@0.12.0
+
 ## 0.1.8
 
 ### Patch Changes
