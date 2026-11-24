@@ -2,7 +2,7 @@
 
 > **loadGameIntoState**(`slot`): `Promise`\<[`SaveResult`](../type-aliases/SaveResult.md)\>
 
-Defined in: [packages/core/src/saves/hooks/useLoadGame.ts:18](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/saves/hooks/useLoadGame.ts#L18)
+Defined in: [packages/core/src/saves/hooks/useLoadGame.ts:18](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/saves/hooks/useLoadGame.ts#L18)
 
 Loads the save in a slot, applying migrations when it predates the current
 game version.

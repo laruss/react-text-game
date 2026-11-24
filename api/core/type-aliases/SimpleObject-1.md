@@ -2,7 +2,7 @@
 
 > **SimpleObject**\<`VariablesType`\> = `SimpleObjectImpl`\<`VariablesType`\> & `VariablesType`
 
-Defined in: [packages/core/src/gameObjects/simpleObject.ts:100](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/gameObjects/simpleObject.ts#L100)
+Defined in: [packages/core/src/gameObjects/simpleObject.ts:100](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/gameObjects/simpleObject.ts#L100)
 
 Type representing a SimpleObject instance with direct property access.
 Combines BaseGameObject functionality with variable properties.

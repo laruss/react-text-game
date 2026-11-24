@@ -2,7 +2,7 @@
 
 > **ClockOptions** = `object`
 
-Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/clock/types.ts#L26)
+Defined in: [types.ts:26](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/clock/types.ts#L26)
 
 Configuration accepted by the `clock` option of `Game.init()`.
 
@@ -21,7 +21,7 @@ await Game.init({
 
 > `optional` **mode**: [`ClockMode`](ClockMode.md)
 
-Defined in: [types.ts:41](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/clock/types.ts#L41)
+Defined in: [types.ts:41](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/clock/types.ts#L41)
 
 How game time advances.
 
@@ -35,7 +35,7 @@ How game time advances.
 
 > `optional` **scale**: `number`
 
-Defined in: [types.ts:49](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/clock/types.ts#L49)
+Defined in: [types.ts:49](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/clock/types.ts#L49)
 
 Multiplier applied to elapsed wall-clock time in `"realtime"` mode.
 A scale of `60` turns one real second into one game minute.
@@ -50,7 +50,7 @@ A scale of `60` turns one real second into one game minute.
 
 > `optional` **startAt**: `number`
 
-Defined in: [types.ts:34](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/clock/types.ts#L34)
+Defined in: [types.ts:34](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/clock/types.ts#L34)
 
 Game time the clock starts at, in milliseconds.
 

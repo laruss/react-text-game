@@ -2,21 +2,21 @@
 
 > **initI18n**(`config?`): `Promise`\<`void`\>
 
-Defined in: [init.ts:72](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/i18n/init.ts#L72)
+Defined in: [init.ts:74](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/i18n/init.ts#L74)
 
 Initializes the i18n (internationalization) system for the game engine.
 
-This function sets up i18next with the provided configuration, automatically loads
-UI translations from the @react-text-game/ui package (if installed), and merges them
-with user-provided translation resources. It also loads the user's saved language
+This function sets up i18next with the provided configuration and merges the
+default translations that packages registered through `registerTranslations`
+(for example `@react-text-game/ui` and `@react-text-game/messenger`) with
+user-provided translation resources. It also loads the user's saved language
 preference from the database.
 
 The initialization process:
-1. Loads UI translations from the UI package (if available)
-2. Merges user resources with UI translations (user translations take precedence)
-3. Loads the saved language preference from the database
-4. Initializes i18next with the merged resources and saved language
-5. Registers any additional i18next modules provided in the config
+1. Merges user resources over registered package defaults (user translations take precedence)
+2. Loads the saved language preference from the database
+3. Initializes i18next with the merged resources and saved language
+4. Registers any additional i18next modules provided in the config
 
 **Important:** This function should be called once during game initialization,
 typically before rendering any UI components.

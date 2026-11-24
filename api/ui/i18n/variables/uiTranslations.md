@@ -2,7 +2,9 @@
 
 > `const` **uiTranslations**: `object`
 
-Defined in: [index.ts:3](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/ui/src/i18n/index.ts#L3)
+Defined in: [index.ts:13](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/ui/src/i18n/index.ts#L13)
+
+This package's default strings, keyed by language and namespace.
 
 ## Type Declaration
 
@@ -20,8 +22,7 @@ English defaults for the `ui` namespace.
 
 A TypeScript module rather than JSON on purpose: Node's ESM resolver requires
 an `with { type: "json" }` import attribute for JSON modules, so a bare JSON
-import makes this entry unloadable under plain Node (SSR, or `Game.init`
-reaching it through core's dynamic import).
+import makes this entry unloadable under plain Node (SSR).
 
 #### en.ui.mainMenu
 
@@ -118,3 +119,9 @@ reaching it through core's dynamic import).
 #### en.ui.saves.title.saveLoad
 
 > **saveLoad**: `string` = `"Save / Load Game"`
+
+## Remarks
+
+Registered automatically when the package is imported, so a game gets working
+text without wiring anything. Exported for merging them by hand into
+`Game.init({ translations: { resources } })`.

@@ -2,17 +2,18 @@
 
 > **registerTranslations**(`resources`): `void`
 
-Defined in: [registry.ts:47](https://github.com/laruss/react-text-game/blob/37ebb1fd49045bfbb1d2a2fa96b8f14a2f8c2644/packages/core/src/i18n/registry.ts#L47)
+Defined in: [registry.ts:48](https://github.com/laruss/react-text-game/blob/eec26bc9ed999238cfd09c6ed359f08cfbe32a5d/packages/core/src/i18n/registry.ts#L48)
 
 Registers default translations contributed by a package.
 
-Companion packages (for example `@react-text-game/messenger`) ship their own
-namespace of default strings. Registering them here means the game author
-gets working text without copying resource bundles into `Game.init()`, while
-still being able to override any key.
+Companion packages (for example `@react-text-game/ui` and
+`@react-text-game/messenger`) ship their own namespace of default strings.
+Registering them here means the game author gets working text without
+copying resource bundles into `Game.init()`, while still being able to
+override any key.
 
-Precedence is: registered package defaults, then `@react-text-game/ui`
-defaults, then the author's `translations.resources` - the author always wins.
+The author's `translations.resources` always take precedence over
+registered package defaults.
 
 ## Parameters
 
