@@ -13,6 +13,7 @@
     "homepage": "https://reacttextgame.dev/",
     "private": false,
     "sideEffects": [
+        "./dist/index.js",
         "./dist/i18n/index.js"
     ],
     "type": "module",

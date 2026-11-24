@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { resolve } from "node:path";
 
 import * as messenger from "#index";
 
@@ -56,11 +57,49 @@ describe("public entry point", () => {
         expect(messenger.playerSenderId).toBe("player");
     });
 
-    test("registers its own translations on import", () => {
+    test("exports its own translations", () => {
         expect(messenger.messengerTranslations.en.messenger).toMatchObject({
             "member.joined": "{{who}} joined the chat",
             typing: "typing...",
         });
+    });
+
+    // Run in a fresh process: test files share one module cache, so the
+    // registration may already have happened through another file.
+    test("registers its own translations on import", async () => {
+        const script = `
+            import i18next from "i18next";
+            await i18next.init({ lng: "en", resources: {} });
+            await import("./src/index.ts");
+            console.log(i18next.getFixedT("en", "messenger")("typing"));
+        `;
+        const child = Bun.spawn([process.execPath, "-e", script], {
+            cwd: resolve(import.meta.dir, "../.."),
+            stdout: "pipe",
+            stderr: "pipe",
+        });
+        const [stdout, stderr, exitCode] = await Promise.all([
+            new Response(child.stdout).text(),
+            new Response(child.stderr).text(),
+            child.exited,
+        ]);
+
+        expect(stderr).toBe("");
+        expect(exitCode).toBe(0);
+        expect(stdout.trim()).toBe("typing...");
+    });
+
+    // Bundlers drop a side-effect-only import whose importer is marked free
+    // of side effects, so both links of the chain from the package entry to
+    // the registration call must be listed.
+    test("keeps its translations through tree shaking", async () => {
+        const manifest = await Bun.file(
+            resolve(import.meta.dir, "../../package.json")
+        ).json();
+
+        expect(manifest.sideEffects).toEqual(
+            expect.arrayContaining(["./dist/index.js", "./dist/i18n/index.js"])
+        );
     });
 
     test("does not leak internal helpers", () => {
