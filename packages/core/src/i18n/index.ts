@@ -10,7 +10,7 @@
  * - **React Hooks:** `useGameTranslation()` hook for accessing translations in components
  * - **Utility Functions:** `getGameTranslation()` for translations outside React components
  * - **Type Definitions:** TypeScript types for i18n configuration
- * - **Auto-loading:** Automatic loading and merging of UI package translations
+ * - **Package defaults:** `registerTranslations()` for companion packages' default strings
  * - **Persistence:** Automatic saving and loading of language preferences
  *
  * ## Quick Start
@@ -55,7 +55,7 @@
  * Common namespaces:
  * - `passages` - Story passages and game content
  * - `common` - Shared text across the game
- * - `ui` - UI-specific text (automatically loaded from UI package if installed)
+ * - `ui` - UI-specific text (registered by the UI package when it is imported)
  *
  * @see {@link initI18n} - Initialize the i18n system
  * @see {@link useGameTranslation} - React hook for translations

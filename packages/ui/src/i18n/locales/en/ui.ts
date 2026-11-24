@@ -4,8 +4,7 @@
  * @remarks
  * A TypeScript module rather than JSON on purpose: Node's ESM resolver requires
  * an `with { type: "json" }` import attribute for JSON modules, so a bare JSON
- * import makes this entry unloadable under plain Node (SSR, or `Game.init`
- * reaching it through core's dynamic import).
+ * import makes this entry unloadable under plain Node (SSR).
  */
 export const ui = {
     mainMenu: {

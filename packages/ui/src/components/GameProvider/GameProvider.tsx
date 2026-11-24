@@ -18,6 +18,9 @@ import {
     useState,
 } from "react";
 
+// Registers the `ui` namespace on its own: a Next.js client bundle reaches this
+// module without ever loading the package entry.
+import "#i18n";
 import { ErrorBoundary } from "#components/ErrorBoundary";
 import {
     LoadingScreen,

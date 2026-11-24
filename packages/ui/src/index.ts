@@ -1,3 +1,6 @@
+// Registers this package's default strings on import.
+import "./i18n";
+
 export * from "./components";
 export type {
     Components,

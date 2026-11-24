@@ -130,7 +130,7 @@ describe("registerTranslations", () => {
             );
         });
 
-        test("still merges UI translations", async () => {
+        test("merges registered defaults alongside user resources", async () => {
             registerTranslations({
                 en: { messengerTest: { typing: "typing..." } },
             });
@@ -167,6 +167,25 @@ describe("registerTranslations", () => {
             });
 
             const t = i18next.getFixedT("en", "lateTest");
+            expect(t("hello")).toBe("Author");
+            expect(t("extra")).toBe("Extra");
+        });
+    });
+
+    describe("registered while initI18n is pending", () => {
+        // A lazily loaded package chunk can register between the resource
+        // snapshot initI18n takes and i18next finishing its init.
+        test("is applied once init completes, still losing to the author", async () => {
+            const initialization = initI18n({
+                resources: { en: { pendingTest: { hello: "Author" } } },
+            });
+
+            registerTranslations({
+                en: { pendingTest: { hello: "Package", extra: "Extra" } },
+            });
+            await initialization;
+
+            const t = i18next.getFixedT("en", "pendingTest");
             expect(t("hello")).toBe("Author");
             expect(t("extra")).toBe("Extra");
         });

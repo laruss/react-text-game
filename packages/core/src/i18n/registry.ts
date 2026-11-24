@@ -18,13 +18,14 @@ const addResourceBundles = (resources: Resource): void => {
 /**
  * Registers default translations contributed by a package.
  *
- * Companion packages (for example `@react-text-game/messenger`) ship their own
- * namespace of default strings. Registering them here means the game author
- * gets working text without copying resource bundles into `Game.init()`, while
- * still being able to override any key.
+ * Companion packages (for example `@react-text-game/ui` and
+ * `@react-text-game/messenger`) ship their own namespace of default strings.
+ * Registering them here means the game author gets working text without
+ * copying resource bundles into `Game.init()`, while still being able to
+ * override any key.
  *
- * Precedence is: registered package defaults, then `@react-text-game/ui`
- * defaults, then the author's `translations.resources` - the author always wins.
+ * The author's `translations.resources` always take precedence over
+ * registered package defaults.
  *
  * @param resources - i18next resources, keyed by language and then namespace
  *
@@ -66,6 +67,16 @@ export function registerTranslations(resources: Resource): void {
  */
 export function _getRegisteredTranslations(): Resource {
     return registeredTranslations;
+}
+
+/**
+ * Adds every registered translation to i18next without overwriting keys that
+ * are already present.
+ *
+ * @internal
+ */
+export function _applyRegisteredTranslations(): void {
+    addResourceBundles(registeredTranslations);
 }
 
 /**

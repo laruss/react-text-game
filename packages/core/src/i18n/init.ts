@@ -6,24 +6,26 @@ import { logger } from "#logger";
 import { getSetting } from "#saves/db";
 
 import { DEFAULT_CONFIG } from "./constants";
-import { _getRegisteredTranslations } from "./registry";
+import {
+    _applyRegisteredTranslations,
+    _getRegisteredTranslations,
+} from "./registry";
 import type { I18nConfig } from "./types";
-import { loadUITranslations } from "./utils";
 
 /**
  * Initializes the i18n (internationalization) system for the game engine.
  *
- * This function sets up i18next with the provided configuration, automatically loads
- * UI translations from the @react-text-game/ui package (if installed), and merges them
- * with user-provided translation resources. It also loads the user's saved language
+ * This function sets up i18next with the provided configuration and merges the
+ * default translations that packages registered through `registerTranslations`
+ * (for example `@react-text-game/ui` and `@react-text-game/messenger`) with
+ * user-provided translation resources. It also loads the user's saved language
  * preference from the database.
  *
  * The initialization process:
- * 1. Loads UI translations from the UI package (if available)
- * 2. Merges user resources with UI translations (user translations take precedence)
- * 3. Loads the saved language preference from the database
- * 4. Initializes i18next with the merged resources and saved language
- * 5. Registers any additional i18next modules provided in the config
+ * 1. Merges user resources over registered package defaults (user translations take precedence)
+ * 2. Loads the saved language preference from the database
+ * 3. Initializes i18next with the merged resources and saved language
+ * 4. Registers any additional i18next modules provided in the config
  *
  * **Important:** This function should be called once during game initialization,
  * typically before rendering any UI components.
@@ -78,22 +80,13 @@ export async function initI18n(config?: I18nConfig) {
         modules = [],
     } = (config || DEFAULT_CONFIG) as I18nConfig;
 
-    const uiTranslations = await loadUITranslations();
-
-    if (Object.keys(uiTranslations).length === 0) {
-        logger.log("UI translations not found.");
-    } else {
-        logger.log("UI translations loaded successfully.");
-    }
-
     const packageTranslations = _getRegisteredTranslations();
 
-    // Layer the three sources by precedence: package defaults registered
-    // through registerTranslations(), then UI defaults, then user resources.
+    // User resources take precedence over package defaults registered
+    // through registerTranslations().
     const userResources = resources || {};
     const languages = new Set([
         ...Object.keys(packageTranslations),
-        ...Object.keys(uiTranslations),
         ...Object.keys(userResources),
     ]);
 
@@ -102,13 +95,8 @@ export async function initI18n(config?: I18nConfig) {
     for (const lang of languages) {
         // Merged per key, not per namespace: overriding a single string of a
         // namespace must not drop the rest of that namespace's defaults.
-        const withUi = deepMerge(
-            (packageTranslations[lang] || {}) as Record<string, unknown>,
-            (uiTranslations[lang] || {}) as Record<string, unknown>
-        );
-
         mergedResources[lang] = deepMerge(
-            withUi,
+            (packageTranslations[lang] || {}) as Record<string, unknown>,
             (userResources[lang] || {}) as Record<string, unknown>
         ) as Resource[string];
     }
@@ -137,6 +125,11 @@ export async function initI18n(config?: I18nConfig) {
             escapeValue: false, // React already escapes
         },
     });
+
+    // Packages registered while init was pending missed the snapshot above and
+    // found i18next uninitialized or about to be replaced. Re-applying never
+    // overwrites, so the author's resources still win.
+    _applyRegisteredTranslations();
 
     logger.log(
         `i18n initialized with language: ${i18next.language}, fallback: ${fallbackLanguage}, supported languages: ${supportedLanguages.join(", ")}`

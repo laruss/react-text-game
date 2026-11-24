@@ -18,10 +18,10 @@ Runtime i18next. No code generation, no build step, no CLI.
 - **Resources are plain objects.** The author passes
   `{ [lang]: { [namespace]: { ... } } }` and calls `t()` themselves. Nothing is
   extracted from passage source.
-- **Three layers, merged per key.** Package defaults registered through
-  `registerTranslations()`, then `@react-text-game/ui` defaults, then the
-  author's `resources`. `deepMerge` runs per key rather than per namespace, so
-  overriding one string does not drop the rest of that namespace.
+- **Two layers, merged per key.** Package defaults registered through
+  `registerTranslations()`, then the author's `resources`. `deepMerge` runs per
+  key rather than per namespace, so overriding one string does not drop the rest
+  of that namespace.
 - **Persistence.** The active language is a row in the saves database
   (`getSetting`/`setSetting` under `"language"`), read during `initI18n` and
   written by `changeLanguage`.
@@ -30,16 +30,22 @@ Runtime i18next. No code generation, no build step, no CLI.
   outside it. Both default to the `passages` namespace.
 - **Packages contribute defaults.** `registerTranslations()` accumulates
   resources; before init they fold into the i18next config, after init they go
-  through `addResourceBundle` without overwriting existing keys.
+  through `addResourceBundle` without overwriting existing keys. Registrations
+  that land while `initI18n` is pending are re-applied once it completes.
 - **UI package.** Ships the English `ui` namespace plus the `LanguageToggle`
-  component. Core loads it through an optional dynamic import, so a game with a
-  custom UI and no `@react-text-game/ui` installed just gets an empty object.
+  component, and registers the namespace on import. Core never references the UI
+  package: a literal `import("@react-text-game/ui/i18n")`, even guarded by
+  `try/catch`, breaks the build of every game without it, because bundlers
+  resolve literal specifiers at build time. Besides the package entry, the
+  `"use client"` modules that start the game or read the namespace import the
+  registration themselves, since a Next.js client bundle reaches them without
+  the entry.
 - **Messenger package.** Ships the English `messenger` namespace and registers it
   on import, so importing the package is enough.
 
 Locale files are TypeScript modules, not JSON: Node's ESM resolver requires an
 `with { type: "json" }` import attribute, which would make the entry unloadable
-under plain Node when core reaches it through the dynamic import.
+under plain Node (SSR).
 
 #### What the original proposal wanted, and what happened to it
 
@@ -52,7 +58,7 @@ under plain Node when core reaches it through the dynamic import.
 | `rtg-i18n.config.js` | Not needed. The config is the `translations` field of `Game.init`. |
 | A dedicated `@react-text-game/i18n` package | Shipped inside core, exposed at the `@react-text-game/core/i18n` subpath. |
 | MDX strategy: frontmatter markers vs per-language files vs JSON-only | Never decided. `packages/mdx` has no i18n awareness at all. |
-| Copying UI translation files into the user's project | Replaced by the dynamic import plus `registerTranslations`, so nothing is copied. |
+| Copying UI translation files into the user's project | Replaced by `registerTranslations`, so nothing is copied. |
 
 The runtime half of the proposal survived roughly as designed - namespaces,
 automatic injection of a `t` function, UI package defaults that the author can

@@ -4,6 +4,9 @@ import type { useSaveSlots } from "@react-text-game/core/saves";
 import { useTranslation } from "react-i18next";
 import { twMerge } from "tailwind-merge";
 
+// Registers the `ui` namespace on its own: a Next.js client bundle reaches this
+// module without ever loading the package entry.
+import "#i18n";
 import { Button } from "#components/common/Button";
 import type { SaveLoadMode } from "#context/SaveLoadMenuContext";
 

@@ -68,7 +68,7 @@ With those two components in place, the UI handles menus, passage rendering, and
 
 ## Internationalization
 
-The UI package ships with an `en` translation bundle for the `ui` namespace and exposes it through `@react-text-game/ui/i18n`. When you call `Game.init`, the core engine automatically merges these strings with your game resources and persists the active language for every player.
+The UI package ships with an `en` translation bundle for the `ui` namespace and exposes it through `@react-text-game/ui/i18n`. Importing `@react-text-game/ui` registers these strings with the core engine, which merges them with your game resources when you call `Game.init` and persists the active language for every player.
 
 ### Default UI copy
 
@@ -78,7 +78,7 @@ import { uiTranslations } from "@react-text-game/ui/i18n";
 console.log(uiTranslations.en.ui.mainMenu.title); // "Main Menu"
 ```
 
-Components such as `MainMenu`, `SaveLoadModal`, and `ErrorBoundary` already call `useTranslation('ui')`, so English works out of the box. You only need to add resources when you want to localize beyond the default language or override labels.
+`MainMenu` and `SaveLoadModal` (including its save slots) already call `useTranslation('ui')`, so English works out of the box. You only need to add resources when you want to localize beyond the default language or override labels.
 
 ### Adding more languages
 

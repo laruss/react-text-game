@@ -6,7 +6,6 @@ import { Game } from "#game";
 import { getGameTranslation, initI18n, useGameTranslation } from "#i18n";
 import { DEFAULT_CONFIG } from "#i18n/constants";
 import type { I18nConfig } from "#i18n/types";
-import { loadUITranslations } from "#i18n/utils";
 import { getSetting, setSetting } from "#saves/db";
 import { setupMockStorage, teardownMockStorage } from "#tests/helpers";
 
@@ -42,30 +41,6 @@ describe("i18n", () => {
             expect(DEFAULT_CONFIG.fallbackLanguage).toBe("en");
             expect(DEFAULT_CONFIG.debug).toBe(false);
             expect(DEFAULT_CONFIG.resources).toEqual({});
-        });
-    });
-
-    describe("loadUITranslations", () => {
-        test("returns empty object when UI package not installed", async () => {
-            const translations = await loadUITranslations();
-
-            // Since UI package likely isn't installed in tests, should return {}
-            expect(typeof translations).toBe("object");
-        });
-
-        test("returns translation structure when UI package is available", async () => {
-            const translations = await loadUITranslations();
-
-            // Check structure regardless of whether UI package is installed
-            expect(translations).toBeDefined();
-
-            // If translations exist, they should be organized by language
-            if (Object.keys(translations).length > 0) {
-                const firstLang = Object.keys(translations)[0];
-                expect(
-                    firstLang ? typeof translations[firstLang] : "undefined"
-                ).toBe("object");
-            }
         });
     });
 

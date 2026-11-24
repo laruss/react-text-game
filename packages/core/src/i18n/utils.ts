@@ -1,55 +1,5 @@
 import i18next from "i18next";
 
-type UITranslations = Record<string, Record<string, object>>;
-type UITranslationsImporter = () => Promise<{
-    readonly uiTranslations: UITranslations;
-}>;
-
-/** @internal */
-export async function _loadUITranslationsFrom(
-    importUITranslations: UITranslationsImporter
-): Promise<UITranslations> {
-    try {
-        const { uiTranslations } = await importUITranslations();
-        return uiTranslations;
-    } catch (_e) {
-        // UI package isn't installed - this is expected for users with custom UIs
-        return {};
-    }
-}
-
-/**
- * Safely loads UI translations from the @react-text-game/ui package.
- *
- * This function attempts to dynamically import translations from the UI package.
- * If the UI package is not installed (which is expected for games using custom UIs),
- * it returns an empty object instead of throwing an error.
- *
- * The returned translations are organized by language code and namespace:
- * `{ [languageCode]: { [namespace]: { [key]: translation } } }`
- *
- * @returns {Promise<Record<string, Record<string, object>>>} A promise that resolves to
- *          UI translations organized by language and namespace, or an empty object if
- *          the UI package is not installed.
- *
- * @example
- * ```typescript
- * const uiTranslations = await loadUITranslations();
- * // Returns: { en: { ui: { save: "Save", load: "Load" } }, ru: { ui: { save: "Сохранить" } } }
- * // Or: {} (if UI package not installed)
- * ```
- */
-export function loadUITranslations(): Promise<UITranslations> {
-    return _loadUITranslationsFrom(async () => {
-        // UI package is a peer dependency and may not be installed.
-        // This dynamic import will fail gracefully at runtime if UI package is not available.
-        // The optional peer may not resolve while compiling this package standalone.
-        // biome-ignore lint/suspicious/noTsIgnore: this optional peer import may or may not resolve for consumers.
-        // @ts-ignore
-        return import("@react-text-game/ui/i18n");
-    });
-}
-
 /**
  * Gets a translation function (t) scoped to a specific namespace and the current language.
  *

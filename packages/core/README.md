@@ -567,7 +567,7 @@ const intro = t("forest.description");
 
 ### UI package integration
 
-If the optional `@react-text-game/ui` package is installed, the core engine automatically loads its bundled namespaces and merges them with your resources. Your translations override the UI defaults when both provide the same keys, and the engine happily runs without the UI package when you ship a custom interface.
+Importing the optional `@react-text-game/ui` package registers its bundled `ui` namespace with the core engine, which merges it with your resources. Your translations override the UI defaults when both provide the same keys. The core engine never imports the UI package itself, so a game with a custom interface builds and runs without it.
 
 ## Core Concepts
 

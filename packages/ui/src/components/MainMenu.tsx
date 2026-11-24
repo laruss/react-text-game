@@ -4,6 +4,9 @@ import { Game, SYSTEM_PASSAGE_NAMES } from "@react-text-game/core";
 import { useLastLoadGame } from "@react-text-game/core/saves";
 import { useTranslation } from "react-i18next";
 
+// Registers the `ui` namespace on its own: a Next.js client bundle reaches this
+// module without ever loading the package entry.
+import "#i18n";
 import { useSaveLoadMenu } from "#context/SaveLoadMenuContext";
 
 import { Button } from "./common";

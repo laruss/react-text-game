@@ -4,6 +4,8 @@
     "description": "Themeable React UI component library for text-based games with Tailwind CSS v4, featuring story passages, interactive maps, and customizable game interfaces",
     "private": false,
     "sideEffects": [
+        "./dist/index.js",
+        "./dist/i18n/index.js",
         "./dist/styles/index.css"
     ],
     "type": "module",
